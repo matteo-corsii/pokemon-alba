@@ -26,6 +26,8 @@ Questa roadmap descrive una sequenza iniziale di attività. Ogni fase deve produ
 
 ## 3. Creare una modifica testuale minima
 
+**Esito del test manuale:** la prima ROM personale è stata compilata con successo e avviata con mGBA 0.10.5. La frase personalizzata è stata verificata senza caratteri corrotti o testo tagliato; avvio, comandi, audio e scelta del nome funzionano correttamente.
+
 **Obiettivo:** verificare l’intero ciclo di modifica del gioco con un cambiamento semplice e facilmente riconoscibile.
 
 **Risultato verificabile:** una singola stringa scelta per il test appare correttamente nel gioco compilato.
