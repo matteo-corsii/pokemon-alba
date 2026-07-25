@@ -261,20 +261,20 @@ static const u8 gText_SaveFileErased[] = _("The save file has been erased\ndue t
 static const u8 gJPText_No1MSubCircuit[] = _("1Mサブきばんが ささっていません！");
 static const u8 gText_BatteryRunDry[] = _("The internal battery has run dry.\nThe game can be played.\pHowever, clock-based events will\nno longer occur.");
 
-static const u8 gText_MainMenuNewGame[] = _("NEW GAME");
-static const u8 gText_MainMenuContinue[] = _("CONTINUE");
-static const u8 gText_MainMenuOption[] = _("OPTION");
-static const u8 gText_MainMenuMysteryGift[] = _("MYSTERY GIFT");
-static const u8 gText_MainMenuMysteryGift2[] = _("MYSTERY GIFT");
-static const u8 gText_MainMenuMysteryEvents[] = _("MYSTERY EVENTS");
+static const u8 gText_MainMenuNewGame[] = _("NUOVA PARTITA");
+static const u8 gText_MainMenuContinue[] = _("CONTINUA");
+static const u8 gText_MainMenuOption[] = _("OPZIONI");
+static const u8 gText_MainMenuMysteryGift[] = _("DONO SEGRETO");
+static const u8 gText_MainMenuMysteryGift2[] = _("DONO SEGRETO");
+static const u8 gText_MainMenuMysteryEvents[] = _("EVENTI SEGRETI");
 static const u8 gText_WirelessNotConnected[] = _("The Wireless Adapter is not\nconnected.");
 static const u8 gText_MysteryGiftCantUse[] = _("MYSTERY GIFT can't be used while\nthe Wireless Adapter is attached.");
 static const u8 gText_MysteryEventsCantUse[] = _("MYSTERY EVENTS can't be used while\nthe Wireless Adapter is attached.");
 
-static const u8 gText_ContinueMenuPlayer[] = _("PLAYER");
-static const u8 gText_ContinueMenuTime[] = _("TIME");
+static const u8 gText_ContinueMenuPlayer[] = _("NOME");
+static const u8 gText_ContinueMenuTime[] = _("TEMPO");
 static const u8 gText_ContinueMenuPokedex[] = _("POKéDEX");
-static const u8 gText_ContinueMenuBadges[] = _("BADGES");
+static const u8 gText_ContinueMenuBadges[] = _("MEDAGLIE");
 
 #define MENU_LEFT 2
 #define MENU_TOP_WIN0 1
@@ -406,7 +406,7 @@ static const struct WindowTemplate sNewGameBirchSpeechTextWindows[] =
         .bg = 0,
         .tilemapLeft = 3,
         .tilemapTop = 5,
-        .width = 6,
+        .width = 7,
         .height = 4,
         .paletteNum = 15,
         .baseBlock = 0x6D
@@ -418,7 +418,7 @@ static const struct WindowTemplate sNewGameBirchSpeechTextWindows[] =
         .width = 9,
         .height = 10,
         .paletteNum = 15,
-        .baseBlock = 0x85
+        .baseBlock = 0x89
     },
     DUMMY_WIN_TEMPLATE
 };
@@ -1652,7 +1652,7 @@ static void Task_NewGameBirchSpeech_CreateNameYesNo(u8 taskId)
 {
     if (!RunTextPrintersAndIsPrinter0Active())
     {
-        CreateYesNoMenuParameterized(2, 1, 0xF3, 0xDF, 2, 15);
+        CreateYesNoMenuParameterized(2, 1, 0xF3, 0xE3, 2, 15);
         gTasks[taskId].func = Task_NewGameBirchSpeech_ProcessNameYesNoMenu;
     }
 }
