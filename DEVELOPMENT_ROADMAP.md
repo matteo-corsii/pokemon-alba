@@ -4,6 +4,8 @@ Questa roadmap descrive una sequenza iniziale di attività. Ogni fase deve produ
 
 ## 1. Verificare la compilazione pulita del progetto base
 
+**Nota di verifica:** è stata avviata la verifica della compilazione pulita tramite GitHub Actions.
+
 **Obiettivo:** stabilire una base tecnica affidabile, senza modifiche funzionali rispetto a `pokeemerald-expansion`.
 
 **Risultato verificabile:** il progetto base completa la compilazione prevista e il relativo risultato viene registrato senza aggiungere contenuti di gioco.
