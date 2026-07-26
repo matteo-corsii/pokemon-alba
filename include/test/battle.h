@@ -1237,7 +1237,7 @@ void GivePlayerItem(u32 sourceLine, enum Item, u32 quantity);
                                  }
 
 #define SEND_IN_MESSAGE(name)    ONE_OF {                                                   \
-                                     MESSAGE("Vai, " name "!");                            \
+                                     MESSAGE("Go! " name "!");                              \
                                      MESSAGE("You're in charge, " name "!");                \
                                      MESSAGE("Go for it, " name "!");                       \
                                      MESSAGE("Your opponent's weak! Get 'em, " name "!");   \
