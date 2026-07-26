@@ -20,10 +20,10 @@ SINGLE_BATTLE_TEST("Ground-type moves do neutral damage to non-grounded Flying t
         ANIMATION(ANIM_TYPE_MOVE, MOVE_EARTHQUAKE, player);
         if (config >= GEN_5) {
             NONE_OF {
-                MESSAGE("It's super effective!");
+                MESSAGE("È superefficace!");
             }
         } else {
-            MESSAGE("It's super effective!");
+            MESSAGE("È superefficace!");
         }
     }
 }

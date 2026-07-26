@@ -42,7 +42,7 @@ SINGLE_BATTLE_TEST("Wonder Guard does not activate when targeted by moves super 
     } WHEN {
         TURN { MOVE(opponent, move); }
     } SCENE {
-        MESSAGE("It's super effective!");
+        MESSAGE("È superefficace!");
         MESSAGE("Shedinja fainted!");
     }
 }

@@ -223,11 +223,11 @@ SINGLE_BATTLE_TEST("Dancer-called attacks have their type updated")
         TURN { MOVE(player, MOVE_REVELATION_DANCE); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_REVELATION_DANCE, player);
-        MESSAGE("It's not very effective…");
+        MESSAGE("Non è molto efficace…");
         ABILITY_POPUP(opponent, ABILITY_DANCER);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_REVELATION_DANCE, opponent);
-        NOT MESSAGE("It's not very effective…");
-        MESSAGE("It's super effective!");
+        NOT MESSAGE("Non è molto efficace…");
+        MESSAGE("È superefficace!");
     }
 }
 

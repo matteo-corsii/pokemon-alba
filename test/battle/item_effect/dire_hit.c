@@ -21,6 +21,6 @@ SINGLE_BATTLE_TEST("Dire Hit increases a battler's critical hit chance by 2 stag
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FOCUS_ENERGY, player);
         MESSAGE("Wobbuffet used the Dire Hit to get pumped!");
         MESSAGE("Wobbuffet used Scratch!");
-        MESSAGE("A critical hit!");
+        MESSAGE("Brutto colpo!");
     }
 }

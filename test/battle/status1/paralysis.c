@@ -88,7 +88,7 @@ SINGLE_BATTLE_TEST("Thunder Wave doesn't print an effectiveness message")
         TURN { MOVE(opponent, MOVE_THUNDER_WAVE); }
     } SCENE {
         MESSAGE("The opposing Wobbuffet used Thunder Wave!");
-        NOT MESSAGE("It's super effective!");
+        NOT MESSAGE("È superefficace!");
     }
 }
 

@@ -195,7 +195,7 @@ SINGLE_BATTLE_TEST("Disguised Mimikyu's types revert back to Ghost/Fairy when Di
         MESSAGE("The opposing Wobbuffet used Scratch!");
         ABILITY_POPUP(player, ABILITY_DISGUISE);
         MESSAGE("The opposing Wobbuffet used Shadow Claw!");
-        MESSAGE("It's super effective!");
+        MESSAGE("È superefficace!");
     }
 }
 

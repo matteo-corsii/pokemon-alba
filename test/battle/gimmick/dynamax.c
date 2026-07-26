@@ -1462,7 +1462,7 @@ DOUBLE_BATTLE_TEST("Dynamax: G-Max Chi Strike boosts allies' crit chance by 1 st
         }
         // turn 4
         MESSAGE("Machop used Scratch!"); // Machop is at +5 crit stages
-        MESSAGE("A critical hit!");
+        MESSAGE("Brutto colpo!");
     }
 }
 

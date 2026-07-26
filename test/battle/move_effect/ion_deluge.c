@@ -60,6 +60,6 @@ SINGLE_BATTLE_TEST("Ion Deluge makes Normal type moves Electric type")
         MESSAGE("The opposing Golbat used Ion Deluge!");
         MESSAGE("A deluge of ions showers the battlefield!");
         MESSAGE("Wobbuffet used Scratch!");
-        MESSAGE("It's super effective!"); // Because Scratch is now electric type.
+        MESSAGE("È superefficace!"); // Because Scratch is now electric type.
     }
 }

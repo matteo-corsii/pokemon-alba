@@ -10,6 +10,6 @@ SINGLE_BATTLE_TEST("Merciless causes a move to result in a critical hit if the t
         TURN { MOVE(player, MOVE_SCRATCH); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player);
-        MESSAGE("A critical hit!");
+        MESSAGE("Brutto colpo!");
     }
 }

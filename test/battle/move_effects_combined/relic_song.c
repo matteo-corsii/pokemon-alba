@@ -49,7 +49,7 @@ SINGLE_BATTLE_TEST("Relic Song will become a Water-type move when used by a Pok√
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_RELIC_SONG, opponent);
         HP_BAR(player);
-        MESSAGE("It's super effective!");
+        MESSAGE("√à superefficace!");
     }
 }
 

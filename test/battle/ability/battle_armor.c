@@ -16,7 +16,7 @@ SINGLE_BATTLE_TEST("Battle Armor and Shell Armor block critical hits")
         TURN { MOVE(player, MOVE_SCRATCH, criticalHit: TRUE); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player);
-        NOT MESSAGE("A critical hit!");
+        NOT MESSAGE("Brutto colpo!");
     }
 }
 
@@ -44,6 +44,6 @@ SINGLE_BATTLE_TEST("Mold Breaker, Teravolt and Turboblaze ignore Battle Armor an
         TURN { MOVE(player, MOVE_SCRATCH, criticalHit: TRUE); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player);
-        MESSAGE("A critical hit!");
+        MESSAGE("Brutto colpo!");
     }
 }

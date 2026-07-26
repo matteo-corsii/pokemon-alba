@@ -327,9 +327,9 @@ DOUBLE_BATTLE_TEST("Dragon Darts always prints effectiveness message after every
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DRAGON_DARTS, playerLeft);
         HP_BAR(opponentLeft);
-        MESSAGE("It's not very effective…");
+        MESSAGE("Non è molto efficace…");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DRAGON_DARTS, playerLeft);
         HP_BAR(opponentRight);
-        MESSAGE("It's super effective!");
+        MESSAGE("È superefficace!");
     }
 }

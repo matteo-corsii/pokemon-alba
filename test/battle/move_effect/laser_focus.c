@@ -18,6 +18,6 @@ SINGLE_BATTLE_TEST("Laser Focus causes the user's move used on the next turn to 
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_LASER_FOCUS, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player);
-        MESSAGE("A critical hit!");
+        MESSAGE("Brutto colpo!");
     }
 }

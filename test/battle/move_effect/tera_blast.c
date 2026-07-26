@@ -17,7 +17,7 @@ SINGLE_BATTLE_TEST("Tera Blast changes from Normal-type to the user's Tera Type"
     } SCENE {
         MESSAGE("Wobbuffet used Tera Blast!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TERA_BLAST, player);
-        MESSAGE("It's super effective!");
+        MESSAGE("È superefficace!");
     }
 }
 
@@ -68,7 +68,7 @@ SINGLE_BATTLE_TEST("Tera Blast has correct effectiveness for every Tera Type")
         if (species == SPECIES_GASTLY && type == TYPE_NORMAL)
             MESSAGE("It doesn't affect the opposing Gastly…");
         else
-            MESSAGE("It's super effective!");
+            MESSAGE("È superefficace!");
     }
 }
 
@@ -153,7 +153,7 @@ SINGLE_BATTLE_TEST("Stellar-type Tera Blast is super-effective on Stellar-type P
     } SCENE {
         MESSAGE("Wobbuffet used Tera Blast!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TERA_BLAST, player);
-        MESSAGE("It's super effective!");
+        MESSAGE("È superefficace!");
     }
 }
 
@@ -167,7 +167,7 @@ SINGLE_BATTLE_TEST("Stellar-type Tera Blast activates a Stellar-type Pokemon's W
     } SCENE {
         MESSAGE("Wobbuffet used Tera Blast!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TERA_BLAST, player);
-        MESSAGE("It's super effective!");
+        MESSAGE("È superefficace!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponent);
     }
 }

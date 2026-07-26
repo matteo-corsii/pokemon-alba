@@ -58,13 +58,13 @@ SINGLE_BATTLE_TEST("Surging Strikes hits 3 times with each hit being a critical 
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SURGING_STRIKES, player);
         HP_BAR(opponent, captureDamage: &firstHit);
-        MESSAGE("A critical hit!");
+        MESSAGE("Brutto colpo!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SURGING_STRIKES, player);
         HP_BAR(opponent, captureDamage: &secondHit);
-        MESSAGE("A critical hit!");
+        MESSAGE("Brutto colpo!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SURGING_STRIKES, player);
         HP_BAR(opponent, captureDamage: &thirdHit);
-        MESSAGE("A critical hit!");
+        MESSAGE("Brutto colpo!");
     } THEN {
         EXPECT_EQ(firstHit, secondHit);
         EXPECT_EQ(secondHit, thirdHit);

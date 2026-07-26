@@ -66,7 +66,7 @@ SINGLE_BATTLE_TEST("Weather Ball stays Fire-type under real weather if user has 
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, weatherMove, opponent);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_WEATHER_BALL, player);
-        MESSAGE("It's super effective!");
+        MESSAGE("È superefficace!");
     }
 }
 

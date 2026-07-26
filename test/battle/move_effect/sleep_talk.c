@@ -167,7 +167,7 @@ SINGLE_BATTLE_TEST("Sleep Talk calls move and that move correctly ignores abilit
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SLEEP_TALK, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SUNSTEEL_STRIKE, player);
-        MESSAGE("A critical hit!");
+        MESSAGE("Brutto colpo!");
     }
 }
 

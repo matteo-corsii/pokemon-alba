@@ -18,7 +18,7 @@ SINGLE_BATTLE_TEST("Super Luck increases the critical hit ratio by 1 stage")
         TURN { MOVE(player, MOVE_SCRATCH); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player);
-        MESSAGE("A critical hit!");
+        MESSAGE("Brutto colpo!");
     }
 }
 

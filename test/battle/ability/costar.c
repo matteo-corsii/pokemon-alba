@@ -44,7 +44,7 @@ DOUBLE_BATTLE_TEST("Costar copies an ally's Dragon Cheer critical hit boost")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DRAGON_CHEER, playerRight);
         ABILITY_POPUP(playerRight, ABILITY_COSTAR);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, playerRight);
-        MESSAGE("A critical hit!");
+        MESSAGE("Brutto colpo!");
     }
 }
 
@@ -90,7 +90,7 @@ DOUBLE_BATTLE_TEST("Costar copies an ally's Focus Energy critical hit boost")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FOCUS_ENERGY, playerLeft);
         ABILITY_POPUP(playerRight, ABILITY_COSTAR);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, playerRight);
-        MESSAGE("A critical hit!");
+        MESSAGE("Brutto colpo!");
     }
 }
 
@@ -114,7 +114,7 @@ DOUBLE_BATTLE_TEST("Costar copies an ally's Dragon Cheer critical hit boost")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SWORDS_DANCE, playerLeft);
         ABILITY_POPUP(playerRight, ABILITY_COSTAR);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, playerRight);
-        MESSAGE("A critical hit!");
+        MESSAGE("Brutto colpo!");
     }
 }
 

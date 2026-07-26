@@ -31,7 +31,7 @@ AI_SINGLE_BATTLE_TEST("Trainer Slide: Singles: Player Lands First Critical Hit")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_LASER_FOCUS, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player);
-        MESSAGE("A critical hit!");
+        MESSAGE("Brutto colpo!");
         MESSAGE("Trainer A: This message plays after the player lands their first critical hit.{PAUSE_UNTIL_PRESS}");
     }
 }
@@ -47,7 +47,7 @@ AI_SINGLE_BATTLE_TEST("Trainer Slide: Singles: Enemy Lands First Critical Hit")
         TURN { EXPECT_MOVE(opponent, MOVE_SURGING_STRIKES); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SURGING_STRIKES, opponent);
-        MESSAGE("A critical hit!");
+        MESSAGE("Brutto colpo!");
         MESSAGE("Trainer A: This message plays after the enemy lands their first critical hit.{PAUSE_UNTIL_PRESS}");
     }
 }
@@ -82,7 +82,7 @@ AI_SINGLE_BATTLE_TEST("Trainer Slide: Singles: Player Lands First Super Effectiv
     } WHEN {
         TURN { MOVE(player, MOVE_BITE); }
     } SCENE {
-        MESSAGE("It's super effective!");
+        MESSAGE("È superefficace!");
         MESSAGE("Trainer A: This message plays after the player lands their first super effective hit.{PAUSE_UNTIL_PRESS}");
     }
 }
@@ -254,7 +254,7 @@ AI_DOUBLE_BATTLE_TEST("Trainer Slide: Doubles: Player Lands First Critical Hit")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_LASER_FOCUS, playerLeft);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, playerLeft);
-        MESSAGE("A critical hit!");
+        MESSAGE("Brutto colpo!");
         MESSAGE("Trainer A: This message plays after the player lands their first critical hit.{PAUSE_UNTIL_PRESS}");
         NONE_OF {
             MESSAGE("Trainer A: This message plays after the player lands their first critical hit.{PAUSE_UNTIL_PRESS}");
@@ -275,7 +275,7 @@ AI_DOUBLE_BATTLE_TEST("Trainer Slide: Doubles: Enemy Lands First Critical Hit")
         TURN { EXPECT_MOVE(opponentLeft, MOVE_SURGING_STRIKES); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SURGING_STRIKES, opponentLeft);
-        MESSAGE("A critical hit!");
+        MESSAGE("Brutto colpo!");
         MESSAGE("Trainer A: This message plays after the enemy lands their first critical hit.{PAUSE_UNTIL_PRESS}");
         NONE_OF {
             MESSAGE("Trainer A: This message plays after the enemy lands their first critical hit.{PAUSE_UNTIL_PRESS}");
@@ -320,7 +320,7 @@ AI_DOUBLE_BATTLE_TEST("Trainer Slide: Doubles: Player Lands First Super Effectiv
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_BITE, target: opponentLeft); }
     } SCENE {
-        MESSAGE("It's super effective!");
+        MESSAGE("È superefficace!");
         MESSAGE("Trainer A: This message plays after the player lands their first super effective hit.{PAUSE_UNTIL_PRESS}");
         NONE_OF {
             MESSAGE("Trainer A: This message plays after the player lands their first super effective hit.{PAUSE_UNTIL_PRESS}");
@@ -534,7 +534,7 @@ AI_MULTI_BATTLE_TEST("Trainer Slide: Multi: Player Lands First Critical Hit")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_LASER_FOCUS, playerLeft);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SURF, playerLeft);
-        MESSAGE("A critical hit!");
+        MESSAGE("Brutto colpo!");
         MESSAGE("Trainer A: This message plays after the player lands their first critical hit.{PAUSE_UNTIL_PRESS}");
         MESSAGE("Trainer B: This message plays after the player lands their first critical hit.{PAUSE_UNTIL_PRESS}");
         // Note: Planned PR for additional slides will change slides from using "Player/Opponent" side to "Attacker/Target" side
@@ -562,17 +562,17 @@ AI_MULTI_BATTLE_TEST("Trainer Slide: Multi: Enemy Lands First Critical Hit")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ENDURE, playerLeft);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SURGING_STRIKES, opponentLeft);
-        MESSAGE("A critical hit!");
-        MESSAGE("A critical hit!");
-        MESSAGE("A critical hit!");
+        MESSAGE("Brutto colpo!");
+        MESSAGE("Brutto colpo!");
+        MESSAGE("Brutto colpo!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SURGING_STRIKES, opponentRight);
-        MESSAGE("A critical hit!");
-        MESSAGE("A critical hit!");
-        MESSAGE("A critical hit!");
+        MESSAGE("Brutto colpo!");
+        MESSAGE("Brutto colpo!");
+        MESSAGE("Brutto colpo!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SURGING_STRIKES, playerRight);
-        MESSAGE("A critical hit!");
-        MESSAGE("A critical hit!");
-        MESSAGE("A critical hit!");
+        MESSAGE("Brutto colpo!");
+        MESSAGE("Brutto colpo!");
+        MESSAGE("Brutto colpo!");
         MESSAGE("Trainer A: This message plays after the enemy lands their first critical hit.{PAUSE_UNTIL_PRESS}");
         MESSAGE("Trainer B: This message plays after the enemy lands their first critical hit.{PAUSE_UNTIL_PRESS}");
         MESSAGE("Trainer Partner: This message plays after the enemy lands their first critical hit.{PAUSE_UNTIL_PRESS}");
