@@ -46,7 +46,7 @@ DOUBLE_BATTLE_TEST("Dragon Cheer increases critical hit ratio by 1 on non-Dragon
             MESSAGE("Wobbuffet is getting pumped!");
         }
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, playerRight);
-        MESSAGE("A critical hit!");
+        MESSAGE("Brutto colpo!");
     }
 }
 
@@ -81,7 +81,7 @@ DOUBLE_BATTLE_TEST("Dragon Cheer increases critical hit ratio by 2 on Dragon typ
             MESSAGE("Dratini is getting pumped!");
         }
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, playerRight);
-        MESSAGE("A critical hit!");
+        MESSAGE("Brutto colpo!");
     }
 }
 

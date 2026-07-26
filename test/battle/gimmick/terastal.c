@@ -292,7 +292,7 @@ SINGLE_BATTLE_TEST("(TERA) Roost does not remove the user's Flying type while Te
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ROOST, player);
         MESSAGE("The opposing Wobbuffet used Ice Beam!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ICE_BEAM, opponent);
-        MESSAGE("It's super effective!");
+        MESSAGE("È superefficace!");
     }
 }
 
@@ -491,7 +491,7 @@ SINGLE_BATTLE_TEST("(TERA) Roost does not remove Flying-type ground immunity whe
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ROOST, player);
         MESSAGE("The opposing Wobbuffet used Ice Beam!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ICE_BEAM, opponent);
-        MESSAGE("It's super effective!");
+        MESSAGE("È superefficace!");
     }
 }
 
@@ -607,7 +607,7 @@ SINGLE_BATTLE_TEST("(TERA) Protean/Libero cannot change the type of a Terastalli
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_TERA_ACTIVATE, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_BUBBLE, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_EMBER, opponent);
-        MESSAGE("It's super effective!");
+        MESSAGE("È superefficace!");
     }
 }
 
@@ -708,7 +708,7 @@ SINGLE_BATTLE_TEST("(TERA) Terapagos retains its base defensive profile when Ter
     } WHEN {
         TURN { MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); MOVE(opponent, MOVE_BRICK_BREAK); }
     } SCENE {
-        MESSAGE("It's super effective!");
+        MESSAGE("È superefficace!");
     }
 }
 

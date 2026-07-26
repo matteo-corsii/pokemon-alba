@@ -16,6 +16,6 @@ SINGLE_BATTLE_TEST("Freeze Dry is super effective on water types")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FREEZE_DRY, player);
         HP_BAR(opponent);
-        MESSAGE("It's super effective!");
+        MESSAGE("È superefficace!");
     }
 }

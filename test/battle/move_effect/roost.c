@@ -99,7 +99,7 @@ SINGLE_BATTLE_TEST("Roost suppresses the user's Flying-typing this turn, then re
         MESSAGE("Skarmory's HP was restored.");
         MESSAGE("The opposing Wobbuffet used Earthquake!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_EARTHQUAKE, opponent);
-        MESSAGE("It's super effective!");
+        MESSAGE("È superefficace!");
         // Turn 2: EQ has no effect because Roost expired
         MESSAGE("The opposing Wobbuffet used Earthquake!");
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_EARTHQUAKE, opponent);
@@ -147,7 +147,7 @@ SINGLE_BATTLE_TEST("Roost, if used by a Flying/Flying type, treats the user as a
             if (damagingMove == MOVE_KARATE_CHOP)
             {
                 ANIMATION(ANIM_TYPE_MOVE, damagingMove, opponent);
-                MESSAGE("It's super effective!");
+                MESSAGE("È superefficace!");
             }
             else if (damagingMove == MOVE_LICK)
             {
@@ -158,8 +158,8 @@ SINGLE_BATTLE_TEST("Roost, if used by a Flying/Flying type, treats the user as a
             {
                 ANIMATION(ANIM_TYPE_MOVE, damagingMove, opponent);
                 NONE_OF {
-                    MESSAGE("It's super effective!");
-                    MESSAGE("It's not very effective…");
+                    MESSAGE("È superefficace!");
+                    MESSAGE("Non è molto efficace…");
                     MESSAGE("It doesn't affect Tornadus…");
                 }
             }
@@ -168,8 +168,8 @@ SINGLE_BATTLE_TEST("Roost, if used by a Flying/Flying type, treats the user as a
         {
             // Should not see any effectiveness messages
             NONE_OF {
-                MESSAGE("It's super effective!");
-                MESSAGE("It's not very effective…");
+                MESSAGE("È superefficace!");
+                MESSAGE("Non è molto efficace…");
                 MESSAGE("It doesn't affect Tornadus…");
             }
         }
@@ -217,8 +217,8 @@ SINGLE_BATTLE_TEST("Roost, if used by a Mystery/Flying type, treats the user as 
         MESSAGE("Moltres's HP was restored.");
         ANIMATION(ANIM_TYPE_MOVE, damagingMove, opponent);
         NONE_OF {
-            MESSAGE("It's super effective!");
-            MESSAGE("It's not very effective…");
+            MESSAGE("È superefficace!");
+            MESSAGE("Non è molto efficace…");
             MESSAGE("It doesn't affect Moltres…");
         }
     }
@@ -290,7 +290,7 @@ SINGLE_BATTLE_TEST("Roost does not undo other type-changing effects at the end o
         MESSAGE("Swellow transformed into the Water type!");
         MESSAGE("The opposing Wobbuffet used Vine Whip!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_VINE_WHIP, opponent);
-        MESSAGE("It's super effective!");
+        MESSAGE("È superefficace!");
     }
 }
 

@@ -16,6 +16,6 @@ SINGLE_BATTLE_TEST("Liquid voice turns a sound move into a Water-type move")
         TURN { MOVE(opponent, MOVE_HYPER_VOICE); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_HYPER_VOICE, opponent);
-        MESSAGE("It's super effective!");
+        MESSAGE("È superefficace!");
     }
 }

@@ -284,62 +284,62 @@ LittlerootTown_BrendansHouse_1F_Movement_BrendanGoUpstairs2:
 	step_end
 
 PlayersHouse_1F_Text_IsntItNiceInHere:
-	.string "MOM: See, {PLAYER}?\n"
-	.string "Isn't it nice in here, too?$"
+	.string "MAMMA: Hai visto, {PLAYER}?\n"
+	.string "Non è carina anche dentro?$"
 
 PlayersHouse_1F_Text_MoversPokemonGoSetClock:
-	.string "The mover's POKéMON do all the work\n"
-	.string "of moving us in and cleaning up after.\l"
-	.string "This is so convenient!\p"
-	.string "{PLAYER}, your room is upstairs.\n"
-	.string "Go check it out, dear!\p"
-	.string "DAD bought you a new clock to mark\n"
-	.string "our move here.\l"
-	.string "Don't forget to set it!$"
+	.string "I POKéMON dei traslocatori si occupano\n"
+	.string "di spostare tutto e poi riordinare.\l"
+	.string "Sono davvero comodi!\p"
+	.string "{PLAYER}, la tua stanza è di sopra.\n"
+	.string "Va' a darle un'occhiata!\p"
+	.string "PAPÀ ti ha comprato un nuovo orologio\n"
+	.string "per ricordare il nostro trasloco.\l"
+	.string "Non dimenticare di regolarlo!$"
 
 PlayersHouse_1F_Text_ArentYouInterestedInRoom:
-	.string "MOM: Well, {PLAYER}?\p"
-	.string "Aren't you interested in seeing your\n"
-	.string "very own room?$"
+	.string "MAMMA: Allora, {PLAYER}?\p"
+	.string "Non vuoi vedere la tua\n"
+	.string "nuova stanza?$"
 
 PlayersHouse_1F_Text_GoSetTheClock:
-	.string "MOM: {PLAYER}.\p"
-	.string "Go set the clock in your room, honey.$"
+	.string "MAMMA: {PLAYER}.\p"
+	.string "Va' a regolare l'orologio in camera.$"
 
 PlayersHouse_1F_Text_OhComeQuickly:
-	.string "MOM: Oh! {PLAYER}, {PLAYER}!\n"
-	.string "Quick! Come quickly!$"
+	.string "MAMMA: Oh! {PLAYER}, {PLAYER}!\n"
+	.string "Presto! Vieni qui!$"
 
 PlayersHouse_1F_Text_MaybeDadWillBeOn:
-	.string "MOM: Look! It's PETALBURG GYM!\n"
-	.string "Maybe DAD will be on!$"
+	.string "MAMMA: Guarda! È la PALESTRA di PETALBURG!\n"
+	.string "Forse faranno vedere PAPÀ!$"
 
 PlayersHouse_1F_Text_ItsOverWeMissedHim:
-	.string "MOM: Oh… It's over.\p"
-	.string "I think DAD was on, but we missed him.\n"
-	.string "Too bad.$"
+	.string "MAMMA: Oh… È già finito.\p"
+	.string "Credo ci fosse PAPÀ, ma l'abbiamo perso.\n"
+	.string "Che peccato.$"
 
 PlayersHouse_1F_Text_GoIntroduceYourselfNextDoor:
-	.string "Oh, yes.\n"
-	.string "One of DAD's friends lives in town.\p"
-	.string "PROF. BIRCH is his name.\p"
-	.string "He lives right next door, so you should\n"
-	.string "go over and introduce yourself.$"
+	.string "Ah, già.\n"
+	.string "In città vive un amico di PAPÀ.\p"
+	.string "Si chiama PROF. LAURO.\p"
+	.string "Abita qui accanto, quindi dovresti\n"
+	.string "andare a presentarti.$"
 
 PlayersHouse_1F_Text_SeeYouHoney:
-	.string "MOM: See you, honey!$"
+	.string "MAMMA: A dopo!$"
 
 PlayersHouse_1F_Text_DidYouMeetProfBirch:
-	.string "MOM: Did you introduce yourself to\n"
-	.string "PROF. BIRCH?$"
+	.string "MAMMA: Hai conosciuto il\n"
+	.string "PROF. LAURO?$"
 
 PlayersHouse_1F_Text_YouShouldRestABit:
-	.string "MOM: How are you doing, {PLAYER}?\n"
-	.string "You look a little tired.\p"
-	.string "I think you should rest a bit.$"
+	.string "MAMMA: Come stai, {PLAYER}?\n"
+	.string "Mi sembri un po' giù.\p"
+	.string "Dovresti riposarti un po'.$"
 
 PlayersHouse_1F_Text_TakeCareHoney:
-	.string "MOM: Take care, honey!$"
+	.string "MAMMA: Stammi bene!$"
 
 PlayersHouse_1F_Text_GotDadsBadgeHeresSomethingFromMom:
 	.string "MOM: Oh? Did DAD give you that BADGE?\p"
@@ -368,8 +368,9 @@ PlayersHouse_1F_Text_Vigoroth2:
 	.string "Huggoh, uggo uggo…$"
 
 PlayersHouse_1F_Text_ReportFromPetalburgGym:
-	.string "INTERVIEWER: …We brought you this\n"
-	.string "report from in front of PETALBURG GYM.$"
+	.string "INTERVISTATORE: …Questo servizio\n"
+	.string "arrivava dalla PALESTRA DI\n"
+	.string "PETALBURG.$"
 
 PlayersHouse_1F_Text_TheresAMovieOnTV:
 	.string "There is a movie on TV.\p"

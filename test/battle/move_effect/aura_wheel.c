@@ -42,11 +42,11 @@ SINGLE_BATTLE_TEST("Aura Wheel changes type depending on Morpeko's form")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_AURA_WHEEL, player);
         HP_BAR(opponent);
-        NOT MESSAGE("It's super effective!");
+        NOT MESSAGE("È superefficace!");
         // Turn 2 (Hangry)
         ANIMATION(ANIM_TYPE_MOVE, MOVE_AURA_WHEEL, player);
         HP_BAR(opponent);
-        MESSAGE("It's super effective!");
+        MESSAGE("È superefficace!");
     }
 }
 

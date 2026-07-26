@@ -48,6 +48,6 @@ SINGLE_BATTLE_TEST("Photon Geyser ignores ignorable Abilities like Battle Armor"
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_PHOTON_GEYSER, player, );
         HP_BAR(opponent);
-        MESSAGE("A critical hit!");
+        MESSAGE("Brutto colpo!");
     }
 }

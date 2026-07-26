@@ -28,11 +28,11 @@ SINGLE_BATTLE_TEST("Thousand Arrows does neutral damage to non-grounded Flying t
         ANIMATION(ANIM_TYPE_MOVE, MOVE_THOUSAND_ARROWS, player);
         if (pokemon == SPECIES_SKARMORY)
         {
-            MESSAGE("It's super effective!");
+            MESSAGE("È superefficace!");
         }
         else
         {
-            MESSAGE("It's not very effective…");
+            MESSAGE("Non è molto efficace…");
         }
     }
 }

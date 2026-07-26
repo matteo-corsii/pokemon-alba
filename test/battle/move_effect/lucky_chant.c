@@ -11,6 +11,6 @@ SINGLE_BATTLE_TEST("Lucky Chant prevents critical hits on the user's side")
         TURN { MOVE(opponent, MOVE_LUCKY_CHANT); MOVE(player, MOVE_SCRATCH, criticalHit: TRUE); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player);
-        NOT MESSAGE("A critical hit!");
+        NOT MESSAGE("Brutto colpo!");
     }
 }

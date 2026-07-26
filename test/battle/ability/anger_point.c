@@ -11,7 +11,7 @@ SINGLE_BATTLE_TEST("Anger Point raises Attack stage to maximum after receiving a
         TURN { MOVE(opponent, MOVE_FROST_BREATH); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FROST_BREATH, opponent);
-        MESSAGE("A critical hit!");
+        MESSAGE("Brutto colpo!");
         ABILITY_POPUP(player, ABILITY_ANGER_POINT);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
         MESSAGE("Primeape maxed its Attack!");
@@ -34,7 +34,7 @@ SINGLE_BATTLE_TEST("Anger Point does not trigger when already at maximum Attack 
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
         MESSAGE("Primeape cut its own HP and maximized its Attack!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FROST_BREATH, opponent);
-        MESSAGE("A critical hit!");
+        MESSAGE("Brutto colpo!");
         NONE_OF {
             ABILITY_POPUP(player, ABILITY_ANGER_POINT);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
@@ -60,7 +60,7 @@ SINGLE_BATTLE_TEST("Anger Point does not trigger when a substitute takes the hit
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SUBSTITUTE, player);
         MESSAGE("Primeape put in a substitute!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FROST_BREATH, opponent);
-        MESSAGE("A critical hit!");
+        MESSAGE("Brutto colpo!");
         NONE_OF {
             ABILITY_POPUP(player, ABILITY_ANGER_POINT);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);

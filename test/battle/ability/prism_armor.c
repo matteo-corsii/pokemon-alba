@@ -18,7 +18,7 @@ SINGLE_BATTLE_TEST("Prism Armor reduces damage to Super Effective moves by 0.75"
         TURN { MOVE(opponent, MOVE_DARK_PULSE); }
     } SCENE {
         HP_BAR(player, captureDamage: &results[i].damage);
-        MESSAGE("It's super effective!");
+        MESSAGE("È superefficace!");
     } FINALLY {
         EXPECT_MUL_EQ(results[0].damage, Q_4_12(0.75), results[1].damage);
     }

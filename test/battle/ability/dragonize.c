@@ -17,7 +17,7 @@ SINGLE_BATTLE_TEST("Dragonize turns a Normal-type move into a dragon-type move")
         TURN { MOVE(opponent, MOVE_SCRATCH); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
-        MESSAGE("It's super effective!");
+        MESSAGE("È superefficace!");
     }
 }
 
@@ -65,7 +65,7 @@ SINGLE_BATTLE_TEST("Dragonize doesn't affect Weather Ball's type", s16 damage)
     } SCENE {
         HP_BAR(opponent, captureDamage: &results[i].damage);
         if (move == MOVE_SUNNY_DAY)
-            MESSAGE("It's super effective!");
+            MESSAGE("È superefficace!");
     } FINALLY {
         EXPECT_MUL_EQ(results[0].damage, Q_4_12(6.0), results[1].damage); // double base power + type effectiveness + sun 50% boost
         EXPECT_MUL_EQ(results[2].damage, Q_4_12(6.0), results[3].damage); // double base power + type effectiveness + sun 50% boost
@@ -165,7 +165,7 @@ SINGLE_BATTLE_TEST("Dragonize overrides Ion Deluge")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ION_DELUGE, opponent);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player);
-        MESSAGE("It's super effective!");
+        MESSAGE("È superefficace!");
     }
 }
 
@@ -181,7 +181,7 @@ SINGLE_BATTLE_TEST("Dragonize changes Tera Blast's type when not Terastallized")
         TURN { MOVE(player, MOVE_TERA_BLAST); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TERA_BLAST, player);
-        MESSAGE("It's not very effective…");
+        MESSAGE("Non è molto efficace…");
     }
 }
 
@@ -231,7 +231,7 @@ SINGLE_BATTLE_TEST("Dragonize doesn't affect damaging Z-Move types")
     } SCENE {
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_ZMOVE_ACTIVATE, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_BREAKNECK_BLITZ, player);
-        NOT { MESSAGE("It's super effective!"); }
+        NOT { MESSAGE("È superefficace!"); }
     }
 }
 

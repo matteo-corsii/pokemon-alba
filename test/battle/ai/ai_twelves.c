@@ -36,11 +36,11 @@ AI_MULTI_BATTLE_TEST("12v12: AI can use all 6 party slots in a 12v12 (battler 1)
         TURN {}
         TURN {}
     } SCENE {
-        MESSAGE(AI_TRAINER_NAME " sent out Hypno!");
-        MESSAGE(AI_TRAINER_NAME " sent out Wynaut!");
-        MESSAGE(AI_TRAINER_NAME " sent out Alakazam!");
-        MESSAGE(AI_TRAINER_NAME " sent out Kadabra!");
-        MESSAGE(AI_TRAINER_NAME " sent out Abra!");
+        MESSAGE(AI_TRAINER_NAME " manda in campo Hypno!");
+        MESSAGE(AI_TRAINER_NAME " manda in campo Wynaut!");
+        MESSAGE(AI_TRAINER_NAME " manda in campo Alakazam!");
+        MESSAGE(AI_TRAINER_NAME " manda in campo Kadabra!");
+        MESSAGE(AI_TRAINER_NAME " manda in campo Abra!");
     }
 }
 

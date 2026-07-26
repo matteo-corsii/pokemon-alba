@@ -28,7 +28,9 @@ Questa roadmap descrive una sequenza iniziale di attività. Ogni fase deve produ
 
 **Esito del test manuale:** la prima ROM personale è stata compilata con successo e avviata con mGBA 0.10.5. La frase personalizzata è stata verificata senza caratteri corrotti o testo tagliato; avvio, comandi, audio e scelta del nome funzionano correttamente.
 
-**Pacchetto successivo in preparazione:** traduzione italiana completa dell’interfaccia di apertura e della parte restante dell’introduzione del Professor Birch.
+**Esito dell’apertura italiana:** l’interfaccia iniziale e l’introduzione tradotta sono state compilate e collaudate manualmente con successo, senza errori grafici, testi tagliati o problemi funzionali.
+
+**Milestone in preparazione:** il pacchetto di identità narrativa è stato esteso alla localizzazione del primo segmento giocabile, dall'arrivo ad Albèra al primo ritorno al Laboratorio del Cratere dopo l'incontro con il rivale. Comprende ora anche il servizio televisivo obbligatorio e l'interfaccia essenziale del primo combattimento. Gli identificatori interni originali restano invariati; il pacchetto non è ancora stato compilato né collaudato.
 
 **Obiettivo:** verificare l’intero ciclo di modifica del gioco con un cambiamento semplice e facilmente riconoscibile.
 

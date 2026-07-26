@@ -49,7 +49,7 @@ GHOST_BATTLE_TEST("Ghost battle: Intro plays correctly (no Silph Scope)")
         TURN {}
     } SCENE {
         MESSAGE("The GHOST appeared! Darn! The GHOST can't be ID'd!");
-        MESSAGE("Go! Wobbuffet!");
+        MESSAGE("Vai, Wobbuffet!");
     }
 }
 
@@ -69,7 +69,7 @@ GHOST_BATTLE_TEST("Ghost battle: Intro plays correctly (with Silph Scope)")
         MESSAGE("SILPH SCOPE unveiled the GHOST's identity!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_SILPH_SCOPED, opponent);
         MESSAGE("The GHOST was MAROWAK!");
-        MESSAGE("Go! Wobbuffet!");
+        MESSAGE("Vai, Wobbuffet!");
     }
 }
 

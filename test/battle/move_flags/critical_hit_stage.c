@@ -19,6 +19,6 @@ SINGLE_BATTLE_TEST("criticalHitStage set to 1 increases critical hits occur at a
     } WHEN {
         TURN { MOVE(player, MOVE_SLASH); }
     } SCENE {
-        MESSAGE("A critical hit!");
+        MESSAGE("Brutto colpo!");
     }
 }

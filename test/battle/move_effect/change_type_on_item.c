@@ -25,7 +25,7 @@ SINGLE_BATTLE_TEST("Techno Blast changes type depending on the drive the user ho
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TECHNO_BLAST, player);
         HP_BAR(opponent);
-        MESSAGE("It's super effective!");
+        MESSAGE("È superefficace!");
     }
 }
 

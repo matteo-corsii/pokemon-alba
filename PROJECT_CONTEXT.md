@@ -25,6 +25,61 @@ La prima area comprenderà:
 
 I nomi reali potranno essere sostituiti da nomi fittizi durante la progettazione definitiva.
 
+## Identità provvisoria del mondo
+
+### Regione di Ausonia
+
+Ausonia è una regione ispirata all’Italia, caratterizzata da:
+
+- città moderne costruite sopra insediamenti antichi;
+- laghi vulcanici;
+- sistemi idrici sotterranei;
+- boschi, coste, campagne e montagne;
+- forte contrasto tra tutela del territorio e sviluppo economico;
+- tradizioni locali differenti da zona a zona.
+
+### Albèra
+
+Albèra è la città iniziale, ispirata ad Albano Laziale.
+
+La sua futura mappa comprenderà:
+
+- Via dell’Armonia;
+- scuola del quartiere;
+- campetto da basket;
+- abitazioni;
+- centro storico;
+- resti romani;
+- Via Consolare;
+- discesa verso il Lago di Albèra;
+- accessi sotterranei alla falda.
+
+### Professor Lauro
+
+Il Professor Lauro studia:
+
+- adattamento dei Pokémon all’ambiente;
+- memoria dei luoghi;
+- modificazioni causate dall’acqua e dal territorio;
+- legame tra Allenatore e Pokémon;
+- fenomeno che in futuro verrà chiamato Forma Riflesso.
+
+Il nome richiama l’alloro, ma il personaggio mantiene temporaneamente sprite e struttura tecnica del Professor Birch.
+
+### Nico e Lia
+
+Nico e Lia sono i nomi provvisori dei due rivali, utilizzati in base al protagonista selezionato.
+
+Il rivale:
+
+- è cresciuto nello stesso territorio del protagonista;
+- conosce bene Albèra;
+- è competitivo ma non ostile;
+- inizialmente considera la crisi dei laghi un problema esagerato dagli adulti;
+- cambia opinione con il procedere della storia.
+
+La personalità e i dialoghi completi del rivale saranno definiti in una fase successiva.
+
 ## Tema della storia
 
 Il livello dell’acqua dei laghi dei Castelli Romani sta diminuendo. Nel mondo narrativo del gioco, il Lago Albano e il Lago di Nemi sono alimentati da un grande sistema sotterraneo condiviso.

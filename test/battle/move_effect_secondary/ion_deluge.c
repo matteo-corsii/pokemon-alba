@@ -21,9 +21,9 @@ SINGLE_BATTLE_TEST("Ion Duldge turns normal moves into electric for the remainde
         MESSAGE("A deluge of ions showers the battlefield!");
         MESSAGE("The opposing Wobbuffet used Scratch!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
-        MESSAGE("It's super effective!");
+        MESSAGE("È superefficace!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
-        NOT MESSAGE("It's super effective!");
+        NOT MESSAGE("È superefficace!");
     }
 }
 
@@ -41,9 +41,9 @@ SINGLE_BATTLE_TEST("Plasma Fists turns normal moves into electric for the remain
         MESSAGE("A deluge of ions showers the battlefield!");
         MESSAGE("The opposing Wobbuffet used Scratch!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
-        MESSAGE("It's super effective!");
+        MESSAGE("È superefficace!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
-        NOT MESSAGE("It's super effective!");
+        NOT MESSAGE("È superefficace!");
     }
 }
 
@@ -63,7 +63,7 @@ SINGLE_BATTLE_TEST("Plasma Fists does not set up Ion Deluge if it does not conne
         }
         MESSAGE("The opposing Phanpy used Scratch!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
-        NOT MESSAGE("It's super effective!");
+        NOT MESSAGE("È superefficace!");
     }
 }
 
@@ -80,7 +80,7 @@ SINGLE_BATTLE_TEST("Plasma Fists type-changing effect does not override Pixilate
         MESSAGE("A deluge of ions showers the battlefield!");
         MESSAGE("The opposing Sylveon used Scratch!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
-        NOT MESSAGE("It's super effective!");
+        NOT MESSAGE("È superefficace!");
     }
 }
 
@@ -97,7 +97,7 @@ SINGLE_BATTLE_TEST("Plasma Fists type-changing effect is applied after Normalize
         MESSAGE("A deluge of ions showers the battlefield!");
         MESSAGE("The opposing Skitty used Ember!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_EMBER, opponent);
-        MESSAGE("It's super effective!");
+        MESSAGE("È superefficace!");
     }
 }
 
@@ -113,7 +113,7 @@ SINGLE_BATTLE_TEST("Plasma Fists turns normal type dynamax-moves into electric t
         ANIMATION(ANIM_TYPE_MOVE, MOVE_PLASMA_FISTS, player);
         MESSAGE("A deluge of ions showers the battlefield!");
         MESSAGE("The opposing Wobbuffet used Max Lightning!");
-        MESSAGE("It's super effective!");
+        MESSAGE("È superefficace!");
     }
 }
 

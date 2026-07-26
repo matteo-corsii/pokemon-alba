@@ -36,7 +36,7 @@ SINGLE_BATTLE_TEST("Focus Energy increases the user's critical hit ratio by 1 st
         if (useFocusEnergy)
             ANIMATION(ANIM_TYPE_MOVE, MOVE_FOCUS_ENERGY, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player);
-        MESSAGE("A critical hit!");
+        MESSAGE("Brutto colpo!");
     }
 }
 
@@ -63,7 +63,7 @@ SINGLE_BATTLE_TEST("Focus Energy multiplies crit chance by 4 with gen 1 crit cha
         if (useFocusEnergy)
             ANIMATION(ANIM_TYPE_MOVE, MOVE_FOCUS_ENERGY, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player);
-        MESSAGE("A critical hit!");
+        MESSAGE("Brutto colpo!");
     }
 }
 

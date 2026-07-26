@@ -1,7 +1,7 @@
 gText_Birch_Welcome::
 	.string "Ciao! Scusa se ti ho fatto aspettare!\p"
 	.string "Benvenuto nel mondo di POKéMON ALBA!\p"
-	.string "Mi chiamo BIRCH.\p"
+	.string "Mi chiamo LAURO.\p"
 	.string "Ma tutti mi chiamano PROFESSORE\n"
 	.string "POKéMON.\p"
 	.string "$"
@@ -45,8 +45,8 @@ gText_Birch_SoItsPlayer::
 gText_Birch_YourePlayer::
 	.string "Ah, va bene!\p"
 	.string "Tu sei {PLAYER}{KUN}, vero?\n"
-	.string "Ti stai trasferendo nella mia città,\l"
-	.string "LITTLEROOT. Ora ricordo!\p"
+	.string "Ti stai trasferendo ad ALBÈRA.\l"
+	.string "Ora ricordo!\p"
 	.string "$"
 
 gText_Birch_AreYouReady::
@@ -57,5 +57,5 @@ gText_Birch_AreYouReady::
 	.string "mondo dei POKéMON, dove sogni,\l"
 	.string "avventure e amicizie ti aspettano!\p"
 	.string "Bene, ti aspetterò più tardi.\n"
-	.string "Vieni nel mio LABORATORIO POKéMON.\p"
+	.string "Vieni al LABORATORIO DEL CRATERE.\p"
 	.string "$"
