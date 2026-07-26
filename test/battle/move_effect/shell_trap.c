@@ -28,13 +28,13 @@ SINGLE_BATTLE_TEST("Shell Trap activates only if hit by a physical move")
         ANIMATION(ANIM_TYPE_MOVE, move, opponent);
 
         if (activate) {
-            MESSAGE("Wobbuffet used Shell Trap!");
+            MESSAGE("Wobbuffet usa\nShell Trap!");
             ANIMATION(ANIM_TYPE_MOVE, MOVE_SHELL_TRAP, player);
             HP_BAR(opponent);
         } else {
             MESSAGE("Wobbuffet's shell trap didn't work!");
             NONE_OF {
-                MESSAGE("Wobbuffet used Shell Trap!");
+                MESSAGE("Wobbuffet usa\nShell Trap!");
                 ANIMATION(ANIM_TYPE_MOVE, MOVE_SHELL_TRAP, player);
                 HP_BAR(opponent);
             }
@@ -59,13 +59,13 @@ SINGLE_BATTLE_TEST("Shell Trap does not activate if attacker's Sheer Force appli
         MESSAGE("Wobbuffet set a shell trap!");
         ANIMATION(ANIM_TYPE_MOVE, move, opponent);
         if (activate) {
-            MESSAGE("Wobbuffet used Shell Trap!");
+            MESSAGE("Wobbuffet usa\nShell Trap!");
             ANIMATION(ANIM_TYPE_MOVE, MOVE_SHELL_TRAP, player);
             HP_BAR(opponent);
         } else {
             MESSAGE("Wobbuffet's shell trap didn't work!");
             NONE_OF {
-                MESSAGE("Wobbuffet used Shell Trap!");
+                MESSAGE("Wobbuffet usa\nShell Trap!");
                 ANIMATION(ANIM_TYPE_MOVE, MOVE_SHELL_TRAP, player);
                 HP_BAR(opponent);
             }
@@ -85,10 +85,10 @@ SINGLE_BATTLE_TEST("Shell Trap does not activate if battler faints before being 
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_SHELL_TRAP_SETUP, player);
         MESSAGE("Wobbuffet set a shell trap!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
-        MESSAGE("Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet non ha\npiù energie!");
         SEND_IN_MESSAGE("Wobbuffet");
         NONE_OF {
-            MESSAGE("Wobbuffet used Shell Trap!");
+            MESSAGE("Wobbuffet usa\nShell Trap!");
             ANIMATION(ANIM_TYPE_MOVE, MOVE_SHELL_TRAP, player);
             HP_BAR(opponent);
         }
@@ -108,14 +108,14 @@ DOUBLE_BATTLE_TEST("Shell Trap activates immediately after being hit on turn 1 a
     } SCENE {
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_SHELL_TRAP_SETUP, playerLeft);
         MESSAGE("Wobbuffet set a shell trap!");
-        MESSAGE("The opposing Wobbuffet used GRAFFIO!");
+        MESSAGE("Wobbuffet avversario usa\nGRAFFIO!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponentLeft);
-        MESSAGE("Wobbuffet used Shell Trap!");
+        MESSAGE("Wobbuffet usa\nShell Trap!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SHELL_TRAP, playerLeft);
         HP_BAR(opponentLeft);
         HP_BAR(opponentRight);
-        MESSAGE("Wobbuffet used Celebrate!");
-        MESSAGE("The opposing Wynaut used Celebrate!");
+        MESSAGE("Wobbuffet usa\nCelebrate!");
+        MESSAGE("Wynaut avversario usa\nCelebrate!");
     }
 }
 
@@ -132,14 +132,14 @@ DOUBLE_BATTLE_TEST("Shell Trap activates immediately after being hit on turn 2 a
     } SCENE {
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_SHELL_TRAP_SETUP, playerLeft);
         MESSAGE("Wobbuffet set a shell trap!");
-        MESSAGE("The opposing Wynaut used Celebrate!");
-        MESSAGE("The opposing Wobbuffet used GRAFFIO!");
+        MESSAGE("Wynaut avversario usa\nCelebrate!");
+        MESSAGE("Wobbuffet avversario usa\nGRAFFIO!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponentLeft);
-        MESSAGE("Wobbuffet used Shell Trap!");
+        MESSAGE("Wobbuffet usa\nShell Trap!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SHELL_TRAP, playerLeft);
         HP_BAR(opponentLeft);
         HP_BAR(opponentRight);
-        MESSAGE("Wobbuffet used Celebrate!");
+        MESSAGE("Wobbuffet usa\nCelebrate!");
     }
 }
 
@@ -156,11 +156,11 @@ DOUBLE_BATTLE_TEST("Shell Trap activates immediately after being hit on turn 3 a
     } SCENE {
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_SHELL_TRAP_SETUP, playerLeft);
         MESSAGE("Wobbuffet set a shell trap!");
-        MESSAGE("Wobbuffet used Celebrate!");
-        MESSAGE("The opposing Wynaut used Celebrate!");
-        MESSAGE("The opposing Wobbuffet used GRAFFIO!");
+        MESSAGE("Wobbuffet usa\nCelebrate!");
+        MESSAGE("Wynaut avversario usa\nCelebrate!");
+        MESSAGE("Wobbuffet avversario usa\nGRAFFIO!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponentLeft);
-        MESSAGE("Wobbuffet used Shell Trap!");
+        MESSAGE("Wobbuffet usa\nShell Trap!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SHELL_TRAP, playerLeft);
         HP_BAR(opponentLeft);
         HP_BAR(opponentRight);
@@ -188,7 +188,7 @@ DOUBLE_BATTLE_TEST("Shell Trap targets correctly if one of the opponents has fai
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_SHELL_TRAP_SETUP, playerRight);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponentLeft);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SHELL_TRAP, playerRight);
-        MESSAGE("The opposing Scizor non ha più energie!");
+        MESSAGE("Scizor avversario non ha\npiù energie!");
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponentRight);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, playerLeft);
 

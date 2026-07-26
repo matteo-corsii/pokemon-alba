@@ -64,7 +64,7 @@ SINGLE_BATTLE_TEST("Disguised Mimikyu takes no damage from a confusion hit and c
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CONFUSE_RAY, opponent);
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_CONFUSION, player);
-        MESSAGE("Mimikyu became confused!");
+        MESSAGE("Mimikyu\nè in preda alla confusione!");
         MESSAGE("Mimikyu is confused!");
         MESSAGE("It hurt itself in its confusion!");
         NOT HP_BAR(player);
@@ -190,11 +190,11 @@ SINGLE_BATTLE_TEST("Disguised Mimikyu's types revert back to Ghost/Fairy when Di
         TURN { MOVE(opponent, MOVE_SCRATCH); }
         TURN { MOVE(opponent, MOVE_SHADOW_CLAW); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used Soak!");
+        MESSAGE("Wobbuffet avversario usa\nSoak!");
         MESSAGE("Mimikyu transformed into the Water type!");
-        MESSAGE("The opposing Wobbuffet used GRAFFIO!");
+        MESSAGE("Wobbuffet avversario usa\nGRAFFIO!");
         ABILITY_POPUP(player, ABILITY_DISGUISE);
-        MESSAGE("The opposing Wobbuffet used Shadow Claw!");
+        MESSAGE("Wobbuffet avversario usa\nShadow Claw!");
         MESSAGE("È superefficace!");
     }
 }

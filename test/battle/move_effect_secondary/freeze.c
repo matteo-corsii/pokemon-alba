@@ -55,7 +55,7 @@ SINGLE_BATTLE_TEST("Freeze cannot be inflicted in Sunlight")
     } WHEN {
         TURN { MOVE(opponent, MOVE_SUNNY_DAY); MOVE(player, MOVE_ICE_BEAM); }
     } SCENE {
-        NOT MESSAGE("Wobbuffet was frozen solid!");
+        NOT MESSAGE("Wobbuffet si\ncongela!");
     }
 }
 

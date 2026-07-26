@@ -22,22 +22,22 @@ SINGLE_BATTLE_TEST("Tailwind applies for 3 turns (Gen4) or 4 turns (Gen5+)")
         TURN {}
         TURN {}
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used Celebrate!");
-        MESSAGE("Wobbuffet used Tailwind!");
+        MESSAGE("Wobbuffet avversario usa\nCelebrate!");
+        MESSAGE("Wobbuffet usa\nTailwind!");
 
-        MESSAGE("Wobbuffet used Celebrate!");
-        MESSAGE("The opposing Wobbuffet used Celebrate!");
+        MESSAGE("Wobbuffet usa\nCelebrate!");
+        MESSAGE("Wobbuffet avversario usa\nCelebrate!");
 
-        MESSAGE("Wobbuffet used Celebrate!");
-        MESSAGE("The opposing Wobbuffet used Celebrate!");
+        MESSAGE("Wobbuffet usa\nCelebrate!");
+        MESSAGE("Wobbuffet avversario usa\nCelebrate!");
 
         if (config >= GEN_5) {
-            MESSAGE("Wobbuffet used Celebrate!");
-            MESSAGE("The opposing Wobbuffet used Celebrate!");
+            MESSAGE("Wobbuffet usa\nCelebrate!");
+            MESSAGE("Wobbuffet avversario usa\nCelebrate!");
         }
 
-        MESSAGE("The opposing Wobbuffet used Celebrate!");
-        MESSAGE("Wobbuffet used Celebrate!");
+        MESSAGE("Wobbuffet avversario usa\nCelebrate!");
+        MESSAGE("Wobbuffet usa\nCelebrate!");
     }
 }
 
@@ -52,10 +52,10 @@ DOUBLE_BATTLE_TEST("Tailwind doesn't affect the partner on the same turn it's us
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_TAILWIND); }
     } SCENE {
-        MESSAGE("Wobbuffet used Tailwind!");
-        MESSAGE("The opposing Wobbuffet used Celebrate!");
-        MESSAGE("The opposing Wynaut used Celebrate!");
-        MESSAGE("Wynaut used Celebrate!");
+        MESSAGE("Wobbuffet usa\nTailwind!");
+        MESSAGE("Wobbuffet avversario usa\nCelebrate!");
+        MESSAGE("Wynaut avversario usa\nCelebrate!");
+        MESSAGE("Wynaut usa\nCelebrate!");
     }
 }
 
@@ -70,9 +70,9 @@ DOUBLE_BATTLE_TEST("Tailwind affects the partner on the same turn it's used (Gen
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_TAILWIND); }
     } SCENE {
-        MESSAGE("Wobbuffet used Tailwind!");
-        MESSAGE("Wynaut used Celebrate!");
-        MESSAGE("The opposing Wobbuffet used Celebrate!");
-        MESSAGE("The opposing Wynaut used Celebrate!");
+        MESSAGE("Wobbuffet usa\nTailwind!");
+        MESSAGE("Wynaut usa\nCelebrate!");
+        MESSAGE("Wobbuffet avversario usa\nCelebrate!");
+        MESSAGE("Wynaut avversario usa\nCelebrate!");
     }
 }

@@ -30,7 +30,7 @@ Questa roadmap descrive una sequenza iniziale di attività. Ogni fase deve produ
 
 **Esito dell’apertura italiana:** l’interfaccia iniziale e l’introduzione tradotta sono state compilate e collaudate manualmente con successo, senza errori grafici, testi tagliati o problemi funzionali.
 
-**Esito del collaudo del prologo:** il segmento dall’introduzione al ritorno ad Albèra è stato completato senza blocchi, crash o problemi grafici. Sono stati individuati cinque gruppi residui di localizzazione: scatoloni, orologio, PC della camera, messaggi di battaglia e Centro Pokémon. Il relativo pacchetto correttivo è in preparazione e non è ancora stato compilato né collaudato.
+**Esito del collaudo finale del prologo:** il pacchetto correttivo è stato completato senza blocchi o problemi grafici, ma il collaudo ha individuato alcuni messaggi di battaglia composti con prefissi inglesi e testo italiano. È stata preparata una correzione mirata di coerenza linguistica, senza modifiche alla logica di battaglia; la correzione non è ancora stata compilata né collaudata.
 
 **Obiettivo:** verificare l’intero ciclo di modifica del gioco con un cambiamento semplice e facilmente riconoscibile.
 

@@ -60,15 +60,15 @@ SINGLE_BATTLE_TEST("Safety Goggles blocks Effect Spore's effect")
             ABILITY_POPUP(opponent, ABILITY_EFFECT_SPORE);
 
             ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, player);
-            MESSAGE("Wobbuffet was poisoned!");
+            MESSAGE("Wobbuffet ha subito\nun avvelenamento!");
             STATUS_ICON(player, poison: TRUE);
 
             ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PRZ, player);
-            MESSAGE("Wobbuffet is paralyzed, so it may be unable to move!");
+            MESSAGE("Wobbuffet ha subito\nuna paralisi!");
             STATUS_ICON(player, paralysis: TRUE);
 
             ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_SLP, player);
-            MESSAGE("Wobbuffet fell asleep!");
+            MESSAGE("Wobbuffet cade\nnel sonno!");
             STATUS_ICON(player, sleep: TRUE);
         }
     }

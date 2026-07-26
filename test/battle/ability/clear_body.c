@@ -223,21 +223,21 @@ SINGLE_BATTLE_TEST("Clear Body, Full Metal Body, and White Smoke don't prevent S
     } SCENE {
         NOT ABILITY_POPUP(opponent, ability);
         if (heldItem == ITEM_IRON_BALL) {
-            MESSAGE("Wobbuffet used Celebrate!");
+            MESSAGE("Wobbuffet usa\nCelebrate!");
             if (ability == ABILITY_FULL_METAL_BODY)
-                MESSAGE("The opposing Solgaleo used Celebrate!");
+                MESSAGE("Solgaleo avversario usa\nCelebrate!");
             else if (ability == ABILITY_WHITE_SMOKE)
-                MESSAGE("The opposing Torkoal used Celebrate!");
+                MESSAGE("Torkoal avversario usa\nCelebrate!");
             else
-                MESSAGE("The opposing Metang used Celebrate!");
+                MESSAGE("Metang avversario usa\nCelebrate!");
         } else {
             if (ability == ABILITY_FULL_METAL_BODY)
-                MESSAGE("The opposing Solgaleo used Celebrate!");
+                MESSAGE("Solgaleo avversario usa\nCelebrate!");
             else if (ability == ABILITY_WHITE_SMOKE)
-                MESSAGE("The opposing Torkoal used Celebrate!");
+                MESSAGE("Torkoal avversario usa\nCelebrate!");
             else
-                MESSAGE("The opposing Metang used Celebrate!");
-            MESSAGE("Wobbuffet used Celebrate!");
+                MESSAGE("Metang avversario usa\nCelebrate!");
+            MESSAGE("Wobbuffet usa\nCelebrate!");
         }
     }
 }
@@ -259,21 +259,21 @@ SINGLE_BATTLE_TEST("Clear Body, Full Metal Body, and White Smoke don't prevent S
         TURN { MOVE(player, MOVE_THUNDER_WAVE); }
     } SCENE {
         if (ability == ABILITY_FULL_METAL_BODY)
-            MESSAGE("The opposing Solgaleo used Celebrate!");
+            MESSAGE("Solgaleo avversario usa\nCelebrate!");
         else if (ability == ABILITY_WHITE_SMOKE)
-            MESSAGE("The opposing Torkoal used Celebrate!");
+            MESSAGE("Torkoal avversario usa\nCelebrate!");
         else
-            MESSAGE("The opposing Metang used Celebrate!");
-        MESSAGE("Wobbuffet used Thunder Wave!");
+            MESSAGE("Metang avversario usa\nCelebrate!");
+        MESSAGE("Wobbuffet usa\nThunder Wave!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_THUNDER_WAVE, player);
         NOT ABILITY_POPUP(opponent, ability);
-        MESSAGE("Wobbuffet used Thunder Wave!");
+        MESSAGE("Wobbuffet usa\nThunder Wave!");
         ONE_OF {
-            MESSAGE("The opposing Metang used Celebrate!");
+            MESSAGE("Metang avversario usa\nCelebrate!");
             MESSAGE("The opposing Metang couldn't move because it's paralyzed!");
-            MESSAGE("The opposing Solgaleo used Celebrate!");
+            MESSAGE("Solgaleo avversario usa\nCelebrate!");
             MESSAGE("The opposing Solgaleo couldn't move because it's paralyzed!");
-            MESSAGE("The opposing Torkoal used Celebrate!");
+            MESSAGE("Torkoal avversario usa\nCelebrate!");
             MESSAGE("The opposing Torkoal couldn't move because it's paralyzed!");
         }
     }
@@ -323,15 +323,15 @@ SINGLE_BATTLE_TEST("Clear Body, Full Metal Body, and White Smoke don't prevent r
         TURN { MOVE(player, MOVE_SCARY_FACE); MOVE(opponent, MOVE_BATON_PASS); SEND_OUT(opponent, 1); }
         TURN { MOVE(player, MOVE_SCARY_FACE); }
     } SCENE {
-        MESSAGE("Wobbuffet used Scary Face!");
+        MESSAGE("Wobbuffet usa\nScary Face!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCARY_FACE, player);
         ABILITY_POPUP(opponent, ability);
         if (ability == ABILITY_FULL_METAL_BODY)
-            MESSAGE("The opposing Solgaleo used Celebrate!");
+            MESSAGE("Solgaleo avversario usa\nCelebrate!");
         else if (ability == ABILITY_WHITE_SMOKE)
-            MESSAGE("The opposing Torkoal used Celebrate!");
+            MESSAGE("Torkoal avversario usa\nCelebrate!");
         else
-            MESSAGE("The opposing Metang used Celebrate!");
+            MESSAGE("Metang avversario usa\nCelebrate!");
     }
 }
 
@@ -356,22 +356,22 @@ SINGLE_BATTLE_TEST("Clear Body, Full Metal Body, and White Smoke don't prevent T
         TURN { MOVE(player, MOVE_TOPSY_TURVY); }
         TURN { MOVE(player, MOVE_SCARY_FACE); }
     } SCENE {
-        MESSAGE("Wobbuffet used Topsy-Turvy!");
+        MESSAGE("Wobbuffet usa\nTopsy-Turvy!");
         NOT ABILITY_POPUP(opponent, ability);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TOPSY_TURVY, player);
         if (ability == ABILITY_FULL_METAL_BODY) {
-            MESSAGE("The opposing Solgaleo used Celebrate!");
-            MESSAGE("The opposing Solgaleo used Celebrate!");
+            MESSAGE("Solgaleo avversario usa\nCelebrate!");
+            MESSAGE("Solgaleo avversario usa\nCelebrate!");
         }
         else if (ability == ABILITY_WHITE_SMOKE) {
-            MESSAGE("The opposing Torkoal used Celebrate!");
-            MESSAGE("The opposing Torkoal used Celebrate!");
+            MESSAGE("Torkoal avversario usa\nCelebrate!");
+            MESSAGE("Torkoal avversario usa\nCelebrate!");
         }
         else {
-            MESSAGE("The opposing Metang used Celebrate!");
-            MESSAGE("The opposing Metang used Celebrate!");
+            MESSAGE("Metang avversario usa\nCelebrate!");
+            MESSAGE("Metang avversario usa\nCelebrate!");
         }
-        MESSAGE("Wobbuffet used Scary Face!");
+        MESSAGE("Wobbuffet usa\nScary Face!");
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_SCARY_FACE, player);
         ABILITY_POPUP(opponent, ability);
     }
@@ -397,29 +397,29 @@ SINGLE_BATTLE_TEST("Clear Body, Full Metal Body, and White Smoke don't prevent S
         TURN {}
     } SCENE {
         if (ability == ABILITY_FULL_METAL_BODY)
-            MESSAGE("The opposing Solgaleo used Agility!");
+            MESSAGE("Solgaleo avversario usa\nAgility!");
         else if (ability == ABILITY_WHITE_SMOKE)
-            MESSAGE("The opposing Torkoal used Agility!");
+            MESSAGE("Torkoal avversario usa\nAgility!");
         else
-            MESSAGE("The opposing Metang used Agility!");
+            MESSAGE("Metang avversario usa\nAgility!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_AGILITY, opponent);
-        MESSAGE("Wobbuffet used Celebrate!");
+        MESSAGE("Wobbuffet usa\nCelebrate!");
         if (ability == ABILITY_FULL_METAL_BODY)
-            MESSAGE("The opposing Solgaleo used Celebrate!");
+            MESSAGE("Solgaleo avversario usa\nCelebrate!");
         else if (ability == ABILITY_WHITE_SMOKE)
-            MESSAGE("The opposing Torkoal used Celebrate!");
+            MESSAGE("Torkoal avversario usa\nCelebrate!");
         else
-            MESSAGE("The opposing Metang used Celebrate!");
-        MESSAGE("Wobbuffet used Spectral Thief!");
+            MESSAGE("Metang avversario usa\nCelebrate!");
+        MESSAGE("Wobbuffet usa\nSpectral Thief!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SPECTRAL_THIEF, player);
         NOT ABILITY_POPUP(opponent, ability);
-        MESSAGE("Wobbuffet used Celebrate!");
+        MESSAGE("Wobbuffet usa\nCelebrate!");
         if (ability == ABILITY_FULL_METAL_BODY)
-            MESSAGE("The opposing Solgaleo used Celebrate!");
+            MESSAGE("Solgaleo avversario usa\nCelebrate!");
         else if (ability == ABILITY_WHITE_SMOKE)
-            MESSAGE("The opposing Torkoal used Celebrate!");
+            MESSAGE("Torkoal avversario usa\nCelebrate!");
         else
-            MESSAGE("The opposing Metang used Celebrate!");
+            MESSAGE("Metang avversario usa\nCelebrate!");
     }
 }
 

@@ -19,8 +19,8 @@ SINGLE_BATTLE_TEST("Zen Mode switches Darmanitan's form when HP is half or less 
     } WHEN {
             TURN { MOVE(player, MOVE_CELEBRATE); MOVE(opponent, MOVE_SCRATCH); }
     } SCENE {
-        MESSAGE("Darmanitan used Celebrate!");
-        MESSAGE("The opposing Wobbuffet used GRAFFIO!");
+        MESSAGE("Darmanitan usa\nCelebrate!");
+        MESSAGE("Wobbuffet avversario usa\nGRAFFIO!");
         HP_BAR(player);
         ABILITY_POPUP(player, ABILITY_ZEN_MODE);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
@@ -52,15 +52,15 @@ SINGLE_BATTLE_TEST("Zen Mode switches Darmanitan's form to Standard when swapped
         TURN { SWITCH(player, 1); MOVE(opponent, MOVE_CELEBRATE); }
         TURN { SWITCH(player, 0); MOVE(opponent, MOVE_CELEBRATE); }
     } SCENE {
-        MESSAGE("Darmanitan used Celebrate!");
-        MESSAGE("The opposing Wobbuffet used Celebrate!");
+        MESSAGE("Darmanitan usa\nCelebrate!");
+        MESSAGE("Wobbuffet avversario usa\nCelebrate!");
         ABILITY_POPUP(player, ABILITY_ZEN_MODE);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
         MESSAGE("Zen Mode triggered!");
         MESSAGE("Go! Wobbuffet!");
-        MESSAGE("The opposing Wobbuffet used Celebrate!");
+        MESSAGE("Wobbuffet avversario usa\nCelebrate!");
         MESSAGE("Go! Darmanitan!");
-        MESSAGE("The opposing Wobbuffet used Celebrate!");
+        MESSAGE("Wobbuffet avversario usa\nCelebrate!");
         ABILITY_POPUP(player, ABILITY_ZEN_MODE);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
         MESSAGE("Zen Mode triggered!");
@@ -89,13 +89,13 @@ SINGLE_BATTLE_TEST("Zen Mode switches Darmanitan's form when HP is healed above 
         TURN { MOVE(player, MOVE_CELEBRATE); MOVE(opponent, MOVE_CELEBRATE); }
         TURN { MOVE(player, MOVE_CELEBRATE); MOVE(opponent, MOVE_HEAL_PULSE); }
     } SCENE {
-        MESSAGE("Darmanitan used Celebrate!");
-        MESSAGE("The opposing Wobbuffet used Celebrate!");
+        MESSAGE("Darmanitan usa\nCelebrate!");
+        MESSAGE("Wobbuffet avversario usa\nCelebrate!");
         ABILITY_POPUP(player, ABILITY_ZEN_MODE);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
         MESSAGE("Zen Mode triggered!");
-        MESSAGE("Darmanitan used Celebrate!");
-        MESSAGE("The opposing Wobbuffet used Heal Pulse!");
+        MESSAGE("Darmanitan usa\nCelebrate!");
+        MESSAGE("Wobbuffet avversario usa\nHeal Pulse!");
         HP_BAR(player);
         ABILITY_POPUP(player, ABILITY_ZEN_MODE);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);

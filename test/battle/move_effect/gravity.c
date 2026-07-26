@@ -23,13 +23,13 @@ DOUBLE_BATTLE_TEST("Gravity cancels Fly and Sky Drop if they are in the air")
         TURN { MOVE(playerLeft, MOVE_GRAVITY); SKIP_TURN(opponentRight); SKIP_TURN(opponentLeft); }
     } SCENE {
         // turn 1
-        MESSAGE("The opposing Pidgey used Sky Drop!");
+        MESSAGE("Pidgey avversario usa\nSky Drop!");
         MESSAGE("The opposing Pidgey took Wynaut into the sky!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SKY_DROP, opponentLeft);
-        MESSAGE("The opposing Rookidee used Fly!");
+        MESSAGE("Rookidee avversario usa\nFly!");
         MESSAGE("The opposing Rookidee flew up high!");
         // turn 2
-        MESSAGE("Wobbuffet used Gravity!");
+        MESSAGE("Wobbuffet usa\nGravity!");
         MESSAGE("Gravity intensified!");
         MESSAGE("The opposing Pidgey fell from the sky due to the gravity!");
         MESSAGE("The opposing Rookidee fell from the sky due to the gravity!");

@@ -68,7 +68,7 @@ SINGLE_BATTLE_TEST("Relic Song transformation activates after target faints")
         HP_BAR(opponent);
         ABILITY_POPUP(opponent, ABILITY_COTTON_DOWN);
         MESSAGE("Meloetta's Speed fell!");
-        MESSAGE("The opposing Gossifleur non ha più energie!");
+        MESSAGE("Gossifleur avversario non ha\npiù energie!");
         MESSAGE("Meloetta transformed!");
     } THEN {
         EXPECT_EQ(player->species, SPECIES_MELOETTA_PIROUETTE);

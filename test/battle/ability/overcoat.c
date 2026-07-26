@@ -38,7 +38,7 @@ DOUBLE_BATTLE_TEST("Overcoat blocks damage from sandstorm")
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_SANDSTORM); }
     } SCENE {
-        MESSAGE("Wynaut used Sandstorm!");
+        MESSAGE("Wynaut usa\nSandstorm!");
         MESSAGE("The sandstorm is raging.");
         HP_BAR(playerLeft);
         NONE_OF {
@@ -61,8 +61,8 @@ DOUBLE_BATTLE_TEST("Overcoat blocks damage from hail")
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_HAIL); MOVE(playerRight, MOVE_SKILL_SWAP, target: playerLeft); }
     } SCENE {
-        MESSAGE("Wynaut used Hail!");
-        MESSAGE("Solosis used Skill Swap!");
+        MESSAGE("Wynaut usa\nHail!");
+        MESSAGE("Solosis usa\nSkill Swap!");
         HP_BAR(playerLeft);
         NONE_OF {
             HP_BAR(playerRight);
@@ -84,7 +84,7 @@ SINGLE_BATTLE_TEST("Overcoat blocks Effect Spore's effect (Gen6+)")
     } WHEN {
         TURN { MOVE(player, MOVE_TACKLE, WITH_RNG(RNG_EFFECT_SPORE, 1)); }
     } SCENE {
-        MESSAGE("Pineco used AZIONE!");
+        MESSAGE("Pineco usa\nAZIONE!");
         if (config == GEN_6) {
             NOT ABILITY_POPUP(opponent, ABILITY_EFFECT_SPORE);
         }

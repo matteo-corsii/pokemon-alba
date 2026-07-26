@@ -191,7 +191,7 @@ SINGLE_BATTLE_TEST("Recycle cannot recover an item removed by Knock Off")
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_ITEM_KNOCKOFF);
         MESSAGE("Wobbuffet knocked off the opposing Wobbuffet's Leftovers!");
 
-        MESSAGE("The opposing Wobbuffet used Recycle!");
+        MESSAGE("Wobbuffet avversario usa\nRecycle!");
         MESSAGE("But it failed!");
     } THEN {
         EXPECT(opponent->item == ITEM_NONE);
@@ -243,8 +243,8 @@ SINGLE_BATTLE_TEST("Knock Off triggers Unburden")
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_ITEM_KNOCKOFF);
         MESSAGE("Wobbuffet knocked off the opposing Wobbuffet's Leftovers!");
         // turn 2
-        MESSAGE("The opposing Wobbuffet used Celebrate!");
-        MESSAGE("Wobbuffet used Celebrate!");
+        MESSAGE("Wobbuffet avversario usa\nCelebrate!");
+        MESSAGE("Wobbuffet usa\nCelebrate!");
     } THEN {
         EXPECT(opponent->item == ITEM_NONE);
     }
@@ -402,7 +402,7 @@ SINGLE_BATTLE_TEST("Knock Off does not activate if user faints")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_KNOCK_OFF, player);
         MESSAGE("Wobbuffet was hurt by the opposing Wobbuffet's Rocky Helmet!");
-        MESSAGE("Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet non ha\npiù energie!");
     } THEN {
         EXPECT(opponent->item == ITEM_ROCKY_HELMET);
     }

@@ -67,8 +67,8 @@ DOUBLE_BATTLE_TEST("Coaching fails if all allies are is semi-invulnerable")
     } WHEN {
         TURN { MOVE(playerRight, MOVE_FLY, target: opponentLeft); MOVE(playerLeft, MOVE_COACHING, target: playerRight); }
     } SCENE {
-        MESSAGE("Hawlucha used Fly!");
-        MESSAGE("Wobbuffet used Coaching!");
+        MESSAGE("Hawlucha usa\nFly!");
+        MESSAGE("Wobbuffet usa\nCoaching!");
         NONE_OF {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_COACHING, playerLeft);
             MESSAGE("Hawlucha's Attack rose!");
@@ -107,8 +107,8 @@ DOUBLE_BATTLE_TEST("Coaching fails if there's no ally")
         TURN { MOVE(playerLeft, MOVE_COACHING, target: playerRight); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, playerLeft);
-        MESSAGE("Wynaut non ha più energie!");
-        MESSAGE("Wobbuffet used Coaching!");
+        MESSAGE("Wynaut non ha\npiù energie!");
+        MESSAGE("Wobbuffet usa\nCoaching!");
         NONE_OF {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_COACHING, playerLeft);
             MESSAGE("Wynaut's Attack rose!");

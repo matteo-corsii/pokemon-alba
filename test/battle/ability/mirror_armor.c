@@ -35,7 +35,7 @@ SINGLE_BATTLE_TEST("Mirror Armor triggers even if the attacking Pokemon also has
     } WHEN {
         TURN { MOVE(opponent, MOVE_LEER); }
     } SCENE {
-        MESSAGE("The opposing Corviknight used FULMISGUARDO!");
+        MESSAGE("Corviknight avversario usa\nFULMISGUARDO!");
         ABILITY_POPUP(player, ABILITY_MIRROR_ARMOR);
         NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
@@ -54,7 +54,7 @@ SINGLE_BATTLE_TEST("Mirror Armor doesn't lower the stats of an attacking Pokemon
     } WHEN {
         TURN { MOVE(opponent, MOVE_LEER); }
     } SCENE {
-        MESSAGE("The opposing Wynaut used FULMISGUARDO!");
+        MESSAGE("Wynaut avversario usa\nFULMISGUARDO!");
         ABILITY_POPUP(player, ABILITY_MIRROR_ARMOR);
         ABILITY_POPUP(opponent, ABILITY_CLEAR_BODY);
         MESSAGE("The opposing Wynaut's stats were not lowered!");
@@ -91,9 +91,9 @@ SINGLE_BATTLE_TEST("Mirror Armor doesn't lower the stats of an attacking Pokemon
         TURN { MOVE(opponent, MOVE_SUBSTITUTE); }
         TURN { MOVE(opponent, MOVE_LEER); }
     } SCENE {
-        MESSAGE("The opposing Wynaut used Substitute!");
+        MESSAGE("Wynaut avversario usa\nSubstitute!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SUBSTITUTE, opponent);
-        MESSAGE("The opposing Wynaut used FULMISGUARDO!");
+        MESSAGE("Wynaut avversario usa\nFULMISGUARDO!");
         ABILITY_POPUP(player, ABILITY_MIRROR_ARMOR);
         NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
     } THEN {
@@ -110,7 +110,7 @@ SINGLE_BATTLE_TEST("Mirror Armor raises the stat of an attacking Pokemon with Co
     } WHEN {
         TURN { MOVE(opponent, MOVE_LEER); }
     } SCENE {
-        MESSAGE("The opposing Shuckle used FULMISGUARDO!");
+        MESSAGE("Shuckle avversario usa\nFULMISGUARDO!");
         ABILITY_POPUP(player, ABILITY_MIRROR_ARMOR);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
         MESSAGE("The opposing Shuckle's Defense rose!");
@@ -131,10 +131,10 @@ SINGLE_BATTLE_TEST("Mirror Armor doesn't lower the stat of the attacking Pokemon
         TURN { MOVE(player, MOVE_SCREECH); }
         TURN { MOVE(opponent, MOVE_LEER); }
     } SCENE {
-        MESSAGE("Corviknight used Screech!");
-        MESSAGE("Corviknight used Screech!");
-        MESSAGE("Corviknight used Screech!");
-        MESSAGE("The opposing Wynaut used FULMISGUARDO!");
+        MESSAGE("Corviknight usa\nScreech!");
+        MESSAGE("Corviknight usa\nScreech!");
+        MESSAGE("Corviknight usa\nScreech!");
+        MESSAGE("Wynaut avversario usa\nFULMISGUARDO!");
         ABILITY_POPUP(player, ABILITY_MIRROR_ARMOR);
         NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
         MESSAGE("The opposing Wynaut's Defense won't go any lower!");
@@ -163,8 +163,8 @@ DOUBLE_BATTLE_TEST("Mirror Armor lowers Speed of the partner Pokemon after Court
         TURN { SWITCH(playerRight, 2); }
         TURN {}
     } SCENE {
-        MESSAGE("Wobbuffet used Sticky Web!");
-        MESSAGE("The opposing Wynaut used Court Change!");
+        MESSAGE("Wobbuffet usa\nSticky Web!");
+        MESSAGE("Wynaut avversario usa\nCourt Change!");
         MESSAGE("The opposing Wynaut swapped the battle effects affecting each side of the field!");
         SEND_IN_MESSAGE("Corviknight");
         MESSAGE("Corviknight was caught in a sticky web!");

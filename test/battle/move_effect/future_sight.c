@@ -157,7 +157,7 @@ SINGLE_BATTLE_TEST("Future Sight will miss timing if target faints before it is 
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_MEMENTO, opponent);
-        MESSAGE("The opposing Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet avversario non ha\npiù energie!");
         MESSAGE("2 sent out Wynaut!");
         NOT MESSAGE("The opposing Wynaut took the Future Sight attack!");
     }
@@ -179,7 +179,7 @@ SINGLE_BATTLE_TEST("Future Sight will miss timing if target faints by residual d
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FUTURE_SIGHT, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_WRAP, player);
-        MESSAGE("The opposing Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet avversario non ha\npiù energie!");
         MESSAGE("2 sent out Wynaut!");
         NOT MESSAGE("The opposing Wynaut took the Future Sight attack!");
     }
@@ -200,7 +200,7 @@ SINGLE_BATTLE_TEST("Future Sight breaks Focus Sash and doesn't make the holder e
     } SCENE {
         MESSAGE("The opposing Pidgey hung on using its Focus Sash!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_PSYCHIC, player);
-        MESSAGE("The opposing Pidgey non ha più energie!");
+        MESSAGE("Pidgey avversario non ha\npiù energie!");
     }
 }
 

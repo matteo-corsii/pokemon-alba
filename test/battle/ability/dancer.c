@@ -49,8 +49,8 @@ DOUBLE_BATTLE_TEST("Dancer can copy Teeter Dance and confuse both opposing targe
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TEETER_DANCE, playerLeft);
         ABILITY_POPUP(opponentLeft, ABILITY_DANCER);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TEETER_DANCE, opponentLeft);
-        MESSAGE("Wobbuffet became confused!");
-        MESSAGE("Wynaut became confused!");
+        MESSAGE("Wobbuffet\nè in preda alla confusione!");
+        MESSAGE("Wynaut\nè in preda alla confusione!");
     }
 }
 
@@ -201,12 +201,12 @@ DOUBLE_BATTLE_TEST("Dancer still triggers if another dancer flinches")
         ABILITY_POPUP(playerLeft, ABILITY_DANCER);
         MESSAGE("Oricorio flinched and couldn't move!");
         NONE_OF {
-            MESSAGE("Oricorio used Dragon Dance!");
+            MESSAGE("Oricorio usa\nDragon Dance!");
             ANIMATION(ANIM_TYPE_MOVE, MOVE_DRAGON_DANCE, playerLeft);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
         }
         ABILITY_POPUP(opponentLeft, ABILITY_DANCER);
-        MESSAGE("The opposing Oricorio used Dragon Dance!");
+        MESSAGE("Oricorio avversario usa\nDragon Dance!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DRAGON_DANCE, opponentLeft);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
     }
@@ -519,10 +519,10 @@ DOUBLE_BATTLE_TEST("Dancer-called moves doesn't update move to be called by Mirr
         ABILITY_POPUP(opponentLeft, ABILITY_DANCER);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DRAGON_DANCE, opponentLeft);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
-        MESSAGE("Wobbuffet used Mirror Move!");
-        MESSAGE("Wobbuffet used GRAFFIO!");
+        MESSAGE("Wobbuffet usa\nMirror Move!");
+        MESSAGE("Wobbuffet usa\nGRAFFIO!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, playerLeft);
-        NOT MESSAGE("Wobbuffet used Dragon Dance!");
+        NOT MESSAGE("Wobbuffet usa\nDragon Dance!");
     }
 }
 
@@ -560,7 +560,7 @@ DOUBLE_BATTLE_TEST("Dancer still activates after Red Card")
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_FIERY_DANCE, target: opponentLeft); }
     } SCENE {
-        MESSAGE("Wobbuffet used Fiery Dance!");
+        MESSAGE("Wobbuffet usa\nFiery Dance!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FIERY_DANCE, playerLeft);
         HP_BAR(opponentLeft);
         // Red card trigger
@@ -586,7 +586,7 @@ DOUBLE_BATTLE_TEST("Dancer still activates after Red Card even if blocked by Suc
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_FIERY_DANCE, target: opponentLeft); }
     } SCENE {
-        MESSAGE("Octillery used Fiery Dance!");
+        MESSAGE("Octillery usa\nFiery Dance!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FIERY_DANCE, playerLeft);
         HP_BAR(opponentLeft);
         // red card trigger
@@ -711,7 +711,7 @@ SINGLE_BATTLE_TEST("Dancer user may hit itself in confusion instead of copying a
         TURN { MOVE(player, MOVE_DRAGON_DANCE); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CONFUSE_RAY, player);
-        MESSAGE("The opposing Oricorio became confused!");
+        MESSAGE("Oricorio avversario\nè in preda alla confusione!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DRAGON_DANCE, player);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
         ABILITY_POPUP(opponent, ABILITY_DANCER);
@@ -881,11 +881,11 @@ DOUBLE_BATTLE_TEST("Dancer copies Lunar Dance after the original user faints, bu
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_LUNAR_DANCE, playerLeft);
         HP_BAR(playerLeft, hp: 0);
-        MESSAGE("Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet non ha\npiù energie!");
         ABILITY_POPUP(playerRight, ABILITY_DANCER);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_LUNAR_DANCE, playerRight);
         HP_BAR(playerRight, hp: 0);
-        MESSAGE("Oricorio non ha più energie!");
+        MESSAGE("Oricorio non ha\npiù energie!");
         SEND_IN_MESSAGE("Wynaut");
         SEND_IN_MESSAGE("Chansey");
     }

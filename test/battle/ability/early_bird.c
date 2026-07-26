@@ -11,7 +11,7 @@ SINGLE_BATTLE_TEST("Early Bird wakes up if 1 sleep turn is preset")
     } SCENE {
         MESSAGE("Doduo woke up!");
         STATUS_ICON(player, none: TRUE);
-        MESSAGE("Doduo used Celebrate!");
+        MESSAGE("Doduo usa\nCelebrate!");
     }
 }
 
@@ -27,7 +27,7 @@ SINGLE_BATTLE_TEST("Early Bird turns a 3-turn sleep into one missed turn")
         MESSAGE("Doduo is fast asleep.");
         MESSAGE("Doduo woke up!");
         STATUS_ICON(player, none: TRUE);
-        MESSAGE("Doduo used Celebrate!");
+        MESSAGE("Doduo usa\nCelebrate!");
     }
 }
 
@@ -44,6 +44,6 @@ SINGLE_BATTLE_TEST("Early Bird reduces Rest sleep to one turn")
         MESSAGE("Doduo is fast asleep.");
         MESSAGE("Doduo woke up!");
         STATUS_ICON(player, none: TRUE);
-        MESSAGE("Doduo used Celebrate!");
+        MESSAGE("Doduo usa\nCelebrate!");
     }
 }

@@ -13,15 +13,15 @@ SINGLE_BATTLE_TEST("Fake Out can only be used on the user's first turn")
         TURN { MOVE(player, MOVE_FAKE_OUT); MOVE(opponent, MOVE_FAKE_OUT); }
         TURN { MOVE(player, MOVE_FAKE_OUT); MOVE(opponent, MOVE_FAKE_OUT); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used Fake Out!");
+        MESSAGE("Wobbuffet avversario usa\nFake Out!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FAKE_OUT, opponent);
-        MESSAGE("The opposing Wobbuffet used Fake Out!");
+        MESSAGE("Wobbuffet avversario usa\nFake Out!");
         NONE_OF { ANIMATION(ANIM_TYPE_MOVE, MOVE_FAKE_OUT, opponent); }
-        MESSAGE("Wobbuffet used Fake Out!");
+        MESSAGE("Wobbuffet usa\nFake Out!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FAKE_OUT, player);
-        MESSAGE("The opposing Wobbuffet used Fake Out!");
+        MESSAGE("Wobbuffet avversario usa\nFake Out!");
         NONE_OF { ANIMATION(ANIM_TYPE_MOVE, MOVE_FAKE_OUT, opponent); }
-        MESSAGE("Wobbuffet used Fake Out!");
+        MESSAGE("Wobbuffet usa\nFake Out!");
         NONE_OF { ANIMATION(ANIM_TYPE_MOVE, MOVE_FAKE_OUT, player); }
     }
 }
@@ -34,11 +34,11 @@ SINGLE_BATTLE_TEST("Fake Out fails if it's called via Instruct")
     } WHEN {
         TURN { MOVE(player, MOVE_FAKE_OUT); MOVE(opponent, MOVE_INSTRUCT); }
     } SCENE {
-        MESSAGE("Wobbuffet used Fake Out!");
+        MESSAGE("Wobbuffet usa\nFake Out!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FAKE_OUT, player);
         NONE_OF { MESSAGE("The opposing Oranguru flinched and couldn't move!"); }
         ANIMATION(ANIM_TYPE_MOVE, MOVE_INSTRUCT, opponent);
-        MESSAGE("Wobbuffet used Fake Out!");
+        MESSAGE("Wobbuffet usa\nFake Out!");
         NONE_OF { ANIMATION(ANIM_TYPE_MOVE, MOVE_FAKE_OUT, player); }
     }
 }
@@ -199,15 +199,15 @@ SINGLE_BATTLE_TEST("First Impression can only be used on the user's first turn")
         TURN { MOVE(player, MOVE_FIRST_IMPRESSION); MOVE(opponent, MOVE_FIRST_IMPRESSION); }
         TURN { MOVE(player, MOVE_FIRST_IMPRESSION); MOVE(opponent, MOVE_FIRST_IMPRESSION); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used First Impression!");
+        MESSAGE("Wobbuffet avversario usa\nFirst Impression!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FIRST_IMPRESSION, opponent);
-        MESSAGE("The opposing Wobbuffet used First Impression!");
+        MESSAGE("Wobbuffet avversario usa\nFirst Impression!");
         NONE_OF { ANIMATION(ANIM_TYPE_MOVE, MOVE_FIRST_IMPRESSION, opponent); }
-        MESSAGE("Wobbuffet used First Impression!");
+        MESSAGE("Wobbuffet usa\nFirst Impression!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FIRST_IMPRESSION, player);
-        MESSAGE("The opposing Wobbuffet used First Impression!");
+        MESSAGE("Wobbuffet avversario usa\nFirst Impression!");
         NONE_OF { ANIMATION(ANIM_TYPE_MOVE, MOVE_FIRST_IMPRESSION, opponent); }
-        MESSAGE("Wobbuffet used First Impression!");
+        MESSAGE("Wobbuffet usa\nFirst Impression!");
         NONE_OF { ANIMATION(ANIM_TYPE_MOVE, MOVE_FIRST_IMPRESSION, player); }
     }
 }
@@ -220,10 +220,10 @@ SINGLE_BATTLE_TEST("First Impression fails if it's called via Instruct")
     } WHEN {
         TURN { MOVE(player, MOVE_FIRST_IMPRESSION); MOVE(opponent, MOVE_INSTRUCT); }
     } SCENE {
-        MESSAGE("Wobbuffet used First Impression!");
+        MESSAGE("Wobbuffet usa\nFirst Impression!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FIRST_IMPRESSION, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_INSTRUCT, opponent);
-        MESSAGE("Wobbuffet used First Impression!");
+        MESSAGE("Wobbuffet usa\nFirst Impression!");
         NONE_OF { ANIMATION(ANIM_TYPE_MOVE, MOVE_FIRST_IMPRESSION, player); }
     }
 }

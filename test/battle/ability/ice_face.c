@@ -113,8 +113,8 @@ SINGLE_BATTLE_TEST("Ice Face is not restored if Eiscue changes into Noice Face f
     } SCENE {
         ABILITY_POPUP(player, ABILITY_ICE_FACE);
         MESSAGE("Eiscue transformed!");
-        MESSAGE("Eiscue used Celebrate!");
-        MESSAGE("Eiscue non ha più energie!");
+        MESSAGE("Eiscue usa\nCelebrate!");
+        MESSAGE("Eiscue non ha\npiù energie!");
     }
 }
 
@@ -132,7 +132,7 @@ SINGLE_BATTLE_TEST("Ice Face form change persists after switching out")
     } SCENE {
         ABILITY_POPUP(player, ABILITY_ICE_FACE);
         MESSAGE("Eiscue transformed!");
-        MESSAGE("Eiscue non ha più energie!");
+        MESSAGE("Eiscue non ha\npiù energie!");
     }
 }
 
@@ -148,7 +148,7 @@ SINGLE_BATTLE_TEST("Ice Face doesn't transform Eiscue if Cloud Nine/Air Lock is 
     } SCENE {
         ABILITY_POPUP(player, ABILITY_ICE_FACE);
         MESSAGE("Eiscue transformed!");
-        MESSAGE("Eiscue non ha più energie!");
+        MESSAGE("Eiscue non ha\npiù energie!");
     }
 }
 

@@ -51,8 +51,8 @@ DOUBLE_BATTLE_TEST("Frisk triggers for player in a Double Battle after switching
     } WHEN {
         TURN { MOVE(opponentLeft, MOVE_POUND, target: target); SEND_OUT(target, 2); }
     } SCENE {
-        MESSAGE("The opposing Wynaut used BOTTA!");
-        MESSAGE("Wobbuffet non ha più energie!");
+        MESSAGE("Wynaut avversario usa\nBOTTA!");
+        MESSAGE("Wobbuffet non ha\npiù energie!");
         ABILITY_POPUP(target, ABILITY_FRISK);
         MESSAGE("Furret frisked the opposing Wynaut and found its POZIONE!");
     }
@@ -74,8 +74,8 @@ DOUBLE_BATTLE_TEST("Frisk triggers for opponent in a Double Battle after switchi
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_POUND, target: target); SEND_OUT(target, 2); }
     } SCENE {
-        MESSAGE("Wynaut used BOTTA!");
-        MESSAGE("The opposing Wobbuffet non ha più energie!");
+        MESSAGE("Wynaut usa\nBOTTA!");
+        MESSAGE("Wobbuffet avversario non ha\npiù energie!");
         ABILITY_POPUP(target, ABILITY_FRISK);
         MESSAGE("The opposing Furret frisked Wynaut and found its POZIONE!");
     }

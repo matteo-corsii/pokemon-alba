@@ -103,10 +103,10 @@ AI_MULTI_BATTLE_TEST("AI will not revive a partner's party member with Revival B
         TURN { EXPECT_MOVE(playerRight, move2); } // EXPECT_MOVE makes battler2 AI-controlled
     } SCENE {
         if (user == opponentLeft) {
-            MESSAGE("The opposing Wobbuffet used Revival Blessing!");
+            MESSAGE("Wobbuffet avversario usa\nRevival Blessing!");
             MESSAGE("But it failed!");
         } else if (user == playerRight) {
-            MESSAGE("Clefairy used Revival Blessing!");
+            MESSAGE("Clefairy usa\nRevival Blessing!");
             MESSAGE("But it failed!");
         } else {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_REVIVAL_BLESSING, opponentRight);
@@ -780,7 +780,7 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_MON_CHOICES: Number of hits to KO calculati
     } WHEN {
             TURN { MOVE(player, MOVE_SCRATCH); EXPECT_MOVES(opponent, MOVE_ZIPPY_ZAP, MOVE_EXTREME_SPEED, MOVE_IRON_TAIL, MOVE_KNOCK_OFF); }
     } SCENE {
-        MESSAGE("Venusaur non ha più energie!");
+        MESSAGE("Venusaur non ha\npiù energie!");
     }
 }
 
@@ -797,7 +797,7 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_MON_CHOICES: Number of hits to KO calculati
     } WHEN {
             TURN { MOVE(player, MOVE_SWORDS_DANCE); EXPECT_MOVES(opponent, MOVE_SCRATCH); }
     } SCENE {
-        MESSAGE("Bulbasaur non ha più energie!");
+        MESSAGE("Bulbasaur non ha\npiù energie!");
     }
 }
 
@@ -842,7 +842,7 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_MON_CHOICES: AI will not switch in a Pokemo
     } WHEN {
             TURN { MOVE(player, MOVE_NIGHT_SLASH) ; EXPECT_SEND_OUT(opponent, alakazamFirst ? 1 : 2); } // AI doesn't send out Alakazam if it gets outsped
     } SCENE {
-        MESSAGE("The opposing Kadabra non ha più energie!");
+        MESSAGE("Kadabra avversario non ha\npiù energie!");
         if (alakazamFirst) {
             MESSAGE(AI_TRAINER_NAME " manda in campo Alakazam!");
         } else {

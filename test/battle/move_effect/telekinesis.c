@@ -21,10 +21,10 @@ SINGLE_BATTLE_TEST("Telekinesis makes the target unable to avoid any attacks mad
         TURN { MOVE(player, MOVE_TELEKINESIS); MOVE(opponent, MOVE_MINIMIZE); }
         TURN { MOVE(player, MOVE_SCREECH, hit:FALSE); }
     } SCENE {
-        MESSAGE("Wobbuffet used Telekinesis!");
+        MESSAGE("Wobbuffet usa\nTelekinesis!");
         MESSAGE("The opposing Wynaut was hurled into the air!");
-        MESSAGE("The opposing Wynaut used Minimize!");
-        MESSAGE("Wobbuffet used Screech!");
+        MESSAGE("Wynaut avversario usa\nMinimize!");
+        MESSAGE("Wobbuffet usa\nScreech!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCREECH, player);
         NOT MESSAGE("The opposing Wynaut avoided the attack!");
     }
@@ -40,10 +40,10 @@ SINGLE_BATTLE_TEST("Telekinesis ends after 3 turns")
         TURN {}
         TURN {}
     } SCENE {
-        MESSAGE("Wobbuffet used Telekinesis!");
+        MESSAGE("Wobbuffet usa\nTelekinesis!");
         MESSAGE("The opposing Wynaut was hurled into the air!");
-        MESSAGE("Wobbuffet used Celebrate!");
-        MESSAGE("Wobbuffet used Celebrate!");
+        MESSAGE("Wobbuffet usa\nCelebrate!");
+        MESSAGE("Wobbuffet usa\nCelebrate!");
         MESSAGE("The opposing Wynaut was freed from the telekinesis!");
     }
 }
@@ -59,12 +59,12 @@ SINGLE_BATTLE_TEST("Telekinesis makes the target immune to Ground-type attacks")
         TURN { MOVE(player, MOVE_TELEKINESIS); }
         TURN { MOVE(player, MOVE_BULLDOZE); }
     } SCENE {
-        MESSAGE("Wobbuffet used Bulldoze!");
+        MESSAGE("Wobbuffet usa\nBulldoze!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_BULLDOZE, player);
         HP_BAR(opponent);
-        MESSAGE("Wobbuffet used Telekinesis!");
+        MESSAGE("Wobbuffet usa\nTelekinesis!");
         MESSAGE("The opposing Wynaut was hurled into the air!");
-        MESSAGE("Wobbuffet used Bulldoze!");
+        MESSAGE("Wobbuffet usa\nBulldoze!");
         NONE_OF {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_BULLDOZE, player);
             HP_BAR(opponent);

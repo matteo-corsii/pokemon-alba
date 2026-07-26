@@ -22,13 +22,13 @@ SINGLE_BATTLE_TEST("Magic Coat prints the correct message when bouncing back a m
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_MAGIC_COAT, player);
         MESSAGE("Zigzagoon bounced the Spore back!");
-        MESSAGE("The opposing Zigzagoon fell asleep!");
+        MESSAGE("Zigzagoon avversario cade\nnel sonno!");
         STATUS_ICON(opponent, sleep: TRUE);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_MAGIC_COAT, player);
         MESSAGE("Zigzagoon bounced the Spore back!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SPORE, player);
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_SLP, opponent);
-        MESSAGE("The opposing Zigzagoon fell asleep!");
+        MESSAGE("Zigzagoon avversario cade\nnel sonno!");
         STATUS_ICON(opponent, sleep: TRUE);
     }
 }
@@ -62,7 +62,7 @@ DOUBLE_BATTLE_TEST("Magic Coat fails when the only slower battler is a fainted a
         }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponentLeft);
-        MESSAGE("Wynaut non ha più energie!");
+        MESSAGE("Wynaut non ha\npiù energie!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponentLeft);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponentRight);
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_MAGIC_COAT, playerLeft);

@@ -11,8 +11,8 @@ SINGLE_BATTLE_TEST("Quick Draw has a 30% chance of going first")
         TURN { MOVE(player, MOVE_SCRATCH); }
     } SCENE {
         ABILITY_POPUP(player, ABILITY_QUICK_DRAW);
-        MESSAGE("Slowbro used GRAFFIO!");
-        MESSAGE("The opposing Wobbuffet used Celebrate!");
+        MESSAGE("Slowbro usa\nGRAFFIO!");
+        MESSAGE("Wobbuffet avversario usa\nCelebrate!");
     }
 }
 
@@ -26,7 +26,7 @@ SINGLE_BATTLE_TEST("Quick Draw does not activate 70% of the time")
         TURN { MOVE(opponent, MOVE_CELEBRATE); MOVE(player, MOVE_SCRATCH); }
     } SCENE {
         NOT ABILITY_POPUP(player, ABILITY_QUICK_DRAW);
-        MESSAGE("The opposing Wobbuffet used Celebrate!");
-        MESSAGE("Slowbro used GRAFFIO!");
+        MESSAGE("Wobbuffet avversario usa\nCelebrate!");
+        MESSAGE("Slowbro usa\nGRAFFIO!");
     }
 }

@@ -171,7 +171,7 @@ SINGLE_BATTLE_TEST("Freeze is thawed by user's Flame Wheel")
     } SCENE {
         MESSAGE("Wobbuffet's Flame Wheel melted the ice!");
         STATUS_ICON(player, none: TRUE);
-        MESSAGE("Wobbuffet used Flame Wheel!");
+        MESSAGE("Wobbuffet usa\nFlame Wheel!");
     }
 }
 
@@ -186,7 +186,7 @@ SINGLE_BATTLE_TEST("Freeze isn't thawed if opponent is asleep during thawing att
         TURN { MOVE(opponent, MOVE_EMBER); MOVE(player, MOVE_CELEBRATE); }
     } SCENE {
         NONE_OF {
-            MESSAGE("The opposing Wobbuffet used BRACIERE!");
+            MESSAGE("Wobbuffet avversario usa\nBRACIERE!");
             MESSAGE("Wobbuffet thawed out!");
             STATUS_ICON(player, none: TRUE);
         }

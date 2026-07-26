@@ -24,7 +24,7 @@ SINGLE_BATTLE_TEST("Dark Void inflicts 1-3 turns of sleep")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DARK_VOID, player);
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_SLP, opponent);
-        MESSAGE("The opposing Wobbuffet fell asleep!");
+        MESSAGE("Wobbuffet avversario cade\nnel sonno!");
         STATUS_ICON(opponent, sleep: TRUE);
         for (count = 0; count < turns; ++count)
         {

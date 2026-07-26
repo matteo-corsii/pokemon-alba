@@ -16,11 +16,11 @@ SINGLE_BATTLE_TEST("Desolate Land blocks damaging Water-type moves")
         TURN { MOVE(opponent, MOVE_WATER_GUN); }
         TURN { MOVE(opponent, MOVE_WATER_GUN); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used PISTOLACQUA!");
+        MESSAGE("Wobbuffet avversario usa\nPISTOLACQUA!");
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_WATER_GUN, opponent);
         MESSAGE("The Water-type attack evaporated in the extremely harsh sunlight!");
         NOT HP_BAR(player);
-        MESSAGE("The opposing Wobbuffet used PISTOLACQUA!");
+        MESSAGE("Wobbuffet avversario usa\nPISTOLACQUA!");
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_WATER_GUN, opponent);
         MESSAGE("The Water-type attack evaporated in the extremely harsh sunlight!");
         NOT HP_BAR(player);
@@ -42,7 +42,7 @@ DOUBLE_BATTLE_TEST("Desolate Land blocks damaging Water-type moves and prints th
     } WHEN {
         TURN { MOVE(opponentLeft, MOVE_SURF); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used Surf!");
+        MESSAGE("Wobbuffet avversario usa\nSurf!");
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_SURF, opponentLeft);
         MESSAGE("The Water-type attack evaporated in the extremely harsh sunlight!");
         NOT MESSAGE("The Water-type attack evaporated in the extremely harsh sunlight!");

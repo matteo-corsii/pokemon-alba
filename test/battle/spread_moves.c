@@ -332,7 +332,7 @@ DOUBLE_BATTLE_TEST("Spread Moves: Spread move vs Wide Guard")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_WIDE_GUARD, playerLeft);
         MESSAGE("Wide Guard protected your team!");
-        MESSAGE("The opposing Wobbuffet used Hyper Voice!");
+        MESSAGE("Wobbuffet avversario usa\nHyper Voice!");
         MESSAGE("Wobbuffet protected itself!");
         MESSAGE("Wynaut protected itself!");
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_HYPER_VOICE, playerLeft);
@@ -350,8 +350,8 @@ DOUBLE_BATTLE_TEST("Spread Moves: Spread move vs one protecting mon")
     } WHEN {
         TURN { MOVE(opponentLeft, MOVE_PROTECT); MOVE(playerLeft, MOVE_HYPER_VOICE); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used Protect!");
-        MESSAGE("Wobbuffet used Hyper Voice!");
+        MESSAGE("Wobbuffet avversario usa\nProtect!");
+        MESSAGE("Wobbuffet usa\nHyper Voice!");
         MESSAGE("The opposing Wobbuffet protected itself!");
     }
 }
@@ -486,9 +486,9 @@ DOUBLE_BATTLE_TEST("Spread Moves: Focus Sash activates correctly")
         MESSAGE("The opposing Wynaut hung on using its Focus Sash!");
         MESSAGE("The opposing Wobbuffet hung on using its Focus Sash!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_EXPLOSION, playerLeft);
-        MESSAGE("The opposing Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet avversario non ha\npiù energie!");
         MESSAGE("Wynaut hung on using its Focus Sash!");
-        MESSAGE("The opposing Wynaut non ha più energie!");
+        MESSAGE("Wynaut avversario non ha\npiù energie!");
     }
 }
 

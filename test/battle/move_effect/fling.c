@@ -19,7 +19,7 @@ SINGLE_BATTLE_TEST("Fling fails if Pokémon holds no item")
     } WHEN {
         TURN { MOVE(player, MOVE_FLING); }
     } SCENE {
-        MESSAGE("Wobbuffet used Fling!");
+        MESSAGE("Wobbuffet usa\nFling!");
         if (item != ITEM_NONE) {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_FLING, player);
             HP_BAR(opponent);
@@ -46,7 +46,7 @@ SINGLE_BATTLE_TEST("Fling fails if Pokémon is under the effects of Embargo or M
         TURN { MOVE(opponent, move); }
         TURN { MOVE(player, MOVE_FLING); }
     } SCENE {
-        MESSAGE("Wobbuffet used Fling!");
+        MESSAGE("Wobbuffet usa\nFling!");
         if (move == MOVE_CELEBRATE) {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_FLING, player);
             HP_BAR(opponent);
@@ -72,7 +72,7 @@ SINGLE_BATTLE_TEST("Fling fails for Pokémon with Klutz ability (Gen5+)")
     } WHEN {
         TURN { MOVE(player, MOVE_FLING); }
     } SCENE {
-        MESSAGE("Buneary used Fling!");
+        MESSAGE("Buneary usa\nFling!");
         if (ability != ABILITY_KLUTZ || config == GEN_4) {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_FLING, player);
             HP_BAR(opponent);
@@ -123,13 +123,13 @@ SINGLE_BATTLE_TEST("Fling's thrown item can be regained with Recycle")
         TURN { MOVE(player, MOVE_RECYCLE); }
         TURN { MOVE(player, MOVE_FLING); }
     } SCENE {
-        MESSAGE("Wobbuffet used Fling!");
+        MESSAGE("Wobbuffet usa\nFling!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FLING, player);
         HP_BAR(opponent);
-        MESSAGE("Wobbuffet used Recycle!");
+        MESSAGE("Wobbuffet usa\nRecycle!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_RECYCLE, player);
         MESSAGE("Wobbuffet found one Razor Claw!");
-        MESSAGE("Wobbuffet used Fling!");
+        MESSAGE("Wobbuffet usa\nFling!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FLING, player);
         HP_BAR(opponent);
     }
@@ -146,14 +146,14 @@ SINGLE_BATTLE_TEST("Fling - Item is lost even when there is no target")
         TURN { MOVE(opponent, MOVE_SELF_DESTRUCT); MOVE(player, MOVE_FLING); SEND_OUT(opponent, 1); }
         TURN { MOVE(player, MOVE_FLING); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used Self-Destruct!");
+        MESSAGE("Wobbuffet avversario usa\nSelf-Destruct!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SELF_DESTRUCT, opponent);
         HP_BAR(player);
-        MESSAGE("The opposing Wobbuffet non ha più energie!");
-        MESSAGE("Wobbuffet used Fling!");
+        MESSAGE("Wobbuffet avversario non ha\npiù energie!");
+        MESSAGE("Wobbuffet usa\nFling!");
         MESSAGE("But it failed!");
 
-        MESSAGE("Wobbuffet used Fling!");
+        MESSAGE("Wobbuffet usa\nFling!");
         MESSAGE("But it failed!");
     } THEN {
         EXPECT_EQ(player->item, ITEM_NONE);
@@ -170,12 +170,12 @@ SINGLE_BATTLE_TEST("Fling - Item is lost when target protects itself")
         TURN { MOVE(opponent, MOVE_PROTECT); MOVE(player, MOVE_FLING); }
         TURN { MOVE(player, MOVE_FLING); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used Protect!");
+        MESSAGE("Wobbuffet avversario usa\nProtect!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_PROTECT, opponent);
-        MESSAGE("Wobbuffet used Fling!");
+        MESSAGE("Wobbuffet usa\nFling!");
         MESSAGE("The opposing Wobbuffet protected itself!");
 
-        MESSAGE("Wobbuffet used Fling!");
+        MESSAGE("Wobbuffet usa\nFling!");
         MESSAGE("But it failed!");
     } THEN {
         EXPECT_EQ(player->item, ITEM_NONE);
@@ -237,7 +237,7 @@ SINGLE_BATTLE_TEST("Fling doesn't consume the item if the user is asleep/frozen/
             MESSAGE("Wobbuffet is fast asleep.");
             MESSAGE("Wobbuffet woke up!");
         }
-        MESSAGE("Wobbuffet used Fling!");
+        MESSAGE("Wobbuffet usa\nFling!");
         if (item != ITEM_NONE) {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_FLING, player);
             HP_BAR(opponent);
@@ -267,32 +267,32 @@ SINGLE_BATTLE_TEST("Fling applies special effects when throwing specific Items")
     } WHEN {
         TURN { MOVE(player, MOVE_FLING); }
     } SCENE {
-        MESSAGE("Wobbuffet used Fling!");
+        MESSAGE("Wobbuffet usa\nFling!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FLING, player);
         HP_BAR(opponent);
         switch (item)
         {
         case ITEM_FLAME_ORB:
             {
-                MESSAGE("The opposing Wobbuffet was burned!");
+                MESSAGE("Wobbuffet avversario ha subito\nuna scottatura!");
                 STATUS_ICON(opponent, STATUS1_BURN);
             }
             break;
         case ITEM_LIGHT_BALL:
             {
-                MESSAGE("The opposing Wobbuffet is paralyzed, so it may be unable to move!");
+                MESSAGE("Wobbuffet avversario ha subito\nuna paralisi!");
                 STATUS_ICON(opponent, STATUS1_PARALYSIS);
             }
             break;
         case ITEM_POISON_BARB:
             {
-                MESSAGE("The opposing Wobbuffet was poisoned!");
+                MESSAGE("Wobbuffet avversario ha subito\nun avvelenamento!");
                 STATUS_ICON(opponent, STATUS1_POISON);
             }
             break;
         case ITEM_TOXIC_ORB:
             {
-                MESSAGE("The opposing Wobbuffet was badly poisoned!");
+                MESSAGE("Wobbuffet avversario ha subito\nun grave avvelenamento!");
                 STATUS_ICON(opponent, STATUS1_TOXIC_POISON);
             }
             break;
@@ -325,7 +325,7 @@ SINGLE_BATTLE_TEST("Fling's secondary effects are blocked by Shield Dust")
     } WHEN {
         TURN { MOVE(player, MOVE_FLING); }
     } SCENE {
-        MESSAGE("Wobbuffet used Fling!");
+        MESSAGE("Wobbuffet usa\nFling!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FLING, player);
         HP_BAR(opponent);
         switch (item)
@@ -333,7 +333,7 @@ SINGLE_BATTLE_TEST("Fling's secondary effects are blocked by Shield Dust")
         case ITEM_FLAME_ORB:
             {
                 NONE_OF {
-                    MESSAGE("The opposing Wobbuffet was burned!");
+                    MESSAGE("Wobbuffet avversario ha subito\nuna scottatura!");
                     STATUS_ICON(opponent, STATUS1_BURN);
                 }
                 MESSAGE("The Flame Orb was used up…");
@@ -342,7 +342,7 @@ SINGLE_BATTLE_TEST("Fling's secondary effects are blocked by Shield Dust")
         case ITEM_LIGHT_BALL:
             {
                 NONE_OF {
-                    MESSAGE("The opposing Wobbuffet is paralyzed, so it may be unable to move!");
+                    MESSAGE("Wobbuffet avversario ha subito\nuna paralisi!");
                     STATUS_ICON(opponent, STATUS1_PARALYSIS);
                 }
                 MESSAGE("The Light Ball was used up…");
@@ -351,7 +351,7 @@ SINGLE_BATTLE_TEST("Fling's secondary effects are blocked by Shield Dust")
         case ITEM_POISON_BARB:
             {
                 NONE_OF {
-                    MESSAGE("The opposing Wobbuffet was poisoned!");
+                    MESSAGE("Wobbuffet avversario ha subito\nun avvelenamento!");
                     STATUS_ICON(opponent, STATUS1_POISON);
                 }
                 MESSAGE("The Poison Barb was used up…");
@@ -360,7 +360,7 @@ SINGLE_BATTLE_TEST("Fling's secondary effects are blocked by Shield Dust")
         case ITEM_TOXIC_ORB:
             {
                 NONE_OF {
-                    MESSAGE("The opposing Wobbuffet was badly poisoned!");
+                    MESSAGE("Wobbuffet avversario ha subito\nun grave avvelenamento!");
                     STATUS_ICON(opponent, STATUS1_TOXIC_POISON);
                 }
                 MESSAGE("The Toxic Orb was used up…");
@@ -478,7 +478,7 @@ SINGLE_BATTLE_TEST("Fling - thrown berry's effect activates for the target even 
     } WHEN {
         TURN { MOVE(player, MOVE_FLING); }
     } SCENE {
-        MESSAGE("Wobbuffet used Fling!");
+        MESSAGE("Wobbuffet usa\nFling!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FLING, player);
         HP_BAR(opponent);
         if (effect == HOLD_EFFECT_RESTORE_HP) {

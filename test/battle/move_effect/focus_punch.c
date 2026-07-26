@@ -90,13 +90,13 @@ SINGLE_BATTLE_TEST("Focus Punch activates when Focus Band/Focus Sash blocks OHKO
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FISSURE, opponent);
 
         if (item) {
-            MESSAGE("Wobbuffet used Focus Punch!");
+            MESSAGE("Wobbuffet usa\nFocus Punch!");
             ANIMATION(ANIM_TYPE_MOVE, MOVE_FOCUS_PUNCH, player);
             HP_BAR(opponent);
         } else {
-            MESSAGE("Wobbuffet non ha più energie!");
+            MESSAGE("Wobbuffet non ha\npiù energie!");
             NONE_OF {
-                MESSAGE("Wobbuffet used Focus Punch!");
+                MESSAGE("Wobbuffet usa\nFocus Punch!");
                 ANIMATION(ANIM_TYPE_MOVE, MOVE_FOCUS_PUNCH, player);
                 HP_BAR(opponent);
             }
@@ -123,13 +123,13 @@ SINGLE_BATTLE_TEST("Focus Punch activates when Disguise block a OHKO move (Gen8+
         ANIMATION(ANIM_TYPE_MOVE, move, opponent);
 
         if (activate) {
-            MESSAGE("Mimikyu used Focus Punch!");
+            MESSAGE("Mimikyu usa\nFocus Punch!");
             ANIMATION(ANIM_TYPE_MOVE, MOVE_FOCUS_PUNCH, player);
             HP_BAR(opponent);
         } else {
             MESSAGE("Mimikyu lost its focus and couldn't move!");
             NONE_OF {
-                MESSAGE("Mimikyu used Focus Punch!");
+                MESSAGE("Mimikyu usa\nFocus Punch!");
                 ANIMATION(ANIM_TYPE_MOVE, MOVE_FOCUS_PUNCH, player);
                 HP_BAR(opponent);
             }
@@ -157,7 +157,7 @@ SINGLE_BATTLE_TEST("Focus Punch does not activate when Focus Band/Focus Sash/Stu
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SEISMIC_TOSS, opponent);
         MESSAGE("Wobbuffet lost its focus and couldn't move!");
         NONE_OF {
-            MESSAGE("Wobbuffet used Focus Punch!");
+            MESSAGE("Wobbuffet usa\nFocus Punch!");
             ANIMATION(ANIM_TYPE_MOVE, MOVE_FOCUS_PUNCH, player);
             HP_BAR(opponent);
         }
@@ -178,7 +178,7 @@ SINGLE_BATTLE_TEST("Focus Punch activates when the user's Substitute is hit")
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FOCUS_PUNCH_SETUP, player);
         MESSAGE("Wobbuffet is tightening its focus!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
-        MESSAGE("Wobbuffet used Focus Punch!");
+        MESSAGE("Wobbuffet usa\nFocus Punch!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FOCUS_PUNCH, player);
         HP_BAR(opponent);
     }

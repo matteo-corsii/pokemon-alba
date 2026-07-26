@@ -189,7 +189,7 @@ SINGLE_BATTLE_TEST("Protect: Spiky Shield does 1/8 dmg of max hp of attackers ma
         if (usedMove == MOVE_SCRATCH) {
             HP_BAR(player, maxHp / 8);
             if (hp == 1) {
-                MESSAGE("Wobbuffet non ha più energie!");
+                MESSAGE("Wobbuffet non ha\npiù energie!");
                 SEND_IN_MESSAGE("Wobbuffet");
             }
         }
@@ -408,8 +408,8 @@ SINGLE_BATTLE_TEST("Protect: Recoil damage is not applied if target was protecte
         TURN {}
     } SCENE {
         // 1st turn
-        MESSAGE("The opposing Beautifly used GRAFFIO!");
-        MESSAGE("Rapidash used GRAFFIO!");
+        MESSAGE("Beautifly avversario usa\nGRAFFIO!");
+        MESSAGE("Rapidash usa\nGRAFFIO!");
         // 2nd turn
         ANIMATION(ANIM_TYPE_MOVE, protectMove, opponent);
         MESSAGE("The opposing Beautifly protected itself!");
@@ -443,7 +443,7 @@ SINGLE_BATTLE_TEST("Protect: Multi-hit moves don't hit a protected target and fa
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, move, opponent);
         MESSAGE("The opposing Beautifly protected itself!");
-        MESSAGE("Rapidash used Arm Thrust!");
+        MESSAGE("Rapidash usa\nArm Thrust!");
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_ARM_THRUST, player);
         MESSAGE("The opposing Beautifly protected itself!");
         // Each effect happens only once.
@@ -497,7 +497,7 @@ DOUBLE_BATTLE_TEST("Protect fails when the only slower battler is a fainted ally
         }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponentLeft);
-        MESSAGE("Wynaut non ha più energie!");
+        MESSAGE("Wynaut non ha\npiù energie!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponentLeft);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponentRight);
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_PROTECT, playerLeft);
@@ -524,10 +524,10 @@ DOUBLE_BATTLE_TEST("Protect: Wide Guard protects self and ally from multi-target
         TURN { MOVE(opponentLeft, MOVE_WIDE_GUARD); MOVE(playerLeft, move, target: opponentLeft); }
         TURN {}
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used Wide Guard!");
+        MESSAGE("Wobbuffet avversario usa\nWide Guard!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_WIDE_GUARD, opponentLeft);
         if (move == MOVE_SCRATCH) {
-            MESSAGE("Wobbuffet used GRAFFIO!");
+            MESSAGE("Wobbuffet usa\nGRAFFIO!");
             ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, playerLeft);
             HP_BAR(opponentLeft);
         } else if (move == MOVE_HYPER_VOICE) {
@@ -568,7 +568,7 @@ DOUBLE_BATTLE_TEST("Protect: Wide Guard can not fail on consecutive turns (Gen6+
         TURN {}
     } SCENE {
         for (turns = 0; turns < 2; turns++) {
-            MESSAGE("The opposing Wobbuffet used Wide Guard!");
+            MESSAGE("Wobbuffet avversario usa\nWide Guard!");
             ANIMATION(ANIM_TYPE_MOVE, MOVE_WIDE_GUARD, opponentLeft);
             NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_HYPER_VOICE, playerLeft);
             MESSAGE("The opposing Wobbuffet protected itself!");
@@ -600,10 +600,10 @@ DOUBLE_BATTLE_TEST("Protect: Quick Guard protects self and ally from priority mo
         TURN { MOVE(opponentLeft, MOVE_QUICK_GUARD); MOVE(playerLeft, move, target:targetOpponent); }
         TURN {}
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used Quick Guard!");
+        MESSAGE("Wobbuffet avversario usa\nQuick Guard!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_QUICK_GUARD, opponentLeft);
         if (move == MOVE_SCRATCH) {
-            MESSAGE("Wobbuffet used GRAFFIO!");
+            MESSAGE("Wobbuffet usa\nGRAFFIO!");
             ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, playerLeft);
             HP_BAR(targetOpponent);
         } else if (move == MOVE_QUICK_ATTACK) {
@@ -633,7 +633,7 @@ DOUBLE_BATTLE_TEST("Protect: Quick Guard can not fail on consecutive turns (Gen6
         TURN { MOVE(opponentLeft, MOVE_QUICK_GUARD); MOVE(playerLeft, MOVE_QUICK_ATTACK, target: opponentRight); }
     } SCENE {
         for (turns = 0; turns < 2; turns++) {
-            MESSAGE("The opposing Wobbuffet used Quick Guard!");
+            MESSAGE("Wobbuffet avversario usa\nQuick Guard!");
             ANIMATION(ANIM_TYPE_MOVE, MOVE_QUICK_GUARD, opponentLeft);
             NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_QUICK_ATTACK, playerLeft);
             MESSAGE("The opposing Wobbuffet protected itself!");
@@ -666,7 +666,7 @@ DOUBLE_BATTLE_TEST("Crafty Shield protects self and ally from opposing status mo
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CRAFTY_SHIELD, opponentLeft);
         if (move == MOVE_LEER) {
-            MESSAGE("Wobbuffet used FULMISGUARDO!");
+            MESSAGE("Wobbuffet usa\nFULMISGUARDO!");
             MESSAGE("The opposing Wobbuffet protected itself!");
             NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
             MESSAGE("The opposing Wobbuffet protected itself!");
@@ -816,7 +816,7 @@ DOUBLE_BATTLE_TEST("Crafty Shield does not protect against moves that target all
         TURN { MOVE(opponentLeft, MOVE_CRAFTY_SHIELD); MOVE(opponentRight, MOVE_CELEBRATE); MOVE(playerLeft, move); MOVE(playerRight, MOVE_CELEBRATE); }
     } SCENE {
         if (move == MOVE_FLOWER_SHIELD) {
-            MESSAGE("Tangela used Flower Shield!");
+            MESSAGE("Tangela usa\nFlower Shield!");
             ANIMATION(ANIM_TYPE_MOVE, MOVE_FLOWER_SHIELD, playerLeft);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
             MESSAGE("Tangela's Defense rose!");

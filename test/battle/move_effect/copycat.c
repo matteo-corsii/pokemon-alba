@@ -53,7 +53,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon can have their base moves copied
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_TRICK_ROOM, gimmick: GIMMICK_DYNAMAX, target: opponentLeft); MOVE(playerRight, MOVE_COPYCAT, target: opponentLeft); }
     } SCENE {
-        MESSAGE("Wobbuffet used Max Guard!");
-        MESSAGE("Wynaut used Trick Room!");
+        MESSAGE("Wobbuffet usa\nMax Guard!");
+        MESSAGE("Wynaut usa\nTrick Room!");
     }
 }

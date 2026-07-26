@@ -63,7 +63,7 @@ AI_SINGLE_BATTLE_TEST("Trainer Slide: Singles: Player Lands First STAB Hit")
     } WHEN {
         TURN { MOVE(player, MOVE_VINE_WHIP); }
     } SCENE {
-        MESSAGE("Bulbasaur used Vine Whip!");
+        MESSAGE("Bulbasaur usa\nVine Whip!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_VINE_WHIP, player);
         MESSAGE("Trainer A: Player lands their first STAB move.{PAUSE_UNTIL_PRESS}");
     }
@@ -98,7 +98,7 @@ AI_SINGLE_BATTLE_TEST("Trainer Slide: Singles: Player Lands First Down")
     } WHEN {
         TURN { EXPECT_MOVE(opponent, MOVE_HEALING_WISH); EXPECT_SEND_OUT(opponent,1); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet avversario non ha\npiù energie!");
         MESSAGE("Trainer A: This message plays after the player KOs one enemy mon.{PAUSE_UNTIL_PRESS}");
     }
 }
@@ -132,7 +132,7 @@ AI_SINGLE_BATTLE_TEST("Trainer Slide: Singles: Last Switchin")
     } WHEN {
         TURN { EXPECT_MOVE(opponent, MOVE_HEALING_WISH); EXPECT_SEND_OUT(opponent,1); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet avversario non ha\npiù energie!");
         MESSAGE("Trainer A: This message plays after the enemy switches in their last Pokemon.{PAUSE_UNTIL_PRESS}");
     }
 }
@@ -296,7 +296,7 @@ AI_DOUBLE_BATTLE_TEST("Trainer Slide: Doubles: Player Lands First STAB Hit")
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_VINE_WHIP, target: opponentLeft); }
     } SCENE {
-        MESSAGE("Bulbasaur used Vine Whip!");
+        MESSAGE("Bulbasaur usa\nVine Whip!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_VINE_WHIP, playerLeft);
         MESSAGE("Trainer A: Player lands their first STAB move.{PAUSE_UNTIL_PRESS}");
         NONE_OF {
@@ -341,7 +341,7 @@ AI_DOUBLE_BATTLE_TEST("Trainer Slide: Doubles: Player Lands First Down")
     } WHEN {
         TURN { EXPECT_MOVE(opponentLeft, MOVE_HEALING_WISH); EXPECT_SEND_OUT(opponentLeft,2); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet avversario non ha\npiù energie!");
         MESSAGE("Trainer A: This message plays after the player KOs one enemy mon.{PAUSE_UNTIL_PRESS}");
         NONE_OF {
             MESSAGE("Trainer A: This message plays after the player KOs one enemy mon.{PAUSE_UNTIL_PRESS}");
@@ -385,7 +385,7 @@ AI_DOUBLE_BATTLE_TEST("Trainer Slide: Doubles: Last Switchin")
     } WHEN {
         TURN { EXPECT_MOVE(opponentLeft, MOVE_HEALING_WISH); EXPECT_SEND_OUT(opponentLeft,2); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet avversario non ha\npiù energie!");
         MESSAGE("Trainer A: This message plays after the enemy switches in their last Pokemon.{PAUSE_UNTIL_PRESS}");
         NONE_OF {
             MESSAGE("Trainer A: This message plays after the enemy switches in their last Pokemon.{PAUSE_UNTIL_PRESS}");
@@ -592,7 +592,7 @@ AI_MULTI_BATTLE_TEST("Trainer Slide: Multi: Player Lands First STAB Hit")
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_EARTHQUAKE); }
     } SCENE {
-        MESSAGE("Sandshrew used Earthquake!");
+        MESSAGE("Sandshrew usa\nEarthquake!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_EARTHQUAKE, playerLeft);
         MESSAGE("Trainer A: Player lands their first STAB move.{PAUSE_UNTIL_PRESS}");
         MESSAGE("Trainer B: Player lands their first STAB move.{PAUSE_UNTIL_PRESS}");
@@ -616,7 +616,7 @@ AI_MULTI_BATTLE_TEST("Trainer Slide: Multi: Player Lands First Super Effective H
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_EARTHQUAKE); }
     } SCENE {
-        MESSAGE("Sandshrew used Earthquake!");
+        MESSAGE("Sandshrew usa\nEarthquake!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_EARTHQUAKE, playerLeft);
         MESSAGE("Trainer A: This message plays after the player lands their first super effective hit.{PAUSE_UNTIL_PRESS}");
         MESSAGE("Trainer B: This message plays after the player lands their first super effective hit.{PAUSE_UNTIL_PRESS}");
@@ -644,11 +644,11 @@ AI_MULTI_BATTLE_TEST("Trainer Slide: Multi: Player Lands First Down")
             EXPECT_MOVE(opponentRight, MOVE_HEALING_WISH); EXPECT_SEND_OUT(opponentRight,1);
         }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet avversario non ha\npiù energie!");
         MESSAGE("Trainer A: This message plays after the player KOs one enemy mon.{PAUSE_UNTIL_PRESS}");
-        MESSAGE("The opposing Wynaut non ha più energie!");
+        MESSAGE("Wynaut avversario non ha\npiù energie!");
         MESSAGE("Trainer B: This message plays after the player KOs one enemy mon.{PAUSE_UNTIL_PRESS}");
-        MESSAGE("Raticate non ha più energie!");
+        MESSAGE("Raticate non ha\npiù energie!");
         // Note: Planned PR for additional slides will change slides from using "Player/Opponent" side to "Attacker/Target" side
         // MESSAGE("Trainer Partner: This message plays after the player KOs one enemy mon.{PAUSE_UNTIL_PRESS}");
     }
@@ -699,9 +699,9 @@ AI_MULTI_BATTLE_TEST("Trainer Slide: Multi: Last Switchin")
             EXPECT_MOVE(opponentRight, MOVE_MEMENTO); EXPECT_SEND_OUT(opponentRight,1); 
         }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet non ha più energie!");
-        MESSAGE("Raticate non ha più energie!");
-        MESSAGE("The opposing Wynaut non ha più energie!");
+        MESSAGE("Wobbuffet avversario non ha\npiù energie!");
+        MESSAGE("Raticate non ha\npiù energie!");
+        MESSAGE("Wynaut avversario non ha\npiù energie!");
         MESSAGE("Trainer A: This message plays after the enemy switches in their last Pokemon.{PAUSE_UNTIL_PRESS}");
         MESSAGE("Trainer Partner: This message plays after the enemy switches in their last Pokemon.{PAUSE_UNTIL_PRESS}");
         MESSAGE("Trainer B: This message plays after the enemy switches in their last Pokemon.{PAUSE_UNTIL_PRESS}");

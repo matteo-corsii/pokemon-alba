@@ -15,7 +15,7 @@ SINGLE_BATTLE_TEST("Recoil if miss: Jump Kick has 50% recoil on miss")
         TURN { MOVE(player, MOVE_JUMP_KICK, hit: FALSE); }
     } SCENE {
         s32 maxHP = GetMonData(&PLAYER_PARTY[0], MON_DATA_MAX_HP);
-        MESSAGE("Wobbuffet used Jump Kick!");
+        MESSAGE("Wobbuffet usa\nJump Kick!");
         MESSAGE("The opposing Wobbuffet avoided the attack!");
         MESSAGE("Wobbuffet kept going and crashed!");
         HP_BAR(player, damage: maxHP / 2);
@@ -77,12 +77,12 @@ SINGLE_BATTLE_TEST("Recoil if miss: Jump Kick's recoil happens after Spiky Shiel
         TURN {}
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SPIKY_SHIELD, opponent);
-        MESSAGE("Wobbuffet used Jump Kick!");
+        MESSAGE("Wobbuffet usa\nJump Kick!");
         MESSAGE("The opposing Wobbuffet protected itself!");
         HP_BAR(player, damage: maxHp / 8);
         MESSAGE("Wobbuffet was hurt!");
         if (faintOnSpiky){
-            MESSAGE("Wobbuffet non ha più energie!");
+            MESSAGE("Wobbuffet non ha\npiù energie!");
             SEND_IN_MESSAGE("Wynaut");
             NONE_OF {
                 MESSAGE("Wobbuffet kept going and crashed!");
@@ -92,7 +92,7 @@ SINGLE_BATTLE_TEST("Recoil if miss: Jump Kick's recoil happens after Spiky Shiel
             MESSAGE("Wobbuffet kept going and crashed!");
             HP_BAR(player);
             if (faintOnJumpKick) {
-                MESSAGE("Wobbuffet non ha più energie!");
+                MESSAGE("Wobbuffet non ha\npiù energie!");
                 SEND_IN_MESSAGE("Wynaut");
             }
         }
@@ -145,7 +145,7 @@ SINGLE_BATTLE_TEST("Recoil if miss: Disguise doesn't prevent crash damage from J
         TURN { MOVE(player, MOVE_JUMP_KICK); }
     } SCENE {
         s32 maxHP = GetMonData(&PLAYER_PARTY[0], MON_DATA_MAX_HP);
-        MESSAGE("Kangaskhan used Jump Kick!");
+        MESSAGE("Kangaskhan usa\nJump Kick!");
         if (ability == ABILITY_SCRAPPY) {
             NONE_OF {
                 MESSAGE("Kangaskhan  kept going and crashed!");

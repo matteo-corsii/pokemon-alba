@@ -49,12 +49,12 @@ SINGLE_BATTLE_TEST("Smelling Salts get incread power vs. paralyzed targets")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SMELLING_SALTS, player);
         if (status1 == STATUS1_PARALYSIS)
         {
-            MESSAGE("The opposing Lotad non ha più energie!");
+            MESSAGE("Lotad avversario non ha\npiù energie!");
         }
         else
         {
-            NOT MESSAGE("The opposing Lotad non ha più energie!");
-            MESSAGE("The opposing Lotad used Celebrate!");
+            NOT MESSAGE("Lotad avversario non ha\npiù energie!");
+            MESSAGE("Lotad avversario usa\nCelebrate!");
         }
     }
 }
@@ -107,12 +107,12 @@ SINGLE_BATTLE_TEST("Wake-Up Slap gets increased power against sleeping targets")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_WAKE_UP_SLAP, player);
         if (status1 == STATUS1_SLEEP)
         {
-            MESSAGE("The opposing Lotad non ha più energie!");
+            MESSAGE("Lotad avversario non ha\npiù energie!");
         }
         else
         {
-            NOT MESSAGE("The opposing Lotad non ha più energie!");
-            MESSAGE("The opposing Lotad used Celebrate!");
+            NOT MESSAGE("Lotad avversario non ha\npiù energie!");
+            MESSAGE("Lotad avversario usa\nCelebrate!");
         }
     }
 }

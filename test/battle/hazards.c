@@ -21,7 +21,7 @@ SINGLE_BATTLE_TEST("Hazards are applied based on order of set up")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STEALTH_ROCK, opponent);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STICKY_WEB, opponent);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SPIKES, opponent);
-        MESSAGE("Wobbuffet was poisoned!");
+        MESSAGE("Wobbuffet ha subito\nun avvelenamento!");
         MESSAGE("Pointed stones dug into Wobbuffet!");
         MESSAGE("Wobbuffet was caught in a sticky web!");
         MESSAGE("Wobbuffet was hurt by the spikes!");
@@ -55,9 +55,9 @@ SINGLE_BATTLE_TEST("Hazards are applied correctly after a battler faints")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STEALTH_ROCK, opponent);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FINAL_GAMBIT, player);
-        MESSAGE("Wynaut non ha più energie!");
+        MESSAGE("Wynaut non ha\npiù energie!");
         MESSAGE("Pointed stones dug into Wobbuffet!");
-        MESSAGE("Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet non ha\npiù energie!");
         MESSAGE("Pointed stones dug into Wynaut!");
     }
 }
@@ -80,7 +80,7 @@ SINGLE_BATTLE_TEST("Toxic Spikes can be removed after fainting to other hazards"
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STICKY_WEB, opponent);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SPIKES, opponent);
         MESSAGE("Pointed stones dug into Grimer!");
-        MESSAGE("Grimer non ha più energie!");
+        MESSAGE("Grimer non ha\npiù energie!");
         MESSAGE("The poison spikes disappeared from the ground around your team!");
         NONE_OF {
             MESSAGE("Grimer was caught in a sticky web!");
@@ -116,12 +116,12 @@ SINGLE_BATTLE_TEST("Hazards can trigger Emergency Exit and other hazards don't a
         MESSAGE("Pointed stones dug into Golisopod!");
         ABILITY_POPUP(player, ABILITY_EMERGENCY_EXIT);
         NONE_OF {
-            MESSAGE("Golisopod was poisoned!");
+            MESSAGE("Golisopod ha subito\nun avvelenamento!");
             MESSAGE("Golisopod was caught in a sticky web!");
             MESSAGE("Golisopod was hurt by the spikes!");
         }
         MESSAGE("Pointed stones dug into Wobbuffet!");
-        MESSAGE("Wobbuffet was poisoned!");
+        MESSAGE("Wobbuffet ha subito\nun avvelenamento!");
         MESSAGE("Wobbuffet was caught in a sticky web!");
         MESSAGE("Wobbuffet was hurt by the spikes!");
         NOT MESSAGE("Pointed stones dug into Wobbuffet!"); // Because the previous switch in effects instruction is still kept
@@ -155,16 +155,16 @@ DOUBLE_BATTLE_TEST("Hazards can trigger Emergency Exit and hazards still activat
         MESSAGE("Pointed stones dug into Golisopod!");
         ABILITY_POPUP(playerLeft, ABILITY_EMERGENCY_EXIT);
         NONE_OF {
-            MESSAGE("Golisopod was poisoned!");
+            MESSAGE("Golisopod ha subito\nun avvelenamento!");
             MESSAGE("Golisopod was caught in a sticky web!");
             MESSAGE("Golisopod was hurt by the spikes!");
         }
         MESSAGE("Pointed stones dug into Wobbuffet!");
-        MESSAGE("Wobbuffet was poisoned!");
+        MESSAGE("Wobbuffet ha subito\nun avvelenamento!");
         MESSAGE("Wobbuffet was caught in a sticky web!");
         MESSAGE("Wobbuffet was hurt by the spikes!");
         MESSAGE("Pointed stones dug into Wynaut!");
-        MESSAGE("Wynaut was poisoned!");
+        MESSAGE("Wynaut ha subito\nun avvelenamento!");
         MESSAGE("Wynaut was caught in a sticky web!");
         MESSAGE("Wynaut was hurt by the spikes!");
     }

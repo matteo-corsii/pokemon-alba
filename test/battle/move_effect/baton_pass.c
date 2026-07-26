@@ -17,9 +17,9 @@ SINGLE_BATTLE_TEST("Baton Pass used after Memento works correctly")
     } WHEN {
         TURN { MOVE(player, MOVE_MEMENTO); SEND_OUT(player, 1); MOVE(opponent, MOVE_BATON_PASS); SEND_OUT(opponent, 1); }
     } SCENE {
-        MESSAGE("Wobbuffet used Memento!");
-        MESSAGE("Wobbuffet non ha più energie!");
-        MESSAGE("The opposing Wynaut used Baton Pass!");
+        MESSAGE("Wobbuffet usa\nMemento!");
+        MESSAGE("Wobbuffet non ha\npiù energie!");
+        MESSAGE("Wynaut avversario usa\nBaton Pass!");
         MESSAGE("2 sent out Caterpie!");
         MESSAGE("Go! Wobbuffet!");
     }

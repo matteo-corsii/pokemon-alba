@@ -24,15 +24,15 @@ SINGLE_BATTLE_TEST("Paralysis reduces Speed by 50% (Gen 7+) or 75% (Gen 1-6)")
     } SCENE {
         if (playerFirst) {
             ONE_OF {
-                MESSAGE("Wobbuffet used Celebrate!");
-                MESSAGE("Wobbuffet is paralyzed, so it may be unable to move!");
+                MESSAGE("Wobbuffet usa\nCelebrate!");
+                MESSAGE("Wobbuffet ha subito\nuna paralisi!");
             }
-            MESSAGE("The opposing Wobbuffet used Celebrate!");
+            MESSAGE("Wobbuffet avversario usa\nCelebrate!");
         } else {
-            MESSAGE("The opposing Wobbuffet used Celebrate!");
+            MESSAGE("Wobbuffet avversario usa\nCelebrate!");
             ONE_OF {
-                MESSAGE("Wobbuffet used Celebrate!");
-                MESSAGE("Wobbuffet is paralyzed, so it may be unable to move!");
+                MESSAGE("Wobbuffet usa\nCelebrate!");
+                MESSAGE("Wobbuffet ha subito\nuna paralisi!");
             }
         }
     }
@@ -64,7 +64,7 @@ SINGLE_BATTLE_TEST("Thunder Wave doesn't affect Electric types (Gen6+)")
     } WHEN {
         TURN { MOVE(player, MOVE_THUNDER_WAVE); }
     } SCENE {
-        MESSAGE("Wobbuffet used Thunder Wave!");
+        MESSAGE("Wobbuffet usa\nThunder Wave!");
         if (gen == GEN_6) {
             NONE_OF {
                 ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PRZ, opponent);
@@ -87,7 +87,7 @@ SINGLE_BATTLE_TEST("Thunder Wave doesn't print an effectiveness message")
     } WHEN {
         TURN { MOVE(opponent, MOVE_THUNDER_WAVE); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used Thunder Wave!");
+        MESSAGE("Wobbuffet avversario usa\nThunder Wave!");
         NOT MESSAGE("È superefficace!");
     }
 }
@@ -100,7 +100,7 @@ SINGLE_BATTLE_TEST("Thunder Wave prints an avoided attack message when it misses
     } WHEN {
         TURN { MOVE(player, MOVE_THUNDER_WAVE, hit: FALSE); }
     } SCENE {
-        MESSAGE("Wobbuffet used Thunder Wave!");
+        MESSAGE("Wobbuffet usa\nThunder Wave!");
         MESSAGE("The opposing Wobbuffet avoided the attack!");
         NOT MESSAGE("But it failed!");
     }
@@ -114,7 +114,7 @@ SINGLE_BATTLE_TEST("Thunder Wave prints failure when the target already has a di
     } WHEN {
         TURN { MOVE(player, MOVE_THUNDER_WAVE); }
     } SCENE {
-        MESSAGE("Wobbuffet used Thunder Wave!");
+        MESSAGE("Wobbuffet usa\nThunder Wave!");
         MESSAGE("But it failed!");
     }
 }
@@ -127,7 +127,7 @@ SINGLE_BATTLE_TEST("Thunder Wave prints already paralyzed message with the right
     } WHEN {
         TURN { MOVE(player, MOVE_THUNDER_WAVE); }
     } SCENE {
-        MESSAGE("Wobbuffet used Thunder Wave!");
+        MESSAGE("Wobbuffet usa\nThunder Wave!");
         MESSAGE("The opposing Zigzagoon is already paralyzed!");
         NOT MESSAGE("Wobbuffet is already paralyzed!");
     }

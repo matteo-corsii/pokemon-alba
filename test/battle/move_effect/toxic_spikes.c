@@ -64,7 +64,7 @@ SINGLE_BATTLE_TEST("Toxic Spikes fails after 2 layers")
         MESSAGE("Poison spikes were scattered on the ground all around the opposing team!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TOXIC_SPIKES, player);
         MESSAGE("Poison spikes were scattered on the ground all around the opposing team!");
-        MESSAGE("Wobbuffet used Toxic Spikes!");
+        MESSAGE("Wobbuffet usa\nToxic Spikes!");
         MESSAGE("But it failed!");
         MESSAGE("2 sent out Wynaut!");
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, opponent);
@@ -217,7 +217,7 @@ SINGLE_BATTLE_TEST("Toxic Spikes inflicts poison on switch in after Primal Rever
         TURN { SWITCH(player, 1); }
         TURN { MOVE(player, MOVE_MEMENTO); SEND_OUT(player, 2); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used Toxic Spikes!");
+        MESSAGE("Wobbuffet avversario usa\nToxic Spikes!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TOXIC_SPIKES, opponent);
         MESSAGE("Poison spikes were scattered on the ground all around your team!");
         // Switch in
@@ -227,8 +227,8 @@ SINGLE_BATTLE_TEST("Toxic Spikes inflicts poison on switch in after Primal Rever
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_PRIMAL_REVERSION, player);
         MESSAGE("Groudon's Primal Reversion! It reverted to its primal state!");
         // Memento
-        MESSAGE("Groudon used Memento!");
-        MESSAGE("Groudon non ha più energie!");
+        MESSAGE("Groudon usa\nMemento!");
+        MESSAGE("Groudon non ha\npiù energie!");
         // 2nd switch-in
         SEND_IN_MESSAGE("Wynaut");
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, player);
@@ -247,7 +247,7 @@ SINGLE_BATTLE_TEST("Toxic Spikes print normal poison for 1 layer")
         TURN { SWITCH(opponent, 1); }
         TURN {}
     } SCENE {
-        MESSAGE("The opposing Wynaut was poisoned!");
+        MESSAGE("Wynaut avversario ha subito\nun avvelenamento!");
     }
 }
 
@@ -263,7 +263,7 @@ SINGLE_BATTLE_TEST("Toxic Spikes print bad poison for 2 layers")
         TURN { SWITCH(opponent, 1); }
         TURN {}
     } SCENE {
-        MESSAGE("The opposing Wynaut was badly poisoned!");
+        MESSAGE("Wynaut avversario ha subito\nun grave avvelenamento!");
     }
 }
 

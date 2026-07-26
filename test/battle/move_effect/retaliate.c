@@ -91,7 +91,7 @@ DOUBLE_BATTLE_TEST("Retaliate works with passive damage")
         TURN { MOVE(opponentRight, MOVE_CELEBRATE, target: moveTarget); MOVE(playerLeft, MOVE_RETALIATE, target: opponentRight); }
     } SCENE {
         if (move != MOVE_FLAME_BURST)
-            MESSAGE("Wynaut used Celebrate!");
+            MESSAGE("Wynaut usa\nCelebrate!");
         HP_BAR(opponentRight, captureDamage: &damage[0]);
         HP_BAR(opponentRight, captureDamage: &damage[1]);
     } THEN {

@@ -17,10 +17,10 @@ SINGLE_BATTLE_TEST("Embargo blocks the effect of an affected Pokémon's held ite
         TURN { MOVE(player, MOVE_FISSURE); }
     } SCENE {
         // Turn 1
-        MESSAGE("Wobbuffet used Embargo!");
+        MESSAGE("Wobbuffet usa\nEmbargo!");
         MESSAGE("The opposing Wobbuffet can't use items anymore!");
         // Turn 2
-        MESSAGE("Wobbuffet used Fissure!");
+        MESSAGE("Wobbuffet usa\nFissure!");
         HP_BAR(opponent, hp: 0);
     }
 }
@@ -38,7 +38,7 @@ SINGLE_BATTLE_TEST("Embargo blocks an affected Pokémon's trainer from using ite
         TURN { MOVE(player, MOVE_EMBARGO); }
         TURN { USE_ITEM(opponent, ITEM_POTION, partyIndex: 0); }
     } SCENE {
-        MESSAGE("Wobbuffet used Embargo!");
+        MESSAGE("Wobbuffet usa\nEmbargo!");
         MESSAGE("The opposing Wobbuffet can't use items anymore!");
     } THEN {
         EXPECT_EQ(opponent->hp, 1);
@@ -59,10 +59,10 @@ WILD_BATTLE_TEST("Embargo doesn't block held item effects that affect experience
     } WHEN {
         TURN { MOVE(opponent, MOVE_EMBARGO); MOVE(player, MOVE_SCRATCH); }
     } SCENE {
-        MESSAGE("The wild Caterpie used Embargo!");
+        MESSAGE("Caterpie selvatico usa\nEmbargo!");
         MESSAGE("Wobbuffet can't use items anymore!");
-        MESSAGE("Wobbuffet used GRAFFIO!");
-        MESSAGE("The wild Caterpie non ha più energie!");
+        MESSAGE("Wobbuffet usa\nGRAFFIO!");
+        MESSAGE("Caterpie selvatico non ha\npiù energie!");
         EXPERIENCE_BAR(player, captureGainedExp: &results[i].exp);
     } FINALLY {
         EXPECT_MUL_EQ(results[1].exp, Q_4_12(1.5), results[0].exp);
@@ -84,11 +84,11 @@ WILD_BATTLE_TEST("Embargo doesn't block held item effects that affect effort val
         TURN { MOVE(opponent, MOVE_EMBARGO); MOVE(player, MOVE_SCRATCH); }
     } SCENE {
         // Turn 1
-        MESSAGE("The wild Caterpie used Embargo!");
+        MESSAGE("Caterpie selvatico usa\nEmbargo!");
         MESSAGE("Wobbuffet can't use items anymore!");
         // Turn 2
-        MESSAGE("Wobbuffet used GRAFFIO!");
-        MESSAGE("The wild Caterpie non ha più energie!");
+        MESSAGE("Wobbuffet usa\nGRAFFIO!");
+        MESSAGE("Caterpie selvatico non ha\npiù energie!");
     } THEN {
         finalHPEVAmount = (GetMonData(&PLAYER_PARTY[0], MON_DATA_HP_EV) + gItemsInfo[ITEM_POWER_WEIGHT].holdEffectParam + gSpeciesInfo[SPECIES_CATERPIE].evYield_HP);
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP_EV), finalHPEVAmount);
@@ -106,11 +106,11 @@ SINGLE_BATTLE_TEST("Embargo negates a held item's Speed reduction")
         TURN { MOVE(player, MOVE_SCRATCH); MOVE(opponent, MOVE_SCRATCH); }
     } SCENE {
         // Turn 1
-        MESSAGE("Wobbuffet used Embargo!");
+        MESSAGE("Wobbuffet usa\nEmbargo!");
         MESSAGE("The opposing Wobbuffet can't use items anymore!");
         // Turn 2
-        MESSAGE("The opposing Wobbuffet used GRAFFIO!");
-        MESSAGE("Wobbuffet used GRAFFIO!");
+        MESSAGE("Wobbuffet avversario usa\nGRAFFIO!");
+        MESSAGE("Wobbuffet usa\nGRAFFIO!");
     }
 }
 
@@ -132,8 +132,8 @@ SINGLE_BATTLE_TEST("Embargo negates a held item's Speed reduction")
 //         TURN { USE_ITEM(player, ITEM_X_ACCURACY); }
 //         TURN { MOVE(player, MOVE_SING); }
 //     } SCENE {
-//         MESSAGE("Wobbuffet used Sing!");
-//         MESSAGE("Wild Wobbuffet fell asleep!");
+//         MESSAGE("Wobbuffet usa\nSing!");
+//         MESSAGE("Wild Wobbuffet cade\nnel sonno!");
 //     } THEN {
 //         initialFriendship = GetMonData(&PLAYER_PARTY[0], MON_DATA_FRIENDSHIP);
 //         finalFriendship = GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_FRIENDSHIP);
@@ -176,13 +176,13 @@ SINGLE_BATTLE_TEST("Embargo makes Fling and Natural Gift fail")
         TURN { MOVE(player, moveId); }
     } SCENE {
         // Turn 1
-        MESSAGE("The opposing Wobbuffet used Embargo!");
+        MESSAGE("Wobbuffet avversario usa\nEmbargo!");
         MESSAGE("Wobbuffet can't use items anymore!");
         // Turn 2
         if (moveId == MOVE_FLING)
-            MESSAGE("Wobbuffet used Fling!");
+            MESSAGE("Wobbuffet usa\nFling!");
         else
-            MESSAGE("Wobbuffet used Natural Gift!");
+            MESSAGE("Wobbuffet usa\nNatural Gift!");
         MESSAGE("But it failed!");
     }
 }
@@ -197,13 +197,13 @@ SINGLE_BATTLE_TEST("Embargo doesn't stop an item flung at an affected target fro
         TURN { MOVE(player, MOVE_FLING); }
     } SCENE {
         // Turn 1
-        MESSAGE("Wobbuffet used Embargo!");
+        MESSAGE("Wobbuffet usa\nEmbargo!");
         MESSAGE("The opposing Wobbuffet can't use items anymore!");
         // Turn 2
-        MESSAGE("Wobbuffet used Fling!");
+        MESSAGE("Wobbuffet usa\nFling!");
         MESSAGE("Wobbuffet flung its Light Ball!");
         HP_BAR(opponent);
-        MESSAGE("The opposing Wobbuffet is paralyzed, so it may be unable to move!");
+        MESSAGE("Wobbuffet avversario ha subito\nuna paralisi!");
     }
 }
 
@@ -219,14 +219,14 @@ SINGLE_BATTLE_TEST("Baton Pass passes Embargo's effect")
         TURN { MOVE(player, MOVE_FLING); }
     } SCENE {
         // Turn 1
-        MESSAGE("The opposing Wobbuffet used Embargo!");
+        MESSAGE("Wobbuffet avversario usa\nEmbargo!");
         MESSAGE("Wobbuffet can't use items anymore!");
         // Turn 2
-        MESSAGE("Wobbuffet used Baton Pass!");
+        MESSAGE("Wobbuffet usa\nBaton Pass!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_BATON_PASS, player);
         SEND_IN_MESSAGE("Wynaut");
         // Turn 3
-        MESSAGE("Wynaut used Fling!");
+        MESSAGE("Wynaut usa\nFling!");
         MESSAGE("But it failed!");
     }
 }
@@ -243,10 +243,10 @@ SINGLE_BATTLE_TEST("Embargo doesn't block the effects of berries obtained throug
         TURN { MOVE(player, MOVE_PLUCK); }
     } SCENE {
         // Turn 1
-        MESSAGE("The opposing Wobbuffet used Embargo!");
+        MESSAGE("Wobbuffet avversario usa\nEmbargo!");
         MESSAGE("Wobbuffet can't use items anymore!");
         // Turn 2
-        MESSAGE("Wobbuffet used Pluck!");
+        MESSAGE("Wobbuffet usa\nPluck!");
         HP_BAR(opponent);
         MESSAGE("Wobbuffet stole and ate its target's Oran Berry!");
         HP_BAR(player, damage: -hp);
@@ -265,9 +265,9 @@ SINGLE_BATTLE_TEST("Embargo disables the effect of the Plate items on the move J
     } WHEN {
         TURN { MOVE(opponent, MOVE_EMBARGO); MOVE(player, MOVE_JUDGMENT); }
     } SCENE {
-        MESSAGE("The opposing Dragonite used Embargo!");
+        MESSAGE("Dragonite avversario usa\nEmbargo!");
         MESSAGE("Arceus can't use items anymore!");
-        MESSAGE("Arceus used Judgment!");
+        MESSAGE("Arceus usa\nJudgment!");
         HP_BAR(opponent, captureDamage: &results[i].damage);
     } FINALLY {
         EXPECT_MUL_EQ(results[0].damage, Q_4_12(1.0), results[1].damage);
@@ -286,9 +286,9 @@ SINGLE_BATTLE_TEST("Embargo disables the effect of the Drive items on the move T
     } WHEN {
         TURN { MOVE(opponent, MOVE_EMBARGO); MOVE(player, MOVE_TECHNO_BLAST); }
     } SCENE {
-        MESSAGE("The opposing Gyarados used Embargo!");
+        MESSAGE("Gyarados avversario usa\nEmbargo!");
         MESSAGE("Genesect can't use items anymore!");
-        MESSAGE("Genesect used Techno Blast!");
+        MESSAGE("Genesect usa\nTechno Blast!");
         HP_BAR(opponent, captureDamage: &results[i].damage);
     } FINALLY {
         EXPECT_MUL_EQ(results[0].damage, Q_4_12(1.0), results[1].damage);
@@ -307,9 +307,9 @@ SINGLE_BATTLE_TEST("Embargo disables the effect of the Memory items on the move 
     } WHEN {
         TURN { MOVE(opponent, MOVE_EMBARGO); MOVE(player, MOVE_MULTI_ATTACK); }
     } SCENE {
-        MESSAGE("The opposing Venusaur used Embargo!");
+        MESSAGE("Venusaur avversario usa\nEmbargo!");
         MESSAGE("Silvally can't use items anymore!");
-        MESSAGE("Silvally used Multi-Attack!");
+        MESSAGE("Silvally usa\nMulti-Attack!");
         HP_BAR(opponent, captureDamage: &results[i].damage);
     } FINALLY {
         EXPECT_MUL_EQ(results[0].damage, Q_4_12(1.0), results[1].damage);
@@ -326,13 +326,13 @@ SINGLE_BATTLE_TEST("Embargo can be reflected by Magic Coat")
         TURN { MOVE(opponent, MOVE_FLING); }
     } SCENE {
         // Turn 1
-        MESSAGE("Wobbuffet used Magic Coat!");
+        MESSAGE("Wobbuffet usa\nMagic Coat!");
         MESSAGE("Wobbuffet shrouded itself with Magic Coat!");
-        MESSAGE("The opposing Wobbuffet used Embargo!");
+        MESSAGE("Wobbuffet avversario usa\nEmbargo!");
         MESSAGE("Wobbuffet bounced the Embargo back!");
         MESSAGE("The opposing Wobbuffet can't use items anymore!");
         // Turn 2
-        MESSAGE("The opposing Wobbuffet used Fling!");
+        MESSAGE("Wobbuffet avversario usa\nFling!");
         MESSAGE("But it failed!");
     }
 }
@@ -349,10 +349,10 @@ SINGLE_BATTLE_TEST("Embargo doesn't prevent Mega Evolution")
         TURN { MOVE(opponent, MOVE_CELEBRATE, gimmick: GIMMICK_MEGA); }
     } SCENE {
         // Turn 1
-        MESSAGE("Wobbuffet used Embargo!");
+        MESSAGE("Wobbuffet usa\nEmbargo!");
         MESSAGE("The opposing Wobbuffet can't use items anymore!");
         // Turn 2
-        MESSAGE("The opposing Wobbuffet used Baton Pass!");
+        MESSAGE("Wobbuffet avversario usa\nBaton Pass!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_BATON_PASS, opponent);
         MESSAGE("2 sent out Charizard!");
         // Turn 3
@@ -374,17 +374,17 @@ SINGLE_BATTLE_TEST("Embargo doesn't prevent Primal Reversion")
         TURN { MOVE(opponent, MOVE_FLING); }
     } SCENE {
         // Turn 1
-        MESSAGE("Wobbuffet used Embargo!");
+        MESSAGE("Wobbuffet usa\nEmbargo!");
         MESSAGE("The opposing Wobbuffet can't use items anymore!");
         // Turn 2
-        MESSAGE("The opposing Wobbuffet used Baton Pass!");
+        MESSAGE("Wobbuffet avversario usa\nBaton Pass!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_BATON_PASS, opponent);
         MESSAGE("2 sent out Groudon!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_PRIMAL_REVERSION, opponent);
         MESSAGE("The opposing Groudon's Primal Reversion! It reverted to its primal state!");
         ABILITY_POPUP(opponent);
         // Turn 3
-        MESSAGE("The opposing Groudon used Fling!");
+        MESSAGE("Groudon avversario usa\nFling!");
         MESSAGE("But it failed!");
     }
 }

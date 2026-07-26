@@ -15,7 +15,7 @@ SINGLE_BATTLE_TEST("Teatime causes the user to consume its Berry, ignoring HP re
     } WHEN {
         TURN { MOVE(player, MOVE_TEATIME); }
     } SCENE {
-        MESSAGE("Wobbuffet used Teatime!");
+        MESSAGE("Wobbuffet usa\nTeatime!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TEATIME, player);
         MESSAGE("The Liechi Berry boosted Wobbuffet's Attack!");
     }
@@ -29,7 +29,7 @@ SINGLE_BATTLE_TEST("Teatime causes the user to consume its Berry, even in the pr
     } WHEN {
         TURN { MOVE(player, MOVE_TEATIME); }
     } SCENE {
-        MESSAGE("Wobbuffet used Teatime!");
+        MESSAGE("Wobbuffet usa\nTeatime!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TEATIME, player);
         MESSAGE("The Liechi Berry boosted Wobbuffet's Attack!");
     }
@@ -46,7 +46,7 @@ SINGLE_BATTLE_TEST("Teatime causes the user to consume its Berry, even under the
             MOVE(player, MOVE_TEATIME);
         }
     } SCENE {
-        MESSAGE("Wobbuffet used Teatime!");
+        MESSAGE("Wobbuffet usa\nTeatime!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TEATIME, player);
         MESSAGE("The Liechi Berry boosted Wobbuffet's Attack!");
     }
@@ -60,7 +60,7 @@ SINGLE_BATTLE_TEST("Teatime causes the user to consume its Berry, ignoring HP re
     } WHEN {
         TURN { MOVE(opponent, MOVE_TEATIME); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used Teatime!");
+        MESSAGE("Wobbuffet avversario usa\nTeatime!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TEATIME, opponent);
         MESSAGE("The Liechi Berry boosted the opposing Wobbuffet's Attack!");
     }
@@ -74,7 +74,7 @@ SINGLE_BATTLE_TEST("Teatime causes other Pokemon to consume their Berry even if 
     } WHEN {
         TURN { MOVE(player, MOVE_TEATIME); }
     } SCENE {
-        MESSAGE("Wobbuffet used Teatime!");
+        MESSAGE("Wobbuffet usa\nTeatime!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TEATIME, player);
         MESSAGE("The Liechi Berry boosted the opposing Wobbuffet's Attack!");
     }
@@ -88,7 +88,7 @@ SINGLE_BATTLE_TEST("Teatime causes other Pokemon to consume their Berry even if 
     } WHEN {
         TURN { MOVE(opponent, MOVE_TEATIME); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used Teatime!");
+        MESSAGE("Wobbuffet avversario usa\nTeatime!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TEATIME, opponent);
         MESSAGE("The Liechi Berry boosted Wobbuffet's Attack!");
     }
@@ -110,13 +110,13 @@ DOUBLE_BATTLE_TEST("Teatime causes all Pokémon to consume their berry")
         TURN { MOVE(user, MOVE_TEATIME); }
     } SCENE {
         if (user == playerLeft) {
-            MESSAGE("Wobbuffet used Teatime!");
+            MESSAGE("Wobbuffet usa\nTeatime!");
         } else if (user == playerRight) {
-            MESSAGE("Wynaut used Teatime!");
+            MESSAGE("Wynaut usa\nTeatime!");
         } else if (user == opponentLeft) {
-            MESSAGE("The opposing Wobbuffet used Teatime!");
+            MESSAGE("Wobbuffet avversario usa\nTeatime!");
         } else {
-            MESSAGE("The opposing Wynaut used Teatime!");
+            MESSAGE("Wynaut avversario usa\nTeatime!");
         }
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TEATIME, user);
         if (user == playerLeft) {
@@ -151,7 +151,7 @@ SINGLE_BATTLE_TEST("Teatime fails if no Pokémon is holding a Berry")
     } WHEN {
         TURN { MOVE(player, MOVE_TEATIME); }
     } SCENE {
-        MESSAGE("Wobbuffet used Teatime!");
+        MESSAGE("Wobbuffet usa\nTeatime!");
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_TEATIME, player);
         MESSAGE("But it failed!");
     }
@@ -168,7 +168,7 @@ SINGLE_BATTLE_TEST("Teatime does not affect Pokémon in the semi-invulnerable tu
             MOVE(player, MOVE_TEATIME);
         }
     } SCENE {
-        MESSAGE("Wobbuffet used Teatime!");
+        MESSAGE("Wobbuffet usa\nTeatime!");
         NONE_OF {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_TEATIME, player);
             MESSAGE("The Liechi Berry boosted the opposing Wobbuffet's Attack!");
@@ -197,7 +197,7 @@ SINGLE_BATTLE_TEST("Teatime triggers Volt Absorb if it has been affected by Elec
             MOVE(opponent, MOVE_TEATIME);
         }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used Teatime!");
+        MESSAGE("Wobbuffet avversario usa\nTeatime!");
         if (shouldTriggerAbility) {
             ABILITY_POPUP(player, ABILITY_VOLT_ABSORB);
             HP_BAR(player, damage: -25);
@@ -236,7 +236,7 @@ SINGLE_BATTLE_TEST("Teatime triggers Lightning Rod if it has been affected by El
             MOVE(opponent, MOVE_TEATIME);
         }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used Teatime!");
+        MESSAGE("Wobbuffet avversario usa\nTeatime!");
         if (shouldTriggerAbility) {
             ABILITY_POPUP(player, ABILITY_LIGHTNING_ROD);
             MESSAGE("Pikachu's Sp. Atk rose!");
@@ -277,7 +277,7 @@ SINGLE_BATTLE_TEST("Teatime triggers Motor Drive if it has been affected by Elec
             MOVE(opponent, MOVE_TEATIME);
         }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used Teatime!");
+        MESSAGE("Wobbuffet avversario usa\nTeatime!");
         if (shouldTriggerAbility) {
             ABILITY_POPUP(player, ABILITY_MOTOR_DRIVE);
             MESSAGE("Electivire's Speed rose!");
