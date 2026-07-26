@@ -512,7 +512,7 @@ AI_TWO_VS_ONE_BATTLE_TEST("AI will not try to switch for the same pokemon for 2 
         if (flags & AI_FLAG_SMART_SWITCHING)
         {
             MESSAGE(AI_TRAINER_NAME " withdrew Gengar!");
-            MESSAGE(AI_TRAINER_NAME " sent out Gastly!");
+            MESSAGE(AI_TRAINER_NAME " manda in campo Gastly!");
         }
         MESSAGE(AI_TRAINER_NAME " withdrew Haunter!");
         MESSAGE(AI_TRAINER_NAME " sent out Raticate!");
