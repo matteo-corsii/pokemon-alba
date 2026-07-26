@@ -145,7 +145,7 @@ SINGLE_BATTLE_TEST("Color Change changes the type to Normal when a Pokemon is hi
         TURN {}
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FUTURE_SIGHT, player);
-        MESSAGE("Wobbuffet used Soak!");
+        MESSAGE("Wobbuffet usa\nSoak!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SOAK, player);
         MESSAGE("The opposing Kecleon transformed into the Water type!");
         MESSAGE("The opposing Kecleon took the Future Sight attack!");

@@ -37,24 +37,24 @@ DOUBLE_BATTLE_TEST("Court Change swaps entry hazards used by the opponent")
         TURN { MOVE(playerLeft, MOVE_COURT_CHANGE); }
         TURN { SWITCH(playerLeft, 2); SWITCH(opponentLeft, 2); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used Sticky Web!");
-        MESSAGE("The opposing Wobbuffet used Stealth Rock!");
-        MESSAGE("The opposing Wobbuffet used Spikes!");
-        MESSAGE("The opposing Wobbuffet used Toxic Spikes!");
-        MESSAGE("Wynaut used Court Change!");
+        MESSAGE("Wobbuffet avversario usa\nSticky Web!");
+        MESSAGE("Wobbuffet avversario usa\nStealth Rock!");
+        MESSAGE("Wobbuffet avversario usa\nSpikes!");
+        MESSAGE("Wobbuffet avversario usa\nToxic Spikes!");
+        MESSAGE("Wynaut usa\nCourt Change!");
         MESSAGE("Wynaut swapped the battle effects affecting each side of the field!");
         SEND_IN_MESSAGE("Wynaut");
         NONE_OF {
             MESSAGE("Wynaut was caught in a sticky web!");
             MESSAGE("Pointed stones dug into Wynaut!");
             MESSAGE("Wynaut was hurt by the spikes!");
-            MESSAGE("Wynaut was poisoned!");
+            MESSAGE("Wynaut ha subito\nun avvelenamento!");
         }
         MESSAGE("2 sent out Wobbuffet!");
         MESSAGE("The opposing Wobbuffet was caught in a sticky web!");
         MESSAGE("Pointed stones dug into the opposing Wobbuffet!");
         MESSAGE("The opposing Wobbuffet was hurt by the spikes!");
-        MESSAGE("The opposing Wobbuffet was poisoned!");
+        MESSAGE("Wobbuffet avversario ha subito\nun avvelenamento!");
     }
 }
 
@@ -73,23 +73,23 @@ DOUBLE_BATTLE_TEST("Court Change swaps entry hazards used by the player")
         TURN { MOVE(opponentLeft, MOVE_COURT_CHANGE); }
         TURN { SWITCH(opponentLeft, 2); SWITCH(playerLeft, 2); }
     } SCENE {
-        MESSAGE("Wobbuffet used Sticky Web!");
-        MESSAGE("Wobbuffet used Stealth Rock!");
-        MESSAGE("Wobbuffet used Spikes!");
-        MESSAGE("Wobbuffet used Toxic Spikes!");
-        MESSAGE("The opposing Wynaut used Court Change!");
+        MESSAGE("Wobbuffet usa\nSticky Web!");
+        MESSAGE("Wobbuffet usa\nStealth Rock!");
+        MESSAGE("Wobbuffet usa\nSpikes!");
+        MESSAGE("Wobbuffet usa\nToxic Spikes!");
+        MESSAGE("Wynaut avversario usa\nCourt Change!");
         MESSAGE("The opposing Wynaut swapped the battle effects affecting each side of the field!");
         SEND_IN_MESSAGE("Wobbuffet");
         MESSAGE("Wobbuffet was caught in a sticky web!");
         MESSAGE("Pointed stones dug into Wobbuffet!");
         MESSAGE("Wobbuffet was hurt by the spikes!");
-        MESSAGE("Wobbuffet was poisoned!");
+        MESSAGE("Wobbuffet ha subito\nun avvelenamento!");
         MESSAGE("2 sent out Wynaut!");
         NONE_OF {
             MESSAGE("The opposing Wynaut was caught in a sticky web!");
             MESSAGE("Pointed stones dug into the opposing Wynaut!");
             MESSAGE("The opposing Wynaut was hurt by the spikes!");
-            MESSAGE("The opposing Wynaut was poisoned!");
+            MESSAGE("Wynaut avversario ha subito\nun avvelenamento!");
         }
     }
 }
@@ -114,14 +114,14 @@ DOUBLE_BATTLE_TEST("Court Change used by the player swaps Mist, Safeguard, Auror
         TURN {}
         TURN {}
     } SCENE {
-        MESSAGE("Wynaut used Snowscape!");
-        MESSAGE("The opposing Wobbuffet used Mist!");
-        MESSAGE("The opposing Wobbuffet used Safeguard!");
-        MESSAGE("The opposing Wobbuffet used Aurora Veil!");
-        MESSAGE("The opposing Wobbuffet used Reflect!");
-        MESSAGE("The opposing Wobbuffet used Light Screen!");
-        MESSAGE("The opposing Wobbuffet used Tailwind!");
-        MESSAGE("Wynaut used Court Change!");
+        MESSAGE("Wynaut usa\nSnowscape!");
+        MESSAGE("Wobbuffet avversario usa\nMist!");
+        MESSAGE("Wobbuffet avversario usa\nSafeguard!");
+        MESSAGE("Wobbuffet avversario usa\nAurora Veil!");
+        MESSAGE("Wobbuffet avversario usa\nReflect!");
+        MESSAGE("Wobbuffet avversario usa\nLight Screen!");
+        MESSAGE("Wobbuffet avversario usa\nTailwind!");
+        MESSAGE("Wynaut usa\nCourt Change!");
         MESSAGE("Wynaut swapped the battle effects affecting each side of the field!");
         // The effects now end for the player side.
         MESSAGE("Your team is no longer protected by Safeguard!");
@@ -153,13 +153,13 @@ DOUBLE_BATTLE_TEST("Court Change used by the opponent swaps Mist, Safeguard, Aur
         TURN {}
         TURN {}
     } SCENE {
-        MESSAGE("Wobbuffet used Mist!");
-        MESSAGE("Wobbuffet used Safeguard!");
-        MESSAGE("Wobbuffet used Aurora Veil!");
-        MESSAGE("Wobbuffet used Reflect!");
-        MESSAGE("Wobbuffet used Light Screen!");
-        MESSAGE("Wobbuffet used Tailwind!");
-        MESSAGE("The opposing Wynaut used Court Change!");
+        MESSAGE("Wobbuffet usa\nMist!");
+        MESSAGE("Wobbuffet usa\nSafeguard!");
+        MESSAGE("Wobbuffet usa\nAurora Veil!");
+        MESSAGE("Wobbuffet usa\nReflect!");
+        MESSAGE("Wobbuffet usa\nLight Screen!");
+        MESSAGE("Wobbuffet usa\nTailwind!");
+        MESSAGE("Wynaut avversario usa\nCourt Change!");
         MESSAGE("The opposing Wynaut swapped the battle effects affecting each side of the field!");
         // The effects now end for the player side.
         MESSAGE("The snow stopped.");
@@ -186,7 +186,7 @@ DOUBLE_BATTLE_TEST("Court Change used by the player swaps G-Max Steelsurge")
         TURN { MOVE(opponentLeft, MOVE_COURT_CHANGE); }
         TURN { SWITCH(opponentLeft, 2); SWITCH(playerLeft, 2); }
     } SCENE {
-        MESSAGE("Copperajah used G-Max Steelsurge!");
+        MESSAGE("Copperajah usa\nG-Max Steelsurge!");
         SEND_IN_MESSAGE("Wobbuffet");
         MESSAGE("The sharp steel bit into Wobbuffet!");
         NOT MESSAGE("The sharp steel bit into the opposing Wynaut!");
@@ -214,15 +214,15 @@ DOUBLE_BATTLE_TEST("Court Change used by the player swaps G-Max Vine Lash, G-Max
     } SCENE {
         switch (species) {
             case SPECIES_VENUSAUR:
-                MESSAGE("Venusaur used G-Max Vine Lash!");
+                MESSAGE("Venusaur usa\nG-Max Vine Lash!");
                 MESSAGE("Wobbuffet is hurt by G-Max Vine Lash's ferocious beating!");
                 break;
             case SPECIES_CHARIZARD:
-                MESSAGE("Charizard used G-Max Wildfire!");
+                MESSAGE("Charizard usa\nG-Max Wildfire!");
                 MESSAGE("Wobbuffet is burning up within G-Max Wildfire's flames!");
                 break;
             case SPECIES_BLASTOISE:
-                MESSAGE("Blastoise used G-Max Cannonade!");
+                MESSAGE("Blastoise usa\nG-Max Cannonade!");
                 MESSAGE("Wobbuffet is hurt by G-Max Cannonade's vortex!");
                 break;
         }

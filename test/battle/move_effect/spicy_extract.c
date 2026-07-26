@@ -47,7 +47,7 @@ SINGLE_BATTLE_TEST("Spicy Extract is prevented by target's ability if it's Attac
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SWORDS_DANCE, opponent);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("Wobbuffet used Spicy Extract!");
+        MESSAGE("Wobbuffet usa\nSpicy Extract!");
         if (ability == ABILITY_CLEAR_BODY) {
             ABILITY_POPUP(opponent, ABILITY_CLEAR_BODY);
             MESSAGE("The opposing Beldum's stats were not lowered!");
@@ -70,7 +70,7 @@ SINGLE_BATTLE_TEST("Spicy Extract Defense loss is prevented by Big Pecks")
     } WHEN {
         TURN { MOVE(player, MOVE_SPICY_EXTRACT); }
     } SCENE {
-        MESSAGE("Wobbuffet used Spicy Extract!");
+        MESSAGE("Wobbuffet usa\nSpicy Extract!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SPICY_EXTRACT, player);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
         MESSAGE("The opposing Pidgey's Attack rose sharply!");
@@ -92,7 +92,7 @@ SINGLE_BATTLE_TEST("Spicy Extract bypasses accuracy checks")
     } WHEN {
         TURN { MOVE(player, MOVE_SPICY_EXTRACT); }
     } SCENE {
-        MESSAGE("Wobbuffet used Spicy Extract!");
+        MESSAGE("Wobbuffet usa\nSpicy Extract!");
         NOT MESSAGE("The opposing Wobbuffet avoided the attack!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SPICY_EXTRACT, player);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
@@ -110,9 +110,9 @@ SINGLE_BATTLE_TEST("Spicy Extract will fail if target is in a semi-invulnerabili
     } WHEN {
         TURN { MOVE(opponent, MOVE_DIVE); MOVE(player, MOVE_SPICY_EXTRACT); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used Dive!");
+        MESSAGE("Wobbuffet avversario usa\nDive!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DIVE, opponent);
-        MESSAGE("Wobbuffet used Spicy Extract!");
+        MESSAGE("Wobbuffet usa\nSpicy Extract!");
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_SPICY_EXTRACT, player);
         MESSAGE("The opposing Wobbuffet avoided the attack!");
     }
@@ -126,7 +126,7 @@ SINGLE_BATTLE_TEST("Spicy Extract stat changes will be inverted by Contrary")
     } WHEN {
         TURN { MOVE(player, MOVE_SPICY_EXTRACT); }
     } SCENE {
-        MESSAGE("Wobbuffet used Spicy Extract!");
+        MESSAGE("Wobbuffet usa\nSpicy Extract!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SPICY_EXTRACT, player);
 
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
@@ -148,7 +148,7 @@ SINGLE_BATTLE_TEST("Spicy Extract against Clear Amulet and Contrary raises Defen
     } WHEN {
         TURN { MOVE(player, MOVE_SPICY_EXTRACT); }
     } SCENE {
-        MESSAGE("Wobbuffet used Spicy Extract!");
+        MESSAGE("Wobbuffet usa\nSpicy Extract!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SPICY_EXTRACT, player);
         NONE_OF {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);

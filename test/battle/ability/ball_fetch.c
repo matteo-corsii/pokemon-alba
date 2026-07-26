@@ -86,7 +86,7 @@ WILD_BATTLE_TEST("Ball Fetch only picks up the first failed ball, once per battl
         MESSAGE("You used Great Ball!");
         ABILITY_POPUP(player, ABILITY_BALL_FETCH);
         MESSAGE("Yamper found a Great Ball!");
-        MESSAGE("Yamper used Bestow!");
+        MESSAGE("Yamper usa\nBestow!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_BESTOW, player);
         MESSAGE("The wild Metagross received Great Ball from Yamper!");
         NOT ABILITY_POPUP(player, ABILITY_BALL_FETCH);

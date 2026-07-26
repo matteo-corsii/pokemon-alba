@@ -17,7 +17,7 @@ SINGLE_BATTLE_TEST("Axe Kick confuses the target")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_AXE_KICK, player);
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_CONFUSION, opponent);
-        MESSAGE("The opposing Wobbuffet became confused!");
+        MESSAGE("Wobbuffet avversario\nè in preda alla confusione!");
     }
 }
 
@@ -47,7 +47,7 @@ SINGLE_BATTLE_TEST("Axe Kick deals damage half the hp to user if it fails")
         TURN { MOVE(player, MOVE_AXE_KICK, hit: FALSE); }
     } SCENE {
         s32 maxHP = GetMonData(&PLAYER_PARTY[0], MON_DATA_MAX_HP);
-        MESSAGE("Wobbuffet used Axe Kick!");
+        MESSAGE("Wobbuffet usa\nAxe Kick!");
         MESSAGE("The opposing Wobbuffet avoided the attack!");
         MESSAGE("Wobbuffet kept going and crashed!");
         HP_BAR(player, hp: maxHP / 2);
@@ -69,7 +69,7 @@ SINGLE_BATTLE_TEST("Axe Kick still deals crash damage when boosted by Sheer Forc
         TURN { MOVE(player, MOVE_AXE_KICK, hit: FALSE); }
     } SCENE {
         s32 maxHP = GetMonData(&PLAYER_PARTY[0], MON_DATA_MAX_HP);
-        MESSAGE("Tauros used Axe Kick!");
+        MESSAGE("Tauros usa\nAxe Kick!");
         MESSAGE("The opposing Wobbuffet avoided the attack!");
         MESSAGE("Tauros kept going and crashed!");
         HP_BAR(player, hp: maxHP / 2);

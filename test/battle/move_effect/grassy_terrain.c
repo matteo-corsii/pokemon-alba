@@ -42,7 +42,7 @@ SINGLE_BATTLE_TEST("Grassy Terrain increases power of Grass-type moves by 30/50 
             TURN { MOVE(player, MOVE_GRASSY_TERRAIN); }
         TURN { MOVE(player, MOVE_ABSORB); }
     } SCENE {
-        MESSAGE("Wobbuffet used Absorb!");
+        MESSAGE("Wobbuffet usa\nAbsorb!");
         HP_BAR(opponent, captureDamage: &results[i].damage);
     } FINALLY {
         if (B_TERRAIN_TYPE_BOOST >= GEN_8)
@@ -64,18 +64,18 @@ SINGLE_BATTLE_TEST("Grassy Terrain lasts for 5 turns")
         TURN {}
         TURN {}
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used Celebrate!");
+        MESSAGE("Wobbuffet avversario usa\nCelebrate!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_GRASSY_TERRAIN, player);
         MESSAGE("Grass grew to cover the battlefield!");
 
-        MESSAGE("Wobbuffet used Celebrate!");
-        MESSAGE("The opposing Wobbuffet used Celebrate!");
+        MESSAGE("Wobbuffet usa\nCelebrate!");
+        MESSAGE("Wobbuffet avversario usa\nCelebrate!");
 
-        MESSAGE("Wobbuffet used Celebrate!");
-        MESSAGE("The opposing Wobbuffet used Celebrate!");
+        MESSAGE("Wobbuffet usa\nCelebrate!");
+        MESSAGE("Wobbuffet avversario usa\nCelebrate!");
 
-        MESSAGE("Wobbuffet used Celebrate!");
-        MESSAGE("The opposing Wobbuffet used Celebrate!");
+        MESSAGE("Wobbuffet usa\nCelebrate!");
+        MESSAGE("Wobbuffet avversario usa\nCelebrate!");
 
         MESSAGE("The grass disappeared from the battlefield.");
     }
@@ -93,7 +93,7 @@ SINGLE_BATTLE_TEST("Grassy Terrain heals the Pokémon on the field for the durat
         TURN {}
         TURN {}
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used Celebrate!");
+        MESSAGE("Wobbuffet avversario usa\nCelebrate!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_GRASSY_TERRAIN, player);
         MESSAGE("Grass grew to cover the battlefield!");
         MESSAGE("The opposing Wobbuffet is healed by the grassy terrain!");

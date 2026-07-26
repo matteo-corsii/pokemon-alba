@@ -44,8 +44,8 @@ SINGLE_BATTLE_TEST("Comatose may be suppressed if Pokémon transformed into a Po
         TURN { MOVE(player, move); }
     } SCENE {
         MESSAGE("Komala is drowsing!");
-        MESSAGE("Komala used Gastro Acid!");
-        MESSAGE("The opposing Ditto used Transform!");
+        MESSAGE("Komala usa\nGastro Acid!");
+        MESSAGE("Ditto avversario usa\nTransform!");
         MESSAGE("The opposing Ditto transformed into Komala!");
 
         ANIMATION(ANIM_TYPE_MOVE, move, player);

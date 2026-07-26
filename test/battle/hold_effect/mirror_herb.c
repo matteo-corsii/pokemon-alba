@@ -59,8 +59,8 @@ DOUBLE_BATTLE_TEST("Mirror Herb does not trigger for Ally's Soul Heart's stat ra
     } WHEN {
         TURN { MOVE(playerRight, MOVE_SCRATCH, target:opponentLeft); }
     } SCENE {
-        MESSAGE("Wynaut used GRAFFIO!");
-        MESSAGE("The opposing Wobbuffet non ha più energie!");
+        MESSAGE("Wynaut usa\nGRAFFIO!");
+        MESSAGE("Wobbuffet avversario non ha\npiù energie!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
         NONE_OF {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, playerLeft);

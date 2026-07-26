@@ -33,7 +33,7 @@ DOUBLE_BATTLE_TEST("Sparkly Swirl cures the entire party of the user from primar
         TURN { MOVE(playerLeft, MOVE_SPARKLY_SWIRL, target: opponentLeft); }
         TURN { SWITCH(playerLeft, 2); SWITCH(playerRight, 3); }
     } SCENE {
-        MESSAGE("Wobbuffet used Sparkly Swirl!");
+        MESSAGE("Wobbuffet usa\nSparkly Swirl!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SPARKLY_SWIRL, playerLeft);
         switch(status)
         {

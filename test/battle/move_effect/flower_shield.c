@@ -21,7 +21,7 @@ DOUBLE_BATTLE_TEST("Flower Shield raises the defense of all Grass-type Pokémon"
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_FLOWER_SHIELD); MOVE(playerRight, MOVE_CELEBRATE); }
     } SCENE {
-        MESSAGE("Tangela used Flower Shield!");
+        MESSAGE("Tangela usa\nFlower Shield!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FLOWER_SHIELD, playerLeft);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
         MESSAGE("Tangela's Defense rose!");

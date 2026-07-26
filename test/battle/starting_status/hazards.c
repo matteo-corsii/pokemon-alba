@@ -41,7 +41,7 @@ SINGLE_BATTLE_TEST("Starting Toxic Spikes poison the opposing switch-in")
         TURN { SWITCH(opponent, 1); }
     } SCENE {
         MESSAGE("2 sent out Wynaut!");
-        MESSAGE("The opposing Wynaut was poisoned!");
+        MESSAGE("Wynaut avversario ha subito\nun avvelenamento!");
         STATUS_ICON(opponent, poison: TRUE);
         NOT STATUS_ICON(opponent, badPoison: TRUE);
     } THEN {
@@ -61,7 +61,7 @@ SINGLE_BATTLE_TEST("Starting Toxic Spikes badly poison the opposing switch-in")
         TURN { SWITCH(opponent, 1); }
     } SCENE {
         MESSAGE("2 sent out Wynaut!");
-        MESSAGE("The opposing Wynaut was badly poisoned!");
+        MESSAGE("Wynaut avversario ha subito\nun grave avvelenamento!");
         STATUS_ICON(opponent, badPoison: TRUE);
     } THEN {
         ResetStartingStatuses();
@@ -171,7 +171,7 @@ SINGLE_BATTLE_TEST("Starting Toxic Spikes poison the player's switch-in")
         TURN { SWITCH(player, 1); }
     } SCENE {
         MESSAGE("Go! Wynaut!");
-        MESSAGE("Wynaut was poisoned!");
+        MESSAGE("Wynaut ha subito\nun avvelenamento!");
         STATUS_ICON(player, poison: TRUE);
         NOT STATUS_ICON(player, badPoison: TRUE);
     } THEN {
@@ -191,7 +191,7 @@ SINGLE_BATTLE_TEST("Starting Toxic Spikes badly poison the player's switch-in")
         TURN { SWITCH(player, 1); }
     } SCENE {
         MESSAGE("Go! Wynaut!");
-        MESSAGE("Wynaut was badly poisoned!");
+        MESSAGE("Wynaut ha subito\nun grave avvelenamento!");
         STATUS_ICON(player, badPoison: TRUE);
     } THEN {
         ResetStartingStatuses();

@@ -15,7 +15,7 @@ WILD_BATTLE_TEST("Ion Deluge works the same way as always when used by a mon wit
     } WHEN {
         TURN { MOVE(opponent, MOVE_ION_DELUGE); }
     } SCENE {
-        MESSAGE("The wild Lanturn used Ion Deluge!");
+        MESSAGE("Lanturn selvatico usa\nIon Deluge!");
         NONE_OF {
             ABILITY_POPUP(opponent, ABILITY_VOLT_ABSORB);
             HP_BAR(opponent);
@@ -37,7 +37,7 @@ WILD_BATTLE_TEST("Ion Deluge works the same way as always when used by a mon wit
     } WHEN {
         TURN { MOVE(opponent, MOVE_ION_DELUGE); }
     } SCENE {
-        MESSAGE("The wild Zebstrika used Ion Deluge!");
+        MESSAGE("Zebstrika selvatico usa\nIon Deluge!");
         NONE_OF {
             ABILITY_POPUP(opponent, ability);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
@@ -57,9 +57,9 @@ SINGLE_BATTLE_TEST("Ion Deluge makes Normal type moves Electric type")
     } WHEN {
         TURN { MOVE(opponent, MOVE_ION_DELUGE); MOVE(player, MOVE_SCRATCH); }
     } SCENE {
-        MESSAGE("The opposing Golbat used Ion Deluge!");
+        MESSAGE("Golbat avversario usa\nIon Deluge!");
         MESSAGE("A deluge of ions showers the battlefield!");
-        MESSAGE("Wobbuffet used GRAFFIO!");
+        MESSAGE("Wobbuffet usa\nGRAFFIO!");
         MESSAGE("È superefficace!"); // Because GRAFFIO is now electric type.
     }
 }

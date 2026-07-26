@@ -272,7 +272,7 @@ SINGLE_BATTLE_TEST("Wind Power displays its message before fainting when trigger
         HP_BAR(player);
         ABILITY_POPUP(player, ABILITY_WIND_POWER);
         MESSAGE("Being hit by Air Cutter charged Wattrel with power!");
-        MESSAGE("Wattrel non ha più energie!");
+        MESSAGE("Wattrel non ha\npiù energie!");
     }
 }
 
@@ -290,7 +290,7 @@ DOUBLE_BATTLE_TEST("Tailwind does not trigger Wind Power on an absent ally battl
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponentLeft);
         HP_BAR(playerRight);
-        MESSAGE("Wattrel non ha più energie!");
+        MESSAGE("Wattrel non ha\npiù energie!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TAILWIND, playerLeft);
         NONE_OF {
             ABILITY_POPUP(playerRight, ABILITY_WIND_POWER);

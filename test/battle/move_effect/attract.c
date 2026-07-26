@@ -66,7 +66,7 @@ SINGLE_BATTLE_TEST("Attract fails if the target is already infatuated")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ATTRACT, player);
         MESSAGE("The opposing Nidoking fell in love!");
-        MESSAGE("Nidoqueen used Attract!");
+        MESSAGE("Nidoqueen usa\nAttract!");
         MESSAGE("But it failed!");
     } THEN {
         EXPECT(opponent->volatiles.infatuation);
@@ -81,7 +81,7 @@ SINGLE_BATTLE_TEST("Attract fails when used on a Pokémon of the same gender")
     } WHEN {
         TURN { MOVE(player, MOVE_ATTRACT); }
     } SCENE {
-        MESSAGE("Nidoqueen used Attract!");
+        MESSAGE("Nidoqueen usa\nAttract!");
         MESSAGE("But it failed!");
     } THEN {
         EXPECT(!(opponent->volatiles.infatuation));
@@ -97,7 +97,7 @@ SINGLE_BATTLE_TEST("Attract fails when used on a genderless Pokémon")
     } WHEN {
         TURN { MOVE(player, MOVE_ATTRACT); }
     } SCENE {
-        MESSAGE("Nidoqueen used Attract!");
+        MESSAGE("Nidoqueen usa\nAttract!");
         MESSAGE("But it failed!");
     } THEN {
         EXPECT(!(opponent->volatiles.infatuation));

@@ -23,9 +23,9 @@ DOUBLE_BATTLE_TEST("Water and Fire Pledge create a rainbow on the user's side of
         TURN {}
         TURN {}
     } SCENE {
-        MESSAGE("Wobbuffet used Water Pledge!");
+        MESSAGE("Wobbuffet usa\nWater Pledge!");
         MESSAGE("Wobbuffet is waiting for Wynaut's move…{PAUSE 16}");
-        MESSAGE("Wynaut used Fire Pledge!");
+        MESSAGE("Wynaut usa\nFire Pledge!");
         MESSAGE("The two moves have become one! It's a combined move!{PAUSE 16}");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_WATER_PLEDGE, playerRight);
         HP_BAR(opponentRight);
@@ -51,7 +51,7 @@ DOUBLE_BATTLE_TEST("Rainbow doubles the chance of secondary move effects")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_WATER_PLEDGE, playerRight);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_EMBER, playerLeft);
-        MESSAGE("The opposing Wynaut was burned!");
+        MESSAGE("Wynaut avversario ha subito\nuna scottatura!");
     }
 }
 
@@ -91,9 +91,9 @@ DOUBLE_BATTLE_TEST("Fire and Grass Pledge summons Sea Of Fire for four turns tha
         TURN {}
         TURN {}
     } SCENE {
-        MESSAGE("Wobbuffet used Fire Pledge!");
+        MESSAGE("Wobbuffet usa\nFire Pledge!");
         MESSAGE("Wobbuffet is waiting for Wynaut's move…{PAUSE 16}");
-        MESSAGE("Wynaut used Grass Pledge!");
+        MESSAGE("Wynaut usa\nGrass Pledge!");
         MESSAGE("The two moves have become one! It's a combined move!{PAUSE 16}");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FIRE_PLEDGE, playerRight);
         HP_BAR(opponentRight);
@@ -180,9 +180,9 @@ DOUBLE_BATTLE_TEST("Grass and Water Pledge create a swamp on the user's side of 
         TURN {}
         TURN {}
     } SCENE {
-        MESSAGE("Wobbuffet used Grass Pledge!");
+        MESSAGE("Wobbuffet usa\nGrass Pledge!");
         MESSAGE("Wobbuffet is waiting for Wynaut's move…{PAUSE 16}");
-        MESSAGE("Wynaut used Water Pledge!");
+        MESSAGE("Wynaut usa\nWater Pledge!");
         MESSAGE("The two moves have become one! It's a combined move!{PAUSE 16}");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_GRASS_PLEDGE, playerRight);
         HP_BAR(opponentRight);

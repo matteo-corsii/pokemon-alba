@@ -246,7 +246,7 @@ DOUBLE_BATTLE_TEST("Beads of Ruin will not reactivate after Sunsteel Strike fain
 
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SUNSTEEL_STRIKE, playerRight);
         HP_BAR(opponentLeft);
-        MESSAGE("The opposing Weezing non ha più energie!");
+        MESSAGE("Weezing avversario non ha\npiù energie!");
 
         NOT ABILITY_POPUP(playerLeft, ABILITY_BEADS_OF_RUIN);
 

@@ -70,7 +70,7 @@ SINGLE_BATTLE_TEST("Defog lowers evasiveness of target behind Substitute (Gen4)"
     } WHEN {
         TURN { MOVE(opponent, MOVE_SUBSTITUTE); MOVE(player, MOVE_DEFOG); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used Substitute!");
+        MESSAGE("Wobbuffet avversario usa\nSubstitute!");
         NOT MESSAGE("But it failed!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DEFOG, player);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
@@ -93,7 +93,7 @@ SINGLE_BATTLE_TEST("Defog fails if target has minimum evasion stat change behind
         TURN { MOVE(player, MOVE_DEFOG); }
         TURN { MOVE(player, MOVE_DEFOG); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used Substitute!");
+        MESSAGE("Wobbuffet avversario usa\nSubstitute!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DEFOG, player);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
         MESSAGE("The opposing Wobbuffet's evasiveness harshly fell!");
@@ -118,7 +118,7 @@ SINGLE_BATTLE_TEST("Defog does not lower evasiveness if target behind Substitute
         TURN { MOVE(opponent, move); }
         TURN { MOVE(opponent, MOVE_SUBSTITUTE); MOVE(player, MOVE_DEFOG); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used Substitute!");
+        MESSAGE("Wobbuffet avversario usa\nSubstitute!");
         if (move == MOVE_CELEBRATE)
         {
             MESSAGE("But it failed!");
@@ -229,10 +229,10 @@ DOUBLE_BATTLE_TEST("Defog doesn't remove Mist or Safeguard from the user's side"
             MESSAGE("Your team's Mist wore off!");
             MESSAGE("Your team's Safeguard wore off!");
         }
-        MESSAGE("The opposing Wobbuffet used Screech!");
+        MESSAGE("Wobbuffet avversario usa\nScreech!");
         MESSAGE("Wobbuffet is protected by the mist!");
         NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-        MESSAGE("The opposing Wobbuffet used Toxic!");
+        MESSAGE("Wobbuffet avversario usa\nToxic!");
         MESSAGE("Wobbuffet is protected by Safeguard!");
         NOT STATUS_ICON(playerRight, badPoison: TRUE);
     }
@@ -261,7 +261,7 @@ DOUBLE_BATTLE_TEST("Defog removes Mist and Safeguard from target's side")
             MESSAGE("The opposing team's Mist wore off!");
             MESSAGE("The opposing team's Safeguard wore off!");
         }
-        MESSAGE("Wobbuffet used Screech!");
+        MESSAGE("Wobbuffet usa\nScreech!");
         if (move == MOVE_DEFOG) {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_SCREECH, playerLeft);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
@@ -269,7 +269,7 @@ DOUBLE_BATTLE_TEST("Defog removes Mist and Safeguard from target's side")
             MESSAGE("The opposing Wobbuffet is protected by the mist!");
             NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
         }
-        MESSAGE("Wobbuffet used Toxic!");
+        MESSAGE("Wobbuffet usa\nToxic!");
         if (move == MOVE_DEFOG) {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_TOXIC, playerRight);
             STATUS_ICON(opponentRight, badPoison: TRUE);
@@ -522,12 +522,12 @@ SINGLE_BATTLE_TEST("Defog removes Toxic Spikes from target's side")
         // Switch happens
         MESSAGE("2 sent out Wobbuffet!");
         if (move != MOVE_DEFOG) {
-            MESSAGE("The opposing Wobbuffet was poisoned!");
+            MESSAGE("Wobbuffet avversario ha subito\nun avvelenamento!");
             ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, opponent);
             STATUS_ICON(opponent, poison: TRUE);
         } else {
             NONE_OF {
-                MESSAGE("The opposing Wobbuffet was poisoned!");
+                MESSAGE("Wobbuffet avversario ha subito\nun avvelenamento!");
                 ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, opponent);
                 STATUS_ICON(opponent, poison: TRUE);
             }
@@ -559,12 +559,12 @@ SINGLE_BATTLE_TEST("Defog removes Toxic Spikes from user's side (Gen 6+)")
         // Switch happens
         MESSAGE("2 sent out Wobbuffet!");
         if (move != MOVE_DEFOG || config <= GEN_5) {
-            MESSAGE("The opposing Wobbuffet was poisoned!");
+            MESSAGE("Wobbuffet avversario ha subito\nun avvelenamento!");
             ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, opponent);
             STATUS_ICON(opponent, poison: TRUE);
         } else {
             NONE_OF {
-                MESSAGE("The opposing Wobbuffet was poisoned!");
+                MESSAGE("Wobbuffet avversario ha subito\nun avvelenamento!");
                 ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, opponent);
                 STATUS_ICON(opponent, poison: TRUE);
             }
@@ -682,7 +682,7 @@ DOUBLE_BATTLE_TEST("Defog removes everything it can")
         TURN { MOVE(playerLeft, MOVE_REFLECT); MOVE(playerRight, MOVE_LIGHT_SCREEN); MOVE(opponentLeft, MOVE_REFLECT); MOVE(opponentRight, MOVE_SAFEGUARD); }
         TURN { MOVE(playerLeft, MOVE_MIST); MOVE(playerRight, MOVE_SAFEGUARD); MOVE(opponentLeft, MOVE_MIST); MOVE(opponentRight, MOVE_DEFOG, target: playerLeft); }
     } SCENE {
-        MESSAGE("The opposing Glalie used Defog!");
+        MESSAGE("Glalie avversario usa\nDefog!");
         MESSAGE("Glalie is protected by the mist!");
 
         // No, idea. Either I'm blind or the anim is played on the correct mon
@@ -753,7 +753,7 @@ SINGLE_BATTLE_TEST("Defog is used on the correct side if opposing mon is behind 
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_LIGHT_SCREEN, opponent);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SUBSTITUTE, opponent);
-        MESSAGE("Wobbuffet used Defog!");
+        MESSAGE("Wobbuffet usa\nDefog!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DEFOG, player);
         MESSAGE("The opposing team's Light Screen wore off!");
     } THEN {

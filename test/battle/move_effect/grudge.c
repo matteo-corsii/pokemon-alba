@@ -16,7 +16,7 @@ SINGLE_BATTLE_TEST("Grudge depletes all PP of the move that fainted the target")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_GRUDGE, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
-        MESSAGE("Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet non ha\npiù energie!");
     } THEN {
         EXPECT_GT(opponent->pp[0], 0);
         EXPECT_EQ(opponent->pp[1], 0);
@@ -41,7 +41,7 @@ SINGLE_BATTLE_TEST("Grudge does not deplete PP of a Z-Move")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_GRUDGE, player);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_ZMOVE_ACTIVATE, opponent);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_BREAKNECK_BLITZ, opponent);
-        MESSAGE("Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet non ha\npiù energie!");
     } THEN {
         EXPECT_GT(opponent->pp[0], 0);
         EXPECT_GT(opponent->pp[1], 0);
@@ -59,11 +59,11 @@ SINGLE_BATTLE_TEST("Grudge depletes all PP from a Max Move's base move")
     } WHEN {
         TURN { MOVE(player, MOVE_GRUDGE); MOVE(opponent, MOVE_SCRATCH, gimmick: GIMMICK_DYNAMAX); SEND_OUT(player, 1); }
     } SCENE {
-        MESSAGE("Wobbuffet used Grudge!");
+        MESSAGE("Wobbuffet usa\nGrudge!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_GRUDGE, player);
-        MESSAGE("The opposing Wobbuffet used Max Strike!");
+        MESSAGE("Wobbuffet avversario usa\nMax Strike!");
         MESSAGE("The opposing Wobbuffet lost all of GRAFFIO's PP due to the grudge!");
-        MESSAGE("Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet non ha\npiù energie!");
     } THEN {
         EXPECT_GT(opponent->pp[0], 0);
         EXPECT_EQ(opponent->pp[1], 0);
@@ -86,7 +86,7 @@ SINGLE_BATTLE_TEST("Grudge does not activate for Struggle")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_GRUDGE, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STRUGGLE, opponent);
         NOT MESSAGE("The opposing Wobbuffet lost all of Struggle's PP due to the grudge!");
-        MESSAGE("Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet non ha\npiù energie!");
     }
     THEN {
         EXPECT_GT(opponent->pp[0], 0);
@@ -113,7 +113,7 @@ SINGLE_BATTLE_TEST("Grudge's effect disappears if the user takes a new turn - Mo
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
         NOT MESSAGE("The opposing Wobbuffet lost all of GRAFFIO's PP due to the grudge!");
-        MESSAGE("Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet non ha\npiù energie!");
     }
     THEN {
         EXPECT_GT(opponent->pp[0], 0);
@@ -140,12 +140,12 @@ SINGLE_BATTLE_TEST("Grudge's effect disappears if the user takes a new turn - Sl
         ANIMATION(ANIM_TYPE_MOVE, MOVE_GRUDGE, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SPORE, opponent);
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_SLP, player);
-        MESSAGE("Wobbuffet fell asleep!");
+        MESSAGE("Wobbuffet cade\nnel sonno!");
         STATUS_ICON(player, sleep: TRUE);
         MESSAGE("Wobbuffet is fast asleep.");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_VITAL_THROW, opponent);
         NOT MESSAGE("The opposing Wobbuffet lost all of GRAFFIO's PP due to the grudge!");
-        MESSAGE("Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet non ha\npiù energie!");
     }
     THEN {
         EXPECT_GT(opponent->pp[0], 0);
@@ -173,12 +173,12 @@ SINGLE_BATTLE_TEST("Grudge's effect disappears if the user takes a new turn - Pa
     SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_GRUDGE, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STUN_SPORE, opponent);
-        MESSAGE("Wobbuffet is paralyzed, so it may be unable to move!");
+        MESSAGE("Wobbuffet ha subito\nuna paralisi!");
         STATUS_ICON(player, paralysis: TRUE);
         MESSAGE("Wobbuffet couldn't move because it's paralyzed!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_VITAL_THROW, opponent);
         NOT MESSAGE("The opposing Wobbuffet lost all of GRAFFIO's PP due to the grudge!");
-        MESSAGE("Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet non ha\npiù energie!");
     }
     THEN {
         EXPECT_GT(opponent->pp[0], 0);
@@ -210,7 +210,7 @@ SINGLE_BATTLE_TEST("Grudge's effect disappears if the user takes a new turn - Fl
         MESSAGE("Wobbuffet flinched and couldn't move!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
         NOT MESSAGE("The opposing Wobbuffet lost all of GRAFFIO's PP due to the grudge!");
-        MESSAGE("Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet non ha\npiù energie!");
     }
     THEN {
         EXPECT_GT(opponent->pp[0], 0);
@@ -239,7 +239,7 @@ SINGLE_BATTLE_TEST("Grudge's effect doesn't trigger on indirect damage - Sandsto
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_SANDSTORM_CONTINUES);
         MESSAGE("Wobbuffet is buffeted by the sandstorm!");
         NOT MESSAGE("The opposing Wobbuffet lost all of Sandstorm's PP due to the grudge!");
-        MESSAGE("Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet non ha\npiù energie!");
     }
     THEN {
         EXPECT_GT(opponent->pp[0], 0);
@@ -266,7 +266,7 @@ SINGLE_BATTLE_TEST("Grudge's effect doesn't trigger on indirect damage - Leech S
         MESSAGE("Wobbuffet was seeded!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_LEECH_SEED_DRAIN, player);
         NOT MESSAGE("The opposing Wobbuffet lost all of Leech Seed's PP due to the grudge!");
-        MESSAGE("Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet non ha\npiù energie!");
     }
     THEN {
         EXPECT_GT(opponent->pp[0], 0);
@@ -296,7 +296,7 @@ SINGLE_BATTLE_TEST("Grudge's effect doesn't trigger on indirect damage - Future 
         MESSAGE("Wobbuffet took the Future Sight attack!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FUTURE_SIGHT_HIT);
         NOT MESSAGE("The opposing Wobbuffet lost all of Future Sight's PP due to the grudge!");
-        MESSAGE("Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet non ha\npiù energie!");
     }
     THEN {
         EXPECT_GT(opponent->pp[0], 0);

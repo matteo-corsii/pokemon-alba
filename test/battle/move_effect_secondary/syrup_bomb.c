@@ -209,7 +209,7 @@ SINGLE_BATTLE_TEST("Sticky Syrup is removed when the user faints")
         MESSAGE("The opposing Wobbuffet got covered in sticky candy syrup!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
         HP_BAR(player);
-        MESSAGE("Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet non ha\npiù energie!");
         SEND_IN_MESSAGE("Wynaut");
         NONE_OF {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_SYRUP_BOMB_SPEED_DROP, opponent);

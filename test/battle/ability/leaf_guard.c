@@ -83,10 +83,10 @@ SINGLE_BATTLE_TEST("Leaf Guard prevents status conditions from Flame Orb and Tox
         TURN { MOVE(player, MOVE_SUNNY_DAY); }
     } SCENE {
         if (item == ITEM_FLAME_ORB) {
-            NONE_OF { MESSAGE("Leafeon was burned!"); STATUS_ICON(player, burn: TRUE); }
+            NONE_OF { MESSAGE("Leafeon ha subito\nuna scottatura!"); STATUS_ICON(player, burn: TRUE); }
         }
         else {
-            NONE_OF { MESSAGE("Leafeon was badly poisoned!"); STATUS_ICON(player, badPoison: TRUE); }
+            NONE_OF { MESSAGE("Leafeon ha subito\nun grave avvelenamento!"); STATUS_ICON(player, badPoison: TRUE); }
         }
     }
 }
@@ -109,11 +109,11 @@ SINGLE_BATTLE_TEST("Leaf Guard doesn't prevent status conditions from Flame Orb 
         TURN { MOVE(player, MOVE_SUNNY_DAY); }
     } SCENE {
         if (item == ITEM_FLAME_ORB) {
-            MESSAGE("Leafeon was burned!");
+            MESSAGE("Leafeon ha subito\nuna scottatura!");
             STATUS_ICON(player, burn: TRUE);
         }
         else {
-            MESSAGE("Leafeon was badly poisoned!");
+            MESSAGE("Leafeon ha subito\nun grave avvelenamento!");
             STATUS_ICON(player, badPoison: TRUE);
         }
     }

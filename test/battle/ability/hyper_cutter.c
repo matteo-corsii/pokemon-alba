@@ -51,7 +51,7 @@ SINGLE_BATTLE_TEST("Hyper Cutter doesn't prevent Attack reduction from burn")
         TURN { MOVE(player, MOVE_WILL_O_WISP); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_WILL_O_WISP, player);
-        MESSAGE("The opposing Krabby was burned!");
+        MESSAGE("Krabby avversario ha subito\nuna scottatura!");
     } THEN {
         EXPECT_EQ(opponent->statStages[STAT_ATK], DEFAULT_STAT_STAGE);
     }

@@ -15,7 +15,7 @@ SINGLE_BATTLE_TEST("Tera Blast changes from Normal-type to the user's Tera Type"
     } WHEN {
         TURN { MOVE(player, MOVE_TERA_BLAST, gimmick: GIMMICK_TERA); }
     } SCENE {
-        MESSAGE("Wobbuffet used Tera Blast!");
+        MESSAGE("Wobbuffet usa\nTera Blast!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TERA_BLAST, player);
         MESSAGE("È superefficace!");
     }
@@ -83,7 +83,7 @@ SINGLE_BATTLE_TEST("Tera Blast becomes a physical move if the user is Terastalli
     } WHEN {
         TURN { MOVE(player, MOVE_TERA_BLAST, gimmick: tera); }
     } SCENE {
-        MESSAGE("Wobbuffet used Tera Blast!");
+        MESSAGE("Wobbuffet usa\nTera Blast!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TERA_BLAST, player);
         HP_BAR(opponent, captureDamage: &results[i].damage);
     } FINALLY {
@@ -102,7 +102,7 @@ SINGLE_BATTLE_TEST("Stellar-type Tera Blast lowers both offensive stats")
     } WHEN {
         TURN { MOVE(player, MOVE_TERA_BLAST, gimmick: GIMMICK_TERA); }
     } SCENE {
-        MESSAGE("Wobbuffet used Tera Blast!");
+        MESSAGE("Wobbuffet usa\nTera Blast!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TERA_BLAST, player);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
         MESSAGE("Wobbuffet's Attack fell!");
@@ -124,15 +124,15 @@ SINGLE_BATTLE_TEST("Stellar-type Tera Blast has 100 BP and a one-time 1.2x boost
         TURN { MOVE(player, MOVE_TERA_BLAST); }
     } SCENE {
         // turn 1
-        MESSAGE("Wobbuffet used Tera Blast!");
+        MESSAGE("Wobbuffet usa\nTera Blast!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TERA_BLAST, player);
         HP_BAR(opponent, captureDamage: &damage[0]);
         // turn 2
-        MESSAGE("Wobbuffet used Tera Blast!");
+        MESSAGE("Wobbuffet usa\nTera Blast!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TERA_BLAST, player);
         HP_BAR(opponent, captureDamage: &damage[1]);
         // turn 4
-        MESSAGE("Wobbuffet used Tera Blast!");
+        MESSAGE("Wobbuffet usa\nTera Blast!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TERA_BLAST, player);
         HP_BAR(opponent, captureDamage: &damage[2]);
     } THEN {
@@ -151,7 +151,7 @@ SINGLE_BATTLE_TEST("Stellar-type Tera Blast is super-effective on Stellar-type P
     } WHEN {
         TURN { MOVE(player, MOVE_TERA_BLAST, gimmick: GIMMICK_TERA); MOVE(opponent, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); }
     } SCENE {
-        MESSAGE("Wobbuffet used Tera Blast!");
+        MESSAGE("Wobbuffet usa\nTera Blast!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TERA_BLAST, player);
         MESSAGE("È superefficace!");
     }
@@ -165,7 +165,7 @@ SINGLE_BATTLE_TEST("Stellar-type Tera Blast activates a Stellar-type Pokemon's W
     } WHEN {
         TURN { MOVE(player, MOVE_TERA_BLAST, gimmick: GIMMICK_TERA); MOVE(opponent, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); }
     } SCENE {
-        MESSAGE("Wobbuffet used Tera Blast!");
+        MESSAGE("Wobbuffet usa\nTera Blast!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TERA_BLAST, player);
         MESSAGE("È superefficace!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponent);
@@ -180,9 +180,9 @@ SINGLE_BATTLE_TEST("Flying-type Tera Blast does not have its priority boosted by
     } WHEN {
         TURN { MOVE(player, MOVE_TERA_BLAST, gimmick: GIMMICK_TERA); MOVE(opponent, MOVE_QUICK_ATTACK); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used ATTACCO RAPIDO!");
+        MESSAGE("Wobbuffet avversario usa\nATTACCO RAPIDO!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_QUICK_ATTACK, opponent);
-        MESSAGE("Talonflame used Tera Blast!");
+        MESSAGE("Talonflame usa\nTera Blast!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TERA_BLAST, player);
     }
 }

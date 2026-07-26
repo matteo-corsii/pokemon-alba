@@ -20,14 +20,14 @@ DOUBLE_BATTLE_TEST("Beak Blast's charging message is shown before other moves ar
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_BEAK_BLAST_SETUP, playerLeft);
         MESSAGE("Wynaut started heating up its beak!");
 
-        MESSAGE("Wobbuffet used Celebrate!");
+        MESSAGE("Wobbuffet usa\nCelebrate!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, playerRight);
-        MESSAGE("The opposing Wobbuffet used Celebrate!");
+        MESSAGE("Wobbuffet avversario usa\nCelebrate!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponentRight);
-        MESSAGE("The opposing Wobbuffet used Celebrate!");
+        MESSAGE("Wobbuffet avversario usa\nCelebrate!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponentLeft);
 
-        MESSAGE("Wynaut used Beak Blast!");
+        MESSAGE("Wynaut usa\nBeak Blast!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_BEAK_BLAST, playerLeft);
         HP_BAR(opponentLeft);
     }
@@ -48,24 +48,24 @@ DOUBLE_BATTLE_TEST("Beak Blast burns all who make contact with the Pokémon")
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_BEAK_BLAST_SETUP, playerLeft);
         MESSAGE("Wynaut started heating up its beak!");
 
-        MESSAGE("Wobbuffet used Celebrate!");
+        MESSAGE("Wobbuffet usa\nCelebrate!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, playerRight);
 
-        MESSAGE("The opposing Wobbuffet used GRAFFIO!");
+        MESSAGE("Wobbuffet avversario usa\nGRAFFIO!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponentLeft);
         HP_BAR(playerLeft);
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_BRN, opponentLeft);
-        MESSAGE("The opposing Wobbuffet was burned!");
+        MESSAGE("Wobbuffet avversario ha subito\nuna scottatura!");
         STATUS_ICON(opponentLeft, burn: TRUE);
 
-        MESSAGE("The opposing Wobbuffet used GRAFFIO!");
+        MESSAGE("Wobbuffet avversario usa\nGRAFFIO!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponentRight);
         HP_BAR(playerLeft);
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_BRN, opponentRight);
-        MESSAGE("The opposing Wobbuffet was burned!");
+        MESSAGE("Wobbuffet avversario ha subito\nuna scottatura!");
         STATUS_ICON(opponentRight, burn: TRUE);
 
-        MESSAGE("Wynaut used Beak Blast!");
+        MESSAGE("Wynaut usa\nBeak Blast!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_BEAK_BLAST, playerLeft);
         HP_BAR(opponentLeft);
     }
@@ -94,18 +94,18 @@ SINGLE_BATTLE_TEST("Beak Blast burns only when contact moves are used")
 
         if (burn) {
             ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_BRN, opponent);
-            MESSAGE("The opposing Wobbuffet was burned!");
+            MESSAGE("Wobbuffet avversario ha subito\nuna scottatura!");
             STATUS_ICON(opponent, burn: TRUE);
         }
         else {
             NONE_OF {
                 ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_BRN, opponent);
-                MESSAGE("The opposing Wobbuffet was burned!");
+                MESSAGE("Wobbuffet avversario ha subito\nuna scottatura!");
                 STATUS_ICON(opponent, burn: TRUE);
             }
         }
 
-        MESSAGE("Wobbuffet used Beak Blast!");
+        MESSAGE("Wobbuffet usa\nBeak Blast!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_BEAK_BLAST, player);
         HP_BAR(opponent);
     }
@@ -134,7 +134,7 @@ SINGLE_BATTLE_TEST("Beak Blast doesn't burn when charging a two turn move")
         NONE_OF {
             HP_BAR(player);
             ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_BRN, opponent);
-            MESSAGE("The opposing Wobbuffet was burned!");
+            MESSAGE("Wobbuffet avversario ha subito\nuna scottatura!");
             STATUS_ICON(opponent, burn: TRUE);
         }
     }

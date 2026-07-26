@@ -24,11 +24,11 @@ SINGLE_BATTLE_TEST("Solar Beam does not need a charging turn if Sun is up")
         }
     } SCENE {
         if (ability == ABILITY_WHITE_SMOKE) {
-            MESSAGE("Torkoal used Solar Beam!");
+            MESSAGE("Torkoal usa\nSolar Beam!");
             MESSAGE("Torkoal absorbed light!");
             ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponent);
         }
-        MESSAGE("Torkoal used Solar Beam!");
+        MESSAGE("Torkoal usa\nSolar Beam!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SOLAR_BEAM, player);
     }
 }
@@ -50,10 +50,10 @@ SINGLE_BATTLE_TEST("Solar Beam does half damage if Sandstorm is up (Gen3+)", s16
         TURN { MOVE(player, MOVE_SOLAR_BEAM); }
         TURN { SKIP_TURN(player); }
     } SCENE {
-        MESSAGE("Hippowdon used Solar Beam!");
+        MESSAGE("Hippowdon usa\nSolar Beam!");
         MESSAGE("Hippowdon absorbed light!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponent);
-        MESSAGE("Hippowdon used Solar Beam!");
+        MESSAGE("Hippowdon usa\nSolar Beam!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SOLAR_BEAM, player);
         HP_BAR(opponent, captureDamage: &results[i].damage);
     } FINALLY {

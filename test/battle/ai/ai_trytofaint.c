@@ -13,7 +13,7 @@ AI_SINGLE_BATTLE_TEST("AI prefers priority moves if it's slower and can kill tar
     } WHEN {
         TURN { EXPECT_MOVE(opponent, MOVE_QUICK_ATTACK); SEND_OUT(player, 1); }
     } SCENE {
-        MESSAGE("Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet non ha\npiù energie!");
     }
 }
 
@@ -28,7 +28,7 @@ AI_SINGLE_BATTLE_TEST("AI will choose a random move if it's faster and can kill 
     } WHEN {
         TURN { EXPECT_MOVES(opponent, MOVE_QUICK_ATTACK, MOVE_STRENGTH); SEND_OUT(player, 1); }
     } SCENE {
-        MESSAGE("Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet non ha\npiù energie!");
     }
 }
 
@@ -43,7 +43,7 @@ AI_SINGLE_BATTLE_TEST("AI will choose a priority move if it is slower then the t
         TURN { MOVE(player, MOVE_STRENGTH); EXPECT_MOVE(opponent, MOVE_STRENGTH); }
         TURN { MOVE(player, MOVE_STRENGTH); EXPECT_MOVE(opponent, MOVE_QUICK_ATTACK); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet avversario non ha\npiù energie!");
     }
 }
 
@@ -56,7 +56,7 @@ AI_SINGLE_BATTLE_TEST("AI sees Loaded Dice damage increase from multi hit moves"
     } WHEN {
         TURN { EXPECT_MOVE(opponent, MOVE_BULLET_SEED); }
     } SCENE {
-        MESSAGE("Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet non ha\npiù energie!");
     }
 }
 

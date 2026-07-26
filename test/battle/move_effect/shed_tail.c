@@ -66,7 +66,7 @@ SINGLE_BATTLE_TEST("Shed Tail fails if there are no usable Pokémon left")
     } WHEN {
         TURN { MOVE(player, MOVE_SHED_TAIL); }
     } SCENE {
-        MESSAGE("Wobbuffet used Shed Tail!");
+        MESSAGE("Wobbuffet usa\nShed Tail!");
         MESSAGE("But it failed!");
     }
 }

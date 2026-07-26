@@ -23,7 +23,7 @@ SINGLE_BATTLE_TEST("Spectral Thief steals opponents boost before attacking", s16
             TURN { MOVE(player, move); MOVE(opponent, MOVE_SPECTRAL_THIEF); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, move, player);
-        MESSAGE("The opposing Wobbuffet used Spectral Thief!");
+        MESSAGE("Wobbuffet avversario usa\nSpectral Thief!");
         if (move == MOVE_SWORDS_DANCE)
             MESSAGE("The opposing Wobbuffet stole the target's boosted stats!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SPECTRAL_THIEF, opponent);
@@ -43,7 +43,7 @@ SINGLE_BATTLE_TEST("Spectral Thief can't steal opponent's boost if target is imm
             TURN { MOVE(player, MOVE_SWORDS_DANCE); MOVE(opponent, MOVE_SPECTRAL_THIEF); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SWORDS_DANCE, player);
-        MESSAGE("The opposing Wobbuffet used Spectral Thief!");
+        MESSAGE("Wobbuffet avversario usa\nSpectral Thief!");
         NONE_OF {
             MESSAGE("The opposing Wobbuffet stole the target's boosted stats!");
             ANIMATION(ANIM_TYPE_MOVE, MOVE_SPECTRAL_THIEF, opponent);

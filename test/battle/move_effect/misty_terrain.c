@@ -11,7 +11,7 @@ SINGLE_BATTLE_TEST("Misty Terrain protects grounded battlers from non-volatile s
         TURN { MOVE(player, MOVE_TOXIC); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_MISTY_TERRAIN, player);
-        MESSAGE("The opposing Claydol used Toxic!");
+        MESSAGE("Claydol avversario usa\nToxic!");
         MESSAGE("Wobbuffet surrounds itself with a protective mist!");
         NOT { STATUS_ICON(opponent, badPoison: TRUE); }
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TOXIC, player);
@@ -103,18 +103,18 @@ SINGLE_BATTLE_TEST("Misty Terrain lasts for 5 turns")
         TURN {}
         TURN {}
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used Celebrate!");
+        MESSAGE("Wobbuffet avversario usa\nCelebrate!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_MISTY_TERRAIN, player);
         MESSAGE("Mist swirled around the battlefield!");
 
-        MESSAGE("Wobbuffet used Celebrate!");
-        MESSAGE("The opposing Wobbuffet used Celebrate!");
+        MESSAGE("Wobbuffet usa\nCelebrate!");
+        MESSAGE("Wobbuffet avversario usa\nCelebrate!");
 
-        MESSAGE("Wobbuffet used Celebrate!");
-        MESSAGE("The opposing Wobbuffet used Celebrate!");
+        MESSAGE("Wobbuffet usa\nCelebrate!");
+        MESSAGE("Wobbuffet avversario usa\nCelebrate!");
 
-        MESSAGE("Wobbuffet used Celebrate!");
-        MESSAGE("The opposing Wobbuffet used Celebrate!");
+        MESSAGE("Wobbuffet usa\nCelebrate!");
+        MESSAGE("Wobbuffet avversario usa\nCelebrate!");
 
         MESSAGE("The mist disappeared from the battlefield.");
     }

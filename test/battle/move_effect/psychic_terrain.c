@@ -10,10 +10,10 @@ SINGLE_BATTLE_TEST("Psychic Terrain protects grounded battlers from priority mov
         TURN { MOVE(player, MOVE_PSYCHIC_TERRAIN); }
         TURN { MOVE(player, MOVE_QUICK_ATTACK); MOVE(opponent, MOVE_QUICK_ATTACK); }
     } SCENE {
-        MESSAGE("Claydol used Psychic Terrain!");
+        MESSAGE("Claydol usa\nPsychic Terrain!");
         MESSAGE("The opposing Wobbuffet is protected by the Psychic Terrain!");
         NOT { HP_BAR(opponent); }
-        MESSAGE("The opposing Wobbuffet used ATTACCO RAPIDO!");
+        MESSAGE("Wobbuffet avversario usa\nATTACCO RAPIDO!");
         HP_BAR(player);
     }
 }
@@ -31,7 +31,7 @@ SINGLE_BATTLE_TEST("Psychic Terrain increases power of Psychic-type moves by 30/
             TURN { MOVE(player, MOVE_PSYCHIC_TERRAIN); }
         TURN { MOVE(player, MOVE_CONFUSION); }
     } SCENE {
-        MESSAGE("Wobbuffet used Confusion!");
+        MESSAGE("Wobbuffet usa\nConfusion!");
         HP_BAR(opponent, captureDamage: &results[i].damage);
     } FINALLY {
         if (B_TERRAIN_TYPE_BOOST >= GEN_8)
@@ -50,8 +50,8 @@ SINGLE_BATTLE_TEST("Psychic Terrain doesn't blocks priority moves that target th
         TURN { MOVE(player, MOVE_PSYCHIC_TERRAIN); }
         TURN { MOVE(player, MOVE_RECOVER); }
     } SCENE {
-        MESSAGE("Sableye used Psychic Terrain!");
-        MESSAGE("Sableye used Recover!");
+        MESSAGE("Sableye usa\nPsychic Terrain!");
+        MESSAGE("Sableye usa\nRecover!");
         HP_BAR(player);
     }
 }
@@ -65,8 +65,8 @@ SINGLE_BATTLE_TEST("Psychic Terrain doesn't block priority moves that target all
         TURN { MOVE(player, MOVE_PSYCHIC_TERRAIN); }
         TURN { MOVE(player, MOVE_HAZE); }
     } SCENE {
-        MESSAGE("Sableye used Psychic Terrain!");
-        MESSAGE("Sableye used Haze!");
+        MESSAGE("Sableye usa\nPsychic Terrain!");
+        MESSAGE("Sableye usa\nHaze!");
     }
 }
 
@@ -79,8 +79,8 @@ SINGLE_BATTLE_TEST("Psychic Terrain doesn't block priority moves that target all
         TURN { MOVE(player, MOVE_PSYCHIC_TERRAIN); }
         TURN { MOVE(player, MOVE_SPIKES); }
     } SCENE {
-        MESSAGE("Sableye used Psychic Terrain!");
-        MESSAGE("Sableye used Spikes!");
+        MESSAGE("Sableye usa\nPsychic Terrain!");
+        MESSAGE("Sableye usa\nSpikes!");
     }
 }
 
@@ -95,8 +95,8 @@ DOUBLE_BATTLE_TEST("Psychic Terrain doesn't block priority moves that target all
         TURN { MOVE(playerLeft, MOVE_PSYCHIC_TERRAIN); }
         TURN { MOVE(playerLeft, MOVE_HEAL_PULSE, target: playerRight); }
     } SCENE {
-        MESSAGE("Sableye used Psychic Terrain!");
-        MESSAGE("Sableye used Heal Pulse!");
+        MESSAGE("Sableye usa\nPsychic Terrain!");
+        MESSAGE("Sableye usa\nHeal Pulse!");
     }
 }
 
@@ -109,8 +109,8 @@ SINGLE_BATTLE_TEST("Psychic Terrain doesn't block priority field moves")
         TURN { MOVE(player, MOVE_PSYCHIC_TERRAIN); }
         TURN { MOVE(player, MOVE_SUNNY_DAY); }
     } SCENE {
-        MESSAGE("Sableye used Psychic Terrain!");
-        MESSAGE("Sableye used Sunny Day!");
+        MESSAGE("Sableye usa\nPsychic Terrain!");
+        MESSAGE("Sableye usa\nSunny Day!");
     }
 }
 
@@ -161,18 +161,18 @@ SINGLE_BATTLE_TEST("Psychic Terrain lasts for 5 turns")
         TURN {}
         TURN {}
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used Celebrate!");
+        MESSAGE("Wobbuffet avversario usa\nCelebrate!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_PSYCHIC_TERRAIN, player);
         MESSAGE("The battlefield got weird!");
 
-        MESSAGE("Wobbuffet used Celebrate!");
-        MESSAGE("The opposing Wobbuffet used Celebrate!");
+        MESSAGE("Wobbuffet usa\nCelebrate!");
+        MESSAGE("Wobbuffet avversario usa\nCelebrate!");
 
-        MESSAGE("Wobbuffet used Celebrate!");
-        MESSAGE("The opposing Wobbuffet used Celebrate!");
+        MESSAGE("Wobbuffet usa\nCelebrate!");
+        MESSAGE("Wobbuffet avversario usa\nCelebrate!");
 
-        MESSAGE("Wobbuffet used Celebrate!");
-        MESSAGE("The opposing Wobbuffet used Celebrate!");
+        MESSAGE("Wobbuffet usa\nCelebrate!");
+        MESSAGE("Wobbuffet avversario usa\nCelebrate!");
 
         MESSAGE("The weirdness disappeared from the battlefield!");
     }

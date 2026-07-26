@@ -48,7 +48,7 @@ SINGLE_BATTLE_TEST("Rototiller fails if there are no valid targets")
         TURN { MOVE(player, MOVE_ROTOTILLER); }
     } SCENE {
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_ROTOTILLER, player);
-        MESSAGE("Wynaut used Rototiller!");
+        MESSAGE("Wynaut usa\nRototiller!");
         MESSAGE("It doesn't affect Wynaut…");
         MESSAGE("It doesn't affect the opposing Wobbuffet…");
     }
@@ -67,7 +67,7 @@ DOUBLE_BATTLE_TEST("Rototiller fails if there are no valid targets (Double Battl
         TURN { MOVE(playerLeft, MOVE_ROTOTILLER); }
     } SCENE {
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_ROTOTILLER, playerLeft);
-        MESSAGE("Wobbuffet used Rototiller!");
+        MESSAGE("Wobbuffet usa\nRototiller!");
         MESSAGE("It doesn't affect Wobbuffet…");
         MESSAGE("It doesn't affect Flygon…");
         MESSAGE("It doesn't affect the opposing Wobbuffet…");
@@ -110,7 +110,7 @@ SINGLE_BATTLE_TEST("Rototiller fails if the only valid target is semi-invulnerab
         TURN { MOVE(opponent, MOVE_DIG); MOVE(player, MOVE_ROTOTILLER); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DIG, opponent);
-        MESSAGE("Wobbuffet used Rototiller!");
+        MESSAGE("Wobbuffet usa\nRototiller!");
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_ROTOTILLER, player);
         MESSAGE("The opposing Tangela avoided the attack!");
     } THEN {

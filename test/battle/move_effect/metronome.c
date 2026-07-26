@@ -14,7 +14,7 @@ SINGLE_BATTLE_TEST("Metronome picks a random move")
     } WHEN {
         TURN { MOVE(player, MOVE_METRONOME, WITH_RNG(RNG_METRONOME, MOVE_SCRATCH)); }
     } SCENE {
-        MESSAGE("Wobbuffet used Metronome!");
+        MESSAGE("Wobbuffet usa\nMetronome!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_METRONOME, player);
         MESSAGE("Waggling a finger let it use GRAFFIO!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player);
@@ -35,7 +35,7 @@ SINGLE_BATTLE_TEST("Metronome's called powder move fails against Grass Types")
     } WHEN {
         TURN { MOVE(player, MOVE_METRONOME, WITH_RNG(RNG_METRONOME, MOVE_POISON_POWDER)); }
     } SCENE {
-        MESSAGE("Wobbuffet used Metronome!");
+        MESSAGE("Wobbuffet usa\nMetronome!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_METRONOME, player);
         MESSAGE("Waggling a finger let it use Poison Powder!");
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_POISON_POWDER, player);
@@ -53,7 +53,7 @@ SINGLE_BATTLE_TEST("Metronome's called multi-hit move hits multiple times")
     } WHEN {
         TURN { MOVE(player, MOVE_METRONOME, WITH_RNG(RNG_METRONOME, MOVE_ROCK_BLAST)); }
     } SCENE {
-        MESSAGE("Wobbuffet used Metronome!");
+        MESSAGE("Wobbuffet usa\nMetronome!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_METRONOME, player);
         MESSAGE("Waggling a finger let it use Rock Blast!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ROCK_BLAST, player);

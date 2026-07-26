@@ -74,7 +74,7 @@ DOUBLE_BATTLE_TEST("Order Up increases a stat based on Tatsugiri's form even if 
         MESSAGE("Tatsugiri was swallowed by Dondozo and became Dondozo's commander!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
         MESSAGE("Tatsugiri was hurt by its poisoning!");
-        MESSAGE("Tatsugiri non ha più energie!");
+        MESSAGE("Tatsugiri non ha\npiù energie!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_HAZE, opponentRight); // Remove previous stat boosts
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ORDER_UP, playerRight);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
@@ -131,9 +131,9 @@ DOUBLE_BATTLE_TEST("Order Up is boosted by Sheer Force without removing the stat
     } WHEN {
         TURN { MOVE(opponentRight, MOVE_ENTRAINMENT, target: playerLeft); MOVE(playerLeft, MOVE_ORDER_UP, target: opponentLeft); }
     } SCENE {
-        MESSAGE("The opposing Tauros used Entrainment!");
+        MESSAGE("Tauros avversario usa\nEntrainment!");
         MESSAGE("Dondozo acquired Sheer Force!");
-        MESSAGE("Dondozo used Order Up!");
+        MESSAGE("Dondozo usa\nOrder Up!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
     }
 }
@@ -157,13 +157,13 @@ DOUBLE_BATTLE_TEST("Order Up is always boosted by Sheer Force", s16 damage)
                MOVE(opponentLeft, move, target: playerLeft);
                MOVE(playerLeft, MOVE_ORDER_UP, target: opponentRight); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used Haze!");
+        MESSAGE("Wobbuffet avversario usa\nHaze!");
         if (move == MOVE_ENTRAINMENT)
         {
-            MESSAGE("The opposing Tauros used Entrainment!");
+            MESSAGE("Tauros avversario usa\nEntrainment!");
             MESSAGE("Dondozo acquired Sheer Force!");
         }
-        MESSAGE("Dondozo used Order Up!");
+        MESSAGE("Dondozo usa\nOrder Up!");
         HP_BAR(opponentRight, captureDamage: &results[i].damage);
     } FINALLY {
         EXPECT_MUL_EQ(results[0].damage, UQ_4_12(1.3), results[1].damage);

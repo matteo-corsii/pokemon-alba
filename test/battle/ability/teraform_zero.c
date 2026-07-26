@@ -47,9 +47,9 @@ SINGLE_BATTLE_TEST("Teraform Zero can be replaced")
         TURN { MOVE(opponent, MOVE_POUND); }
         TURN { MOVE(opponent, MOVE_WORRY_SEED); MOVE(player, MOVE_REST, gimmick: GIMMICK_TERA); }
     } SCENE {
-        MESSAGE("The opposing Whimsicott used Worry Seed!");
+        MESSAGE("Whimsicott avversario usa\nWorry Seed!");
         MESSAGE("Terapagos acquired Insomnia!");
-        MESSAGE("Terapagos used Rest!");
+        MESSAGE("Terapagos usa\nRest!");
         ABILITY_POPUP(player, ABILITY_INSOMNIA);
         MESSAGE("Terapagos stayed awake!");
     }
@@ -64,7 +64,7 @@ SINGLE_BATTLE_TEST("Teraform Zero cannot be swapped")
     } WHEN {
         TURN { MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); MOVE(opponent, MOVE_SKILL_SWAP); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used Skill Swap!");
+        MESSAGE("Wobbuffet avversario usa\nSkill Swap!");
         MESSAGE("But it failed!");
     }
 }
@@ -78,7 +78,7 @@ SINGLE_BATTLE_TEST("Teraform Zero cannot be copied")
     } WHEN {
         TURN { MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); MOVE(opponent, MOVE_ROLE_PLAY); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used Role Play!");
+        MESSAGE("Wobbuffet avversario usa\nRole Play!");
         MESSAGE("But it failed!");
     }
 }
@@ -97,7 +97,7 @@ DOUBLE_BATTLE_TEST("Teraform Zero shouldn't cause Neutralizing Gas to show it's 
         MESSAGE("Terapagos is storing energy!");
         MESSAGE("Terapagos terastallized into the Stellar type!");
         NOT ABILITY_POPUP(playerRight, ABILITY_NEUTRALIZING_GAS);
-        MESSAGE("Terapagos used Celebrate!");
+        MESSAGE("Terapagos usa\nCelebrate!");
     }
 }
 

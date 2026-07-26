@@ -83,11 +83,11 @@ DOUBLE_BATTLE_TEST("Mimicry can trigger multiple times in a turn")
     } WHEN {
         TURN { MOVE(opponentRight, MOVE_ELECTRIC_TERRAIN); MOVE(opponentLeft, MOVE_MISTY_TERRAIN); }
     } SCENE {
-        MESSAGE("The opposing Bagon used Electric Terrain!");
+        MESSAGE("Bagon avversario usa\nElectric Terrain!");
         ABILITY_POPUP(playerLeft, ABILITY_MIMICRY);
         MESSAGE("Stunfisk's type changed to Electric!");
         // igglybuff
-        MESSAGE("The opposing Igglybuff used Misty Terrain!");
+        MESSAGE("Igglybuff avversario usa\nMisty Terrain!");
         ABILITY_POPUP(playerLeft, ABILITY_MIMICRY);
         MESSAGE("Stunfisk's type changed to Fairy!");
     } THEN {
@@ -111,14 +111,14 @@ DOUBLE_BATTLE_TEST("Mimicry triggers after Skill Swap")
              }
     } SCENE {
         // turn 1
-        MESSAGE("Shiftry used Grassy Terrain!");
+        MESSAGE("Shiftry usa\nGrassy Terrain!");
         ABILITY_POPUP(playerLeft, ABILITY_MIMICRY);
         MESSAGE("Stunfisk's type changed to Grass!");
         // turn 2
-        MESSAGE("Shiftry used Skill Swap!");
+        MESSAGE("Shiftry usa\nSkill Swap!");
         ABILITY_POPUP(playerRight, ABILITY_MIMICRY);
         MESSAGE("Shiftry's type changed to Grass!");
-        MESSAGE("Stunfisk used Splash!"); // make sure popup occurs before the subsequent move
+        MESSAGE("Stunfisk usa\nSplash!"); // make sure popup occurs before the subsequent move
     } THEN {
         EXPECT_EQ(playerLeft->types[0], TYPE_GRASS);
         EXPECT_EQ(playerLeft->types[1], TYPE_GRASS);

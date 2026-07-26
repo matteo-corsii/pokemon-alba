@@ -15,7 +15,7 @@ SINGLE_BATTLE_TEST("Poison Touch has a 30% chance to poison when attacking with 
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player);
         ABILITY_POPUP(player, ABILITY_POISON_TOUCH);
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, opponent);
-        MESSAGE("The opposing Wobbuffet was poisoned!");
+        MESSAGE("Wobbuffet avversario ha subito\nun avvelenamento!");
         STATUS_ICON(opponent, poison: TRUE);
     }
 }
@@ -62,7 +62,7 @@ SINGLE_BATTLE_TEST("Poison Touch only applies when using contact moves")
         if (MoveMakesContact(move)) {
             ABILITY_POPUP(player, ABILITY_POISON_TOUCH);
             ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, opponent);
-            MESSAGE("The opposing Wobbuffet was poisoned!");
+            MESSAGE("Wobbuffet avversario ha subito\nun avvelenamento!");
             STATUS_ICON(opponent, poison: TRUE);
         } else {
             NONE_OF {
@@ -88,13 +88,13 @@ SINGLE_BATTLE_TEST("Poison Touch applies between multi-hit move hits")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ARM_THRUST, player);
         ABILITY_POPUP(player, ABILITY_POISON_TOUCH);
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, opponent);
-        MESSAGE("The opposing Wobbuffet was poisoned!");
+        MESSAGE("Wobbuffet avversario ha subito\nun avvelenamento!");
         STATUS_ICON(opponent, poison: TRUE);
         MESSAGE("The opposing Wobbuffet's Pecha Berry cured its poison!");
         STATUS_ICON(opponent, poison: FALSE);
         ABILITY_POPUP(player, ABILITY_POISON_TOUCH);
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, opponent);
-        MESSAGE("The opposing Wobbuffet was poisoned!");
+        MESSAGE("Wobbuffet avversario ha subito\nun avvelenamento!");
         STATUS_ICON(opponent, poison: TRUE);
     }
 }
@@ -121,7 +121,7 @@ SINGLE_BATTLE_TEST("Poison Touch activates when user has Protective Pads, but no
         if (item != ITEM_PUNCHING_GLOVE) {
             ABILITY_POPUP(player, ABILITY_POISON_TOUCH);
             ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, opponent);
-            MESSAGE("The opposing Wobbuffet was poisoned!");
+            MESSAGE("Wobbuffet avversario ha subito\nun avvelenamento!");
             STATUS_ICON(opponent, poison: TRUE);
         } else {
             NONE_OF {

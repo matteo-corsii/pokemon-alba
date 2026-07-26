@@ -33,7 +33,7 @@ SINGLE_BATTLE_TEST("Damage calculation matches Gen5+")
         }
     }
     SCENE {
-        MESSAGE("Glaceon used Ice Fang!");
+        MESSAGE("Glaceon usa\nIce Fang!");
         HP_BAR(opponent, captureDamage: &dmg);
     }
     THEN {
@@ -72,7 +72,7 @@ SINGLE_BATTLE_TEST("Damage calculation matches Gen6+ (Muscle Band, crit)")
         }
     }
     SCENE {
-        MESSAGE("Glaceon used Ice Fang!");
+        MESSAGE("Glaceon usa\nIce Fang!");
         HP_BAR(opponent, captureDamage: &dmg);
     }
     THEN {
@@ -111,7 +111,7 @@ SINGLE_BATTLE_TEST("Damage calculation matches Gen5+ (Marshadow vs Mawile)")
         }
     }
     SCENE{
-        MESSAGE("Marshadow used Spectral Thief!");
+        MESSAGE("Marshadow usa\nSpectral Thief!");
         HP_BAR(opponent, captureDamage: &dmg);
     }
     THEN{

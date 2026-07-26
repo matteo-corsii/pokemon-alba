@@ -14,7 +14,7 @@ DOUBLE_BATTLE_TEST("Costar copies an ally's stat stages upon entering battle")
         TURN { SWITCH(opponentRight, 2); MOVE(playerLeft, MOVE_CELEBRATE); }
     } SCENE {
         // Turn 1 - buff up
-        MESSAGE("The opposing Wobbuffet used Swords Dance!");
+        MESSAGE("Wobbuffet avversario usa\nSwords Dance!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
         // Turn 2 - Switch into Flamigo
         MESSAGE("2 sent out Flamigo!");
@@ -169,7 +169,7 @@ DOUBLE_BATTLE_TEST("Costar's message displays correctly after all battlers faint
             SEND_OUT(opponentRight, 3);
         }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used Explosion!");
+        MESSAGE("Wobbuffet avversario usa\nExplosion!");
         ABILITY_POPUP(playerLeft, ABILITY_INTREPID_SWORD);
         MESSAGE("Zacian's Attack rose!");
         ABILITY_POPUP(playerRight, ABILITY_COSTAR);
@@ -198,7 +198,7 @@ DOUBLE_BATTLE_TEST("Costar's message displays correctly after all battlers faint
             SEND_OUT(opponentRight, 3);
         }
     } SCENE {
-        MESSAGE("Wobbuffet used Explosion!");
+        MESSAGE("Wobbuffet usa\nExplosion!");
         ABILITY_POPUP(opponentLeft, ABILITY_INTREPID_SWORD);
         MESSAGE("The opposing Zacian's Attack rose!");
         ABILITY_POPUP(opponentRight, ABILITY_COSTAR);

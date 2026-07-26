@@ -370,8 +370,8 @@ DOUBLE_BATTLE_TEST("Neutralizing Gas is active for the duration of a Spread Move
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ORIGIN_PULSE, opponentLeft);
         HP_BAR(playerLeft);
         HP_BAR(playerRight);
-        MESSAGE("Weezing non ha più energie!");
-        MESSAGE("Golem non ha più energie!");
+        MESSAGE("Weezing non ha\npiù energie!");
+        MESSAGE("Golem non ha\npiù energie!");
         NOT ABILITY_POPUP(playerRight, ABILITY_STURDY);
     }
 }
@@ -390,9 +390,9 @@ DOUBLE_BATTLE_TEST("Neutralizing Gas is active until the last Dragon Darts hit e
         ABILITY_POPUP(playerLeft, ABILITY_NEUTRALIZING_GAS);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DRAGON_DARTS, opponentLeft);
         HP_BAR(playerLeft);
-        MESSAGE("Weezing non ha più energie!");
+        MESSAGE("Weezing non ha\npiù energie!");
         HP_BAR(playerRight);
-        NOT MESSAGE("Golem non ha più energie!");
+        NOT MESSAGE("Golem non ha\npiù energie!");
         ABILITY_POPUP(playerRight, ABILITY_STURDY);
     }
 }
@@ -411,7 +411,7 @@ DOUBLE_BATTLE_TEST("Neutralizing Gas doesn't reactivate Beads of Ruin after Chi-
         MESSAGE("Neutralizing gas filled the area!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, playerLeft);
         HP_BAR(opponentRight);
-        MESSAGE("The opposing Chi-Yu non ha più energie!");
+        MESSAGE("Chi-Yu avversario non ha\npiù energie!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, playerRight);
         HP_BAR(opponentLeft);
         MESSAGE("The effects of the neutralizing gas wore off!");
@@ -419,6 +419,6 @@ DOUBLE_BATTLE_TEST("Neutralizing Gas doesn't reactivate Beads of Ruin after Chi-
             ABILITY_POPUP(opponentRight, ABILITY_BEADS_OF_RUIN);
             MESSAGE("The opposing Chi-Yu's Beads of Ruin weakened the Sp. Def of all surrounding Pokémon!");
         }
-        MESSAGE("The opposing Weezing non ha più energie!");
+        MESSAGE("Weezing avversario non ha\npiù energie!");
     }
 }

@@ -53,7 +53,7 @@ SINGLE_BATTLE_TEST("Rapid Spin: Mortal Spin blows away Wrap, hazards and poisons
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STEALTH_ROCK, opponent);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_MORTAL_SPIN, player);
-        MESSAGE("The opposing Wobbuffet was poisoned!");
+        MESSAGE("Wobbuffet avversario ha subito\nun avvelenamento!");
         STATUS_ICON(opponent, poison: TRUE);
         MESSAGE("Wobbuffet was freed from Wrap!");
         MESSAGE("The pointed stones disappeared from around your team!");

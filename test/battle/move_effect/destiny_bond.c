@@ -21,9 +21,9 @@ SINGLE_BATTLE_TEST("Destiny Bond faints the opposing mon if it fainted from the 
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DESTINY_BOND, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
-        MESSAGE("Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet non ha\npiù energie!");
         MESSAGE("Wobbuffet took its attacker down with it!");
-        MESSAGE("The opposing Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet avversario non ha\npiù energie!");
     }
 }
 
@@ -111,9 +111,9 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are not affected by Destiny Bond
     } WHEN {
         TURN { MOVE(opponent, MOVE_DESTINY_BOND); MOVE(player, MOVE_SCRATCH, gimmick: GIMMICK_DYNAMAX); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used Destiny Bond!");
-        MESSAGE("Wobbuffet used Max Strike!");
-        MESSAGE("The opposing Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet avversario usa\nDestiny Bond!");
+        MESSAGE("Wobbuffet usa\nMax Strike!");
+        MESSAGE("Wobbuffet avversario non ha\npiù energie!");
         NONE_OF { HP_BAR(player); }
     }
 }

@@ -12,7 +12,7 @@ SINGLE_BATTLE_TEST("Adaptability increases same-type attack bonus from x1.5 to x
     } WHEN {
         TURN { MOVE(player, MOVE_WATER_GUN); }
     } SCENE {
-        MESSAGE("Crawdaunt used PISTOLACQUA!");
+        MESSAGE("Crawdaunt usa\nPISTOLACQUA!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_WATER_GUN, player);
         HP_BAR(opponent, captureDamage: &results[i].damage);
     } FINALLY {
@@ -32,7 +32,7 @@ SINGLE_BATTLE_TEST("(TERA) Terastallizing into a different type with Adaptabilit
     } WHEN {
         TURN { MOVE(player, MOVE_HEADBUTT, gimmick: tera); }
     } SCENE {
-        MESSAGE("Crawdaunt used Headbutt!");
+        MESSAGE("Crawdaunt usa\nHeadbutt!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_HEADBUTT, player);
         HP_BAR(opponent, captureDamage: &results[i].damage);
     } FINALLY {
@@ -52,7 +52,7 @@ SINGLE_BATTLE_TEST("(TERA) Terastallizing into the same type with Adaptability g
     } WHEN {
         TURN { MOVE(player, MOVE_WATER_PULSE, gimmick: tera); }
     } SCENE {
-        MESSAGE("Crawdaunt used Water Pulse!");
+        MESSAGE("Crawdaunt usa\nWater Pulse!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_WATER_PULSE, player);
         HP_BAR(opponent, captureDamage: &results[i].damage);
     } FINALLY {

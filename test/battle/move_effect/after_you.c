@@ -46,7 +46,7 @@ DOUBLE_BATTLE_TEST("After You does nothing if the target has already moved")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, playerLeft);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponentLeft);
-        MESSAGE("The opposing Wynaut used After You!");
+        MESSAGE("Wynaut avversario usa\nAfter You!");
         MESSAGE("But it failed!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, playerRight);
     }
@@ -75,7 +75,7 @@ DOUBLE_BATTLE_TEST("After You calculates correct turn order if only one Pokémon
         MESSAGE("Regirock took the kind offer!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STONE_EDGE, playerRight);
         HP_BAR(opponentLeft);
-        MESSAGE("The opposing Pidgeot non ha più energie!");
+        MESSAGE("Pidgeot avversario non ha\npiù energie!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponentRight);
 
         ANIMATION(ANIM_TYPE_MOVE, MOVE_AFTER_YOU, playerLeft);
@@ -103,7 +103,7 @@ DOUBLE_BATTLE_TEST("After You fails if the turn order remains the same after Aft
         }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, playerLeft);
-        MESSAGE("The opposing Wynaut used After You!");
+        MESSAGE("Wynaut avversario usa\nAfter You!");
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_AFTER_YOU, opponentRight);
         MESSAGE("But it failed!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponentLeft);

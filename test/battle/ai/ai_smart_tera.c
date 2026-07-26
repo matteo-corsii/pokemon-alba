@@ -16,7 +16,7 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_TERA: AI will tera if it enables a ko")
         TURN { EXPECT_MOVE(opponent, MOVE_SEED_BOMB, gimmick: GIMMICK_TERA); SEND_OUT(player, 1); }
     } SCENE {
         MESSAGE("The opposing Wobbuffet terastallized into the Grass type!");
-        MESSAGE("Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet non ha\npiù energie!");
     }
 }
 

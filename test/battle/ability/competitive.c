@@ -473,7 +473,7 @@ SINGLE_BATTLE_TEST("Competitive doesn't activate when an opposing stat drop fail
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SPIN_OUT, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SPIN_OUT, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SPIN_OUT, player);
-        MESSAGE("The opposing Wobbuffet used Scary Face!");
+        MESSAGE("Wobbuffet avversario usa\nScary Face!");
         NONE_OF {
             ABILITY_POPUP(player, ABILITY_COMPETITIVE);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);

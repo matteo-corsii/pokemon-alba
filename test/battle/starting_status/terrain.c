@@ -87,7 +87,7 @@ SINGLE_BATTLE_TEST("Terrain started after the one which started the battle lasts
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_RESTORE_BG);
         // Player uses Grassy Terrain
         if (viaMove) {
-            MESSAGE("Tapu Bulu used Grassy Terrain!");
+            MESSAGE("Tapu Bulu usa\nGrassy Terrain!");
             ANIMATION(ANIM_TYPE_MOVE, MOVE_GRASSY_TERRAIN, player);
             MESSAGE("Grass grew to cover the battlefield!");
         } else {
@@ -97,14 +97,14 @@ SINGLE_BATTLE_TEST("Terrain started after the one which started the battle lasts
         }
 
         // 5 turns
-        MESSAGE("Tapu Bulu used Celebrate!");
-        MESSAGE("The opposing Wobbuffet used Celebrate!");
+        MESSAGE("Tapu Bulu usa\nCelebrate!");
+        MESSAGE("Wobbuffet avversario usa\nCelebrate!");
 
-        MESSAGE("Tapu Bulu used Celebrate!");
-        MESSAGE("The opposing Wobbuffet used Celebrate!");
+        MESSAGE("Tapu Bulu usa\nCelebrate!");
+        MESSAGE("Wobbuffet avversario usa\nCelebrate!");
 
-        MESSAGE("Tapu Bulu used Celebrate!");
-        MESSAGE("The opposing Wobbuffet used Celebrate!");
+        MESSAGE("Tapu Bulu usa\nCelebrate!");
+        MESSAGE("Wobbuffet avversario usa\nCelebrate!");
 
         MESSAGE("The grass disappeared from the battlefield.");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_RESTORE_BG);

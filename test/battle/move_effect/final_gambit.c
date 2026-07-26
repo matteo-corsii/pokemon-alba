@@ -106,7 +106,7 @@ SINGLE_BATTLE_TEST("Final Gambit does not faint user if target is immune")
 //         TURN { MOVE(player, MOVE_FINAL_GAMBIT); }
 //     } SCENE {
 //         NOT ABILITY_POPUP(opponent, ABILITY_INNARDS_OUT);
-//         MESSAGE("Wobbuffet non ha più energie!");
+//         MESSAGE("Wobbuffet non ha\npiù energie!");
 //         NOT ABILITY_POPUP(opponent, ABILITY_INNARDS_OUT);
 //     }
 // }
@@ -121,7 +121,7 @@ SINGLE_BATTLE_TEST("Final Gambit does not faint user if target is immune")
 //         TURN { MOVE(player, MOVE_FINAL_GAMBIT); }
 //     } SCENE {
 //         ABILITY_POPUP(opponent, ABILITY_INNARDS_OUT);
-//         MESSAGE("Wobbuffet non ha più energie!");
+//         MESSAGE("Wobbuffet non ha\npiù energie!");
 //     }
 // }
 

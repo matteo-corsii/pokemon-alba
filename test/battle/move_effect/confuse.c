@@ -16,7 +16,7 @@ SINGLE_BATTLE_TEST("Teeter Dance confuses target")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TEETER_DANCE, player);
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_CONFUSION, opponent);
-        MESSAGE("The opposing Wobbuffet became confused!");
+        MESSAGE("Wobbuffet avversario\nè in preda alla confusione!");
     }
 }
 
@@ -32,7 +32,7 @@ SINGLE_BATTLE_TEST("Teeter Dance confusion is blocked by Own Tempo")
         NONE_OF {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_TEETER_DANCE, player);
             ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_CONFUSION, opponent);
-            MESSAGE("The opposing Wobbuffet became confused!");
+            MESSAGE("Wobbuffet avversario\nè in preda alla confusione!");
         }
     }
 }
@@ -49,10 +49,10 @@ DOUBLE_BATTLE_TEST("Teeter Dance can confuse foes and allies")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TEETER_DANCE, playerLeft);
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_CONFUSION, opponentLeft);
-        MESSAGE("The opposing Wobbuffet became confused!");
+        MESSAGE("Wobbuffet avversario\nè in preda alla confusione!");
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_CONFUSION, playerRight);
-        MESSAGE("Wynaut became confused!");
+        MESSAGE("Wynaut\nè in preda alla confusione!");
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_CONFUSION, opponentRight);
-        MESSAGE("The opposing Wynaut became confused!");
+        MESSAGE("Wynaut avversario\nè in preda alla confusione!");
     }
 }

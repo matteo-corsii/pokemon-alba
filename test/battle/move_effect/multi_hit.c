@@ -251,7 +251,7 @@ SINGLE_BATTLE_TEST("Scale Shot decreases defense and increases speed after killi
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCALE_SHOT, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCALE_SHOT, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCALE_SHOT, player);
-        MESSAGE("The opposing Slugma non ha più energie!");
+        MESSAGE("Slugma avversario non ha\npiù energie!");
         MESSAGE("The Pokémon was hit 3 time(s)!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
         MESSAGE("Bagon's Defense fell!");
@@ -281,6 +281,6 @@ SINGLE_BATTLE_TEST("Multi Hit moves will not disrupt Destiny Bond flag")
             ANIMATION(ANIM_TYPE_MOVE, MOVE_BULLET_SEED, opponent);
         }
         MESSAGE("Wobbuffet took its attacker down with it!");
-        MESSAGE("The opposing Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet avversario non ha\npiù energie!");
     }
 }

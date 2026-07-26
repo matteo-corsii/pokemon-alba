@@ -17,7 +17,7 @@ SINGLE_BATTLE_TEST("Air Balloon prevents the holder from taking damage from grou
         TURN { MOVE(opponent, MOVE_EARTHQUAKE); }
     } SCENE {
         MESSAGE("Wobbuffet floats in the air with its Air Balloon!");
-        MESSAGE("The opposing Wobbuffet used Earthquake!");
+        MESSAGE("Wobbuffet avversario usa\nEarthquake!");
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_EARTHQUAKE, opponent);
         MESSAGE("It doesn't affect Wobbuffet…");
     }
@@ -83,7 +83,7 @@ SINGLE_BATTLE_TEST("Air Balloon can not be restored with Recycle after it has be
         MESSAGE("Wobbuffet floats in the air with its Air Balloon!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
         MESSAGE("Wobbuffet's Air Balloon popped!");
-        MESSAGE("Wobbuffet used Recycle!");
+        MESSAGE("Wobbuffet usa\nRecycle!");
         MESSAGE("But it failed!");
     }
 }
@@ -185,7 +185,7 @@ SINGLE_BATTLE_TEST("Air Balloon pops when the holder faints from a damaging move
         MESSAGE("Wobbuffet floats in the air with its Air Balloon!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
         MESSAGE("Wobbuffet's Air Balloon popped!");
-        MESSAGE("Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet non ha\npiù energie!");
     } THEN {
         EXPECT_EQ(player->item, ITEM_NONE);
     }

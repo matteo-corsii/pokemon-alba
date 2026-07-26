@@ -65,7 +65,7 @@ SINGLE_BATTLE_TEST("Electromorphosis displays its message before fainting when t
         HP_BAR(player);
         ABILITY_POPUP(player, ABILITY_ELECTROMORPHOSIS);
         MESSAGE("Being hit by GRAFFIO charged Bellibolt with power!");
-        MESSAGE("Bellibolt non ha più energie!");
+        MESSAGE("Bellibolt non ha\npiù energie!");
     }
 }
 

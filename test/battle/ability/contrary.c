@@ -90,7 +90,7 @@ SINGLE_BATTLE_TEST("Contrary raises stats after using a move which would normall
         TURN { MOVE(opponent, MOVE_OVERHEAT); }
         TURN { MOVE(opponent, MOVE_OVERHEAT); }
     } SCENE {
-        MESSAGE("The opposing Spinda used Overheat!");
+        MESSAGE("Spinda avversario usa\nOverheat!");
         HP_BAR(player, captureDamage: &results[i].damageBefore);
         if (ability == ABILITY_CONTRARY) {
             // ABILITY_POPUP(opponent, ABILITY_CONTRARY);
@@ -102,7 +102,7 @@ SINGLE_BATTLE_TEST("Contrary raises stats after using a move which would normall
             MESSAGE("The opposing Spinda's Sp. Atk harshly fell!");
         }
 
-        // MESSAGE("The opposing Spinda used Overheat!");
+        // MESSAGE("Spinda avversario usa\nOverheat!");
         HP_BAR(player, captureDamage: &results[i].damageAfter);
         if (ability == ABILITY_CONTRARY) {
             // ABILITY_POPUP(opponent, ABILITY_CONTRARY);
@@ -134,10 +134,10 @@ SINGLE_BATTLE_TEST("Contrary lowers a stat after using a move which would normal
         TURN { MOVE(opponent, MOVE_SWORDS_DANCE); }
         TURN { MOVE(opponent, MOVE_SCRATCH); }
     } SCENE {
-        MESSAGE("The opposing Spinda used GRAFFIO!");
+        MESSAGE("Spinda avversario usa\nGRAFFIO!");
         HP_BAR(player, captureDamage: &results[i].damageBefore);
 
-        //MESSAGE("The opposing Spinda used Swords Dance!");
+        //MESSAGE("Spinda avversario usa\nSwords Dance!");
         if (ability == ABILITY_CONTRARY) {
             // ABILITY_POPUP(opponent, ABILITY_CONTRARY);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
@@ -148,7 +148,7 @@ SINGLE_BATTLE_TEST("Contrary lowers a stat after using a move which would normal
             MESSAGE("The opposing Spinda's Attack rose sharply!");
         }
 
-        // MESSAGE("The opposing Spinda used GRAFFIO!");
+        // MESSAGE("Spinda avversario usa\nGRAFFIO!");
         HP_BAR(player, captureDamage: &results[i].damageAfter);
     }
     FINALLY {
@@ -169,7 +169,7 @@ SINGLE_BATTLE_TEST("Contrary raises a stat after using a move which would normal
     } WHEN {
         TURN { MOVE(player, MOVE_GROWL); MOVE(opponent, MOVE_SCRATCH); }
     } SCENE {
-        MESSAGE("Wobbuffet used RUGGITO!");
+        MESSAGE("Wobbuffet usa\nRUGGITO!");
         if (ability == ABILITY_CONTRARY) {
             // ABILITY_POPUP(opponent, ABILITY_CONTRARY);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
@@ -180,7 +180,7 @@ SINGLE_BATTLE_TEST("Contrary raises a stat after using a move which would normal
             MESSAGE("The opposing Spinda's Attack fell!");
         }
 
-        MESSAGE("The opposing Spinda used GRAFFIO!");
+        MESSAGE("Spinda avversario usa\nGRAFFIO!");
         HP_BAR(player, captureDamage: &results[i].damage);
     }
     FINALLY {
@@ -202,7 +202,7 @@ SINGLE_BATTLE_TEST("Contrary lowers a stat after using a move which would normal
         TURN { MOVE(opponent, MOVE_BELLY_DRUM); }
         TURN { MOVE(opponent, MOVE_SCRATCH); }
     } SCENE {
-        MESSAGE("The opposing Spinda used GRAFFIO!");
+        MESSAGE("Spinda avversario usa\nGRAFFIO!");
         HP_BAR(player, captureDamage: &results[i].damageBefore);
 
         if (ability == ABILITY_CONTRARY) {

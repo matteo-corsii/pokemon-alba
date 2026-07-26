@@ -16,7 +16,7 @@ SINGLE_BATTLE_TEST("Chloroblast makes the user lose 1/2 of its Max HP")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CHLOROBLAST, player);
         HP_BAR(player, damage: 200);
-        NOT MESSAGE("Wobbuffet non ha più energie!"); // Wobb had more than 1/2 of its HP, so it can't faint.
+        NOT MESSAGE("Wobbuffet non ha\npiù energie!"); // Wobb had more than 1/2 of its HP, so it can't faint.
     }
 }
 
@@ -30,7 +30,7 @@ SINGLE_BATTLE_TEST("Chloroblast causes the user to faint when below 1/2 of its M
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CHLOROBLAST, player);
         HP_BAR(player, hp: 0);
-        MESSAGE("Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet non ha\npiù energie!");
     }
 }
 
@@ -45,9 +45,9 @@ SINGLE_BATTLE_TEST("Chloroblast causes the user & the target to faint when below
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CHLOROBLAST, player);
         HP_BAR(opponent, hp: 0);
-        MESSAGE("The opposing Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet avversario non ha\npiù energie!");
         HP_BAR(player, hp: 0);
-        MESSAGE("Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet non ha\npiù energie!");
     }
 }
 
@@ -126,7 +126,7 @@ SINGLE_BATTLE_TEST("Chloroblast does not cause the user to lose HP if there is n
             ANIMATION(ANIM_TYPE_MOVE, MOVE_CHLOROBLAST, player);
             HP_BAR(player);
         }
-        MESSAGE("Wobbuffet used Chloroblast!");
+        MESSAGE("Wobbuffet usa\nChloroblast!");
         MESSAGE("But it failed!");
         MESSAGE("2 sent out Wobbuffet!");
     }
