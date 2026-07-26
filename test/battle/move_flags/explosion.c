@@ -16,7 +16,7 @@ SINGLE_BATTLE_TEST("Explosion causes the user to faint")
     } SCENE {
         HP_BAR(player, hp: 0);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_EXPLOSION, player);
-        MESSAGE("Wobbuffet fainted!");
+        MESSAGE("Wobbuffet non ha più energie!");
     }
 }
 
@@ -32,8 +32,8 @@ SINGLE_BATTLE_TEST("Explosion causes the user & the target to faint")
         HP_BAR(player, hp: 0);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_EXPLOSION, player);
         HP_BAR(opponent, hp: 0);
-        MESSAGE("Wobbuffet fainted!");
-        MESSAGE("The opposing Wobbuffet fainted!");
+        MESSAGE("Wobbuffet non ha più energie!");
+        MESSAGE("The opposing Wobbuffet non ha più energie!");
     }
 }
 
@@ -47,7 +47,7 @@ SINGLE_BATTLE_TEST("Explosion causes the user to faint even if it misses")
     } SCENE {
         HP_BAR(player, hp: 0);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_EXPLOSION, player);
-        MESSAGE("Wobbuffet fainted!");
+        MESSAGE("Wobbuffet non ha più energie!");
     }
 }
 
@@ -64,7 +64,7 @@ SINGLE_BATTLE_TEST("Explosion causes the user to faint even if it has no effect"
         HP_BAR(player, hp: 0);
         MESSAGE("It doesn't affect the opposing Gastly…");
         NOT HP_BAR(opponent);
-        MESSAGE("Wobbuffet fainted!");
+        MESSAGE("Wobbuffet non ha più energie!");
     }
 }
 
@@ -84,10 +84,10 @@ DOUBLE_BATTLE_TEST("Explosion causes everyone to faint in a double battle")
         HP_BAR(opponentLeft, hp: 0);
         HP_BAR(playerRight, hp: 0);
         HP_BAR(opponentRight, hp: 0);
-        MESSAGE("Wobbuffet fainted!");
-        MESSAGE("The opposing Abra fainted!");
-        MESSAGE("Wynaut fainted!");
-        MESSAGE("The opposing Kadabra fainted!");
+        MESSAGE("Wobbuffet non ha più energie!");
+        MESSAGE("The opposing Abra non ha più energie!");
+        MESSAGE("Wynaut non ha più energie!");
+        MESSAGE("The opposing Kadabra non ha più energie!");
     }
 }
 
@@ -139,8 +139,8 @@ DOUBLE_BATTLE_TEST("Explosion boosted by Galvanize is correctly blocked by Volt 
         NOT HP_BAR(opponentLeft, hp: 0);
         HP_BAR(playerRight, hp: 0);
         HP_BAR(opponentRight, hp: 0);
-        MESSAGE("Geodude fainted!");
-        MESSAGE("Wynaut fainted!");
-        MESSAGE("The opposing Wobbuffet fainted!");
+        MESSAGE("Geodude non ha più energie!");
+        MESSAGE("Wynaut non ha più energie!");
+        MESSAGE("The opposing Wobbuffet non ha più energie!");
     }
 }

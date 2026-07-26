@@ -28,7 +28,7 @@ SINGLE_BATTLE_TEST("Forewarn randomly chooses between same-power moves on one op
         TURN {}
     } SCENE {
         ABILITY_POPUP(player, ABILITY_FOREWARN);
-        MESSAGE("Forewarn alerted Musharna to the opposing Zubat's Tackle!");
+        MESSAGE("Forewarn alerted Musharna to the opposing Zubat's AZIONE!");
     }
 }
 
@@ -47,7 +47,7 @@ DOUBLE_BATTLE_TEST("Forewarn randomly chooses between opponents with same-power 
         TURN {}
     } SCENE {
         ABILITY_POPUP(playerLeft, ABILITY_FOREWARN);
-        MESSAGE("Forewarn alerted Musharna to the opposing Zubat's Tackle!");
+        MESSAGE("Forewarn alerted Musharna to the opposing Zubat's AZIONE!");
     }
 }
 

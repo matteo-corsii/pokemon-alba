@@ -13,7 +13,7 @@ SINGLE_BATTLE_TEST("Mist prevents stat reductions from opposing moves")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_MIST, player);
         MESSAGE("Your team became shrouded in mist!");
-        MESSAGE("The opposing Wobbuffet used Growl!");
+        MESSAGE("The opposing Wobbuffet used RUGGITO!");
         MESSAGE("Wobbuffet is protected by the mist!");
     } THEN {
         EXPECT_EQ(player->statStages[STAT_ATK], DEFAULT_STAT_STAGE);

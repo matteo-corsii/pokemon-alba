@@ -249,7 +249,7 @@ SINGLE_BATTLE_TEST("Strength Sap will drain users HP if target has Liquid Ooze")
         HP_BAR(player, captureDamage: &lostHp);
         MESSAGE("Wobbuffet sucked up the liquid ooze!");
         if (atkStat >= 490) {
-            MESSAGE("Wobbuffet fainted!");
+            MESSAGE("Wobbuffet non ha più energie!");
             SEND_IN_MESSAGE("Wobbuffet");
         }
     } THEN {

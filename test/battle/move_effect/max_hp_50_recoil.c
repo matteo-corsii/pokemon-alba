@@ -16,7 +16,7 @@ SINGLE_BATTLE_TEST("Steel Beam makes the user lose 1/2 of its Max HP")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STEEL_BEAM, player);
         HP_BAR(player, damage: 200);
-        NOT MESSAGE("Wobbuffet fainted!"); // Wobb had more than 1/2 of its HP, so it can't faint.
+        NOT MESSAGE("Wobbuffet non ha più energie!"); // Wobb had more than 1/2 of its HP, so it can't faint.
     }
 }
 
@@ -32,7 +32,7 @@ DOUBLE_BATTLE_TEST("Steel Beam makes the user lose 1/2 of its Max HP in a double
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STEEL_BEAM, playerLeft);
         HP_BAR(playerLeft, damage: 200);
-        NOT MESSAGE("Wobbuffet fainted!"); // Wobb had more than 1/2 of its HP, so it can't faint.
+        NOT MESSAGE("Wobbuffet non ha più energie!"); // Wobb had more than 1/2 of its HP, so it can't faint.
     }
 }
 
@@ -46,7 +46,7 @@ SINGLE_BATTLE_TEST("Steel Beam causes the user to faint when below 1/2 of its Ma
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STEEL_BEAM, player);
         HP_BAR(player, hp: 0);
-        MESSAGE("Wobbuffet fainted!");
+        MESSAGE("Wobbuffet non ha più energie!");
     }
 }
 
@@ -62,7 +62,7 @@ DOUBLE_BATTLE_TEST("Steel Beam causes the user to faint when below 1/2 of its Ma
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STEEL_BEAM, playerLeft);
         HP_BAR(playerLeft, hp: 0);
-        MESSAGE("Wobbuffet fainted!");
+        MESSAGE("Wobbuffet non ha più energie!");
     }
 }
 
@@ -78,8 +78,8 @@ SINGLE_BATTLE_TEST("Steel Beam causes the user & the target to faint when below 
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STEEL_BEAM, player);
         HP_BAR(opponent, hp: 0);
         HP_BAR(player, hp: 0);
-        MESSAGE("Wobbuffet fainted!");
-        MESSAGE("The opposing Wobbuffet fainted!");
+        MESSAGE("Wobbuffet non ha più energie!");
+        MESSAGE("The opposing Wobbuffet non ha più energie!");
     }
 }
 

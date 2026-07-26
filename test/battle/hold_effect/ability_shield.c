@@ -60,7 +60,7 @@ DOUBLE_BATTLE_TEST("Ability Shield prevents Intimidate from reactivating after N
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
         }
-        MESSAGE("The opposing Koffing fainted!");
+        MESSAGE("The opposing Koffing non ha più energie!");
     } THEN {
         EXPECT_EQ(playerLeft->statStages[STAT_ATK], DEFAULT_STAT_STAGE - 1);
         EXPECT_EQ(playerRight->statStages[STAT_ATK], DEFAULT_STAT_STAGE - 1);
@@ -144,11 +144,11 @@ SINGLE_BATTLE_TEST("Ability Shield protects against Sunsteel Strike (no message)
             NONE_OF {
                 ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
                 MESSAGE("Shedinja's Ability is protected by the effects of its Ability Shield!");
-                MESSAGE("Shedinja fainted!");
+                MESSAGE("Shedinja non ha più energie!");
             }
             ABILITY_POPUP(player, ABILITY_WONDER_GUARD);
         } else {
-            MESSAGE("Shedinja fainted!");
+            MESSAGE("Shedinja non ha più energie!");
             NOT ABILITY_POPUP(player, ABILITY_WONDER_GUARD);
         }
     }
@@ -319,7 +319,7 @@ DOUBLE_BATTLE_TEST("Ability Shield prevents Receiver/Power of Alchemy holder fro
     } SCENE {
         ABILITY_POPUP(opponentRight, ABILITY_INTIMIDATE);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, playerLeft);
-        MESSAGE("The opposing Gyarados fainted!");
+        MESSAGE("The opposing Gyarados non ha più energie!");
         NONE_OF {
             ABILITY_POPUP(opponentLeft, ability);
             ABILITY_POPUP(opponentLeft, ABILITY_INTIMIDATE);
@@ -349,7 +349,7 @@ DOUBLE_BATTLE_TEST("Ability Shield on fainted ally does not block Receiver/Power
     } SCENE {
         ABILITY_POPUP(opponentRight, ABILITY_INTIMIDATE);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, playerLeft);
-        MESSAGE("The opposing Gyarados fainted!");
+        MESSAGE("The opposing Gyarados non ha più energie!");
         ABILITY_POPUP(opponentLeft, ability);
         ABILITY_POPUP(opponentLeft, ABILITY_INTIMIDATE);
     } THEN {

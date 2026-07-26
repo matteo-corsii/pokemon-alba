@@ -494,8 +494,8 @@ DOUBLE_BATTLE_TEST("Dancer-called moves do not update move to be called by Mimic
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DRAGON_DANCE, opponentLeft);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_MIMIC, playerLeft);
-        MESSAGE("Wobbuffet learned Scratch!");
-        NOT MESSAGE("Wobbuffet learned Dragon Dance!");
+        MESSAGE("Wobbuffet ha imparato GRAFFIO!");
+        NOT MESSAGE("Wobbuffet ha imparato Dragon Dance!");
     }
 }
 
@@ -520,7 +520,7 @@ DOUBLE_BATTLE_TEST("Dancer-called moves doesn't update move to be called by Mirr
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DRAGON_DANCE, opponentLeft);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
         MESSAGE("Wobbuffet used Mirror Move!");
-        MESSAGE("Wobbuffet used Scratch!");
+        MESSAGE("Wobbuffet used GRAFFIO!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, playerLeft);
         NOT MESSAGE("Wobbuffet used Dragon Dance!");
     }
@@ -881,11 +881,11 @@ DOUBLE_BATTLE_TEST("Dancer copies Lunar Dance after the original user faints, bu
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_LUNAR_DANCE, playerLeft);
         HP_BAR(playerLeft, hp: 0);
-        MESSAGE("Wobbuffet fainted!");
+        MESSAGE("Wobbuffet non ha più energie!");
         ABILITY_POPUP(playerRight, ABILITY_DANCER);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_LUNAR_DANCE, playerRight);
         HP_BAR(playerRight, hp: 0);
-        MESSAGE("Oricorio fainted!");
+        MESSAGE("Oricorio non ha più energie!");
         SEND_IN_MESSAGE("Wynaut");
         SEND_IN_MESSAGE("Chansey");
     }

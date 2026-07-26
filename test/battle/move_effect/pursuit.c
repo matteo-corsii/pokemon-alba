@@ -255,7 +255,7 @@ DOUBLE_BATTLE_TEST("Pursuit only attacks a switching foe if foe is alive")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_PURSUIT, opponentLeft);
         HP_BAR(playerLeft);
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_PURSUIT, opponentRight);
-        MESSAGE("Wobbuffet fainted!");
+        MESSAGE("Wobbuffet non ha più energie!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_PURSUIT, opponentRight);
         SEND_IN_MESSAGE("Grimer");
     }
@@ -277,7 +277,7 @@ DOUBLE_BATTLE_TEST("Pursuit attacks the second switching foe if the first faints
         SWITCH_OUT_MESSAGE("Wobbuffet");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_PURSUIT, opponentLeft);
         HP_BAR(playerLeft);
-        MESSAGE("Wobbuffet fainted!");
+        MESSAGE("Wobbuffet non ha più energie!");
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_PURSUIT, opponentRight);
         SWITCH_OUT_MESSAGE("Zigzagoon");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_PURSUIT, opponentRight);
@@ -300,7 +300,7 @@ DOUBLE_BATTLE_TEST("Pursuit only attacks a switching foe if user is alive")
         TURN { MOVE(playerLeft, MOVE_VOLT_SWITCH, target: opponentLeft); MOVE(opponentLeft, MOVE_PURSUIT, target: playerLeft); SEND_OUT(playerLeft, 2); SEND_OUT(opponentLeft, 2); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_VOLT_SWITCH, playerLeft);
-        MESSAGE("The opposing Wynaut fainted!");
+        MESSAGE("The opposing Wynaut non ha più energie!");
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_PURSUIT, opponentLeft);
         SEND_IN_MESSAGE("Grimer");
     }
@@ -648,7 +648,7 @@ SINGLE_BATTLE_TEST("Pursuit user faints to Life Orb and target still switches ou
         SWITCH_OUT_MESSAGE("Wobbuffet");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_PURSUIT, opponent);
         HP_BAR(opponent);
-        MESSAGE("The opposing Wobbuffet fainted!");
+        MESSAGE("The opposing Wobbuffet non ha più energie!");
         SEND_IN_MESSAGE("Voltorb");
     } THEN {
         EXPECT_EQ(player->species, SPECIES_VOLTORB);

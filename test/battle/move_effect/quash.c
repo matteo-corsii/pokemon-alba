@@ -67,7 +67,7 @@ DOUBLE_BATTLE_TEST("Quash calculates correct turn order if only one Pokémon is 
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponentRight);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STONE_EDGE, playerRight);
         HP_BAR(opponentLeft);
-        MESSAGE("The opposing Pidgeot fainted!");
+        MESSAGE("The opposing Pidgeot non ha più energie!");
 
         ANIMATION(ANIM_TYPE_MOVE, MOVE_QUASH, playerLeft);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponentRight);

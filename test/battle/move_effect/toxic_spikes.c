@@ -228,7 +228,7 @@ SINGLE_BATTLE_TEST("Toxic Spikes inflicts poison on switch in after Primal Rever
         MESSAGE("Groudon's Primal Reversion! It reverted to its primal state!");
         // Memento
         MESSAGE("Groudon used Memento!");
-        MESSAGE("Groudon fainted!");
+        MESSAGE("Groudon non ha più energie!");
         // 2nd switch-in
         SEND_IN_MESSAGE("Wynaut");
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, player);

@@ -115,7 +115,7 @@ DOUBLE_BATTLE_TEST("Magic Bounce bounces back moves hitting both foes at two foe
         MESSAGE("The opposing Wynaut's Defense fell!");
 
         ABILITY_POPUP(opponentLeft, ABILITY_MAGIC_BOUNCE);
-        MESSAGE("Abra's Leer was bounced back!");
+        MESSAGE("Abra's FULMISGUARDO was bounced back!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_LEER, opponentLeft);
 
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
@@ -139,7 +139,7 @@ DOUBLE_BATTLE_TEST("Magic Bounce activates on all opposing mons")
     } SCENE {
         ABILITY_POPUP(opponentLeft, ABILITY_MAGIC_BOUNCE);
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_LEER, playerLeft);
-        MESSAGE("Abra's Leer was bounced back!");
+        MESSAGE("Abra's FULMISGUARDO was bounced back!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_LEER, opponentLeft);
         NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);

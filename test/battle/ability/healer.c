@@ -60,7 +60,7 @@ DOUBLE_BATTLE_TEST("Healer cures status condition before burn or poison damage i
     } WHEN {
         TURN {}
     } SCENE {
-        NOT MESSAGE("The opposing Wobbuffet fainted!");
+        NOT MESSAGE("The opposing Wobbuffet non ha più energie!");
         switch (status)
         {
             case STATUS1_POISON:

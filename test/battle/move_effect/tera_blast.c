@@ -180,7 +180,7 @@ SINGLE_BATTLE_TEST("Flying-type Tera Blast does not have its priority boosted by
     } WHEN {
         TURN { MOVE(player, MOVE_TERA_BLAST, gimmick: GIMMICK_TERA); MOVE(opponent, MOVE_QUICK_ATTACK); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used Quick Attack!");
+        MESSAGE("The opposing Wobbuffet used ATTACCO RAPIDO!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_QUICK_ATTACK, opponent);
         MESSAGE("Talonflame used Tera Blast!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TERA_BLAST, player);

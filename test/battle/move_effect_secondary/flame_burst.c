@@ -35,7 +35,7 @@ DOUBLE_BATTLE_TEST("Flame Burst doesn't crash, opponent to player")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FLAME_BURST, opponentRight);
         HP_BAR(playerRight);
-        MESSAGE("Wobbuffet fainted!");
+        MESSAGE("Wobbuffet non ha più energie!");
     }
 }
 
@@ -51,6 +51,6 @@ DOUBLE_BATTLE_TEST("Flame Burst doesn't crash, player to opponent")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FLAME_BURST, playerLeft);
         HP_BAR(opponentRight);
-        MESSAGE("The opposing Wynaut fainted!");
+        MESSAGE("The opposing Wynaut non ha più energie!");
     }
 }

@@ -82,7 +82,7 @@ SINGLE_BATTLE_TEST("Recoil if miss: Jump Kick's recoil happens after Spiky Shiel
         HP_BAR(player, damage: maxHp / 8);
         MESSAGE("Wobbuffet was hurt!");
         if (faintOnSpiky){
-            MESSAGE("Wobbuffet fainted!");
+            MESSAGE("Wobbuffet non ha più energie!");
             SEND_IN_MESSAGE("Wynaut");
             NONE_OF {
                 MESSAGE("Wobbuffet kept going and crashed!");
@@ -92,7 +92,7 @@ SINGLE_BATTLE_TEST("Recoil if miss: Jump Kick's recoil happens after Spiky Shiel
             MESSAGE("Wobbuffet kept going and crashed!");
             HP_BAR(player);
             if (faintOnJumpKick) {
-                MESSAGE("Wobbuffet fainted!");
+                MESSAGE("Wobbuffet non ha più energie!");
                 SEND_IN_MESSAGE("Wynaut");
             }
         }

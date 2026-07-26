@@ -185,7 +185,7 @@ SINGLE_BATTLE_TEST("Air Balloon pops when the holder faints from a damaging move
         MESSAGE("Wobbuffet floats in the air with its Air Balloon!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
         MESSAGE("Wobbuffet's Air Balloon popped!");
-        MESSAGE("Wobbuffet fainted!");
+        MESSAGE("Wobbuffet non ha più energie!");
     } THEN {
         EXPECT_EQ(player->item, ITEM_NONE);
     }

@@ -84,7 +84,7 @@ SINGLE_BATTLE_TEST("Overcoat blocks Effect Spore's effect (Gen6+)")
     } WHEN {
         TURN { MOVE(player, MOVE_TACKLE, WITH_RNG(RNG_EFFECT_SPORE, 1)); }
     } SCENE {
-        MESSAGE("Pineco used Tackle!");
+        MESSAGE("Pineco used AZIONE!");
         if (config == GEN_6) {
             NOT ABILITY_POPUP(opponent, ABILITY_EFFECT_SPORE);
         }

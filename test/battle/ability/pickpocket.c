@@ -92,7 +92,7 @@ SINGLE_BATTLE_TEST("Pickpocket does not activate if the user faints")
             ABILITY_POPUP(opponent, ABILITY_PICKPOCKET);
             MESSAGE("The opposing Sneasel stole Wobbuffet's Magost Berry!");
         }
-        MESSAGE("The opposing Sneasel fainted!");
+        MESSAGE("The opposing Sneasel non ha più energie!");
     } THEN {
         EXPECT(opponent->item == ITEM_NONE);
         EXPECT(player->item == ITEM_MAGOST_BERRY);

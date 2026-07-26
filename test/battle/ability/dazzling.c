@@ -25,7 +25,7 @@ DOUBLE_BATTLE_TEST("Dazzling, Queenly Majesty and Armor Tail protect the user fr
     } SCENE {
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_QUICK_ATTACK, opponentRight);
         ABILITY_POPUP(opponentLeft, ability);
-        MESSAGE("Wobbuffet cannot use Quick Attack!");
+        MESSAGE("Wobbuffet cannot use ATTACCO RAPIDO!");
     }
 }
 
@@ -48,7 +48,7 @@ DOUBLE_BATTLE_TEST("Dazzling, Queenly Majesty and Armor Tail protect users partn
     } SCENE {
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_QUICK_ATTACK, opponentRight);
         ABILITY_POPUP(opponentLeft, ability);
-        MESSAGE("Wobbuffet cannot use Quick Attack!");
+        MESSAGE("Wobbuffet cannot use ATTACCO RAPIDO!");
     }
 }
 
@@ -248,7 +248,7 @@ DOUBLE_BATTLE_TEST("Instruct-called moves keep their priority, which is consider
         MESSAGE("The opposing Wobbuffet is switched out with the Eject Button!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_INSTRUCT, playerLeft);
         ABILITY_POPUP(opponentLeft, ability);
-        MESSAGE("Wobbuffet cannot use Quick Attack!");
+        MESSAGE("Wobbuffet cannot use ATTACCO RAPIDO!");
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_QUICK_ATTACK, playerRight);
     }
 }
@@ -271,7 +271,7 @@ SINGLE_BATTLE_TEST("Dazzling, Queenly Majesty and Armor Tail do not block high-p
     } SCENE {
         MESSAGE("Wobbuffet used Metronome!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_METRONOME, player);
-        MESSAGE("Waggling a finger let it use Quick Attack!");
+        MESSAGE("Waggling a finger let it use ATTACCO RAPIDO!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_QUICK_ATTACK, player);
         HP_BAR(opponent);
         NOT ABILITY_POPUP(opponent, ability);

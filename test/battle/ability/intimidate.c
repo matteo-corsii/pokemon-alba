@@ -126,7 +126,7 @@ SINGLE_BATTLE_TEST("Intimidate and Eject Button don't force the opponent to Atta
         MESSAGE("Wobbuffet's Attack fell!");
         NONE_OF {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
-            MESSAGE("The opposing Hitmontop used Scratch!");
+            MESSAGE("The opposing Hitmontop used GRAFFIO!");
         }
     }
 }
@@ -354,7 +354,7 @@ DOUBLE_BATTLE_TEST("Intimidate activates when it's no longer affected by Neutral
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FELL_STINGER, opponentLeft);
         MESSAGE("The effects of the neutralizing gas wore off!");
         ABILITY_POPUP(opponentLeft, ABILITY_INTIMIDATE);
-        MESSAGE("Weezing fainted!");
+        MESSAGE("Weezing non ha più energie!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
         SEND_IN_MESSAGE("Wobbuffet");
     }

@@ -149,7 +149,7 @@ SINGLE_BATTLE_TEST("Fling - Item is lost even when there is no target")
         MESSAGE("The opposing Wobbuffet used Self-Destruct!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SELF_DESTRUCT, opponent);
         HP_BAR(player);
-        MESSAGE("The opposing Wobbuffet fainted!");
+        MESSAGE("The opposing Wobbuffet non ha più energie!");
         MESSAGE("Wobbuffet used Fling!");
         MESSAGE("But it failed!");
 
@@ -638,7 +638,7 @@ SINGLE_BATTLE_TEST("Fling reveals the user's item before dealing damage")
     } WHEN {
         TURN { MOVE(opponent, MOVE_FLING); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet flung its Potion!");
+        MESSAGE("The opposing Wobbuffet flung its POZIONE!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FLING, opponent);
         HP_BAR(player);
     }
@@ -654,7 +654,7 @@ SINGLE_BATTLE_TEST("Fling doesn't reveal the user's item if it failed to use the
         TURN { MOVE(opponent, MOVE_FLING); }
     } SCENE {
         NONE_OF {
-            MESSAGE("The opposing Wobbuffet flung its Potion!");
+            MESSAGE("The opposing Wobbuffet flung its POZIONE!");
             ANIMATION(ANIM_TYPE_MOVE, MOVE_FLING, opponent);
             HP_BAR(player);
         };
@@ -672,7 +672,7 @@ SINGLE_BATTLE_TEST("Fling doesn't reveal the user's item if it missed")
         TURN { MOVE(opponent, MOVE_FLING, hit: FALSE); }
     } SCENE {
         NONE_OF {
-            MESSAGE("The opposing Wobbuffet flung its Potion!");
+            MESSAGE("The opposing Wobbuffet flung its POZIONE!");
             ANIMATION(ANIM_TYPE_MOVE, MOVE_FLING, opponent);
             HP_BAR(player);
         };

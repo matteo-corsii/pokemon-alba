@@ -54,7 +54,7 @@ DOUBLE_BATTLE_TEST("Liquid Ooze causes Matcha Gatcha users to lose HP instead of
         HP_BAR(opponentLeft);
         HP_BAR(playerLeft);
         MESSAGE("Wobbuffet sucked up the liquid ooze!");
-        MESSAGE("Wobbuffet fainted!");
+        MESSAGE("Wobbuffet non ha più energie!");
     }
 }
 
@@ -73,7 +73,7 @@ DOUBLE_BATTLE_TEST("Liquid Ooze will faint Matcha Gatcha users if it deals enoug
         HP_BAR(opponentLeft);
         HP_BAR(playerLeft);
         MESSAGE("Wobbuffet sucked up the liquid ooze!");
-        MESSAGE("Wobbuffet fainted!");
+        MESSAGE("Wobbuffet non ha più energie!");
     }
 }
 
@@ -100,7 +100,7 @@ SINGLE_BATTLE_TEST("Liquid Ooze causes Strength Sap users to lose HP instead of 
         HP_BAR(player, captureDamage: &lostHp);
         MESSAGE("Wobbuffet sucked up the liquid ooze!");
         if (atkStat >= 490) {
-            MESSAGE("Wobbuffet fainted!");
+            MESSAGE("Wobbuffet non ha più energie!");
             SEND_IN_MESSAGE("Wobbuffet");
         }
     } THEN {
@@ -127,13 +127,13 @@ SINGLE_BATTLE_TEST("Liquid Ooze causes leech seed victim to faint before seeder"
         // Drain at end of turn
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_LEECH_SEED_DRAIN, opponent);
         if (ability != ABILITY_LIQUID_OOZE) {
-            MESSAGE("The opposing Tentacool fainted!");
+            MESSAGE("The opposing Tentacool non ha più energie!");
             MESSAGE("The opposing Tentacool's health is sapped by Leech Seed!");
         } else {
-            MESSAGE("The opposing Tentacool fainted!");
+            MESSAGE("The opposing Tentacool non ha più energie!");
             ABILITY_POPUP(opponent, ABILITY_LIQUID_OOZE);
             MESSAGE("Bulbasaur sucked up the liquid ooze!");
-            MESSAGE("Bulbasaur fainted!");
+            MESSAGE("Bulbasaur non ha più energie!");
         }
     }
 }

@@ -61,7 +61,7 @@ DOUBLE_BATTLE_TEST("Revival Blessing doesn't prevent revived battlers from losin
                MOVE(opponentLeft, MOVE_REVIVAL_BLESSING, partyIndex: 1); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, playerLeft);
-        MESSAGE("The opposing Wynaut fainted!");
+        MESSAGE("The opposing Wynaut non ha più energie!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_REVIVAL_BLESSING, opponentLeft);
         MESSAGE("Wynaut was revived and is ready to fight again!");
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponentRight);
@@ -85,7 +85,7 @@ DOUBLE_BATTLE_TEST("Revival Blessing correctly updates battler absent flags")
         MESSAGE("It doesn't affect Pidgeot…");
         MESSAGE("It doesn't affect the opposing Starly…");
         HP_BAR(opponentLeft);
-        MESSAGE("The opposing Geodude fainted!");
+        MESSAGE("The opposing Geodude non ha più energie!");
         MESSAGE("The opposing Starly used Revival Blessing!");
         MESSAGE("Geodude was revived and is ready to fight again!"); // Should have prefix but it doesn't currently.
         // Turn 2
@@ -93,7 +93,7 @@ DOUBLE_BATTLE_TEST("Revival Blessing correctly updates battler absent flags")
         MESSAGE("It doesn't affect Pidgeot…");
         MESSAGE("It doesn't affect the opposing Starly…");
         HP_BAR(opponentLeft);
-        MESSAGE("The opposing Geodude fainted!");
+        MESSAGE("The opposing Geodude non ha più energie!");
     }
 }
 
