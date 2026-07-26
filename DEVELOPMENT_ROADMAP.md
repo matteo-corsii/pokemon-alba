@@ -30,7 +30,7 @@ Questa roadmap descrive una sequenza iniziale di attività. Ogni fase deve produ
 
 **Esito dell’apertura italiana:** l’interfaccia iniziale e l’introduzione tradotta sono state compilate e collaudate manualmente con successo, senza errori grafici, testi tagliati o problemi funzionali.
 
-**Milestone in preparazione:** è iniziato il pacchetto di identità narrativa. I nomi provvisori di regione, città, Professore e rivali sono stati stabiliti; in questa fase vengono sostituiti soltanto i testi visibili, mantenendo invariati gli identificatori interni originali. La milestone non sarà considerata completa prima della compilazione e del test.
+**Milestone in preparazione:** il pacchetto di identità narrativa è stato esteso alla localizzazione del primo segmento giocabile, dall'arrivo ad Albèra al primo ritorno al Laboratorio del Cratere dopo l'incontro con il rivale. Gli identificatori interni originali restano invariati; il pacchetto non è ancora stato compilato né collaudato.
 
 **Obiettivo:** verificare l’intero ciclo di modifica del gioco con un cambiamento semplice e facilmente riconoscibile.
 

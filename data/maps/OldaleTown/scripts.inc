@@ -382,14 +382,14 @@ OldaleTown_Text_FinishedSketchingFootprints:
 	.string "own footprints…$"
 
 OldaleTown_Text_MayLetsGoBack:
-	.string "MAY: {PLAYER}{KUN}!\n"
-	.string "Over here!\l"
-	.string "Let's hurry home!$"
+	.string "LIA: {PLAYER}{KUN}!\n"
+	.string "Da questa parte!\l"
+	.string "Torniamo presto ad ALBÈRA!$"
 
 OldaleTown_Text_BrendanLetsGoBack:
-	.string "BRENDAN: I'm heading back to my dad's\n"
-	.string "LAB now.\l"
-	.string "{PLAYER}, you should hustle back, too.$"
+	.string "NICO: Io torno al LABORATORIO DEL CRATERE\n"
+	.string "da mio padre.\l"
+	.string "{PLAYER}, dovresti sbrigarti anche tu.$"
 
 OldaleTown_Text_TownSign:
 	.string "OLDALE TOWN\n"
