@@ -1231,7 +1231,7 @@ void GivePlayerItem(u32 sourceLine, enum Item, u32 quantity);
 
 #define SWITCH_OUT_MESSAGE(name) ONE_OF {                                         \
                                      MESSAGE(name ", that's enough! Come back!"); \
-                                     MESSAGE(name ", come back!");                \
+                                     MESSAGE("Rientra, " name "!");               \
                                      MESSAGE(name ", OK! Come back!");            \
                                      MESSAGE(name ", good! Come back!");          \
                                  }

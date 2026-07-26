@@ -36,8 +36,8 @@ SINGLE_BATTLE_TEST("Battle Message: STRINGID_INTROMSG, STRINGID_INTROSENDOUT, ST
     } WHEN {
         TURN { SWITCH(opponent, 1); }
     } SCENE {
-        MESSAGE("2 ti sfida!");
-        MESSAGE("2 manda in campo Wobbuffet!");
+        MESSAGE("You are challenged by 2!");
+        MESSAGE("2 sent out Wobbuffet!");
         MESSAGE("Vai, Gastly!");
         MESSAGE("2 withdrew Wobbuffet!");
         MESSAGE("2 sent out Girafarig!");
@@ -58,7 +58,7 @@ AI_SINGLE_BATTLE_TEST("Battle Message: STRINGID_INTROMSG, STRINGID_INTROSENDOUT,
         MESSAGE(AI_TRAINER_NAME " manda in campo Wobbuffet!");
         MESSAGE("Vai, Gastly!");
         MESSAGE(AI_TRAINER_NAME " withdrew Wobbuffet!");
-        MESSAGE(AI_TRAINER_NAME " sent out Girafarig!");
+        MESSAGE(AI_TRAINER_NAME " manda in campo Girafarig!");
     }
 }
 
@@ -77,7 +77,7 @@ DOUBLE_BATTLE_TEST("Battle Message: STRINGID_INTROMSG, STRINGID_INTROSENDOUT, ST
             SWITCH(opponentRight, 2);
         }
     } SCENE {
-        MESSAGE("2 ti sfida!");
+        MESSAGE("You are challenged by 2!");
         MESSAGE("2 sent out Wobbuffet and Wynaut!");
         MESSAGE("Go! Gastly and Haunter!");
         MESSAGE("2 withdrew Wobbuffet!");
@@ -107,7 +107,7 @@ AI_DOUBLE_BATTLE_TEST("Battle Message: STRINGID_INTROMSG, STRINGID_INTROSENDOUT,
         MESSAGE(AI_TRAINER_NAME " sent out Wobbuffet and Wynaut!");
         MESSAGE("Go! Gastly and Haunter!");
         MESSAGE(AI_TRAINER_NAME " withdrew Wobbuffet!");
-        MESSAGE(AI_TRAINER_NAME " sent out Farigiraf!");
+        MESSAGE(AI_TRAINER_NAME " manda in campo Farigiraf!");
         MESSAGE(AI_TRAINER_NAME " withdrew Wynaut!");
         MESSAGE(AI_TRAINER_NAME " sent out Girafarig!");
     }
@@ -164,7 +164,7 @@ AI_MULTI_BATTLE_TEST("Battle Message: STRINGID_INTROMSG, STRINGID_INTROSENDOUT, 
         MESSAGE(AI_TRAINER_NAME " sent out Wobbuffet! " AI_TRAINER_2_NAME " sent out Wynaut!");
         MESSAGE(AI_PARTNER_NAME " sent out Haunter! Go, Gastly!");
         MESSAGE(AI_TRAINER_NAME " withdrew Wobbuffet!");
-        MESSAGE(AI_TRAINER_NAME " sent out Farigiraf!");
+        MESSAGE(AI_TRAINER_NAME " manda in campo Farigiraf!");
         MESSAGE(AI_PARTNER_NAME " withdrew Haunter!");
         MESSAGE(AI_PARTNER_NAME " sent out Gengar!");
         MESSAGE(AI_TRAINER_2_NAME " withdrew Wynaut!");
@@ -189,7 +189,7 @@ TWO_VS_ONE_BATTLE_TEST("Battle Message: STRINGID_INTROMSG, STRINGID_INTROSENDOUT
             SWITCH(opponentRight, 2);
         }
     } SCENE {
-        MESSAGE("2 ti sfida!");
+        MESSAGE("You are challenged by 2!");
         MESSAGE("2 sent out Wobbuffet and Wynaut!");
         MESSAGE("3 sent out Haunter! Go, Gastly!");
         MESSAGE("2 withdrew Wobbuffet!");
@@ -223,7 +223,7 @@ AI_TWO_VS_ONE_BATTLE_TEST("Battle Message: STRINGID_INTROMSG, STRINGID_INTROSEND
         MESSAGE(AI_TRAINER_NAME " sent out Wobbuffet and Wynaut!");
         MESSAGE(AI_PARTNER_NAME " sent out Haunter! Go, Gastly!");
         MESSAGE(AI_TRAINER_NAME " withdrew Wobbuffet!");
-        MESSAGE(AI_TRAINER_NAME " sent out Farigiraf!");
+        MESSAGE(AI_TRAINER_NAME " manda in campo Farigiraf!");
         MESSAGE(AI_TRAINER_NAME " withdrew Wynaut!");
         MESSAGE(AI_TRAINER_NAME " sent out Girafarig!");
         MESSAGE(AI_PARTNER_NAME " withdrew Haunter!");
@@ -276,7 +276,7 @@ AI_ONE_VS_TWO_BATTLE_TEST("Battle Message: STRINGID_INTROMSG, STRINGID_INTROSEND
         MESSAGE(AI_TRAINER_NAME " sent out Wobbuffet! " AI_TRAINER_2_NAME " sent out Wynaut!");
         MESSAGE("Go! Gastly and Haunter!");
         MESSAGE(AI_TRAINER_NAME " withdrew Wobbuffet!");
-        MESSAGE(AI_TRAINER_NAME " sent out Farigiraf!");
+        MESSAGE(AI_TRAINER_NAME " manda in campo Farigiraf!");
         MESSAGE(AI_TRAINER_2_NAME " withdrew Wynaut!");
         MESSAGE(AI_TRAINER_2_NAME " sent out Girafarig!");
     }

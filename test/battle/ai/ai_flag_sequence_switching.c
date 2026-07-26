@@ -27,14 +27,14 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SEQUENCE_SWITCHING: AI will always switch after a
         }
     } SCENE {
         if (aiSequenceSwitchingFlag) {
-            MESSAGE(AI_TRAINER_NAME " sent out Machoke!");
-            MESSAGE(AI_TRAINER_NAME " sent out Machamp!");
-            MESSAGE(AI_TRAINER_NAME " sent out Mankey!");
-            MESSAGE(AI_TRAINER_NAME " sent out Primeape!");
-            MESSAGE(AI_TRAINER_NAME " sent out Magnezone!");
+            MESSAGE(AI_TRAINER_NAME " manda in campo Machoke!");
+            MESSAGE(AI_TRAINER_NAME " manda in campo Machamp!");
+            MESSAGE(AI_TRAINER_NAME " manda in campo Mankey!");
+            MESSAGE(AI_TRAINER_NAME " manda in campo Primeape!");
+            MESSAGE(AI_TRAINER_NAME " manda in campo Magnezone!");
         }
         else {
-            MESSAGE(AI_TRAINER_NAME " sent out Magnezone!");
+            MESSAGE(AI_TRAINER_NAME " manda in campo Magnezone!");
         }
     }
 }

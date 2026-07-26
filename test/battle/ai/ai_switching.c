@@ -184,7 +184,7 @@ AI_SINGLE_BATTLE_TEST("AI switches if Perish Song is about to kill")
             TURN {}
             TURN { EXPECT_SWITCH(opponent, 1); }
     } SCENE {
-        MESSAGE(AI_TRAINER_NAME " sent out Crobat!");
+        MESSAGE(AI_TRAINER_NAME " manda in campo Crobat!");
     }
 }
 
@@ -231,7 +231,7 @@ AI_DOUBLE_BATTLE_TEST("AI will not try to switch for the same Pokémon for 2 spo
         TURN { EXPECT_SWITCH(opponentLeft, 2); }
     } SCENE {
         MESSAGE(AI_TRAINER_NAME " withdrew Gengar!");
-        MESSAGE(AI_TRAINER_NAME " sent out Raticate!");
+        MESSAGE(AI_TRAINER_NAME " manda in campo Raticate!");
         NONE_OF {
             MESSAGE(AI_TRAINER_NAME " withdrew Haunter!");
             MESSAGE(AI_TRAINER_NAME " sent out Raticate!");
@@ -475,7 +475,7 @@ AI_TWO_VS_ONE_BATTLE_TEST("AI will not try to switch for the same pokemon for 2 
         TURN { EXPECT_SWITCH(opponentLeft, 3); }
     } SCENE {
         MESSAGE(AI_TRAINER_NAME " withdrew Gengar!");
-        MESSAGE(AI_TRAINER_NAME " sent out Raticate!");
+        MESSAGE(AI_TRAINER_NAME " manda in campo Raticate!");
         if (flags & AI_FLAG_SMART_SWITCHING)
         {
             MESSAGE(AI_TRAINER_NAME " withdrew Haunter!");
@@ -628,7 +628,7 @@ AI_DOUBLE_BATTLE_TEST("AI will not try to switch for the same Pokémon for 2 spo
         TURN { EXPECT_SWITCH(opponentLeft, 3); }
     } SCENE {
         MESSAGE(AI_TRAINER_NAME " withdrew Linoone!");
-        MESSAGE(AI_TRAINER_NAME " sent out Gengar!");
+        MESSAGE(AI_TRAINER_NAME " manda in campo Gengar!");
         NONE_OF {
             MESSAGE(AI_TRAINER_NAME "sent out Linoone!");
             MESSAGE(AI_TRAINER_NAME " sent out Gengar!");
@@ -844,9 +844,9 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_MON_CHOICES: AI will not switch in a Pokemo
     } SCENE {
         MESSAGE("The opposing Kadabra fainted!");
         if (alakazamFirst) {
-            MESSAGE(AI_TRAINER_NAME " sent out Alakazam!");
+            MESSAGE(AI_TRAINER_NAME " manda in campo Alakazam!");
         } else {
-            MESSAGE(AI_TRAINER_NAME " sent out Blastoise!");
+            MESSAGE(AI_TRAINER_NAME " manda in campo Blastoise!");
         }
     }
 }
