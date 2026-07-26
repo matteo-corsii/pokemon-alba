@@ -402,7 +402,7 @@ SINGLE_BATTLE_TEST("Knock Off does not activate if user faints")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_KNOCK_OFF, player);
         MESSAGE("Wobbuffet was hurt by the opposing Wobbuffet's Rocky Helmet!");
-        MESSAGE("Wobbuffet fainted!");
+        MESSAGE("Wobbuffet non ha più energie!");
     } THEN {
         EXPECT(opponent->item == ITEM_ROCKY_HELMET);
     }

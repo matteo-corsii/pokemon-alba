@@ -12,7 +12,7 @@ SINGLE_BATTLE_TEST("Adaptability increases same-type attack bonus from x1.5 to x
     } WHEN {
         TURN { MOVE(player, MOVE_WATER_GUN); }
     } SCENE {
-        MESSAGE("Crawdaunt used Water Gun!");
+        MESSAGE("Crawdaunt used PISTOLACQUA!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_WATER_GUN, player);
         HP_BAR(opponent, captureDamage: &results[i].damage);
     } FINALLY {

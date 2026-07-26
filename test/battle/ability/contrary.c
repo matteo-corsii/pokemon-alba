@@ -134,7 +134,7 @@ SINGLE_BATTLE_TEST("Contrary lowers a stat after using a move which would normal
         TURN { MOVE(opponent, MOVE_SWORDS_DANCE); }
         TURN { MOVE(opponent, MOVE_SCRATCH); }
     } SCENE {
-        MESSAGE("The opposing Spinda used Scratch!");
+        MESSAGE("The opposing Spinda used GRAFFIO!");
         HP_BAR(player, captureDamage: &results[i].damageBefore);
 
         //MESSAGE("The opposing Spinda used Swords Dance!");
@@ -148,7 +148,7 @@ SINGLE_BATTLE_TEST("Contrary lowers a stat after using a move which would normal
             MESSAGE("The opposing Spinda's Attack rose sharply!");
         }
 
-        // MESSAGE("The opposing Spinda used Scratch!");
+        // MESSAGE("The opposing Spinda used GRAFFIO!");
         HP_BAR(player, captureDamage: &results[i].damageAfter);
     }
     FINALLY {
@@ -169,7 +169,7 @@ SINGLE_BATTLE_TEST("Contrary raises a stat after using a move which would normal
     } WHEN {
         TURN { MOVE(player, MOVE_GROWL); MOVE(opponent, MOVE_SCRATCH); }
     } SCENE {
-        MESSAGE("Wobbuffet used Growl!");
+        MESSAGE("Wobbuffet used RUGGITO!");
         if (ability == ABILITY_CONTRARY) {
             // ABILITY_POPUP(opponent, ABILITY_CONTRARY);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
@@ -180,7 +180,7 @@ SINGLE_BATTLE_TEST("Contrary raises a stat after using a move which would normal
             MESSAGE("The opposing Spinda's Attack fell!");
         }
 
-        MESSAGE("The opposing Spinda used Scratch!");
+        MESSAGE("The opposing Spinda used GRAFFIO!");
         HP_BAR(player, captureDamage: &results[i].damage);
     }
     FINALLY {
@@ -202,7 +202,7 @@ SINGLE_BATTLE_TEST("Contrary lowers a stat after using a move which would normal
         TURN { MOVE(opponent, MOVE_BELLY_DRUM); }
         TURN { MOVE(opponent, MOVE_SCRATCH); }
     } SCENE {
-        MESSAGE("The opposing Spinda used Scratch!");
+        MESSAGE("The opposing Spinda used GRAFFIO!");
         HP_BAR(player, captureDamage: &results[i].damageBefore);
 
         if (ability == ABILITY_CONTRARY) {

@@ -19,9 +19,9 @@ DOUBLE_BATTLE_TEST("Moxie/Chilling Neigh raises Attack by one stage after direct
         TURN { MOVE(playerLeft, MOVE_EARTHQUAKE); SEND_OUT(opponentLeft, 2); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_EARTHQUAKE, playerLeft);
-        MESSAGE("The opposing Glalie fainted!");
-        MESSAGE("Snorunt fainted!");
-        MESSAGE("The opposing Abra fainted!");
+        MESSAGE("The opposing Glalie non ha più energie!");
+        MESSAGE("Snorunt non ha più energie!");
+        MESSAGE("The opposing Abra non ha più energie!");
         ABILITY_POPUP(playerLeft, abilityPopUp);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
         if (species == SPECIES_SALAMENCE)
@@ -56,9 +56,9 @@ DOUBLE_BATTLE_TEST("Moxie/Chilling Neigh does not trigger if Pokemon faint to in
         ANIMATION(ANIM_TYPE_MOVE, MOVE_QUICK_ATTACK, playerRight);
         for (i = 0; i < 3; i++) {
             ONE_OF {
-                MESSAGE("Snorunt fainted!");
-                MESSAGE("The opposing Glalie fainted!");
-                MESSAGE("The opposing Abra fainted!");
+                MESSAGE("Snorunt non ha più energie!");
+                MESSAGE("The opposing Glalie non ha più energie!");
+                MESSAGE("The opposing Abra non ha più energie!");
             }
             NONE_OF {
                 ABILITY_POPUP(playerLeft, abilityPopUp);
@@ -98,7 +98,7 @@ SINGLE_BATTLE_TEST("Moxie/Chilling Neigh does not trigger when already at maximu
         else
             MESSAGE("Calyrex cut its own HP and maximized its Attack!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_QUICK_ATTACK, player);
-        MESSAGE("The opposing Snorunt fainted!");
+        MESSAGE("The opposing Snorunt non ha più energie!");
         NONE_OF {
             ABILITY_POPUP(player, abilityPopUp);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
@@ -134,7 +134,7 @@ DOUBLE_BATTLE_TEST("Moxie/Chilling Neigh does not increase damage done by the sa
         HP_BAR(opponentLeft, captureDamage: &damage[0]);
         HP_BAR(playerRight);
         HP_BAR(opponentRight, captureDamage: &damage[1]);
-        MESSAGE("Abra fainted!");
+        MESSAGE("Abra non ha più energie!");
         ABILITY_POPUP(playerLeft, abilityPopUp);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
         if (species == SPECIES_SALAMENCE)

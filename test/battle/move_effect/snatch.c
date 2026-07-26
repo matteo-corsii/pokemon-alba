@@ -141,7 +141,7 @@ DOUBLE_BATTLE_TEST("Snatch fails when the only slower battler is a fainted ally"
         }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponentLeft);
-        MESSAGE("Wynaut fainted!");
+        MESSAGE("Wynaut non ha più energie!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponentLeft);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponentRight);
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_SNATCH, playerLeft);

@@ -14,7 +14,7 @@ SINGLE_BATTLE_TEST("Aegislash reverts to Shield Form upon fainting (start as Shi
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_GUST, opponent);
         HP_BAR(player);
-        MESSAGE("Aegislash fainted!");
+        MESSAGE("Aegislash non ha più energie!");
         SEND_IN_MESSAGE("Wobbuffet");
         SWITCH_OUT_MESSAGE("Wobbuffet")
         SEND_IN_MESSAGE("Aegislash");
@@ -37,7 +37,7 @@ SINGLE_BATTLE_TEST("Aegislash reverts to Shield Form upon fainting (start as Bla
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_GUST, opponent);
         HP_BAR(player);
-        MESSAGE("Aegislash fainted!");
+        MESSAGE("Aegislash non ha più energie!");
         SEND_IN_MESSAGE("Wobbuffet");
         SWITCH_OUT_MESSAGE("Wobbuffet")
         SEND_IN_MESSAGE("Aegislash");
@@ -61,10 +61,10 @@ DOUBLE_BATTLE_TEST("Causing a Forecast or Flower Gift Pokémon to faint should n
         TURN { MOVE(playerRight, MOVE_GYRO_BALL, target: opponentRight); }
     } SCENE {
         if (species == SPECIES_CASTFORM) {
-            MESSAGE("The opposing Castform fainted!");
+            MESSAGE("The opposing Castform non ha più energie!");
             NOT MESSAGE("The opposing Castform transformed!");
         } else {
-            MESSAGE("The opposing Cherrim fainted!");
+            MESSAGE("The opposing Cherrim non ha più energie!");
             NOT MESSAGE("The opposing Cherrim transformed!");
         }
     }

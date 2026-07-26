@@ -137,7 +137,7 @@ SINGLE_BATTLE_TEST("Conversion 2's type change considers move types changed by N
     } SCENE {
         // turn 1
         MESSAGE("Wobbuffet used Electrify!");
-        MESSAGE("The opposing Wobbuffet used Pound!");
+        MESSAGE("The opposing Wobbuffet used BOTTA!");
         // turn 2
         ONE_OF {
             MESSAGE("Wobbuffet transformed into the Ground type!");
@@ -146,7 +146,7 @@ SINGLE_BATTLE_TEST("Conversion 2's type change considers move types changed by N
             MESSAGE("Wobbuffet transformed into the Electric type!");
         }
         // turn 3
-        MESSAGE("Wobbuffet used Water Gun!");
+        MESSAGE("Wobbuffet used PISTOLACQUA!");
         ONE_OF {
             MESSAGE("The opposing Wobbuffet transformed into the Steel type!");
             MESSAGE("The opposing Wobbuffet transformed into the Rock type!");

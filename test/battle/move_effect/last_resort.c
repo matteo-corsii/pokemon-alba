@@ -35,7 +35,7 @@ SINGLE_BATTLE_TEST("Last Resort works only when all of the known moves have been
     } SCENE {
         MESSAGE("Wobbuffet used Last Resort!");
         MESSAGE("But it failed!");
-        MESSAGE("Wobbuffet used Scratch!");
+        MESSAGE("Wobbuffet used GRAFFIO!");
         MESSAGE("Wobbuffet used Last Resort!");
         HP_BAR(opponent);
     }
@@ -55,10 +55,10 @@ SINGLE_BATTLE_TEST("Last Resort works only when all of the known moves have been
     } SCENE {
         MESSAGE("Wobbuffet used Last Resort!");
         MESSAGE("But it failed!");
-        MESSAGE("Wobbuffet used Quick Attack!");
+        MESSAGE("Wobbuffet used ATTACCO RAPIDO!");
         MESSAGE("Wobbuffet used Last Resort!");
         MESSAGE("But it failed!");
-        MESSAGE("Wobbuffet used Scratch!");
+        MESSAGE("Wobbuffet used GRAFFIO!");
         MESSAGE("Wobbuffet used Last Resort!");
         HP_BAR(opponent);
     }
@@ -80,10 +80,10 @@ SINGLE_BATTLE_TEST("Last Resort works only when all of the known moves have been
     } SCENE {
         MESSAGE("Wobbuffet used Last Resort!");
         MESSAGE("But it failed!");
-        MESSAGE("Wobbuffet used Quick Attack!");
+        MESSAGE("Wobbuffet used ATTACCO RAPIDO!");
         MESSAGE("Wobbuffet used Last Resort!");
         MESSAGE("But it failed!");
-        MESSAGE("Wobbuffet used Scratch!");
+        MESSAGE("Wobbuffet used GRAFFIO!");
         MESSAGE("Wobbuffet used Last Resort!");
         MESSAGE("But it failed!");
         MESSAGE("Wobbuffet used Gust!");

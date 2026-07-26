@@ -17,7 +17,7 @@ SINGLE_BATTLE_TEST("Mind Blown makes the user lose 1/2 of its Max HP")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_MIND_BLOWN, player);
         HP_BAR(player, damage: 200);
-        NOT MESSAGE("Wobbuffet fainted!"); // Wobb had more than 1/2 of its HP, so it can't faint.
+        NOT MESSAGE("Wobbuffet non ha più energie!"); // Wobb had more than 1/2 of its HP, so it can't faint.
     }
 }
 
@@ -33,7 +33,7 @@ DOUBLE_BATTLE_TEST("Mind Blown makes the user lose 1/2 of its Max HP in a double
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_MIND_BLOWN, playerLeft);
         HP_BAR(playerLeft, damage: 200);
-        NOT MESSAGE("Wobbuffet fainted!"); // Wobb had more than 1/2 of its HP, so it can't faint.
+        NOT MESSAGE("Wobbuffet non ha più energie!"); // Wobb had more than 1/2 of its HP, so it can't faint.
     }
 }
 
@@ -47,7 +47,7 @@ SINGLE_BATTLE_TEST("Mind Blown causes the user to faint when below 1/2 of its Ma
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_MIND_BLOWN, player);
         HP_BAR(player, hp: 0);
-        MESSAGE("Wobbuffet fainted!");
+        MESSAGE("Wobbuffet non ha più energie!");
     }
 }
 
@@ -63,7 +63,7 @@ DOUBLE_BATTLE_TEST("Mind Blown causes the user to faint when below 1/2 of its Ma
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_MIND_BLOWN, playerLeft);
         HP_BAR(playerLeft, hp: 0);
-        MESSAGE("Wobbuffet fainted!");
+        MESSAGE("Wobbuffet non ha più energie!");
     }
 }
 
@@ -79,8 +79,8 @@ SINGLE_BATTLE_TEST("Mind Blown causes the user & the target to faint when below 
         ANIMATION(ANIM_TYPE_MOVE, MOVE_MIND_BLOWN, player);
         HP_BAR(opponent, hp: 0);
         HP_BAR(player, hp: 0);
-        MESSAGE("Wobbuffet fainted!");
-        MESSAGE("The opposing Wobbuffet fainted!");
+        MESSAGE("Wobbuffet non ha più energie!");
+        MESSAGE("The opposing Wobbuffet non ha più energie!");
     }
 }
 
@@ -101,10 +101,10 @@ DOUBLE_BATTLE_TEST("Mind Blown causes everyone to faint in a double battle")
         HP_BAR(playerRight, hp: 0);
         HP_BAR(opponentRight, hp: 0);
         HP_BAR(playerLeft, hp: 0);
-        MESSAGE("Wobbuffet fainted!");
-        MESSAGE("The opposing Abra fainted!");
-        MESSAGE("Wynaut fainted!");
-        MESSAGE("The opposing Kadabra fainted!");
+        MESSAGE("Wobbuffet non ha più energie!");
+        MESSAGE("The opposing Abra non ha più energie!");
+        MESSAGE("Wynaut non ha più energie!");
+        MESSAGE("The opposing Kadabra non ha più energie!");
     }
 }
 
@@ -137,9 +137,9 @@ DOUBLE_BATTLE_TEST("Mind Blown's recoil only happens once, regardless of number 
         HP_BAR(opponentLeft, hp: 0);
         HP_BAR(playerRight, hp: 0);
         HP_BAR(opponentRight, hp: 0);
-        MESSAGE("The opposing Abra fainted!");
-        MESSAGE("Wynaut fainted!");
-        MESSAGE("The opposing Kadabra fainted!");
+        MESSAGE("The opposing Abra non ha più energie!");
+        MESSAGE("Wynaut non ha più energie!");
+        MESSAGE("The opposing Kadabra non ha più energie!");
     } THEN {
         EXPECT_GT(playerLeft->hp, 0);
     }

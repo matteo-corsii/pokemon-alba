@@ -92,8 +92,8 @@ DOUBLE_BATTLE_TEST("Razor Wind successfully KOs both opponents")
             MESSAGE("Wobbuffet used Razor Wind!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_RAZOR_WIND, playerLeft);
         HP_BAR(opponentLeft);
-        MESSAGE("The opposing Wobbuffet fainted!");
-        MESSAGE("The opposing Wynaut fainted!");
+        MESSAGE("The opposing Wobbuffet non ha più energie!");
+        MESSAGE("The opposing Wynaut non ha più energie!");
     }
 }
 

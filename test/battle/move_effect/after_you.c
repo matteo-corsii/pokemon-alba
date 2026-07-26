@@ -75,7 +75,7 @@ DOUBLE_BATTLE_TEST("After You calculates correct turn order if only one Pokémon
         MESSAGE("Regirock took the kind offer!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STONE_EDGE, playerRight);
         HP_BAR(opponentLeft);
-        MESSAGE("The opposing Pidgeot fainted!");
+        MESSAGE("The opposing Pidgeot non ha più energie!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponentRight);
 
         ANIMATION(ANIM_TYPE_MOVE, MOVE_AFTER_YOU, playerLeft);

@@ -107,7 +107,7 @@ DOUBLE_BATTLE_TEST("Coaching fails if there's no ally")
         TURN { MOVE(playerLeft, MOVE_COACHING, target: playerRight); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, playerLeft);
-        MESSAGE("Wynaut fainted!");
+        MESSAGE("Wynaut non ha più energie!");
         MESSAGE("Wobbuffet used Coaching!");
         NONE_OF {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_COACHING, playerLeft);

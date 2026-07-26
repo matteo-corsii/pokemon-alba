@@ -168,30 +168,34 @@ static EWRAM_DATA u8 sTopMenuNumOptions = 0;
 EWRAM_DATA struct PlayerPCItemPageStruct gPlayerPCItemPageInfo = {};
 static EWRAM_DATA struct ItemStorageMenu *sItemStorageMenu = NULL;
 
-static const u8 sText_WithdrawItem[] = _("WITHDRAW ITEM");
-static const u8 sText_DepositItem[] = _("DEPOSIT ITEM");
-static const u8 sText_TossItem[] = _("TOSS ITEM");
-static const u8 sText_Mailbox[] = _("MAILBOX");
+static const u8 sText_WithdrawItem[] = _("RITIRA STRUMENTO");
+static const u8 sText_DepositItem[] = _("DEPOSITA STRUMENTO");
+static const u8 sText_TossItem[] = _("GETTA STRUMENTO");
+static const u8 sText_Mailbox[] = _("POSTA");
+static const u8 sText_Exit[] = _("ESCI");
+static const u8 sText_WhatWouldYouLike[] = _("Cosa vuoi fare?");
+static const u8 sText_GoBackPrevMenu[] = _("Torna al menu\nprecedente.");
+static const u8 sText_NoItemsInPC[] = _("Nel PC non ci sono strumenti.{PAUSE_UNTIL_PRESS}");
 
-static const u8 sText_WithdrawHowManyItems[] = _("Withdraw how many\n{STR_VAR_1}?");
-static const u8 sText_WithdrawXItems[] = _("Withdrew {STR_VAR_2}\n{STR_VAR_1}.");
-static const u8 sText_NoRoomInBag[] = _("There is no more\nroom in the BAG.");
-static const u8 sText_TooImportantToToss[] = _("That's much too\nimportant to toss\nout!");
+static const u8 sText_WithdrawHowManyItems[] = _("Quanti {STR_VAR_1}\nvuoi ritirare?");
+static const u8 sText_WithdrawXItems[] = _("Hai ritirato {STR_VAR_2}\n{STR_VAR_1}.");
+static const u8 sText_NoRoomInBag[] = _("Non c'è più spazio\nnella BORSA.");
+static const u8 sText_TooImportantToToss[] = _("Non puoi gettare uno\nstrumento così importante!");
 
 static const u8 *const sItemStorage_OptionDescriptions[] =
 {
-    [MENU_WITHDRAW] = COMPOUND_STRING("Take out items from the PC."),
-    [MENU_DEPOSIT]  = COMPOUND_STRING("Store items in the PC."),
-    [MENU_TOSS]     = COMPOUND_STRING("Throw away items stored in the PC."),
-    [MENU_EXIT]     = gText_GoBackPrevMenu,
+    [MENU_WITHDRAW] = COMPOUND_STRING("Ritira strumenti dal PC."),
+    [MENU_DEPOSIT]  = COMPOUND_STRING("Deposita strumenti nel PC."),
+    [MENU_TOSS]     = COMPOUND_STRING("Getta strumenti conservati nel PC."),
+    [MENU_EXIT]     = sText_GoBackPrevMenu,
 };
 
 static const struct MenuAction sPlayerPCMenuActions[] =
 {
-    [MENU_ITEMSTORAGE] = { COMPOUND_STRING("ITEM STORAGE"), {PlayerPC_ItemStorage} },
+    [MENU_ITEMSTORAGE] = { COMPOUND_STRING("DEPOSITO STRUMENTI"), {PlayerPC_ItemStorage} },
     [MENU_MAILBOX]     = { sText_Mailbox,                   {PlayerPC_Mailbox} },
-    [MENU_DECORATION]  = { COMPOUND_STRING("DECORATION"),   {PlayerPC_Decoration} },
-    [MENU_TURNOFF]     = { COMPOUND_STRING("TURN OFF"),     {PlayerPC_TurnOff} }
+    [MENU_DECORATION]  = { COMPOUND_STRING("DECORAZIONI"),  {PlayerPC_Decoration} },
+    [MENU_TURNOFF]     = { COMPOUND_STRING("SPEGNI"),       {PlayerPC_TurnOff} }
 };
 
 static const u8 sBedroomPC_OptionOrder[] =
@@ -216,7 +220,7 @@ static const struct MenuAction sItemStorage_MenuActions[] =
     [MENU_WITHDRAW] = { sText_WithdrawItem, {ItemStorage_Withdraw} },
     [MENU_DEPOSIT]  = { sText_DepositItem,  {ItemStorage_Deposit} },
     [MENU_TOSS]     = { sText_TossItem,     {ItemStorage_Toss} },
-    [MENU_EXIT]     = { gText_Cancel,       {ItemStorage_Exit} }
+    [MENU_EXIT]     = { sText_Exit,          {ItemStorage_Exit} }
 };
 
 static const u16 sNewGamePCItems[][2] =
@@ -372,14 +376,14 @@ void BedroomPC(void)
 {
     sTopMenuOptionOrder = sBedroomPC_OptionOrder;
     sTopMenuNumOptions = NUM_BEDROOM_PC_OPTIONS;
-    DisplayItemMessageOnField(CreateTask(TaskDummy, 0), gText_WhatWouldYouLike, InitPlayerPCMenu);
+    DisplayItemMessageOnField(CreateTask(TaskDummy, 0), sText_WhatWouldYouLike, InitPlayerPCMenu);
 }
 
 void PlayerPC(void)
 {
     sTopMenuOptionOrder = sPlayerPC_OptionOrder;
     sTopMenuNumOptions = NUM_PLAYER_PC_OPTIONS;
-    DisplayItemMessageOnField(CreateTask(TaskDummy, 0), gText_WhatWouldYouLike, InitPlayerPCMenu);
+    DisplayItemMessageOnField(CreateTask(TaskDummy, 0), sText_WhatWouldYouLike, InitPlayerPCMenu);
 }
 
 #define tUsedSlots  data[1]
@@ -443,7 +447,7 @@ static void PlayerPCProcessMenuInput(u8 taskId)
 
 void ReshowPlayerPC(u8 var)
 {
-    DisplayItemMessageOnField(var, gText_WhatWouldYouLike, InitPlayerPCMenu);
+    DisplayItemMessageOnField(var, sText_WhatWouldYouLike, InitPlayerPCMenu);
 }
 
 static void PlayerPC_ItemStorage(u8 taskId)
@@ -601,7 +605,7 @@ static void ItemStorage_Withdraw(u8 taskId)
     {
         // Can't withdraw, no items in PC
         ItemStorage_EraseMainMenu(taskId);
-        DisplayItemMessageOnField(taskId, gText_NoItems, PlayerPC_ItemStorage);
+        DisplayItemMessageOnField(taskId, sText_NoItemsInPC, PlayerPC_ItemStorage);
     }
 
 }
@@ -619,7 +623,7 @@ static void ItemStorage_Toss(u8 taskId)
     {
         // Can't toss, no items in PC
         ItemStorage_EraseMainMenu(taskId);
-        DisplayItemMessageOnField(taskId, gText_NoItems, PlayerPC_ItemStorage);
+        DisplayItemMessageOnField(taskId, sText_NoItemsInPC, PlayerPC_ItemStorage);
     }
 }
 
@@ -995,7 +999,7 @@ void ItemStorage_RefreshListMenu(void)
     }
 
     // Set up Cancel entry
-    StringCopy(&sItemStorageMenu->itemNames[i][0], gText_Cancel2);
+    StringCopy(&sItemStorageMenu->itemNames[i][0], sText_Exit);
     sItemStorageMenu->listItems[i].name = &sItemStorageMenu->itemNames[i][0];
     sItemStorageMenu->listItems[i].id = LIST_CANCEL;
 
@@ -1053,7 +1057,7 @@ static void ItemStorage_PrintDescription(s32 id)
     if (id != LIST_CANCEL)
         description = (u8 *)GetItemDescription(gSaveBlock1Ptr->pcItems[id].itemId);
     else
-        description = gText_GoBackPrevMenu;
+        description = sText_GoBackPrevMenu;
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     AddTextPrinterParameterized(windowId, FONT_NORMAL, description, 0, 1, 0, NULL);

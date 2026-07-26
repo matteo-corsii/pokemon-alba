@@ -61,8 +61,8 @@ WILD_BATTLE_TEST("Embargo doesn't block held item effects that affect experience
     } SCENE {
         MESSAGE("The wild Caterpie used Embargo!");
         MESSAGE("Wobbuffet can't use items anymore!");
-        MESSAGE("Wobbuffet used Scratch!");
-        MESSAGE("The wild Caterpie fainted!");
+        MESSAGE("Wobbuffet used GRAFFIO!");
+        MESSAGE("The wild Caterpie non ha più energie!");
         EXPERIENCE_BAR(player, captureGainedExp: &results[i].exp);
     } FINALLY {
         EXPECT_MUL_EQ(results[1].exp, Q_4_12(1.5), results[0].exp);
@@ -87,8 +87,8 @@ WILD_BATTLE_TEST("Embargo doesn't block held item effects that affect effort val
         MESSAGE("The wild Caterpie used Embargo!");
         MESSAGE("Wobbuffet can't use items anymore!");
         // Turn 2
-        MESSAGE("Wobbuffet used Scratch!");
-        MESSAGE("The wild Caterpie fainted!");
+        MESSAGE("Wobbuffet used GRAFFIO!");
+        MESSAGE("The wild Caterpie non ha più energie!");
     } THEN {
         finalHPEVAmount = (GetMonData(&PLAYER_PARTY[0], MON_DATA_HP_EV) + gItemsInfo[ITEM_POWER_WEIGHT].holdEffectParam + gSpeciesInfo[SPECIES_CATERPIE].evYield_HP);
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP_EV), finalHPEVAmount);
@@ -109,8 +109,8 @@ SINGLE_BATTLE_TEST("Embargo negates a held item's Speed reduction")
         MESSAGE("Wobbuffet used Embargo!");
         MESSAGE("The opposing Wobbuffet can't use items anymore!");
         // Turn 2
-        MESSAGE("The opposing Wobbuffet used Scratch!");
-        MESSAGE("Wobbuffet used Scratch!");
+        MESSAGE("The opposing Wobbuffet used GRAFFIO!");
+        MESSAGE("Wobbuffet used GRAFFIO!");
     }
 }
 

@@ -55,9 +55,9 @@ SINGLE_BATTLE_TEST("Hazards are applied correctly after a battler faints")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STEALTH_ROCK, opponent);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FINAL_GAMBIT, player);
-        MESSAGE("Wynaut fainted!");
+        MESSAGE("Wynaut non ha più energie!");
         MESSAGE("Pointed stones dug into Wobbuffet!");
-        MESSAGE("Wobbuffet fainted!");
+        MESSAGE("Wobbuffet non ha più energie!");
         MESSAGE("Pointed stones dug into Wynaut!");
     }
 }
@@ -80,7 +80,7 @@ SINGLE_BATTLE_TEST("Toxic Spikes can be removed after fainting to other hazards"
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STICKY_WEB, opponent);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SPIKES, opponent);
         MESSAGE("Pointed stones dug into Grimer!");
-        MESSAGE("Grimer fainted!");
+        MESSAGE("Grimer non ha più energie!");
         MESSAGE("The poison spikes disappeared from the ground around your team!");
         NONE_OF {
             MESSAGE("Grimer was caught in a sticky web!");

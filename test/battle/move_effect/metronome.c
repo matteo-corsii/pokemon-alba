@@ -16,7 +16,7 @@ SINGLE_BATTLE_TEST("Metronome picks a random move")
     } SCENE {
         MESSAGE("Wobbuffet used Metronome!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_METRONOME, player);
-        MESSAGE("Waggling a finger let it use Scratch!");
+        MESSAGE("Waggling a finger let it use GRAFFIO!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player);
         HP_BAR(opponent);
     }

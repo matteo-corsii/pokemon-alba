@@ -58,7 +58,7 @@ AI_SINGLE_BATTLE_TEST("TIE_BREAK_SCORE with SCORE_TIE_CHOSEN can control AI move
     } WHEN {
         TURN { EXPECT_MOVE(opponent, expectedMove); SEND_OUT(player, 1); }
     } SCENE {
-        MESSAGE("Wobbuffet fainted!");
+        MESSAGE("Wobbuffet non ha più energie!");
     }
 }
 
@@ -81,7 +81,7 @@ AI_DOUBLE_BATTLE_TEST("TIE_BREAK_SCORE with SCORE_TIE_CHOSEN can control AI move
     } WHEN {
         TURN { EXPECT_MOVE(opponentLeft, expectedMove, target: playerRight); EXPECT_MOVE(opponentRight, expectedMove, target: playerRight); }
     } SCENE {
-        MESSAGE("Wobbuffet fainted!");
+        MESSAGE("Wobbuffet non ha più energie!");
     }
 }
 
@@ -104,7 +104,7 @@ AI_SINGLE_BATTLE_TEST("TIE_BREAK_SCORE correctly controls AI move selection when
     } WHEN {
         TURN { EXPECT_MOVE(opponent, expectedMove); SEND_OUT(player, 1); }
     } SCENE {
-        MESSAGE("Wobbuffet fainted!");
+        MESSAGE("Wobbuffet non ha più energie!");
     }
 }
 
@@ -128,7 +128,7 @@ AI_DOUBLE_BATTLE_TEST("TIE_BREAK_SCORE correctly controls AI move selection when
     } WHEN {
         TURN { EXPECT_MOVE(opponentLeft, expectedMove, target: playerRight); EXPECT_MOVE(opponentRight, expectedMove, target: playerRight); }
     } SCENE {
-        MESSAGE("Wobbuffet fainted!");
+        MESSAGE("Wobbuffet non ha più energie!");
     }
 }
 
@@ -145,7 +145,7 @@ AI_SINGLE_BATTLE_TEST("TIE_BREAK_SCORE with SCORE_TIE_RANDOM randomizes AI move 
     } WHEN {
         TURN { EXPECT_MOVE(opponent, MOVE_ICE_BEAM); SEND_OUT(player, 1); }
     } SCENE {
-        MESSAGE("Wobbuffet fainted!");
+        MESSAGE("Wobbuffet non ha più energie!");
     }
 }
 
@@ -170,7 +170,7 @@ AI_DOUBLE_BATTLE_TEST("TIE_BREAK_SCORE with SCORE_TIE_RANDOM randomizes AI move 
             SEND_OUT(playerRight, 3);
         }
     } SCENE {
-        MESSAGE("Wobbuffet fainted!");
+        MESSAGE("Wobbuffet non ha più energie!");
     }
 }
 
@@ -204,7 +204,7 @@ AI_DOUBLE_BATTLE_TEST("TIE_BREAK_TARGET with TARGET_TIE_CHOSEN can correctly con
         TURN { EXPECT_MOVE(opponentLeft, MOVE_THUNDERBOLT, target: expectedTarget); EXPECT_MOVE(opponentRight, MOVE_THUNDERBOLT, target: expectedTarget); 
             SEND_OUT(playerLeft, 2); SEND_OUT(playerRight, 3); }
     } SCENE {
-        MESSAGE("Wobbuffet fainted!");
+        MESSAGE("Wobbuffet non ha più energie!");
     }
 }
 
@@ -231,7 +231,7 @@ AI_DOUBLE_BATTLE_TEST("TIE_BREAK_TARGET correctly controls AI target selection w
         TURN { EXPECT_MOVE(opponentLeft, MOVE_THUNDERBOLT, target: expectedTarget); EXPECT_MOVE(opponentRight, MOVE_THUNDERBOLT, target: expectedTarget); 
             SEND_OUT(playerLeft, 2); SEND_OUT(playerRight, 3); }
     } SCENE {
-        MESSAGE("Wobbuffet fainted!");
+        MESSAGE("Wobbuffet non ha più energie!");
     }
 }
 
@@ -251,8 +251,8 @@ AI_DOUBLE_BATTLE_TEST("TIE_BREAK_TARGET with TARGET_TIE_RANDOM randomizes AI tar
     } WHEN {
         TURN { EXPECT_MOVE(opponentRight, MOVE_THUNDERBOLT, target: playerRight); SEND_OUT(playerLeft, 2); SEND_OUT(playerRight, 3); }
     } SCENE {
-        MESSAGE("Wobbuffet fainted!");
-        MESSAGE("Wobbuffet fainted!");
+        MESSAGE("Wobbuffet non ha più energie!");
+        MESSAGE("Wobbuffet non ha più energie!");
     }
 }
 

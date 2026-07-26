@@ -139,7 +139,7 @@ DOUBLE_BATTLE_TEST("Tailwind does not trigger Wind Rider on an absent ally battl
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_WATER_GUN, opponentLeft);
         HP_BAR(playerRight);
-        MESSAGE("Bramblin fainted!");
+        MESSAGE("Bramblin non ha più energie!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TAILWIND, playerLeft);
         NONE_OF {
             ABILITY_POPUP(playerRight, ABILITY_WIND_RIDER);

@@ -82,12 +82,12 @@ SINGLE_BATTLE_TEST("Dynamax: Dynamax expires when fainted")
         if (dynamax)
             MESSAGE("Wobbuffet used Max Strike!");
         else
-            MESSAGE("Wobbuffet used Scratch!");
+            MESSAGE("Wobbuffet used GRAFFIO!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
         HP_BAR(player);
         if (dynamax) // Expect to have visual reversion when fainting.
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
-        MESSAGE("Wobbuffet fainted!");
+        MESSAGE("Wobbuffet non ha più energie!");
     }
 }
 
@@ -109,7 +109,7 @@ SINGLE_BATTLE_TEST("Dynamax: Dynamax expires after three turns", u16 hp)
             if (dynamax)
                 MESSAGE("Wobbuffet used Max Strike!");
             else
-                MESSAGE("Wobbuffet used Scratch!");
+                MESSAGE("Wobbuffet used GRAFFIO!");
             MESSAGE("The opposing Wobbuffet used Celebrate!");
         }
         if (dynamax) // Expect to have visual reversion at the end.
@@ -239,8 +239,8 @@ SINGLE_BATTLE_TEST("Dynamax: Dynamaxed Pokemon are affected by Grudge")
     } SCENE {
         MESSAGE("The opposing Wobbuffet used Grudge!");
         MESSAGE("Wobbuffet used Max Strike!");
-        MESSAGE("Wobbuffet lost all of Scratch's PP due to the grudge!");
-        MESSAGE("The opposing Wobbuffet fainted!");
+        MESSAGE("Wobbuffet lost all of GRAFFIO's PP due to the grudge!");
+        MESSAGE("The opposing Wobbuffet non ha più energie!");
     }
 }
 
@@ -279,7 +279,7 @@ SINGLE_BATTLE_TEST("Dynamax: Dynamaxed Pokemon are not affected by phazing moves
         MESSAGE("Wobbuffet used Max Strike!");
         MESSAGE("The opposing Wobbuffet used Dragon Tail!");
         HP_BAR(player);
-        MESSAGE("Wobbuffet fainted!");
+        MESSAGE("Wobbuffet non ha più energie!");
         NOT MESSAGE("The move was blocked by the power of Dynamax!");
     }
 }
@@ -295,7 +295,7 @@ SINGLE_BATTLE_TEST("Dynamax: Dynamaxed Pokemon can be switched out by Eject Butt
         TURN { MOVE(player, MOVE_SCRATCH, gimmick: GIMMICK_DYNAMAX); MOVE(opponent, MOVE_SCRATCH); SEND_OUT(player, 1); }
     } SCENE {
         MESSAGE("Wobbuffet used Max Strike!");
-        MESSAGE("The opposing Wobbuffet used Scratch!");
+        MESSAGE("The opposing Wobbuffet used GRAFFIO!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
         MESSAGE("Wobbuffet is switched out with the Eject Button!");
     } THEN {
@@ -364,9 +364,9 @@ SINGLE_BATTLE_TEST("Dynamax: Dynamaxed Pokemon can have base moves disabled on t
         TURN { MOVE(player, MOVE_SCRATCH, allowed: FALSE); MOVE(player, MOVE_CELEBRATE); }
     } SCENE {
         MESSAGE("The opposing Wobbuffet used Celebrate!");
-        MESSAGE("Wobbuffet used Scratch!");
+        MESSAGE("Wobbuffet used GRAFFIO!");
         MESSAGE("The opposing Wobbuffet used Disable!");
-        MESSAGE("Wobbuffet's Scratch was disabled!");
+        MESSAGE("Wobbuffet's GRAFFIO was disabled!");
         MESSAGE("Wobbuffet used Max Strike!");
     }
 }
@@ -396,7 +396,7 @@ SINGLE_BATTLE_TEST("Dynamax: Dynamaxed Pokemon are not immune to Knock Off")
     } SCENE {
         MESSAGE("Wobbuffet used Max Strike!");
         MESSAGE("The opposing Wobbuffet used Knock Off!");
-        MESSAGE("The opposing Wobbuffet knocked off Wobbuffet's Potion!");
+        MESSAGE("The opposing Wobbuffet knocked off Wobbuffet's POZIONE!");
     } THEN {
         EXPECT_EQ(player->item, ITEM_NONE);
     }
@@ -414,7 +414,7 @@ SINGLE_BATTLE_TEST("Dynamax: Dynamaxed Pokemon lose their substitutes")
         MESSAGE("Wobbuffet used Substitute!");
         MESSAGE("Wobbuffet put in a substitute!");
         MESSAGE("Wobbuffet used Max Strike!");
-        MESSAGE("The opposing Wobbuffet used Scratch!");
+        MESSAGE("The opposing Wobbuffet used GRAFFIO!");
         HP_BAR(player);
     }
 }
@@ -509,7 +509,7 @@ DOUBLE_BATTLE_TEST("Dynamax: Feint bypasses Max Guard but doesn't break it")
         MESSAGE("Wobbuffet used Max Guard!");
         MESSAGE("The opposing Wobbuffet used Feint!");
         HP_BAR(playerLeft);
-        MESSAGE("The opposing Wynaut used Scratch!");
+        MESSAGE("The opposing Wynaut used GRAFFIO!");
         NONE_OF { HP_BAR(playerLeft); }
     }
 }
@@ -683,7 +683,7 @@ SINGLE_BATTLE_TEST("Dynamax: Max Strike lowers single opponent's speed")
         TURN { MOVE(player, MOVE_SCRATCH); MOVE(opponent, MOVE_SCRATCH); }
     } SCENE {
         // turn 1
-        MESSAGE("The opposing Wobbuffet used Scratch!");
+        MESSAGE("The opposing Wobbuffet used GRAFFIO!");
         MESSAGE("Wobbuffet used Max Strike!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
         MESSAGE("The opposing Wobbuffet's Speed fell!");
@@ -713,8 +713,8 @@ DOUBLE_BATTLE_TEST("Dynamax: Max Strike lowers both opponents' speed")
                MOVE(opponentRight, MOVE_SCRATCH, target: playerLeft); }
     } SCENE {
         // turn 1
-        MESSAGE("The opposing Wobbuffet used Scratch!");
-        MESSAGE("The opposing Wobbuffet used Scratch!");
+        MESSAGE("The opposing Wobbuffet used GRAFFIO!");
+        MESSAGE("The opposing Wobbuffet used GRAFFIO!");
         MESSAGE("Wobbuffet used Max Strike!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
         MESSAGE("The opposing Wobbuffet's Speed fell!");
@@ -726,8 +726,8 @@ DOUBLE_BATTLE_TEST("Dynamax: Max Strike lowers both opponents' speed")
         MESSAGE("The opposing Wobbuffet's Speed fell!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
         MESSAGE("The opposing Wobbuffet's Speed fell!");
-        MESSAGE("The opposing Wobbuffet used Scratch!");
-        MESSAGE("The opposing Wobbuffet used Scratch!");
+        MESSAGE("The opposing Wobbuffet used GRAFFIO!");
+        MESSAGE("The opposing Wobbuffet used GRAFFIO!");
     }
 }
 
@@ -756,7 +756,7 @@ DOUBLE_BATTLE_TEST("Dynamax: Max Knuckle raises both allies' attack")
         MESSAGE("Wobbuffet's Attack rose!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
         MESSAGE("Wynaut's Attack rose!");
-        MESSAGE("Wynaut used Scratch!");
+        MESSAGE("Wynaut used GRAFFIO!");
         HP_BAR(opponentRight, captureDamage: &damage[1]);
         MESSAGE("The opposing Wobbuffet used Celebrate!");
         MESSAGE("The opposing Wynaut used Celebrate!");
@@ -767,7 +767,7 @@ DOUBLE_BATTLE_TEST("Dynamax: Max Knuckle raises both allies' attack")
         MESSAGE("Wobbuffet's Attack rose!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
         MESSAGE("Wynaut's Attack rose!");
-        MESSAGE("Wynaut used Scratch!");
+        MESSAGE("Wynaut used GRAFFIO!");
         HP_BAR(opponentRight, captureDamage: &damage[3]);
     } THEN {
         EXPECT_GT(damage[2], damage[0]);
@@ -1461,7 +1461,7 @@ DOUBLE_BATTLE_TEST("Dynamax: G-Max Chi Strike boosts allies' crit chance by 1 st
             MESSAGE("Machop is getting pumped!");
         }
         // turn 4
-        MESSAGE("Machop used Scratch!"); // Machop is at +5 crit stages
+        MESSAGE("Machop used GRAFFIO!"); // Machop is at +5 crit stages
         MESSAGE("Brutto colpo!");
     }
 }
@@ -1547,7 +1547,7 @@ SINGLE_BATTLE_TEST("Dynamax: Max Moves don't execute effects on fainted battlers
     } SCENE {
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_DYNAMAX_GROWTH, player);
         MESSAGE("Wobbuffet used Max Strike!");
-        MESSAGE("The opposing Wobbuffet fainted!");
+        MESSAGE("The opposing Wobbuffet non ha più energie!");
         NOT MESSAGE("The opposing Wobbuffet's Speed fell!");
     }
 }
@@ -1562,7 +1562,7 @@ SINGLE_BATTLE_TEST("Dynamax: Moxie clones can be triggered by Max Moves fainting
     } WHEN {
         TURN { MOVE(opponent, MOVE_CELEBRATE); MOVE(player, MOVE_WATERFALL, gimmick: GIMMICK_DYNAMAX); SEND_OUT(opponent, 1); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet fainted!");
+        MESSAGE("The opposing Wobbuffet non ha più energie!");
         ABILITY_POPUP(player, ABILITY_MOXIE);
         MESSAGE("Gyarados's Attack rose!");
     }
@@ -1632,7 +1632,7 @@ SINGLE_BATTLE_TEST("Dynamax: Dynamax is reverted before switch out")
         TURN { SWITCH(player, 0); }
         TURN { MOVE(player, MOVE_SCRATCH); }
     } SCENE {
-        MESSAGE("Wobbuffet used Scratch!");
+        MESSAGE("Wobbuffet used GRAFFIO!");
     }
 }
 

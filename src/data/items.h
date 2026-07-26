@@ -631,13 +631,12 @@ const struct ItemInfo gItemsInfo[] =
 
     [ITEM_POTION] =
     {
-        .name = ITEM_NAME("Potion"),
+        .name = ITEM_NAME("POZIONE"),
         .price = (I_PRICE >= GEN_7) ? 200 : 300,
         .holdEffectParam = 20,
         .description = COMPOUND_STRING(
-            "Restores the HP of\n"
-            "a Pokémon by\n"
-            "20 points."),
+            "Restituisce 20 PS\n"
+            "a un Pokémon."),
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_HEALTH_RECOVERY,
         .type = ITEM_USE_PARTY_MENU,

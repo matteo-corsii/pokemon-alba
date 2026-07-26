@@ -31,7 +31,7 @@ DOUBLE_BATTLE_TEST("Ally Switch fails if there is no partner")
         TURN { MOVE(opponentLeft, MOVE_SCRATCH, target:playerRight); }
         TURN { MOVE(playerLeft, MOVE_ALLY_SWITCH); }
     } SCENE {
-        MESSAGE("Wobbuffet fainted!");
+        MESSAGE("Wobbuffet non ha più energie!");
         MESSAGE("Wobbuffet used Ally Switch!");
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_ALLY_SWITCH, playerLeft);
         MESSAGE("But it failed!");
@@ -345,7 +345,7 @@ DOUBLE_BATTLE_TEST("Ally switch updates last used moves for Mimic")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ALLY_SWITCH, playerLeft);
         MESSAGE("Xatu and Riolu switched places!");
         MESSAGE("The opposing Fearow used Mimic!");
-        MESSAGE("The opposing Fearow learned Fake Out!");
+        MESSAGE("The opposing Fearow ha imparato Fake Out!");
     }
 }
 
@@ -502,7 +502,7 @@ DOUBLE_BATTLE_TEST("Ally Switch updates attract battler")
         TURN {}
     } SCENE {
         // turn 1
-        MESSAGE("Wobbuffet used Tackle!");
+        MESSAGE("Wobbuffet used AZIONE!");
         HP_BAR(opponentLeft);
         ABILITY_POPUP(opponentLeft, ABILITY_CUTE_CHARM);
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_INFATUATION, playerLeft);

@@ -98,7 +98,7 @@ AI_SINGLE_BATTLE_TEST("Trainer Slide: Singles: Player Lands First Down")
     } WHEN {
         TURN { EXPECT_MOVE(opponent, MOVE_HEALING_WISH); EXPECT_SEND_OUT(opponent,1); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet fainted!");
+        MESSAGE("The opposing Wobbuffet non ha più energie!");
         MESSAGE("Trainer A: This message plays after the player KOs one enemy mon.{PAUSE_UNTIL_PRESS}");
     }
 }
@@ -132,7 +132,7 @@ AI_SINGLE_BATTLE_TEST("Trainer Slide: Singles: Last Switchin")
     } WHEN {
         TURN { EXPECT_MOVE(opponent, MOVE_HEALING_WISH); EXPECT_SEND_OUT(opponent,1); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet fainted!");
+        MESSAGE("The opposing Wobbuffet non ha più energie!");
         MESSAGE("Trainer A: This message plays after the enemy switches in their last Pokemon.{PAUSE_UNTIL_PRESS}");
     }
 }
@@ -341,7 +341,7 @@ AI_DOUBLE_BATTLE_TEST("Trainer Slide: Doubles: Player Lands First Down")
     } WHEN {
         TURN { EXPECT_MOVE(opponentLeft, MOVE_HEALING_WISH); EXPECT_SEND_OUT(opponentLeft,2); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet fainted!");
+        MESSAGE("The opposing Wobbuffet non ha più energie!");
         MESSAGE("Trainer A: This message plays after the player KOs one enemy mon.{PAUSE_UNTIL_PRESS}");
         NONE_OF {
             MESSAGE("Trainer A: This message plays after the player KOs one enemy mon.{PAUSE_UNTIL_PRESS}");
@@ -385,7 +385,7 @@ AI_DOUBLE_BATTLE_TEST("Trainer Slide: Doubles: Last Switchin")
     } WHEN {
         TURN { EXPECT_MOVE(opponentLeft, MOVE_HEALING_WISH); EXPECT_SEND_OUT(opponentLeft,2); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet fainted!");
+        MESSAGE("The opposing Wobbuffet non ha più energie!");
         MESSAGE("Trainer A: This message plays after the enemy switches in their last Pokemon.{PAUSE_UNTIL_PRESS}");
         NONE_OF {
             MESSAGE("Trainer A: This message plays after the enemy switches in their last Pokemon.{PAUSE_UNTIL_PRESS}");
@@ -644,11 +644,11 @@ AI_MULTI_BATTLE_TEST("Trainer Slide: Multi: Player Lands First Down")
             EXPECT_MOVE(opponentRight, MOVE_HEALING_WISH); EXPECT_SEND_OUT(opponentRight,1);
         }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet fainted!");
+        MESSAGE("The opposing Wobbuffet non ha più energie!");
         MESSAGE("Trainer A: This message plays after the player KOs one enemy mon.{PAUSE_UNTIL_PRESS}");
-        MESSAGE("The opposing Wynaut fainted!");
+        MESSAGE("The opposing Wynaut non ha più energie!");
         MESSAGE("Trainer B: This message plays after the player KOs one enemy mon.{PAUSE_UNTIL_PRESS}");
-        MESSAGE("Raticate fainted!");
+        MESSAGE("Raticate non ha più energie!");
         // Note: Planned PR for additional slides will change slides from using "Player/Opponent" side to "Attacker/Target" side
         // MESSAGE("Trainer Partner: This message plays after the player KOs one enemy mon.{PAUSE_UNTIL_PRESS}");
     }
@@ -699,9 +699,9 @@ AI_MULTI_BATTLE_TEST("Trainer Slide: Multi: Last Switchin")
             EXPECT_MOVE(opponentRight, MOVE_MEMENTO); EXPECT_SEND_OUT(opponentRight,1); 
         }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet fainted!");
-        MESSAGE("Raticate fainted!");
-        MESSAGE("The opposing Wynaut fainted!");
+        MESSAGE("The opposing Wobbuffet non ha più energie!");
+        MESSAGE("Raticate non ha più energie!");
+        MESSAGE("The opposing Wynaut non ha più energie!");
         MESSAGE("Trainer A: This message plays after the enemy switches in their last Pokemon.{PAUSE_UNTIL_PRESS}");
         MESSAGE("Trainer Partner: This message plays after the enemy switches in their last Pokemon.{PAUSE_UNTIL_PRESS}");
         MESSAGE("Trainer B: This message plays after the enemy switches in their last Pokemon.{PAUSE_UNTIL_PRESS}");

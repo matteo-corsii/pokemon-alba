@@ -178,7 +178,7 @@ SINGLE_BATTLE_TEST("(TERA) Terastallization's 60 BP floor does not apply to prio
     } WHEN {
         TURN { MOVE(player, MOVE_QUICK_ATTACK, gimmick: tera); }
     } SCENE {
-        MESSAGE("Wobbuffet used Quick Attack!");
+        MESSAGE("Wobbuffet used ATTACCO RAPIDO!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_QUICK_ATTACK, player);
         HP_BAR(opponent, captureDamage: &results[i].damage);
     } FINALLY {
@@ -218,7 +218,7 @@ SINGLE_BATTLE_TEST("(TERA) Terastallization changes type effectiveness", s16 dam
     } WHEN {
         TURN { MOVE(player, MOVE_CELEBRATE, gimmick: tera); MOVE(opponent, MOVE_WATER_GUN); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used Water Gun!");
+        MESSAGE("The opposing Wobbuffet used PISTOLACQUA!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_WATER_GUN, opponent);
         HP_BAR(player, captureDamage: &results[i].damage);
     } FINALLY {
@@ -341,7 +341,7 @@ SINGLE_BATTLE_TEST("(TERA) Reflect Type copies a Terastallized Pokemon's Tera Ty
         MESSAGE("The opposing Wobbuffet used Reflect Type!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_REFLECT_TYPE, opponent);
         // turn 3
-        MESSAGE("Wobbuffet used Scratch!");
+        MESSAGE("Wobbuffet used GRAFFIO!");
         MESSAGE("It doesn't affect the opposing Wobbuffet…");
         NOT { HP_BAR(opponent); }
     }
@@ -458,7 +458,7 @@ SINGLE_BATTLE_TEST("(TERA) Reflect Type copies a Stellar-type Pokemon's base typ
         MESSAGE("The opposing Wobbuffet used Reflect Type!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_REFLECT_TYPE, opponent);
         // turn 3
-        MESSAGE("Banette used Scratch!");
+        MESSAGE("Banette used GRAFFIO!");
         MESSAGE("It doesn't affect the opposing Wobbuffet…");
         NOT { HP_BAR(opponent); }
     }
@@ -581,7 +581,7 @@ SINGLE_BATTLE_TEST("(TERA) Terastallizing into the Stellar type boosts all moves
         ANIMATION(ANIM_TYPE_MOVE, MOVE_MEGA_DRAIN, player);
         HP_BAR(opponent, captureDamage: &damage[2]);
         // turn 4
-        MESSAGE("Wobbuffet used Water Gun!");
+        MESSAGE("Wobbuffet used PISTOLACQUA!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_WATER_GUN, player);
         HP_BAR(opponent, captureDamage: &damage[3]);
     } THEN {
@@ -623,7 +623,7 @@ SINGLE_BATTLE_TEST("(TERA) Status moves don't expend Stellar's one-time type boo
         TURN { MOVE(player, MOVE_TAKE_DOWN); }
     } SCENE {
         // turn 1
-        MESSAGE("Wobbuffet used Growl!");
+        MESSAGE("Wobbuffet used RUGGITO!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_GROWL, player);
         // turn 2
         MESSAGE("Wobbuffet used Take Down!");

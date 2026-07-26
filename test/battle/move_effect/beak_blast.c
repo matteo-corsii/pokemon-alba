@@ -51,14 +51,14 @@ DOUBLE_BATTLE_TEST("Beak Blast burns all who make contact with the Pokémon")
         MESSAGE("Wobbuffet used Celebrate!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, playerRight);
 
-        MESSAGE("The opposing Wobbuffet used Scratch!");
+        MESSAGE("The opposing Wobbuffet used GRAFFIO!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponentLeft);
         HP_BAR(playerLeft);
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_BRN, opponentLeft);
         MESSAGE("The opposing Wobbuffet was burned!");
         STATUS_ICON(opponentLeft, burn: TRUE);
 
-        MESSAGE("The opposing Wobbuffet used Scratch!");
+        MESSAGE("The opposing Wobbuffet used GRAFFIO!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponentRight);
         HP_BAR(playerLeft);
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_BRN, opponentRight);
