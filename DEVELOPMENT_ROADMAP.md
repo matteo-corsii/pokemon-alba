@@ -28,7 +28,9 @@ Questa roadmap descrive una sequenza iniziale di attività. Ogni fase deve produ
 
 **Esito del test manuale:** la prima ROM personale è stata compilata con successo e avviata con mGBA 0.10.5. La frase personalizzata è stata verificata senza caratteri corrotti o testo tagliato; avvio, comandi, audio e scelta del nome funzionano correttamente.
 
-**Pacchetto successivo in preparazione:** traduzione italiana completa dell’interfaccia di apertura e della parte restante dell’introduzione del Professor Birch.
+**Esito dell’apertura italiana:** l’interfaccia iniziale e l’introduzione tradotta sono state compilate e collaudate manualmente con successo, senza errori grafici, testi tagliati o problemi funzionali.
+
+**Milestone in preparazione:** è iniziato il pacchetto di identità narrativa. I nomi provvisori di regione, città, Professore e rivali sono stati stabiliti; in questa fase vengono sostituiti soltanto i testi visibili, mantenendo invariati gli identificatori interni originali. La milestone non sarà considerata completa prima della compilazione e del test.
 
 **Obiettivo:** verificare l’intero ciclo di modifica del gioco con un cambiamento semplice e facilmente riconoscibile.
 
