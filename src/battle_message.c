@@ -605,8 +605,8 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_SYMBIOSISITEMPASS]                    = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX} shared its {B_LAST_ITEM} with {B_EFF_NAME_WITH_PREFIX2}!"),
     [STRINGID_STEALTHROCKDMG]                       = COMPOUND_STRING("Pointed stones dug into {B_SCR_NAME_WITH_PREFIX2}!"),
     [STRINGID_TOXICSPIKESABSORBED]                  = COMPOUND_STRING("The poison spikes disappeared from the ground around {B_EFF_TEAM2} team!"),
-    [STRINGID_TOXICSPIKESPOISONED]                  = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX} was poisoned!"),
-    [STRINGID_TOXICSPIKESBADLYPOISONED]             = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX} was badly poisoned!"),
+    [STRINGID_TOXICSPIKESPOISONED]                  = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX} ha subito\nun avvelenamento!"),
+    [STRINGID_TOXICSPIKESBADLYPOISONED]             = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX} ha subito\nun grave avvelenamento!"),
     [STRINGID_STICKYWEBSWITCHIN]                    = COMPOUND_STRING("{B_EFF_NAME_WITH_PREFIX} was caught in a sticky web!"),
     [STRINGID_HEALINGWISHCAMETRUE]                  = COMPOUND_STRING("The healing wish came true for {B_SCR_NAME_WITH_PREFIX2}!"),
     [STRINGID_HEALINGWISHHEALED]                    = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX} regained health!"),
@@ -2717,6 +2717,11 @@ void BufferStringBattle(enum StringID stringID, enum BattlerId battler)
     case STRINGID_PKMNWASFROZEN:
     case STRINGID_PKMNWASPARALYZED:
     case STRINGID_PKMNWASCONFUSED:
+        sUseItalianBattlerSuffix = TRUE;
+        stringPtr = gBattleStringsTable[stringID];
+        break;
+    case STRINGID_TOXICSPIKESPOISONED:
+    case STRINGID_TOXICSPIKESBADLYPOISONED:
         sUseItalianBattlerSuffix = TRUE;
         stringPtr = gBattleStringsTable[stringID];
         break;
