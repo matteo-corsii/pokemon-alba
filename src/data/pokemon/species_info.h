@@ -156,6 +156,66 @@ static const struct LevelUpMove sSelvazannaLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+static const struct LevelUpMove sSerbraceLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_SCRATCH),
+    LEVEL_UP_MOVE( 1, MOVE_LEER),
+    LEVEL_UP_MOVE( 4, MOVE_EMBER),
+    LEVEL_UP_MOVE( 7, MOVE_SMOKESCREEN),
+    LEVEL_UP_MOVE( 9, MOVE_FLAME_CHARGE),
+    LEVEL_UP_MOVE(12, MOVE_POISON_STING),
+    LEVEL_UP_MOVE(15, MOVE_BITE),
+    LEVEL_UP_MOVE(18, MOVE_INCINERATE),
+    LEVEL_UP_MOVE(22, MOVE_COIL),
+    LEVEL_UP_MOVE(26, MOVE_VENOSHOCK),
+    LEVEL_UP_MOVE(30, MOVE_FIRE_SPIN),
+    LEVEL_UP_MOVE(34, MOVE_NASTY_PLOT),
+    LEVEL_UP_MOVE(38, MOVE_FLAMETHROWER),
+    LEVEL_UP_MOVE(43, MOVE_TOXIC),
+    LEVEL_UP_MOVE(48, MOVE_SLUDGE_BOMB),
+    LEVEL_UP_MOVE(54, MOVE_HEAT_WAVE),
+    LEVEL_UP_END
+};
+
+static const struct LevelUpMove sVipercenLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_SCRATCH),
+    LEVEL_UP_MOVE( 1, MOVE_LEER),
+    LEVEL_UP_MOVE( 4, MOVE_EMBER),
+    LEVEL_UP_MOVE( 7, MOVE_SMOKESCREEN),
+    LEVEL_UP_MOVE( 9, MOVE_FLAME_CHARGE),
+    LEVEL_UP_MOVE(12, MOVE_POISON_STING),
+    LEVEL_UP_MOVE(15, MOVE_BITE),
+    LEVEL_UP_MOVE(18, MOVE_INCINERATE),
+    LEVEL_UP_MOVE(22, MOVE_COIL),
+    LEVEL_UP_MOVE(26, MOVE_VENOSHOCK),
+    LEVEL_UP_MOVE(30, MOVE_FIRE_SPIN),
+    LEVEL_UP_MOVE(34, MOVE_NASTY_PLOT),
+    LEVEL_UP_MOVE(38, MOVE_FLAMETHROWER),
+    LEVEL_UP_MOVE(43, MOVE_TOXIC),
+    LEVEL_UP_MOVE(48, MOVE_SLUDGE_BOMB),
+    LEVEL_UP_MOVE(54, MOVE_HEAT_WAVE),
+    LEVEL_UP_END
+};
+
+static const struct LevelUpMove sTossivampaLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_SCRATCH),
+    LEVEL_UP_MOVE( 1, MOVE_LEER),
+    LEVEL_UP_MOVE( 4, MOVE_EMBER),
+    LEVEL_UP_MOVE( 7, MOVE_SMOKESCREEN),
+    LEVEL_UP_MOVE( 9, MOVE_FLAME_CHARGE),
+    LEVEL_UP_MOVE(12, MOVE_POISON_STING),
+    LEVEL_UP_MOVE(15, MOVE_BITE),
+    LEVEL_UP_MOVE(18, MOVE_INCINERATE),
+    LEVEL_UP_MOVE(22, MOVE_COIL),
+    LEVEL_UP_MOVE(26, MOVE_VENOSHOCK),
+    LEVEL_UP_MOVE(30, MOVE_FIRE_SPIN),
+    LEVEL_UP_MOVE(34, MOVE_NASTY_PLOT),
+    LEVEL_UP_MOVE(38, MOVE_FLAMETHROWER),
+    LEVEL_UP_MOVE(43, MOVE_TOXIC),
+    LEVEL_UP_MOVE(48, MOVE_SLUDGE_BOMB),
+    LEVEL_UP_MOVE(54, MOVE_HEAT_WAVE),
+    LEVEL_UP_END
+};
+
 const struct SpeciesInfo gSpeciesInfo[] =
 {
     [SPECIES_NONE] =
@@ -426,6 +486,221 @@ const struct SpeciesInfo gSpeciesInfo[] =
             gShinyOverworldPalette_Mamoswine
         )
         .levelUpLearnset = sSelvazannaLevelUpLearnset,
+        .teachableLearnset = sNoneTeachableLearnset,
+        .eggMoveLearnset = sNoneEggMoveLearnset,
+    },
+
+    [SPECIES_SERBRACE] =
+    {
+        .baseHP        = 45,
+        .baseAttack    = 40,
+        .baseDefense   = 40,
+        .baseSpeed     = 65,
+        .baseSpAttack  = 70,
+        .baseSpDefense = 50,
+        .types = MON_TYPES(TYPE_FIRE),
+        .catchRate = 45,
+        .expYield = 64,
+        .evYield_SpAttack = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = 70,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD, EGG_GROUP_DRAGON),
+        .abilities = { ABILITY_BLAZE, ABILITY_NONE, ABILITY_CORROSION },
+        .bodyColor = BODY_COLOR_BLACK,
+        .speciesName = _("Serbrace"),
+        .cryId = CRY_EKANS,
+        .natDexNum = NATIONAL_DEX_SERBRACE,
+        .categoryName = _("BRACE"),
+        .height = 6,
+        .weight = 60,
+        .description = COMPOUND_STRING(
+            "Trattiene il calore tra le\n"
+            "squame scure del suo corpo.\n"
+            "Quando si agita, dal dorso\n"
+            "si alzano piccoli sbuffi."),
+        .pokemonScale = 298,
+        .pokemonOffset = 12,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Ekans,
+        .frontPicSize = P_GBA_STYLE_SPECIES_GFX ? MON_COORDS_SIZE(48, 40) : MON_COORDS_SIZE(48, 48),
+        .frontPicYOffset = P_GBA_STYLE_SPECIES_GFX ? 12 : 10,
+        .frontAnimFrames = ANIM_FRAMES(
+            ANIMCMD_FRAME(1, 8),
+            ANIMCMD_FRAME(0, 8),
+            ANIMCMD_FRAME(1, 8),
+            ANIMCMD_FRAME(0, 8),
+            ANIMCMD_FRAME(1, 40),
+            ANIMCMD_FRAME(0, 8),
+        ),
+        .frontAnimId = P_GBA_STYLE_SPECIES_GFX ? ANIM_H_STRETCH : ANIM_V_STRETCH,
+        .frontAnimDelay = 30,
+        .backPic = gMonBackPic_Ekans,
+        .backPicSize = P_GBA_STYLE_SPECIES_GFX ? MON_COORDS_SIZE(48, 48) : MON_COORDS_SIZE(56, 48),
+        .backPicYOffset = P_GBA_STYLE_SPECIES_GFX ? 9 : 10,
+        .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
+        .palette = gMonPalette_Ekans,
+        .shinyPalette = gMonShinyPalette_Ekans,
+        .iconSprite = gMonIcon_Ekans,
+        .iconPalIndex = 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        SHADOW(0, 2, SHADOW_SIZE_M)
+        FOOTPRINT(Ekans)
+        OVERWORLD(
+            sPicTable_Ekans,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_SLITHER,
+            sAnimTable_Following,
+            gOverworldPalette_Ekans,
+            gShinyOverworldPalette_Ekans
+        )
+        .levelUpLearnset = sSerbraceLevelUpLearnset,
+        .teachableLearnset = sNoneTeachableLearnset,
+        .eggMoveLearnset = sNoneEggMoveLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_VIPERCEN}),
+    },
+
+    [SPECIES_VIPERCEN] =
+    {
+        .baseHP        = 60,
+        .baseAttack    = 55,
+        .baseDefense   = 55,
+        .baseSpeed     = 75,
+        .baseSpAttack  = 95,
+        .baseSpDefense = 65,
+        .types = MON_TYPES(TYPE_FIRE),
+        .catchRate = 45,
+        .expYield = 142,
+        .evYield_SpAttack = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = 70,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD, EGG_GROUP_DRAGON),
+        .abilities = { ABILITY_BLAZE, ABILITY_NONE, ABILITY_CORROSION },
+        .bodyColor = BODY_COLOR_BLACK,
+        .speciesName = _("Vipercen"),
+        .cryId = CRY_ARBOK,
+        .natDexNum = NATIONAL_DEX_VIPERCEN,
+        .categoryName = _("CENERE"),
+        .height = 12,
+        .weight = 185,
+        .description = COMPOUND_STRING(
+            "Le scaglie del collo accumulano\n"
+            "cenere e calore vulcanico.\n"
+            "Studia a lungo l’avversario\n"
+            "prima di attaccare."),
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 296,
+        .trainerOffset = 2,
+        .frontPic = gMonFrontPic_Arbok,
+        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = P_GBA_STYLE_SPECIES_GFX ? 2 : 1,
+        .frontAnimFrames = ANIM_FRAMES(
+            ANIMCMD_FRAME(0, 5),
+            ANIMCMD_FRAME(1, 35),
+            ANIMCMD_FRAME(0, 10),
+        ),
+        .frontAnimId = ANIM_V_STRETCH,
+        .backPic = gMonBackPic_Arbok,
+        .backPicSize = P_GBA_STYLE_SPECIES_GFX ? MON_COORDS_SIZE(56, 56) : MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = P_GBA_STYLE_SPECIES_GFX ? 4 : 1,
+        .backAnimId = BACK_ANIM_V_SHAKE,
+        .palette = gMonPalette_Arbok,
+        .shinyPalette = gMonShinyPalette_Arbok,
+        .iconSprite = gMonIcon_Arbok,
+        .iconPalIndex = 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        SHADOW(1, 11, SHADOW_SIZE_L)
+        FOOTPRINT(Arbok)
+        OVERWORLD(
+            sPicTable_Arbok,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_SLITHER,
+            sAnimTable_Following,
+            gOverworldPalette_Arbok,
+            gShinyOverworldPalette_Arbok
+        )
+        .levelUpLearnset = sVipercenLevelUpLearnset,
+        .teachableLearnset = sNoneTeachableLearnset,
+        .eggMoveLearnset = sNoneEggMoveLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_TOSSIVAMPA}),
+    },
+
+    [SPECIES_TOSSIVAMPA] =
+    {
+        .baseHP        = 75,
+        .baseAttack    = 70,
+        .baseDefense   = 70,
+        .baseSpeed     = 105,
+        .baseSpAttack  = 125,
+        .baseSpDefense = 85,
+        .types = MON_TYPES(TYPE_FIRE, TYPE_POISON),
+        .catchRate = 45,
+        .expYield = 265,
+        .evYield_SpAttack = 3,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = 70,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD, EGG_GROUP_DRAGON),
+        .abilities = { ABILITY_BLAZE, ABILITY_NONE, ABILITY_CORROSION },
+        .bodyColor = BODY_COLOR_BLACK,
+        .noFlip = TRUE,
+        .speciesName = _("Tossivampa"),
+        .cryId = CRY_SEVIPER,
+        .natDexNum = NATIONAL_DEX_TOSSIVAMPA,
+        .categoryName = _("FUMAROLA"),
+        .height = 22,
+        .weight = 520,
+        .description = COMPOUND_STRING(
+            "Emette vapori minerali dalle\n"
+            "aperture del suo cappuccio.\n"
+            "Le sue zanne diffondono un\n"
+            "veleno caldo e corrosivo."),
+        .pokemonScale = 275,
+        .pokemonOffset = 7,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Seviper,
+        .frontPicSize = P_GBA_STYLE_SPECIES_GFX ? MON_COORDS_SIZE(56, 56) : MON_COORDS_SIZE(64, 56),
+        .frontPicYOffset = P_GBA_STYLE_SPECIES_GFX ? 8 : 6,
+        .frontAnimFrames = ANIM_FRAMES(
+            ANIMCMD_FRAME(0, 15),
+            ANIMCMD_FRAME(1, 15),
+            ANIMCMD_FRAME(0, 15),
+            ANIMCMD_FRAME(1, 15),
+            ANIMCMD_FRAME(0, 15),
+            ANIMCMD_FRAME(1, 15),
+            ANIMCMD_FRAME(0, 50),
+        ),
+        .frontAnimId = ANIM_V_STRETCH,
+        .backPic = gMonBackPic_Seviper,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = P_GBA_STYLE_SPECIES_GFX ? 3 : 1,
+        .backAnimId = BACK_ANIM_V_STRETCH,
+        .palette = gMonPalette_Seviper,
+        .shinyPalette = gMonShinyPalette_Seviper,
+        .iconSprite = gMonIcon_Seviper,
+        .iconPalIndex = 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        SHADOW(-3, 7, SHADOW_SIZE_L)
+        FOOTPRINT(Seviper)
+        OVERWORLD(
+            sPicTable_Seviper,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_BIKE_TIRE,
+            sAnimTable_Following_Asym,
+            gOverworldPalette_Seviper,
+            gShinyOverworldPalette_Seviper
+        )
+        .levelUpLearnset = sTossivampaLevelUpLearnset,
         .teachableLearnset = sNoneTeachableLearnset,
         .eggMoveLearnset = sNoneEggMoveLearnset,
     },
