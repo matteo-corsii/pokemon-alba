@@ -2,8 +2,8 @@
 #define GUARD_CONSTANTS_FLAGS_FRLG_H
 
 
-#define FLAG_0x020               0x020
-#define FLAG_0x021               0x021
+#define FLAG_ALBERA_CAMPETTO_COMPLETED      0x020
+#define FLAG_ALBERA_WATER_RESEARCH_STARTED  0x021
 #define FLAG_0x022               0x022
 #define FLAG_0x023               0x023
 #define FLAG_0x024               0x024

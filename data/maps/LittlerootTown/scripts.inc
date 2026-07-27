@@ -249,13 +249,96 @@ LittlerootTown_EventScript_Boy::
 	msgbox LittlerootTown_Text_BirchSpendsDaysInLab, MSGBOX_NPC
 	end
 
+LittlerootTown_EventScript_CampettoYouth::
+	lock
+	faceplayer
+	goto_if_eq VAR_LITTLEROOT_TOWN_STATE, 0, LittlerootTown_EventScript_CampettoYouthBeforeRival
+	goto_if_set FLAG_ALBERA_WATER_RESEARCH_STARTED, LittlerootTown_EventScript_CampettoYouthAfterAssignment
+	goto_if_set FLAG_ALBERA_CAMPETTO_COMPLETED, LittlerootTown_EventScript_CampettoYouthAfterEvent
+	msgbox LittlerootTown_Text_CampettoYouthBeforeEvent, MSGBOX_DEFAULT
+	release
+	end
+
+LittlerootTown_EventScript_CampettoYouthBeforeRival::
+	msgbox LittlerootTown_Text_CampettoYouthBeforeRival, MSGBOX_DEFAULT
+	release
+	end
+
+LittlerootTown_EventScript_CampettoYouthAfterEvent::
+	msgbox LittlerootTown_Text_CampettoYouthAfterEvent, MSGBOX_DEFAULT
+	release
+	end
+
+LittlerootTown_EventScript_CampettoYouthAfterAssignment::
+	msgbox LittlerootTown_Text_CampettoYouthAfterAssignment, MSGBOX_DEFAULT
+	release
+	end
+
+LittlerootTown_EventScript_CampettoTrigger::
+	goto_if_set FLAG_ALBERA_CAMPETTO_COMPLETED, LittlerootTown_EventScript_CampettoTriggerEnd
+	lockall
+	setobjectxyperm LOCALID_LITTLEROOT_RIVAL, 31, 15
+	addobject LOCALID_LITTLEROOT_RIVAL
+	applymovement LOCALID_LITTLEROOT_RIVAL, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_LITTLEROOT_CAMPETTO_YOUTH, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown
+	waitmovement 0
+	msgbox LittlerootTown_Text_CampettoYouthWaterPressure, MSGBOX_DEFAULT
+	checkplayergender
+	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_CampettoLiaSkeptical
+	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_CampettoNicoSkeptical
+	closemessage
+	playse SE_M_STRENGTH
+	waitse
+	applymovement LOCALID_LITTLEROOT_RIVAL, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_LITTLEROOT_CAMPETTO_YOUTH, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown
+	waitmovement 0
+	msgbox LittlerootTown_Text_CampettoYouthUndergroundNoise, MSGBOX_DEFAULT
+	checkplayergender
+	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_CampettoLiaConclusion
+	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_CampettoNicoConclusion
+	closemessage
+	setflag FLAG_ALBERA_CAMPETTO_COMPLETED
+	removeobject LOCALID_LITTLEROOT_RIVAL
+	releaseall
+	end
+
+LittlerootTown_EventScript_CampettoTriggerEnd::
+	end
+
+LittlerootTown_EventScript_CampettoLiaSkeptical::
+	msgbox LittlerootTown_Text_CampettoLiaSkeptical, MSGBOX_DEFAULT
+	return
+
+LittlerootTown_EventScript_CampettoNicoSkeptical::
+	msgbox LittlerootTown_Text_CampettoNicoSkeptical, MSGBOX_DEFAULT
+	return
+
+LittlerootTown_EventScript_CampettoLiaConclusion::
+	msgbox LittlerootTown_Text_CampettoLiaConclusion, MSGBOX_DEFAULT
+	return
+
+LittlerootTown_EventScript_CampettoNicoConclusion::
+	msgbox LittlerootTown_Text_CampettoNicoConclusion, MSGBOX_DEFAULT
+	return
+
 LittlerootTown_EventScript_Twin::
 	lock
 	faceplayer
 	goto_if_set FLAG_ADVENTURE_STARTED, LittlerootTown_EventScript_GoodLuck
 	goto_if_set FLAG_RESCUED_BIRCH, LittlerootTown_EventScript_YouSavedBirch
-	goto_if_ne VAR_LITTLEROOT_TOWN_STATE, 0, LittlerootTown_EventScript_GoSaveBirch
+	goto_if_eq VAR_LITTLEROOT_TOWN_STATE, 0, LittlerootTown_EventScript_TwinGrassWarning
+	goto_if_unset FLAG_ALBERA_CAMPETTO_COMPLETED, LittlerootTown_EventScript_GoToCampetto
+	goto LittlerootTown_EventScript_GoSaveBirch
+
+LittlerootTown_EventScript_TwinGrassWarning::
 	msgbox LittlerootTown_Text_IfYouGoInGrassPokemonWillJumpOut, MSGBOX_DEFAULT
+	release
+	end
+
+LittlerootTown_EventScript_GoToCampetto::
+	msgbox LittlerootTown_Text_GoToCampettoFirst, MSGBOX_DEFAULT
 	release
 	end
 
@@ -374,6 +457,7 @@ LittlerootTown_Movement_TwinReturnRight:
 
 LittlerootTown_EventScript_GoSaveBirchTrigger::
 	lockall
+	goto_if_unset FLAG_ALBERA_CAMPETTO_COMPLETED, LittlerootTown_EventScript_BlockRouteUntilCampetto
 	applymovement LOCALID_LITTLEROOT_TWIN, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
@@ -384,6 +468,14 @@ LittlerootTown_EventScript_GoSaveBirchTrigger::
 	applymovement LOCALID_LITTLEROOT_TWIN, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	setvar VAR_LITTLEROOT_TOWN_STATE, 2
+	releaseall
+	end
+
+LittlerootTown_EventScript_BlockRouteUntilCampetto::
+	msgbox LittlerootTown_Text_GoToCampettoFirst, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_PLAYER, LittlerootTown_Movement_PushPlayerBackFromRoute
+	waitmovement 0
 	releaseall
 	end
 
@@ -963,6 +1055,62 @@ LittlerootTown_Text_BirchSpendsDaysInLab:
 	.string "per fare ricerche sul campo…\p"
 	.string "Ma quando trova il tempo di stare\n"
 	.string "a casa?$"
+
+LittlerootTown_Text_CampettoYouthBeforeEvent:
+	.string "La fontanella del campetto\n"
+	.string "oggi ha di nuovo poca pressione…$"
+
+LittlerootTown_Text_CampettoYouthBeforeRival:
+	.string "Ci troviamo spesso qui\n"
+	.string "dopo la scuola.$"
+
+LittlerootTown_Text_CampettoYouthAfterEvent:
+	.string "Ogni tanto si sente ancora\n"
+	.string "quel rumore sotto il campetto.$"
+
+LittlerootTown_Text_CampettoYouthAfterAssignment:
+	.string "La fontanella continua\n"
+	.string "a perdere pressione.\p"
+	.string "Se senti ancora quel rumore,\n"
+	.string "avvisa il PROF. LAURO.$"
+
+LittlerootTown_Text_CampettoYouthWaterPressure:
+	.string "RAGAZZO: La fontanella\n"
+	.string "ha perso di nuovo pressione.\p"
+	.string "Stamattina usciva appena\n"
+	.string "un filo d'acqua.$"
+
+LittlerootTown_Text_CampettoLiaSkeptical:
+	.string "LIA: Secondo me stanno\n"
+	.string "esagerando.\p"
+	.string "Sarà una tubatura vecchia.\n"
+	.string "Qui succede sempre qualcosa.$"
+
+LittlerootTown_Text_CampettoNicoSkeptical:
+	.string "NICO: Secondo me stanno\n"
+	.string "esagerando.\p"
+	.string "Sarà una tubatura vecchia.\n"
+	.string "Qui succede sempre qualcosa.$"
+
+LittlerootTown_Text_CampettoYouthUndergroundNoise:
+	.string "RAGAZZO: Hai sentito anche tu?\p"
+	.string "Sembrava venire da sotto\n"
+	.string "il campetto…$"
+
+LittlerootTown_Text_CampettoLiaConclusion:
+	.string "LIA: Ne parleremo dopo.\p"
+	.string "Il PROF. LAURO ti sta\n"
+	.string "aspettando, no?$"
+
+LittlerootTown_Text_CampettoNicoConclusion:
+	.string "NICO: Ne parleremo dopo.\p"
+	.string "Il PROF. LAURO ti sta\n"
+	.string "aspettando, no?$"
+
+LittlerootTown_Text_GoToCampettoFirst:
+	.string "Prima dovrei passare\n"
+	.string "dal campetto di\n"
+	.string "Via dell'Armonia.$"
 
 LittlerootTown_Text_IfYouGoInGrassPokemonWillJumpOut:
 	.string "Ehm, ehm, ehm!\p"
