@@ -94,6 +94,15 @@ e completate le parti isolate degli alberi individuate durante il collaudo. Il
 prototipo è quindi pronto per ricevere il nuovo prologo; la relativa
 riscrittura narrativa non è ancora completata.
 
+## Secondo collaudo manuale
+
+Il nuovo prologo è stato completato con entrambi i protagonisti. Le scene, i
+flag e la progressione sono risultati corretti, senza crash o blocchi
+permanenti. Il collaudo ha inoltre evidenziato ulteriori collisioni residue e
+frammenti grafici lungo il vecchio confine della mappa: questi residui sono
+stati ripuliti, mantenendo invariati eventi, collegamenti e delimitazioni
+intenzionali. La mappa è pronta per le successive espansioni.
+
 ## Primo utilizzo narrativo
 
 Dopo l'incontro iniziale nella casa di Nico o Lia, il giocatore deve percorrere
