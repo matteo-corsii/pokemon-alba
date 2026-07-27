@@ -4114,11 +4114,10 @@ static void BufferStatRoseMessage(enum Stat statIdx)
     if (B_X_ITEMS_BUFF >= GEN_7)
     {
         StringCopy(gBattleTextBuff2, gText_StatSharply);
-        StringAppend(gBattleTextBuff2, gText_StatRose);
     }
     else
     {
-        StringCopy(gBattleTextBuff2, gText_StatRose);
+        PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_EMPTYSTRING3);
     }
     BattleStringExpandPlaceholdersToDisplayedString(gText_DefendersStatRose);
 }

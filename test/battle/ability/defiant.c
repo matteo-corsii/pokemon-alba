@@ -21,35 +21,35 @@ DOUBLE_BATTLE_TEST("Defiant sharply raises player's Attack after Intimidate")
         //1st mon Intimidate
         ABILITY_POPUP(opponentLeft, ABILITY_INTIMIDATE);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-        MESSAGE("Mankey's Attack fell!");
+        MESSAGE("Mankey: ATTACCO\ndiminuisce!");
         if (abilityLeft == ABILITY_DEFIANT) {
             ABILITY_POPUP(playerLeft, ABILITY_DEFIANT);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-            MESSAGE("Mankey's Attack rose sharply!");
+            MESSAGE("Mankey: ATTACCO\naumenta di molto!");
         }
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
-        MESSAGE("Primeape's Attack fell!");
+        MESSAGE("Primeape: ATTACCO\ndiminuisce!");
         if (abilityRight == ABILITY_DEFIANT) {
             ABILITY_POPUP(playerRight, ABILITY_DEFIANT);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
-            MESSAGE("Primeape's Attack rose sharply!");
+            MESSAGE("Primeape: ATTACCO\naumenta di molto!");
         }
 
         //2nd mon Intimidate
         ABILITY_POPUP(opponentRight, ABILITY_INTIMIDATE);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-        MESSAGE("Mankey's Attack fell!");
+        MESSAGE("Mankey: ATTACCO\ndiminuisce!");
         if (abilityLeft == ABILITY_DEFIANT) {
             ABILITY_POPUP(playerLeft, ABILITY_DEFIANT);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-            MESSAGE("Mankey's Attack rose sharply!");
+            MESSAGE("Mankey: ATTACCO\naumenta di molto!");
         }
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
-        MESSAGE("Primeape's Attack fell!");
+        MESSAGE("Primeape: ATTACCO\ndiminuisce!");
         if (abilityRight == ABILITY_DEFIANT) {
             ABILITY_POPUP(playerRight, ABILITY_DEFIANT);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
-            MESSAGE("Primeape's Attack rose sharply!");
+            MESSAGE("Primeape: ATTACCO\naumenta di molto!");
         }
     } THEN {
         // -2 from Intimidates and +4 from Defiants gets +2 total
@@ -79,35 +79,35 @@ DOUBLE_BATTLE_TEST("Defiant sharply raises opponent's Attack after Intimidate")
         //1st mon Intimidate
         ABILITY_POPUP(playerLeft, ABILITY_INTIMIDATE);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
-        MESSAGE("The opposing Mankey's Attack fell!");
+        MESSAGE("Mankey avversario: ATTACCO\ndiminuisce!");
         if (abilityLeft == ABILITY_DEFIANT) {
             ABILITY_POPUP(opponentLeft, ABILITY_DEFIANT);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
-            MESSAGE("The opposing Mankey's Attack rose sharply!");
+            MESSAGE("Mankey avversario: ATTACCO\naumenta di molto!");
         }
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
-        MESSAGE("The opposing Primeape's Attack fell!");
+        MESSAGE("Primeape avversario: ATTACCO\ndiminuisce!");
         if (abilityRight == ABILITY_DEFIANT) {
             ABILITY_POPUP(opponentRight, ABILITY_DEFIANT);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
-            MESSAGE("The opposing Primeape's Attack rose sharply!");
+            MESSAGE("Primeape avversario: ATTACCO\naumenta di molto!");
         }
 
         //2nd mon Intimidate
         ABILITY_POPUP(playerRight, ABILITY_INTIMIDATE);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
-        MESSAGE("The opposing Mankey's Attack fell!");
+        MESSAGE("Mankey avversario: ATTACCO\ndiminuisce!");
         if (abilityLeft == ABILITY_DEFIANT) {
             ABILITY_POPUP(opponentLeft, ABILITY_DEFIANT);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
-            MESSAGE("The opposing Mankey's Attack rose sharply!");
+            MESSAGE("Mankey avversario: ATTACCO\naumenta di molto!");
         }
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
-        MESSAGE("The opposing Primeape's Attack fell!");
+        MESSAGE("Primeape avversario: ATTACCO\ndiminuisce!");
         if (abilityRight == ABILITY_DEFIANT) {
             ABILITY_POPUP(opponentRight, ABILITY_DEFIANT);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
-            MESSAGE("The opposing Primeape's Attack rose sharply!");
+            MESSAGE("Primeape avversario: ATTACCO\naumenta di molto!");
         }
     } THEN {
         // -2 from Intimidates and +4 from Defiants gets +2 total
@@ -131,11 +131,11 @@ SINGLE_BATTLE_TEST("Defiant activates after Sticky Web lowers Speed")
         SEND_IN_MESSAGE("Mankey");
         MESSAGE("Mankey was caught in a sticky web!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Mankey's Speed fell!");
+        MESSAGE("Mankey: VELOCITÀ\ndiminuisce!");
         // Defiant activates
         ABILITY_POPUP(player, ABILITY_DEFIANT);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Mankey's Attack rose sharply!");
+        MESSAGE("Mankey: ATTACCO\naumenta di molto!");
     }
 }
 
@@ -159,20 +159,20 @@ SINGLE_BATTLE_TEST("Defiant doesn't activate after Sticky Web lowers Speed if Co
         SEND_IN_MESSAGE("Mankey");
         MESSAGE("Mankey was caught in a sticky web!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Mankey's Speed fell!");
+        MESSAGE("Mankey: VELOCITÀ\ndiminuisce!");
         // Defiant doesn't activate
         NONE_OF {
             ABILITY_POPUP(player, ABILITY_DEFIANT);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-            MESSAGE("Mankey's Attack rose sharply!");
+            MESSAGE("Mankey: ATTACCO\naumenta di molto!");
         }
         // Defiant triggers correctly after Sticky Web
         ANIMATION(ANIM_TYPE_MOVE, MOVE_GROWL, opponent);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Mankey's Attack fell!");
+        MESSAGE("Mankey: ATTACCO\ndiminuisce!");
         ABILITY_POPUP(player, ABILITY_DEFIANT);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Mankey's Attack rose sharply!");
+        MESSAGE("Mankey: ATTACCO\naumenta di molto!");
     }
 }
 
@@ -196,17 +196,17 @@ SINGLE_BATTLE_TEST("Defiant activates after Sticky Web lowers Speed if Court Cha
         SEND_IN_MESSAGE("Mankey");
         MESSAGE("Mankey was caught in a sticky web!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Mankey's Speed fell!");
+        MESSAGE("Mankey: VELOCITÀ\ndiminuisce!");
         ABILITY_POPUP(player, ABILITY_DEFIANT);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Mankey's Attack rose sharply!");
+        MESSAGE("Mankey: ATTACCO\naumenta di molto!");
         // Defiant triggers correctly after Sticky Web
         ANIMATION(ANIM_TYPE_MOVE, MOVE_GROWL, opponent);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Mankey's Attack fell!");
+        MESSAGE("Mankey: ATTACCO\ndiminuisce!");
         ABILITY_POPUP(player, ABILITY_DEFIANT);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Mankey's Attack rose sharply!");
+        MESSAGE("Mankey: ATTACCO\naumenta di molto!");
     }
 }
 
@@ -224,19 +224,19 @@ DOUBLE_BATTLE_TEST("Defiant is activated by Cotton Down for non-ally Pokémon")
         ABILITY_POPUP(opponentLeft, ABILITY_COTTON_DOWN);
 
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
-        MESSAGE("The opposing Mankey's Speed fell!");
+        MESSAGE("Mankey avversario: VELOCITÀ\ndiminuisce!");
 
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-        MESSAGE("Mankey's Speed fell!");
+        MESSAGE("Mankey: VELOCITÀ\ndiminuisce!");
         ABILITY_POPUP(playerLeft, ABILITY_DEFIANT);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-        MESSAGE("Mankey's Attack rose sharply!");
+        MESSAGE("Mankey: ATTACCO\naumenta di molto!");
 
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
-        MESSAGE("Mankey's Speed fell!");
+        MESSAGE("Mankey: VELOCITÀ\ndiminuisce!");
         ABILITY_POPUP(playerRight, ABILITY_DEFIANT);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
-        MESSAGE("Mankey's Attack rose sharply!");
+        MESSAGE("Mankey: ATTACCO\naumenta di molto!");
     } THEN {
         EXPECT_EQ(playerLeft->statStages[STAT_SPEED], DEFAULT_STAT_STAGE - 1);
         EXPECT_EQ(playerRight->statStages[STAT_SPEED], DEFAULT_STAT_STAGE - 1);
@@ -361,7 +361,7 @@ SINGLE_BATTLE_TEST("Defiant activates before White Herb")
 
         ABILITY_POPUP(player, ABILITY_DEFIANT);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Mankey's Attack rose sharply!");
+        MESSAGE("Mankey: ATTACCO\naumenta di molto!");
 
         if (move == MOVE_LEER) {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
@@ -393,15 +393,15 @@ SINGLE_BATTLE_TEST("Defiant activates for each stat that is lowered")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TICKLE, opponent);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Mankey's Attack fell!");
+        MESSAGE("Mankey: ATTACCO\ndiminuisce!");
         ABILITY_POPUP(player, ABILITY_DEFIANT);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Mankey's Attack rose sharply!");
+        MESSAGE("Mankey: ATTACCO\naumenta di molto!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Mankey's Defense fell!");
+        MESSAGE("Mankey: DIFESA\ndiminuisce!");
         ABILITY_POPUP(player, ABILITY_DEFIANT);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Mankey's Attack rose sharply!");
+        MESSAGE("Mankey: ATTACCO\naumenta di molto!");
 
     } THEN {
         EXPECT_EQ(player->statStages[STAT_ATK], DEFAULT_STAT_STAGE + 3);
@@ -433,7 +433,7 @@ SINGLE_BATTLE_TEST("Defiant doesn't activate if the Pokémon lowers it's own sta
         NONE_OF {
             ABILITY_POPUP(player, ABILITY_DEFIANT);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-            MESSAGE("Mankey's Attack rose sharply!");
+            MESSAGE("Mankey: ATTACCO\naumenta di molto!");
         }
     } THEN {
         if (move == MOVE_SUPERPOWER)
@@ -480,17 +480,17 @@ SINGLE_BATTLE_TEST("Defiant doesn't display ability popup when already at Maximu
         // Maxed Attack
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TICKLE, opponent);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Mankey's Attack fell!");
+        MESSAGE("Mankey: ATTACCO\ndiminuisce!");
         ABILITY_POPUP(player, ABILITY_DEFIANT);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Mankey's Attack rose!");
+        MESSAGE("Mankey: ATTACCO\naumenta!");
         // Maxed Attack
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Mankey's Defense fell!");
+        MESSAGE("Mankey: DIFESA\ndiminuisce!");
         NONE_OF {
             ABILITY_POPUP(player, ABILITY_DEFIANT);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-            MESSAGE("Mankey's Attack rose sharply!");
+            MESSAGE("Mankey: ATTACCO\naumenta di molto!");
         }
     } THEN {
         EXPECT_EQ(player->statStages[STAT_ATK], MAX_STAT_STAGE);

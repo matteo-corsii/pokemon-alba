@@ -41,7 +41,7 @@ SINGLE_BATTLE_TEST("Hadron Engine announces Electric Terrain before triggering Q
         MESSAGE("Miraidon turned the ground into Electric Terrain, energizing its futuristic engine!");
         ABILITY_POPUP(opponent, ABILITY_QUARK_DRIVE);
         MESSAGE("The Electric Terrain activated the opposing Iron Bundle's Quark Drive!");
-        MESSAGE("The opposing Iron Bundle's Sp. Atk was heightened!");
+        MESSAGE("Iron Bundle avversario: ATT. SPECIALE\naumenta!");
     }
 }
 

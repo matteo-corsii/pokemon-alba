@@ -1,12 +1,12 @@
 gText_ObtainedTheItem::
-	.string "Obtained the {STR_VAR_2}!$"
+	.string "Hai ottenuto {STR_VAR_2}!$"
 
 gText_TheBagIsFull::
 	.string "The BAG is full…$"
 
 gText_PutItemInPocket::
-	.string "{PLAYER} put away the {STR_VAR_2}\n"
-	.string "in the {STR_VAR_3} POCKET.$"
+	.string "{PLAYER} mette {STR_VAR_2}\n"
+	.string "nella tasca {STR_VAR_3}.$"
 
 gText_PlayerFoundOneItem::
 	.string "{PLAYER} found one {STR_VAR_2}!$"
@@ -31,7 +31,8 @@ gText_TheDecorWasTransferredToThePC::
 	.string "to the PC.$"
 
 gText_ObtainedTheItems::
-	.string "Obtained {STR_VAR_1} {STR_VAR_2}!$"
+	.string "Hai ottenuto\n"
+	.string "{STR_VAR_1} {STR_VAR_2}!$"
 
 gText_PlayerFoundItems::
 	.string "{PLAYER} found {STR_VAR_1} {STR_VAR_2}!$"

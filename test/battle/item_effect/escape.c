@@ -14,7 +14,7 @@ WILD_BATTLE_TEST("Poke Toy lets the player escape from a wild battle")
     } WHEN {
         TURN { USE_ITEM(player, ITEM_POKE_TOY); }
     } SCENE {
-        MESSAGE("{PLAY_SE SE_FLEE}You got away safely!\p");
+        MESSAGE("{PLAY_SE SE_FLEE}Fuga riuscita!\p");
     }
 }
 
@@ -33,7 +33,7 @@ WILD_BATTLE_TEST("Poke Toy lets the player escape from a wild battle even if a m
         ANIMATION(ANIM_TYPE_MOVE, MOVE_MEAN_LOOK, opponent);
         MESSAGE("Wobbuffet can no longer escape!");
         // Turn 2
-        MESSAGE("{PLAY_SE SE_FLEE}You got away safely!\p");
+        MESSAGE("{PLAY_SE SE_FLEE}Fuga riuscita!\p");
     }
 }
 
@@ -45,6 +45,6 @@ WILD_BATTLE_TEST("Poke Toy lets the player escape from a wild battle even if an 
     } WHEN {
         TURN { USE_ITEM(player, ITEM_POKE_TOY); }
     } SCENE {
-        MESSAGE("{PLAY_SE SE_FLEE}You got away safely!\p");
+        MESSAGE("{PLAY_SE SE_FLEE}Fuga riuscita!\p");
     }
 }

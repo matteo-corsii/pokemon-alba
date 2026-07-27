@@ -18,7 +18,7 @@ SINGLE_BATTLE_TEST("Howl raises user's Attack by 1 stage", s16 damage)
         if (raiseAttack) {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_HOWL, player);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-            MESSAGE("Wobbuffet's Attack rose!");
+            MESSAGE("Wobbuffet: ATTACCO\naumenta!");
         }
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player);
         HP_BAR(opponent, captureDamage: &results[i].damage);
@@ -47,9 +47,9 @@ DOUBLE_BATTLE_TEST("Howl raises user's and partner's Attack by 1 stage", s16 dam
         if (raiseAttack) {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_HOWL, playerLeft);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-            MESSAGE("Wobbuffet's Attack rose!");
+            MESSAGE("Wobbuffet: ATTACCO\naumenta!");
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
-            MESSAGE("Wynaut's Attack rose!");
+            MESSAGE("Wynaut: ATTACCO\naumenta!");
         }
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, playerLeft);
         HP_BAR(opponentLeft, captureDamage: &results[i].damageLeft);
@@ -83,10 +83,10 @@ DOUBLE_BATTLE_TEST("Howl does not work on partner if it has Soundproof")
         MESSAGE("It doesn't affect Voltorb…");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_HOWL, playerLeft);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-        MESSAGE("Wobbuffet's Attack rose!");
+        MESSAGE("Wobbuffet: ATTACCO\naumenta!");
         NONE_OF {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
-            MESSAGE("Wynaut's Attack rose!");
+            MESSAGE("Wynaut: ATTACCO\naumenta!");
         }
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, playerRight);
         HP_BAR(opponentLeft, captureDamage: &damage[1]);

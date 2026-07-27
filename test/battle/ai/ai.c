@@ -32,7 +32,7 @@ AI_SINGLE_BATTLE_TEST("AI prefers Water Gun over Bubble if it knows that foe has
                    if (abilityAI == ABILITY_MOLD_BREAKER) { SCORE_GT(opponent, MOVE_BUBBLE, MOVE_WATER_GUN); } // Bubble is a plus effect if contrary is ignored
                    else { SCORE_GT(opponent, MOVE_WATER_GUN, MOVE_BUBBLE); }}
     } SCENE {
-        MESSAGE("Shuckle's Defense fell!"); // Contrary activates
+        MESSAGE("Shuckle: DIFESA\ndiminuisce!"); // Contrary activates
     } THEN {
         EXPECT(gAiLogicData->abilities[B_POSITION_PLAYER_LEFT] == ABILITY_CONTRARY);
     }

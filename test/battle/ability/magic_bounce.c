@@ -112,16 +112,16 @@ DOUBLE_BATTLE_TEST("Magic Bounce bounces back moves hitting both foes at two foe
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_LEER, playerLeft);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
-        MESSAGE("The opposing Wynaut's Defense fell!");
+        MESSAGE("Wynaut avversario: DIFESA\ndiminuisce!");
 
         ABILITY_POPUP(opponentLeft, ABILITY_MAGIC_BOUNCE);
         MESSAGE("Abra's FULMISGUARDO was bounced back!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_LEER, opponentLeft);
 
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-        MESSAGE("Abra's Defense fell!");
+        MESSAGE("Abra: DIFESA\ndiminuisce!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
-        MESSAGE("Kadabra's Defense fell!");
+        MESSAGE("Kadabra: DIFESA\ndiminuisce!");
     }
 }
 
@@ -143,14 +143,14 @@ DOUBLE_BATTLE_TEST("Magic Bounce activates on all opposing mons")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_LEER, opponentLeft);
         NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-        MESSAGE("Abra's Defense fell!");
+        MESSAGE("Abra: DIFESA\ndiminuisce!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
-        MESSAGE("Kadabra's Defense fell!");
+        MESSAGE("Kadabra: DIFESA\ndiminuisce!");
         NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-        MESSAGE("Abra's Defense fell!");
+        MESSAGE("Abra: DIFESA\ndiminuisce!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
-        MESSAGE("Kadabra's Defense fell!");
+        MESSAGE("Kadabra: DIFESA\ndiminuisce!");
     }
 }
 

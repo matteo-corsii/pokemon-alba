@@ -21,35 +21,35 @@ DOUBLE_BATTLE_TEST("Competitive sharply raises player's Sp. Atk after Intimidate
         //1st mon Intimidate
         ABILITY_POPUP(opponentLeft, ABILITY_INTIMIDATE);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-        MESSAGE("Igglybuff's Attack fell!");
+        MESSAGE("Igglybuff: ATTACCO\ndiminuisce!");
         if (abilityLeft == ABILITY_COMPETITIVE) {
             ABILITY_POPUP(playerLeft, ABILITY_COMPETITIVE);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-            MESSAGE("Igglybuff's Sp. Atk rose sharply!");
+            MESSAGE("Igglybuff: ATT. SPECIALE\naumenta di molto!");
         }
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
-        MESSAGE("Jigglypuff's Attack fell!");
+        MESSAGE("Jigglypuff: ATTACCO\ndiminuisce!");
         if (abilityRight == ABILITY_COMPETITIVE) {
             ABILITY_POPUP(playerRight, ABILITY_COMPETITIVE);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
-            MESSAGE("Jigglypuff's Sp. Atk rose sharply!");
+            MESSAGE("Jigglypuff: ATT. SPECIALE\naumenta di molto!");
         }
 
         //2nd mon Intimidate
         ABILITY_POPUP(opponentRight, ABILITY_INTIMIDATE);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-        MESSAGE("Igglybuff's Attack fell!");
+        MESSAGE("Igglybuff: ATTACCO\ndiminuisce!");
         if (abilityLeft == ABILITY_COMPETITIVE) {
             ABILITY_POPUP(playerLeft, ABILITY_COMPETITIVE);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-            MESSAGE("Igglybuff's Sp. Atk rose sharply!");
+            MESSAGE("Igglybuff: ATT. SPECIALE\naumenta di molto!");
         }
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
-        MESSAGE("Jigglypuff's Attack fell!");
+        MESSAGE("Jigglypuff: ATTACCO\ndiminuisce!");
         if (abilityRight == ABILITY_COMPETITIVE) {
             ABILITY_POPUP(playerRight, ABILITY_COMPETITIVE);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
-            MESSAGE("Jigglypuff's Sp. Atk rose sharply!");
+            MESSAGE("Jigglypuff: ATT. SPECIALE\naumenta di molto!");
         }
     } THEN {
         EXPECT_EQ(playerLeft->statStages[STAT_SPATK], DEFAULT_STAT_STAGE + (abilityLeft == ABILITY_COMPETITIVE ? 4 : 0));
@@ -78,35 +78,35 @@ DOUBLE_BATTLE_TEST("Competitive sharply raises opponent's Sp. Atk after Intimida
         //1st mon Intimidate
         ABILITY_POPUP(playerLeft, ABILITY_INTIMIDATE);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
-        MESSAGE("The opposing Igglybuff's Attack fell!");
+        MESSAGE("Igglybuff avversario: ATTACCO\ndiminuisce!");
         if (abilityLeft == ABILITY_COMPETITIVE) {
             ABILITY_POPUP(opponentLeft, ABILITY_COMPETITIVE);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
-            MESSAGE("The opposing Igglybuff's Sp. Atk rose sharply!");
+            MESSAGE("Igglybuff avversario: ATT. SPECIALE\naumenta di molto!");
         }
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
-        MESSAGE("The opposing Jigglypuff's Attack fell!");
+        MESSAGE("Jigglypuff avversario: ATTACCO\ndiminuisce!");
         if (abilityRight == ABILITY_COMPETITIVE) {
             ABILITY_POPUP(opponentRight, ABILITY_COMPETITIVE);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
-            MESSAGE("The opposing Jigglypuff's Sp. Atk rose sharply!");
+            MESSAGE("Jigglypuff avversario: ATT. SPECIALE\naumenta di molto!");
         }
 
         //2nd mon Intimidate
         ABILITY_POPUP(playerRight, ABILITY_INTIMIDATE);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
-        MESSAGE("The opposing Igglybuff's Attack fell!");
+        MESSAGE("Igglybuff avversario: ATTACCO\ndiminuisce!");
         if (abilityLeft == ABILITY_COMPETITIVE) {
             ABILITY_POPUP(opponentLeft, ABILITY_COMPETITIVE);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
-            MESSAGE("The opposing Igglybuff's Sp. Atk rose sharply!");
+            MESSAGE("Igglybuff avversario: ATT. SPECIALE\naumenta di molto!");
         }
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
-        MESSAGE("The opposing Jigglypuff's Attack fell!");
+        MESSAGE("Jigglypuff avversario: ATTACCO\ndiminuisce!");
         if (abilityRight == ABILITY_COMPETITIVE) {
             ABILITY_POPUP(opponentRight, ABILITY_COMPETITIVE);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
-            MESSAGE("The opposing Jigglypuff's Sp. Atk rose sharply!");
+            MESSAGE("Jigglypuff avversario: ATT. SPECIALE\naumenta di molto!");
         }
     } THEN {
         EXPECT_EQ(opponentLeft->statStages[STAT_SPATK], DEFAULT_STAT_STAGE + (abilityLeft == ABILITY_COMPETITIVE ? 4 : 0));
@@ -129,11 +129,11 @@ SINGLE_BATTLE_TEST("Competitive activates after Sticky Web lowers Speed")
         SEND_IN_MESSAGE("Igglybuff");
         MESSAGE("Igglybuff was caught in a sticky web!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Igglybuff's Speed fell!");
+        MESSAGE("Igglybuff: VELOCITÀ\ndiminuisce!");
         // Competitive activates
         ABILITY_POPUP(player, ABILITY_COMPETITIVE);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Igglybuff's Sp. Atk rose sharply!");
+        MESSAGE("Igglybuff: ATT. SPECIALE\naumenta di molto!");
     }
 }
 
@@ -154,12 +154,12 @@ SINGLE_BATTLE_TEST("Competitive doesn't activate after Sticky Web lowers Speed i
         SEND_IN_MESSAGE("Igglybuff");
         MESSAGE("Igglybuff was caught in a sticky web!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Igglybuff's Speed fell!");
+        MESSAGE("Igglybuff: VELOCITÀ\ndiminuisce!");
         // Competitive doesn't activate
         NONE_OF {
             ABILITY_POPUP(player, ABILITY_COMPETITIVE);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-            MESSAGE("Igglybuff's Sp. Atk rose sharply!");
+            MESSAGE("Igglybuff: ATT. SPECIALE\naumenta di molto!");
         }
     }
 }
@@ -182,20 +182,20 @@ SINGLE_BATTLE_TEST("Competitive correctly activates after Sticky Web lowers Spee
         SEND_IN_MESSAGE("Igglybuff");
         MESSAGE("Igglybuff was caught in a sticky web!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Igglybuff's Speed fell!");
+        MESSAGE("Igglybuff: VELOCITÀ\ndiminuisce!");
         // Competitive doesn't activate
         NONE_OF {
             ABILITY_POPUP(player, ABILITY_COMPETITIVE);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-            MESSAGE("Igglybuff's Sp. Atk rose sharply!");
+            MESSAGE("Igglybuff: ATT. SPECIALE\naumenta di molto!");
         }
         // Competitive triggers correctly after Sticky Web
         ANIMATION(ANIM_TYPE_MOVE, MOVE_GROWL, opponent);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Igglybuff's Attack fell!");
+        MESSAGE("Igglybuff: ATTACCO\ndiminuisce!");
         ABILITY_POPUP(player, ABILITY_COMPETITIVE);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Igglybuff's Sp. Atk rose sharply!");
+        MESSAGE("Igglybuff: ATT. SPECIALE\naumenta di molto!");
     }
 }
 
@@ -213,19 +213,19 @@ DOUBLE_BATTLE_TEST("Competitive is activated by Cotton Down for non-ally pokemon
         ABILITY_POPUP(opponentLeft, ABILITY_COTTON_DOWN);
 
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
-        MESSAGE("The opposing Igglybuff's Speed fell!");
+        MESSAGE("Igglybuff avversario: VELOCITÀ\ndiminuisce!");
 
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-        MESSAGE("Igglybuff's Speed fell!");
+        MESSAGE("Igglybuff: VELOCITÀ\ndiminuisce!");
         ABILITY_POPUP(playerLeft, ABILITY_COMPETITIVE);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-        MESSAGE("Igglybuff's Sp. Atk rose sharply!");
+        MESSAGE("Igglybuff: ATT. SPECIALE\naumenta di molto!");
 
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
-        MESSAGE("Igglybuff's Speed fell!");
+        MESSAGE("Igglybuff: VELOCITÀ\ndiminuisce!");
         ABILITY_POPUP(playerRight, ABILITY_COMPETITIVE);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
-        MESSAGE("Igglybuff's Sp. Atk rose sharply!");
+        MESSAGE("Igglybuff: ATT. SPECIALE\naumenta di molto!");
 
     } THEN {
         EXPECT_EQ(playerLeft->statStages[STAT_SPEED], DEFAULT_STAT_STAGE - 1);
@@ -351,7 +351,7 @@ SINGLE_BATTLE_TEST("Competitive activates before White Herb")
 
         ABILITY_POPUP(player, ABILITY_COMPETITIVE);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Igglybuff's Sp. Atk rose sharply!");
+        MESSAGE("Igglybuff: ATT. SPECIALE\naumenta di molto!");
 
         if (move == MOVE_LEER) {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
@@ -384,15 +384,15 @@ SINGLE_BATTLE_TEST("Competitive activates for each stat that is lowered")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TICKLE, opponent);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
 
-        MESSAGE("Igglybuff's Attack fell!");
+        MESSAGE("Igglybuff: ATTACCO\ndiminuisce!");
         ABILITY_POPUP(player, ABILITY_COMPETITIVE);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Igglybuff's Sp. Atk rose sharply!");
+        MESSAGE("Igglybuff: ATT. SPECIALE\naumenta di molto!");
 
-        MESSAGE("Igglybuff's Defense fell!");
+        MESSAGE("Igglybuff: DIFESA\ndiminuisce!");
         ABILITY_POPUP(player, ABILITY_COMPETITIVE);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Igglybuff's Sp. Atk rose sharply!");
+        MESSAGE("Igglybuff: ATT. SPECIALE\naumenta di molto!");
 
     } THEN {
         EXPECT_EQ(player->statStages[STAT_SPATK], DEFAULT_STAT_STAGE + 4);
@@ -424,7 +424,7 @@ SINGLE_BATTLE_TEST("Competitive doesn't activate if the pokemon lowers it's own 
         NONE_OF {
             ABILITY_POPUP(player, ABILITY_COMPETITIVE);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-            MESSAGE("Igglybuff's Sp. Atk rose sharply!");
+            MESSAGE("Igglybuff: ATT. SPECIALE\naumenta di molto!");
         }
     } THEN {
         if (move == MOVE_SUPERPOWER)

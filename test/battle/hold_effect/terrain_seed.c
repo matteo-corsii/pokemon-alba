@@ -32,15 +32,15 @@ SINGLE_BATTLE_TEST("Electric Seed raises the holder's Defense on Electric Terrai
         TURN { SWITCH(player, 1); }
     } SCENE {
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("The Electric Seed boosted Wobbuffet's Defense!");
+        MESSAGE("Electric Seed: DIFESA\naumenta!");
         if (item == ITEM_ELECTRIC_SEED) {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-            MESSAGE("The Electric Seed boosted the opposing Tapu Koko's Defense!");
+            MESSAGE("Electric Seed: DIFESA\naumenta!");
         }
         SWITCH_OUT_MESSAGE("Wobbuffet");
         SEND_IN_MESSAGE("Wobbuffet");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("The Electric Seed boosted Wobbuffet's Defense!");
+        MESSAGE("Electric Seed: DIFESA\naumenta!");
     } THEN {
         EXPECT_EQ(player->statStages[STAT_DEF], DEFAULT_STAT_STAGE + 1);
     }
@@ -64,15 +64,15 @@ SINGLE_BATTLE_TEST("Grassy Seed raises the holder's Defense on Grassy Terrain")
         TURN { SWITCH(player, 1); }
     } SCENE {
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("The Grassy Seed boosted Wobbuffet's Defense!");
+        MESSAGE("Grassy Seed: DIFESA\naumenta!");
         if (item == ITEM_GRASSY_SEED) {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-            MESSAGE("The Grassy Seed boosted the opposing Tapu Bulu's Defense!");
+            MESSAGE("Grassy Seed: DIFESA\naumenta!");
         }
         SWITCH_OUT_MESSAGE("Wobbuffet");
         SEND_IN_MESSAGE("Wobbuffet");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("The Grassy Seed boosted Wobbuffet's Defense!");
+        MESSAGE("Grassy Seed: DIFESA\naumenta!");
     } THEN {
         EXPECT_EQ(player->statStages[STAT_DEF], DEFAULT_STAT_STAGE + 1);
     }
@@ -96,15 +96,15 @@ SINGLE_BATTLE_TEST("Misty Seed raises the holder's Sp. Defense on Misty Terrain"
         TURN { SWITCH(player, 1); }
     } SCENE {
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("The Misty Seed boosted Wobbuffet's Sp. Def!");
+        MESSAGE("Misty Seed: DIF. SPECIALE\naumenta!");
         if (item == ITEM_MISTY_SEED) {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-            MESSAGE("The Misty Seed boosted the opposing Tapu Fini's Sp. Def!");
+            MESSAGE("Misty Seed: DIF. SPECIALE\naumenta!");
         }
         SWITCH_OUT_MESSAGE("Wobbuffet");
         SEND_IN_MESSAGE("Wobbuffet");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("The Misty Seed boosted Wobbuffet's Sp. Def!");
+        MESSAGE("Misty Seed: DIF. SPECIALE\naumenta!");
     } THEN {
         EXPECT_EQ(player->statStages[STAT_SPDEF], DEFAULT_STAT_STAGE + 1);
     }
@@ -128,15 +128,15 @@ SINGLE_BATTLE_TEST("Psychic Seed raises the holder's Sp. Defense on Psychic Terr
         TURN { SWITCH(player, 1); }
     } SCENE {
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("The Psychic Seed boosted Wobbuffet's Sp. Def!");
+        MESSAGE("Psychic Seed: DIF. SPECIALE\naumenta!");
         if (item == ITEM_PSYCHIC_SEED) {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-            MESSAGE("The Psychic Seed boosted the opposing Tapu Lele's Sp. Def!");
+            MESSAGE("Psychic Seed: DIF. SPECIALE\naumenta!");
         }
         SWITCH_OUT_MESSAGE("Wobbuffet");
         SEND_IN_MESSAGE("Wobbuffet");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("The Psychic Seed boosted Wobbuffet's Sp. Def!");
+        MESSAGE("Psychic Seed: DIF. SPECIALE\naumenta!");
     } THEN {
         EXPECT_EQ(player->statStages[STAT_SPDEF], DEFAULT_STAT_STAGE + 1);
     }
@@ -174,9 +174,9 @@ SINGLE_BATTLE_TEST("Electric Seed is consumed on Electric Terrain before other a
     } SCENE {
         ABILITY_POPUP(opponent, ABILITY_ELECTRIC_SURGE);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The Electric Seed boosted the opposing Tapu Koko's Defense!");
+        MESSAGE("Electric Seed: DIFESA\naumenta!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("The Electric Seed boosted Tapu Bulu's Defense!");
+        MESSAGE("Electric Seed: DIFESA\naumenta!");
         ABILITY_POPUP(player, ABILITY_GRASSY_SURGE);
     }
 }
@@ -195,7 +195,7 @@ SINGLE_BATTLE_TEST("Electric Seed doesn't activate on existing Electric Terrain 
         SEND_IN_MESSAGE("Tapu Bulu");
         NONE_OF {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-            MESSAGE("The Electric Seed boosted Tapu Bulu's Defense!");
+            MESSAGE("Electric Seed: DIFESA\naumenta!");
         }
         ABILITY_POPUP(player, ABILITY_GRASSY_SURGE);
     }

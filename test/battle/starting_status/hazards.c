@@ -81,7 +81,7 @@ SINGLE_BATTLE_TEST("Starting Sticky Web lowers Speed on entry")
     } SCENE {
         MESSAGE("2 sent out Wynaut!");
         MESSAGE("The opposing Wynaut was caught in a sticky web!");
-        MESSAGE("The opposing Wynaut's Speed fell!");
+        MESSAGE("Wynaut avversario: VELOCITÀ\ndiminuisce!");
     } THEN {
         ResetStartingStatuses();
     }
@@ -211,7 +211,7 @@ SINGLE_BATTLE_TEST("Starting Sticky Web lowers Speed on player's entry")
     } SCENE {
         MESSAGE("Go! Wynaut!");
         MESSAGE("Wynaut was caught in a sticky web!");
-        MESSAGE("Wynaut's Speed fell!");
+        MESSAGE("Wynaut: VELOCITÀ\ndiminuisce!");
     } THEN {
         ResetStartingStatuses();
     }

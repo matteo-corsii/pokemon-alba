@@ -95,7 +95,7 @@ SINGLE_BATTLE_TEST("Liquid Ooze causes Strength Sap users to lose HP instead of 
         MESSAGE("Wobbuffet usa\nStrength Sap!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STRENGTH_SAP, player);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Tentacool's Attack fell!");
+        MESSAGE("Tentacool avversario: ATTACCO\ndiminuisce!");
         ABILITY_POPUP(opponent, ABILITY_LIQUID_OOZE);
         HP_BAR(player, captureDamage: &lostHp);
         MESSAGE("Wobbuffet sucked up the liquid ooze!");

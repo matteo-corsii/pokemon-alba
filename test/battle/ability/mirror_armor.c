@@ -39,7 +39,7 @@ SINGLE_BATTLE_TEST("Mirror Armor triggers even if the attacking Pokemon also has
         ABILITY_POPUP(player, ABILITY_MIRROR_ARMOR);
         NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Corviknight's Defense fell!");
+        MESSAGE("Corviknight avversario: DIFESA\ndiminuisce!");
     } THEN {
         EXPECT_EQ(player->statStages[STAT_DEF], DEFAULT_STAT_STAGE);
         EXPECT_EQ(opponent->statStages[STAT_DEF], DEFAULT_STAT_STAGE - 1);
@@ -75,7 +75,7 @@ SINGLE_BATTLE_TEST("Mirror Armor lowers the Attack of Pokemon with Intimidate")
         ABILITY_POPUP(opponent, ABILITY_INTIMIDATE);
         ABILITY_POPUP(player, ABILITY_MIRROR_ARMOR);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Gyarados's Attack fell!");
+        MESSAGE("Gyarados avversario: ATTACCO\ndiminuisce!");
     } THEN {
         EXPECT_EQ(player->statStages[STAT_ATK], DEFAULT_STAT_STAGE);
         EXPECT_EQ(opponent->statStages[STAT_ATK], DEFAULT_STAT_STAGE - 1);
@@ -113,7 +113,7 @@ SINGLE_BATTLE_TEST("Mirror Armor raises the stat of an attacking Pokemon with Co
         MESSAGE("Shuckle avversario usa\nFULMISGUARDO!");
         ABILITY_POPUP(player, ABILITY_MIRROR_ARMOR);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Shuckle's Defense rose!");
+        MESSAGE("Shuckle avversario: DIFESA\naumenta!");
     } THEN {
         EXPECT_EQ(player->statStages[STAT_DEF], DEFAULT_STAT_STAGE);
         EXPECT_EQ(opponent->statStages[STAT_DEF], DEFAULT_STAT_STAGE + 1);
@@ -137,7 +137,7 @@ SINGLE_BATTLE_TEST("Mirror Armor doesn't lower the stat of the attacking Pokemon
         MESSAGE("Wynaut avversario usa\nFULMISGUARDO!");
         ABILITY_POPUP(player, ABILITY_MIRROR_ARMOR);
         NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Wynaut's Defense won't go any lower!");
+        MESSAGE("Wynaut avversario: DIFESA\nnon può diminuire oltre!");
     } THEN {
         EXPECT_EQ(player->statStages[STAT_DEF], DEFAULT_STAT_STAGE);
         EXPECT_EQ(opponent->statStages[STAT_DEF], MIN_STAT_STAGE);
@@ -170,7 +170,7 @@ DOUBLE_BATTLE_TEST("Mirror Armor lowers Speed of the partner Pokemon after Court
         MESSAGE("Corviknight was caught in a sticky web!");
         ABILITY_POPUP(playerRight, ABILITY_MIRROR_ARMOR);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-        MESSAGE("Wobbuffet's Speed fell!");
+        MESSAGE("Wobbuffet: VELOCITÀ\ndiminuisce!");
     }
 }
 

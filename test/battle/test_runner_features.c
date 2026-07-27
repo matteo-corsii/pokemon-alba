@@ -22,7 +22,7 @@ SINGLE_BATTLE_TEST("Forced abilities activate on switch-in")
         ABILITY_POPUP(opponent, ABILITY_ELECTRIC_SURGE);
         ABILITY_POPUP(player, ABILITY_QUARK_DRIVE);
         MESSAGE("The Electric Terrain activated Kadabra's Quark Drive!");
-        MESSAGE("Kadabra's Sp. Atk was heightened!");
+        MESSAGE("Kadabra: ATT. SPECIALE\naumenta!");
     }
 }
 

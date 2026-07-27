@@ -51,8 +51,8 @@ SINGLE_BATTLE_TEST("Stuff Cheeks raises Defense by 2 stages after consuming the 
     } SCENE {
         MESSAGE("Skwovet usa\nStuff Cheeks!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STUFF_CHEEKS, player);
-        MESSAGE("The Liechi Berry boosted Skwovet's Attack!");
-        MESSAGE("Skwovet's Defense rose sharply!");
+        MESSAGE("Liechi Berry: ATTACCO\naumenta!");
+        MESSAGE("Skwovet: DIFESA\naumenta di molto!");
     } THEN {
         EXPECT_EQ(player->statStages[STAT_DEF], DEFAULT_STAT_STAGE + 2);
         EXPECT_EQ(player->item, ITEM_NONE);
@@ -85,7 +85,7 @@ SINGLE_BATTLE_TEST("Stuff Cheeks can be used even if Magic Room is active")
     } SCENE {
         MESSAGE("Skwovet usa\nStuff Cheeks!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STUFF_CHEEKS, player);
-        MESSAGE("The Liechi Berry boosted Skwovet's Attack!");
+        MESSAGE("Liechi Berry: ATTACCO\naumenta!");
     }
 }
 

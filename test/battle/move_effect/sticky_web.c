@@ -22,7 +22,7 @@ SINGLE_BATTLE_TEST("Sticky Web lowers Speed by 1 on switch-in")
         MESSAGE("2 sent out Wynaut!");
         MESSAGE("The opposing Wynaut was caught in a sticky web!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Wynaut's Speed fell!");
+        MESSAGE("Wynaut avversario: VELOCITÀ\ndiminuisce!");
     }
 }
 
@@ -68,10 +68,10 @@ DOUBLE_BATTLE_TEST("Sticky Web lowers Speed by 1 in a double battle after Explos
         MESSAGE("2 sent out Alakazam!");
         MESSAGE("The opposing Alakazam was caught in a sticky web!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
-        MESSAGE("The opposing Alakazam's Speed fell!");
+        MESSAGE("Alakazam avversario: VELOCITÀ\ndiminuisce!");
         MESSAGE("The opposing Wynaut was caught in a sticky web!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
-        MESSAGE("The opposing Wynaut's Speed fell!");
+        MESSAGE("Wynaut avversario: VELOCITÀ\ndiminuisce!");
     }
 }
 
@@ -91,7 +91,7 @@ SINGLE_BATTLE_TEST("Sticky Web raises Speed by 1 for a Pokemon with Contrary")
         MESSAGE("2 sent out Shuckle!");
         MESSAGE("The opposing Shuckle was caught in a sticky web!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Shuckle's Speed rose!");
+        MESSAGE("Shuckle avversario: VELOCITÀ\naumenta!");
     }
 }
 
@@ -129,12 +129,12 @@ DOUBLE_BATTLE_TEST("Sticky Web has correct interactions with Mirror Armor - the 
         ABILITY_POPUP(playerRight, ABILITY_MIRROR_ARMOR);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, BATTLER_OPPONENT);
         if (opponentSetUpper == 0) {
-            MESSAGE("The opposing Caterpie's Speed fell!");
+            MESSAGE("Caterpie avversario: VELOCITÀ\ndiminuisce!");
             NONE_OF {
                 MESSAGE("The opposing Caterpie was caught in a sticky web!");
             }
         } else {
-            MESSAGE("The opposing Weedle's Speed fell!");
+            MESSAGE("Weedle avversario: VELOCITÀ\ndiminuisce!");
             NONE_OF {
                 MESSAGE("The opposing Weedle was caught in a sticky web!");
             }
@@ -301,6 +301,6 @@ DOUBLE_BATTLE_TEST("Sticky Web setter has their speed lowered with Mirror Armor 
         ABILITY_POPUP(playerRight, ABILITY_MIRROR_ARMOR);
         // sticky web setter - caterpie (now opponentRight) gets speed lowered
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
-        MESSAGE("The opposing Caterpie's Speed fell!");
+        MESSAGE("Caterpie avversario: VELOCITÀ\ndiminuisce!");
     }
 }

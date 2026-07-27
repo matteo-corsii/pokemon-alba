@@ -16,9 +16,9 @@ SINGLE_BATTLE_TEST("Spicy Extract raises target's Attack by 2 stages and lowers 
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SPICY_EXTRACT, player);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Wobbuffet's Attack rose sharply!");
+        MESSAGE("Wobbuffet avversario: ATTACCO\naumenta di molto!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Wobbuffet's Defense harshly fell!");
+        MESSAGE("Wobbuffet avversario: DIFESA\ndiminuisce di molto!");
     } THEN {
         EXPECT_EQ(opponent->statStages[STAT_ATK], DEFAULT_STAT_STAGE + 2);
         EXPECT_EQ(opponent->statStages[STAT_DEF], DEFAULT_STAT_STAGE - 2);
@@ -73,13 +73,13 @@ SINGLE_BATTLE_TEST("Spicy Extract Defense loss is prevented by Big Pecks")
         MESSAGE("Wobbuffet usa\nSpicy Extract!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SPICY_EXTRACT, player);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Pidgey's Attack rose sharply!");
+        MESSAGE("Pidgey avversario: ATTACCO\naumenta di molto!");
         NONE_OF {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-            MESSAGE("The opposing Wobbuffet's Defense harshly fell!");
+            MESSAGE("Wobbuffet avversario: DIFESA\ndiminuisce di molto!");
         }
         ABILITY_POPUP(opponent, ABILITY_BIG_PECKS);
-        MESSAGE("The opposing Pidgey's Defense was not lowered!");
+        MESSAGE("Pidgey avversario: DIFESA\nriduzione impedita!");
     }
 }
 
@@ -96,9 +96,9 @@ SINGLE_BATTLE_TEST("Spicy Extract bypasses accuracy checks")
         NOT MESSAGE("The opposing Wobbuffet avoided the attack!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SPICY_EXTRACT, player);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Wobbuffet's Attack rose sharply!");
+        MESSAGE("Wobbuffet avversario: ATTACCO\naumenta di molto!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Wobbuffet's Defense harshly fell!");
+        MESSAGE("Wobbuffet avversario: DIFESA\ndiminuisce di molto!");
     }
 }
 
@@ -130,10 +130,10 @@ SINGLE_BATTLE_TEST("Spicy Extract stat changes will be inverted by Contrary")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SPICY_EXTRACT, player);
 
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Snivy's Attack harshly fell!");
+        MESSAGE("Snivy avversario: ATTACCO\ndiminuisce di molto!");
 
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Snivy's Defense rose sharply!");
+        MESSAGE("Snivy avversario: DIFESA\naumenta di molto!");
     } THEN {
         EXPECT_EQ(opponent->statStages[STAT_ATK], DEFAULT_STAT_STAGE - 2);
         EXPECT_EQ(opponent->statStages[STAT_DEF], DEFAULT_STAT_STAGE + 2);
@@ -152,11 +152,11 @@ SINGLE_BATTLE_TEST("Spicy Extract against Clear Amulet and Contrary raises Defen
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SPICY_EXTRACT, player);
         NONE_OF {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-            MESSAGE("The opposing Snivy's Attack harshly fell!");
+            MESSAGE("Snivy avversario: ATTACCO\ndiminuisce di molto!");
         }
         MESSAGE("The effects of the Clear Amulet held by the opposing Snivy prevents its stats from being lowered!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Snivy's Defense rose sharply!");
+        MESSAGE("Snivy avversario: DIFESA\naumenta di molto!");
     } THEN {
         EXPECT_EQ(opponent->statStages[STAT_ATK], DEFAULT_STAT_STAGE);
         EXPECT_EQ(opponent->statStages[STAT_DEF], DEFAULT_STAT_STAGE + 2);

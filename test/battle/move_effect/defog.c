@@ -30,7 +30,7 @@ SINGLE_BATTLE_TEST("Defog lowers evasiveness by 1 stage")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DEFOG, player);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Wobbuffet's evasiveness fell!");
+        MESSAGE("Wobbuffet avversario: ELUSIONE\ndiminuisce!");
     } THEN {
         EXPECT_EQ(opponent->statStages[STAT_EVASION], DEFAULT_STAT_STAGE - 1);
     }
@@ -51,10 +51,10 @@ SINGLE_BATTLE_TEST("Defog fails if target has minimum evasion stat change")
         {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_DEFOG, player);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-            MESSAGE("The opposing Numel's evasiveness harshly fell!");
+            MESSAGE("Numel avversario: ELUSIONE\ndiminuisce di molto!");
         }
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_DEFOG, player);
-        MESSAGE("The opposing Numel's evasiveness won't go any lower!");
+        MESSAGE("Numel avversario: ELUSIONE\nnon può diminuire oltre!");
     } THEN {
         EXPECT_EQ(opponent->statStages[STAT_EVASION], DEFAULT_STAT_STAGE - 6);
     }
@@ -74,7 +74,7 @@ SINGLE_BATTLE_TEST("Defog lowers evasiveness of target behind Substitute (Gen4)"
         NOT MESSAGE("But it failed!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DEFOG, player);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Wobbuffet's evasiveness fell!");
+        MESSAGE("Wobbuffet avversario: ELUSIONE\ndiminuisce!");
     } THEN {
         EXPECT_EQ(opponent->statStages[STAT_EVASION], DEFAULT_STAT_STAGE - 1);
     }
@@ -96,7 +96,7 @@ SINGLE_BATTLE_TEST("Defog fails if target has minimum evasion stat change behind
         MESSAGE("Wobbuffet avversario usa\nSubstitute!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DEFOG, player);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Wobbuffet's evasiveness harshly fell!");
+        MESSAGE("Wobbuffet avversario: ELUSIONE\ndiminuisce di molto!");
         MESSAGE("But it failed!");
     } THEN {
         EXPECT_EQ(opponent->statStages[STAT_EVASION], DEFAULT_STAT_STAGE - 6);
@@ -125,14 +125,14 @@ SINGLE_BATTLE_TEST("Defog does not lower evasiveness if target behind Substitute
             NONE_OF {
                 ANIMATION(ANIM_TYPE_MOVE, MOVE_DEFOG, player);
                 ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-                MESSAGE("The opposing Wobbuffet's evasiveness fell!");
+                MESSAGE("Wobbuffet avversario: ELUSIONE\ndiminuisce!");
             }
         }
         else
         {
             NONE_OF {
                 ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-                MESSAGE("The opposing Wobbuffet's evasiveness fell!");
+                MESSAGE("Wobbuffet avversario: ELUSIONE\ndiminuisce!");
             }
         }
     } THEN {
@@ -312,14 +312,14 @@ DOUBLE_BATTLE_TEST("Defog removes Stealth Rock and Sticky Web from target's side
             MESSAGE("Pointed stones dug into Wobbuffet!");
             MESSAGE("Wobbuffet was caught in a sticky web!");
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-            MESSAGE("Wobbuffet's Speed fell!");
+            MESSAGE("Wobbuffet: VELOCITÀ\ndiminuisce!");
         } else {
             NONE_OF {
                 HP_BAR(playerLeft);
                 MESSAGE("Pointed stones dug into Wobbuffet!");
                 MESSAGE("Wobbuffet was caught in a sticky web!");
                 ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-                MESSAGE("Wobbuffet's Speed fell!");
+                MESSAGE("Wobbuffet: VELOCITÀ\ndiminuisce!");
             }
         }
     } THEN {
@@ -366,14 +366,14 @@ DOUBLE_BATTLE_TEST("Defog removes Stealth Rock and Sticky Web from user's side (
             MESSAGE("Pointed stones dug into Wobbuffet!");
             MESSAGE("Wobbuffet was caught in a sticky web!");
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-            MESSAGE("Wobbuffet's Speed fell!");
+            MESSAGE("Wobbuffet: VELOCITÀ\ndiminuisce!");
         } else {
             NONE_OF {
                 HP_BAR(playerLeft);
                 MESSAGE("Pointed stones dug into Wobbuffet!");
                 MESSAGE("Wobbuffet was caught in a sticky web!");
                 ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-                MESSAGE("Wobbuffet's Speed fell!");
+                MESSAGE("Wobbuffet: VELOCITÀ\ndiminuisce!");
             }
         }
     } THEN {
@@ -596,7 +596,7 @@ DOUBLE_BATTLE_TEST("Defog doesn't remove Aurora Veil from the user's side", s16 
         ANIMATION(ANIM_TYPE_MOVE, move, playerLeft);
         if (move == MOVE_DEFOG) {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
-            MESSAGE("The opposing Glalie's evasiveness fell!");
+            MESSAGE("Glalie avversario: ELUSIONE\ndiminuisce!");
         }
         NOT MESSAGE("Your team's Aurora Veil wore off!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponentLeft);
@@ -638,7 +638,7 @@ DOUBLE_BATTLE_TEST("Defog removes Aurora Veil from target's side", s16 damagePhy
         ANIMATION(ANIM_TYPE_MOVE, move, opponentLeft);
         if (move == MOVE_DEFOG) {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-            MESSAGE("Glalie's evasiveness fell!");
+            MESSAGE("Glalie: ELUSIONE\ndiminuisce!");
             MESSAGE("Your team's Aurora Veil wore off!");
         }
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponentLeft);

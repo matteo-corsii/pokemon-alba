@@ -22,7 +22,7 @@ SINGLE_BATTLE_TEST("Strength Sap lowers Attack by 1 and restores HP based on tar
         MESSAGE("Wobbuffet usa\nStrength Sap!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STRENGTH_SAP, player);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Wobbuffet's Attack fell!");
+        MESSAGE("Wobbuffet avversario: ATTACCO\ndiminuisce!");
         HP_BAR(player, captureDamage: &results[i].hp);
         MESSAGE("The opposing Wobbuffet had its energy drained!");
     } THEN {
@@ -49,7 +49,7 @@ SINGLE_BATTLE_TEST("Strength Sap works exactly the same when attacker is behind 
         MESSAGE("Wobbuffet usa\nStrength Sap!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STRENGTH_SAP, player);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Wobbuffet's Attack fell!");
+        MESSAGE("Wobbuffet avversario: ATTACCO\ndiminuisce!");
         HP_BAR(player, captureDamage: &results[i].hp);
         NOT MESSAGE("The substitute took damage for the opposing Wobbuffet!");
         MESSAGE("The opposing Wobbuffet had its energy drained!");
@@ -97,7 +97,7 @@ SINGLE_BATTLE_TEST("Strength Sap lowers Attack by 1 and restores HP based on tar
         MESSAGE("Wobbuffet usa\nStrength Sap!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STRENGTH_SAP, player);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Wobbuffet's Attack fell!");
+        MESSAGE("Wobbuffet avversario: ATTACCO\ndiminuisce!");
         HP_BAR(player, captureDamage: &results[i].hp);
         MESSAGE("The opposing Wobbuffet had its energy drained!");
     } THEN {
@@ -133,11 +133,11 @@ SINGLE_BATTLE_TEST("Strength Sap fails if target is at -6 Atk")
         NONE_OF {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_STRENGTH_SAP, player);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-            MESSAGE("The opposing Wobbuffet's Attack fell!");
+            MESSAGE("Wobbuffet avversario: ATTACCO\ndiminuisce!");
             HP_BAR(player);
             MESSAGE("The opposing Wobbuffet had its energy drained!");
         }
-        MESSAGE("The opposing Wobbuffet's Attack won't go any lower!");
+        MESSAGE("Wobbuffet avversario: ATTACCO\nnon può diminuire oltre!");
     }
 }
 
@@ -160,7 +160,7 @@ SINGLE_BATTLE_TEST("Strength Sap restores more HP if Big Root is held", s16 hp)
         MESSAGE("Wobbuffet usa\nStrength Sap!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STRENGTH_SAP, player);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Wobbuffet's Attack fell!");
+        MESSAGE("Wobbuffet avversario: ATTACCO\ndiminuisce!");
         HP_BAR(player, captureDamage: &results[i].hp);
         MESSAGE("The opposing Wobbuffet had its energy drained!");
     } FINALLY {
@@ -244,7 +244,7 @@ SINGLE_BATTLE_TEST("Strength Sap will drain users HP if target has Liquid Ooze")
         MESSAGE("Wobbuffet usa\nStrength Sap!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STRENGTH_SAP, player);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Tentacool's Attack fell!");
+        MESSAGE("Tentacool avversario: ATTACCO\ndiminuisce!");
         ABILITY_POPUP(opponent, ABILITY_LIQUID_OOZE);
         HP_BAR(player, captureDamage: &lostHp);
         MESSAGE("Wobbuffet sucked up the liquid ooze!");

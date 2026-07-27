@@ -28,7 +28,7 @@ DOUBLE_BATTLE_TEST("Sparkly Swirl cures the entire party")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SPARKLY_SWIRL, playerLeft);
         STATUS_ICON(playerLeft, none: TRUE);
         STATUS_ICON(playerRight, none: TRUE);
-        NOT MESSAGE("Wobbuffet was hurt by its poisoning!");
+        NOT MESSAGE("Wobbuffet soffre per\nl'avvelenamento!");
         for (i = 0; i < PARTY_SIZE; i++)
             EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_STATUS), STATUS1_NONE);
     }
@@ -106,9 +106,9 @@ DOUBLE_BATTLE_TEST("Heal Bell does not cure Soundproof partners (Gen 4, Gen 6+)"
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_HEAL_BELL, playerLeft);
         if (ability == ABILITY_SOUNDPROOF && config != GEN_5) {
-            MESSAGE("Exploud was hurt by its poisoning!");
+            MESSAGE("Exploud soffre per\nl'avvelenamento!");
         } else {
-            NOT MESSAGE("Exploud was hurt by its poisoning!");
+            NOT MESSAGE("Exploud soffre per\nl'avvelenamento!");
         }
     }
 }
@@ -135,9 +135,9 @@ SINGLE_BATTLE_TEST("Heal Bell cures inactive Soundproof Pokemon (Gen5+)")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_HEAL_BELL, player);
         SEND_IN_MESSAGE("Exploud");
         if (ability == ABILITY_SCRAPPY || config >= GEN_5) {
-            NOT MESSAGE("Exploud was hurt by its poisoning!");
+            NOT MESSAGE("Exploud soffre per\nl'avvelenamento!");
         } else {
-            MESSAGE("Exploud was hurt by its poisoning!");
+            MESSAGE("Exploud soffre per\nl'avvelenamento!");
         }
     }
 }
@@ -160,9 +160,9 @@ SINGLE_BATTLE_TEST("Heal Bell cures a Soundproof user (Gen5, Gen8+)")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_HEAL_BELL, player);
         if (config == GEN_5 || config >= GEN_8) {
-            NOT MESSAGE("Exploud was hurt by its poisoning!");
+            NOT MESSAGE("Exploud soffre per\nl'avvelenamento!");
         } else {
-            MESSAGE("Exploud was hurt by its poisoning!");
+            MESSAGE("Exploud soffre per\nl'avvelenamento!");
         }
     }
 }
@@ -189,8 +189,8 @@ DOUBLE_BATTLE_TEST("Aromatherapy cure Soundproof battlers regardless of config")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_AROMATHERAPY, playerLeft);
         NONE_OF {
-            MESSAGE("Exploud was hurt by its poisoning!");
-            MESSAGE("Wobbuffet was hurt by its poisoning!");
+            MESSAGE("Exploud soffre per\nl'avvelenamento!");
+            MESSAGE("Wobbuffet soffre per\nl'avvelenamento!");
         }
     }
 }
@@ -214,7 +214,7 @@ SINGLE_BATTLE_TEST("Aromatherapy cures inactive Soundproof Pokemon regardless of
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_AROMATHERAPY, player);
         SEND_IN_MESSAGE("Exploud");
-        NOT MESSAGE("Exploud was hurt by its poisoning!");
+        NOT MESSAGE("Exploud soffre per\nl'avvelenamento!");
     }
 }
 
@@ -231,7 +231,7 @@ DOUBLE_BATTLE_TEST("Aromatherapy will be blocked on ally by Sap Sipper but not u
     } SCENE {
         ABILITY_POPUP(playerRight, ABILITY_SAP_SIPPER);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
-        MESSAGE("Marill's Attack rose!");
+        MESSAGE("Marill: ATTACCO\naumenta!");
     } THEN {
         EXPECT_EQ(playerRight->statStages[STAT_ATK], DEFAULT_STAT_STAGE + 1);
     }

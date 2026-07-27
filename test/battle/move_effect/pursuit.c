@@ -474,7 +474,7 @@ SINGLE_BATTLE_TEST("Pursuited mon correctly switches out after it got hit and ac
         ANIMATION(ANIM_TYPE_MOVE, MOVE_PURSUIT, opponent);
         ABILITY_POPUP(player, ABILITY_TANGLING_HAIR);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Wynaut's Speed fell!");
+        MESSAGE("Wynaut avversario: VELOCITÀ\ndiminuisce!");
         SEND_IN_MESSAGE("Wobbuffet");
     }
 }
@@ -494,11 +494,11 @@ DOUBLE_BATTLE_TEST("Pursuited mon correctly switches out after it got hit and ac
         ANIMATION(ANIM_TYPE_MOVE, MOVE_PURSUIT, opponentLeft);
         ABILITY_POPUP(playerLeft, ABILITY_TANGLING_HAIR);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
-        MESSAGE("The opposing Wynaut's Speed fell!");
+        MESSAGE("Wynaut avversario: VELOCITÀ\ndiminuisce!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_PURSUIT, opponentRight);
         ABILITY_POPUP(playerLeft, ABILITY_TANGLING_HAIR);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
-        MESSAGE("The opposing Wobbuffet's Speed fell!");
+        MESSAGE("Wobbuffet avversario: VELOCITÀ\ndiminuisce!");
         SEND_IN_MESSAGE("Wobbuffet");
     }
 }
@@ -536,19 +536,19 @@ DOUBLE_BATTLE_TEST("Pursuited mon correctly switches out after it got hit and ac
         ANIMATION(ANIM_TYPE_MOVE, MOVE_PURSUIT, opponentLeft);
         ABILITY_POPUP(playerLeft, ABILITY_COTTON_DOWN);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
-        MESSAGE("Wobbuffet's Speed fell!");
+        MESSAGE("Wobbuffet: VELOCITÀ\ndiminuisce!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
-        MESSAGE("The opposing Wynaut's Speed fell!");
+        MESSAGE("Wynaut avversario: VELOCITÀ\ndiminuisce!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
-        MESSAGE("The opposing Wobbuffet's Speed fell!");
+        MESSAGE("Wobbuffet avversario: VELOCITÀ\ndiminuisce!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_PURSUIT, opponentRight);
         ABILITY_POPUP(playerLeft, ABILITY_COTTON_DOWN);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
-        MESSAGE("Wobbuffet's Speed fell!");
+        MESSAGE("Wobbuffet: VELOCITÀ\ndiminuisce!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
-        MESSAGE("The opposing Wynaut's Speed fell!");
+        MESSAGE("Wynaut avversario: VELOCITÀ\ndiminuisce!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
-        MESSAGE("The opposing Wobbuffet's Speed fell!");
+        MESSAGE("Wobbuffet avversario: VELOCITÀ\ndiminuisce!");
         SEND_IN_MESSAGE("Wobbuffet");
     }
 }

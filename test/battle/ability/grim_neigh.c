@@ -24,9 +24,9 @@ DOUBLE_BATTLE_TEST("Grim Neigh raises Sp. Attack by one stage after directly cau
         ABILITY_POPUP(playerLeft, abilityPopUp);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
         if (species == SPECIES_SPECTRIER)
-            MESSAGE("Spectrier's Sp. Atk rose drastically!");
+            MESSAGE("Spectrier: ATT. SPECIALE\naumenta drasticamente!");
         else
-            MESSAGE("Calyrex's Sp. Atk rose drastically!");
+            MESSAGE("Calyrex: ATT. SPECIALE\naumenta drasticamente!");
     } THEN {
         EXPECT_EQ(playerLeft->statStages[STAT_SPATK], DEFAULT_STAT_STAGE + 3);
     }
@@ -59,9 +59,9 @@ DOUBLE_BATTLE_TEST("Grim Neigh does not trigger if Pokemon faint to indirect dam
             NONE_OF {
                 ABILITY_POPUP(playerLeft, abilityPopUp);
                 ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-                MESSAGE("Salamence's Sp. Atk rose!");
-                MESSAGE("Spectrier's Sp. Atk rose!");
-                MESSAGE("Calyrex's Sp. Atk rose!");
+                MESSAGE("Salamence: ATT. SPECIALE\naumenta!");
+                MESSAGE("Spectrier: ATT. SPECIALE\naumenta!");
+                MESSAGE("Calyrex: ATT. SPECIALE\naumenta!");
             }
         }
     } THEN {
@@ -95,9 +95,9 @@ DOUBLE_BATTLE_TEST("Grim Neigh does not increase damage done by the same move th
         ABILITY_POPUP(playerLeft, abilityPopUp);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
         if (species == SPECIES_SPECTRIER)
-            MESSAGE("Spectrier's Sp. Atk rose!");
+            MESSAGE("Spectrier: ATT. SPECIALE\naumenta!");
         else
-            MESSAGE("Calyrex's Sp. Atk rose!");
+            MESSAGE("Calyrex: ATT. SPECIALE\naumenta!");
     } THEN {
         EXPECT_EQ(playerLeft->statStages[STAT_SPATK], DEFAULT_STAT_STAGE + 1);
         EXPECT_EQ(damage[0], damage[1]);

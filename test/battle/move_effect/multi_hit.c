@@ -166,9 +166,9 @@ SINGLE_BATTLE_TEST("Scale Shot decreases defense and increases speed after final
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCALE_SHOT, player);
         MESSAGE("The Pokémon was hit 5 time(s)!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Wobbuffet's Defense fell!");
+        MESSAGE("Wobbuffet: DIFESA\ndiminuisce!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Wobbuffet's Speed rose!");
+        MESSAGE("Wobbuffet: VELOCITÀ\naumenta!");
     }
 }
 
@@ -228,9 +228,9 @@ SINGLE_BATTLE_TEST("Scale Shot decreases defense and increases speed after the 4
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCALE_SHOT, player);
         MESSAGE("The Pokémon was hit 4 time(s)!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Wobbuffet's Defense fell!");
+        MESSAGE("Wobbuffet: DIFESA\ndiminuisce!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Wobbuffet's Speed rose!");
+        MESSAGE("Wobbuffet: VELOCITÀ\naumenta!");
     }
 }
 
@@ -254,9 +254,9 @@ SINGLE_BATTLE_TEST("Scale Shot decreases defense and increases speed after killi
         MESSAGE("Slugma avversario non ha\npiù energie!");
         MESSAGE("The Pokémon was hit 3 time(s)!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Bagon's Defense fell!");
+        MESSAGE("Bagon: DIFESA\ndiminuisce!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Bagon's Speed rose!");
+        MESSAGE("Bagon: VELOCITÀ\naumenta!");
     }
 }
 

@@ -81,7 +81,7 @@ SINGLE_BATTLE_TEST("Orichalcum Pulse triggers Protosynthesis before announcing i
         MESSAGE("The sunlight turned harsh!");
         ABILITY_POPUP(opponent, ABILITY_PROTOSYNTHESIS);
         MESSAGE("The harsh sunlight activated the opposing Walking Wake's Protosynthesis!");
-        MESSAGE("The opposing Walking Wake's Sp. Atk was heightened!");
+        MESSAGE("Walking Wake avversario: ATT. SPECIALE\naumenta!");
         MESSAGE("Koraidon turned the sunlight harsh, sending its ancient pulse into a frenzy!");
     }
 }

@@ -60,28 +60,28 @@ DOUBLE_BATTLE_TEST("Opportunist raises Attack only once when partner has Intimid
         ABILITY_POPUP(playerLeft, ABILITY_INTIMIDATE);
         if (abilityLeft == ABILITY_CONTRARY) {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
-            MESSAGE("The opposing Spinda's Attack rose!");
+            MESSAGE("Spinda avversario: ATTACCO\naumenta!");
         } else {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
-            MESSAGE("The opposing Spinda's Attack fell!");
+            MESSAGE("Spinda avversario: ATTACCO\ndiminuisce!");
         }
         if (abilityRight == ABILITY_CONTRARY) {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
-            MESSAGE("The opposing Spinda's Attack rose!");
+            MESSAGE("Spinda avversario: ATTACCO\naumenta!");
         } else {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
-            MESSAGE("The opposing Spinda's Attack fell!");
+            MESSAGE("Spinda avversario: ATTACCO\ndiminuisce!");
         }
 
         if ((abilityLeft == ABILITY_CONTRARY && abilityRight != ABILITY_CONTRARY)
                 || (abilityLeft != ABILITY_CONTRARY && abilityRight == ABILITY_CONTRARY)) {
             ABILITY_POPUP(playerRight, ABILITY_OPPORTUNIST);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
-            MESSAGE("Espathra's Attack rose!");
+            MESSAGE("Espathra: ATTACCO\naumenta!");
         } else if (abilityLeft == ABILITY_CONTRARY && abilityRight == ABILITY_CONTRARY) {
             ABILITY_POPUP(playerRight, ABILITY_OPPORTUNIST);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
-            MESSAGE("Espathra's Attack rose sharply!");
+            MESSAGE("Espathra: ATTACCO\naumenta di molto!");
         }
 
         HP_BAR(playerLeft, captureDamage: &results[i].damageLeft);
@@ -225,7 +225,7 @@ DOUBLE_BATTLE_TEST("Opportunist copies the stat of each Pokémon that were raise
         ABILITY_POPUP(opponentRight, ABILITY_INTREPID_SWORD);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
         ABILITY_POPUP(playerRight, ABILITY_OPPORTUNIST);
-        MESSAGE("Espathra's Attack rose sharply!");
+        MESSAGE("Espathra: ATTACCO\naumenta di molto!");
     } THEN {
         EXPECT_EQ(playerRight->statStages[STAT_ATK], DEFAULT_STAT_STAGE + 2);
     }

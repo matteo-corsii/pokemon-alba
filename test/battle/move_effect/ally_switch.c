@@ -56,11 +56,11 @@ DOUBLE_BATTLE_TEST("Ally Switch changes the position of battlers")
 
         MESSAGE("Kadabra avversario usa\nScreech!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-        MESSAGE("Wynaut's Defense harshly fell!");
+        MESSAGE("Wynaut: DIFESA\ndiminuisce di molto!");
 
         MESSAGE("Abra avversario usa\nScreech!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-        MESSAGE("Wynaut's Defense harshly fell!");
+        MESSAGE("Wynaut: DIFESA\ndiminuisce di molto!");
     } THEN {
         EXPECT_EQ(playerLeft->speed, 4);
         EXPECT_EQ(playerLeft->species, SPECIES_WYNAUT);

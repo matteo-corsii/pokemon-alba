@@ -30,11 +30,11 @@ DOUBLE_BATTLE_TEST("Commander increases all stats by 2 stages once it is trigger
         ABILITY_POPUP(playerLeft, ABILITY_COMMANDER);
         MESSAGE("Tatsugiri was swallowed by Dondozo and became Dondozo's commander!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
-        MESSAGE("Dondozo's Attack rose sharply!");
-        MESSAGE("Dondozo's Defense rose sharply!");
-        MESSAGE("Dondozo's Sp. Atk rose sharply!");
-        MESSAGE("Dondozo's Sp. Def rose sharply!");
-        MESSAGE("Dondozo's Speed rose sharply!");
+        MESSAGE("Dondozo: ATTACCO\naumenta di molto!");
+        MESSAGE("Dondozo: DIFESA\naumenta di molto!");
+        MESSAGE("Dondozo: ATT. SPECIALE\naumenta di molto!");
+        MESSAGE("Dondozo: DIF. SPECIALE\naumenta di molto!");
+        MESSAGE("Dondozo: VELOCITÀ\naumenta di molto!");
     } THEN {
         EXPECT_EQ(playerRight->statStages[STAT_ATK], DEFAULT_STAT_STAGE + 2);
         EXPECT_EQ(playerRight->statStages[STAT_DEF], DEFAULT_STAT_STAGE + 2);

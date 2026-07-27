@@ -30,7 +30,7 @@ Questa roadmap descrive una sequenza iniziale di attività. Ogni fase deve produ
 
 **Esito dell’apertura italiana:** l’interfaccia iniziale e l’introduzione tradotta sono state compilate e collaudate manualmente con successo, senza errori grafici, testi tagliati o problemi funzionali.
 
-**Esito del collaudo finale del prologo:** il pacchetto correttivo è stato completato senza blocchi o problemi grafici, ma il collaudo ha individuato alcuni messaggi di battaglia composti con prefissi inglesi e testo italiano. È stata preparata una correzione mirata di coerenza linguistica, senza modifiche alla logica di battaglia; la correzione non è ancora stata compilata né collaudata.
+**Esito del secondo collaudo del prologo:** il percorso è stato completato con entrambi i protagonisti senza blocchi o problemi di progressione. Il collaudo ha rilevato e corretto il testo tagliato di Via dell'Armonia, i messaggi residui di battaglia, i messaggi globali di consegna degli strumenti e il normale flusso di salvataggio. Le correzioni non modificano le relative meccaniche e attendono la validazione CI e la build privata finale.
 
 **Obiettivo:** verificare l’intero ciclo di modifica del gioco con un cambiamento semplice e facilmente riconoscibile.
 
@@ -112,7 +112,7 @@ Questa roadmap descrive una sequenza iniziale di attività. Ogni fase deve produ
 
 ## 11. Sviluppare eventi e dialoghi del prologo
 
-**Stato:** la mappa prototipo è stata collaudata e la pulizia di collisioni e alberi è completata. Il nuovo prologo comprende l'evento del campetto, il primo segnale sotterraneo e l'incarico di ricerca del Professor Lauro, che avvia la storia parallela sulla crisi idrica senza bloccare il viaggio principale. Questa milestone non è ancora stata compilata né collaudata nel gioco.
+**Stato:** la mappa prototipo e il nuovo prologo sono stati collaudati con entrambi i protagonisti. La pulizia finale di collisioni e alberi è completata; l'evento del campetto, il primo segnale sotterraneo e l'incarico di ricerca del Professor Lauro avviano la storia parallela sulla crisi idrica senza bloccare il viaggio principale. Il pacchetto finale di rifinitura attende la validazione CI e la build privata.
 
 **Obiettivo:** introdurre protagonista, quartiere, rivale, starter e primi segnali della crisi idrica attraverso il gioco.
 

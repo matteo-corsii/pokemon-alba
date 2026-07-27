@@ -513,23 +513,23 @@ SINGLE_BATTLE_TEST("Fling - thrown berry's effect activates for the target even 
         else if (statId != 0) {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
             if (statId == STAT_ATK) {
-                MESSAGE("The Liechi Berry boosted the opposing Wobbuffet's Attack!");
+                MESSAGE("Liechi Berry: ATTACCO\naumenta!");
             } else if (statId == STAT_DEF) {
                 if (item == ITEM_GANLON_BERRY) {
-                    MESSAGE("The Ganlon Berry boosted the opposing Wobbuffet's Defense!");
+                    MESSAGE("Ganlon Berry: DIFESA\naumenta!");
                 } else {
-                    MESSAGE("The Kee Berry boosted the opposing Wobbuffet's Defense!");
+                    MESSAGE("Kee Berry: DIFESA\naumenta!");
                 }
             } else if (statId == STAT_SPDEF) {
                 if (item == ITEM_APICOT_BERRY) {
-                    MESSAGE("The Apicot Berry boosted the opposing Wobbuffet's Sp. Def!");
+                    MESSAGE("Apicot Berry: DIF. SPECIALE\naumenta!");
                 } else {
-                    MESSAGE("The Maranga Berry boosted the opposing Wobbuffet's Sp. Def!");
+                    MESSAGE("Maranga Berry: DIF. SPECIALE\naumenta!");
                 }
             } else if (statId == STAT_SPEED) {
-                MESSAGE("The Salac Berry boosted the opposing Wobbuffet's Speed!");
+                MESSAGE("Salac Berry: VELOCITÀ\naumenta!");
             } else if (statId == STAT_SPATK) {
-                MESSAGE("The Petaya Berry boosted the opposing Wobbuffet's Sp. Atk!");
+                MESSAGE("Petaya Berry: ATT. SPECIALE\naumenta!");
             }
         }
     } THEN {

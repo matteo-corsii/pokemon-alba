@@ -171,7 +171,7 @@ DOUBLE_BATTLE_TEST("Costar's message displays correctly after all battlers faint
     } SCENE {
         MESSAGE("Wobbuffet avversario usa\nExplosion!");
         ABILITY_POPUP(playerLeft, ABILITY_INTREPID_SWORD);
-        MESSAGE("Zacian's Attack rose!");
+        MESSAGE("Zacian: ATTACCO\naumenta!");
         ABILITY_POPUP(playerRight, ABILITY_COSTAR);
         MESSAGE("Flamigo copied Zacian's stat changes!");
     }
@@ -200,7 +200,7 @@ DOUBLE_BATTLE_TEST("Costar's message displays correctly after all battlers faint
     } SCENE {
         MESSAGE("Wobbuffet usa\nExplosion!");
         ABILITY_POPUP(opponentLeft, ABILITY_INTREPID_SWORD);
-        MESSAGE("The opposing Zacian's Attack rose!");
+        MESSAGE("Zacian avversario: ATTACCO\naumenta!");
         ABILITY_POPUP(opponentRight, ABILITY_COSTAR);
         MESSAGE("The opposing Flamigo copied the opposing Zacian's stat changes!");
     }

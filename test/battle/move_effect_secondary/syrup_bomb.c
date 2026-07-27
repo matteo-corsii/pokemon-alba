@@ -22,14 +22,14 @@ SINGLE_BATTLE_TEST("Syrup Bomb covers the foe in sticky syrup for 3 turns")
         HP_BAR(opponent);
         MESSAGE("The opposing Wobbuffet got covered in sticky candy syrup!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_SYRUP_BOMB_SPEED_DROP, opponent);
-        MESSAGE("The opposing Wobbuffet's Speed fell!");
+        MESSAGE("Wobbuffet avversario: VELOCITÀ\ndiminuisce!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_SYRUP_BOMB_SPEED_DROP, opponent);
-        MESSAGE("The opposing Wobbuffet's Speed fell!");
+        MESSAGE("Wobbuffet avversario: VELOCITÀ\ndiminuisce!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_SYRUP_BOMB_SPEED_DROP, opponent);
-        MESSAGE("The opposing Wobbuffet's Speed fell!");
+        MESSAGE("Wobbuffet avversario: VELOCITÀ\ndiminuisce!");
         NONE_OF {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_SYRUP_BOMB_SPEED_DROP, opponent);
-            MESSAGE("The opposing Wobbuffet's Speed fell!");
+            MESSAGE("Wobbuffet avversario: VELOCITÀ\ndiminuisce!");
         }
     }
 }
@@ -47,7 +47,7 @@ SINGLE_BATTLE_TEST("Sticky Syrup isn't applied again if the target is already co
         HP_BAR(opponent);
         MESSAGE("The opposing Wobbuffet got covered in sticky candy syrup!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_SYRUP_BOMB_SPEED_DROP, opponent);
-        MESSAGE("The opposing Wobbuffet's Speed fell!");
+        MESSAGE("Wobbuffet avversario: VELOCITÀ\ndiminuisce!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SYRUP_BOMB, player);
         HP_BAR(opponent);
         NOT MESSAGE("The opposing Wobbuffet got covered in sticky candy syrup!");
@@ -97,7 +97,7 @@ SINGLE_BATTLE_TEST("Sticky Syrup speed reduction is prevented by Clear Body, Whi
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_SYRUP_BOMB_SPEED_DROP, opponent);
             MESSAGE("The opposing Beldum's stats were not lowered!");
             NONE_OF {
-                MESSAGE("The opposing Beldum's Speed fell!");
+                MESSAGE("Beldum avversario: VELOCITÀ\ndiminuisce!");
             }
         }
         else if (species == SPECIES_TORKOAL)
@@ -107,7 +107,7 @@ SINGLE_BATTLE_TEST("Sticky Syrup speed reduction is prevented by Clear Body, Whi
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_SYRUP_BOMB_SPEED_DROP, opponent);
             MESSAGE("The opposing Torkoal's stats were not lowered!");
             NONE_OF {
-                MESSAGE("The opposing Torkoal's Speed fell!");
+                MESSAGE("Torkoal avversario: VELOCITÀ\ndiminuisce!");
             }
         }
         else if (species == SPECIES_SOLGALEO)
@@ -117,7 +117,7 @@ SINGLE_BATTLE_TEST("Sticky Syrup speed reduction is prevented by Clear Body, Whi
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_SYRUP_BOMB_SPEED_DROP, opponent);
             MESSAGE("The opposing Solgaleo's stats were not lowered!");
             NONE_OF {
-                MESSAGE("The opposing Solgaleo's Speed fell!");
+                MESSAGE("Solgaleo avversario: VELOCITÀ\ndiminuisce!");
             }
         }
     }
@@ -137,7 +137,7 @@ SINGLE_BATTLE_TEST("Sticky Syrup speed reduction is prevented by Clear Amulet")
         MESSAGE("The effects of the Clear Amulet held by the opposing Wobbuffet prevents its stats from being lowered!");
         NONE_OF {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_SYRUP_BOMB_SPEED_DROP, opponent);
-            MESSAGE("The opposing Wobbuffet's Speed fell!");
+            MESSAGE("Wobbuffet avversario: VELOCITÀ\ndiminuisce!");
         }
     }
 }
@@ -163,9 +163,9 @@ SINGLE_BATTLE_TEST("Sticky syrup will not decrease speed further then minus six"
         HP_BAR(opponent);
         MESSAGE("The opposing Wobbuffet got covered in sticky candy syrup!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_SYRUP_BOMB_SPEED_DROP, opponent);
-        MESSAGE("The opposing Wobbuffet's Speed won't go any lower!");
+        MESSAGE("Wobbuffet avversario: VELOCITÀ\nnon può diminuire oltre!");
         NONE_OF {
-            MESSAGE("The opposing Wobbuffet's Speed fell!");
+            MESSAGE("Wobbuffet avversario: VELOCITÀ\ndiminuisce!");
         }
     }
 }
@@ -184,10 +184,10 @@ SINGLE_BATTLE_TEST("Sticky Syrup is removed when the user switches out")
         HP_BAR(opponent);
         MESSAGE("The opposing Wobbuffet got covered in sticky candy syrup!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_SYRUP_BOMB_SPEED_DROP, opponent);
-        MESSAGE("The opposing Wobbuffet's Speed fell!");
+        MESSAGE("Wobbuffet avversario: VELOCITÀ\ndiminuisce!");
         NONE_OF {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_SYRUP_BOMB_SPEED_DROP, opponent);
-            MESSAGE("The opposing Wobbuffet's Speed fell!");
+            MESSAGE("Wobbuffet avversario: VELOCITÀ\ndiminuisce!");
         }
     }
 }
@@ -213,7 +213,7 @@ SINGLE_BATTLE_TEST("Sticky Syrup is removed when the user faints")
         SEND_IN_MESSAGE("Wynaut");
         NONE_OF {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_SYRUP_BOMB_SPEED_DROP, opponent);
-            MESSAGE("The opposing Wobbuffet's Speed fell!");
+            MESSAGE("Wobbuffet avversario: VELOCITÀ\ndiminuisce!");
         }
     }
 }

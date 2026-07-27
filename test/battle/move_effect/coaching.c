@@ -17,8 +17,8 @@ DOUBLE_BATTLE_TEST("Coaching raises Attack and Defense of ally by 1 stage each")
         TURN { MOVE(playerLeft, MOVE_COACHING, target: playerRight); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_COACHING, playerLeft);
-        MESSAGE("Wynaut's Attack rose!");
-        MESSAGE("Wynaut's Defense rose!");
+        MESSAGE("Wynaut: ATTACCO\naumenta!");
+        MESSAGE("Wynaut: DIFESA\naumenta!");
     }
 }
 
@@ -34,8 +34,8 @@ DOUBLE_BATTLE_TEST("Coaching bypasses Protect")
         TURN { MOVE(playerRight, MOVE_PROTECT); MOVE(playerLeft, MOVE_COACHING, target: playerRight); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_COACHING, playerLeft);
-        MESSAGE("Wynaut's Attack rose!");
-        MESSAGE("Wynaut's Defense rose!");
+        MESSAGE("Wynaut: ATTACCO\naumenta!");
+        MESSAGE("Wynaut: DIFESA\naumenta!");
     }
 }
 
@@ -51,8 +51,8 @@ DOUBLE_BATTLE_TEST("Coaching bypasses Crafty Shield")
         TURN { MOVE(playerRight, MOVE_CRAFTY_SHIELD); MOVE(playerLeft, MOVE_COACHING, target: playerRight); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_COACHING, playerLeft);
-        MESSAGE("Wynaut's Attack rose!");
-        MESSAGE("Wynaut's Defense rose!");
+        MESSAGE("Wynaut: ATTACCO\naumenta!");
+        MESSAGE("Wynaut: DIFESA\naumenta!");
     }
 }
 
@@ -71,8 +71,8 @@ DOUBLE_BATTLE_TEST("Coaching fails if all allies are is semi-invulnerable")
         MESSAGE("Wobbuffet usa\nCoaching!");
         NONE_OF {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_COACHING, playerLeft);
-            MESSAGE("Hawlucha's Attack rose!");
-            MESSAGE("Hawlucha's Defense rose!");
+            MESSAGE("Hawlucha: ATTACCO\naumenta!");
+            MESSAGE("Hawlucha: DIFESA\naumenta!");
         }
         MESSAGE("Hawlucha avoided the attack!");
     }
@@ -89,8 +89,8 @@ SINGLE_BATTLE_TEST("Coaching fails in single battles")
         MESSAGE("But it failed!");
         NONE_OF {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_COACHING, player);
-            MESSAGE("Wynaut's Attack rose!");
-            MESSAGE("Wynaut's Defense rose!");
+            MESSAGE("Wynaut: ATTACCO\naumenta!");
+            MESSAGE("Wynaut: DIFESA\naumenta!");
         }
     }
 }
@@ -111,8 +111,8 @@ DOUBLE_BATTLE_TEST("Coaching fails if there's no ally")
         MESSAGE("Wobbuffet usa\nCoaching!");
         NONE_OF {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_COACHING, playerLeft);
-            MESSAGE("Wynaut's Attack rose!");
-            MESSAGE("Wynaut's Defense rose!");
+            MESSAGE("Wynaut: ATTACCO\naumenta!");
+            MESSAGE("Wynaut: DIFESA\naumenta!");
         }
         MESSAGE("But it failed!");
     }
@@ -151,7 +151,7 @@ DOUBLE_BATTLE_TEST("Coaching ignores Substitute")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SUBSTITUTE, playerRight);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_COACHING, playerLeft);
-        MESSAGE("Wynaut's Attack rose!");
-        MESSAGE("Wynaut's Defense rose!");
+        MESSAGE("Wynaut: ATTACCO\naumenta!");
+        MESSAGE("Wynaut: DIFESA\naumenta!");
     }
 }

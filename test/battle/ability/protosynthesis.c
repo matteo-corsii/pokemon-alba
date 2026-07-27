@@ -18,7 +18,7 @@ SINGLE_BATTLE_TEST("Protosynthesis boosts the highest stat")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SUNNY_DAY, player);
         ABILITY_POPUP(player, ABILITY_PROTOSYNTHESIS);
         MESSAGE("The harsh sunlight activated Walking Wake's Protosynthesis!");
-        MESSAGE("Walking Wake's Sp. Atk was heightened!");
+        MESSAGE("Walking Wake: ATT. SPECIALE\naumenta!");
     }
 }
 
@@ -70,18 +70,18 @@ SINGLE_BATTLE_TEST("Protosynthesis ability pop up activates only once during the
         ABILITY_POPUP(opponent, ABILITY_DROUGHT);
         ABILITY_POPUP(player, ABILITY_PROTOSYNTHESIS);
         MESSAGE("The harsh sunlight activated Walking Wake's Protosynthesis!");
-        MESSAGE("Walking Wake's Sp. Atk was heightened!");
+        MESSAGE("Walking Wake: ATT. SPECIALE\naumenta!");
         NONE_OF {
             for (turns = 0; turns < 4; turns++) {
                 ABILITY_POPUP(player, ABILITY_PROTOSYNTHESIS);
                 MESSAGE("The harsh sunlight activated Walking Wake's Protosynthesis!");
-                MESSAGE("Walking Wake's Sp. Atk was heightened!");
+                MESSAGE("Walking Wake: ATT. SPECIALE\naumenta!");
             }
         }
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SUNNY_DAY, opponent);
         ABILITY_POPUP(player, ABILITY_PROTOSYNTHESIS);
         MESSAGE("The harsh sunlight activated Walking Wake's Protosynthesis!");
-        MESSAGE("Walking Wake's Sp. Atk was heightened!");
+        MESSAGE("Walking Wake: ATT. SPECIALE\naumenta!");
     }
 }
 
@@ -97,7 +97,7 @@ SINGLE_BATTLE_TEST("Protosynthesis activates on switch-in")
         ABILITY_POPUP(opponent, ABILITY_DROUGHT);
         ABILITY_POPUP(player, ABILITY_PROTOSYNTHESIS);
         MESSAGE("The harsh sunlight activated Roaring Moon's Protosynthesis!");
-        MESSAGE("Roaring Moon's Attack was heightened!");
+        MESSAGE("Roaring Moon: ATTACCO\naumenta!");
     }
 }
 
@@ -119,16 +119,16 @@ SINGLE_BATTLE_TEST("Protosynthesis prioritizes stats in the case of a tie in the
         ABILITY_POPUP(player, ABILITY_PROTOSYNTHESIS);
         switch(i) {
             case 0:
-                MESSAGE("Great Tusk's Attack was heightened!");
+                MESSAGE("Great Tusk: ATTACCO\naumenta!");
                 break;
             case 1:
-                MESSAGE("Great Tusk's Defense was heightened!");
+                MESSAGE("Great Tusk: DIFESA\naumenta!");
                 break;
             case 2:
-                MESSAGE("Great Tusk's Sp. Atk was heightened!");
+                MESSAGE("Great Tusk: ATT. SPECIALE\naumenta!");
                 break;
             case 3:
-                MESSAGE("Great Tusk's Sp. Def was heightened!");
+                MESSAGE("Great Tusk: DIF. SPECIALE\naumenta!");
                 break;
         }
     }
@@ -147,7 +147,7 @@ SINGLE_BATTLE_TEST("Protosynthesis uses Wonder Room swapped defenses when choosi
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SUNNY_DAY, opponent);
         ABILITY_POPUP(player, ABILITY_PROTOSYNTHESIS);
         MESSAGE("The harsh sunlight activated Roaring Moon's Protosynthesis!");
-        MESSAGE("Roaring Moon's Sp. Def was heightened!");
+        MESSAGE("Roaring Moon: DIF. SPECIALE\naumenta!");
     }
 }
 
@@ -253,7 +253,7 @@ SINGLE_BATTLE_TEST("Protosynthesis accounts for Sticky Web when determining the 
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SUNNY_DAY, player);
         ABILITY_POPUP(player, ABILITY_PROTOSYNTHESIS);
         MESSAGE("The harsh sunlight activated Flutter Mane's Protosynthesis!");
-        MESSAGE("Flutter Mane's Sp. Atk was heightened!");
+        MESSAGE("Flutter Mane: ATT. SPECIALE\naumenta!");
     }
 }
 
@@ -297,7 +297,7 @@ SINGLE_BATTLE_TEST("Protosynthesis recalculates the boosted stat after Neutraliz
         MESSAGE("The effects of the neutralizing gas wore off!");
         ABILITY_POPUP(player, ABILITY_PROTOSYNTHESIS);
         MESSAGE("The harsh sunlight activated Flutter Mane's Protosynthesis!");
-        MESSAGE("Flutter Mane's Sp. Atk was heightened!");
+        MESSAGE("Flutter Mane: ATT. SPECIALE\naumenta!");
     }
 }
 

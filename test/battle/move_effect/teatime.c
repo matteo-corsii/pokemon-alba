@@ -17,7 +17,7 @@ SINGLE_BATTLE_TEST("Teatime causes the user to consume its Berry, ignoring HP re
     } SCENE {
         MESSAGE("Wobbuffet usa\nTeatime!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TEATIME, player);
-        MESSAGE("The Liechi Berry boosted Wobbuffet's Attack!");
+        MESSAGE("Liechi Berry: ATTACCO\naumenta!");
     }
 }
 
@@ -31,7 +31,7 @@ SINGLE_BATTLE_TEST("Teatime causes the user to consume its Berry, even in the pr
     } SCENE {
         MESSAGE("Wobbuffet usa\nTeatime!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TEATIME, player);
-        MESSAGE("The Liechi Berry boosted Wobbuffet's Attack!");
+        MESSAGE("Liechi Berry: ATTACCO\naumenta!");
     }
 }
 
@@ -48,7 +48,7 @@ SINGLE_BATTLE_TEST("Teatime causes the user to consume its Berry, even under the
     } SCENE {
         MESSAGE("Wobbuffet usa\nTeatime!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TEATIME, player);
-        MESSAGE("The Liechi Berry boosted Wobbuffet's Attack!");
+        MESSAGE("Liechi Berry: ATTACCO\naumenta!");
     }
 }
 
@@ -62,7 +62,7 @@ SINGLE_BATTLE_TEST("Teatime causes the user to consume its Berry, ignoring HP re
     } SCENE {
         MESSAGE("Wobbuffet avversario usa\nTeatime!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TEATIME, opponent);
-        MESSAGE("The Liechi Berry boosted the opposing Wobbuffet's Attack!");
+        MESSAGE("Liechi Berry: ATTACCO\naumenta!");
     }
 }
 
@@ -76,7 +76,7 @@ SINGLE_BATTLE_TEST("Teatime causes other Pokemon to consume their Berry even if 
     } SCENE {
         MESSAGE("Wobbuffet usa\nTeatime!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TEATIME, player);
-        MESSAGE("The Liechi Berry boosted the opposing Wobbuffet's Attack!");
+        MESSAGE("Liechi Berry: ATTACCO\naumenta!");
     }
 }
 
@@ -90,7 +90,7 @@ SINGLE_BATTLE_TEST("Teatime causes other Pokemon to consume their Berry even if 
     } SCENE {
         MESSAGE("Wobbuffet avversario usa\nTeatime!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TEATIME, opponent);
-        MESSAGE("The Liechi Berry boosted Wobbuffet's Attack!");
+        MESSAGE("Liechi Berry: ATTACCO\naumenta!");
     }
 }
 
@@ -120,25 +120,25 @@ DOUBLE_BATTLE_TEST("Teatime causes all Pokémon to consume their berry")
         }
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TEATIME, user);
         if (user == playerLeft) {
-            MESSAGE("The Liechi Berry boosted Wobbuffet's Attack!");
-            MESSAGE("The Liechi Berry boosted Wynaut's Attack!");
-            MESSAGE("The Liechi Berry boosted the opposing Wobbuffet's Attack!");
-            MESSAGE("The Liechi Berry boosted the opposing Wynaut's Attack!");
+            MESSAGE("Liechi Berry: ATTACCO\naumenta!");
+            MESSAGE("Liechi Berry: ATTACCO\naumenta!");
+            MESSAGE("Liechi Berry: ATTACCO\naumenta!");
+            MESSAGE("Liechi Berry: ATTACCO\naumenta!");
         } else if (user == playerRight) {
-            MESSAGE("The Liechi Berry boosted Wynaut's Attack!");
-            MESSAGE("The Liechi Berry boosted Wobbuffet's Attack!");
-            MESSAGE("The Liechi Berry boosted the opposing Wobbuffet's Attack!");
-            MESSAGE("The Liechi Berry boosted the opposing Wynaut's Attack!");
+            MESSAGE("Liechi Berry: ATTACCO\naumenta!");
+            MESSAGE("Liechi Berry: ATTACCO\naumenta!");
+            MESSAGE("Liechi Berry: ATTACCO\naumenta!");
+            MESSAGE("Liechi Berry: ATTACCO\naumenta!");
         } else if (user == opponentLeft) {
-            MESSAGE("The Liechi Berry boosted the opposing Wobbuffet's Attack!");
-            MESSAGE("The Liechi Berry boosted the opposing Wynaut's Attack!");
-            MESSAGE("The Liechi Berry boosted Wobbuffet's Attack!");
-            MESSAGE("The Liechi Berry boosted Wynaut's Attack!");
+            MESSAGE("Liechi Berry: ATTACCO\naumenta!");
+            MESSAGE("Liechi Berry: ATTACCO\naumenta!");
+            MESSAGE("Liechi Berry: ATTACCO\naumenta!");
+            MESSAGE("Liechi Berry: ATTACCO\naumenta!");
         } else if (user == opponentRight) {
-            MESSAGE("The Liechi Berry boosted the opposing Wynaut's Attack!");
-            MESSAGE("The Liechi Berry boosted the opposing Wobbuffet's Attack!");
-            MESSAGE("The Liechi Berry boosted Wobbuffet's Attack!");
-            MESSAGE("The Liechi Berry boosted Wynaut's Attack!");
+            MESSAGE("Liechi Berry: ATTACCO\naumenta!");
+            MESSAGE("Liechi Berry: ATTACCO\naumenta!");
+            MESSAGE("Liechi Berry: ATTACCO\naumenta!");
+            MESSAGE("Liechi Berry: ATTACCO\naumenta!");
         }
     }
 }
@@ -171,7 +171,7 @@ SINGLE_BATTLE_TEST("Teatime does not affect Pokémon in the semi-invulnerable tu
         MESSAGE("Wobbuffet usa\nTeatime!");
         NONE_OF {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_TEATIME, player);
-            MESSAGE("The Liechi Berry boosted the opposing Wobbuffet's Attack!");
+            MESSAGE("Liechi Berry: ATTACCO\naumenta!");
         }
     }
 }
@@ -205,11 +205,11 @@ SINGLE_BATTLE_TEST("Teatime triggers Volt Absorb if it has been affected by Elec
             NOT ABILITY_POPUP(player, ABILITY_VOLT_ABSORB);
         }
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TEATIME, opponent);
-        MESSAGE("The Liechi Berry boosted the opposing Wobbuffet's Attack!");
+        MESSAGE("Liechi Berry: ATTACCO\naumenta!");
         if (shouldTriggerAbility) {
-            NOT MESSAGE("The Liechi Berry boosted Jolteon's Attack!");
+            NOT MESSAGE("Liechi Berry: ATTACCO\naumenta!");
         } else {
-            MESSAGE("The Liechi Berry boosted Jolteon's Attack!");
+            MESSAGE("Liechi Berry: ATTACCO\naumenta!");
         }
     }
 }
@@ -239,19 +239,19 @@ SINGLE_BATTLE_TEST("Teatime triggers Lightning Rod if it has been affected by El
         MESSAGE("Wobbuffet avversario usa\nTeatime!");
         if (shouldTriggerAbility) {
             ABILITY_POPUP(player, ABILITY_LIGHTNING_ROD);
-            MESSAGE("Pikachu's Sp. Atk rose!");
+            MESSAGE("Pikachu: ATT. SPECIALE\naumenta!");
         } else {
             NONE_OF {
                 ABILITY_POPUP(player, ABILITY_LIGHTNING_ROD);
-                MESSAGE("Pikachu's Sp. Atk rose!");
+                MESSAGE("Pikachu: ATT. SPECIALE\naumenta!");
             }
         }
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TEATIME, opponent);
-        MESSAGE("The Liechi Berry boosted the opposing Wobbuffet's Attack!");
+        MESSAGE("Liechi Berry: ATTACCO\naumenta!");
         if (shouldTriggerAbility) {
-            NOT MESSAGE("The Liechi Berry boosted Pikachu's Attack!");
+            NOT MESSAGE("Liechi Berry: ATTACCO\naumenta!");
         } else {
-            MESSAGE("The Liechi Berry boosted Pikachu's Attack!");
+            MESSAGE("Liechi Berry: ATTACCO\naumenta!");
         }
     }
 }
@@ -280,19 +280,19 @@ SINGLE_BATTLE_TEST("Teatime triggers Motor Drive if it has been affected by Elec
         MESSAGE("Wobbuffet avversario usa\nTeatime!");
         if (shouldTriggerAbility) {
             ABILITY_POPUP(player, ABILITY_MOTOR_DRIVE);
-            MESSAGE("Electivire's Speed rose!");
+            MESSAGE("Electivire: VELOCITÀ\naumenta!");
         } else {
             NONE_OF {
                 ABILITY_POPUP(player, ABILITY_MOTOR_DRIVE);
-                MESSAGE("Electivire's Speed rose!");
+                MESSAGE("Electivire: VELOCITÀ\naumenta!");
             }
         }
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TEATIME, opponent);
-        MESSAGE("The Liechi Berry boosted the opposing Wobbuffet's Attack!");
+        MESSAGE("Liechi Berry: ATTACCO\naumenta!");
         if (shouldTriggerAbility) {
-            NOT MESSAGE("The Liechi Berry boosted Electivire's Attack!");
+            NOT MESSAGE("Liechi Berry: ATTACCO\naumenta!");
         } else {
-            MESSAGE("The Liechi Berry boosted Electivire's Attack!");
+            MESSAGE("Liechi Berry: ATTACCO\naumenta!");
         }
     }
 }
