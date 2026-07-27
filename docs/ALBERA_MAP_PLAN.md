@@ -109,6 +109,13 @@ la breve scena, un flag permanente ne impedisce la ripetizione e consente al
 normale evento di Route 101 di proseguire verso il salvataggio del Professor
 Lauro.
 
+Al successivo ritorno nel Laboratorio del Cratere, dopo la prima sfida con il
+rivale, Lauro collega prudentemente il calo di pressione al rumore sotterraneo
+e affida al protagonista il primo incarico di ricerca. Il Pokédex servirà anche
+per annotare crisi idriche e cambiamenti nel comportamento dei Pokémon durante
+il viaggio. Si tratta ancora di un sospetto scientifico: la scena non assegna
+una causa certa al problema e non blocca la progressione principale.
+
 I cartelli di scuola, campetto e strade chiuse restano rinviati finché il
 prototipo non disporrà di metatile-segnaletica chiaramente riconoscibili; non
 vengono aggiunte interazioni invisibili su celle prive di cartello.

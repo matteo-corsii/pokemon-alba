@@ -484,8 +484,18 @@ LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister::
 	goto_if_unset FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_UNKNOWN_0x380, ProfBirch_EventScript_RatePokedexOrRegister
 	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 3, ProfBirch_EventScript_RatePokedexOrRegister
 	goto_if_ge VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6, ProfBirch_EventScript_RatePokedexOrRegister
-	goto_if_eq VAR_BIRCH_LAB_STATE, 5, LittlerootTown_ProfessorBirchsLab_EventScript_PokemonAwait
+	goto_if_eq VAR_BIRCH_LAB_STATE, 5, LittlerootTown_ProfessorBirchsLab_EventScript_CheckWaterResearchReminder
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_BirchRivalGoneHome, MSGBOX_DEFAULT
+	release
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_CheckWaterResearchReminder::
+	goto_if_set FLAG_ALBERA_WATER_RESEARCH_STARTED, LittlerootTown_ProfessorBirchsLab_EventScript_WaterResearchReminder
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_PokemonAwait
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_WaterResearchReminder::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_WaterResearchReminder, MSGBOX_DEFAULT
 	release
 	end
 
@@ -508,6 +518,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex::
 	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex, MSGBOX_DEFAULT
 	closemessage
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_WaterResearchAssignment, MSGBOX_DEFAULT
+	closemessage
+	setflag FLAG_ALBERA_WATER_RESEARCH_STARTED
 	applymovement LOCALID_BIRCHS_LAB_RIVAL, LittlerootTown_ProfessorBirchsLab_Movement_RivalApproachPlayer
 	waitmovement 0
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
@@ -753,6 +766,36 @@ LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex:
 	.string "{RIVAL} mi cerca durante le ricerche\l"
 	.string "sul campo per mostrarmelo.$"
 
+LittlerootTown_ProfessorBirchsLab_Text_WaterResearchAssignment:
+	.string "PROF. LAURO: Prima che tu\n"
+	.string "parta, voglio affidarti\l"
+	.string "un altro compito.\p"
+	.string "Il calo di pressione in\n"
+	.string "Via dell'Armonia potrebbe\l"
+	.string "essere legato al rumore\l"
+	.string "sotto il campetto.\p"
+	.string "Non ne abbiamo ancora\n"
+	.string "la prova.\p"
+	.string "Durante il viaggio, osserva\n"
+	.string "i luoghi dove l'acqua\l"
+	.string "scarseggia.\p"
+	.string "Fai attenzione ai POKéMON\n"
+	.string "che cambiano comportamento\l"
+	.string "o lasciano il loro habitat.\p"
+	.string "Registra tutto nel POKéDEX,\n"
+	.string "come in un diario scientifico.\p"
+	.string "Torna da me se scopri\n"
+	.string "qualcosa di insolito.\p"
+	.string "Consideralo il tuo primo\n"
+	.string "incarico di ricerca.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_WaterResearchReminder:
+	.string "PROF. LAURO: Osserva l'acqua\n"
+	.string "e il modo in cui si comportano\l"
+	.string "i POKéMON.\p"
+	.string "Anche il dettaglio più piccolo\n"
+	.string "potrebbe essere importante.$"
+
 LittlerootTown_ProfessorBirchsLab_Text_CountlessPokemonAwait:
 	.string "PROF. LAURO: Innumerevoli POKéMON\n"
 	.string "ti aspettano!\p"
@@ -771,7 +814,11 @@ LittlerootTown_ProfessorBirchsLab_Text_CatchCutePokemonWithPokeBalls:
 	.string "Cercherò dappertutto,\n"
 	.string "perché ne voglio di tanti tipi.\p"
 	.string "Se trovo dei POKéMON carini, li catturo\n"
-	.string "con le POKé BALL!$"
+	.string "con le POKé BALL!\p"
+	.string "Quindi adesso sei anche\n"
+	.string "l'assistente del PROF. LAURO?\p"
+	.string "Beh… Se scopri qualcosa,\n"
+	.string "fammelo sapere.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_OhYourBagsFull:
 	.string "Oh? La tua BORSA è piena.$"
@@ -792,7 +839,11 @@ LittlerootTown_ProfessorBirchsLab_Text_CatchCoolPokemonWithPokeBalls:
 	.string "Esplorerò ogni luogo\n"
 	.string "per trovare POKéMON diversi.\p"
 	.string "Se ne trovo uno forte, puoi scommetterci:\n"
-	.string "proverò a catturarlo con le POKé BALL.$"
+	.string "proverò a catturarlo con le POKé BALL.\p"
+	.string "Quindi adesso sei anche\n"
+	.string "l'assistente del PROF. LAURO?\p"
+	.string "Beh… Se scopri qualcosa,\n"
+	.string "fammelo sapere.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_HeyYourBagsFull:
 	.string "Ehi, la tua BORSA è piena.$"

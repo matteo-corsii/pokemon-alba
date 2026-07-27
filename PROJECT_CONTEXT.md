@@ -66,6 +66,13 @@ Il Professor Lauro studia:
 
 Il nome richiama l’alloro, ma il personaggio mantiene temporaneamente sprite e struttura tecnica del Professor Birch.
 
+Dopo la prima sfida con Nico o Lia, Lauro affida al protagonista il primo
+incarico di ricerca sulla crisi idrica. Durante il viaggio il protagonista deve
+osservare i luoghi in cui l'acqua scarseggia e i cambiamenti nel comportamento
+o nell'habitat dei Pokémon, usando il Pokédex anche come diario scientifico.
+L'incarico avvia la storia parallela senza bloccare il viaggio principale o la
+sfida alle Palestre.
+
 ### Nico e Lia
 
 Nico e Lia sono i nomi provvisori dei due rivali, utilizzati in base al protagonista selezionato.

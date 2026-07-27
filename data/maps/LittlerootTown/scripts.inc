@@ -253,6 +253,7 @@ LittlerootTown_EventScript_CampettoYouth::
 	lock
 	faceplayer
 	goto_if_eq VAR_LITTLEROOT_TOWN_STATE, 0, LittlerootTown_EventScript_CampettoYouthBeforeRival
+	goto_if_set FLAG_ALBERA_WATER_RESEARCH_STARTED, LittlerootTown_EventScript_CampettoYouthAfterAssignment
 	goto_if_set FLAG_ALBERA_CAMPETTO_COMPLETED, LittlerootTown_EventScript_CampettoYouthAfterEvent
 	msgbox LittlerootTown_Text_CampettoYouthBeforeEvent, MSGBOX_DEFAULT
 	release
@@ -265,6 +266,11 @@ LittlerootTown_EventScript_CampettoYouthBeforeRival::
 
 LittlerootTown_EventScript_CampettoYouthAfterEvent::
 	msgbox LittlerootTown_Text_CampettoYouthAfterEvent, MSGBOX_DEFAULT
+	release
+	end
+
+LittlerootTown_EventScript_CampettoYouthAfterAssignment::
+	msgbox LittlerootTown_Text_CampettoYouthAfterAssignment, MSGBOX_DEFAULT
 	release
 	end
 
@@ -1059,9 +1065,14 @@ LittlerootTown_Text_CampettoYouthBeforeRival:
 	.string "dopo la scuola.$"
 
 LittlerootTown_Text_CampettoYouthAfterEvent:
-	.string "Quel rumore veniva proprio\n"
-	.string "da sotto il campetto.\p"
-	.string "Ne sono sicuro.$"
+	.string "Ogni tanto si sente ancora\n"
+	.string "quel rumore sotto il campetto.$"
+
+LittlerootTown_Text_CampettoYouthAfterAssignment:
+	.string "La fontanella continua\n"
+	.string "a perdere pressione.\p"
+	.string "Se senti ancora quel rumore,\n"
+	.string "avvisa il PROF. LAURO.$"
 
 LittlerootTown_Text_CampettoYouthWaterPressure:
 	.string "RAGAZZO: La fontanella\n"

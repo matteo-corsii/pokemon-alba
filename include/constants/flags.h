@@ -52,7 +52,7 @@
 #else
 
 #define FLAG_ALBERA_CAMPETTO_COMPLETED 0x20 // Via dell'Armonia prologue event completed
-#define FLAG_UNUSED_0x021    0x21 // Unused Flag
+#define FLAG_ALBERA_WATER_RESEARCH_STARTED 0x21 // Professor Lauro's parallel water research assignment started
 #define FLAG_UNUSED_0x022    0x22 // Unused Flag
 #define FLAG_UNUSED_0x023    0x23 // Unused Flag
 #define FLAG_UNUSED_0x024    0x24 // Unused Flag

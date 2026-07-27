@@ -112,7 +112,7 @@ Questa roadmap descrive una sequenza iniziale di attività. Ogni fase deve produ
 
 ## 11. Sviluppare eventi e dialoghi del prologo
 
-**Stato:** la mappa prototipo è stata collaudata e la pulizia di collisioni e alberi è completata. È iniziata la riscrittura narrativa: il passaggio obbligatorio dal campetto introduce il primo accenno alla crisi della falda. Questa milestone non è ancora stata compilata né collaudata nel gioco.
+**Stato:** la mappa prototipo è stata collaudata e la pulizia di collisioni e alberi è completata. Il nuovo prologo comprende l'evento del campetto, il primo segnale sotterraneo e l'incarico di ricerca del Professor Lauro, che avvia la storia parallela sulla crisi idrica senza bloccare il viaggio principale. Questa milestone non è ancora stata compilata né collaudata nel gioco.
 
 **Obiettivo:** introdurre protagonista, quartiere, rivale, starter e primi segnali della crisi idrica attraverso il gioco.
 
