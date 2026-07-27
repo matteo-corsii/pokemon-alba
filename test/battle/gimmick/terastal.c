@@ -119,7 +119,7 @@ SINGLE_BATTLE_TEST("(TERA) Terastallization's 60 BP floor occurs after Technicia
     } WHEN {
         TURN { MOVE(player, MOVE_MEGA_DRAIN, gimmick: tera); }
     } SCENE {
-        MESSAGE("Mr. Mime usa\nMega Drain!");
+        MESSAGE("Mr. Mime usa\nMegassorbimento!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_MEGA_DRAIN, player);
         HP_BAR(opponent, captureDamage: &results[i].damage);
     } FINALLY {
@@ -569,15 +569,15 @@ SINGLE_BATTLE_TEST("(TERA) Terastallizing into the Stellar type boosts all moves
         TURN { MOVE(player, MOVE_WATER_GUN); }
     } SCENE {
         // turn 1
-        MESSAGE("Wobbuffet usa\nMega Drain!");
+        MESSAGE("Wobbuffet usa\nMegassorbimento!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_MEGA_DRAIN, player);
         HP_BAR(opponent, captureDamage: &damage[0]);
         // turn 2
-        MESSAGE("Wobbuffet usa\nMega Drain!");
+        MESSAGE("Wobbuffet usa\nMegassorbimento!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_MEGA_DRAIN, player);
         HP_BAR(opponent, captureDamage: &damage[1]);
         // turn 3
-        MESSAGE("Wobbuffet usa\nMega Drain!");
+        MESSAGE("Wobbuffet usa\nMegassorbimento!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_MEGA_DRAIN, player);
         HP_BAR(opponent, captureDamage: &damage[2]);
         // turn 4

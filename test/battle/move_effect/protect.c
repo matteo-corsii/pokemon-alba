@@ -600,7 +600,7 @@ DOUBLE_BATTLE_TEST("Protect: Quick Guard protects self and ally from priority mo
         TURN { MOVE(opponentLeft, MOVE_QUICK_GUARD); MOVE(playerLeft, move, target:targetOpponent); }
         TURN {}
     } SCENE {
-        MESSAGE("Wobbuffet avversario usa\nQuick Guard!");
+        MESSAGE("Wobbuffet avversario usa\nAnticipo!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_QUICK_GUARD, opponentLeft);
         if (move == MOVE_SCRATCH) {
             MESSAGE("Wobbuffet usa\nGRAFFIO!");
@@ -633,7 +633,7 @@ DOUBLE_BATTLE_TEST("Protect: Quick Guard can not fail on consecutive turns (Gen6
         TURN { MOVE(opponentLeft, MOVE_QUICK_GUARD); MOVE(playerLeft, MOVE_QUICK_ATTACK, target: opponentRight); }
     } SCENE {
         for (turns = 0; turns < 2; turns++) {
-            MESSAGE("Wobbuffet avversario usa\nQuick Guard!");
+            MESSAGE("Wobbuffet avversario usa\nAnticipo!");
             ANIMATION(ANIM_TYPE_MOVE, MOVE_QUICK_GUARD, opponentLeft);
             NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_QUICK_ATTACK, playerLeft);
             MESSAGE("The opposing Wobbuffet protected itself!");

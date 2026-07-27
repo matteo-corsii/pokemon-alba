@@ -170,7 +170,7 @@ SINGLE_BATTLE_TEST("Fling - Item is lost when target protects itself")
         TURN { MOVE(opponent, MOVE_PROTECT); MOVE(player, MOVE_FLING); }
         TURN { MOVE(player, MOVE_FLING); }
     } SCENE {
-        MESSAGE("Wobbuffet avversario usa\nProtect!");
+        MESSAGE("Wobbuffet avversario usa\nProtezione!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_PROTECT, opponent);
         MESSAGE("Wobbuffet usa\nFling!");
         MESSAGE("The opposing Wobbuffet protected itself!");
