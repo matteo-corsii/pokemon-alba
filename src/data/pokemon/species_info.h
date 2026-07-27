@@ -95,6 +95,67 @@
 #define FLIP    0
 #define NO_FLIP 1
 
+// The first Ausonia starter line uses separate tables so each evolution can diverge later.
+static const struct LevelUpMove sCingermLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_TACKLE),
+    LEVEL_UP_MOVE( 1, MOVE_LEER),
+    LEVEL_UP_MOVE( 4, MOVE_LEAFAGE),
+    LEVEL_UP_MOVE( 7, MOVE_MUD_SLAP),
+    LEVEL_UP_MOVE( 9, MOVE_BITE),
+    LEVEL_UP_MOVE(12, MOVE_DEFENSE_CURL),
+    LEVEL_UP_MOVE(15, MOVE_ROLLOUT),
+    LEVEL_UP_MOVE(18, MOVE_RAZOR_LEAF),
+    LEVEL_UP_MOVE(22, MOVE_TAKE_DOWN),
+    LEVEL_UP_MOVE(26, MOVE_TRAILBLAZE),
+    LEVEL_UP_MOVE(30, MOVE_ASSURANCE),
+    LEVEL_UP_MOVE(34, MOVE_SEED_BOMB),
+    LEVEL_UP_MOVE(38, MOVE_CRUNCH),
+    LEVEL_UP_MOVE(43, MOVE_HIGH_HORSEPOWER),
+    LEVEL_UP_MOVE(48, MOVE_WOOD_HAMMER),
+    LEVEL_UP_MOVE(54, MOVE_SUCKER_PUNCH),
+    LEVEL_UP_END
+};
+
+static const struct LevelUpMove sRovascoLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_TACKLE),
+    LEVEL_UP_MOVE( 1, MOVE_LEER),
+    LEVEL_UP_MOVE( 4, MOVE_LEAFAGE),
+    LEVEL_UP_MOVE( 7, MOVE_MUD_SLAP),
+    LEVEL_UP_MOVE( 9, MOVE_BITE),
+    LEVEL_UP_MOVE(12, MOVE_DEFENSE_CURL),
+    LEVEL_UP_MOVE(15, MOVE_ROLLOUT),
+    LEVEL_UP_MOVE(18, MOVE_RAZOR_LEAF),
+    LEVEL_UP_MOVE(22, MOVE_TAKE_DOWN),
+    LEVEL_UP_MOVE(26, MOVE_TRAILBLAZE),
+    LEVEL_UP_MOVE(30, MOVE_ASSURANCE),
+    LEVEL_UP_MOVE(34, MOVE_SEED_BOMB),
+    LEVEL_UP_MOVE(38, MOVE_CRUNCH),
+    LEVEL_UP_MOVE(43, MOVE_HIGH_HORSEPOWER),
+    LEVEL_UP_MOVE(48, MOVE_WOOD_HAMMER),
+    LEVEL_UP_MOVE(54, MOVE_SUCKER_PUNCH),
+    LEVEL_UP_END
+};
+
+static const struct LevelUpMove sSelvazannaLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_TACKLE),
+    LEVEL_UP_MOVE( 1, MOVE_LEER),
+    LEVEL_UP_MOVE( 4, MOVE_LEAFAGE),
+    LEVEL_UP_MOVE( 7, MOVE_MUD_SLAP),
+    LEVEL_UP_MOVE( 9, MOVE_BITE),
+    LEVEL_UP_MOVE(12, MOVE_DEFENSE_CURL),
+    LEVEL_UP_MOVE(15, MOVE_ROLLOUT),
+    LEVEL_UP_MOVE(18, MOVE_RAZOR_LEAF),
+    LEVEL_UP_MOVE(22, MOVE_TAKE_DOWN),
+    LEVEL_UP_MOVE(26, MOVE_TRAILBLAZE),
+    LEVEL_UP_MOVE(30, MOVE_ASSURANCE),
+    LEVEL_UP_MOVE(34, MOVE_SEED_BOMB),
+    LEVEL_UP_MOVE(38, MOVE_CRUNCH),
+    LEVEL_UP_MOVE(43, MOVE_HIGH_HORSEPOWER),
+    LEVEL_UP_MOVE(48, MOVE_WOOD_HAMMER),
+    LEVEL_UP_MOVE(54, MOVE_SUCKER_PUNCH),
+    LEVEL_UP_END
+};
+
 const struct SpeciesInfo gSpeciesInfo[] =
 {
     [SPECIES_NONE] =
@@ -172,6 +233,201 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .shinyPalette = gMonPalette_Egg,
         .iconSprite = gMonIcon_Egg,
         .iconPalIndex = 1,
+    },
+
+    // Pokémon Alba: provisional data and reused assets for the Ausonia Grass starter line.
+    [SPECIES_CINGERM] =
+    {
+        .baseHP        = 60,
+        .baseAttack    = 65,
+        .baseDefense   = 60,
+        .baseSpeed     = 45,
+        .baseSpAttack  = 35,
+        .baseSpDefense = 45,
+        .types = MON_TYPES(TYPE_GRASS),
+        .catchRate = 45,
+        .expYield = 64,
+        .evYield_Attack = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = 70,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
+        .abilities = { ABILITY_OVERGROW, ABILITY_NONE, ABILITY_DEFIANT },
+        .bodyColor = BODY_COLOR_BROWN,
+        .speciesName = _("Cingerm"),
+        .cryId = CRY_LECHONK,
+        .natDexNum = NATIONAL_DEX_CINGERM,
+        .categoryName = _("GERMOGLIO"),
+        .height = 5,
+        .weight = 125,
+        .description = COMPOUND_STRING(
+            "Scava il terreno con il muso\n"
+            "per cercare radici e semi.\n"
+            "Il germoglio sul capo cresce\n"
+            "quando il suolo è fertile."),
+        .pokemonScale = 356,
+        .pokemonOffset = 17,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Lechonk,
+        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 12,
+        .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        .backPic = gMonBackPic_Lechonk,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 11,
+        .palette = gMonPalette_Lechonk,
+        .shinyPalette = gMonShinyPalette_Lechonk,
+        .iconSprite = gMonIcon_Lechonk,
+        .iconPalIndex = 1,
+        .pokemonJumpType = PKMN_JUMP_TYPE_SLOW,
+        SHADOW(0, 1, SHADOW_SIZE_S)
+        FOOTPRINT(Lechonk)
+        OVERWORLD(
+            sPicTable_Lechonk,
+            SIZE_32x32,
+            SHADOW_SIZE_S,
+            TRACKS_FOOT,
+            sAnimTable_Following,
+            gOverworldPalette_Lechonk,
+            gShinyOverworldPalette_Lechonk
+        )
+        .levelUpLearnset = sCingermLevelUpLearnset,
+        .teachableLearnset = sNoneTeachableLearnset,
+        .eggMoveLearnset = sNoneEggMoveLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_ROVASCO}),
+    },
+
+    [SPECIES_ROVASCO] =
+    {
+        .baseHP        = 80,
+        .baseAttack    = 85,
+        .baseDefense   = 80,
+        .baseSpeed     = 60,
+        .baseSpAttack  = 45,
+        .baseSpDefense = 55,
+        .types = MON_TYPES(TYPE_GRASS),
+        .catchRate = 45,
+        .expYield = 142,
+        .evYield_Attack = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = 70,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
+        .abilities = { ABILITY_OVERGROW, ABILITY_NONE, ABILITY_DEFIANT },
+        .bodyColor = BODY_COLOR_BROWN,
+        .speciesName = _("Rovasco"),
+        .cryId = CRY_OINKOLOGNE_M,
+        .natDexNum = NATIONAL_DEX_ROVASCO,
+        .categoryName = _("ROVETO"),
+        .height = 9,
+        .weight = 420,
+        .description = COMPOUND_STRING(
+            "I rovi sul dorso diventano\n"
+            "più fitti quando difende\n"
+            "il proprio territorio.\n"
+            "Carica senza esitazione."),
+        .pokemonScale = 356,
+        .pokemonOffset = 17,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_OinkologneM,
+        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 7,
+        .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        .backPic = gMonBackPic_OinkologneM,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 12,
+        .palette = gMonPalette_OinkologneM,
+        .shinyPalette = gMonShinyPalette_OinkologneM,
+        .iconSprite = gMonIcon_OinkologneM,
+        .iconPalIndex = 1,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        SHADOW(5, 6, SHADOW_SIZE_M)
+        FOOTPRINT(Oinkologne)
+        OVERWORLD(
+            sPicTable_OinkologneM,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            sAnimTable_Following,
+            gOverworldPalette_OinkologneM,
+            gShinyOverworldPalette_OinkologneM
+        )
+        .levelUpLearnset = sRovascoLevelUpLearnset,
+        .teachableLearnset = sNoneTeachableLearnset,
+        .eggMoveLearnset = sNoneEggMoveLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_SELVAZANNA}),
+    },
+
+    [SPECIES_SELVAZANNA] =
+    {
+        .baseHP        = 100,
+        .baseAttack    = 120,
+        .baseDefense   = 105,
+        .baseSpeed     = 70,
+        .baseSpAttack  = 55,
+        .baseSpDefense = 80,
+        .types = MON_TYPES(TYPE_GRASS, TYPE_DARK),
+        .catchRate = 45,
+        .expYield = 265,
+        .evYield_Attack = 3,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = 70,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
+        .abilities = { ABILITY_OVERGROW, ABILITY_NONE, ABILITY_DEFIANT },
+        .bodyColor = BODY_COLOR_BROWN,
+        .speciesName = _("Selvazanna"),
+        .cryId = CRY_MAMOSWINE,
+        .natDexNum = NATIONAL_DEX_SELVAZANNA,
+        .categoryName = _("SELVA"),
+        .height = 16,
+        .weight = 1450,
+        .description = COMPOUND_STRING(
+            "Protegge i boschi usando\n"
+            "le grandi zanne a radice.\n"
+            "Si nasconde nel sottobosco\n"
+            "prima di caricare gli intrusi."),
+        .pokemonScale = 257,
+        .pokemonOffset = 6,
+        .trainerScale = 423,
+        .trainerOffset = 8,
+        .frontPic = gMonFrontPic_Mamoswine,
+        .frontPicSize = MON_COORDS_SIZE(64, 56),
+        .frontPicYOffset = 4,
+        .frontAnimFrames = ANIM_FRAMES(
+            ANIMCMD_FRAME(0, 10),
+            ANIMCMD_FRAME(1, 25),
+            ANIMCMD_FRAME(0, 30),
+        ),
+        .frontAnimId = ANIM_BACK_AND_LUNGE,
+        .backPic = gMonBackPic_Mamoswine,
+        .backPicSize = MON_COORDS_SIZE(64, 56),
+        .backPicYOffset = 6,
+        .backAnimId = BACK_ANIM_V_SHAKE_LOW,
+        .palette = gMonPalette_Mamoswine,
+        .shinyPalette = gMonShinyPalette_Mamoswine,
+        .iconSprite = gMonIcon_Mamoswine,
+        .iconPalIndex = 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        SHADOW(7, 7, SHADOW_SIZE_L)
+        FOOTPRINT(Mamoswine)
+        OVERWORLD(
+            sPicTable_Mamoswine,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            sAnimTable_Following,
+            gOverworldPalette_Mamoswine,
+            gShinyOverworldPalette_Mamoswine
+        )
+        .levelUpLearnset = sSelvazannaLevelUpLearnset,
+        .teachableLearnset = sNoneTeachableLearnset,
+        .eggMoveLearnset = sNoneEggMoveLearnset,
     },
 
     /* You may add any custom species below this point based on the following structure: */

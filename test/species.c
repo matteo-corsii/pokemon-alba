@@ -212,3 +212,168 @@ TEST("Every species has a description")
 
     EXPECT_NE(StringCompare(GetSpeciesPokedexDescription(species), gFallbackPokedexText), 0);
 }
+
+static u16 GetBaseStatTotalForTest(enum Species species)
+{
+    return gSpeciesInfo[species].baseHP
+         + gSpeciesInfo[species].baseAttack
+         + gSpeciesInfo[species].baseDefense
+         + gSpeciesInfo[species].baseSpeed
+         + gSpeciesInfo[species].baseSpAttack
+         + gSpeciesInfo[species].baseSpDefense;
+}
+
+TEST("Ausonia Grass starter IDs are append-only and distinct")
+{
+    EXPECT_EQ(SPECIES_GLIMMORA_MEGA, 1572);
+    EXPECT_EQ(SPECIES_CINGERM, SPECIES_GLIMMORA_MEGA + 1);
+    EXPECT_EQ(SPECIES_ROVASCO, SPECIES_CINGERM + 1);
+    EXPECT_EQ(SPECIES_SELVAZANNA, SPECIES_ROVASCO + 1);
+    EXPECT_EQ(SPECIES_EGG, SPECIES_SELVAZANNA + 1);
+
+    EXPECT_EQ(NATIONAL_DEX_PECHARUNT, 1025);
+    EXPECT_EQ(NATIONAL_DEX_CINGERM, NATIONAL_DEX_PECHARUNT + 1);
+    EXPECT_EQ(NATIONAL_DEX_ROVASCO, NATIONAL_DEX_CINGERM + 1);
+    EXPECT_EQ(NATIONAL_DEX_SELVAZANNA, NATIONAL_DEX_ROVASCO + 1);
+
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_CINGERM), COMPOUND_STRING("Cingerm")), 0);
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_ROVASCO), COMPOUND_STRING("Rovasco")), 0);
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_SELVAZANNA), COMPOUND_STRING("Selvazanna")), 0);
+}
+
+TEST("Ausonia Grass starter base data matches the approved prototype")
+{
+    const struct SpeciesInfo *cingerm = &gSpeciesInfo[SPECIES_CINGERM];
+    const struct SpeciesInfo *rovasco = &gSpeciesInfo[SPECIES_ROVASCO];
+    const struct SpeciesInfo *selvazanna = &gSpeciesInfo[SPECIES_SELVAZANNA];
+
+    EXPECT_EQ(GetBaseStatTotalForTest(SPECIES_CINGERM), 310);
+    EXPECT_EQ(GetBaseStatTotalForTest(SPECIES_ROVASCO), 405);
+    EXPECT_EQ(GetBaseStatTotalForTest(SPECIES_SELVAZANNA), 530);
+
+    EXPECT_EQ(cingerm->types[0], TYPE_GRASS);
+    EXPECT_EQ(cingerm->types[1], TYPE_GRASS);
+    EXPECT_EQ(rovasco->types[0], TYPE_GRASS);
+    EXPECT_EQ(rovasco->types[1], TYPE_GRASS);
+    EXPECT_EQ(selvazanna->types[0], TYPE_GRASS);
+    EXPECT_EQ(selvazanna->types[1], TYPE_DARK);
+
+    EXPECT_EQ(cingerm->abilities[0], ABILITY_OVERGROW);
+    EXPECT_EQ(cingerm->abilities[1], ABILITY_NONE);
+    EXPECT_EQ(cingerm->abilities[2], ABILITY_DEFIANT);
+    EXPECT_EQ(rovasco->abilities[0], ABILITY_OVERGROW);
+    EXPECT_EQ(rovasco->abilities[1], ABILITY_NONE);
+    EXPECT_EQ(rovasco->abilities[2], ABILITY_DEFIANT);
+    EXPECT_EQ(selvazanna->abilities[0], ABILITY_OVERGROW);
+    EXPECT_EQ(selvazanna->abilities[1], ABILITY_NONE);
+    EXPECT_EQ(selvazanna->abilities[2], ABILITY_DEFIANT);
+
+    EXPECT_EQ(cingerm->growthRate, GROWTH_MEDIUM_SLOW);
+    EXPECT_EQ(rovasco->growthRate, GROWTH_MEDIUM_SLOW);
+    EXPECT_EQ(selvazanna->growthRate, GROWTH_MEDIUM_SLOW);
+    EXPECT_EQ(cingerm->genderRatio, (50 * 255) / 100);
+    EXPECT_EQ(rovasco->genderRatio, (50 * 255) / 100);
+    EXPECT_EQ(selvazanna->genderRatio, (50 * 255) / 100);
+    EXPECT_EQ(cingerm->evYield_Attack, 1);
+    EXPECT_EQ(rovasco->evYield_Attack, 2);
+    EXPECT_EQ(selvazanna->evYield_Attack, 3);
+    EXPECT_EQ(cingerm->catchRate, 45);
+    EXPECT_EQ(rovasco->catchRate, 45);
+    EXPECT_EQ(selvazanna->catchRate, 45);
+    EXPECT_EQ(cingerm->friendship, 70);
+    EXPECT_EQ(rovasco->friendship, 70);
+    EXPECT_EQ(selvazanna->friendship, 70);
+    EXPECT_EQ(cingerm->eggGroups[0], EGG_GROUP_FIELD);
+    EXPECT_EQ(rovasco->eggGroups[0], EGG_GROUP_FIELD);
+    EXPECT_EQ(selvazanna->eggGroups[0], EGG_GROUP_FIELD);
+    EXPECT_EQ(cingerm->itemCommon, ITEM_NONE);
+    EXPECT_EQ(cingerm->itemRare, ITEM_NONE);
+    EXPECT_EQ(rovasco->itemCommon, ITEM_NONE);
+    EXPECT_EQ(rovasco->itemRare, ITEM_NONE);
+    EXPECT_EQ(selvazanna->itemCommon, ITEM_NONE);
+    EXPECT_EQ(selvazanna->itemRare, ITEM_NONE);
+}
+
+TEST("Ausonia Grass starter evolutions use only the approved levels")
+{
+    const struct Evolution *cingermEvolutions = GetSpeciesEvolutions(SPECIES_CINGERM);
+    const struct Evolution *rovascoEvolutions = GetSpeciesEvolutions(SPECIES_ROVASCO);
+
+    EXPECT(cingermEvolutions != NULL);
+    EXPECT_EQ(cingermEvolutions[0].method, EVO_LEVEL);
+    EXPECT_EQ(cingermEvolutions[0].param, 16);
+    EXPECT_GT(cingermEvolutions[0].param, 15);
+    EXPECT_EQ(cingermEvolutions[0].targetSpecies, SPECIES_ROVASCO);
+    EXPECT_EQ(cingermEvolutions[1].method, EVOLUTIONS_END);
+
+    EXPECT(rovascoEvolutions != NULL);
+    EXPECT_EQ(rovascoEvolutions[0].method, EVO_LEVEL);
+    EXPECT_EQ(rovascoEvolutions[0].param, 36);
+    EXPECT_GT(rovascoEvolutions[0].param, 35);
+    EXPECT_EQ(rovascoEvolutions[0].targetSpecies, SPECIES_SELVAZANNA);
+    EXPECT_EQ(rovascoEvolutions[1].method, EVOLUTIONS_END);
+
+    EXPECT(GetSpeciesEvolutions(SPECIES_SELVAZANNA) == NULL);
+}
+
+TEST("Ausonia Grass starter level-up learnsets are complete and ordered")
+{
+    static const enum Species species[] = { SPECIES_CINGERM, SPECIES_ROVASCO, SPECIES_SELVAZANNA };
+    static const u8 expectedLevels[] = { 1, 1, 4, 7, 9, 12, 15, 18, 22, 26, 30, 34, 38, 43, 48, 54 };
+    static const u16 expectedMoves[] = {
+        MOVE_TACKLE, MOVE_LEER, MOVE_LEAFAGE, MOVE_MUD_SLAP,
+        MOVE_BITE, MOVE_DEFENSE_CURL, MOVE_ROLLOUT, MOVE_RAZOR_LEAF,
+        MOVE_TAKE_DOWN, MOVE_TRAILBLAZE, MOVE_ASSURANCE, MOVE_SEED_BOMB,
+        MOVE_CRUNCH, MOVE_HIGH_HORSEPOWER, MOVE_WOOD_HAMMER, MOVE_SUCKER_PUNCH,
+    };
+
+    for (u32 i = 0; i < ARRAY_COUNT(species); i++)
+    {
+        const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species[i]);
+
+        for (u32 j = 0; j < ARRAY_COUNT(expectedMoves); j++)
+        {
+            EXPECT_EQ(learnset[j].level, expectedLevels[j]);
+            EXPECT_EQ(learnset[j].move, expectedMoves[j]);
+            if (j != 0)
+                EXPECT_GE(learnset[j].level, learnset[j - 1].level);
+        }
+        EXPECT_EQ(learnset[ARRAY_COUNT(expectedMoves)].move, LEVEL_UP_MOVE_END);
+    }
+}
+
+TEST("Ausonia Grass starter placeholder assets and Pokédex data are valid")
+{
+    static const enum Species species[] = { SPECIES_CINGERM, SPECIES_ROVASCO, SPECIES_SELVAZANNA };
+    static const enum PokemonCry cries[] = { CRY_LECHONK, CRY_OINKOLOGNE_M, CRY_MAMOSWINE };
+    static const enum NationalDexOrder dexNums[] = { NATIONAL_DEX_CINGERM, NATIONAL_DEX_ROVASCO, NATIONAL_DEX_SELVAZANNA };
+    static const u16 heights[] = { 5, 9, 16 };
+    static const u16 weights[] = { 125, 420, 1450 };
+
+    for (u32 i = 0; i < ARRAY_COUNT(species); i++)
+    {
+        const struct SpeciesInfo *info = &gSpeciesInfo[species[i]];
+
+        EXPECT(info->frontPic != NULL);
+        EXPECT(info->backPic != NULL);
+        EXPECT(info->iconSprite != NULL);
+        EXPECT(info->palette != NULL);
+        EXPECT(info->shinyPalette != NULL);
+    #if P_FOOTPRINTS
+        EXPECT(info->footprint != NULL);
+    #endif
+        EXPECT_EQ(info->cryId, cries[i]);
+        EXPECT_GT(info->cryId, CRY_NONE);
+        EXPECT_LT(info->cryId, CRY_COUNT);
+        EXPECT_EQ(info->natDexNum, dexNums[i]);
+        EXPECT_EQ(info->height, heights[i]);
+        EXPECT_EQ(info->weight, weights[i]);
+        EXPECT_NE(StringCompare(info->description, gFallbackPokedexText), 0);
+        EXPECT_EQ(info->teachableLearnset[0], MOVE_UNAVAILABLE);
+        EXPECT_EQ(info->eggMoveLearnset[0], MOVE_UNAVAILABLE);
+    }
+
+    EXPECT_EQ(StringCompare(gSpeciesInfo[SPECIES_CINGERM].categoryName, COMPOUND_STRING("GERMOGLIO")), 0);
+    EXPECT_EQ(StringCompare(gSpeciesInfo[SPECIES_ROVASCO].categoryName, COMPOUND_STRING("ROVETO")), 0);
+    EXPECT_EQ(StringCompare(gSpeciesInfo[SPECIES_SELVAZANNA].categoryName, COMPOUND_STRING("SELVA")), 0);
+}
