@@ -329,7 +329,8 @@ RivalsHouse_2F_Text_MayWhoAreYou:
 	.string "Oh, no! Dimenticavo!\p"
 	.string "Dovevo aiutare papà a catturare\n"
 	.string "dei POKéMON selvatici!\p"
-	.string "{PLAYER}{KUN}, ci vediamo più tardi!$"
+	.string "{PLAYER}{KUN}, ci vediamo più tardi!\p"
+	.string "Ci vediamo tra poco al campetto.$"
 
 RivalsHouse_2F_Text_MayGettingReady:
 	.string "POKéMON in piena forma!\n"
@@ -353,7 +354,8 @@ RivalsHouse_2F_Text_BrendanWhoAreYou:
 	.string "Accidenti, dimenticavo…\p"
 	.string "Devo aiutare papà a catturare\n"
 	.string "dei POKéMON selvatici.\p"
-	.string "Facciamo un'altra volta, va bene?$"
+	.string "Facciamo un'altra volta, va bene?\p"
+	.string "Ci vediamo tra poco al campetto.$"
 
 RivalsHouse_2F_Text_BrendanGettingReady:
 	.string "POKéMON in piena forma…\n"

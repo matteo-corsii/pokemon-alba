@@ -324,7 +324,11 @@ PlayersHouse_1F_Text_GoIntroduceYourselfNextDoor:
 	.string "In città vive un amico di PAPÀ.\p"
 	.string "Si chiama PROF. LAURO.\p"
 	.string "Abita qui accanto, quindi dovresti\n"
-	.string "andare a presentarti.$"
+	.string "andare a presentarti.\p"
+	.string "Prima di andare dal PROF. LAURO,\n"
+	.string "passa da Via dell'Armonia.\p"
+	.string "Ho sentito che al campetto c'è\n"
+	.string "qualche problema con l'acqua.$"
 
 PlayersHouse_1F_Text_SeeYouHoney:
 	.string "MAMMA: A dopo!$"
