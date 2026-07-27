@@ -104,15 +104,15 @@ SINGLE_BATTLE_TEST("Protect: King's Shield, Silk Trap and Obstruct protect from 
                 ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
                 if (statId == STAT_ATK) {
                     #if B_KINGS_SHIELD_LOWER_ATK >= GEN_8
-                    MESSAGE("Wobbuffet's Attack fell!");
+                    MESSAGE("Wobbuffet: ATTACCO\ndiminuisce!");
                     #else
-                    MESSAGE("Wobbuffet's Attack harshly fell!");
+                    MESSAGE("Wobbuffet: ATTACCO\ndiminuisce di molto!");
                     #endif
                 } else if (statId == STAT_SPEED) {
-                    MESSAGE("Wobbuffet's Speed fell!");
+                    MESSAGE("Wobbuffet: VELOCITÀ\ndiminuisce!");
                 } else if (statId == STAT_DEF) {
                     if (lowersBy == 2) {
-                        MESSAGE("Wobbuffet's Defense harshly fell!");
+                        MESSAGE("Wobbuffet: DIFESA\ndiminuisce di molto!");
                     }
                 }
             } else {
@@ -819,13 +819,13 @@ DOUBLE_BATTLE_TEST("Crafty Shield does not protect against moves that target all
             MESSAGE("Tangela usa\nFlower Shield!");
             ANIMATION(ANIM_TYPE_MOVE, MOVE_FLOWER_SHIELD, playerLeft);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-            MESSAGE("Tangela's Defense rose!");
+            MESSAGE("Tangela: DIFESA\naumenta!");
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
-            MESSAGE("Tangrowth's Defense rose!");
+            MESSAGE("Tangrowth: DIFESA\naumenta!");
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
-            MESSAGE("The opposing Sunkern's Defense rose!");
+            MESSAGE("Sunkern avversario: DIFESA\naumenta!");
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
-            MESSAGE("The opposing Sunflora's Defense rose!");
+            MESSAGE("Sunflora avversario: DIFESA\naumenta!");
         } else {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_PERISH_SONG, playerLeft);
             NONE_OF {

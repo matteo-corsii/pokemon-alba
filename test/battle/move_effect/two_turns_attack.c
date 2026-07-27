@@ -117,7 +117,7 @@ SINGLE_BATTLE_TEST("Skull Bash needs a charging turn")
         else
             ANIMATION(ANIM_TYPE_MOVE, MOVE_SKULL_BASH, player);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Wobbuffet's Defense rose!");
+        MESSAGE("Wobbuffet: DIFESA\naumenta!");
         // Attack turn
         MESSAGE("Wobbuffet usa\nSkull Bash!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SKULL_BASH, player);
@@ -143,7 +143,7 @@ SINGLE_BATTLE_TEST("Skull Bash doesn't need to charge with Power Herb")
         else
             ANIMATION(ANIM_TYPE_MOVE, MOVE_SKULL_BASH, player);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Wobbuffet's Defense rose!");
+        MESSAGE("Wobbuffet: DIFESA\naumenta!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
         MESSAGE("Wobbuffet became fully charged due to its Power Herb!");
         if (B_UPDATED_MOVE_DATA < GEN_5)
@@ -411,7 +411,7 @@ SINGLE_BATTLE_TEST("Electro Shot needs a charging Turn")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ELECTRO_SHOT, player);
         MESSAGE("Wobbuffet absorbed electricity!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Wobbuffet's Sp. Atk rose!");
+        MESSAGE("Wobbuffet: ATT. SPECIALE\naumenta!");
         // Attack turn
         MESSAGE("Wobbuffet usa\nElectro Shot!");
         HP_BAR(opponent);
@@ -433,7 +433,7 @@ SINGLE_BATTLE_TEST("Electro Shot doesn't need to charge when it's raining")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ELECTRO_SHOT, player);
         MESSAGE("Wobbuffet absorbed electricity!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Wobbuffet's Sp. Atk rose!");
+        MESSAGE("Wobbuffet: ATT. SPECIALE\naumenta!");
         NONE_OF {
             MESSAGE("Wobbuffet usa\nElectro Shot!");
         }
@@ -453,7 +453,7 @@ SINGLE_BATTLE_TEST("Electro Shot doesn't need to charge with Power Herb")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ELECTRO_SHOT, player);
         MESSAGE("Wobbuffet absorbed electricity!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Wobbuffet's Sp. Atk rose!");
+        MESSAGE("Wobbuffet: ATT. SPECIALE\naumenta!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
         MESSAGE("Wobbuffet became fully charged due to its Power Herb!");
         NONE_OF {

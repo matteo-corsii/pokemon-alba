@@ -101,11 +101,11 @@ SINGLE_BATTLE_TEST("Protective Pads protects from Protect's secondary effects")
             } else if (move == MOVE_BURNING_BULWARK) {
                 STATUS_ICON(player, STATUS1_BURN);
             } else if (move == MOVE_KINGS_SHIELD) {
-                MESSAGE("Wobbuffet's Attack fell!");
+                MESSAGE("Wobbuffet: ATTACCO\ndiminuisce!");
             } else if (move == MOVE_SILK_TRAP) {
-                MESSAGE("Wobbuffet's Speed fell!");
+                MESSAGE("Wobbuffet: VELOCITÀ\ndiminuisce!");
             } else if (move == MOVE_OBSTRUCT) {
-                MESSAGE("Wobbuffet's Defense harshly fell!");
+                MESSAGE("Wobbuffet: DIFESA\ndiminuisce di molto!");
             }
         }
     }

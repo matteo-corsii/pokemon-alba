@@ -33,7 +33,7 @@ SINGLE_BATTLE_TEST("Rapid Spin blows away Wrap, hazards and raises Speed (Gen 8+
         ANIMATION(ANIM_TYPE_MOVE, MOVE_RAPID_SPIN, player);
     #if B_SPEED_BUFFING_RAPID_SPIN >= GEN_8
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Wobbuffet's Speed rose!");
+        MESSAGE("Wobbuffet: VELOCITÀ\naumenta!");
     #endif
         MESSAGE("Wobbuffet was freed from Wrap!");
         MESSAGE("The pointed stones disappeared from around your team!");
@@ -109,7 +109,7 @@ SINGLE_BATTLE_TEST("Rapid Spin doesn't blow away Wrap, hazards or raise Speed wh
         NONE_OF {
         #if B_SPEED_BUFFING_RAPID_SPIN >= GEN_8
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-            MESSAGE("Tauros's Speed rose!");
+            MESSAGE("Tauros: VELOCITÀ\naumenta!");
         #endif
             MESSAGE("Tauros was freed from Wrap!");
             MESSAGE("The pointed stones disappeared from around your team!");

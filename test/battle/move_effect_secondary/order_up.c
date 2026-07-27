@@ -29,13 +29,13 @@ DOUBLE_BATTLE_TEST("Order Up increases a stat based on Tatsugiri's form")
         switch (species)
         {
         case SPECIES_TATSUGIRI_CURLY:
-            MESSAGE("Dondozo's Attack rose!");
+            MESSAGE("Dondozo: ATTACCO\naumenta!");
             break;
         case SPECIES_TATSUGIRI_DROOPY:
-            MESSAGE("Dondozo's Defense rose!");
+            MESSAGE("Dondozo: DIFESA\naumenta!");
             break;
         case SPECIES_TATSUGIRI_STRETCHY:
-            MESSAGE("Dondozo's Speed rose!");
+            MESSAGE("Dondozo: VELOCITÀ\naumenta!");
             break;
         }
     } THEN {
@@ -73,7 +73,7 @@ DOUBLE_BATTLE_TEST("Order Up increases a stat based on Tatsugiri's form even if 
         ABILITY_POPUP(playerLeft, ABILITY_COMMANDER);
         MESSAGE("Tatsugiri was swallowed by Dondozo and became Dondozo's commander!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
-        MESSAGE("Tatsugiri was hurt by its poisoning!");
+        MESSAGE("Tatsugiri soffre per\nl'avvelenamento!");
         MESSAGE("Tatsugiri non ha\npiù energie!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_HAZE, opponentRight); // Remove previous stat boosts
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ORDER_UP, playerRight);
@@ -81,13 +81,13 @@ DOUBLE_BATTLE_TEST("Order Up increases a stat based on Tatsugiri's form even if 
         switch (species)
         {
         case SPECIES_TATSUGIRI_CURLY:
-            MESSAGE("Dondozo's Attack rose!");
+            MESSAGE("Dondozo: ATTACCO\naumenta!");
             break;
         case SPECIES_TATSUGIRI_DROOPY:
-            MESSAGE("Dondozo's Defense rose!");
+            MESSAGE("Dondozo: DIFESA\naumenta!");
             break;
         case SPECIES_TATSUGIRI_STRETCHY:
-            MESSAGE("Dondozo's Speed rose!");
+            MESSAGE("Dondozo: VELOCITÀ\naumenta!");
             break;
         }
     } THEN {

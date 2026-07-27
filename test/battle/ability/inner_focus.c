@@ -20,7 +20,7 @@ SINGLE_BATTLE_TEST("Inner Focus doesn't prevent intimidate (Gen3-7)")
         HP_BAR(player, captureDamage: &turnOneHit);
         ABILITY_POPUP(player, ABILITY_INTIMIDATE);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Zubat's Attack fell!");
+        MESSAGE("Zubat avversario: ATTACCO\ndiminuisce!");
         // Turn 2
         HP_BAR(player, captureDamage: &turnTwoHit);
     } THEN {

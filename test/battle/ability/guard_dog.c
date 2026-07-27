@@ -19,7 +19,7 @@ SINGLE_BATTLE_TEST("Guard Dog raises Attack when intimidated", s16 damage)
             ABILITY_POPUP(opponent, ABILITY_INTIMIDATE);
             ABILITY_POPUP(player, ABILITY_GUARD_DOG);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-            MESSAGE("Okidogi's Attack rose!");
+            MESSAGE("Okidogi: ATTACCO\naumenta!");
         }
         HP_BAR(opponent, captureDamage: &results[i].damage);
     } FINALLY {
@@ -40,7 +40,7 @@ SINGLE_BATTLE_TEST("Guard Dog raises Attack before Adrenaline Orb when Intimidat
         ABILITY_POPUP(opponent, ABILITY_INTIMIDATE);
         ABILITY_POPUP(player, ABILITY_GUARD_DOG);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Okidogi's Attack rose!");
+        MESSAGE("Okidogi: ATTACCO\naumenta!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
     } THEN {
@@ -63,7 +63,7 @@ SINGLE_BATTLE_TEST("Guard Dog still raises Attack against Intimidate when holdin
         ABILITY_POPUP(opponent, ABILITY_INTIMIDATE);
         ABILITY_POPUP(player, ABILITY_GUARD_DOG);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Okidogi's Attack rose!");
+        MESSAGE("Okidogi: ATTACCO\naumenta!");
         NOT MESSAGE("The effects of the Clear Amulet held by Okidogi prevents its stats from being lowered!");
     } THEN {
         EXPECT_EQ(player->statStages[STAT_ATK], DEFAULT_STAT_STAGE + 1);
@@ -86,7 +86,7 @@ SINGLE_BATTLE_TEST("Guard Dog does not activate if Intimidate is blocked by Subs
         NONE_OF {
             ABILITY_POPUP(player, ABILITY_GUARD_DOG);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-            MESSAGE("Okidogi's Attack rose!");
+            MESSAGE("Okidogi: ATTACCO\naumenta!");
         }
     } THEN {
         EXPECT_EQ(player->statStages[STAT_ATK], DEFAULT_STAT_STAGE);
@@ -110,7 +110,7 @@ SINGLE_BATTLE_TEST("Guard Dog does not activate if Intimidate is blocked by Mist
         NONE_OF {
             ABILITY_POPUP(player, ABILITY_GUARD_DOG);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-            MESSAGE("Okidogi's Attack rose!");
+            MESSAGE("Okidogi: ATTACCO\naumenta!");
         }
     } THEN {
         EXPECT_EQ(player->statStages[STAT_ATK], DEFAULT_STAT_STAGE);
@@ -137,7 +137,7 @@ SINGLE_BATTLE_TEST("Guard Dog does not activate if Intimidate cannot lower Attac
         NONE_OF {
             ABILITY_POPUP(player, ABILITY_GUARD_DOG);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-            MESSAGE("Okidogi's Attack rose!");
+            MESSAGE("Okidogi: ATTACCO\naumenta!");
         }
     } THEN {
         EXPECT_EQ(player->statStages[STAT_ATK], MIN_STAT_STAGE);
@@ -165,7 +165,7 @@ DOUBLE_BATTLE_TEST("Guard Dog does not activate if Intimidate is blocked by Flow
         NONE_OF {
             ABILITY_POPUP(playerRight, ABILITY_GUARD_DOG);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
-            MESSAGE("Okidogi's Attack rose!");
+            MESSAGE("Okidogi: ATTACCO\naumenta!");
         }
     } THEN {
         EXPECT_EQ(playerRight->types[2], TYPE_GRASS);
@@ -192,7 +192,7 @@ DOUBLE_BATTLE_TEST("Guard Dog activates before Flower Veil if it has higher unmo
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
         ABILITY_POPUP(playerRight, ABILITY_GUARD_DOG);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
-        MESSAGE("Okidogi's Attack rose!");
+        MESSAGE("Okidogi: ATTACCO\naumenta!");
         NOT ABILITY_POPUP(playerLeft, ABILITY_FLOWER_VEIL);
     } THEN {
         EXPECT_EQ(playerRight->types[2], TYPE_GRASS);

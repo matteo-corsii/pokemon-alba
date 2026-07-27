@@ -1108,9 +1108,8 @@ LittlerootTown_Text_CampettoNicoConclusion:
 	.string "aspettando, no?$"
 
 LittlerootTown_Text_GoToCampettoFirst:
-	.string "Prima dovrei passare\n"
-	.string "dal campetto di\n"
-	.string "Via dell'Armonia.$"
+	.string "Prima devo passare dal\n"
+	.string "campetto di Via dell'Armonia.$"
 
 LittlerootTown_Text_IfYouGoInGrassPokemonWillJumpOut:
 	.string "Ehm, ehm, ehm!\p"

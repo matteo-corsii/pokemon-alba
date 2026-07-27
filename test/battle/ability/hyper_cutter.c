@@ -69,7 +69,7 @@ SINGLE_BATTLE_TEST("Hyper Cutter is ignored by Mold Breaker")
         ABILITY_POPUP(player, ABILITY_MOLD_BREAKER);
         MESSAGE("Pinsir breaks the mold!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_GROWL, player);
-        MESSAGE("The opposing Krabby's Attack fell!");
+        MESSAGE("Krabby avversario: ATTACCO\ndiminuisce!");
         NONE_OF {
             ABILITY_POPUP(opponent, ABILITY_HYPER_CUTTER);
             MESSAGE("The opposing Krabby's Attack was not lowered!");
@@ -88,8 +88,8 @@ SINGLE_BATTLE_TEST("Hyper Cutter doesn't prevent Attack stage reduction from mov
         TURN {}
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SUPERPOWER, opponent);
-        MESSAGE("The opposing Krabby's Attack fell!");
-        MESSAGE("The opposing Krabby's Defense fell!");
+        MESSAGE("Krabby avversario: ATTACCO\ndiminuisce!");
+        MESSAGE("Krabby avversario: DIFESA\ndiminuisce!");
     } THEN {
         EXPECT_EQ(opponent->statStages[STAT_ATK], DEFAULT_STAT_STAGE - 1);
     }
@@ -106,7 +106,7 @@ SINGLE_BATTLE_TEST("Hyper Cutter doesn't prevent Topsy-Turvy")
         TURN { MOVE(opponent, MOVE_SWORDS_DANCE); MOVE(player, MOVE_TOPSY_TURVY); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SWORDS_DANCE, opponent);
-        MESSAGE("The opposing Krabby's Attack rose sharply!");
+        MESSAGE("Krabby avversario: ATTACCO\naumenta di molto!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TOPSY_TURVY, player);
         MESSAGE("All stat changes on the opposing Krabby were inverted!");
     } THEN {
@@ -125,7 +125,7 @@ SINGLE_BATTLE_TEST("Hyper Cutter doesn't prevent Spectral Thief from resetting p
         TURN { MOVE(opponent, MOVE_SWORDS_DANCE); MOVE(player, MOVE_SPECTRAL_THIEF); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SWORDS_DANCE, opponent);
-        MESSAGE("The opposing Krabby's Attack rose sharply!");
+        MESSAGE("Krabby avversario: ATTACCO\naumenta di molto!");
         MESSAGE("Wobbuffet stole the target's boosted stats!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SPECTRAL_THIEF, player);
     } THEN {

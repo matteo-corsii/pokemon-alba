@@ -16,10 +16,10 @@ SINGLE_BATTLE_TEST("Curse lowers Speed, raises Attack, and raises Defense when u
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CURSE, player);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Wobbuffet's Speed fell!");
+        MESSAGE("Wobbuffet: VELOCITÀ\ndiminuisce!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Wobbuffet's Attack rose!");
-        MESSAGE("Wobbuffet's Defense rose!");
+        MESSAGE("Wobbuffet: ATTACCO\naumenta!");
+        MESSAGE("Wobbuffet: DIFESA\naumenta!");
     }
 }
 
@@ -87,10 +87,10 @@ SINGLE_BATTLE_TEST("Curse lowering stats is not prevented by Mist")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_MIST, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CURSE, player);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Wobbuffet's Speed fell!");
+        MESSAGE("Wobbuffet: VELOCITÀ\ndiminuisce!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Wobbuffet's Attack rose!");
-        MESSAGE("Wobbuffet's Defense rose!");
+        MESSAGE("Wobbuffet: ATTACCO\naumenta!");
+        MESSAGE("Wobbuffet: DIFESA\naumenta!");
     } THEN {
         EXPECT_EQ(player->statStages[STAT_SPEED], DEFAULT_STAT_STAGE - 1);
         EXPECT_EQ(player->statStages[STAT_ATK], DEFAULT_STAT_STAGE + 1);

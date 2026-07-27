@@ -19,7 +19,7 @@ SINGLE_BATTLE_TEST("Captivate decreases the target's Sp. Attack if they're oppos
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CAPTIVATE, player);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Nidoking's Sp. Atk harshly fell!");
+        MESSAGE("Nidoking avversario: ATT. SPECIALE\ndiminuisce di molto!");
     } THEN {
         EXPECT(opponent->statStages[STAT_SPATK] == DEFAULT_STAT_STAGE - 2);
     }
@@ -129,15 +129,15 @@ DOUBLE_BATTLE_TEST("Captivate decreases the target's Sp. Attack if they're oppos
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CAPTIVATE, playerLeft);
         if (species == SPECIES_NIDOKING) {
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
-        MESSAGE("The opposing Nidoking's Sp. Atk harshly fell!");
+        MESSAGE("Nidoking avversario: ATT. SPECIALE\ndiminuisce di molto!");
         } else {
             NONE_OF {
                 ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
-                MESSAGE("The opposing Nidoqueen's Sp. Atk harshly fell!");
+                MESSAGE("Nidoqueen avversario: ATT. SPECIALE\ndiminuisce di molto!");
             }
         }
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
-        MESSAGE("The opposing Nidoking's Sp. Atk harshly fell!");
+        MESSAGE("Nidoking avversario: ATT. SPECIALE\ndiminuisce di molto!");
     } THEN {
         if (species == SPECIES_NIDOKING) {
             EXPECT(opponentLeft->statStages[STAT_SPATK] == DEFAULT_STAT_STAGE - 2);

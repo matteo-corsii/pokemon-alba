@@ -184,8 +184,8 @@ SINGLE_BATTLE_TEST("Stockpile temporarily raises Def and Sp. Def", s16 dmgPyhsic
         if (move == MOVE_STOCKPILE) {
             MESSAGE("Wobbuffet stockpiled 1!");
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-            MESSAGE("Wobbuffet's Defense rose!");
-            MESSAGE("Wobbuffet's Sp. Def rose!");
+            MESSAGE("Wobbuffet: DIFESA\naumenta!");
+            MESSAGE("Wobbuffet: DIF. SPECIALE\naumenta!");
         }
 
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
@@ -240,23 +240,23 @@ DOUBLE_BATTLE_TEST("Stockpile's Def and Sp. Def boost is lost after using Spit U
         ANIMATION(ANIM_TYPE_MOVE, move, playerLeft);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
         if (count == 1) {
-            MESSAGE("Wobbuffet's Defense fell!");
+            MESSAGE("Wobbuffet: DIFESA\ndiminuisce!");
         }
         else if (count == 2) {
-            MESSAGE("Wobbuffet's Defense harshly fell!");
+            MESSAGE("Wobbuffet: DIFESA\ndiminuisce di molto!");
         }
         else {
-            MESSAGE("Wobbuffet's Defense severely fell!");
+            MESSAGE("Wobbuffet: DIFESA\ndiminuisce drasticamente!");
         }
 
         if (count == 1) {
-            MESSAGE("Wobbuffet's Sp. Def fell!");
+            MESSAGE("Wobbuffet: DIF. SPECIALE\ndiminuisce!");
         }
         else if (count == 2) {
-            MESSAGE("Wobbuffet's Sp. Def harshly fell!");
+            MESSAGE("Wobbuffet: DIF. SPECIALE\ndiminuisce di molto!");
         }
         else {
-            MESSAGE("Wobbuffet's Sp. Def severely fell!");
+            MESSAGE("Wobbuffet: DIF. SPECIALE\ndiminuisce drasticamente!");
         }
         MESSAGE("Wobbuffet's stockpiled effect wore off!");
 

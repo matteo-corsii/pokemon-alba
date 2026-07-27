@@ -21,12 +21,12 @@ SINGLE_BATTLE_TEST("Storm Drain absorbs Water-type moves and increases the Sp. A
             };
             ABILITY_POPUP(opponent, ABILITY_STORM_DRAIN);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-            MESSAGE("The opposing Gastrodon's Sp. Atk rose!");
+            MESSAGE("Gastrodon avversario: ATT. SPECIALE\naumenta!");
         } else {
             NONE_OF {
                 ABILITY_POPUP(opponent, ABILITY_STORM_DRAIN);
                 ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-                MESSAGE("The opposing Gastrodon's Sp. Atk rose!");
+                MESSAGE("Gastrodon avversario: ATT. SPECIALE\naumenta!");
             };
             ANIMATION(ANIM_TYPE_MOVE, MOVE_WATER_GUN, player);
             HP_BAR(opponent);
@@ -62,10 +62,10 @@ DOUBLE_BATTLE_TEST("Storm Drain forces single-target Water-type moves to target 
             };
             ABILITY_POPUP(opponentLeft, ABILITY_STORM_DRAIN);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
-            MESSAGE("The opposing Gastrodon's Sp. Atk rose!");
+            MESSAGE("Gastrodon avversario: ATT. SPECIALE\naumenta!");
             ABILITY_POPUP(opponentLeft, ABILITY_STORM_DRAIN);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
-            MESSAGE("The opposing Gastrodon's Sp. Atk rose!");
+            MESSAGE("Gastrodon avversario: ATT. SPECIALE\naumenta!");
         } else {
             NONE_OF {
                 HP_BAR(opponentRight);

@@ -239,11 +239,11 @@ SINGLE_BATTLE_TEST("Teatime triggers Lightning Rod if it has been affected by El
         MESSAGE("Wobbuffet avversario usa\nTeatime!");
         if (shouldTriggerAbility) {
             ABILITY_POPUP(player, ABILITY_LIGHTNING_ROD);
-            MESSAGE("Pikachu's Sp. Atk rose!");
+            MESSAGE("Pikachu: ATT. SPECIALE\naumenta!");
         } else {
             NONE_OF {
                 ABILITY_POPUP(player, ABILITY_LIGHTNING_ROD);
-                MESSAGE("Pikachu's Sp. Atk rose!");
+                MESSAGE("Pikachu: ATT. SPECIALE\naumenta!");
             }
         }
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TEATIME, opponent);
@@ -280,11 +280,11 @@ SINGLE_BATTLE_TEST("Teatime triggers Motor Drive if it has been affected by Elec
         MESSAGE("Wobbuffet avversario usa\nTeatime!");
         if (shouldTriggerAbility) {
             ABILITY_POPUP(player, ABILITY_MOTOR_DRIVE);
-            MESSAGE("Electivire's Speed rose!");
+            MESSAGE("Electivire: VELOCITÀ\naumenta!");
         } else {
             NONE_OF {
                 ABILITY_POPUP(player, ABILITY_MOTOR_DRIVE);
-                MESSAGE("Electivire's Speed rose!");
+                MESSAGE("Electivire: VELOCITÀ\naumenta!");
             }
         }
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TEATIME, opponent);

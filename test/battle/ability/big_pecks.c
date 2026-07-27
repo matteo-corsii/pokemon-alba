@@ -27,7 +27,7 @@ SINGLE_BATTLE_TEST("Big Pecks is ignored by Mold Breaker")
         ABILITY_POPUP(player, ABILITY_MOLD_BREAKER);
         MESSAGE("Pinsir breaks the mold!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_LEER, player);
-        MESSAGE("The opposing Pidgey's Defense fell!");
+        MESSAGE("Pidgey avversario: DIFESA\ndiminuisce!");
         NONE_OF {
             ABILITY_POPUP(opponent, ABILITY_BIG_PECKS);
             MESSAGE("The opposing Pidgey's Defense was not lowered!");
@@ -46,8 +46,8 @@ SINGLE_BATTLE_TEST("Big Pecks doesn't prevent Defense stage reduction from moves
         TURN {}
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SUPERPOWER, opponent);
-        MESSAGE("The opposing Pidgey's Attack fell!");
-        MESSAGE("The opposing Pidgey's Defense fell!");
+        MESSAGE("Pidgey avversario: ATTACCO\ndiminuisce!");
+        MESSAGE("Pidgey avversario: DIFESA\ndiminuisce!");
     } THEN {
         EXPECT_EQ(opponent->statStages[STAT_DEF], DEFAULT_STAT_STAGE - 1);
     }
@@ -64,7 +64,7 @@ SINGLE_BATTLE_TEST("Big Pecks doesn't prevent Topsy-Turvy")
         TURN { MOVE(opponent, MOVE_HARDEN); MOVE(player, MOVE_TOPSY_TURVY); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_HARDEN, opponent);
-        MESSAGE("The opposing Pidgey's Defense rose!");
+        MESSAGE("Pidgey avversario: DIFESA\naumenta!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TOPSY_TURVY, player);
         MESSAGE("All stat changes on the opposing Pidgey were inverted!");
     } THEN {
@@ -85,7 +85,7 @@ SINGLE_BATTLE_TEST("Big Pecks doesn't prevent Spectral Thief from resetting posi
         TURN { MOVE(opponent, MOVE_HARDEN); MOVE(player, MOVE_SPECTRAL_THIEF); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_HARDEN, opponent);
-        MESSAGE("The opposing Pidgey's Defense rose!");
+        MESSAGE("Pidgey avversario: DIFESA\naumenta!");
         MESSAGE("Wobbuffet stole the target's boosted stats!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SPECTRAL_THIEF, player);
     } THEN {

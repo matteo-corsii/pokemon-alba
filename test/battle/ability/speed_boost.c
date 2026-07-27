@@ -13,7 +13,7 @@ SINGLE_BATTLE_TEST("Speed Boost gradually boosts Speed")
         MESSAGE("Wobbuffet avversario usa\nCelebrate!");
         MESSAGE("Torchic usa\nCelebrate!");
         ABILITY_POPUP(player, ABILITY_SPEED_BOOST);
-        MESSAGE("Torchic's Speed rose!");
+        MESSAGE("Torchic: VELOCITÀ\naumenta!");
         MESSAGE("Torchic usa\nCelebrate!");
         MESSAGE("Wobbuffet avversario usa\nCelebrate!");
     }

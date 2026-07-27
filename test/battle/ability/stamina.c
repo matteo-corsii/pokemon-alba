@@ -116,7 +116,7 @@ SINGLE_BATTLE_TEST("Stamina is not activated by users own Substitute")
         MESSAGE("Mudbray put in a substitute!");
         NONE_OF {
             ABILITY_POPUP(player, ABILITY_STAMINA);
-            MESSAGE("Mudbray's Defense rose!");
+            MESSAGE("Mudbray: DIFESA\naumenta!");
         }
     } THEN {
         EXPECT_EQ(player->statStages[STAT_DEF], DEFAULT_STAT_STAGE);

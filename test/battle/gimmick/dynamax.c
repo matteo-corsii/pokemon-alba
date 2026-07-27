@@ -686,11 +686,11 @@ SINGLE_BATTLE_TEST("Dynamax: Max Strike lowers single opponent's speed")
         MESSAGE("Wobbuffet avversario usa\nGRAFFIO!");
         MESSAGE("Wobbuffet usa\nMax Strike!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Wobbuffet's Speed fell!");
+        MESSAGE("Wobbuffet avversario: VELOCITÀ\ndiminuisce!");
         // turn 2
         MESSAGE("Wobbuffet usa\nMax Strike!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Wobbuffet's Speed fell!");
+        MESSAGE("Wobbuffet avversario: VELOCITÀ\ndiminuisce!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
     }
 }
@@ -717,15 +717,15 @@ DOUBLE_BATTLE_TEST("Dynamax: Max Strike lowers both opponents' speed")
         MESSAGE("Wobbuffet avversario usa\nGRAFFIO!");
         MESSAGE("Wobbuffet usa\nMax Strike!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
-        MESSAGE("The opposing Wobbuffet's Speed fell!");
+        MESSAGE("Wobbuffet avversario: VELOCITÀ\ndiminuisce!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
-        MESSAGE("The opposing Wobbuffet's Speed fell!");
+        MESSAGE("Wobbuffet avversario: VELOCITÀ\ndiminuisce!");
         // turn 2
         MESSAGE("Wobbuffet usa\nMax Strike!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
-        MESSAGE("The opposing Wobbuffet's Speed fell!");
+        MESSAGE("Wobbuffet avversario: VELOCITÀ\ndiminuisce!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
-        MESSAGE("The opposing Wobbuffet's Speed fell!");
+        MESSAGE("Wobbuffet avversario: VELOCITÀ\ndiminuisce!");
         MESSAGE("Wobbuffet avversario usa\nGRAFFIO!");
         MESSAGE("Wobbuffet avversario usa\nGRAFFIO!");
     }
@@ -753,9 +753,9 @@ DOUBLE_BATTLE_TEST("Dynamax: Max Knuckle raises both allies' attack")
         MESSAGE("Wobbuffet usa\nMax Knuckle!");
         HP_BAR(opponentLeft, captureDamage: &damage[0]);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-        MESSAGE("Wobbuffet's Attack rose!");
+        MESSAGE("Wobbuffet: ATTACCO\naumenta!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
-        MESSAGE("Wynaut's Attack rose!");
+        MESSAGE("Wynaut: ATTACCO\naumenta!");
         MESSAGE("Wynaut usa\nGRAFFIO!");
         HP_BAR(opponentRight, captureDamage: &damage[1]);
         MESSAGE("Wobbuffet avversario usa\nCelebrate!");
@@ -764,9 +764,9 @@ DOUBLE_BATTLE_TEST("Dynamax: Max Knuckle raises both allies' attack")
         MESSAGE("Wobbuffet usa\nMax Knuckle!");
         HP_BAR(opponentLeft, captureDamage: &damage[2]);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-        MESSAGE("Wobbuffet's Attack rose!");
+        MESSAGE("Wobbuffet: ATTACCO\naumenta!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
-        MESSAGE("Wynaut's Attack rose!");
+        MESSAGE("Wynaut: ATTACCO\naumenta!");
         MESSAGE("Wynaut usa\nGRAFFIO!");
         HP_BAR(opponentRight, captureDamage: &damage[3]);
     } THEN {
@@ -1548,7 +1548,7 @@ SINGLE_BATTLE_TEST("Dynamax: Max Moves don't execute effects on fainted battlers
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_DYNAMAX_GROWTH, player);
         MESSAGE("Wobbuffet usa\nMax Strike!");
         MESSAGE("Wobbuffet avversario non ha\npiù energie!");
-        NOT MESSAGE("The opposing Wobbuffet's Speed fell!");
+        NOT MESSAGE("Wobbuffet avversario: VELOCITÀ\ndiminuisce!");
     }
 }
 
@@ -1564,7 +1564,7 @@ SINGLE_BATTLE_TEST("Dynamax: Moxie clones can be triggered by Max Moves fainting
     } SCENE {
         MESSAGE("Wobbuffet avversario non ha\npiù energie!");
         ABILITY_POPUP(player, ABILITY_MOXIE);
-        MESSAGE("Gyarados's Attack rose!");
+        MESSAGE("Gyarados: ATTACCO\naumenta!");
     }
 }
 

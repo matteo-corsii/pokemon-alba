@@ -12,9 +12,9 @@ SINGLE_BATTLE_TEST("Octolock decreases Defense and Sp. Def by at the end of the 
         ANIMATION(ANIM_TYPE_MOVE, MOVE_OCTOLOCK, player);
         MESSAGE("The opposing Wobbuffet can no longer escape because of Octolock!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Wobbuffet's Defense fell!");
+        MESSAGE("Wobbuffet avversario: DIFESA\ndiminuisce!");
         NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Wobbuffet's Sp. Def fell!");
+        MESSAGE("Wobbuffet avversario: DIF. SPECIALE\ndiminuisce!");
     }
 }
 
@@ -41,8 +41,8 @@ SINGLE_BATTLE_TEST("Octolock reduction is prevented by Clear Body, White Smoke a
             ABILITY_POPUP(opponent, ABILITY_CLEAR_BODY);
             MESSAGE("The opposing Beldum's stats were not lowered!");
             NONE_OF {
-                MESSAGE("The opposing Beldum's Defense fell!");
-                MESSAGE("The opposing Beldum's Sp. Def fell!");
+                MESSAGE("Beldum avversario: DIFESA\ndiminuisce!");
+                MESSAGE("Beldum avversario: DIF. SPECIALE\ndiminuisce!");
             }
         }
         else if (species == SPECIES_TORKOAL)
@@ -51,8 +51,8 @@ SINGLE_BATTLE_TEST("Octolock reduction is prevented by Clear Body, White Smoke a
             ABILITY_POPUP(opponent, ABILITY_WHITE_SMOKE);
             MESSAGE("The opposing Torkoal's stats were not lowered!");
             NONE_OF {
-                MESSAGE("The opposing Torkoal's Defense fell!");
-                MESSAGE("The opposing Torkoal's Sp. Def fell!");
+                MESSAGE("Torkoal avversario: DIFESA\ndiminuisce!");
+                MESSAGE("Torkoal avversario: DIF. SPECIALE\ndiminuisce!");
             }
         }
         else if (species == SPECIES_SOLGALEO)
@@ -61,8 +61,8 @@ SINGLE_BATTLE_TEST("Octolock reduction is prevented by Clear Body, White Smoke a
             ABILITY_POPUP(opponent, ABILITY_FULL_METAL_BODY);
             MESSAGE("The opposing Solgaleo's stats were not lowered!");
             NONE_OF {
-                MESSAGE("The opposing Solgaleo's Defense fell!");
-                MESSAGE("The opposing Solgaleo's Sp. Def fell!");
+                MESSAGE("Solgaleo avversario: DIFESA\ndiminuisce!");
+                MESSAGE("Solgaleo avversario: DIF. SPECIALE\ndiminuisce!");
             }
         }
     }
@@ -78,11 +78,11 @@ SINGLE_BATTLE_TEST("Octolock Defense reduction is prevented by Big Pecks")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_OCTOLOCK, player);
         MESSAGE("The opposing Pidgey can no longer escape because of Octolock!");
-        NOT MESSAGE("The opposing Pidgey's Defense fell!");
+        NOT MESSAGE("Pidgey avversario: DIFESA\ndiminuisce!");
         ABILITY_POPUP(opponent, ABILITY_BIG_PECKS);
         MESSAGE("The opposing Pidgey's Defense was not lowered!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Pidgey's Sp. Def fell!");
+        MESSAGE("Pidgey avversario: DIF. SPECIALE\ndiminuisce!");
     }
 }
 
@@ -100,8 +100,8 @@ SINGLE_BATTLE_TEST("Octolock reduction is prevented by Clear Amulet")
         MESSAGE("The effects of the Clear Amulet held by the opposing Wobbuffet prevents its stats from being lowered!");
         NONE_OF {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-            MESSAGE("The opposing Wobbuffet's Defense fell!");
-            MESSAGE("The opposing Wobbuffet's Sp. Def fell!");
+            MESSAGE("Wobbuffet avversario: DIFESA\ndiminuisce!");
+            MESSAGE("Wobbuffet avversario: DIF. SPECIALE\ndiminuisce!");
         }
     }
 }
@@ -120,14 +120,14 @@ SINGLE_BATTLE_TEST("Octolock will not decrease Defense and Sp. Def further then 
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_OCTOLOCK, player);
         for (j = 0; j < 5; j++) {
-            MESSAGE("The opposing Wobbuffet's Defense fell!");
-            MESSAGE("The opposing Wobbuffet's Sp. Def fell!");
+            MESSAGE("Wobbuffet avversario: DIFESA\ndiminuisce!");
+            MESSAGE("Wobbuffet avversario: DIF. SPECIALE\ndiminuisce!");
         }
-        MESSAGE("The opposing Wobbuffet's Defense won't go any lower!");
-        MESSAGE("The opposing Wobbuffet's Sp. Def won't go any lower!");
+        MESSAGE("Wobbuffet avversario: DIFESA\nnon può diminuire oltre!");
+        MESSAGE("Wobbuffet avversario: DIF. SPECIALE\nnon può diminuire oltre!");
         NONE_OF {
-            MESSAGE("The opposing Wobbuffet's Defense fell!");
-            MESSAGE("The opposing Wobbuffet's Sp. Def fell!");
+            MESSAGE("Wobbuffet avversario: DIFESA\ndiminuisce!");
+            MESSAGE("Wobbuffet avversario: DIF. SPECIALE\ndiminuisce!");
         }
     }
 }
@@ -145,13 +145,13 @@ SINGLE_BATTLE_TEST("Octolock ends after user that set the lock switches out")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_OCTOLOCK, player);
         MESSAGE("The opposing Wobbuffet can no longer escape because of Octolock!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Wobbuffet's Defense fell!");
+        MESSAGE("Wobbuffet avversario: DIFESA\ndiminuisce!");
         NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Wobbuffet's Sp. Def fell!");
+        MESSAGE("Wobbuffet avversario: DIF. SPECIALE\ndiminuisce!");
         NONE_OF {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-            MESSAGE("The opposing Wobbuffet's Defense fell!");
-            MESSAGE("The opposing Wobbuffet's Sp. Def fell!");
+            MESSAGE("Wobbuffet avversario: DIFESA\ndiminuisce!");
+            MESSAGE("Wobbuffet avversario: DIF. SPECIALE\ndiminuisce!");
         }
 
     }
@@ -169,7 +169,7 @@ SINGLE_BATTLE_TEST("Octolock stat drops are not reflected by Mirror Armor")
         MESSAGE("The opposing Corviknight can no longer escape because of Octolock!");
         NOT ABILITY_POPUP(opponent, ABILITY_MIRROR_ARMOR);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Corviknight's Defense fell!");
+        MESSAGE("Corviknight avversario: DIFESA\ndiminuisce!");
     } THEN {
         EXPECT_EQ(player->statStages[STAT_DEF], DEFAULT_STAT_STAGE);
         EXPECT_EQ(player->statStages[STAT_SPDEF], DEFAULT_STAT_STAGE);
