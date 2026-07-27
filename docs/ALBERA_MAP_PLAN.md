@@ -84,3 +84,12 @@ distribuzione degli spazi. Le nuove strutture sono segnaposto costruiti con
 metatile esistenti. Non introduce nuovi warp, connessioni, object events,
 coordinate events o script; i cartelli vengono rinviati per evitare modifiche
 agli script in questa fase.
+
+## Esito del primo collaudo
+
+Tutte le aree previste sono risultate raggiungibili e le future uscite verso il
+centro storico e il Lago di Albèra sono correttamente bloccate. Il prologo
+originale non ha subito regressioni. Sono state ripulite le collisioni residue
+e completate le parti isolate degli alberi individuate durante il collaudo. Il
+prototipo è quindi pronto per ricevere il nuovo prologo; la relativa
+riscrittura narrativa non è ancora completata.
