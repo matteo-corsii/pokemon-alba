@@ -23,6 +23,7 @@
 - [Styleguide and Principles](./STYLEGUIDE.md)
 - [Credits](./CREDITS.md)
 - [Piano della mappa di Albèra](./ALBERA_MAP_PLAN.md)
+- [Implementazione degli starter di Ausonia](./AUSONIA_STARTERS_IMPLEMENTATION.md)
 - [Tutorials]()
   - [What are AI Flags?](tutorials/ai_flags.md)
     - [How to add new AI Flags](tutorials/ai_logic.md)

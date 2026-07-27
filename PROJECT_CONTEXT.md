@@ -165,7 +165,13 @@ Il design definitivo, il nome e il tipo non sono ancora decisi.
 
 ## Starter
 
-Saranno presenti tre nuovi starter, ciascuno con tre stadi evolutivi. I nomi delle specie non sono ancora definitivi.
+Saranno presenti tre nuovi starter, ciascuno con tre stadi evolutivi. I nomi provvisori approvati sono:
+
+- Cingerm, Rovasco e Selvazanna per la linea Erba;
+- Serbrace, Vipercen e Tossivampa per la linea Fuoco;
+- Ardeino, Velairone e Codairone per la linea Acqua.
+
+La linea di Cingerm è il primo prototipo tecnico scelto per verificare l'architettura delle specie originali. In questa fase le tre specie esistono soltanto nei dati e nei test: non sostituiscono gli starter originali e non sono disponibili nel normale gameplay. Sprite, palette, icone, impronte e cry restano segnaposto riutilizzati da specie esistenti fino alla produzione della grafica e dell'audio originali.
 
 ### Starter Erba
 

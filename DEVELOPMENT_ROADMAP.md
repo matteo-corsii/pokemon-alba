@@ -2,6 +2,8 @@
 
 Questa roadmap descrive una sequenza iniziale di attività. Ogni fase deve produrre un risultato verificabile prima di passare alla successiva. I dettagli tecnici e gli eventuali comandi saranno definiti solo dopo essere stati verificati sulla documentazione e sull’ambiente effettivamente utilizzato.
 
+**Stato delle milestone:** Albèra/prologo v1 è conclusa. È iniziata la milestone degli starter originali di Ausonia; la registrazione tecnica della linea Cingerm è in corso, mentre la sostituzione degli starter nel prologo resta rinviata a una fase successiva.
+
 ## 1. Verificare la compilazione pulita del progetto base
 
 **Esito della verifica:** la compilazione pulita è stata verificata con successo tramite GitHub Actions; tutti i job previsti dal workflow ufficiale sono riusciti e nessuna ROM è stata pubblicata come artefatto.
@@ -84,6 +86,8 @@ Questa roadmap descrive una sequenza iniziale di attività. Ogni fase deve produ
 
 ## 8. Aggiungere un primo Pokémon temporaneo di test
 
+**Stato:** la linea Cingerm è stata scelta come primo prototipo dati. Cingerm, Rovasco e Selvazanna vengono registrati senza renderli ottenibili e con asset grafici e sonori provvisori.
+
 **Obiettivo:** verificare il processo tecnico per introdurre una nuova specie usando risorse chiaramente provvisorie.
 
 **Risultato verificabile:** il Pokémon di test è definito, incontrabile in un contesto controllato e non altera specie non correlate.
@@ -93,6 +97,8 @@ Questa roadmap descrive una sequenza iniziale di attività. Ogni fase deve produ
 **Condizione per procedere:** l’aggiunta deve essere isolata, documentata e sostituibile senza propagare dipendenze non necessarie.
 
 ## 9. Progettare gli starter definitivi
+
+**Stato:** sono approvati in via provvisoria i nomi delle nove specie e i parametri tecnici iniziali della linea Cingerm. La direzione artistica originale e le altre due linee restano da implementare.
 
 **Obiettivo:** definire identità, linee evolutive, tipi, ruoli di gioco e direzione artistica dei tre starter.
 
