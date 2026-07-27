@@ -32,6 +32,8 @@ Questa roadmap descrive una sequenza iniziale di attività. Ogni fase deve produ
 
 **Esito del secondo collaudo del prologo:** il percorso è stato completato con entrambi i protagonisti senza blocchi o problemi di progressione. Il collaudo ha rilevato e corretto il testo tagliato di Via dell'Armonia, i messaggi residui di battaglia, i messaggi globali di consegna degli strumenti e il normale flusso di salvataggio. Le correzioni non modificano le relative meccaniche e attendono la validazione CI e la build privata finale.
 
+**Esito del collaudo finale:** sono stati individuati messaggi residui in inglese nella sequenza di sconfitta e alcuni nomi inglesi fra le mosse iniziali degli starter temporanei. È stata preparata la correzione conclusiva della localizzazione del prologo, in attesa della validazione CI e del collaudo della nuova ROM.
+
 **Obiettivo:** verificare l’intero ciclo di modifica del gioco con un cambiamento semplice e facilmente riconoscibile.
 
 **Risultato verificabile:** una singola stringa scelta per il test appare correttamente nel gioco compilato.

@@ -350,7 +350,7 @@ DOUBLE_BATTLE_TEST("Spread Moves: Spread move vs one protecting mon")
     } WHEN {
         TURN { MOVE(opponentLeft, MOVE_PROTECT); MOVE(playerLeft, MOVE_HYPER_VOICE); }
     } SCENE {
-        MESSAGE("Wobbuffet avversario usa\nProtect!");
+        MESSAGE("Wobbuffet avversario usa\nProtezione!");
         MESSAGE("Wobbuffet usa\nHyper Voice!");
         MESSAGE("The opposing Wobbuffet protected itself!");
     }
