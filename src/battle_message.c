@@ -79,7 +79,7 @@ const u8 gText_PkmnsXPreventsSwitching[] = _("{B_BUFF1} is preventing switching 
 const u8 gText_StatSharply[] = _(" di molto");
 const u8 gText_StatRose[] = _("aumenta!");
 const u8 gText_StatFell[] = _("diminuisce!");
-const u8 gText_DefendersStatRose[] = _("{B_DEF_NAME_WITH_PREFIX}:\n{B_BUFF1} aumenta{B_BUFF2}!");
+const u8 gText_DefendersStatRose[] = _("{B_BUFF1}\naumenta{B_BUFF2}!");
 static const u8 sText_GotAwaySafely[] = _("{PLAY_SE SE_FLEE}Fuga riuscita!\p");
 static const u8 sText_PlayerDefeatedLinkTrainer[] = _("You defeated {B_LINK_OPPONENT1_NAME}!");
 static const u8 sText_TwoLinkTrainersDefeated[] = _("You defeated {B_LINK_OPPONENT1_NAME} and {B_LINK_OPPONENT2_NAME}!");
@@ -481,8 +481,8 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_PLAYERDEFEATEDTRAINER1]               = sText_PlayerDefeatedLinkTrainerTrainer1,
     [STRINGID_SOOTHINGAROMA]                        = COMPOUND_STRING("A soothing aroma wafted through the area!"),
     [STRINGID_ITEMSCANTBEUSEDNOW]                   = COMPOUND_STRING("Items can't be used now.{PAUSE 64}"), // Not present in Gen 5+
-    [STRINGID_USINGITEMSTATOFPKMNROSE]              = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX2}: {B_BUFF1}\n{B_LAST_ITEM} aumenta{B_BUFF2}!"),
-    [STRINGID_USINGITEMSTATOFPKMNFELL]              = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX2}: {B_BUFF1}\n{B_LAST_ITEM} diminuisce{B_BUFF2}!"), // This string does not exist in Gen 5+. Used to print more info that's otherwise obscured such as using Room Service
+    [STRINGID_USINGITEMSTATOFPKMNROSE]              = COMPOUND_STRING("{B_LAST_ITEM}: {B_BUFF1}\naumenta{B_BUFF2}!"),
+    [STRINGID_USINGITEMSTATOFPKMNFELL]              = COMPOUND_STRING("{B_LAST_ITEM}: {B_BUFF1}\ndiminuisce{B_BUFF2}!"), // This string does not exist in Gen 5+. Used to print more info that's otherwise obscured such as using Room Service
     [STRINGID_PKMNUSEDXTOGETPUMPED]                 = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX} used the {B_LAST_ITEM} to get pumped!"),
     [STRINGID_PKMNSXMADEYUSELESS]                   = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX}'s {B_SCR_ABILITY} made {B_CURRENT_MOVE} useless!"), //not in gen 5+, ability popup
     [STRINGID_PKMNTRAPPEDBYSANDTOMB]                = COMPOUND_STRING("{B_EFF_NAME_WITH_PREFIX} became trapped by the quicksand!"),
@@ -2731,8 +2731,6 @@ void BufferStringBattle(enum StringID stringID, enum BattlerId battler)
     case STRINGID_STATWASMAXEDOUT:
     case STRINGID_ATTACKERCANTESCAPE:
     case STRINGID_PKMNSXPREVENTSYLOSS:
-    case STRINGID_USINGITEMSTATOFPKMNROSE:
-    case STRINGID_USINGITEMSTATOFPKMNFELL:
     case STRINGID_TARGETABILITYSTATRAISE:
     case STRINGID_ATTACKERABILITYSTATRAISE:
     case STRINGID_TARGETABILITYSTATLOWER:

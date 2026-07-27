@@ -25,11 +25,11 @@ SINGLE_BATTLE_TEST("Ganlon Berry raises the holder's Defense by one stage when H
         if (move == MOVE_SCRATCH) {
             NONE_OF {
                 ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_BERRY, player);
-                MESSAGE("Wobbuffet: DIFESA\nGanlon Berry aumenta!");
+                MESSAGE("Ganlon Berry: DIFESA\naumenta!");
             }
         } else {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_BERRY, player);
-            MESSAGE("Wobbuffet: DIFESA\nGanlon Berry aumenta!");
+            MESSAGE("Ganlon Berry: DIFESA\naumenta!");
         }
     } THEN {
         if (move == MOVE_DRAGON_RAGE)
@@ -47,7 +47,7 @@ SINGLE_BATTLE_TEST("Ganlon Berry raises Defense by one stage when HP drops to 1/
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DRAGON_RAGE, opponent);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_BERRY, player);
-        MESSAGE("Bellsprout: DIFESA\nGanlon Berry aumenta!");
+        MESSAGE("Ganlon Berry: DIFESA\naumenta!");
     } THEN {
         EXPECT_EQ(player->statStages[STAT_DEF], DEFAULT_STAT_STAGE + 1);
     }
@@ -63,7 +63,7 @@ SINGLE_BATTLE_TEST("Ganlon Berry raises Defense by one stage when HP drops to 1/
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DRAGON_RAGE, opponent);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_BERRY, player);
-        MESSAGE("Applin: DIFESA\nGanlon Berry aumenta di molto!");
+        MESSAGE("Ganlon Berry: DIFESA\naumenta di molto!");
     } THEN {
         EXPECT_EQ(player->statStages[STAT_DEF], DEFAULT_STAT_STAGE + 2);
     }

@@ -25,11 +25,11 @@ SINGLE_BATTLE_TEST("Salac Berry raises the holder's Speed by one stage when HP d
         if (move == MOVE_SCRATCH) {
             NONE_OF {
                 ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_BERRY, player);
-                MESSAGE("Wobbuffet: VELOCITÀ\nSalac Berry aumenta!");
+                MESSAGE("Salac Berry: VELOCITÀ\naumenta!");
             }
         } else {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_BERRY, player);
-            MESSAGE("Wobbuffet: VELOCITÀ\nSalac Berry aumenta!");
+            MESSAGE("Salac Berry: VELOCITÀ\naumenta!");
         }
     } THEN {
         if (move == MOVE_DRAGON_RAGE)
@@ -47,7 +47,7 @@ SINGLE_BATTLE_TEST("Salac Berry raises Speed by one stage when HP drops to 1/2 o
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DRAGON_RAGE, opponent);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_BERRY, player);
-        MESSAGE("Bellsprout: VELOCITÀ\nSalac Berry aumenta!");
+        MESSAGE("Salac Berry: VELOCITÀ\naumenta!");
     } THEN {
         EXPECT_EQ(player->statStages[STAT_SPEED], DEFAULT_STAT_STAGE + 1);
     }
@@ -63,7 +63,7 @@ SINGLE_BATTLE_TEST("Salac Berry raises Speed by one stage when HP drops to 1/4 o
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DRAGON_RAGE, opponent);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_BERRY, player);
-        MESSAGE("Applin: VELOCITÀ\nSalac Berry aumenta di molto!");
+        MESSAGE("Salac Berry: VELOCITÀ\naumenta di molto!");
     } THEN {
         EXPECT_EQ(player->statStages[STAT_SPEED], DEFAULT_STAT_STAGE + 2);
     }
@@ -83,7 +83,7 @@ DOUBLE_BATTLE_TEST("Salac Berry does not miss timing miss timing")
         MESSAGE("A sea of fire enveloped the opposing team!");
         MESSAGE("The opposing Wynaut was hurt by the sea of fire!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_BERRY, opponentLeft);
-        MESSAGE("Wynaut avversario: VELOCITÀ\nSalac Berry aumenta!");
+        MESSAGE("Salac Berry: VELOCITÀ\naumenta!");
         MESSAGE("The opposing Wobbuffet was hurt by the sea of fire!");
     }
 }

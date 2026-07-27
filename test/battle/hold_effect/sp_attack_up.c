@@ -25,11 +25,11 @@ SINGLE_BATTLE_TEST("Petaya Berry raises the holder's Sp. Atk by one stage when H
         if (move == MOVE_SCRATCH) {
             NONE_OF {
                 ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_BERRY, player);
-                MESSAGE("Wobbuffet: ATT. SPECIALE\nPetaya Berry aumenta!");
+                MESSAGE("Petaya Berry: ATT. SPECIALE\naumenta!");
             }
         } else {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_BERRY, player);
-            MESSAGE("Wobbuffet: ATT. SPECIALE\nPetaya Berry aumenta!");
+            MESSAGE("Petaya Berry: ATT. SPECIALE\naumenta!");
         }
     } THEN {
         if (move == MOVE_DRAGON_RAGE)
@@ -47,7 +47,7 @@ SINGLE_BATTLE_TEST("Petaya Berry raises Sp. Atk by one stage when HP drops to 1/
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DRAGON_RAGE, opponent);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_BERRY, player);
-        MESSAGE("Bellsprout: ATT. SPECIALE\nPetaya Berry aumenta!");
+        MESSAGE("Petaya Berry: ATT. SPECIALE\naumenta!");
     } THEN {
         EXPECT_EQ(player->statStages[STAT_SPATK], DEFAULT_STAT_STAGE + 1);
     }
@@ -63,7 +63,7 @@ SINGLE_BATTLE_TEST("Petaya Berry raises Sp. Atk by one stage when HP drops to 1/
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DRAGON_RAGE, opponent);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_BERRY, player);
-        MESSAGE("Applin: ATT. SPECIALE\nPetaya Berry aumenta di molto!");
+        MESSAGE("Petaya Berry: ATT. SPECIALE\naumenta di molto!");
     } THEN {
         EXPECT_EQ(player->statStages[STAT_SPATK], DEFAULT_STAT_STAGE + 2);
     }

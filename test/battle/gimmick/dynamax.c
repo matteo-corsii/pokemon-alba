@@ -1324,10 +1324,10 @@ DOUBLE_BATTLE_TEST("Dynamax: G-Max Replenish recycles allies' berries 50\% of th
     } SCENE {
         // turn 1
 
-        MESSAGE("Snorlax: DIF. SPECIALE\nApicot Berry aumenta!");
-        MESSAGE("Munchlax: DIF. SPECIALE\nApicot Berry aumenta!");
-        MESSAGE("Wobbuffet avversario: DIF. SPECIALE\nApicot Berry aumenta!");
-        MESSAGE("Wobbuffet avversario: DIF. SPECIALE\nApicot Berry aumenta!");
+        MESSAGE("Apicot Berry: DIF. SPECIALE\naumenta!");
+        MESSAGE("Apicot Berry: DIF. SPECIALE\naumenta!");
+        MESSAGE("Apicot Berry: DIF. SPECIALE\naumenta!");
+        MESSAGE("Apicot Berry: DIF. SPECIALE\naumenta!");
         // turn 2
         MESSAGE("Snorlax usa\nG-Max Replenish!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_G_MAX_REPLENISH, playerLeft);
@@ -1771,8 +1771,8 @@ DOUBLE_BATTLE_TEST("Dynamax: G-Max Replenish recycles allies' berries 50\% of th
         TURN { MOVE(playerLeft, MOVE_SCRATCH, target: opponentLeft, gimmick: GIMMICK_DYNAMAX); SEND_OUT(opponentLeft, 2);}
     } SCENE {
         // turn 1
-        MESSAGE("Snorlax: DIF. SPECIALE\nApicot Berry aumenta!");
-        MESSAGE("Munchlax: DIF. SPECIALE\nApicot Berry aumenta!");
+        MESSAGE("Apicot Berry: DIF. SPECIALE\naumenta!");
+        MESSAGE("Apicot Berry: DIF. SPECIALE\naumenta!");
         // turn 2
         MESSAGE("Snorlax usa\nG-Max Replenish!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_G_MAX_REPLENISH, playerLeft);
