@@ -80,7 +80,7 @@ SINGLE_BATTLE_TEST("Octolock Defense reduction is prevented by Big Pecks")
         MESSAGE("The opposing Pidgey can no longer escape because of Octolock!");
         NOT MESSAGE("Pidgey avversario: DIFESA\ndiminuisce!");
         ABILITY_POPUP(opponent, ABILITY_BIG_PECKS);
-        MESSAGE("The opposing Pidgey's Defense was not lowered!");
+        MESSAGE("Pidgey avversario: DIFESA\nriduzione impedita!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
         MESSAGE("Pidgey avversario: DIF. SPECIALE\ndiminuisce!");
     }

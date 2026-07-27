@@ -79,7 +79,7 @@ SINGLE_BATTLE_TEST("Spicy Extract Defense loss is prevented by Big Pecks")
             MESSAGE("Wobbuffet avversario: DIFESA\ndiminuisce di molto!");
         }
         ABILITY_POPUP(opponent, ABILITY_BIG_PECKS);
-        MESSAGE("The opposing Pidgey's Defense was not lowered!");
+        MESSAGE("Pidgey avversario: DIFESA\nriduzione impedita!");
     }
 }
 

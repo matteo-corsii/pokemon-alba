@@ -22,16 +22,16 @@ SINGLE_BATTLE_TEST("Booster Energy will activate Quark Drive after Electric Terr
         NONE_OF {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
             MESSAGE("Iron Moth used its Booster Energy to activate Quark Drive!");
-            MESSAGE("Iron Moth's Sp. Atk was heightened!");
+            MESSAGE("Iron Moth: ATT. SPECIALE\naumenta!");
         }
         ABILITY_POPUP(player, ABILITY_QUARK_DRIVE);
         MESSAGE("The Electric Terrain activated Iron Moth's Quark Drive!");
-        MESSAGE("Iron Moth's Sp. Atk was heightened!");
+        MESSAGE("Iron Moth: ATT. SPECIALE\naumenta!");
         MESSAGE("The electricity disappeared from the battlefield.");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
         ABILITY_POPUP(player, ABILITY_QUARK_DRIVE);
         MESSAGE("Iron Moth used its Booster Energy to activate Quark Drive!");
-        MESSAGE("Iron Moth's Sp. Atk was heightened!");
+        MESSAGE("Iron Moth: ATT. SPECIALE\naumenta!");
     }
 }
 
@@ -52,16 +52,16 @@ SINGLE_BATTLE_TEST("Booster Energy will activate Protosynthesis after harsh sunl
         NONE_OF {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
             MESSAGE("Raging Bolt used its Booster Energy to activate Protosynthesis!");
-            MESSAGE("Raging Bolt's Sp. Atk was heightened!");
+            MESSAGE("Raging Bolt: ATT. SPECIALE\naumenta!");
         }
         ABILITY_POPUP(player, ABILITY_PROTOSYNTHESIS);
         MESSAGE("The harsh sunlight activated Raging Bolt's Protosynthesis!");
-        MESSAGE("Raging Bolt's Sp. Atk was heightened!");
+        MESSAGE("Raging Bolt: ATT. SPECIALE\naumenta!");
         MESSAGE("The sunlight faded.");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
         ABILITY_POPUP(player, ABILITY_PROTOSYNTHESIS);
         MESSAGE("Raging Bolt used its Booster Energy to activate Protosynthesis!");
-        MESSAGE("Raging Bolt's Sp. Atk was heightened!");
+        MESSAGE("Raging Bolt: ATT. SPECIALE\naumenta!");
     }
 }
 
@@ -80,7 +80,7 @@ SINGLE_BATTLE_TEST("Booster Energy's Protosynthesis boost is preserved when weat
     } SCENE {
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
         MESSAGE("Raging Bolt used its Booster Energy to activate Protosynthesis!");
-        MESSAGE("Raging Bolt's Attack was heightened!");
+        MESSAGE("Raging Bolt: ATTACCO\naumenta!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SUNNY_DAY, opponent);
         MESSAGE("The sunlight faded.");
     } THEN {
@@ -108,15 +108,15 @@ SINGLE_BATTLE_TEST("Booster Energy activates Protosynthesis and increases highes
         ABILITY_POPUP(player, ABILITY_PROTOSYNTHESIS);
         MESSAGE("Raging Bolt used its Booster Energy to activate Protosynthesis!");
         if (attack == 110)
-            MESSAGE("Raging Bolt's Attack was heightened!");
+            MESSAGE("Raging Bolt: ATTACCO\naumenta!");
         else if (defense == 110)
-            MESSAGE("Raging Bolt's Defense was heightened!");
+            MESSAGE("Raging Bolt: DIFESA\naumenta!");
         else if (speed == 110)
-            MESSAGE("Raging Bolt's Speed was heightened!");
+            MESSAGE("Raging Bolt: VELOCITÀ\naumenta!");
         else if (spAttack == 110)
-            MESSAGE("Raging Bolt's Sp. Atk was heightened!");
+            MESSAGE("Raging Bolt: ATT. SPECIALE\naumenta!");
         else if (spDefense == 110)
-            MESSAGE("Raging Bolt's Sp. Def was heightened!");
+            MESSAGE("Raging Bolt: DIF. SPECIALE\naumenta!");
     } THEN {
         EXPECT(player->item == ITEM_NONE);
     }
@@ -140,15 +140,15 @@ SINGLE_BATTLE_TEST("Booster Energy activates Quark Drive and increases highest s
     } SCENE {
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
         if (attack == 110)
-            MESSAGE("Iron Moth's Attack was heightened!");
+            MESSAGE("Iron Moth: ATTACCO\naumenta!");
         else if (defense == 110)
-            MESSAGE("Iron Moth's Defense was heightened!");
+            MESSAGE("Iron Moth: DIFESA\naumenta!");
         else if (speed == 110)
-            MESSAGE("Iron Moth's Speed was heightened!");
+            MESSAGE("Iron Moth: VELOCITÀ\naumenta!");
         else if (spAttack == 110)
-            MESSAGE("Iron Moth's Sp. Atk was heightened!");
+            MESSAGE("Iron Moth: ATT. SPECIALE\naumenta!");
         else if (spDefense == 110)
-            MESSAGE("Iron Moth's Sp. Def was heightened!");
+            MESSAGE("Iron Moth: DIF. SPECIALE\naumenta!");
     } THEN {
         EXPECT(player->item == ITEM_NONE);
     }
@@ -169,7 +169,7 @@ SINGLE_BATTLE_TEST("Booster Energy's Quark Drive boost is preserved when terrain
     } SCENE {
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
         MESSAGE("Iron Moth used its Booster Energy to activate Quark Drive!");
-        MESSAGE("Iron Moth's Attack was heightened!");
+        MESSAGE("Iron Moth: ATTACCO\naumenta!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_GRASSY_TERRAIN, opponent);
         MESSAGE("The grass disappeared from the battlefield.");
     } THEN {

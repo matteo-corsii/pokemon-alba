@@ -70,8 +70,8 @@ SINGLE_BATTLE_TEST("Knock Off activates after Rocky Helmet and Weakness Policy")
         if (item == ITEM_WEAKNESS_POLICY) {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponent);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE);
-            MESSAGE("The Weakness Policy sharply boosted the opposing Wobbuffet's Attack!");
-            MESSAGE("The Weakness Policy sharply boosted the opposing Wobbuffet's Sp. Atk!");
+            MESSAGE("Wobbuffet avversario: ATTACCO\nWeakness Policy aumenta di molto!");
+            MESSAGE("Wobbuffet avversario: ATT. SPECIALE\nWeakness Policy aumenta di molto!");
         } else if (item == ITEM_ROCKY_HELMET) {
             HP_BAR(player);
             MESSAGE("Wobbuffet was hurt by the opposing Wobbuffet's Rocky Helmet!");
