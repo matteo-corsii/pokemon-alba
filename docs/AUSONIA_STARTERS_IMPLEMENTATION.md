@@ -72,6 +72,8 @@ Non vengono copiati file grafici o audio. `gSpeciesInfo` riusa direttamente asse
 
 I modelli danno silhouette piccole, intermedie e grandi distinguibili per ciascuna linea. Le coordinate, animazioni, ombre, palette, icone, impronte e sprite overworld seguono i rispettivi modelli. Non sono definite differenze grafiche fra sessi dedicate alle specie di Ausonia.
 
+Le concept art di Cingerm, Rovasco, Selvazanna, Serbrace, Vipercen, Tossivampa, Ardeino e Velairone sono approvate. Soltanto Codairone resta da progettare definitivamente. Le immagini di concept non sono conservate nel repository in questa fase e gli asset collegati ai dati restano tutti segnaposto.
+
 Quando saranno disponibili asset originali, i riferimenti andranno sostituiti senza cambiare gli ID. Ogni forma richiederà front e back sprite, palette normale e cromatica, icona, impronta, animazioni, coordinate, ombra, eventuali sprite overworld e cry verificati. I segnaposto non sono direzione artistica definitiva.
 
 ## Rischi e aggiornamenti upstream

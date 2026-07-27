@@ -98,7 +98,7 @@ Questa roadmap descrive una sequenza iniziale di attività. Ogni fase deve produ
 
 ## 9. Progettare gli starter definitivi
 
-**Stato:** sono registrati i nomi e i parametri tecnici preliminari delle nove specie. Le concept art di Cingerm, Rovasco, Selvazanna e Serbrace sono approvate; Vipercen, Tossivampa, Ardeino, Velairone e Codairone devono ancora ricevere concept art definitiva.
+**Stato:** sono registrati i nomi e i parametri tecnici preliminari delle nove specie. Le concept art di Cingerm, Rovasco, Selvazanna, Serbrace, Vipercen, Tossivampa, Ardeino e Velairone sono approvate; soltanto Codairone deve ancora ricevere una concept art definitiva.
 
 **Obiettivo:** definire identità, linee evolutive, tipi, ruoli di gioco e direzione artistica dei tre starter.
 
