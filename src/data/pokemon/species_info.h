@@ -216,6 +216,66 @@ static const struct LevelUpMove sTossivampaLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+static const struct LevelUpMove sArdeinoLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_POUND),
+    LEVEL_UP_MOVE( 1, MOVE_GROWL),
+    LEVEL_UP_MOVE( 4, MOVE_WATER_GUN),
+    LEVEL_UP_MOVE( 7, MOVE_PECK),
+    LEVEL_UP_MOVE( 9, MOVE_QUICK_ATTACK),
+    LEVEL_UP_MOVE(12, MOVE_MIST),
+    LEVEL_UP_MOVE(15, MOVE_SUPERSONIC),
+    LEVEL_UP_MOVE(18, MOVE_WING_ATTACK),
+    LEVEL_UP_MOVE(22, MOVE_AQUA_RING),
+    LEVEL_UP_MOVE(26, MOVE_AIR_SLASH),
+    LEVEL_UP_MOVE(30, MOVE_BRINE),
+    LEVEL_UP_MOVE(34, MOVE_AGILITY),
+    LEVEL_UP_MOVE(38, MOVE_TAILWIND),
+    LEVEL_UP_MOVE(43, MOVE_ROOST),
+    LEVEL_UP_MOVE(48, MOVE_HYDRO_PUMP),
+    LEVEL_UP_MOVE(54, MOVE_HURRICANE),
+    LEVEL_UP_END
+};
+
+static const struct LevelUpMove sVelaironeLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_POUND),
+    LEVEL_UP_MOVE( 1, MOVE_GROWL),
+    LEVEL_UP_MOVE( 4, MOVE_WATER_GUN),
+    LEVEL_UP_MOVE( 7, MOVE_PECK),
+    LEVEL_UP_MOVE( 9, MOVE_QUICK_ATTACK),
+    LEVEL_UP_MOVE(12, MOVE_MIST),
+    LEVEL_UP_MOVE(15, MOVE_SUPERSONIC),
+    LEVEL_UP_MOVE(18, MOVE_WING_ATTACK),
+    LEVEL_UP_MOVE(22, MOVE_AQUA_RING),
+    LEVEL_UP_MOVE(26, MOVE_AIR_SLASH),
+    LEVEL_UP_MOVE(30, MOVE_BRINE),
+    LEVEL_UP_MOVE(34, MOVE_AGILITY),
+    LEVEL_UP_MOVE(38, MOVE_TAILWIND),
+    LEVEL_UP_MOVE(43, MOVE_ROOST),
+    LEVEL_UP_MOVE(48, MOVE_HYDRO_PUMP),
+    LEVEL_UP_MOVE(54, MOVE_HURRICANE),
+    LEVEL_UP_END
+};
+
+static const struct LevelUpMove sCodaironeLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_POUND),
+    LEVEL_UP_MOVE( 1, MOVE_GROWL),
+    LEVEL_UP_MOVE( 4, MOVE_WATER_GUN),
+    LEVEL_UP_MOVE( 7, MOVE_PECK),
+    LEVEL_UP_MOVE( 9, MOVE_QUICK_ATTACK),
+    LEVEL_UP_MOVE(12, MOVE_MIST),
+    LEVEL_UP_MOVE(15, MOVE_SUPERSONIC),
+    LEVEL_UP_MOVE(18, MOVE_WING_ATTACK),
+    LEVEL_UP_MOVE(22, MOVE_AQUA_RING),
+    LEVEL_UP_MOVE(26, MOVE_AIR_SLASH),
+    LEVEL_UP_MOVE(30, MOVE_BRINE),
+    LEVEL_UP_MOVE(34, MOVE_AGILITY),
+    LEVEL_UP_MOVE(38, MOVE_TAILWIND),
+    LEVEL_UP_MOVE(43, MOVE_ROOST),
+    LEVEL_UP_MOVE(48, MOVE_HYDRO_PUMP),
+    LEVEL_UP_MOVE(54, MOVE_HURRICANE),
+    LEVEL_UP_END
+};
+
 const struct SpeciesInfo gSpeciesInfo[] =
 {
     [SPECIES_NONE] =
@@ -701,6 +761,209 @@ const struct SpeciesInfo gSpeciesInfo[] =
             gShinyOverworldPalette_Seviper
         )
         .levelUpLearnset = sTossivampaLevelUpLearnset,
+        .teachableLearnset = sNoneTeachableLearnset,
+        .eggMoveLearnset = sNoneEggMoveLearnset,
+    },
+
+    [SPECIES_ARDEINO] =
+    {
+        .baseHP        = 50,
+        .baseAttack    = 45,
+        .baseDefense   = 50,
+        .baseSpeed     = 45,
+        .baseSpAttack  = 65,
+        .baseSpDefense = 55,
+        .types = MON_TYPES(TYPE_WATER),
+        .catchRate = 45,
+        .expYield = 64,
+        .evYield_SpAttack = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = 70,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING, EGG_GROUP_WATER_1),
+        .abilities = { ABILITY_TORRENT, ABILITY_NONE, ABILITY_HYDRATION },
+        .bodyColor = BODY_COLOR_BLUE,
+        .speciesName = _("Ardeino"),
+        .cryId = CRY_DUCKLETT,
+        .natDexNum = NATIONAL_DEX_ARDEINO,
+        .categoryName = _("PIUMALAGO"),
+        .height = 5,
+        .weight = 38,
+        .description = COMPOUND_STRING(
+            "Osserva a lungo il proprio\n"
+            "riflesso nelle acque calme.\n"
+            "La piuma sulla coda ondeggia\n"
+            "anche quando non c’è vento."),
+        .pokemonScale = 432,
+        .pokemonOffset = 14,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Ducklett,
+        .frontPicSize = MON_COORDS_SIZE(32, 40),
+        .frontPicYOffset = 12,
+        .frontAnimFrames = ANIM_FRAMES(
+            ANIMCMD_FRAME(0, 15),
+            ANIMCMD_FRAME(1, 15),
+            ANIMCMD_FRAME(0, 15),
+            ANIMCMD_FRAME(1, 15),
+            ANIMCMD_FRAME(0, 15),
+            ANIMCMD_FRAME(1, 15),
+            ANIMCMD_FRAME(0, 50),
+        ),
+        .frontAnimId = ANIM_V_STRETCH,
+        .backPic = gMonBackPic_Ducklett,
+        .backPicSize = MON_COORDS_SIZE(48, 48),
+        .backPicYOffset = 10,
+        .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
+        .palette = gMonPalette_Ducklett,
+        .shinyPalette = gMonShinyPalette_Ducklett,
+        .iconSprite = gMonIcon_Ducklett,
+        .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        SHADOW(-1, 2, SHADOW_SIZE_S)
+        FOOTPRINT(Ducklett)
+        OVERWORLD(
+            sPicTable_Ducklett,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            sAnimTable_Following,
+            gOverworldPalette_Ducklett,
+            gShinyOverworldPalette_Ducklett
+        )
+        .levelUpLearnset = sArdeinoLevelUpLearnset,
+        .teachableLearnset = sNoneTeachableLearnset,
+        .eggMoveLearnset = sNoneEggMoveLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_VELAIRONE}),
+    },
+
+    [SPECIES_VELAIRONE] =
+    {
+        .baseHP        = 65,
+        .baseAttack    = 60,
+        .baseDefense   = 65,
+        .baseSpeed     = 60,
+        .baseSpAttack  = 85,
+        .baseSpDefense = 70,
+        .types = MON_TYPES(TYPE_WATER),
+        .catchRate = 45,
+        .expYield = 142,
+        .evYield_SpAttack = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = 70,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING, EGG_GROUP_WATER_1),
+        .abilities = { ABILITY_TORRENT, ABILITY_NONE, ABILITY_HYDRATION },
+        .bodyColor = BODY_COLOR_BLUE,
+        .speciesName = _("Velairone"),
+        .cryId = CRY_SWANNA,
+        .natDexNum = NATIONAL_DEX_VELAIRONE,
+        .categoryName = _("VELO"),
+        .height = 10,
+        .weight = 125,
+        .description = COMPOUND_STRING(
+            "Cammina nelle acque basse\n"
+            "senza produrre alcun rumore.\n"
+            "Le sue lunghe piume seguono\n"
+            "il movimento delle correnti."),
+        .pokemonScale = 272,
+        .pokemonOffset = 3,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Swanna,
+        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicYOffset = 2,
+        .frontAnimFrames = ANIM_FRAMES(
+            ANIMCMD_FRAME(1, 32),
+            ANIMCMD_FRAME(0, 20),
+        ),
+        .frontAnimId = ANIM_V_STRETCH,
+        .backPic = gMonBackPic_Swanna,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 1,
+        .backAnimId = BACK_ANIM_H_STRETCH,
+        .palette = gMonPalette_Swanna,
+        .shinyPalette = gMonShinyPalette_Swanna,
+        .iconSprite = gMonIcon_Swanna,
+        .iconPalIndex = 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        SHADOW(0, 12, SHADOW_SIZE_M)
+        FOOTPRINT(Swanna)
+        OVERWORLD(
+            sPicTable_Swanna,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            sAnimTable_Following,
+            gOverworldPalette_Swanna,
+            gShinyOverworldPalette_Swanna
+        )
+        .levelUpLearnset = sVelaironeLevelUpLearnset,
+        .teachableLearnset = sNoneTeachableLearnset,
+        .eggMoveLearnset = sNoneEggMoveLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_CODAIRONE}),
+    },
+
+    [SPECIES_CODAIRONE] =
+    {
+        .baseHP        = 85,
+        .baseAttack    = 70,
+        .baseDefense   = 80,
+        .baseSpeed     = 90,
+        .baseSpAttack  = 110,
+        .baseSpDefense = 95,
+        .types = MON_TYPES(TYPE_WATER, TYPE_FLYING),
+        .catchRate = 45,
+        .expYield = 265,
+        .evYield_SpAttack = 3,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = 70,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING, EGG_GROUP_WATER_1),
+        .abilities = { ABILITY_TORRENT, ABILITY_NONE, ABILITY_HYDRATION },
+        .bodyColor = BODY_COLOR_BLUE,
+        .speciesName = _("Codairone"),
+        .cryId = CRY_BOMBIRDIER,
+        .natDexNum = NATIONAL_DEX_CODAIRONE,
+        .categoryName = _("RIFLESSO"),
+        .height = 17,
+        .weight = 360,
+        .description = COMPOUND_STRING(
+            "Le ali disegnano increspature\n"
+            "simili a quelle di un lago.\n"
+            "Percepisce subito i cambiamenti\n"
+            "nell’acqua e nell’animo umano."),
+        .pokemonScale = 356,
+        .pokemonOffset = 17,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Bombirdier,
+        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 0,
+        .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        .backPic = gMonBackPic_Bombirdier,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 4,
+        .palette = gMonPalette_Bombirdier,
+        .shinyPalette = gMonShinyPalette_Bombirdier,
+        .iconSprite = gMonIcon_Bombirdier,
+        .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        SHADOW(8, 12, SHADOW_SIZE_M)
+        FOOTPRINT(Bombirdier)
+        OVERWORLD(
+            sPicTable_Bombirdier,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_NONE,
+            sAnimTable_Following,
+            gOverworldPalette_Bombirdier,
+            gShinyOverworldPalette_Bombirdier
+        )
+        .levelUpLearnset = sCodaironeLevelUpLearnset,
         .teachableLearnset = sNoneTeachableLearnset,
         .eggMoveLearnset = sNoneEggMoveLearnset,
     },

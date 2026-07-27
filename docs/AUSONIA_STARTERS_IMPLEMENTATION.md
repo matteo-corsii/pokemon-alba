@@ -28,6 +28,9 @@ L'ultimo identificatore ufficiale verificato è `SPECIES_GLIMMORA_MEGA = 1572`. 
 | Serbrace | 1576 | 1029 |
 | Vipercen | 1577 | 1030 |
 | Tossivampa | 1578 | 1031 |
+| Ardeino | 1579 | 1032 |
+| Velairone | 1580 | 1033 |
+| Codairone | 1581 | 1034 |
 
 Gli ID del Pokédex seguono in appendice `NATIONAL_DEX_PECHARUNT = 1025`. Nessun numero regionale iniziale viene assegnato.
 
@@ -47,7 +50,7 @@ Questa strategia conserva tutti gli ID ufficiali. I salvataggi creati prima dell
 
 ## Dati e disponibilità dei prototipi
 
-Le linee Cingerm e Serbrace sono registrate con evoluzioni ai livelli 16 e 36, dati base completi e un learnset per livello comune a ciascuna linea. Le compatibilità MT/tutor e le mosse Uovo restano vuote tramite le tabelle `sNone*`: è una scelta prudente supportata dalla struttura e non richiede di modificare file generati.
+Tutte e tre le linee sono registrate con evoluzioni ai livelli 16 e 36, dati base completi e un learnset per livello comune a ciascuna linea. Le compatibilità MT/tutor e le mosse Uovo restano vuote tramite le tabelle `sNone*`: è una scelta prudente supportata dalla struttura e non richiede di modificare file generati. Statistiche e learnset restano preliminari fino alla validazione automatica e ai test di gioco.
 
 Le specie non vengono aggiunte a incontri selvatici, regali, commerci, Uova, squadre, mappe, script, borsa degli starter o Pokédex regionale. Sono istanziabili soltanto tramite test e strumenti di debug già esistenti.
 
@@ -63,6 +66,9 @@ Non vengono copiati file grafici o audio. `gSpeciesInfo` riusa direttamente asse
 | Serbrace | Ekans | `CRY_EKANS` |
 | Vipercen | Arbok | `CRY_ARBOK` |
 | Tossivampa | Seviper | `CRY_SEVIPER` |
+| Ardeino | Ducklett | `CRY_DUCKLETT` |
+| Velairone | Swanna | `CRY_SWANNA` |
+| Codairone | Bombirdier | `CRY_BOMBIRDIER` |
 
 I modelli danno silhouette piccole, intermedie e grandi distinguibili per ciascuna linea. Le coordinate, animazioni, ombre, palette, icone, impronte e sprite overworld seguono i rispettivi modelli. Non sono definite differenze grafiche fra sessi dedicate alle specie di Ausonia.
 
@@ -78,9 +84,9 @@ Quando saranno disponibili asset originali, i riferimenti andranno sostituiti se
 
 ## Piano di implementazione
 
-1. Registrare e validare la linea Cingerm.
-2. Registrare e validare la linea Serbrace.
-3. Registrare e validare la linea Ardeino.
+1. Registrare e validare la linea Cingerm — registrazione dati completata.
+2. Registrare e validare la linea Serbrace — registrazione dati completata.
+3. Registrare e validare la linea Ardeino — registrazione dati completata.
 4. Integrare la selezione degli starter nel prologo.
 5. Sostituire i segnaposto con sprite originali.
 6. Aggiungere eventuali differenze sessuali approvate.

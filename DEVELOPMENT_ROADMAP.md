@@ -2,7 +2,7 @@
 
 Questa roadmap descrive una sequenza iniziale di attività. Ogni fase deve produrre un risultato verificabile prima di passare alla successiva. I dettagli tecnici e gli eventuali comandi saranno definiti solo dopo essere stati verificati sulla documentazione e sull’ambiente effettivamente utilizzato.
 
-**Stato delle milestone:** Albèra/prologo v1 è conclusa. È iniziata la milestone degli starter originali di Ausonia; le linee Cingerm e Serbrace sono registrate nei dati, mentre la sostituzione degli starter nel prologo resta rinviata a una fase successiva.
+**Stato delle milestone:** Albèra/prologo v1 è conclusa. La prima registrazione dati delle nove specie starter di Ausonia è completata; nessuna specie sostituisce ancora gli starter del prologo e l'integrazione resta rinviata a una fase successiva.
 
 ## 1. Verificare la compilazione pulita del progetto base
 
@@ -86,7 +86,7 @@ Questa roadmap descrive una sequenza iniziale di attività. Ogni fase deve produ
 
 ## 8. Aggiungere un primo Pokémon temporaneo di test
 
-**Stato:** le linee Cingerm e Serbrace sono registrate come primi prototipi dati. Le sei specie non sono ottenibili e usano asset grafici e sonori provvisori.
+**Stato:** le linee Cingerm, Serbrace e Ardeino sono registrate come prototipi dati. Le nove specie non sono ottenibili e usano asset grafici e sonori provvisori.
 
 **Obiettivo:** verificare il processo tecnico per introdurre una nuova specie usando risorse chiaramente provvisorie.
 
@@ -98,7 +98,7 @@ Questa roadmap descrive una sequenza iniziale di attività. Ogni fase deve produ
 
 ## 9. Progettare gli starter definitivi
 
-**Stato:** sono approvati in via provvisoria i nomi delle nove specie e i parametri tecnici iniziali delle linee Cingerm e Serbrace. Le concept art di Cingerm, Rovasco, Selvazanna e Serbrace sono approvate; le altre cinque e la linea dati Ardeino restano da completare.
+**Stato:** sono registrati i nomi e i parametri tecnici preliminari delle nove specie. Le concept art di Cingerm, Rovasco, Selvazanna e Serbrace sono approvate; Vipercen, Tossivampa, Ardeino, Velairone e Codairone devono ancora ricevere concept art definitiva.
 
 **Obiettivo:** definire identità, linee evolutive, tipi, ruoli di gioco e direzione artistica dei tre starter.
 
