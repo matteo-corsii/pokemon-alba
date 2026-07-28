@@ -72,7 +72,8 @@ foreach ($evolution in @(
 
 Assert-Contains $species '.frontPic = gMonFrontPic_Cingerm' 'Cingerm non usa più il front sprite originale.'
 Assert-Contains $species '.backPic = gMonBackPic_Cingerm' 'Cingerm non usa più il back sprite originale.'
-Assert-Contains $species '.frontPic = gMonFrontPic_Ekans' 'Serbrace non conserva il segnaposto previsto.'
+Assert-Contains $species '.frontPic = gMonFrontPic_Serbrace' 'Serbrace non usa il front sprite originale.'
+Assert-Contains $species '.backPic = gMonBackPic_Serbrace' 'Serbrace non usa il back sprite originale.'
 Assert-Contains $species '.frontPic = gMonFrontPic_Ducklett' 'Ardeino non conserva il segnaposto previsto.'
 
 foreach ($heading in @('static const u8 sTextAbilityTitle[] = _("ABILITÀ");', 'static const u8 sTextTrainerMemoTitle[] = _("MEMO ALLENATORE");')) {
