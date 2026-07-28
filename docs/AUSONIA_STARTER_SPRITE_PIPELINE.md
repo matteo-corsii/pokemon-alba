@@ -2,7 +2,7 @@
 
 ## Stato di Cingerm
 
-Cingerm usa i primi asset grafici originali del progetto Pokémon Alba: front sprite animato, back sprite, icona, palette normale e palette shiny provvisoria. Per la verifica visiva e tecnica sostituisce temporaneamente Treecko soltanto nello slot Erba del prologo e nella progressione direttamente collegata del rivale; Torchic e Mudkip restano provvisori. Cry, footprint, sprite overworld, ombra e relative palette continuano temporaneamente a riutilizzare quelli di Lechonk.
+Cingerm usa i primi asset grafici originali del progetto Pokémon Alba: front sprite animato, back sprite, icona, palette normale e palette shiny provvisoria. È lo starter Erba del prototipo Emerald; Serbrace e Ardeino completano gli slot Fuoco e Acqua ma conservano rispettivamente i segnaposto di Ekans e Ducklett. Cry, footprint, sprite overworld, ombra e relative palette di Cingerm continuano temporaneamente a riutilizzare quelli di Lechonk. FireRed e LeafGreen non cambiano starter.
 
 ## File sorgente
 
@@ -51,4 +51,4 @@ Prima dell'importazione di altri sprite occorre verificare dimensioni, formato i
 
 ## Passaggi futuri
 
-La sostituzione completa richiederà footprint, cry e overworld originali, una palette shiny definitiva e l'eventuale definizione di differenze sessuali. Il prototipo usa il sesso generato normalmente dal motore e non introduce ancora un selettore. La presenza temporanea nello slot Erba non è la configurazione definitiva del prologo e non autorizza altre forme di ottenibilità.
+La sostituzione completa richiederà footprint, cry e overworld originali, una palette shiny definitiva e l'eventuale definizione di differenze sessuali. Per Serbrace e Ardeino occorre ancora produrre l'intero pacchetto grafico originale. Il prototipo usa il sesso generato normalmente dal motore e non introduce ancora un selettore; le tre forme base restano ottenibili soltanto dalla scelta iniziale Emerald.
