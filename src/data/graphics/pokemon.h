@@ -25,6 +25,13 @@ const u32 gMonBackPic_Cingerm[] = INCGFX_U32("graphics/pokemon/cingerm/back.png"
 const u16 gMonShinyPalette_Cingerm[] = INCGFX_U16("graphics/pokemon/cingerm/shiny.pal", ".gbapal");
 const u8 gMonIcon_Cingerm[] = INCGFX_U8("graphics/pokemon/cingerm/icon.png", ".4bpp");
 
+// Pokémon Alba: original battle and menu graphics for Serbrace.
+const u32 gMonFrontPic_Serbrace[] = INCGFX_U32("graphics/pokemon/serbrace/anim_front.png", ".4bpp.smol");
+const u16 gMonPalette_Serbrace[] = INCGFX_U16("graphics/pokemon/serbrace/normal.pal", ".gbapal");
+const u32 gMonBackPic_Serbrace[] = INCGFX_U32("graphics/pokemon/serbrace/back.png", ".4bpp.smol");
+const u16 gMonShinyPalette_Serbrace[] = INCGFX_U16("graphics/pokemon/serbrace/shiny.pal", ".gbapal");
+const u8 gMonIcon_Serbrace[] = INCGFX_U8("graphics/pokemon/serbrace/icon.png", ".4bpp");
+
 #if P_FAMILY_BULBASAUR
 #if !P_GBA_STYLE_SPECIES_GFX
     const u32 gMonFrontPic_Bulbasaur[] = INCGFX_U32("graphics/pokemon/bulbasaur/anim_front.png", ".4bpp.smol");

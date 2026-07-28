@@ -427,7 +427,6 @@ TEST("Cingerm original graphics replace only its Lechonk placeholders")
     static const enum Species ausoniaSpecies[] = {
         SPECIES_ROVASCO,
         SPECIES_SELVAZANNA,
-        SPECIES_SERBRACE,
         SPECIES_VIPERCEN,
         SPECIES_TOSSIVAMPA,
         SPECIES_ARDEINO,
@@ -437,7 +436,6 @@ TEST("Cingerm original graphics replace only its Lechonk placeholders")
     static const enum Species placeholderSpecies[] = {
         SPECIES_OINKOLOGNE_M,
         SPECIES_MAMOSWINE,
-        SPECIES_EKANS,
         SPECIES_ARBOK,
         SPECIES_SEVIPER,
         SPECIES_DUCKLETT,
@@ -487,6 +485,72 @@ TEST("Cingerm original graphics replace only its Lechonk placeholders")
         EXPECT(info->shinyPalette == placeholder->shinyPalette);
         EXPECT(info->iconSprite == placeholder->iconSprite);
     }
+}
+
+TEST("Serbrace original graphics replace only its Ekans placeholders")
+{
+    const struct SpeciesInfo *serbrace = &gSpeciesInfo[SPECIES_SERBRACE];
+    const struct SpeciesInfo *ekans = &gSpeciesInfo[SPECIES_EKANS];
+    const struct SpeciesInfo *cingerm = &gSpeciesInfo[SPECIES_CINGERM];
+    const struct SpeciesInfo *lechonk = &gSpeciesInfo[SPECIES_LECHONK];
+    const struct SpeciesInfo *ardeino = &gSpeciesInfo[SPECIES_ARDEINO];
+    const struct SpeciesInfo *ducklett = &gSpeciesInfo[SPECIES_DUCKLETT];
+    const struct Evolution *evolutions = GetSpeciesEvolutions(SPECIES_SERBRACE);
+
+    EXPECT(serbrace->frontPic != NULL);
+    EXPECT(serbrace->backPic != NULL);
+    EXPECT(serbrace->palette != NULL);
+    EXPECT(serbrace->shinyPalette != NULL);
+    EXPECT(serbrace->iconSprite != NULL);
+    EXPECT(serbrace->frontAnimFrames != NULL);
+    EXPECT(serbrace->frontPic != ekans->frontPic);
+    EXPECT(serbrace->backPic != ekans->backPic);
+    EXPECT(serbrace->palette != ekans->palette);
+    EXPECT(serbrace->shinyPalette != ekans->shinyPalette);
+    EXPECT(serbrace->iconSprite != ekans->iconSprite);
+    EXPECT(serbrace->frontAnimFrames != ekans->frontAnimFrames);
+    EXPECT_EQ(serbrace->frontPicSize, (8 << 4) | 7);
+    EXPECT_EQ(serbrace->backPicSize, (8 << 4) | 7);
+    EXPECT_EQ(serbrace->frontPicYOffset, 4);
+    EXPECT_EQ(serbrace->backPicYOffset, 4);
+    EXPECT(serbrace->iconPalIndex == 3);
+
+    // Gameplay data and the remaining audiovisual placeholders stay unchanged.
+    EXPECT_EQ(serbrace->baseHP, 45);
+    EXPECT_EQ(serbrace->baseAttack, 40);
+    EXPECT_EQ(serbrace->baseDefense, 40);
+    EXPECT_EQ(serbrace->baseSpeed, 65);
+    EXPECT_EQ(serbrace->baseSpAttack, 70);
+    EXPECT_EQ(serbrace->baseSpDefense, 50);
+    EXPECT_EQ(serbrace->types[0], TYPE_FIRE);
+    EXPECT_EQ(serbrace->types[1], TYPE_FIRE);
+    EXPECT_EQ(serbrace->abilities[0], ABILITY_BLAZE);
+    EXPECT_EQ(serbrace->abilities[1], ABILITY_NONE);
+    EXPECT_EQ(serbrace->abilities[2], ABILITY_CORROSION);
+    EXPECT_EQ((u32)serbrace->cryId, CRY_EKANS);
+    EXPECT_EQ(serbrace->backAnimId, ekans->backAnimId);
+    EXPECT(evolutions != NULL);
+    EXPECT_EQ(evolutions[0].method, EVO_LEVEL);
+    EXPECT_EQ(evolutions[0].param, 16);
+    EXPECT_EQ(evolutions[0].targetSpecies, SPECIES_VIPERCEN);
+#if P_FOOTPRINTS
+    EXPECT(serbrace->footprint == ekans->footprint);
+#endif
+#if OW_POKEMON_OBJECT_EVENTS
+    EXPECT(serbrace->overworldData.images == ekans->overworldData.images);
+#if OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
+    EXPECT(serbrace->overworldPalette == ekans->overworldPalette);
+    EXPECT(serbrace->overworldShinyPalette == ekans->overworldShinyPalette);
+#endif
+#endif
+
+    // The other two starter graphics retain their approved states.
+    EXPECT(cingerm->frontPic != lechonk->frontPic);
+    EXPECT(cingerm->backPic != lechonk->backPic);
+    EXPECT(ardeino->frontPic == ducklett->frontPic);
+    EXPECT(ardeino->backPic == ducklett->backPic);
+    EXPECT(ardeino->palette == ducklett->palette);
+    EXPECT(ardeino->iconSprite == ducklett->iconSprite);
 }
 
 TEST("Ausonia Fire starter base data matches the approved prototype")
