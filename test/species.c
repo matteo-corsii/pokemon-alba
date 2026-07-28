@@ -212,3 +212,452 @@ TEST("Every species has a description")
 
     EXPECT_NE(StringCompare(GetSpeciesPokedexDescription(species), gFallbackPokedexText), 0);
 }
+
+static u16 GetBaseStatTotalForTest(enum Species species)
+{
+    return gSpeciesInfo[species].baseHP
+         + gSpeciesInfo[species].baseAttack
+         + gSpeciesInfo[species].baseDefense
+         + gSpeciesInfo[species].baseSpeed
+         + gSpeciesInfo[species].baseSpAttack
+         + gSpeciesInfo[species].baseSpDefense;
+}
+
+TEST("Ausonia starter IDs are append-only and distinct")
+{
+    EXPECT_EQ(SPECIES_GLIMMORA_MEGA, 1572);
+    EXPECT_EQ(SPECIES_CINGERM, SPECIES_GLIMMORA_MEGA + 1);
+    EXPECT_EQ(SPECIES_ROVASCO, SPECIES_CINGERM + 1);
+    EXPECT_EQ(SPECIES_SELVAZANNA, SPECIES_ROVASCO + 1);
+    EXPECT_EQ(SPECIES_SERBRACE, SPECIES_SELVAZANNA + 1);
+    EXPECT_EQ(SPECIES_VIPERCEN, SPECIES_SERBRACE + 1);
+    EXPECT_EQ(SPECIES_TOSSIVAMPA, SPECIES_VIPERCEN + 1);
+    EXPECT_EQ(SPECIES_ARDEINO, SPECIES_TOSSIVAMPA + 1);
+    EXPECT_EQ(SPECIES_VELAIRONE, SPECIES_ARDEINO + 1);
+    EXPECT_EQ(SPECIES_CODAIRONE, SPECIES_VELAIRONE + 1);
+    EXPECT_EQ(SPECIES_EGG, SPECIES_CODAIRONE + 1);
+    EXPECT_EQ(NUM_SPECIES, SPECIES_EGG);
+
+    EXPECT_EQ(NATIONAL_DEX_PECHARUNT, 1025);
+    EXPECT_EQ(NATIONAL_DEX_CINGERM, NATIONAL_DEX_PECHARUNT + 1);
+    EXPECT_EQ(NATIONAL_DEX_ROVASCO, NATIONAL_DEX_CINGERM + 1);
+    EXPECT_EQ(NATIONAL_DEX_SELVAZANNA, NATIONAL_DEX_ROVASCO + 1);
+    EXPECT_EQ(NATIONAL_DEX_SERBRACE, NATIONAL_DEX_SELVAZANNA + 1);
+    EXPECT_EQ(NATIONAL_DEX_VIPERCEN, NATIONAL_DEX_SERBRACE + 1);
+    EXPECT_EQ(NATIONAL_DEX_TOSSIVAMPA, NATIONAL_DEX_VIPERCEN + 1);
+    EXPECT_EQ(NATIONAL_DEX_ARDEINO, NATIONAL_DEX_TOSSIVAMPA + 1);
+    EXPECT_EQ(NATIONAL_DEX_VELAIRONE, NATIONAL_DEX_ARDEINO + 1);
+    EXPECT_EQ(NATIONAL_DEX_CODAIRONE, NATIONAL_DEX_VELAIRONE + 1);
+    EXPECT_EQ(NATIONAL_DEX_COUNT, NATIONAL_DEX_CODAIRONE);
+
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_CINGERM), COMPOUND_STRING("Cingerm")), 0);
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_ROVASCO), COMPOUND_STRING("Rovasco")), 0);
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_SELVAZANNA), COMPOUND_STRING("Selvazanna")), 0);
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_SERBRACE), COMPOUND_STRING("Serbrace")), 0);
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_VIPERCEN), COMPOUND_STRING("Vipercen")), 0);
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_TOSSIVAMPA), COMPOUND_STRING("Tossivampa")), 0);
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_ARDEINO), COMPOUND_STRING("Ardeino")), 0);
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_VELAIRONE), COMPOUND_STRING("Velairone")), 0);
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_CODAIRONE), COMPOUND_STRING("Codairone")), 0);
+}
+
+TEST("Ausonia Grass starter base data matches the approved prototype")
+{
+    const struct SpeciesInfo *cingerm = &gSpeciesInfo[SPECIES_CINGERM];
+    const struct SpeciesInfo *rovasco = &gSpeciesInfo[SPECIES_ROVASCO];
+    const struct SpeciesInfo *selvazanna = &gSpeciesInfo[SPECIES_SELVAZANNA];
+
+    EXPECT_EQ(GetBaseStatTotalForTest(SPECIES_CINGERM), 310);
+    EXPECT_EQ(GetBaseStatTotalForTest(SPECIES_ROVASCO), 405);
+    EXPECT_EQ(GetBaseStatTotalForTest(SPECIES_SELVAZANNA), 530);
+
+    EXPECT_EQ(cingerm->baseHP, 60);
+    EXPECT_EQ(cingerm->baseAttack, 65);
+    EXPECT_EQ(cingerm->baseDefense, 60);
+    EXPECT_EQ(cingerm->baseSpAttack, 35);
+    EXPECT_EQ(cingerm->baseSpDefense, 45);
+    EXPECT_EQ(cingerm->baseSpeed, 45);
+    EXPECT_EQ(rovasco->baseHP, 80);
+    EXPECT_EQ(rovasco->baseAttack, 85);
+    EXPECT_EQ(rovasco->baseDefense, 80);
+    EXPECT_EQ(rovasco->baseSpAttack, 45);
+    EXPECT_EQ(rovasco->baseSpDefense, 55);
+    EXPECT_EQ(rovasco->baseSpeed, 60);
+    EXPECT_EQ(selvazanna->baseHP, 100);
+    EXPECT_EQ(selvazanna->baseAttack, 120);
+    EXPECT_EQ(selvazanna->baseDefense, 105);
+    EXPECT_EQ(selvazanna->baseSpAttack, 55);
+    EXPECT_EQ(selvazanna->baseSpDefense, 80);
+    EXPECT_EQ(selvazanna->baseSpeed, 70);
+
+    EXPECT_EQ(cingerm->types[0], TYPE_GRASS);
+    EXPECT_EQ(cingerm->types[1], TYPE_GRASS);
+    EXPECT_EQ(rovasco->types[0], TYPE_GRASS);
+    EXPECT_EQ(rovasco->types[1], TYPE_GRASS);
+    EXPECT_EQ(selvazanna->types[0], TYPE_GRASS);
+    EXPECT_EQ(selvazanna->types[1], TYPE_DARK);
+
+    EXPECT_EQ(cingerm->abilities[0], ABILITY_OVERGROW);
+    EXPECT_EQ(cingerm->abilities[1], ABILITY_NONE);
+    EXPECT_EQ(cingerm->abilities[2], ABILITY_DEFIANT);
+    EXPECT_EQ(rovasco->abilities[0], ABILITY_OVERGROW);
+    EXPECT_EQ(rovasco->abilities[1], ABILITY_NONE);
+    EXPECT_EQ(rovasco->abilities[2], ABILITY_DEFIANT);
+    EXPECT_EQ(selvazanna->abilities[0], ABILITY_OVERGROW);
+    EXPECT_EQ(selvazanna->abilities[1], ABILITY_NONE);
+    EXPECT_EQ(selvazanna->abilities[2], ABILITY_DEFIANT);
+
+    EXPECT_EQ(cingerm->growthRate, GROWTH_MEDIUM_SLOW);
+    EXPECT_EQ(rovasco->growthRate, GROWTH_MEDIUM_SLOW);
+    EXPECT_EQ(selvazanna->growthRate, GROWTH_MEDIUM_SLOW);
+    EXPECT_EQ(cingerm->genderRatio, (50 * 255) / 100);
+    EXPECT_EQ(rovasco->genderRatio, (50 * 255) / 100);
+    EXPECT_EQ(selvazanna->genderRatio, (50 * 255) / 100);
+    EXPECT_EQ((u32)cingerm->evYield_Attack, 1);
+    EXPECT_EQ((u32)rovasco->evYield_Attack, 2);
+    EXPECT_EQ((u32)selvazanna->evYield_Attack, 3);
+    EXPECT_EQ(cingerm->catchRate, 45);
+    EXPECT_EQ(rovasco->catchRate, 45);
+    EXPECT_EQ(selvazanna->catchRate, 45);
+    EXPECT_EQ(cingerm->friendship, 70);
+    EXPECT_EQ(rovasco->friendship, 70);
+    EXPECT_EQ(selvazanna->friendship, 70);
+    EXPECT_EQ(cingerm->eggGroups[0], EGG_GROUP_FIELD);
+    EXPECT_EQ(cingerm->eggGroups[1], EGG_GROUP_FIELD);
+    EXPECT_EQ(rovasco->eggGroups[0], EGG_GROUP_FIELD);
+    EXPECT_EQ(rovasco->eggGroups[1], EGG_GROUP_FIELD);
+    EXPECT_EQ(selvazanna->eggGroups[0], EGG_GROUP_FIELD);
+    EXPECT_EQ(selvazanna->eggGroups[1], EGG_GROUP_FIELD);
+    EXPECT_EQ(cingerm->itemCommon, ITEM_NONE);
+    EXPECT_EQ(cingerm->itemRare, ITEM_NONE);
+    EXPECT_EQ(rovasco->itemCommon, ITEM_NONE);
+    EXPECT_EQ(rovasco->itemRare, ITEM_NONE);
+    EXPECT_EQ(selvazanna->itemCommon, ITEM_NONE);
+    EXPECT_EQ(selvazanna->itemRare, ITEM_NONE);
+}
+
+TEST("Ausonia Grass starter evolutions use only the approved levels")
+{
+    const struct Evolution *cingermEvolutions = GetSpeciesEvolutions(SPECIES_CINGERM);
+    const struct Evolution *rovascoEvolutions = GetSpeciesEvolutions(SPECIES_ROVASCO);
+
+    EXPECT(cingermEvolutions != NULL);
+    EXPECT_EQ(cingermEvolutions[0].method, EVO_LEVEL);
+    EXPECT_EQ(cingermEvolutions[0].param, 16);
+    EXPECT_GT(cingermEvolutions[0].param, 15);
+    EXPECT_EQ(cingermEvolutions[0].targetSpecies, SPECIES_ROVASCO);
+    EXPECT_EQ(cingermEvolutions[1].method, EVOLUTIONS_END);
+
+    EXPECT(rovascoEvolutions != NULL);
+    EXPECT_EQ(rovascoEvolutions[0].method, EVO_LEVEL);
+    EXPECT_EQ(rovascoEvolutions[0].param, 36);
+    EXPECT_GT(rovascoEvolutions[0].param, 35);
+    EXPECT_EQ(rovascoEvolutions[0].targetSpecies, SPECIES_SELVAZANNA);
+    EXPECT_EQ(rovascoEvolutions[1].method, EVOLUTIONS_END);
+
+    EXPECT(GetSpeciesEvolutions(SPECIES_SELVAZANNA) == NULL);
+}
+
+TEST("Ausonia Grass starter level-up learnsets are complete and ordered")
+{
+    static const enum Species species[] = { SPECIES_CINGERM, SPECIES_ROVASCO, SPECIES_SELVAZANNA };
+    static const u8 expectedLevels[] = { 1, 1, 4, 7, 9, 12, 15, 18, 22, 26, 30, 34, 38, 43, 48, 54 };
+    static const u16 expectedMoves[] = {
+        MOVE_TACKLE, MOVE_LEER, MOVE_LEAFAGE, MOVE_MUD_SLAP,
+        MOVE_BITE, MOVE_DEFENSE_CURL, MOVE_ROLLOUT, MOVE_RAZOR_LEAF,
+        MOVE_TAKE_DOWN, MOVE_TRAILBLAZE, MOVE_ASSURANCE, MOVE_SEED_BOMB,
+        MOVE_CRUNCH, MOVE_HIGH_HORSEPOWER, MOVE_WOOD_HAMMER, MOVE_SUCKER_PUNCH,
+    };
+
+    for (u32 i = 0; i < ARRAY_COUNT(species); i++)
+    {
+        const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species[i]);
+
+        for (u32 j = 0; j < ARRAY_COUNT(expectedMoves); j++)
+        {
+            EXPECT_EQ(learnset[j].level, expectedLevels[j]);
+            EXPECT_EQ(learnset[j].move, expectedMoves[j]);
+            if (j != 0)
+                EXPECT_GE(learnset[j].level, learnset[j - 1].level);
+        }
+        EXPECT_EQ(learnset[ARRAY_COUNT(expectedMoves)].move, LEVEL_UP_MOVE_END);
+    }
+}
+
+TEST("Ausonia Grass starter placeholder assets and Pokédex data are valid")
+{
+    static const enum Species species[] = { SPECIES_CINGERM, SPECIES_ROVASCO, SPECIES_SELVAZANNA };
+    static const enum PokemonCry cries[] = { CRY_LECHONK, CRY_OINKOLOGNE_M, CRY_MAMOSWINE };
+    static const enum NationalDexOrder dexNums[] = { NATIONAL_DEX_CINGERM, NATIONAL_DEX_ROVASCO, NATIONAL_DEX_SELVAZANNA };
+    static const u16 heights[] = { 5, 9, 16 };
+    static const u16 weights[] = { 125, 420, 1450 };
+
+    for (u32 i = 0; i < ARRAY_COUNT(species); i++)
+    {
+        const struct SpeciesInfo *info = &gSpeciesInfo[species[i]];
+
+        EXPECT(info->frontPic != NULL);
+        EXPECT(info->backPic != NULL);
+        EXPECT(info->iconSprite != NULL);
+        EXPECT(info->palette != NULL);
+        EXPECT(info->shinyPalette != NULL);
+    #if P_FOOTPRINTS
+        EXPECT(info->footprint != NULL);
+    #endif
+        EXPECT_EQ((u32)info->cryId, cries[i]);
+        EXPECT_GT((u32)info->cryId, CRY_NONE);
+        EXPECT_LT((u32)info->cryId, CRY_COUNT);
+        EXPECT_EQ((u32)info->natDexNum, dexNums[i]);
+        EXPECT_EQ(info->height, heights[i]);
+        EXPECT_EQ(info->weight, weights[i]);
+        EXPECT_NE(StringCompare(info->description, gFallbackPokedexText), 0);
+        EXPECT_EQ(info->teachableLearnset[0], MOVE_UNAVAILABLE);
+        EXPECT_EQ(info->eggMoveLearnset[0], MOVE_UNAVAILABLE);
+    }
+
+    EXPECT_EQ(StringCompare(gSpeciesInfo[SPECIES_CINGERM].categoryName, COMPOUND_STRING("GERMOGLIO")), 0);
+    EXPECT_EQ(StringCompare(gSpeciesInfo[SPECIES_ROVASCO].categoryName, COMPOUND_STRING("ROVETO")), 0);
+    EXPECT_EQ(StringCompare(gSpeciesInfo[SPECIES_SELVAZANNA].categoryName, COMPOUND_STRING("SELVA")), 0);
+}
+
+TEST("Ausonia Fire starter base data matches the approved prototype")
+{
+    static const enum Species species[] = { SPECIES_SERBRACE, SPECIES_VIPERCEN, SPECIES_TOSSIVAMPA };
+    static const u16 statTotals[] = { 310, 405, 530 };
+    static const u8 spAttackEvs[] = { 1, 2, 3 };
+    static const u8 stats[][NUM_STATS] = {
+        { 45, 40, 40, 65, 70, 50 },
+        { 60, 55, 55, 75, 95, 65 },
+        { 75, 70, 70, 105, 125, 85 },
+    };
+
+    for (u32 i = 0; i < ARRAY_COUNT(species); i++)
+    {
+        const struct SpeciesInfo *info = &gSpeciesInfo[species[i]];
+
+        EXPECT_EQ(info->baseHP, stats[i][STAT_HP]);
+        EXPECT_EQ(info->baseAttack, stats[i][STAT_ATK]);
+        EXPECT_EQ(info->baseDefense, stats[i][STAT_DEF]);
+        EXPECT_EQ(info->baseSpAttack, stats[i][STAT_SPATK]);
+        EXPECT_EQ(info->baseSpDefense, stats[i][STAT_SPDEF]);
+        EXPECT_EQ(info->baseSpeed, stats[i][STAT_SPEED]);
+        EXPECT_EQ(GetBaseStatTotalForTest(species[i]), statTotals[i]);
+        EXPECT_EQ(info->types[0], TYPE_FIRE);
+        EXPECT_EQ(info->types[1], i == 2 ? TYPE_POISON : TYPE_FIRE);
+        EXPECT_EQ(info->abilities[0], ABILITY_BLAZE);
+        EXPECT_EQ(info->abilities[1], ABILITY_NONE);
+        EXPECT_EQ(info->abilities[2], ABILITY_CORROSION);
+        EXPECT_EQ(info->growthRate, GROWTH_MEDIUM_SLOW);
+        EXPECT_EQ(info->genderRatio, (50 * 255) / 100);
+        EXPECT_EQ(info->eggGroups[0], EGG_GROUP_FIELD);
+        EXPECT_EQ(info->eggGroups[1], EGG_GROUP_DRAGON);
+        EXPECT_EQ((u32)info->evYield_SpAttack, spAttackEvs[i]);
+        EXPECT_EQ(info->catchRate, 45);
+        EXPECT_EQ(info->friendship, 70);
+        EXPECT_EQ(info->itemCommon, ITEM_NONE);
+        EXPECT_EQ(info->itemRare, ITEM_NONE);
+    }
+}
+
+TEST("Ausonia Fire starter evolutions use only the approved levels")
+{
+    const struct Evolution *serbraceEvolutions = GetSpeciesEvolutions(SPECIES_SERBRACE);
+    const struct Evolution *vipercenEvolutions = GetSpeciesEvolutions(SPECIES_VIPERCEN);
+
+    EXPECT(serbraceEvolutions != NULL);
+    EXPECT_EQ(serbraceEvolutions[0].method, EVO_LEVEL);
+    EXPECT_EQ(serbraceEvolutions[0].param, 16);
+    EXPECT_EQ(serbraceEvolutions[0].targetSpecies, SPECIES_VIPERCEN);
+    EXPECT_EQ(serbraceEvolutions[1].method, EVOLUTIONS_END);
+
+    EXPECT(vipercenEvolutions != NULL);
+    EXPECT_EQ(vipercenEvolutions[0].method, EVO_LEVEL);
+    EXPECT_EQ(vipercenEvolutions[0].param, 36);
+    EXPECT_EQ(vipercenEvolutions[0].targetSpecies, SPECIES_TOSSIVAMPA);
+    EXPECT_EQ(vipercenEvolutions[1].method, EVOLUTIONS_END);
+
+    EXPECT(GetSpeciesEvolutions(SPECIES_TOSSIVAMPA) == NULL);
+}
+
+TEST("Ausonia Fire starter level-up learnsets are complete and ordered")
+{
+    static const enum Species species[] = { SPECIES_SERBRACE, SPECIES_VIPERCEN, SPECIES_TOSSIVAMPA };
+    static const u8 expectedLevels[] = { 1, 1, 4, 7, 9, 12, 15, 18, 22, 26, 30, 34, 38, 43, 48, 54 };
+    static const u16 expectedMoves[] = {
+        MOVE_SCRATCH, MOVE_LEER, MOVE_EMBER, MOVE_SMOKESCREEN,
+        MOVE_FLAME_CHARGE, MOVE_POISON_STING, MOVE_BITE, MOVE_INCINERATE,
+        MOVE_COIL, MOVE_VENOSHOCK, MOVE_FIRE_SPIN, MOVE_NASTY_PLOT,
+        MOVE_FLAMETHROWER, MOVE_TOXIC, MOVE_SLUDGE_BOMB, MOVE_HEAT_WAVE,
+    };
+
+    for (u32 i = 0; i < ARRAY_COUNT(species); i++)
+    {
+        const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species[i]);
+
+        for (u32 j = 0; j < ARRAY_COUNT(expectedMoves); j++)
+        {
+            EXPECT_EQ(learnset[j].level, expectedLevels[j]);
+            EXPECT_EQ(learnset[j].move, expectedMoves[j]);
+            if (j != 0)
+                EXPECT_GE(learnset[j].level, learnset[j - 1].level);
+        }
+        EXPECT_EQ(learnset[ARRAY_COUNT(expectedMoves)].move, LEVEL_UP_MOVE_END);
+    }
+}
+
+TEST("Ausonia Fire starter placeholder assets and Pokédex data are valid")
+{
+    static const enum Species species[] = { SPECIES_SERBRACE, SPECIES_VIPERCEN, SPECIES_TOSSIVAMPA };
+    static const enum PokemonCry cries[] = { CRY_EKANS, CRY_ARBOK, CRY_SEVIPER };
+    static const enum NationalDexOrder dexNums[] = { NATIONAL_DEX_SERBRACE, NATIONAL_DEX_VIPERCEN, NATIONAL_DEX_TOSSIVAMPA };
+    static const u16 heights[] = { 6, 12, 22 };
+    static const u16 weights[] = { 60, 185, 520 };
+
+    for (u32 i = 0; i < ARRAY_COUNT(species); i++)
+    {
+        const struct SpeciesInfo *info = &gSpeciesInfo[species[i]];
+
+        EXPECT(info->frontPic != NULL);
+        EXPECT(info->backPic != NULL);
+        EXPECT(info->iconSprite != NULL);
+        EXPECT(info->palette != NULL);
+        EXPECT(info->shinyPalette != NULL);
+    #if P_FOOTPRINTS
+        EXPECT(info->footprint != NULL);
+    #endif
+        EXPECT_EQ((u32)info->cryId, cries[i]);
+        EXPECT_GT((u32)info->cryId, CRY_NONE);
+        EXPECT_LT((u32)info->cryId, CRY_COUNT);
+        EXPECT_EQ((u32)info->natDexNum, dexNums[i]);
+        EXPECT_EQ(info->height, heights[i]);
+        EXPECT_EQ(info->weight, weights[i]);
+        EXPECT_NE(StringCompare(info->description, gFallbackPokedexText), 0);
+        EXPECT_EQ(info->teachableLearnset[0], MOVE_UNAVAILABLE);
+        EXPECT_EQ(info->eggMoveLearnset[0], MOVE_UNAVAILABLE);
+    }
+
+    EXPECT_EQ(StringCompare(gSpeciesInfo[SPECIES_SERBRACE].categoryName, COMPOUND_STRING("BRACE")), 0);
+    EXPECT_EQ(StringCompare(gSpeciesInfo[SPECIES_VIPERCEN].categoryName, COMPOUND_STRING("CENERE")), 0);
+    EXPECT_EQ(StringCompare(gSpeciesInfo[SPECIES_TOSSIVAMPA].categoryName, COMPOUND_STRING("FUMAROLA")), 0);
+}
+
+TEST("Ausonia Water starter base data matches the approved prototype")
+{
+    static const enum Species species[] = { SPECIES_ARDEINO, SPECIES_VELAIRONE, SPECIES_CODAIRONE };
+    static const u16 statTotals[] = { 310, 405, 530 };
+    static const u8 spAttackEvs[] = { 1, 2, 3 };
+    static const u8 stats[][NUM_STATS] = {
+        { 50, 45, 50, 45, 65, 55 },
+        { 65, 60, 65, 60, 85, 70 },
+        { 85, 70, 80, 90, 110, 95 },
+    };
+
+    for (u32 i = 0; i < ARRAY_COUNT(species); i++)
+    {
+        const struct SpeciesInfo *info = &gSpeciesInfo[species[i]];
+
+        EXPECT_EQ(info->baseHP, stats[i][STAT_HP]);
+        EXPECT_EQ(info->baseAttack, stats[i][STAT_ATK]);
+        EXPECT_EQ(info->baseDefense, stats[i][STAT_DEF]);
+        EXPECT_EQ(info->baseSpAttack, stats[i][STAT_SPATK]);
+        EXPECT_EQ(info->baseSpDefense, stats[i][STAT_SPDEF]);
+        EXPECT_EQ(info->baseSpeed, stats[i][STAT_SPEED]);
+        EXPECT_EQ(GetBaseStatTotalForTest(species[i]), statTotals[i]);
+        EXPECT_EQ(info->types[0], TYPE_WATER);
+        EXPECT_EQ(info->types[1], i == 2 ? TYPE_FLYING : TYPE_WATER);
+        EXPECT_EQ(info->abilities[0], ABILITY_TORRENT);
+        EXPECT_EQ(info->abilities[1], ABILITY_NONE);
+        EXPECT_EQ(info->abilities[2], ABILITY_HYDRATION);
+        EXPECT_EQ(info->growthRate, GROWTH_MEDIUM_SLOW);
+        EXPECT_EQ(info->genderRatio, (50 * 255) / 100);
+        EXPECT_EQ(info->eggGroups[0], EGG_GROUP_FLYING);
+        EXPECT_EQ(info->eggGroups[1], EGG_GROUP_WATER_1);
+        EXPECT_EQ((u32)info->evYield_SpAttack, spAttackEvs[i]);
+        EXPECT_EQ(info->catchRate, 45);
+        EXPECT_EQ(info->friendship, 70);
+        EXPECT_EQ(info->itemCommon, ITEM_NONE);
+        EXPECT_EQ(info->itemRare, ITEM_NONE);
+    }
+}
+
+TEST("Ausonia Water starter evolutions use only the approved levels")
+{
+    const struct Evolution *ardeinoEvolutions = GetSpeciesEvolutions(SPECIES_ARDEINO);
+    const struct Evolution *velaironeEvolutions = GetSpeciesEvolutions(SPECIES_VELAIRONE);
+
+    EXPECT(ardeinoEvolutions != NULL);
+    EXPECT_EQ(ardeinoEvolutions[0].method, EVO_LEVEL);
+    EXPECT_EQ(ardeinoEvolutions[0].param, 16);
+    EXPECT_EQ(ardeinoEvolutions[0].targetSpecies, SPECIES_VELAIRONE);
+    EXPECT_EQ(ardeinoEvolutions[1].method, EVOLUTIONS_END);
+
+    EXPECT(velaironeEvolutions != NULL);
+    EXPECT_EQ(velaironeEvolutions[0].method, EVO_LEVEL);
+    EXPECT_EQ(velaironeEvolutions[0].param, 36);
+    EXPECT_EQ(velaironeEvolutions[0].targetSpecies, SPECIES_CODAIRONE);
+    EXPECT_EQ(velaironeEvolutions[1].method, EVOLUTIONS_END);
+
+    EXPECT(GetSpeciesEvolutions(SPECIES_CODAIRONE) == NULL);
+}
+
+TEST("Ausonia Water starter level-up learnsets are complete and ordered")
+{
+    static const enum Species species[] = { SPECIES_ARDEINO, SPECIES_VELAIRONE, SPECIES_CODAIRONE };
+    static const u8 expectedLevels[] = { 1, 1, 4, 7, 9, 12, 15, 18, 22, 26, 30, 34, 38, 43, 48, 54 };
+    static const u16 expectedMoves[] = {
+        MOVE_POUND, MOVE_GROWL, MOVE_WATER_GUN, MOVE_PECK,
+        MOVE_QUICK_ATTACK, MOVE_MIST, MOVE_SUPERSONIC, MOVE_WING_ATTACK,
+        MOVE_AQUA_RING, MOVE_AIR_SLASH, MOVE_BRINE, MOVE_AGILITY,
+        MOVE_TAILWIND, MOVE_ROOST, MOVE_HYDRO_PUMP, MOVE_HURRICANE,
+    };
+
+    for (u32 i = 0; i < ARRAY_COUNT(species); i++)
+    {
+        const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species[i]);
+
+        for (u32 j = 0; j < ARRAY_COUNT(expectedMoves); j++)
+        {
+            EXPECT_EQ(learnset[j].level, expectedLevels[j]);
+            EXPECT_EQ(learnset[j].move, expectedMoves[j]);
+            if (j != 0)
+                EXPECT_GE(learnset[j].level, learnset[j - 1].level);
+        }
+        EXPECT_EQ(learnset[ARRAY_COUNT(expectedMoves)].move, LEVEL_UP_MOVE_END);
+    }
+}
+
+TEST("Ausonia Water starter placeholder assets and Pokédex data are valid")
+{
+    static const enum Species species[] = { SPECIES_ARDEINO, SPECIES_VELAIRONE, SPECIES_CODAIRONE };
+    static const enum PokemonCry cries[] = { CRY_DUCKLETT, CRY_SWANNA, CRY_BOMBIRDIER };
+    static const enum NationalDexOrder dexNums[] = { NATIONAL_DEX_ARDEINO, NATIONAL_DEX_VELAIRONE, NATIONAL_DEX_CODAIRONE };
+    static const u16 heights[] = { 5, 10, 17 };
+    static const u16 weights[] = { 38, 125, 360 };
+
+    for (u32 i = 0; i < ARRAY_COUNT(species); i++)
+    {
+        const struct SpeciesInfo *info = &gSpeciesInfo[species[i]];
+
+        EXPECT(info->frontPic != NULL);
+        EXPECT(info->backPic != NULL);
+        EXPECT(info->iconSprite != NULL);
+        EXPECT(info->palette != NULL);
+        EXPECT(info->shinyPalette != NULL);
+    #if P_FOOTPRINTS
+        EXPECT(info->footprint != NULL);
+    #endif
+        EXPECT_EQ((u32)info->cryId, cries[i]);
+        EXPECT_GT((u32)info->cryId, CRY_NONE);
+        EXPECT_LT((u32)info->cryId, CRY_COUNT);
+        EXPECT_EQ((u32)info->natDexNum, dexNums[i]);
+        EXPECT_EQ(info->height, heights[i]);
+        EXPECT_EQ(info->weight, weights[i]);
+        EXPECT_NE(StringCompare(info->description, gFallbackPokedexText), 0);
+        EXPECT_EQ(info->teachableLearnset[0], MOVE_UNAVAILABLE);
+        EXPECT_EQ(info->eggMoveLearnset[0], MOVE_UNAVAILABLE);
+    }
+
+    EXPECT_EQ(StringCompare(gSpeciesInfo[SPECIES_ARDEINO].categoryName, COMPOUND_STRING("PIUMALAGO")), 0);
+    EXPECT_EQ(StringCompare(gSpeciesInfo[SPECIES_VELAIRONE].categoryName, COMPOUND_STRING("VELO")), 0);
+    EXPECT_EQ(StringCompare(gSpeciesInfo[SPECIES_CODAIRONE].categoryName, COMPOUND_STRING("RIFLESSO")), 0);
+}
