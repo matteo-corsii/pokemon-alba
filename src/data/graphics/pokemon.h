@@ -18,6 +18,13 @@ const u8 gMonIcon_QuestionMark[] = INCGFX_U8("graphics/pokemon/question_mark/ico
 #endif //P_FOOTPRINTS
 const u32 gObjectEventPic_Substitute[] = INCGFX_COMP("graphics/pokemon/question_mark/overworld.png", ".4bpp", "-mwidth 4 -mheight 4");
 
+// Pokémon Alba: original battle and menu graphics for Cingerm.
+const u32 gMonFrontPic_Cingerm[] = INCGFX_U32("graphics/pokemon/cingerm/anim_front.png", ".4bpp.smol");
+const u16 gMonPalette_Cingerm[] = INCGFX_U16("graphics/pokemon/cingerm/normal.pal", ".gbapal");
+const u32 gMonBackPic_Cingerm[] = INCGFX_U32("graphics/pokemon/cingerm/back.png", ".4bpp.smol");
+const u16 gMonShinyPalette_Cingerm[] = INCGFX_U16("graphics/pokemon/cingerm/shiny.pal", ".gbapal");
+const u8 gMonIcon_Cingerm[] = INCGFX_U8("graphics/pokemon/cingerm/icon.png", ".4bpp");
+
 #if P_FAMILY_BULBASAUR
 #if !P_GBA_STYLE_SPECIES_GFX
     const u32 gMonFrontPic_Bulbasaur[] = INCGFX_U32("graphics/pokemon/bulbasaur/anim_front.png", ".4bpp.smol");
