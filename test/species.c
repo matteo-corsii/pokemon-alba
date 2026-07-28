@@ -313,9 +313,9 @@ TEST("Ausonia Grass starter base data matches the approved prototype")
     EXPECT_EQ(cingerm->genderRatio, (50 * 255) / 100);
     EXPECT_EQ(rovasco->genderRatio, (50 * 255) / 100);
     EXPECT_EQ(selvazanna->genderRatio, (50 * 255) / 100);
-    EXPECT_EQ(cingerm->evYield_Attack, 1);
-    EXPECT_EQ(rovasco->evYield_Attack, 2);
-    EXPECT_EQ(selvazanna->evYield_Attack, 3);
+    EXPECT_EQ((u32)cingerm->evYield_Attack, 1);
+    EXPECT_EQ((u32)rovasco->evYield_Attack, 2);
+    EXPECT_EQ((u32)selvazanna->evYield_Attack, 3);
     EXPECT_EQ(cingerm->catchRate, 45);
     EXPECT_EQ(rovasco->catchRate, 45);
     EXPECT_EQ(selvazanna->catchRate, 45);
@@ -404,10 +404,10 @@ TEST("Ausonia Grass starter placeholder assets and Pokédex data are valid")
     #if P_FOOTPRINTS
         EXPECT(info->footprint != NULL);
     #endif
-        EXPECT_EQ(info->cryId, cries[i]);
-        EXPECT_GT(info->cryId, CRY_NONE);
-        EXPECT_LT(info->cryId, CRY_COUNT);
-        EXPECT_EQ(info->natDexNum, dexNums[i]);
+        EXPECT_EQ((u32)info->cryId, cries[i]);
+        EXPECT_GT((u32)info->cryId, CRY_NONE);
+        EXPECT_LT((u32)info->cryId, CRY_COUNT);
+        EXPECT_EQ((u32)info->natDexNum, dexNums[i]);
         EXPECT_EQ(info->height, heights[i]);
         EXPECT_EQ(info->weight, weights[i]);
         EXPECT_NE(StringCompare(info->description, gFallbackPokedexText), 0);
@@ -451,7 +451,7 @@ TEST("Ausonia Fire starter base data matches the approved prototype")
         EXPECT_EQ(info->genderRatio, (50 * 255) / 100);
         EXPECT_EQ(info->eggGroups[0], EGG_GROUP_FIELD);
         EXPECT_EQ(info->eggGroups[1], EGG_GROUP_DRAGON);
-        EXPECT_EQ(info->evYield_SpAttack, spAttackEvs[i]);
+        EXPECT_EQ((u32)info->evYield_SpAttack, spAttackEvs[i]);
         EXPECT_EQ(info->catchRate, 45);
         EXPECT_EQ(info->friendship, 70);
         EXPECT_EQ(info->itemCommon, ITEM_NONE);
@@ -525,10 +525,10 @@ TEST("Ausonia Fire starter placeholder assets and Pokédex data are valid")
     #if P_FOOTPRINTS
         EXPECT(info->footprint != NULL);
     #endif
-        EXPECT_EQ(info->cryId, cries[i]);
-        EXPECT_GT(info->cryId, CRY_NONE);
-        EXPECT_LT(info->cryId, CRY_COUNT);
-        EXPECT_EQ(info->natDexNum, dexNums[i]);
+        EXPECT_EQ((u32)info->cryId, cries[i]);
+        EXPECT_GT((u32)info->cryId, CRY_NONE);
+        EXPECT_LT((u32)info->cryId, CRY_COUNT);
+        EXPECT_EQ((u32)info->natDexNum, dexNums[i]);
         EXPECT_EQ(info->height, heights[i]);
         EXPECT_EQ(info->weight, weights[i]);
         EXPECT_NE(StringCompare(info->description, gFallbackPokedexText), 0);
@@ -572,7 +572,7 @@ TEST("Ausonia Water starter base data matches the approved prototype")
         EXPECT_EQ(info->genderRatio, (50 * 255) / 100);
         EXPECT_EQ(info->eggGroups[0], EGG_GROUP_FLYING);
         EXPECT_EQ(info->eggGroups[1], EGG_GROUP_WATER_1);
-        EXPECT_EQ(info->evYield_SpAttack, spAttackEvs[i]);
+        EXPECT_EQ((u32)info->evYield_SpAttack, spAttackEvs[i]);
         EXPECT_EQ(info->catchRate, 45);
         EXPECT_EQ(info->friendship, 70);
         EXPECT_EQ(info->itemCommon, ITEM_NONE);
@@ -646,10 +646,10 @@ TEST("Ausonia Water starter placeholder assets and Pokédex data are valid")
     #if P_FOOTPRINTS
         EXPECT(info->footprint != NULL);
     #endif
-        EXPECT_EQ(info->cryId, cries[i]);
-        EXPECT_GT(info->cryId, CRY_NONE);
-        EXPECT_LT(info->cryId, CRY_COUNT);
-        EXPECT_EQ(info->natDexNum, dexNums[i]);
+        EXPECT_EQ((u32)info->cryId, cries[i]);
+        EXPECT_GT((u32)info->cryId, CRY_NONE);
+        EXPECT_LT((u32)info->cryId, CRY_COUNT);
+        EXPECT_EQ((u32)info->natDexNum, dexNums[i]);
         EXPECT_EQ(info->height, heights[i]);
         EXPECT_EQ(info->weight, weights[i]);
         EXPECT_NE(StringCompare(info->description, gFallbackPokedexText), 0);
