@@ -65,7 +65,7 @@ TEST("Fangosberla preserves Mud-Slap battle data")
     EXPECT_EQ((u32)move->target, TARGET_SELECTED);
     EXPECT_EQ((s32)move->priority, 0);
     EXPECT_EQ((u32)move->category, DAMAGE_CATEGORY_SPECIAL);
-    EXPECT_EQ((bool32)move->ballisticMove, TRUE);
+    EXPECT_EQ((bool32)move->ballisticMove, FALSE);
     EXPECT_EQ((u32)move->numAdditionalEffects, 1);
     EXPECT_EQ(move->additionalEffects[0].moveEffect, MOVE_EFFECT_STAT_MINUS);
     EXPECT_EQ((u32)move->additionalEffects[0].accuracy, 1);

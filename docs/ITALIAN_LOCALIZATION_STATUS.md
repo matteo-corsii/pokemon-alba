@@ -14,7 +14,7 @@ Le stringhe sono definite nell'architettura globale esistente (`src/strings.c`) 
 
 ## Scelte di interfaccia
 
-Le traduzioni mantengono i nomi propri `POKéMON`, `POKéDEX` e `POKéNAV`. Nel riepilogo sono usate abbreviazioni italiane soltanto dove la finestra contiene anche valori numerici: `ATT. SP.`, `DIF. SP.`, `VEL.`, `PREC.` e `STAT.`. I test misurano le etichette con le utility e i font reali del progetto.
+Le traduzioni mantengono i nomi propri `POKéMON`, `POKéDEX` e `POKéNAV`. Nel riepilogo sono usate abbreviazioni italiane soltanto dove la finestra contiene anche valori numerici: `ATT.SP.`, `DIF.SP.`, `VEL.`, `PREC.` e `STAT.`. I test misurano le etichette con le utility e i font reali del progetto.
 
 `Fangosberla` conserva potenza, precisione, PP, tipo, categoria, bersaglio, priorità, riduzione della precisione e animazione di `MOVE_MUD_SLAP`. Cingerm continua a impararla al livello 7.
 
