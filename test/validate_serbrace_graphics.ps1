@@ -177,6 +177,7 @@ $icon = Read-IndexedPng (Join-Path $assetRoot 'icon.png')
 Assert-Png $front 64 128 64 'anim_front.png'
 Assert-Png $back 64 64 64 'back.png'
 Assert-Png $icon 32 64 32 'icon.png'
+Assert-Condition (Test-EqualArrays ($icon.Indices | Sort-Object -Unique) @(0, 1, 2, 3, 8, 12, 13, 14, 15)) 'icon.png contains indices outside the documented pal3 remapping'
 Assert-Condition (Test-EqualArrays (Get-BoundingBox $front 0 64) @(2, 6, 60, 54)) 'anim_front.png frame 0 bounding box changed'
 Assert-Condition (Test-EqualArrays (Get-BoundingBox $front 1 64) @(2, 6, 59, 54)) 'anim_front.png frame 1 bounding box changed'
 Assert-Condition (Test-EqualArrays (Get-BoundingBox $back 0 64) @(3, 9, 58, 51)) 'back.png bounding box changed'
