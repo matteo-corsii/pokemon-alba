@@ -457,11 +457,11 @@ TEST("Cingerm original graphics replace only its Lechonk placeholders")
     EXPECT(cingerm->shinyPalette != lechonk->shinyPalette);
     EXPECT(cingerm->iconSprite != lechonk->iconSprite);
     EXPECT(cingerm->frontAnimFrames != lechonk->frontAnimFrames);
-    EXPECT_EQ(cingerm->frontPicSize, MON_COORDS_SIZE(64, 48));
-    EXPECT_EQ(cingerm->backPicSize, MON_COORDS_SIZE(56, 56));
+    EXPECT_EQ(cingerm->frontPicSize, (8 << 4) | 6);
+    EXPECT_EQ(cingerm->backPicSize, (7 << 4) | 7);
     EXPECT_EQ(cingerm->frontPicYOffset, 4);
     EXPECT_EQ(cingerm->backPicYOffset, 4);
-    EXPECT_EQ(cingerm->iconPalIndex, 5);
+    EXPECT(cingerm->iconPalIndex == 5);
 
     // Audio, footprint and overworld graphics remain explicitly provisional.
     EXPECT_EQ((u32)cingerm->cryId, CRY_LECHONK);
