@@ -5176,10 +5176,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
 
     [MOVE_MUD_SLAP] =
     {
-        .name = COMPOUND_STRING("Mud-Slap"),
+        .name = COMPOUND_STRING("Fangosberla"),
         .description = COMPOUND_STRING(
-            "Hurls mud in the foe's face\n"
-            "to reduce its accuracy."),
+            "Scaglia fango sul bersaglio\n"
+            "riducendone la precisione."),
         .effect = EFFECT_HIT,
         .power = 20,
         .type = TYPE_GROUND,
