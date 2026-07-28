@@ -513,7 +513,7 @@ TEST("Serbrace original graphics replace only its Ekans placeholders")
     EXPECT_EQ(serbrace->backPicSize, (8 << 4) | 7);
     EXPECT_EQ(serbrace->frontPicYOffset, 4);
     EXPECT_EQ(serbrace->backPicYOffset, 4);
-    EXPECT_EQ(serbrace->iconPalIndex, 3);
+    EXPECT(serbrace->iconPalIndex == 3);
 
     // Gameplay data and the remaining audiovisual placeholders stay unchanged.
     EXPECT_EQ(serbrace->baseHP, 45);
