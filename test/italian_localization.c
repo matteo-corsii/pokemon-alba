@@ -57,18 +57,18 @@ TEST("Fangosberla preserves Mud-Slap battle data")
     EXPECT_LE(GetStringWidth(FONT_NARROWER, move->name, 0), 59);
     EXPECT_LE(GetStringWidth(FONT_NORMAL, move->description, 0), 152);
 
-    EXPECT_EQ(move->effect, EFFECT_HIT);
-    EXPECT_EQ(move->power, 20);
-    EXPECT_EQ(move->type, TYPE_GROUND);
-    EXPECT_EQ(move->accuracy, 100);
+    EXPECT_EQ((u32)move->effect, EFFECT_HIT);
+    EXPECT_EQ((u32)move->power, 20);
+    EXPECT_EQ((u32)move->type, TYPE_GROUND);
+    EXPECT_EQ((u32)move->accuracy, 100);
     EXPECT_EQ(move->pp, 10);
-    EXPECT_EQ(move->target, TARGET_SELECTED);
-    EXPECT_EQ(move->priority, 0);
-    EXPECT_EQ(move->category, DAMAGE_CATEGORY_SPECIAL);
-    EXPECT_EQ(move->ballisticMove, TRUE);
-    EXPECT_EQ(move->numAdditionalEffects, 1);
+    EXPECT_EQ((u32)move->target, TARGET_SELECTED);
+    EXPECT_EQ((s32)move->priority, 0);
+    EXPECT_EQ((u32)move->category, DAMAGE_CATEGORY_SPECIAL);
+    EXPECT_EQ((bool32)move->ballisticMove, TRUE);
+    EXPECT_EQ((u32)move->numAdditionalEffects, 1);
     EXPECT_EQ(move->additionalEffects[0].moveEffect, MOVE_EFFECT_STAT_MINUS);
-    EXPECT_EQ(move->additionalEffects[0].accuracy, 1);
+    EXPECT_EQ((u32)move->additionalEffects[0].accuracy, 1);
     EXPECT_EQ(move->additionalEffects[0].chance, 100);
     EXPECT_EQ(move->battleAnimScript, gBattleAnimMove_MudSlap);
 }
