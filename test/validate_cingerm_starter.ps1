@@ -16,8 +16,8 @@ $trainerPath = Join-Path $RepositoryRoot 'src/data/trainers.party'
 $trainerLines = Get-Content -LiteralPath $trainerPath
 
 Assert-True ($starterSource -match '#define GRASS_STARTER \(IS_FRLG \? SPECIES_BULBASAUR\s+: SPECIES_CINGERM\)') 'Lo slot Erba Emerald non restituisce Cingerm mantenendo Bulbasaur in FRLG.'
-Assert-True ($starterSource -match '#define FIRE_STARTER\s+\(IS_FRLG \? SPECIES_CHARMANDER : SPECIES_TORCHIC\)') 'Lo slot Fuoco non è più Torchic in Emerald.'
-Assert-True ($starterSource -match '#define WATER_STARTER \(IS_FRLG \? SPECIES_SQUIRTLE\s+: SPECIES_MUDKIP\s+\)') 'Lo slot Acqua non è più Mudkip in Emerald.'
+Assert-True ($starterSource -match '#define FIRE_STARTER\s+\(IS_FRLG \? SPECIES_CHARMANDER : SPECIES_SERBRACE\)') 'Lo slot Fuoco Emerald non restituisce Serbrace mantenendo Charmander in FRLG.'
+Assert-True ($starterSource -match '#define WATER_STARTER \(IS_FRLG \? SPECIES_SQUIRTLE\s+: SPECIES_ARDEINO\s+\)') 'Lo slot Acqua Emerald non restituisce Ardeino mantenendo Squirtle in FRLG.'
 Assert-True ($battleSetup -match 'ScriptGiveMon\(starterMon, 5, ITEM_NONE\);') 'La creazione iniziale non usa più il livello 5 standard.'
 
 $expected = [ordered]@{
