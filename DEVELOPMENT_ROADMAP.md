@@ -2,7 +2,7 @@
 
 Questa roadmap descrive una sequenza iniziale di attività. Ogni fase deve produrre un risultato verificabile prima di passare alla successiva. I dettagli tecnici e gli eventuali comandi saranno definiti solo dopo essere stati verificati sulla documentazione e sull’ambiente effettivamente utilizzato.
 
-**Stato delle milestone:** Albèra/prologo v1 è conclusa. La prima registrazione dati delle nove specie starter di Ausonia è completata; nessuna specie sostituisce ancora gli starter del prologo e l'integrazione resta rinviata a una fase successiva.
+**Stato delle milestone:** Albèra/prologo v1 è conclusa. La prima registrazione dati delle nove specie starter di Ausonia è completata; Cingerm sostituisce temporaneamente Treecko nello slot Erba per la verifica visiva e tecnica, mentre Torchic e Mudkip restano provvisori.
 
 ## 1. Verificare la compilazione pulita del progetto base
 
@@ -86,7 +86,7 @@ Questa roadmap descrive una sequenza iniziale di attività. Ogni fase deve produ
 
 ## 8. Aggiungere un primo Pokémon temporaneo di test
 
-**Stato:** le linee Cingerm, Serbrace e Ardeino sono registrate come prototipi dati. Le nove specie non sono ottenibili e usano asset grafici e sonori provvisori.
+**Stato:** le linee Cingerm, Serbrace e Ardeino sono registrate come prototipi dati. Cingerm è temporaneamente ottenibile soltanto come starter Erba e usa grafica originale con cry, impronta, overworld e ombra ancora provvisori; le altre otto specie non sono ottenibili direttamente.
 
 **Obiettivo:** verificare il processo tecnico per introdurre una nuova specie usando risorse chiaramente provvisorie.
 
@@ -109,6 +109,8 @@ Questa roadmap descrive una sequenza iniziale di attività. Ogni fase deve produ
 **Condizione per procedere:** i tre concept devono essere coerenti tra loro e sufficientemente definiti per pianificare dati e risorse originali.
 
 ## 10. Implementare la scelta del sesso dello starter
+
+**Stato:** rinviata. Il prototipo Cingerm usa il comportamento standard del motore e non aggiunge ancora un selettore del sesso.
 
 **Obiettivo:** permettere al giocatore di scegliere specie, sesso e soprannome dello starter durante la sequenza iniziale.
 

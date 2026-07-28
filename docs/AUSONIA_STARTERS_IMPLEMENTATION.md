@@ -52,7 +52,9 @@ Questa strategia conserva tutti gli ID ufficiali. I salvataggi creati prima dell
 
 Tutte e tre le linee sono registrate con evoluzioni ai livelli 16 e 36, dati base completi e un learnset per livello comune a ciascuna linea. Le compatibilità MT/tutor e le mosse Uovo restano vuote tramite le tabelle `sNone*`: è una scelta prudente supportata dalla struttura e non richiede di modificare file generati. Statistiche e learnset restano preliminari fino alla validazione automatica e ai test di gioco.
 
-Le specie non vengono aggiunte a incontri selvatici, regali, commerci, Uova, squadre, mappe, script, borsa degli starter o Pokédex regionale. Sono istanziabili soltanto tramite test e strumenti di debug già esistenti.
+Cingerm sostituisce temporaneamente Treecko nello slot Erba della borsa del Professor Lauro e nei soli rami delle squadre di Nico e Lia collegati alla vecchia linea di Treecko. La selezione crea Cingerm al livello 5 attraverso il normale flusso `GetStarterPokemon`/`ScriptGiveMon`; Torchic e Mudkip restano invariati. Cingerm non compare in incontri selvatici, regali aggiuntivi, commerci, Uova, NPC o strumenti di debug, mentre le altre otto specie di Ausonia restano non ottenibili direttamente.
+
+Il prototipo serve esclusivamente a verificare grafica, dati, prima battaglia e progressione del rivale. Non è ancora la configurazione definitiva del prologo: gli starter Fuoco e Acqua di Ausonia non dispongono del pacchetto grafico completo e la selezione manuale del sesso è rinviata. Il sesso di Cingerm viene generato dal comportamento standard del motore.
 
 ## Asset provvisori
 
@@ -60,7 +62,7 @@ Non vengono copiati file grafici o audio. `gSpeciesInfo` riusa direttamente asse
 
 | Specie | Modello grafico | Cry |
 | --- | --- | --- |
-| Cingerm | Lechonk | `CRY_LECHONK` |
+| Cingerm | Grafica originale; footprint, overworld e ombra di Lechonk | `CRY_LECHONK` |
 | Rovasco | Oinkologne maschio | `CRY_OINKOLOGNE_M` |
 | Selvazanna | Mamoswine | `CRY_MAMOSWINE` |
 | Serbrace | Ekans | `CRY_EKANS` |
@@ -89,7 +91,7 @@ Quando saranno disponibili asset originali, i riferimenti andranno sostituiti se
 1. Registrare e validare la linea Cingerm — registrazione dati completata.
 2. Registrare e validare la linea Serbrace — registrazione dati completata.
 3. Registrare e validare la linea Ardeino — registrazione dati completata.
-4. Integrare la selezione degli starter nel prologo.
-5. Sostituire i segnaposto con sprite originali.
+4. Validare il prototipo temporaneo di Cingerm nello slot Erba — in corso.
+5. Completare gli asset originali e integrare i tre starter definitivi nel prologo.
 6. Aggiungere eventuali differenze sessuali approvate.
 7. Progettare e prototipare la Forma Riflesso senza considerarla ancora definitiva.
