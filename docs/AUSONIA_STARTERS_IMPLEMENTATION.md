@@ -56,16 +56,16 @@ Cingerm, Serbrace e Ardeino sostituiscono rispettivamente Treecko, Torchic e Mud
 
 I rami di Nico e Lia collegati alle vecchie linee di Treecko, Torchic e Mudkip usano ora gli stadi equivalenti delle linee Cingerm, Serbrace e Ardeino, conservando livelli e configurazione delle squadre. Le tre forme base non compaiono in incontri selvatici, regali aggiuntivi, commerci, Uova, NPC o strumenti di debug; gli stadi successivi sono raggiungibili soltanto tramite evoluzione o nella progressione del rivale. La selezione manuale del sesso resta rinviata.
 
-## Asset provvisori
+## Stato degli asset
 
-Non vengono copiati file grafici o audio. `gSpeciesInfo` riusa direttamente asset già presenti:
+Gli asset originali approvati di Cingerm e Serbrace sono conservati nelle rispettive directory sotto `graphics/pokemon/`. Per gli elementi non ancora originali, `gSpeciesInfo` riusa direttamente asset già presenti:
 
 | Specie | Modello grafico | Cry |
 | --- | --- | --- |
 | Cingerm | Grafica originale; footprint, overworld e ombra di Lechonk | `CRY_LECHONK` |
 | Rovasco | Oinkologne maschio | `CRY_OINKOLOGNE_M` |
 | Selvazanna | Mamoswine | `CRY_MAMOSWINE` |
-| Serbrace | Ekans | `CRY_EKANS` |
+| Serbrace | Grafica originale; footprint, overworld e ombra di Ekans | `CRY_EKANS` |
 | Vipercen | Arbok | `CRY_ARBOK` |
 | Tossivampa | Seviper | `CRY_SEVIPER` |
 | Ardeino | Ducklett | `CRY_DUCKLETT` |
@@ -74,7 +74,7 @@ Non vengono copiati file grafici o audio. `gSpeciesInfo` riusa direttamente asse
 
 I modelli danno silhouette piccole, intermedie e grandi distinguibili per ciascuna linea. Le coordinate, animazioni, ombre, palette, icone, impronte e sprite overworld seguono i rispettivi modelli. Non sono definite differenze grafiche fra sessi dedicate alle specie di Ausonia.
 
-Le concept art di Cingerm, Rovasco, Selvazanna, Serbrace, Vipercen, Tossivampa, Ardeino e Velairone sono approvate. Soltanto Codairone resta da progettare definitivamente. Le immagini di concept non sono conservate nel repository. Cingerm possiede i primi asset originali; Serbrace, Ardeino e gli altri record continuano a usare i segnaposto documentati.
+Le concept art di Cingerm, Rovasco, Selvazanna, Serbrace, Vipercen, Tossivampa, Ardeino e Velairone sono approvate. Soltanto Codairone resta da progettare definitivamente. Le immagini di concept non sono conservate nel repository. Cingerm e Serbrace possiedono front, back, icona e palette originali, con shiny ancora provvisorie; Ardeino e gli altri record continuano a usare i segnaposto documentati. Il trio resta interamente selezionabile e questa sostituzione non modifica gameplay o localizzazione italiana.
 
 Quando saranno disponibili asset originali, i riferimenti andranno sostituiti senza cambiare gli ID. Ogni forma richiederà front e back sprite, palette normale e cromatica, icona, impronta, animazioni, coordinate, ombra, eventuali sprite overworld e cry verificati. I segnaposto non sono direzione artistica definitiva.
 
@@ -92,6 +92,6 @@ Quando saranno disponibili asset originali, i riferimenti andranno sostituiti se
 2. Registrare e validare la linea Serbrace — registrazione dati completata.
 3. Registrare e validare la linea Ardeino — registrazione dati completata.
 4. Integrare e validare il trio completo negli slot Emerald e nei rami del rivale — in corso.
-5. Completare gli asset originali di Serbrace, Ardeino e delle evoluzioni.
+5. Completare gli asset originali di Ardeino e delle evoluzioni, quindi sostituire shiny, cry, footprint e overworld ancora provvisori.
 6. Aggiungere eventuali differenze sessuali approvate.
 7. Progettare e prototipare la Forma Riflesso senza considerarla ancora definitiva.
