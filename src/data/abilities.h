@@ -495,22 +495,22 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_OVERGROW] =
     {
-        .name = _("Overgrow"),
-        .description = COMPOUND_STRING("Ups Grass moves in a pinch."),
+        .name = _("Erbaiuto"),
+        .description = COMPOUND_STRING("Potenzia le mosse Erba\ncon pochi PS."),
         .aiRating = 5,
     },
 
     [ABILITY_BLAZE] =
     {
-        .name = _("Blaze"),
-        .description = COMPOUND_STRING("Ups Fire moves in a pinch."),
+        .name = _("Aiutofuoco"),
+        .description = COMPOUND_STRING("Potenzia le mosse Fuoco\ncon pochi PS."),
         .aiRating = 5,
     },
 
     [ABILITY_TORRENT] =
     {
-        .name = _("Torrent"),
-        .description = COMPOUND_STRING("Ups Water moves in a pinch."),
+        .name = _("Acquaiuto"),
+        .description = COMPOUND_STRING("Potenzia le mosse Acqua\ncon pochi PS."),
         .aiRating = 5,
     },
 
@@ -700,8 +700,8 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_HYDRATION] =
     {
-        .name = _("Hydration"),
-        .description = COMPOUND_STRING("Cures status in rain."),
+        .name = _("Idratazione"),
+        .description = COMPOUND_STRING("Cura i problemi di stato\nquando piove."),
         .aiRating = 4,
     },
 
@@ -964,8 +964,8 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_DEFIANT] =
     {
-        .name = _("Defiant"),
-        .description = COMPOUND_STRING("Lowered stats up Attack."),
+        .name = _("Agonismo"),
+        .description = COMPOUND_STRING("Aumenta molto l'Attacco\nse le statistiche calano."),
         .aiRating = 5,
     },
 
@@ -1620,8 +1620,8 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_CORROSION] =
     {
-        .name = _("Corrosion"),
-        .description = COMPOUND_STRING("Poisons any type."),
+        .name = _("Corrosione"),
+        .description = COMPOUND_STRING("Può avvelenare anche i tipi\nAcciaio e Veleno."),
         .aiRating = 5,
     },
 

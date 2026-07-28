@@ -65,25 +65,27 @@
 #define PSS_LABEL_WINDOW_UNUSED1 7
 
 // Info screen
-#define PSS_LABEL_WINDOW_POKEMON_INFO_RENTAL 8
-#define PSS_LABEL_WINDOW_POKEMON_INFO_TYPE 9
+#define PSS_LABEL_WINDOW_INFO_ABILITY_TITLE 8
+#define PSS_LABEL_WINDOW_INFO_MEMO_TITLE 9
+#define PSS_LABEL_WINDOW_POKEMON_INFO_RENTAL 10
+#define PSS_LABEL_WINDOW_POKEMON_INFO_TYPE 11
 
 // Skills screen
-#define PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT 10 // HP, Attack, Defense
-#define PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT 11 // Sp. Attack, Sp. Defense, Speed
-#define PSS_LABEL_WINDOW_POKEMON_SKILLS_EXP 12 // EXP, Next Level
-#define PSS_LABEL_WINDOW_POKEMON_SKILLS_STATUS 13
+#define PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT 12 // HP, Attack, Defense
+#define PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT 13 // Sp. Attack, Sp. Defense, Speed
+#define PSS_LABEL_WINDOW_POKEMON_SKILLS_EXP 14 // EXP, Next Level
+#define PSS_LABEL_WINDOW_POKEMON_SKILLS_STATUS 15
 
 // Moves screen
-#define PSS_LABEL_WINDOW_MOVES_POWER_ACC 14 // Also contains the power and accuracy values
-#define PSS_LABEL_WINDOW_MOVES_APPEAL_JAM 15
-#define PSS_LABEL_WINDOW_PROMPT_RELEARN 16
+#define PSS_LABEL_WINDOW_MOVES_POWER_ACC 16 // Also contains the power and accuracy values
+#define PSS_LABEL_WINDOW_MOVES_APPEAL_JAM 17
+#define PSS_LABEL_WINDOW_PROMPT_RELEARN 18
 
 // Above/below the Pokémon's portrait (left)
-#define PSS_LABEL_WINDOW_PORTRAIT_DEX_NUMBER 17
-#define PSS_LABEL_WINDOW_PORTRAIT_NICKNAME 18 // The upper name
-#define PSS_LABEL_WINDOW_PORTRAIT_SPECIES 19 // The lower name
-#define PSS_LABEL_WINDOW_END 20
+#define PSS_LABEL_WINDOW_PORTRAIT_DEX_NUMBER 19
+#define PSS_LABEL_WINDOW_PORTRAIT_NICKNAME 20 // The upper name
+#define PSS_LABEL_WINDOW_PORTRAIT_SPECIES 21 // The lower name
+#define PSS_LABEL_WINDOW_END 22
 
 // Dynamic fields for the Pokémon Info page
 #define PSS_DATA_WINDOW_INFO_ORIGINAL_TRAINER 0
@@ -203,6 +205,7 @@ static bool8 DecompressGraphics(void);
 static void CopyMonToSummaryStruct(struct Pokemon *);
 static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *);
 static void SetDefaultTilemaps(void);
+static void ClearInfoPageHeading(u16 *, u32);
 static void CloseSummaryScreen(u8);
 static void Task_HandleInput(u8);
 static void ChangeSummaryPokemon(u8, s8);
@@ -502,6 +505,24 @@ static const struct WindowTemplate sSummaryTemplate[] =
         .paletteNum = 6,
         .baseBlock = 137,
     },
+    [PSS_LABEL_WINDOW_INFO_ABILITY_TITLE] = {
+        .bg = 0,
+        .tilemapLeft = 12,
+        .tilemapTop = 8,
+        .width = 9,
+        .height = 1,
+        .paletteNum = 6,
+        .baseBlock = 822,
+    },
+    [PSS_LABEL_WINDOW_INFO_MEMO_TITLE] = {
+        .bg = 0,
+        .tilemapLeft = 12,
+        .tilemapTop = 13,
+        .width = 9,
+        .height = 1,
+        .paletteNum = 6,
+        .baseBlock = 831,
+    },
     [PSS_LABEL_WINDOW_POKEMON_INFO_RENTAL] = {
         .bg = 0,
         .tilemapLeft = 11,
@@ -779,6 +800,8 @@ static const u8 *const sRelearnTexts[MOVE_RELEARNER_COUNT] =
 
 static const u8 sMemoNatureTextColor[] = _("{COLOR LIGHT_RED}{SHADOW GREEN}");
 static const u8 sMemoMiscTextColor[] = _("{COLOR WHITE}{SHADOW DARK_GRAY}"); // This is also affected by palettes, apparently
+static const u8 sTextAbilityTitle[] = _("ABILITÀ");
+static const u8 sTextTrainerMemoTitle[] = _("MEMO ALLENATORE");
 static const u8 sStatsLeftColumnLayout[] = _("{DYNAMIC 0}/{DYNAMIC 1}\n{DYNAMIC 2}\n{DYNAMIC 3}");
 static const u8 sStatsLeftIVEVColumnLayout[] = _("{DYNAMIC 0}\n{DYNAMIC 1}\n{DYNAMIC 2}");
 static const u8 sStatsRightColumnLayout[] = _("{DYNAMIC 0}\n{DYNAMIC 1}\n{DYNAMIC 2}");
@@ -1449,11 +1472,14 @@ static bool8 DecompressGraphics(void)
         if (FreeTempTileDataBuffersIfPossible() != 1)
         {
             DecompressDataWithHeaderWram(gSummaryPage_Info_Tilemap, sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_INFO][0]);
+            ClearInfoPageHeading(sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_INFO][0], 8);
+            ClearInfoPageHeading(sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_INFO][0], 13);
             sMonSummaryScreen->switchCounter++;
         }
         break;
     case 2:
         DecompressDataWithHeaderWram(gSummaryPage_InfoEgg_Tilemap, sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_INFO][1]);
+        ClearInfoPageHeading(sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_INFO][1], 13);
         sMonSummaryScreen->switchCounter++;
         break;
     case 3:
@@ -1577,6 +1603,12 @@ static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *mon)
     }
     sMonSummaryScreen->switchCounter++;
     return FALSE;
+}
+
+static void ClearInfoPageHeading(u16 *tilemap, u32 y)
+{
+    for (u32 x = 12; x <= 20; x++)
+        tilemap[y * 32 + x] = (tilemap[y * 32 + x] & ~0x3FF) | 0x88;
 }
 
 static void SetDefaultTilemaps(void)
@@ -3291,6 +3323,9 @@ static void PrintPageNamesAndStats(void)
     PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_TITLE, gText_PkmnSkills, 2, 1, 0, 1);
     PrintTextOnWindow(PSS_LABEL_WINDOW_BATTLE_MOVES_TITLE, gText_BattleMoves, 2, 1, 0, 1);
     PrintTextOnWindow(PSS_LABEL_WINDOW_CONTEST_MOVES_TITLE, gText_ContestMoves, 2, 1, 0, 1);
+    if (!sMonSummaryScreen->summary.isEgg)
+        PrintTextOnWindowWithFont(PSS_LABEL_WINDOW_INFO_ABILITY_TITLE, sTextAbilityTitle, 0, 0, 0, 1, FONT_SMALL_NARROW);
+    PrintTextOnWindowWithFont(PSS_LABEL_WINDOW_INFO_MEMO_TITLE, sTextTrainerMemoTitle, 0, 0, 0, 1, FONT_SMALL_NARROW);
 
     ShowUtilityPrompt(SUMMARY_MODE_NORMAL);
 
@@ -3331,6 +3366,9 @@ static void PutPageWindowTilemaps(u8 page)
     case PSS_PAGE_INFO:
         PutWindowTilemap(PSS_LABEL_WINDOW_POKEMON_INFO_TITLE);
         PutWindowTilemap(PSS_LABEL_WINDOW_PROMPT_UTILITY);
+        if (!sMonSummaryScreen->summary.isEgg)
+            PutWindowTilemap(PSS_LABEL_WINDOW_INFO_ABILITY_TITLE);
+        PutWindowTilemap(PSS_LABEL_WINDOW_INFO_MEMO_TITLE);
         if (InBattleFactory() == TRUE || InSlateportBattleTent() == TRUE)
             PutWindowTilemap(PSS_LABEL_WINDOW_POKEMON_INFO_RENTAL);
         PutWindowTilemap(PSS_LABEL_WINDOW_POKEMON_INFO_TYPE);
@@ -3387,6 +3425,8 @@ static void ClearPageWindowTilemaps(u8 page)
     {
     case PSS_PAGE_INFO:
         ClearWindowTilemap(PSS_LABEL_WINDOW_PROMPT_UTILITY);
+        ClearWindowTilemap(PSS_LABEL_WINDOW_INFO_ABILITY_TITLE);
+        ClearWindowTilemap(PSS_LABEL_WINDOW_INFO_MEMO_TITLE);
         if (InBattleFactory() == TRUE || InSlateportBattleTent() == TRUE)
             ClearWindowTilemap(PSS_LABEL_WINDOW_POKEMON_INFO_RENTAL);
         ClearWindowTilemap(PSS_LABEL_WINDOW_POKEMON_INFO_TYPE);
