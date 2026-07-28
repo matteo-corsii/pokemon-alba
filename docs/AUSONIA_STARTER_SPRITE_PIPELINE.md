@@ -2,7 +2,7 @@
 
 ## Stato di Cingerm
 
-Cingerm usa i primi asset grafici originali del progetto Pokémon Alba: front sprite animato, back sprite, icona, palette normale e palette shiny provvisoria. La specie resta non ottenibile nel gameplay. Cry, footprint, sprite overworld e relative palette continuano temporaneamente a riutilizzare quelli di Lechonk.
+Cingerm usa i primi asset grafici originali del progetto Pokémon Alba: front sprite animato, back sprite, icona, palette normale e palette shiny provvisoria. Per la verifica visiva e tecnica sostituisce temporaneamente Treecko soltanto nello slot Erba del prologo e nella progressione direttamente collegata del rivale; Torchic e Mudkip restano provvisori. Cry, footprint, sprite overworld, ombra e relative palette continuano temporaneamente a riutilizzare quelli di Lechonk.
 
 ## File sorgente
 
@@ -51,4 +51,4 @@ Prima dell'importazione di altri sprite occorre verificare dimensioni, formato i
 
 ## Passaggi futuri
 
-La sostituzione completa richiederà footprint, cry e overworld originali, una palette shiny definitiva e l'eventuale definizione di differenze sessuali. Questi elementi devono essere introdotti separatamente senza rendere Cingerm ottenibile prima dell'integrazione prevista dal gameplay.
+La sostituzione completa richiederà footprint, cry e overworld originali, una palette shiny definitiva e l'eventuale definizione di differenze sessuali. Il prototipo usa il sesso generato normalmente dal motore e non introduce ancora un selettore. La presenza temporanea nello slot Erba non è la configurazione definitiva del prologo e non autorizza altre forme di ottenibilità.

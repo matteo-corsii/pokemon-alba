@@ -171,7 +171,7 @@ Saranno presenti tre nuovi starter, ciascuno con tre stadi evolutivi. I nomi pro
 - Serbrace, Vipercen e Tossivampa per la linea Fuoco;
 - Ardeino, Velairone e Codairone per la linea Acqua.
 
-La linea di Cingerm è il primo prototipo tecnico scelto per verificare l'architettura delle specie originali; le linee Serbrace e Ardeino completano la prima registrazione dati. In questa fase tutte e nove le specie esistono soltanto nei dati e nei test: non sostituiscono gli starter originali e non sono disponibili nel normale gameplay. Sprite, palette, icone, impronte e cry restano segnaposto riutilizzati da specie esistenti fino alla produzione della grafica e dell'audio originali.
+La linea di Cingerm è il primo prototipo tecnico scelto per verificare l'architettura delle specie originali; le linee Serbrace e Ardeino completano la prima registrazione dati. Cingerm sostituisce temporaneamente Treecko soltanto nello slot Erba del prologo e nella progressione direttamente collegata di Nico e Lia, per consentire una verifica visiva e tecnica nel gioco. Torchic e Mudkip restano gli altri due starter provvisori; le altre otto specie di Ausonia non sono ottenibili direttamente. Cingerm usa front sprite, back sprite, icona e palette originali, mentre cry, impronta, overworld e ombra restano provvisori di Lechonk.
 
 Le concept art di Cingerm, Rovasco, Selvazanna, Serbrace, Vipercen, Tossivampa, Ardeino e Velairone sono approvate. Soltanto Codairone deve ancora ricevere una concept art definitiva; statistiche e learnset restano preliminari fino alla validazione automatica e ai test di gioco.
 
@@ -211,6 +211,8 @@ Durante la scelta iniziale, il giocatore dovrà poter selezionare:
 - il soprannome.
 
 Questa funzionalità dovrà essere presente già nella prima beta.
+
+Nel prototipo corrente il motore genera ancora normalmente il sesso dello starter: il selettore dedicato è rinviato. La sostituzione temporanea di Treecko con Cingerm non costituisce la configurazione definitiva del prologo, perché gli starter Fuoco e Acqua originali di Ausonia non dispongono ancora del pacchetto grafico completo.
 
 ## Nuova meccanica: Forma Riflesso
 
