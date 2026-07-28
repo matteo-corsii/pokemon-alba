@@ -1,43 +1,10 @@
 #include "global.h"
-#include "data.h"
 #include "pokemon.h"
 #include "script_pokemon_util.h"
 #include "starter_choose.h"
 #include "test/test.h"
 #include "constants/abilities.h"
 #include "constants/items.h"
-#include "constants/trainers.h"
-
-struct RivalStarterExpectation
-{
-    u16 trainerId;
-    enum Species species;
-    u8 level;
-};
-
-static bool32 TrainerPartyContains(u16 trainerId, enum Species species, u8 level)
-{
-    const struct Trainer *trainer = &gTrainers[DIFFICULTY_NORMAL][trainerId];
-
-    for (u32 i = 0; i < trainer->partySize; i++)
-    {
-        if (trainer->party[i].species == species && trainer->party[i].lvl == level)
-            return TRUE;
-    }
-    return FALSE;
-}
-
-static bool32 TrainerPartyContainsSpecies(u16 trainerId, enum Species species)
-{
-    const struct Trainer *trainer = &gTrainers[DIFFICULTY_NORMAL][trainerId];
-
-    for (u32 i = 0; i < trainer->partySize; i++)
-    {
-        if (trainer->party[i].species == species)
-            return TRUE;
-    }
-    return FALSE;
-}
 
 TEST("Starter slots preserve FRLG and expose Cingerm only in Emerald")
 {
@@ -88,37 +55,4 @@ TEST("Selecting the grass slot creates a level 5 Cingerm with its normal data")
             hasLeafage = TRUE;
     }
     EXPECT(hasLeafage);
-}
-
-TEST("Nico and Lia use the Cingerm line only when their grass starter branch is selected")
-{
-    const struct Evolution *rovascoEvolutions = GetSpeciesEvolutions(SPECIES_ROVASCO);
-    static const struct RivalStarterExpectation expected[] = {
-        { TRAINER_BRENDAN_ROUTE_103_MUDKIP, SPECIES_CINGERM, 5 },
-        { TRAINER_MAY_ROUTE_103_MUDKIP, SPECIES_CINGERM, 5 },
-        { TRAINER_BRENDAN_RUSTBORO_MUDKIP, SPECIES_CINGERM, 15 },
-        { TRAINER_MAY_RUSTBORO_MUDKIP, SPECIES_CINGERM, 15 },
-        { TRAINER_BRENDAN_ROUTE_110_MUDKIP, SPECIES_ROVASCO, 20 },
-        { TRAINER_MAY_ROUTE_110_MUDKIP, SPECIES_ROVASCO, 20 },
-        { TRAINER_BRENDAN_ROUTE_119_MUDKIP, SPECIES_ROVASCO, 31 },
-        { TRAINER_MAY_ROUTE_119_MUDKIP, SPECIES_ROVASCO, 31 },
-        { TRAINER_BRENDAN_LILYCOVE_MUDKIP, SPECIES_ROVASCO, 34 },
-        { TRAINER_MAY_LILYCOVE_MUDKIP, SPECIES_ROVASCO, 34 },
-    };
-
-    ASSUME(IS_FRLG == FALSE);
-
-    for (u32 i = 0; i < ARRAY_COUNT(expected); i++)
-    {
-        EXPECT(TrainerPartyContains(expected[i].trainerId, expected[i].species, expected[i].level));
-        EXPECT(!TrainerPartyContainsSpecies(expected[i].trainerId, SPECIES_TREECKO));
-        EXPECT(!TrainerPartyContainsSpecies(expected[i].trainerId, SPECIES_GROVYLE));
-        EXPECT(!TrainerPartyContainsSpecies(expected[i].trainerId, SPECIES_SCEPTILE));
-    }
-
-    // No current Nico/Lia encounter reaches the level-36 final stage.
-    // The existing species tests validate Rovasco -> Selvazanna at level 36.
-    EXPECT(rovascoEvolutions != NULL);
-    EXPECT_EQ(rovascoEvolutions[0].targetSpecies, SPECIES_SELVAZANNA);
-    EXPECT_EQ(rovascoEvolutions[0].param, 36);
 }

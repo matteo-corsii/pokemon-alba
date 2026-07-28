@@ -21,34 +21,42 @@ Assert-True ($starterSource -match '#define WATER_STARTER \(IS_FRLG \? SPECIES_S
 Assert-True ($battleSetup -match 'ScriptGiveMon\(starterMon, 5, ITEM_NONE\);') 'La creazione iniziale non usa più il livello 5 standard.'
 
 $expected = [ordered]@{
-    TRAINER_BRENDAN_ROUTE_103_MUDKIP = 'Cingerm'
-    TRAINER_BRENDAN_ROUTE_110_MUDKIP = 'Rovasco'
-    TRAINER_BRENDAN_ROUTE_119_MUDKIP = 'Rovasco'
-    TRAINER_MAY_ROUTE_103_MUDKIP = 'Cingerm'
-    TRAINER_MAY_ROUTE_110_MUDKIP = 'Rovasco'
-    TRAINER_MAY_ROUTE_119_MUDKIP = 'Rovasco'
-    TRAINER_BRENDAN_RUSTBORO_MUDKIP = 'Cingerm'
-    TRAINER_MAY_RUSTBORO_MUDKIP = 'Cingerm'
-    TRAINER_BRENDAN_LILYCOVE_MUDKIP = 'Rovasco'
-    TRAINER_MAY_LILYCOVE_MUDKIP = 'Rovasco'
+    TRAINER_BRENDAN_ROUTE_103_MUDKIP = 'Cingerm:5'
+    TRAINER_BRENDAN_ROUTE_110_MUDKIP = 'Rovasco:20'
+    TRAINER_BRENDAN_ROUTE_119_MUDKIP = 'Rovasco:31'
+    TRAINER_MAY_ROUTE_103_MUDKIP = 'Cingerm:5'
+    TRAINER_MAY_ROUTE_110_MUDKIP = 'Rovasco:20'
+    TRAINER_MAY_ROUTE_119_MUDKIP = 'Rovasco:31'
+    TRAINER_BRENDAN_RUSTBORO_MUDKIP = 'Cingerm:15'
+    TRAINER_MAY_RUSTBORO_MUDKIP = 'Cingerm:15'
+    TRAINER_BRENDAN_LILYCOVE_MUDKIP = 'Rovasco:34'
+    TRAINER_MAY_LILYCOVE_MUDKIP = 'Rovasco:34'
 }
 
 $found = [ordered]@{}
 $currentTrainer = $null
+$pendingSpecies = $null
 foreach ($line in $trainerLines) {
     if ($line -match '^=== (TRAINER_(?:BRENDAN|MAY)_[A-Z0-9_]+) ===$') {
         $currentTrainer = $Matches[1]
+        $pendingSpecies = $null
         continue
     }
     if ($line -match '^=== ') {
         $currentTrainer = $null
+        $pendingSpecies = $null
         continue
     }
     if ($currentTrainer -and $line -match '^(Cingerm|Rovasco|Selvazanna|Treecko|Grovyle|Sceptile)$') {
+        $pendingSpecies = $line
+        continue
+    }
+    if ($currentTrainer -and $pendingSpecies -and $line -match '^Level: ([0-9]+)$') {
         if (-not $found.Contains($currentTrainer)) {
             $found[$currentTrainer] = @()
         }
-        $found[$currentTrainer] += $line
+        $found[$currentTrainer] += "$pendingSpecies`:$($Matches[1])"
+        $pendingSpecies = $null
     }
 }
 
