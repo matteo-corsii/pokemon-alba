@@ -171,7 +171,7 @@ Saranno presenti tre nuovi starter, ciascuno con tre stadi evolutivi. I nomi pro
 - Serbrace, Vipercen e Tossivampa per la linea Fuoco;
 - Ardeino, Velairone e Codairone per la linea Acqua.
 
-La linea di Cingerm è il primo prototipo tecnico scelto per verificare l'architettura delle specie originali; le linee Serbrace e Ardeino completano la prima registrazione dati. Cingerm sostituisce temporaneamente Treecko soltanto nello slot Erba del prologo e nella progressione direttamente collegata di Nico e Lia, per consentire una verifica visiva e tecnica nel gioco. Torchic e Mudkip restano gli altri due starter provvisori; le altre otto specie di Ausonia non sono ottenibili direttamente. Cingerm usa front sprite, back sprite, icona e palette originali, mentre cry, impronta, overworld e ombra restano provvisori di Lechonk.
+Le tre linee completano la prima registrazione dati. Nel prototipo Emerald Cingerm, Serbrace e Ardeino occupano rispettivamente gli slot Erba, Fuoco e Acqua e sono ottenibili soltanto tramite la selezione iniziale; i rami collegati delle squadre di Nico e Lia usano gli stadi equivalenti delle tre linee. FireRed e LeafGreen conservano Bulbasaur, Charmander e Squirtle. Cingerm usa front sprite, back sprite, icona e palette originali, mentre cry, impronta, overworld e ombra restano provvisori di Lechonk. Serbrace e Ardeino sono funzionali ma conservano ancora tutti gli asset grafici segnaposto previsti.
 
 Le concept art di Cingerm, Rovasco, Selvazanna, Serbrace, Vipercen, Tossivampa, Ardeino e Velairone sono approvate. Soltanto Codairone deve ancora ricevere una concept art definitiva; statistiche e learnset restano preliminari fino alla validazione automatica e ai test di gioco.
 
@@ -212,7 +212,7 @@ Durante la scelta iniziale, il giocatore dovrà poter selezionare:
 
 Questa funzionalità dovrà essere presente già nella prima beta.
 
-Nel prototipo corrente il motore genera ancora normalmente il sesso dello starter: il selettore dedicato è rinviato. La sostituzione temporanea di Treecko con Cingerm non costituisce la configurazione definitiva del prologo, perché gli starter Fuoco e Acqua originali di Ausonia non dispongono ancora del pacchetto grafico completo.
+Nel prototipo corrente il motore genera ancora normalmente il sesso dello starter: il selettore dedicato è rinviato. Il trio è funzionale, ma la configurazione grafica non è definitiva perché Serbrace e Ardeino non dispongono ancora del pacchetto grafico originale.
 
 ## Nuova meccanica: Forma Riflesso
 

@@ -2,7 +2,7 @@
 
 Questa roadmap descrive una sequenza iniziale di attività. Ogni fase deve produrre un risultato verificabile prima di passare alla successiva. I dettagli tecnici e gli eventuali comandi saranno definiti solo dopo essere stati verificati sulla documentazione e sull’ambiente effettivamente utilizzato.
 
-**Stato delle milestone:** Albèra/prologo v1 è conclusa. La prima registrazione dati delle nove specie starter di Ausonia è completata; Cingerm sostituisce temporaneamente Treecko nello slot Erba per la verifica visiva e tecnica, mentre Torchic e Mudkip restano provvisori.
+**Stato delle milestone:** Albèra/prologo v1 è conclusa. La prima registrazione dati delle nove specie starter di Ausonia è completata; Cingerm, Serbrace e Ardeino formano ora il trio selezionabile in Emerald, con FireRed e LeafGreen invariati. Cingerm possiede grafica originale, mentre Serbrace e Ardeino restano graficamente provvisori. Abilità, Nature e Memo Allenatore del riepilogo sono stati localizzati per il prototipo.
 
 ## 1. Verificare la compilazione pulita del progetto base
 
@@ -86,7 +86,7 @@ Questa roadmap descrive una sequenza iniziale di attività. Ogni fase deve produ
 
 ## 8. Aggiungere un primo Pokémon temporaneo di test
 
-**Stato:** le linee Cingerm, Serbrace e Ardeino sono registrate come prototipi dati. Cingerm è temporaneamente ottenibile soltanto come starter Erba e usa grafica originale con cry, impronta, overworld e ombra ancora provvisori; le altre otto specie non sono ottenibili direttamente.
+**Stato:** le linee Cingerm, Serbrace e Ardeino sono registrate come prototipi dati. Le tre forme base sono ottenibili soltanto nei rispettivi slot starter Emerald e gli stadi evoluti soltanto tramite evoluzione o nelle squadre previste di Nico e Lia; nessuna delle nove specie compare negli incontri selvatici. Cingerm usa grafica originale con cry, impronta, overworld e ombra ancora provvisori; Serbrace e Ardeino conservano asset segnaposto.
 
 **Obiettivo:** verificare il processo tecnico per introdurre una nuova specie usando risorse chiaramente provvisorie.
 

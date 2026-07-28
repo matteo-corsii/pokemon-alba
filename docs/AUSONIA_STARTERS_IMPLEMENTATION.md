@@ -52,9 +52,9 @@ Questa strategia conserva tutti gli ID ufficiali. I salvataggi creati prima dell
 
 Tutte e tre le linee sono registrate con evoluzioni ai livelli 16 e 36, dati base completi e un learnset per livello comune a ciascuna linea. Le compatibilità MT/tutor e le mosse Uovo restano vuote tramite le tabelle `sNone*`: è una scelta prudente supportata dalla struttura e non richiede di modificare file generati. Statistiche e learnset restano preliminari fino alla validazione automatica e ai test di gioco.
 
-Cingerm sostituisce temporaneamente Treecko nello slot Erba della borsa del Professor Lauro e nei soli rami delle squadre di Nico e Lia collegati alla vecchia linea di Treecko. La selezione crea Cingerm al livello 5 attraverso il normale flusso `GetStarterPokemon`/`ScriptGiveMon`; Torchic e Mudkip restano invariati. Cingerm non compare in incontri selvatici, regali aggiuntivi, commerci, Uova, NPC o strumenti di debug, mentre le altre otto specie di Ausonia restano non ottenibili direttamente.
+Cingerm, Serbrace e Ardeino sostituiscono rispettivamente Treecko, Torchic e Mudkip nei soli tre slot starter Emerald. La selezione crea la forma base scelta al livello 5 attraverso il normale flusso `GetStarterPokemon`/`ScriptGiveMon`, lasciando al motore natura, sesso, IV, statistiche e mosse iniziali. Bulbasaur, Charmander e Squirtle restano invariati nelle configurazioni FireRed e LeafGreen.
 
-Il prototipo serve esclusivamente a verificare grafica, dati, prima battaglia e progressione del rivale. Non è ancora la configurazione definitiva del prologo: gli starter Fuoco e Acqua di Ausonia non dispongono del pacchetto grafico completo e la selezione manuale del sesso è rinviata. Il sesso di Cingerm viene generato dal comportamento standard del motore.
+I rami di Nico e Lia collegati alle vecchie linee di Treecko, Torchic e Mudkip usano ora gli stadi equivalenti delle linee Cingerm, Serbrace e Ardeino, conservando livelli e configurazione delle squadre. Le tre forme base non compaiono in incontri selvatici, regali aggiuntivi, commerci, Uova, NPC o strumenti di debug; gli stadi successivi sono raggiungibili soltanto tramite evoluzione o nella progressione del rivale. La selezione manuale del sesso resta rinviata.
 
 ## Asset provvisori
 
@@ -74,7 +74,7 @@ Non vengono copiati file grafici o audio. `gSpeciesInfo` riusa direttamente asse
 
 I modelli danno silhouette piccole, intermedie e grandi distinguibili per ciascuna linea. Le coordinate, animazioni, ombre, palette, icone, impronte e sprite overworld seguono i rispettivi modelli. Non sono definite differenze grafiche fra sessi dedicate alle specie di Ausonia.
 
-Le concept art di Cingerm, Rovasco, Selvazanna, Serbrace, Vipercen, Tossivampa, Ardeino e Velairone sono approvate. Soltanto Codairone resta da progettare definitivamente. Le immagini di concept non sono conservate nel repository in questa fase e gli asset collegati ai dati restano tutti segnaposto.
+Le concept art di Cingerm, Rovasco, Selvazanna, Serbrace, Vipercen, Tossivampa, Ardeino e Velairone sono approvate. Soltanto Codairone resta da progettare definitivamente. Le immagini di concept non sono conservate nel repository. Cingerm possiede i primi asset originali; Serbrace, Ardeino e gli altri record continuano a usare i segnaposto documentati.
 
 Quando saranno disponibili asset originali, i riferimenti andranno sostituiti senza cambiare gli ID. Ogni forma richiederà front e back sprite, palette normale e cromatica, icona, impronta, animazioni, coordinate, ombra, eventuali sprite overworld e cry verificati. I segnaposto non sono direzione artistica definitiva.
 
@@ -91,7 +91,7 @@ Quando saranno disponibili asset originali, i riferimenti andranno sostituiti se
 1. Registrare e validare la linea Cingerm — registrazione dati completata.
 2. Registrare e validare la linea Serbrace — registrazione dati completata.
 3. Registrare e validare la linea Ardeino — registrazione dati completata.
-4. Validare il prototipo temporaneo di Cingerm nello slot Erba — in corso.
-5. Completare gli asset originali e integrare i tre starter definitivi nel prologo.
+4. Integrare e validare il trio completo negli slot Emerald e nei rami del rivale — in corso.
+5. Completare gli asset originali di Serbrace, Ardeino e delle evoluzioni.
 6. Aggiungere eventuali differenze sessuali approvate.
 7. Progettare e prototipare la Forma Riflesso senza considerarla ancora definitiva.
