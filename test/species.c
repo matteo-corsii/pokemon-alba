@@ -420,6 +420,75 @@ TEST("Ausonia Grass starter placeholder assets and Pokédex data are valid")
     EXPECT_EQ(StringCompare(gSpeciesInfo[SPECIES_SELVAZANNA].categoryName, COMPOUND_STRING("SELVA")), 0);
 }
 
+TEST("Cingerm original graphics replace only its Lechonk placeholders")
+{
+    const struct SpeciesInfo *cingerm = &gSpeciesInfo[SPECIES_CINGERM];
+    const struct SpeciesInfo *lechonk = &gSpeciesInfo[SPECIES_LECHONK];
+    static const enum Species ausoniaSpecies[] = {
+        SPECIES_ROVASCO,
+        SPECIES_SELVAZANNA,
+        SPECIES_SERBRACE,
+        SPECIES_VIPERCEN,
+        SPECIES_TOSSIVAMPA,
+        SPECIES_ARDEINO,
+        SPECIES_VELAIRONE,
+        SPECIES_CODAIRONE,
+    };
+    static const enum Species placeholderSpecies[] = {
+        SPECIES_OINKOLOGNE_M,
+        SPECIES_MAMOSWINE,
+        SPECIES_EKANS,
+        SPECIES_ARBOK,
+        SPECIES_SEVIPER,
+        SPECIES_DUCKLETT,
+        SPECIES_SWANNA,
+        SPECIES_BOMBIRDIER,
+    };
+
+    EXPECT(cingerm->frontPic != NULL);
+    EXPECT(cingerm->backPic != NULL);
+    EXPECT(cingerm->palette != NULL);
+    EXPECT(cingerm->shinyPalette != NULL);
+    EXPECT(cingerm->iconSprite != NULL);
+    EXPECT(cingerm->frontAnimFrames != NULL);
+    EXPECT(cingerm->frontPic != lechonk->frontPic);
+    EXPECT(cingerm->backPic != lechonk->backPic);
+    EXPECT(cingerm->palette != lechonk->palette);
+    EXPECT(cingerm->shinyPalette != lechonk->shinyPalette);
+    EXPECT(cingerm->iconSprite != lechonk->iconSprite);
+    EXPECT(cingerm->frontAnimFrames != lechonk->frontAnimFrames);
+    EXPECT_EQ(cingerm->frontPicSize, (8 << 4) | 6);
+    EXPECT_EQ(cingerm->backPicSize, (7 << 4) | 7);
+    EXPECT_EQ(cingerm->frontPicYOffset, 4);
+    EXPECT_EQ(cingerm->backPicYOffset, 4);
+    EXPECT(cingerm->iconPalIndex == 5);
+
+    // Audio, footprint and overworld graphics remain explicitly provisional.
+    EXPECT_EQ((u32)cingerm->cryId, CRY_LECHONK);
+#if P_FOOTPRINTS
+    EXPECT(cingerm->footprint == lechonk->footprint);
+#endif
+#if OW_POKEMON_OBJECT_EVENTS
+    EXPECT(cingerm->overworldData.images == lechonk->overworldData.images);
+#if OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
+    EXPECT(cingerm->overworldPalette == lechonk->overworldPalette);
+    EXPECT(cingerm->overworldShinyPalette == lechonk->overworldShinyPalette);
+#endif
+#endif
+
+    for (u32 i = 0; i < ARRAY_COUNT(ausoniaSpecies); i++)
+    {
+        const struct SpeciesInfo *info = &gSpeciesInfo[ausoniaSpecies[i]];
+        const struct SpeciesInfo *placeholder = &gSpeciesInfo[placeholderSpecies[i]];
+
+        EXPECT(info->frontPic == placeholder->frontPic);
+        EXPECT(info->backPic == placeholder->backPic);
+        EXPECT(info->palette == placeholder->palette);
+        EXPECT(info->shinyPalette == placeholder->shinyPalette);
+        EXPECT(info->iconSprite == placeholder->iconSprite);
+    }
+}
+
 TEST("Ausonia Fire starter base data matches the approved prototype")
 {
     static const enum Species species[] = { SPECIES_SERBRACE, SPECIES_VIPERCEN, SPECIES_TOSSIVAMPA };
