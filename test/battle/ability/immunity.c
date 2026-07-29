@@ -25,7 +25,7 @@ SINGLE_BATTLE_TEST("Immunity prevents Toxic bad poison")
     } WHEN {
         TURN { MOVE(player, MOVE_TOXIC); }
     } SCENE {
-        MESSAGE("Wobbuffet usa\nToxic!");
+        MESSAGE("Wobbuffet usa\nTossina!");
         ABILITY_POPUP(opponent, ABILITY_IMMUNITY);
         MESSAGE("It doesn't affect the opposing Snorlax…");
         NOT STATUS_ICON(opponent, poison: TRUE);

@@ -219,7 +219,7 @@ SINGLE_BATTLE_TEST("Full Restore resets Toxic Counter")
         TURN {}
         TURN { USE_ITEM(player, ITEM_FULL_RESTORE, partyIndex: 0); }
     } SCENE {
-        MESSAGE("Wobbuffet avversario usa\nToxic!");
+        MESSAGE("Wobbuffet avversario usa\nTossina!");
         MESSAGE("Wobbuffet had its HP restored.");
         MESSAGE("Wobbuffet was cured of its poisoning!");
     } THEN {

@@ -9953,7 +9953,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     {
         .name = COMPOUND_STRING("Ventoincoda"),
         .description = COMPOUND_STRING(
-            "Genera un vento che raddoppia\n"
+            "Un vento raddoppia la\n"
         #if B_TAILWIND_TURNS >= GEN_5
             "la Velocità per 4 turni."),
         #else

@@ -11,7 +11,7 @@ SINGLE_BATTLE_TEST("Misty Terrain protects grounded battlers from non-volatile s
         TURN { MOVE(player, MOVE_TOXIC); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_MISTY_TERRAIN, player);
-        MESSAGE("Claydol avversario usa\nToxic!");
+        MESSAGE("Claydol avversario usa\nTossina!");
         MESSAGE("Wobbuffet surrounds itself with a protective mist!");
         NOT { STATUS_ICON(opponent, badPoison: TRUE); }
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TOXIC, player);

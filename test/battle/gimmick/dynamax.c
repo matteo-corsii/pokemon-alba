@@ -912,7 +912,7 @@ SINGLE_BATTLE_TEST("Dynamax: Max Starfall sets up Misty Terrain")
         TURN { MOVE(player, MOVE_MOONBLAST, gimmick: GIMMICK_DYNAMAX); MOVE(opponent, MOVE_TOXIC); }
     } SCENE {
         MESSAGE("Wobbuffet usa\nMax Starfall!");
-        MESSAGE("Wobbuffet avversario usa\nToxic!");
+        MESSAGE("Wobbuffet avversario usa\nTossina!");
         MESSAGE("Wobbuffet surrounds itself with a protective mist!");
     }
 }
@@ -1423,14 +1423,14 @@ DOUBLE_BATTLE_TEST("Dynamax: G-Max Centiferno traps both opponents in Fire Spin"
     } SCENE {
         // turn 1
         MESSAGE("Centiskorch usa\nG-Max Centiferno!");
-        MESSAGE("The opposing Wobbuffet is hurt by Fire Spin!");
+        MESSAGE("The opposing Wobbuffet is hurt by Turbofuoco!");
         HP_BAR(opponentLeft);
-        MESSAGE("The opposing Wynaut is hurt by Fire Spin!");
+        MESSAGE("The opposing Wynaut is hurt by Turbofuoco!");
         HP_BAR(opponentRight);
         // turn 2 - Fire Spin continues even after Centiskorch switches out
-        MESSAGE("The opposing Wobbuffet is hurt by Fire Spin!");
+        MESSAGE("The opposing Wobbuffet is hurt by Turbofuoco!");
         HP_BAR(opponentLeft);
-        MESSAGE("The opposing Wynaut is hurt by Fire Spin!");
+        MESSAGE("The opposing Wynaut is hurt by Turbofuoco!");
         HP_BAR(opponentRight);
     }
 }
