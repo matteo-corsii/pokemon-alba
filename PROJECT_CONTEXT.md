@@ -171,7 +171,9 @@ Saranno presenti tre nuovi starter, ciascuno con tre stadi evolutivi. I nomi pro
 - Serbrace, Vipercen e Tossivampa per la linea Fuoco;
 - Ardeino, Velairone e Codairone per la linea Acqua.
 
-Le tre linee completano la prima registrazione dati. Nel prototipo Emerald Cingerm, Serbrace e Ardeino occupano rispettivamente gli slot Erba, Fuoco e Acqua e sono ottenibili soltanto tramite la selezione iniziale; i rami collegati delle squadre di Nico e Lia usano gli stadi equivalenti delle tre linee. FireRed e LeafGreen conservano Bulbasaur, Charmander e Squirtle. Cingerm e Serbrace usano front sprite, back sprite, icona e palette originali; le palette shiny sono ancora provvisorie. Cry, impronta, overworld e ombra restano provvisori rispettivamente di Lechonk ed Ekans. Ardeino è funzionale ma conserva ancora tutti gli asset grafici segnaposto previsti. Questa sostituzione grafica non modifica gameplay o localizzazione italiana.
+Le tre linee completano la prima registrazione dati. Nel prototipo Emerald Cingerm, Serbrace e Ardeino occupano rispettivamente gli slot Erba, Fuoco e Acqua e sono ottenibili soltanto tramite la selezione iniziale; i rami collegati delle squadre di Nico e Lia usano gli stadi equivalenti delle tre linee. FireRed e LeafGreen conservano Bulbasaur, Charmander e Squirtle. Tutte e tre le forme base usano front sprite, back sprite, icona e palette normale originali; le palette shiny sono ancora provvisorie. Cry, impronta, overworld e ombra restano provvisori rispettivamente di Lechonk, Ekans e Ducklett. Le evoluzioni non dispongono ancora necessariamente di grafica originale.
+
+Le 46 mosse uniche presenti nei learnset per livello delle nove specie sono state sottoposte ad audit. I nomi e le descrizioni ancora inglesi sono stati localizzati, `Fangosberla` è stata conservata e `Smokescreen` è ora `Muro di Fumo`; dati tecnici, livelli, ordine e contenuto dei learnset sono rimasti invariati. La localizzazione completa di tutte le mosse del gioco resta una milestone futura.
 
 Le concept art di Cingerm, Rovasco, Selvazanna, Serbrace, Vipercen, Tossivampa, Ardeino e Velairone sono approvate. Soltanto Codairone deve ancora ricevere una concept art definitiva; statistiche e learnset restano preliminari fino alla validazione automatica e ai test di gioco.
 
@@ -212,7 +214,7 @@ Durante la scelta iniziale, il giocatore dovrà poter selezionare:
 
 Questa funzionalità dovrà essere presente già nella prima beta.
 
-Nel prototipo corrente il motore genera ancora normalmente il sesso dello starter: il selettore dedicato è rinviato. Il trio è funzionale, ma la configurazione grafica non è definitiva perché Serbrace e Ardeino non dispongono ancora del pacchetto grafico originale.
+Nel prototipo corrente il motore genera ancora normalmente il sesso dello starter: il selettore dedicato è rinviato. Il trio è funzionale e le tre forme base dispongono del pacchetto grafico originale minimo; shiny definitive, cry, impronte, overworld e grafica originale delle evoluzioni restano da completare.
 
 ## Nuova meccanica: Forma Riflesso
 
