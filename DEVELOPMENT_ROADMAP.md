@@ -2,7 +2,7 @@
 
 Questa roadmap descrive una sequenza iniziale di attività. Ogni fase deve produrre un risultato verificabile prima di passare alla successiva. I dettagli tecnici e gli eventuali comandi saranno definiti solo dopo essere stati verificati sulla documentazione e sull’ambiente effettivamente utilizzato.
 
-**Stato delle milestone:** Albèra/prologo v1 è conclusa. La prima registrazione dati delle nove specie starter di Ausonia è completata; Cingerm, Serbrace e Ardeino formano ora il trio selezionabile in Emerald, con FireRed e LeafGreen invariati. Tutte le nove specie possiedono front animato, back, icona e palette normale originali; shiny, cry, impronte e overworld non sono ancora definitivi. Le 46 mosse uniche dei nove learnset per livello sono state sottoposte ad audit e localizzate dove ancora inglesi, senza cambiare dati tecnici o learnset. Abilità, Nature e Memo Allenatore del riepilogo sono stati localizzati per il prototipo.
+**Stato delle milestone:** è in validazione il primo segmento canonico giocabile di Albèra: anomalia domestica, convocazione di Lauro, scelta del trio nel laboratorio, distribuzione a Nico e Lia, battaglia con Nico, incarico e checkpoint su Route 101. FireRed e LeafGreen restano compatibili e conservano i propri starter. Tutte le nove specie possiedono front animato, back, icona e palette normale originali; shiny, cry, impronte e overworld non sono ancora definitivi. Le 46 mosse uniche dei nove learnset per livello restano localizzate senza cambiamenti tecnici.
 
 ## 1. Verificare la compilazione pulita del progetto base
 
@@ -86,7 +86,7 @@ Questa roadmap descrive una sequenza iniziale di attività. Ogni fase deve produ
 
 ## 8. Aggiungere un primo Pokémon temporaneo di test
 
-**Stato:** le linee Cingerm, Serbrace e Ardeino sono registrate come prototipi dati. Le tre forme base sono ottenibili soltanto nei rispettivi slot starter Emerald e gli stadi evoluti soltanto tramite evoluzione o nelle squadre previste di Nico e Lia; nessuna delle nove specie compare negli incontri selvatici. Tutte le nove specie usano front animato, back, icona e palette normale originali, con shiny, cry, impronta, overworld e ombra ancora provvisori. I learnset restano invariati; le relative mosse per livello mostrano ora nome e descrizione italiani quando erano ancora inglesi.
+**Stato:** le linee Cingerm, Serbrace e Ardeino sono registrate come prototipi dati. Le tre forme base sono ottenibili soltanto nei rispettivi slot starter Emerald; Nico usa lo starter avvantaggiato nella prima lotta e Lia riceve narrativamente quello rimanente senza combattere in questa milestone. Gli stadi evoluti restano raggiungibili tramite evoluzione o nei rami futuri già registrati; nessuna delle nove specie compare negli incontri selvatici. Tutte usano front animato, back, icona e palette normale originali, con shiny, cry, impronta, overworld e ombra ancora provvisori. I learnset restano invariati.
 
 **Obiettivo:** verificare il processo tecnico per introdurre una nuova specie usando risorse chiaramente provvisorie.
 
@@ -122,7 +122,7 @@ Questa roadmap descrive una sequenza iniziale di attività. Ogni fase deve produ
 
 ## 11. Sviluppare eventi e dialoghi del prologo
 
-**Stato:** la mappa prototipo e il nuovo prologo sono stati collaudati con entrambi i protagonisti. La pulizia finale di collisioni e alberi è completata; l'evento del campetto, il primo segnale sotterraneo e l'incarico di ricerca del Professor Lauro avviano la storia parallela sulla crisi idrica senza bloccare il viaggio principale. Il pacchetto finale di rifinitura attende la validazione CI e la build privata.
+**Stato:** il flusso successivo all'arrivo ad Albèra è stato riallineato al canone. Il primo segnale è domestico; Lauro convoca il protagonista nel laboratorio, assegna i tre starter al giocatore, a Nico e a Lia, e dopo la lotta amichevole con Nico affida il sopralluogo. Lia non combatte e individua la nuova variazione. Route 101 viene sbloccata come checkpoint stabile. Restano da completare CI e collaudo manuale dei tre percorsi.
 
 **Obiettivo:** introdurre protagonista, quartiere, rivale, starter e primi segnali della crisi idrica attraverso il gioco.
 

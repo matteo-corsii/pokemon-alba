@@ -23,6 +23,7 @@
 - [Styleguide and Principles](./STYLEGUIDE.md)
 - [Credits](./CREDITS.md)
 - [Piano della mappa di Albèra](./ALBERA_MAP_PLAN.md)
+- [Primo segmento giocabile di Albèra](./ALBERA_FIRST_PLAYABLE_SEGMENT.md)
 - [Implementazione degli starter di Ausonia](./AUSONIA_STARTERS_IMPLEMENTATION.md)
 - [Pipeline degli sprite degli starter di Ausonia](./AUSONIA_STARTER_SPRITE_PIPELINE.md)
 - [Stato della localizzazione italiana](./ITALIAN_LOCALIZATION_STATUS.md)

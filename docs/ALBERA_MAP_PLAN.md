@@ -91,39 +91,39 @@ Tutte le aree previste sono risultate raggiungibili e le future uscite verso il
 centro storico e il Lago di Albèra sono correttamente bloccate. Il prologo
 originale non ha subito regressioni. Sono state ripulite le collisioni residue
 e completate le parti isolate degli alberi individuate durante il collaudo. Il
-prototipo è quindi pronto per ricevere il nuovo prologo; la relativa
-riscrittura narrativa non è ancora completata.
+prototipo era quindi pronto per ricevere il nuovo prologo; questa nota descrive
+lo stato storico precedente al segmento canonico documentato più sotto.
 
 ## Secondo collaudo manuale
 
-Il nuovo prologo è stato completato con entrambi i protagonisti. Le scene, i
+Il precedente prologo è stato completato con entrambi i protagonisti. Le scene, i
 flag e la progressione sono risultati corretti, senza crash o blocchi
 permanenti. Il collaudo ha inoltre evidenziato ulteriori collisioni residue e
 frammenti grafici lungo il vecchio confine della mappa: questi residui sono
 stati ripuliti, mantenendo invariati eventi, collegamenti e delimitazioni
-intenzionali. La mappa è pronta per le successive espansioni.
+intenzionali. Quel flusso è stato successivamente sostituito, nelle sole parti
+incompatibili dopo l'arrivo, dal primo segmento canonico.
 
-## Primo utilizzo narrativo
+## Primo utilizzo narrativo canonico
 
-Dopo l'incontro iniziale nella casa di Nico o Lia, il giocatore deve percorrere
-Via dell'Armonia e raggiungere il campetto prima di poter accedere a Route 101.
-Qui un giovane del quartiere segnala che la fontanella ha perso nuovamente
-pressione e che al mattino usciva soltanto un filo d'acqua.
+Dopo la sequenza di arrivo già esistente, la casa del protagonista introduce
+un'interruzione momentanea dell'acqua e un rumore nelle tubature. Il familiare
+comunica che il Professor Lauro lo aspetta nel Laboratorio del Cratere. Il
+campetto conserva spazi e dialoghi ambientali, ma il suo vecchio evento non è
+più il primo segnale obbligatorio.
 
-Nico o Lia, mostrato in base al protagonista scelto, interpreta inizialmente il
-problema come il normale guasto di una vecchia tubatura. Un rumore proveniente
-dal sottosuolo del campetto interrompe la conversazione e introduce il primo
-indizio anomalo della crisi idrica, senza mostrarne ancora la causa. Conclusa
-la breve scena, un flag permanente ne impedisce la ripetizione e consente al
-normale evento di Route 101 di proseguire verso il salvataggio del Professor
-Lauro.
+L'uscita nord resta chiusa con una spiegazione diegetica finché Lauro non ha
+completato il briefing. Nel laboratorio sono presenti contemporaneamente Nico
+e Lia: il giocatore sceglie Cingerm, Serbrace o Ardeino; Nico riceve lo starter
+avvantaggiato e Lia quello rimanente. La prima sfida è sempre contro Nico e la
+sconfitta cambia soltanto una battuta, senza whiteout o deviazioni narrative.
 
-Al successivo ritorno nel Laboratorio del Cratere, dopo la prima sfida con il
-rivale, Lauro collega prudentemente il calo di pressione al rumore sotterraneo
-e affida al protagonista il primo incarico di ricerca. Il Pokédex servirà anche
-per annotare crisi idriche e cambiamenti nel comportamento dei Pokémon durante
-il viaggio. Si tratta ancora di un sospetto scientifico: la scena non assegna
-una causa certa al problema e non blocca la progressione principale.
+Lia individua poi una nuova variazione proveniente da Route 101. Lauro affida
+un sopralluogo prudente, consegna il Pokédex se necessario e riapre la strada.
+Il salvataggio vanilla di Lauro resta conservato negli script ma viene saltato
+dal nuovo stato di progressione; anche la battaglia alternativa di Route 103 è
+nascosta. L'ingresso in Route 101 registra il checkpoint stabile della
+milestone, senza sviluppare l'evento principale dell'area successiva.
 
 I cartelli di scuola, campetto e strade chiuse restano rinviati finché il
 prototipo non disporrà di metatile-segnaletica chiaramente riconoscibili; non
