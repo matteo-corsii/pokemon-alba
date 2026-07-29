@@ -101,16 +101,58 @@ LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForJohtoStarters::
 	end
 
 LittlerootTown_ProfessorBirchsLab_OnFrame:
-	map_script_2 VAR_ALBERA_OPENING_STATE, 1, LittlerootTown_ProfessorBirchsLab_EventScript_AlberaOpening
 	map_script_2 VAR_BIRCH_LAB_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_GiveStarterEvent
 	map_script_2 VAR_BIRCH_LAB_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedexEvent
 	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1, LittlerootTown_ProfessorBirchsLab_EventScript_UpgradeToNationalDex
 	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_ChooseJohtoStarter
 	.2byte 0
 
-LittlerootTown_ProfessorBirchsLab_EventScript_AlberaOpening::
+LittlerootTown_ProfessorBirchsLab_EventScript_AlberaOpeningTrigger::
 	lockall
-	turnobject LOCALID_PLAYER, DIR_NORTH
+	getplayerxy VAR_TEMP_0, VAR_TEMP_1
+	goto_if_eq VAR_TEMP_0, 4, LittlerootTown_ProfessorBirchsLab_EventScript_AlberaApproachFromX4
+	goto_if_eq VAR_TEMP_0, 5, LittlerootTown_ProfessorBirchsLab_EventScript_AlberaApproachFromX5
+	goto_if_eq VAR_TEMP_0, 7, LittlerootTown_ProfessorBirchsLab_EventScript_AlberaApproachFromX7
+	goto_if_eq VAR_TEMP_0, 8, LittlerootTown_ProfessorBirchsLab_EventScript_AlberaApproachFromX8
+	goto_if_eq VAR_TEMP_0, 9, LittlerootTown_ProfessorBirchsLab_EventScript_AlberaApproachFromX9
+	applymovement LOCALID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_PlayerApproachFromX6
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_StageAlberaOpening
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_AlberaApproachFromX4::
+	applymovement LOCALID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_PlayerApproachFromX4
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_StageAlberaOpening
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_AlberaApproachFromX5::
+	applymovement LOCALID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_PlayerApproachFromX5
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_StageAlberaOpening
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_AlberaApproachFromX7::
+	applymovement LOCALID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_PlayerApproachFromX7
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_StageAlberaOpening
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_AlberaApproachFromX8::
+	applymovement LOCALID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_PlayerApproachFromX8
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_StageAlberaOpening
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_AlberaApproachFromX9::
+	applymovement LOCALID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_PlayerApproachFromX9
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_StageAlberaOpening
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_StageAlberaOpening::
+	applymovement LOCALID_BIRCHS_LAB_BIRCH, Common_Movement_FaceDown
+	applymovement LOCALID_ALBERA_LAB_NICO, Common_Movement_FaceRight
+	applymovement LOCALID_ALBERA_LAB_LIA, Common_Movement_FaceLeft
+	waitmovement 0
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_AlberaOpening
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_AlberaOpening::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_AlberaBriefing, MSGBOX_DEFAULT
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_LiaInitialObservation, MSGBOX_DEFAULT
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_NicoReadyToHelp, MSGBOX_DEFAULT
@@ -151,6 +193,11 @@ LittlerootTown_ProfessorBirchsLab_EventScript_AssignAfterArdeino::
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_StartNicoBattle::
+	applymovement LOCALID_ALBERA_LAB_NICO, LittlerootTown_ProfessorBirchsLab_Movement_NicoApproachPlayer
+	applymovement LOCALID_PLAYER, Common_Movement_FaceLeft
+	applymovement LOCALID_BIRCHS_LAB_BIRCH, Common_Movement_FaceDown
+	applymovement LOCALID_ALBERA_LAB_LIA, Common_Movement_FaceLeft
+	waitmovement 0
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_NicoBattleChallenge, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
 	case 0, LittlerootTown_ProfessorBirchsLab_EventScript_BattleNicoSerbrace
@@ -178,6 +225,11 @@ LittlerootTown_ProfessorBirchsLab_EventScript_AfterNicoBattle::
 	specialvar VAR_RESULT, GetBattleOutcome
 	setflag FLAG_ALBERA_NICO_BATTLE_COMPLETED
 	setvar VAR_ALBERA_OPENING_STATE, 4
+	applymovement LOCALID_ALBERA_LAB_NICO, Common_Movement_FaceRight
+	applymovement LOCALID_PLAYER, Common_Movement_FaceLeft
+	applymovement LOCALID_BIRCHS_LAB_BIRCH, Common_Movement_FaceDown
+	applymovement LOCALID_ALBERA_LAB_LIA, Common_Movement_FaceLeft
+	waitmovement 0
 	goto_if_eq VAR_RESULT, B_OUTCOME_LOST, LittlerootTown_ProfessorBirchsLab_EventScript_NicoAfterLoss
 	special HealPlayerParty
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_NicoAfterWin, MSGBOX_DEFAULT
@@ -218,6 +270,49 @@ LittlerootTown_ProfessorBirchsLab_EventScript_CompleteAlberaOpening::
 	removeobject LOCALID_ALBERA_LAB_LIA
 	releaseall
 	end
+
+LittlerootTown_ProfessorBirchsLab_Movement_PlayerApproachFromX4:
+	walk_right
+	walk_right
+	walk_up
+	walk_up
+	step_end
+
+LittlerootTown_ProfessorBirchsLab_Movement_PlayerApproachFromX5:
+	walk_right
+	walk_up
+	walk_up
+	step_end
+
+LittlerootTown_ProfessorBirchsLab_Movement_PlayerApproachFromX6:
+	walk_up
+	walk_up
+	step_end
+
+LittlerootTown_ProfessorBirchsLab_Movement_PlayerApproachFromX7:
+	walk_left
+	walk_up
+	walk_up
+	step_end
+
+LittlerootTown_ProfessorBirchsLab_Movement_PlayerApproachFromX8:
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	step_end
+
+LittlerootTown_ProfessorBirchsLab_Movement_PlayerApproachFromX9:
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	step_end
+
+LittlerootTown_ProfessorBirchsLab_Movement_NicoApproachPlayer:
+	walk_right
+	step_end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_Nico::
 	lock
