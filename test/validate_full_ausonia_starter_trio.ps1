@@ -101,15 +101,23 @@ foreach ($entry in $abilityTranslations.GetEnumerator()) {
 }
 
 $gameplayRoots = @('data/maps', 'data/scripts', 'src/data/wild_encounters.json')
+$canonicalStarterScript = [IO.Path]::GetFullPath((Join-Path $RepositoryRoot 'data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc'))
 foreach ($relativeRoot in $gameplayRoots) {
     $root = Join-Path $RepositoryRoot $relativeRoot
     $files = if (Test-Path -LiteralPath $root -PathType Container) { Get-ChildItem -LiteralPath $root -Recurse -File } elseif (Test-Path -LiteralPath $root) { Get-Item -LiteralPath $root } else { @() }
     foreach ($file in $files) {
+        if ([IO.Path]::GetFullPath($file.FullName) -eq $canonicalStarterScript) { continue }
         $content = Get-Content -LiteralPath $file.FullName -Raw
         foreach ($speciesName in @('Cingerm','Rovasco','Selvazanna','Serbrace','Vipercen','Tossivampa','Ardeino','Velairone','Codairone')) {
             Assert-True ($content -notmatch "\b$speciesName\b|SPECIES_$($speciesName.ToUpperInvariant())") "$speciesName compare in gameplay non consentito: $($file.FullName)."
         }
     }
 }
+
+$canonicalStarterContent = Get-Content -LiteralPath $canonicalStarterScript -Raw
+foreach ($starter in @('CINGERM', 'SERBRACE', 'ARDEINO')) {
+    Assert-Contains $canonicalStarterContent "SPECIES_$starter" "$starter non compare nella selezione canonica del laboratorio."
+}
+Assert-True (-not $canonicalStarterContent.Contains('TRAINER_MAY_ROUTE_103')) 'La milestone canonica non deve introdurre una battaglia contro Lia.'
 
 Write-Output 'Full Ausonia starter trio validation passed.'

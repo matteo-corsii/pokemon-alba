@@ -53,10 +53,10 @@
 
 #define FLAG_ALBERA_CAMPETTO_COMPLETED 0x20 // Via dell'Armonia prologue event completed
 #define FLAG_ALBERA_WATER_RESEARCH_STARTED 0x21 // Professor Lauro's parallel water research assignment started
-#define FLAG_UNUSED_0x022    0x22 // Unused Flag
-#define FLAG_UNUSED_0x023    0x23 // Unused Flag
-#define FLAG_UNUSED_0x024    0x24 // Unused Flag
-#define FLAG_UNUSED_0x025    0x25 // Unused Flag
+#define FLAG_ALBERA_HOME_ANOMALY_SEEN 0x22 // Initial domestic water-pressure anomaly completed
+#define FLAG_ALBERA_NICO_BATTLE_COMPLETED 0x23 // Friendly opening battle with Nico completed
+#define FLAG_HIDE_ALBERA_LAB_NICO 0x24 // Nico's dedicated Albèra lab object
+#define FLAG_HIDE_ALBERA_LAB_LIA 0x25 // Lia's dedicated Albèra lab object
 #define FLAG_UNUSED_0x026    0x26 // Unused Flag
 #define FLAG_UNUSED_0x027    0x27 // Unused Flag
 #define FLAG_UNUSED_0x028    0x28 // Unused Flag

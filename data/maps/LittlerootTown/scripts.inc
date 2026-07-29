@@ -275,6 +275,7 @@ LittlerootTown_EventScript_CampettoYouthAfterAssignment::
 	end
 
 LittlerootTown_EventScript_CampettoTrigger::
+	goto_if_ge VAR_ALBERA_OPENING_STATE, 1, LittlerootTown_EventScript_CampettoDeferred
 	goto_if_set FLAG_ALBERA_CAMPETTO_COMPLETED, LittlerootTown_EventScript_CampettoTriggerEnd
 	lockall
 	setobjectxyperm LOCALID_LITTLEROOT_RIVAL, 31, 15
@@ -307,6 +308,12 @@ LittlerootTown_EventScript_CampettoTrigger::
 LittlerootTown_EventScript_CampettoTriggerEnd::
 	end
 
+LittlerootTown_EventScript_CampettoDeferred::
+	lockall
+	msgbox LittlerootTown_Text_CampettoDeferred, MSGBOX_DEFAULT
+	releaseall
+	end
+
 LittlerootTown_EventScript_CampettoLiaSkeptical::
 	msgbox LittlerootTown_Text_CampettoLiaSkeptical, MSGBOX_DEFAULT
 	return
@@ -329,7 +336,7 @@ LittlerootTown_EventScript_Twin::
 	goto_if_set FLAG_ADVENTURE_STARTED, LittlerootTown_EventScript_GoodLuck
 	goto_if_set FLAG_RESCUED_BIRCH, LittlerootTown_EventScript_YouSavedBirch
 	goto_if_eq VAR_LITTLEROOT_TOWN_STATE, 0, LittlerootTown_EventScript_TwinGrassWarning
-	goto_if_unset FLAG_ALBERA_CAMPETTO_COMPLETED, LittlerootTown_EventScript_GoToCampetto
+	goto_if_unset FLAG_ALBERA_WATER_RESEARCH_STARTED, LittlerootTown_EventScript_GoToLabFirst
 	goto LittlerootTown_EventScript_GoSaveBirch
 
 LittlerootTown_EventScript_TwinGrassWarning::
@@ -339,6 +346,11 @@ LittlerootTown_EventScript_TwinGrassWarning::
 
 LittlerootTown_EventScript_GoToCampetto::
 	msgbox LittlerootTown_Text_GoToCampettoFirst, MSGBOX_DEFAULT
+	release
+	end
+
+LittlerootTown_EventScript_GoToLabFirst::
+	msgbox LittlerootTown_Text_GoToLabFirst, MSGBOX_DEFAULT
 	release
 	end
 
@@ -457,17 +469,16 @@ LittlerootTown_Movement_TwinReturnRight:
 
 LittlerootTown_EventScript_GoSaveBirchTrigger::
 	lockall
-	goto_if_unset FLAG_ALBERA_CAMPETTO_COMPLETED, LittlerootTown_EventScript_BlockRouteUntilCampetto
-	applymovement LOCALID_LITTLEROOT_TWIN, Common_Movement_WalkInPlaceFasterRight
-	waitmovement 0
-	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
-	waitmovement 0
-	special GetPlayerBigGuyGirlString
-	msgbox LittlerootTown_Text_CanYouGoSeeWhatsHappening, MSGBOX_DEFAULT
-	closemessage
-	applymovement LOCALID_LITTLEROOT_TWIN, Common_Movement_FaceOriginalDirection
-	waitmovement 0
+	goto_if_unset FLAG_ALBERA_WATER_RESEARCH_STARTED, LittlerootTown_EventScript_BlockRouteUntilLabAssignment
 	setvar VAR_LITTLEROOT_TOWN_STATE, 2
+	releaseall
+	end
+
+LittlerootTown_EventScript_BlockRouteUntilLabAssignment::
+	msgbox LittlerootTown_Text_RouteClosedForMeasurements, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_PLAYER, LittlerootTown_Movement_PushPlayerBackFromRoute
+	waitmovement 0
 	releaseall
 	end
 
@@ -1110,6 +1121,23 @@ LittlerootTown_Text_CampettoNicoConclusion:
 LittlerootTown_Text_GoToCampettoFirst:
 	.string "Prima devo passare dal\n"
 	.string "campetto di Via dell'Armonia.$"
+
+LittlerootTown_Text_CampettoDeferred:
+	.string "Dal campetto arriva il rumore regolare\n"
+	.string "di un pallone sul cemento.\p"
+	.string "La fontanella perde pressione, ma per\n"
+	.string "ora non sembra esserci pericolo.$"
+
+LittlerootTown_Text_GoToLabFirst:
+	.string "La strada è chiusa per alcune\n"
+	.string "misurazioni.\p"
+	.string "Il PROF. LAURO ti aspetta al\n"
+	.string "LABORATORIO DEL CRATERE.$"
+
+LittlerootTown_Text_RouteClosedForMeasurements:
+	.string "La strada è momentaneamente chiusa.\p"
+	.string "Il PROF. LAURO sta controllando\n"
+	.string "alcune anomalie nella zona.$"
 
 LittlerootTown_Text_IfYouGoInGrassPokemonWillJumpOut:
 	.string "Ehm, ehm, ehm!\p"

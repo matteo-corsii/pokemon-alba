@@ -330,6 +330,21 @@ PlayersHouse_1F_Text_GoIntroduceYourselfNextDoor:
 	.string "Ho sentito che al campetto c'è\n"
 	.string "qualche problema con l'acqua.$"
 
+PlayersHouse_1F_Text_LauroAskedForYou:
+	.string "Prima ha chiamato il PROF. LAURO.\n"
+	.string "Ti aspetta al LABORATORIO DEL CRATERE\l"
+	.string "appena puoi.$"
+
+PlayersHouse_1F_Text_InitialWaterAnomaly:
+	.string "…Glu glu… … …\p"
+	.string "Per un momento l'acqua del rubinetto\n"
+	.string "si interrompe. Dalle tubature arriva\l"
+	.string "un rumore profondo.\p"
+	.string "MAMMA: Ecco, di nuovo.\n"
+	.string "Sarà la pressione della rete.\l"
+	.string "Adesso sembra già tutto normale.\p"
+	.string "Vai pure da Lauro, ma non tardare.$"
+
 PlayersHouse_1F_Text_SeeYouHoney:
 	.string "MAMMA: A dopo!$"
 

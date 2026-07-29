@@ -66,26 +66,26 @@ Il Professor Lauro studia:
 
 Il nome richiama l’alloro, ma il personaggio mantiene temporaneamente sprite e struttura tecnica del Professor Birch.
 
-Dopo la prima sfida con Nico o Lia, Lauro affida al protagonista il primo
-incarico di ricerca sulla crisi idrica. Durante il viaggio il protagonista deve
-osservare i luoghi in cui l'acqua scarseggia e i cambiamenti nel comportamento
-o nell'habitat dei Pokémon, usando il Pokédex anche come diario scientifico.
-L'incarico avvia la storia parallela senza bloccare il viaggio principale o la
-sfida alle Palestre.
+Dopo la prima sfida amichevole con Nico, Lauro affida al protagonista il primo
+incarico di ricerca sulle anomalie idriche. Non conosce ancora la causa: chiede
+di osservare pressione, sorgenti e comportamento dei Pokémon usando il Pokédex
+anche come riferimento scientifico. L'incarico apre Route 101 e avvia
+l'indagine senza dichiarare una crisi o introdurre spiegazioni definitive.
 
 ### Nico e Lia
 
-Nico e Lia sono i nomi provvisori dei due rivali, utilizzati in base al protagonista selezionato.
+Nico e Lia esistono contemporaneamente e hanno ruoli complementari,
+indipendenti dal protagonista selezionato.
 
-Il rivale:
+- Nico è diretto, energico e competitivo senza essere ostile. Riceve lo starter
+  avvantaggiato contro quello del giocatore ed è sempre il primo rivale da
+  battaglia.
+- Lia è calma, precisa e attenta ai dettagli. Riceve lo starter rimanente,
+  segue le misurazioni ambientali e non combatte nella prima milestone.
 
-- è cresciuto nello stesso territorio del protagonista;
-- conosce bene Albèra;
-- è competitivo ma non ostile;
-- inizialmente considera la crisi dei laghi un problema esagerato dagli adulti;
-- cambia opinione con il procedere della storia.
-
-La personalità e i dialoghi completi del rivale saranno definiti in una fase successiva.
+Entrambi sono cresciuti nel territorio di Albèra. La loro importanza narrativa
+deriva rispettivamente dall'azione e dall'osservazione, non dal sesso scelto per
+il protagonista.
 
 ## Tema della storia
 
@@ -171,7 +171,7 @@ Saranno presenti tre nuovi starter, ciascuno con tre stadi evolutivi. I nomi pro
 - Serbrace, Vipercen e Tossivampa per la linea Fuoco;
 - Ardeino, Velairone e Codairone per la linea Acqua.
 
-Le tre linee completano la prima registrazione dati. Nel prototipo Emerald Cingerm, Serbrace e Ardeino occupano rispettivamente gli slot Erba, Fuoco e Acqua e sono ottenibili soltanto tramite la selezione iniziale; i rami collegati delle squadre di Nico e Lia usano gli stadi equivalenti delle tre linee. FireRed e LeafGreen conservano Bulbasaur, Charmander e Squirtle. Tutte le nove specie usano front sprite animato, back sprite, icona e palette normale originali; le palette shiny sono ancora provvisorie. Cry, impronta, overworld e ombra continuano a riutilizzare i segnaposto documentati per ciascuna specie. Evoluzioni, gameplay, learnset, mappe, incontri e squadre non sono stati modificati dalla milestone grafica.
+Le tre linee completano la prima registrazione dati. Nel prototipo Emerald Cingerm, Serbrace e Ardeino occupano rispettivamente gli slot Erba, Fuoco e Acqua e sono ottenibili soltanto tramite la selezione iniziale nel laboratorio. Nico riceve sempre lo starter avvantaggiato e Lia quello rimanente; soltanto Nico usa la squadra della prima battaglia. FireRed e LeafGreen conservano Bulbasaur, Charmander e Squirtle. Tutte le nove specie usano front sprite animato, back sprite, icona e palette normale originali; le palette shiny sono ancora provvisorie. Cry, impronta, overworld e ombra continuano a riutilizzare i segnaposto documentati per ciascuna specie.
 
 Le 46 mosse uniche presenti nei learnset per livello delle nove specie sono state sottoposte ad audit. I nomi e le descrizioni ancora inglesi sono stati localizzati, `Fangosberla` è stata conservata e `Smokescreen` è ora `Muro di Fumo`; dati tecnici, livelli, ordine e contenuto dei learnset sono rimasti invariati. La localizzazione completa di tutte le mosse del gioco resta una milestone futura.
 
