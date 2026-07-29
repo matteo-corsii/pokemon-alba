@@ -199,6 +199,7 @@ PlayersHouse_1F_EventScript_PetalburgGymReportFemale::
 PlayersHouse_1F_EventScript_StartAlberaOpening::
 	setflag FLAG_ALBERA_HOME_ANOMALY_SEEN
 	setvar VAR_ALBERA_OPENING_STATE, 1
+	setvar VAR_LITTLEROOT_RIVAL_STATE, 3
 	setvar VAR_LITTLEROOT_TOWN_STATE, 1
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH
 	clearflag FLAG_HIDE_ALBERA_LAB_NICO

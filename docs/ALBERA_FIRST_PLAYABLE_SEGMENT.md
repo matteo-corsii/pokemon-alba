@@ -59,9 +59,11 @@ FireRed e LeafGreen conservano i rispettivi starter e flussi iniziali.
 | Serbrace | Ardeino | Cingerm |
 | Ardeino | Cingerm | Serbrace |
 
-`VAR_STARTER_MON` resta la fonte unica della scelta. Le squadre iniziali già
-registrate di Nico vengono riutilizzate senza modificare specie, livelli o dati
-di gioco. Lia riceve narrativamente la terza specie e non combatte.
+`VAR_STARTER_MON` resta la fonte unica della scelta. Le tre squadre introduttive
+di Nico mantengono specie, IV nulli e mosse naturali, ma usano il livello 3 e
+l'IA base: la prima mossa STAB resta appresa al livello 4, quindi ogni confronto
+è realisticamente vincibile senza critici od oggetti. I dati base delle specie
+non cambiano. Lia riceve narrativamente la terza specie e non combatte.
 
 ## Robustezza
 
@@ -81,6 +83,9 @@ di gioco. Lia riceve narrativamente la terza specie e non combatte.
   Pokémon del salvataggio vanilla, e nasconde il rivale alternativo di Route
   103 senza cancellarne gli script.
 - Il checkpoint su Route 101 non blocca movimento, salvataggio o ritorno.
+- L'avvio canonico porta lo stato del vecchio rivale a `3`: i tre trigger della
+  casa di Lia e il relativo evento del campetto restano conservati, ma non sono
+  attivabili prematuramente durante questa milestone.
 
 ## Validazione automatica
 
