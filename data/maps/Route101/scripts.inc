@@ -5,7 +5,12 @@ Route101_MapScripts::
 
 Route101_OnTransition:
 	call ProfBirch_EventScript_UpdateLocation
+	call_if_eq VAR_ALBERA_OPENING_STATE, 5, Route101_EventScript_SetAlberaCheckpoint
 	end
+
+Route101_EventScript_SetAlberaCheckpoint::
+	setvar VAR_ALBERA_OPENING_STATE, 6
+	return
 
 Route101_OnFrame:
 	map_script_2 VAR_ROUTE101_STATE, 0, Route101_EventScript_HideMapNamePopup
@@ -295,4 +300,3 @@ Route101_Text_WildPokemonInTallGrass:
 Route101_Text_RouteSign:
 	.string "PERCORSO 101\n"
 	.string "{UP_ARROW} OLDALE$"
-
