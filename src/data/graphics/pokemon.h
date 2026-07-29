@@ -25,6 +25,18 @@ const u32 gMonBackPic_Cingerm[] = INCGFX_U32("graphics/pokemon/cingerm/back.png"
 const u16 gMonShinyPalette_Cingerm[] = INCGFX_U16("graphics/pokemon/cingerm/shiny.pal", ".gbapal");
 const u8 gMonIcon_Cingerm[] = INCGFX_U8("graphics/pokemon/cingerm/icon.png", ".4bpp");
 
+// Pokémon Alba: original battle and menu graphics for the Grass starter evolutions.
+const u32 gMonFrontPic_Rovasco[] = INCGFX_U32("graphics/pokemon/rovasco/anim_front.png", ".4bpp.smol");
+const u16 gMonPalette_Rovasco[] = INCGFX_U16("graphics/pokemon/rovasco/normal.pal", ".gbapal");
+const u32 gMonBackPic_Rovasco[] = INCGFX_U32("graphics/pokemon/rovasco/back.png", ".4bpp.smol");
+const u16 gMonShinyPalette_Rovasco[] = INCGFX_U16("graphics/pokemon/rovasco/shiny.pal", ".gbapal");
+const u8 gMonIcon_Rovasco[] = INCGFX_U8("graphics/pokemon/rovasco/icon.png", ".4bpp");
+const u32 gMonFrontPic_Selvazanna[] = INCGFX_U32("graphics/pokemon/selvazanna/anim_front.png", ".4bpp.smol");
+const u16 gMonPalette_Selvazanna[] = INCGFX_U16("graphics/pokemon/selvazanna/normal.pal", ".gbapal");
+const u32 gMonBackPic_Selvazanna[] = INCGFX_U32("graphics/pokemon/selvazanna/back.png", ".4bpp.smol");
+const u16 gMonShinyPalette_Selvazanna[] = INCGFX_U16("graphics/pokemon/selvazanna/shiny.pal", ".gbapal");
+const u8 gMonIcon_Selvazanna[] = INCGFX_U8("graphics/pokemon/selvazanna/icon.png", ".4bpp");
+
 // Pokémon Alba: original battle and menu graphics for Serbrace.
 const u32 gMonFrontPic_Serbrace[] = INCGFX_U32("graphics/pokemon/serbrace/anim_front.png", ".4bpp.smol");
 const u16 gMonPalette_Serbrace[] = INCGFX_U16("graphics/pokemon/serbrace/normal.pal", ".gbapal");
