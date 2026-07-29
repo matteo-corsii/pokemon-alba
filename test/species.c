@@ -577,7 +577,7 @@ TEST("Ardeino original graphics replace only its Ducklett placeholders")
     EXPECT_EQ(ardeino->backPicSize, (5 << 4) | 8);
     EXPECT_EQ(ardeino->frontPicYOffset, 3);
     EXPECT_EQ(ardeino->backPicYOffset, 4);
-    EXPECT_EQ(ardeino->iconPalIndex, 3);
+    EXPECT_EQ((u32)ardeino->iconPalIndex, 3);
 
     // Gameplay data and the remaining audiovisual placeholders stay unchanged.
     EXPECT_EQ(ardeino->baseHP, 50);
@@ -595,7 +595,7 @@ TEST("Ardeino original graphics replace only its Ducklett placeholders")
     EXPECT_EQ(ardeino->backAnimId, ducklett->backAnimId);
     EXPECT_EQ(ardeino->enemyShadowXOffset, ducklett->enemyShadowXOffset);
     EXPECT_EQ(ardeino->enemyShadowYOffset, ducklett->enemyShadowYOffset);
-    EXPECT_EQ(ardeino->enemyShadowSize, ducklett->enemyShadowSize);
+    EXPECT_EQ((u32)ardeino->enemyShadowSize, (u32)ducklett->enemyShadowSize);
     EXPECT(evolutions != NULL);
     EXPECT_EQ(evolutions[0].method, EVO_LEVEL);
     EXPECT_EQ(evolutions[0].param, 16);
