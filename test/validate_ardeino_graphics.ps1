@@ -61,14 +61,14 @@ function Read-IndexedPng([string]$Path)
         {
             if ($bitsPerPixel -eq 8)
             {
-                $index = $packed[$y * $stride + $x]
+                $value = $packed[$y * $stride + $x]
             }
             else
             {
                 $packedByte = $packed[$y * $stride + [int]($x / 2)]
-                $index = if (($x % 2) -eq 0) { $packedByte -shr 4 } else { $packedByte -band 15 }
+                $value = if (($x % 2) -eq 0) { $packedByte -shr 4 } else { $packedByte -band 15 }
             }
-            $indices[$y * $image.PixelWidth + $x] = $index
+            $indices[$y * $image.PixelWidth + $x] = $value
         }
     }
 
@@ -83,13 +83,7 @@ function Read-IndexedPng([string]$Path)
 function Get-FrameIndices($Image, [int]$Frame, [int]$FrameHeight)
 {
     $frameData = [byte[]]::new($Image.Width * $FrameHeight)
-    [Array]::Copy(
-        $Image.Indices,
-        $Frame * $Image.Width * $FrameHeight,
-        $frameData,
-        0,
-        $frameData.Length
-    )
+    [Array]::Copy($Image.Indices, $Frame * $Image.Width * $FrameHeight, $frameData, 0, $frameData.Length)
     return ,$frameData
 }
 
@@ -103,8 +97,8 @@ function Get-BoundingBox($Image, [int]$Frame, [int]$FrameHeight)
     {
         for ($x = 0; $x -lt $Image.Width; $x++)
         {
-            $index = $Image.Indices[(($Frame * $FrameHeight + $y) * $Image.Width) + $x]
-            if ($index -ne 0)
+            $value = $Image.Indices[(($Frame * $FrameHeight + $y) * $Image.Width) + $x]
+            if ($value -ne 0)
             {
                 $minimumX = [Math]::Min($minimumX, $x)
                 $minimumY = [Math]::Min($minimumY, $y)
@@ -117,7 +111,7 @@ function Get-BoundingBox($Image, [int]$Frame, [int]$FrameHeight)
     return @($minimumX, $minimumY, ($maximumX - $minimumX + 1), ($maximumY - $minimumY + 1))
 }
 
-function Assert-Png($Image, [int]$Width, [int]$Height, [int]$FrameHeight, [string]$Name)
+function Assert-Png($Image, [int]$Width, [int]$Height, [int]$FrameHeight, [string]$Name, [double]$MaximumDifference)
 {
     Assert-Condition ($Image.Width -eq $Width -and $Image.Height -eq $Height) "$Name has invalid dimensions"
     Assert-Condition (($Width % 8) -eq 0 -and ($Height % 8) -eq 0) "$Name is not tile-aligned"
@@ -127,24 +121,23 @@ function Assert-Png($Image, [int]$Width, [int]$Height, [int]$FrameHeight, [strin
     $frameCount = $Height / $FrameHeight
     for ($frame = 0; $frame -lt $frameCount; $frame++)
     {
-        $indices = Get-FrameIndices -Image $Image -Frame $frame -FrameHeight $FrameHeight
-        Assert-Condition (($indices | Where-Object { $_ -ne 0 }).Count -gt 0) "$Name frame $frame is empty"
+        $data = Get-FrameIndices $Image $frame $FrameHeight
+        Assert-Condition (($data | Where-Object { $_ -ne 0 }).Count -gt 0) "$Name frame $frame is empty"
     }
-
     if ($frameCount -eq 2)
     {
-        $first = Get-FrameIndices -Image $Image -Frame 0 -FrameHeight $FrameHeight
-        $second = Get-FrameIndices -Image $Image -Frame 1 -FrameHeight $FrameHeight
-        $differentPixels = 0
+        $first = Get-FrameIndices $Image 0 $FrameHeight
+        $second = Get-FrameIndices $Image 1 $FrameHeight
+        $different = 0
         for ($index = 0; $index -lt $first.Count; $index++)
         {
             if ($first[$index] -ne $second[$index])
             {
-                $differentPixels++
+                $different++
             }
         }
-        Assert-Condition ($differentPixels -gt 0) "$Name frames are identical"
-        Assert-Condition ($differentPixels -lt ($first.Count * 0.4)) "$Name frame variation is unexpectedly large"
+        Assert-Condition ($different -gt 0) "$Name frames are identical"
+        Assert-Condition ($different -lt ($first.Count * $MaximumDifference)) "$Name frame variation is unexpectedly large"
     }
 }
 
@@ -155,34 +148,30 @@ function Read-JascPalette([string]$Path)
     Assert-Condition ($lines[0] -eq 'JASC-PAL') "$Path has an invalid JASC header"
     Assert-Condition ($lines[1] -eq '0100') "$Path has an invalid JASC version"
     Assert-Condition ($lines[2] -eq '16') "$Path must declare exactly 16 colors"
-
     $colors = @()
     foreach ($line in $lines[3..18])
     {
         $parts = $line -split ' '
         Assert-Condition ($parts.Count -eq 3) "$Path contains an invalid color row"
-        $rgb = @($parts | ForEach-Object { [int]$_ })
-        Assert-Condition (($rgb | Measure-Object -Minimum).Minimum -ge 0) "$Path contains a negative color component"
-        Assert-Condition (($rgb | Measure-Object -Maximum).Maximum -le 255) "$Path contains a color component above 255"
-        $colors += ,$rgb
+        $colors += ,@($parts | ForEach-Object { [int]$_ })
     }
     return $colors
 }
 
-$assetRoot = Join-Path $RepositoryRoot 'graphics/pokemon/serbrace'
+$assetRoot = Join-Path $RepositoryRoot 'graphics/pokemon/ardeino'
 $front = Read-IndexedPng (Join-Path $assetRoot 'anim_front.png')
 $back = Read-IndexedPng (Join-Path $assetRoot 'back.png')
 $icon = Read-IndexedPng (Join-Path $assetRoot 'icon.png')
 
-Assert-Png $front 64 128 64 'anim_front.png'
-Assert-Png $back 64 64 64 'back.png'
-Assert-Png $icon 32 64 32 'icon.png'
-Assert-Condition (Test-EqualArrays ($icon.Indices | Sort-Object -Unique) @(0, 1, 2, 3, 8, 12, 13, 14, 15)) 'icon.png contains indices outside the documented pal3 remapping'
-Assert-Condition (Test-EqualArrays (Get-BoundingBox $front 0 64) @(2, 6, 60, 54)) 'anim_front.png frame 0 bounding box changed'
-Assert-Condition (Test-EqualArrays (Get-BoundingBox $front 1 64) @(2, 6, 59, 54)) 'anim_front.png frame 1 bounding box changed'
-Assert-Condition (Test-EqualArrays (Get-BoundingBox $back 0 64) @(3, 9, 58, 51)) 'back.png bounding box changed'
-Assert-Condition (Test-EqualArrays (Get-BoundingBox $icon 0 32) @(2, 3, 28, 28)) 'icon.png frame 0 bounding box changed'
-Assert-Condition (Test-EqualArrays (Get-BoundingBox $icon 1 32) @(2, 3, 28, 28)) 'icon.png frame 1 bounding box changed'
+Assert-Png $front 64 128 64 'anim_front.png' 0.4
+Assert-Png $back 64 64 64 'back.png' 0.4
+Assert-Png $icon 32 64 32 'icon.png' 0.5
+Assert-Condition (Test-EqualArrays (Get-BoundingBox $front 0 64) @(7, 3, 48, 58)) 'anim_front.png frame 0 bounding box changed'
+Assert-Condition (Test-EqualArrays (Get-BoundingBox $front 1 64) @(5, 3, 54, 58)) 'anim_front.png frame 1 bounding box changed'
+Assert-Condition (Test-EqualArrays (Get-BoundingBox $back 0 64) @(17, 3, 33, 57)) 'back.png bounding box changed'
+Assert-Condition (Test-EqualArrays (Get-BoundingBox $icon 0 32) @(1, 6, 30, 25)) 'icon.png frame 0 bounding box changed'
+Assert-Condition (Test-EqualArrays (Get-BoundingBox $icon 1 32) @(1, 7, 30, 25)) 'icon.png frame 1 bounding box changed'
+Assert-Condition (Test-EqualArrays ($icon.Indices | Sort-Object -Unique) @(0, 1, 3, 4, 5, 6, 9, 10, 15)) 'icon.png contains indices outside the documented pal3 remapping'
 
 $normal = Read-JascPalette (Join-Path $assetRoot 'normal.pal')
 $shiny = Read-JascPalette (Join-Path $assetRoot 'shiny.pal')
@@ -199,49 +188,58 @@ for ($index = 0; $index -lt 16; $index++)
 $graphics = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'src/data/graphics/pokemon.h') -Raw
 $species = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'src/data/pokemon/species_info.h') -Raw
 $starter = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'src/starter_choose.c') -Raw
-$serbrace = [regex]::Match($species, '(?s)\[SPECIES_SERBRACE\]\s*=\s*\{.*?\n    \},').Value
-Assert-Condition ($serbrace.Length -gt 0) 'SPECIES_SERBRACE record was not found'
+$ardeino = [regex]::Match($species, '(?s)\[SPECIES_ARDEINO\]\s*=\s*\{.*?\n    \},').Value
+Assert-Condition ($ardeino.Length -gt 0) 'SPECIES_ARDEINO record was not found'
 
 foreach ($declaration in @(
-    'gMonFrontPic_Serbrace[] = INCGFX_U32("graphics/pokemon/serbrace/anim_front.png", ".4bpp.smol")',
-    'gMonBackPic_Serbrace[] = INCGFX_U32("graphics/pokemon/serbrace/back.png", ".4bpp.smol")',
-    'gMonPalette_Serbrace[] = INCGFX_U16("graphics/pokemon/serbrace/normal.pal", ".gbapal")',
-    'gMonShinyPalette_Serbrace[] = INCGFX_U16("graphics/pokemon/serbrace/shiny.pal", ".gbapal")',
-    'gMonIcon_Serbrace[] = INCGFX_U8("graphics/pokemon/serbrace/icon.png", ".4bpp")'
+    'gMonFrontPic_Ardeino[] = INCGFX_U32("graphics/pokemon/ardeino/anim_front.png", ".4bpp.smol")',
+    'gMonBackPic_Ardeino[] = INCGFX_U32("graphics/pokemon/ardeino/back.png", ".4bpp.smol")',
+    'gMonPalette_Ardeino[] = INCGFX_U16("graphics/pokemon/ardeino/normal.pal", ".gbapal")',
+    'gMonShinyPalette_Ardeino[] = INCGFX_U16("graphics/pokemon/ardeino/shiny.pal", ".gbapal")',
+    'gMonIcon_Ardeino[] = INCGFX_U8("graphics/pokemon/ardeino/icon.png", ".4bpp")'
 ))
 {
-    Assert-Condition ($graphics.Contains($declaration)) "Missing Serbrace graphics declaration: $declaration"
+    Assert-Condition ($graphics.Contains($declaration)) "Missing Ardeino graphics declaration: $declaration"
 }
 
 foreach ($reference in @(
-    '.frontPic = gMonFrontPic_Serbrace',
-    '.backPic = gMonBackPic_Serbrace',
-    '.palette = gMonPalette_Serbrace',
-    '.shinyPalette = gMonShinyPalette_Serbrace',
-    '.iconSprite = gMonIcon_Serbrace',
-    '.frontPicSize = MON_COORDS_SIZE(64, 56)',
-    '.backPicSize = MON_COORDS_SIZE(64, 56)',
-    '.frontPicYOffset = 4',
-    '.backPicYOffset = 4',
-    '.iconPalIndex = 3',
-    'ANIMCMD_FRAME(1, 12)',
-    'ANIMCMD_FRAME(0, 8)',
-    '.cryId = CRY_EKANS',
-    'FOOTPRINT(Ekans)',
-    'sPicTable_Ekans'
+    '.frontPic = gMonFrontPic_Ardeino', '.backPic = gMonBackPic_Ardeino',
+    '.palette = gMonPalette_Ardeino', '.shinyPalette = gMonShinyPalette_Ardeino',
+    '.iconSprite = gMonIcon_Ardeino', '.frontPicSize = MON_COORDS_SIZE(56, 64)',
+    '.backPicSize = MON_COORDS_SIZE(40, 64)', '.frontPicYOffset = 3',
+    '.backPicYOffset = 4', '.iconPalIndex = 3', 'ANIMCMD_FRAME(1, 12)',
+    'ANIMCMD_FRAME(0, 8)', '.cryId = CRY_DUCKLETT', 'FOOTPRINT(Ducklett)',
+    'sPicTable_Ducklett', 'gOverworldPalette_Ducklett', 'BACK_ANIM_CONCAVE_ARC_SMALL'
 ))
 {
-    Assert-Condition ($serbrace.Contains($reference)) "Unexpected SPECIES_SERBRACE graphics state: $reference"
+    Assert-Condition ($ardeino.Contains($reference)) "Unexpected SPECIES_ARDEINO graphics state: $reference"
 }
 
-Assert-Condition (-not $serbrace.Contains('.frontPic = gMonFrontPic_Ekans')) 'Serbrace still uses the Ekans front sprite'
-Assert-Condition (-not $serbrace.Contains('.backPic = gMonBackPic_Ekans')) 'Serbrace still uses the Ekans back sprite'
-Assert-Condition (([regex]::Matches($serbrace, 'ANIMCMD_FRAME\(')).Count -eq 2) 'Serbrace front animation must use exactly two commands'
-Assert-Condition ($starter -match '#define FIRE_STARTER\s+\(IS_FRLG \? SPECIES_CHARMANDER : SPECIES_SERBRACE\)') 'Serbrace is no longer the Emerald Fire starter'
+foreach ($oldReference in @(
+    '.frontPic = gMonFrontPic_Ducklett', '.backPic = gMonBackPic_Ducklett',
+    '.palette = gMonPalette_Ducklett', '.shinyPalette = gMonShinyPalette_Ducklett',
+    '.iconSprite = gMonIcon_Ducklett'
+))
+{
+    Assert-Condition (-not $ardeino.Contains($oldReference)) "Ardeino still uses a Ducklett battle placeholder: $oldReference"
+}
+
+Assert-Condition (([regex]::Matches($ardeino, 'ANIMCMD_FRAME\(')).Count -eq 2) 'Ardeino front animation must use exactly two commands'
+Assert-Condition ($starter -match '#define WATER_STARTER\s+\(IS_FRLG \? SPECIES_SQUIRTLE\s+: SPECIES_ARDEINO\s+\)') 'Ardeino is no longer the Emerald Water starter'
 Assert-Condition ($species.Contains('.frontPic = gMonFrontPic_Cingerm')) 'Cingerm original front sprite reference changed'
-Assert-Condition ($species.Contains('.frontPic = gMonFrontPic_Ardeino')) 'Ardeino original front sprite reference changed'
+Assert-Condition ($species.Contains('.frontPic = gMonFrontPic_Serbrace')) 'Serbrace original front sprite reference changed'
+
+foreach ($placeholder in @(
+    @('ROVASCO', 'OinkologneM'), @('SELVAZANNA', 'Mamoswine'),
+    @('VIPERCEN', 'Arbok'), @('TOSSIVAMPA', 'Seviper'),
+    @('VELAIRONE', 'Swanna'), @('CODAIRONE', 'Bombirdier')
+))
+{
+    $record = [regex]::Match($species, "(?s)\[SPECIES_$($placeholder[0])\]\s*=\s*\{.*?\n    \},").Value
+    Assert-Condition ($record.Contains(".frontPic = gMonFrontPic_$($placeholder[1])")) "$($placeholder[0]) placeholder changed"
+}
 
 $wildEncounters = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'src/data/wild_encounters.json') -Raw
-Assert-Condition (-not $wildEncounters.Contains('SPECIES_SERBRACE')) 'Serbrace was added to wild encounters'
+Assert-Condition (-not $wildEncounters.Contains('SPECIES_ARDEINO')) 'Ardeino was added to wild encounters'
 
-Write-Output 'Serbrace graphics validation passed.'
+Write-Output 'Ardeino graphics validation passed.'

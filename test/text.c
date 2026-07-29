@@ -105,6 +105,33 @@ TEST("Move descriptions fit on Pokemon Summary Screen")
     EXPECT_LE(GetStringWidth(fontId, GetMoveDescription(move), 0), widthPx);
 }
 
+TEST("Ausonia starter level-up move localization fits the battle interfaces")
+{
+    static const u16 moves[] = {
+        MOVE_TACKLE, MOVE_LEER, MOVE_LEAFAGE, MOVE_MUD_SLAP,
+        MOVE_BITE, MOVE_DEFENSE_CURL, MOVE_ROLLOUT, MOVE_RAZOR_LEAF,
+        MOVE_TAKE_DOWN, MOVE_TRAILBLAZE, MOVE_ASSURANCE, MOVE_SEED_BOMB,
+        MOVE_CRUNCH, MOVE_HIGH_HORSEPOWER, MOVE_WOOD_HAMMER, MOVE_SUCKER_PUNCH,
+        MOVE_SCRATCH, MOVE_EMBER, MOVE_SMOKESCREEN, MOVE_FLAME_CHARGE,
+        MOVE_POISON_STING, MOVE_INCINERATE, MOVE_COIL, MOVE_VENOSHOCK,
+        MOVE_FIRE_SPIN, MOVE_NASTY_PLOT, MOVE_FLAMETHROWER, MOVE_TOXIC,
+        MOVE_SLUDGE_BOMB, MOVE_HEAT_WAVE, MOVE_POUND, MOVE_GROWL,
+        MOVE_WATER_GUN, MOVE_PECK, MOVE_QUICK_ATTACK, MOVE_MIST,
+        MOVE_SUPERSONIC, MOVE_WING_ATTACK, MOVE_AQUA_RING, MOVE_AIR_SLASH,
+        MOVE_BRINE, MOVE_AGILITY, MOVE_TAILWIND, MOVE_ROOST,
+        MOVE_HYDRO_PUMP, MOVE_HURRICANE,
+    };
+
+    for (u32 i = 0; i < ARRAY_COUNT(moves); i++)
+    {
+        EXPECT_LE(GetStringWidth(FONT_NARROWER, GetMoveName(moves[i]), 0), 64);
+        EXPECT_LE(GetStringWidth(FONT_NORMAL, GetMoveDescription(moves[i]), 0), 152);
+    }
+
+    EXPECT_EQ(StringCompare(GetMoveName(MOVE_MUD_SLAP), COMPOUND_STRING("Fangosberla")), 0);
+    EXPECT_EQ(StringCompare(GetMoveName(MOVE_SMOKESCREEN), COMPOUND_STRING("Muro di Fumo")), 0);
+}
+
 TEST("Item names fit on Bag Screen (list)")
 {
     u32 i;
