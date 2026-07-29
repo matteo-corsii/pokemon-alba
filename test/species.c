@@ -424,22 +424,6 @@ TEST("Cingerm original graphics replace only its Lechonk placeholders")
 {
     const struct SpeciesInfo *cingerm = &gSpeciesInfo[SPECIES_CINGERM];
     const struct SpeciesInfo *lechonk = &gSpeciesInfo[SPECIES_LECHONK];
-    static const enum Species ausoniaSpecies[] = {
-        SPECIES_ROVASCO,
-        SPECIES_SELVAZANNA,
-        SPECIES_VIPERCEN,
-        SPECIES_TOSSIVAMPA,
-        SPECIES_VELAIRONE,
-        SPECIES_CODAIRONE,
-    };
-    static const enum Species placeholderSpecies[] = {
-        SPECIES_OINKOLOGNE_M,
-        SPECIES_MAMOSWINE,
-        SPECIES_ARBOK,
-        SPECIES_SEVIPER,
-        SPECIES_SWANNA,
-        SPECIES_BOMBIRDIER,
-    };
 
     EXPECT(cingerm->frontPic != NULL);
     EXPECT(cingerm->backPic != NULL);
@@ -472,17 +456,6 @@ TEST("Cingerm original graphics replace only its Lechonk placeholders")
 #endif
 #endif
 
-    for (u32 i = 0; i < ARRAY_COUNT(ausoniaSpecies); i++)
-    {
-        const struct SpeciesInfo *info = &gSpeciesInfo[ausoniaSpecies[i]];
-        const struct SpeciesInfo *placeholder = &gSpeciesInfo[placeholderSpecies[i]];
-
-        EXPECT(info->frontPic == placeholder->frontPic);
-        EXPECT(info->backPic == placeholder->backPic);
-        EXPECT(info->palette == placeholder->palette);
-        EXPECT(info->shinyPalette == placeholder->shinyPalette);
-        EXPECT(info->iconSprite == placeholder->iconSprite);
-    }
 }
 
 TEST("Serbrace original graphics replace only its Ekans placeholders")
@@ -615,6 +588,90 @@ TEST("Ardeino original graphics replace only its Ducklett placeholders")
     EXPECT(cingerm->backPic != lechonk->backPic);
     EXPECT(serbrace->frontPic != ekans->frontPic);
     EXPECT(serbrace->backPic != ekans->backPic);
+}
+
+TEST("Ausonia starter evolutions use original graphics without changing provisional assets")
+{
+    static const enum Species species[] = {
+        SPECIES_ROVASCO,
+        SPECIES_SELVAZANNA,
+        SPECIES_VIPERCEN,
+        SPECIES_TOSSIVAMPA,
+        SPECIES_VELAIRONE,
+        SPECIES_CODAIRONE,
+    };
+    static const enum Species placeholders[] = {
+        SPECIES_OINKOLOGNE_M,
+        SPECIES_MAMOSWINE,
+        SPECIES_ARBOK,
+        SPECIES_SEVIPER,
+        SPECIES_SWANNA,
+        SPECIES_BOMBIRDIER,
+    };
+    static const u8 frontPicSizes[] = {
+        (8 << 4) | 7,
+        (6 << 4) | 8,
+        (6 << 4) | 7,
+        (8 << 4) | 8,
+        (7 << 4) | 8,
+        (7 << 4) | 8,
+    };
+    static const u8 backPicSizes[] = {
+        (6 << 4) | 7,
+        (6 << 4) | 7,
+        (6 << 4) | 7,
+        (7 << 4) | 8,
+        (4 << 4) | 8,
+        (6 << 4) | 8,
+    };
+    static const u8 frontOffsets[] = { 4, 0, 6, 2, 3, 3 };
+    static const u8 backOffsets[] = { 4, 0, 7, 2, 3, 3 };
+    static const u8 iconPalIndices[] = { 5, 5, 3, 3, 3, 3 };
+
+    for (u32 i = 0; i < ARRAY_COUNT(species); i++)
+    {
+        const struct SpeciesInfo *info = &gSpeciesInfo[species[i]];
+        const struct SpeciesInfo *placeholder = &gSpeciesInfo[placeholders[i]];
+
+        EXPECT(info->frontPic != NULL);
+        EXPECT(info->backPic != NULL);
+        EXPECT(info->palette != NULL);
+        EXPECT(info->shinyPalette != NULL);
+        EXPECT(info->iconSprite != NULL);
+        EXPECT(info->frontAnimFrames != NULL);
+        EXPECT(info->frontPic != placeholder->frontPic);
+        EXPECT(info->backPic != placeholder->backPic);
+        EXPECT(info->palette != placeholder->palette);
+        EXPECT(info->shinyPalette != placeholder->shinyPalette);
+        EXPECT(info->iconSprite != placeholder->iconSprite);
+        EXPECT(info->frontAnimFrames != placeholder->frontAnimFrames);
+        EXPECT_EQ(info->frontPicSize, frontPicSizes[i]);
+        EXPECT_EQ(info->backPicSize, backPicSizes[i]);
+        EXPECT_EQ(info->frontPicYOffset, frontOffsets[i]);
+        EXPECT_EQ(info->backPicYOffset, backOffsets[i]);
+        EXPECT_EQ((u32)info->iconPalIndex, iconPalIndices[i]);
+
+        // Audio, footprint, overworld, shadow and back animation stay provisional.
+        EXPECT_EQ((u32)info->cryId, (u32)placeholder->cryId);
+        EXPECT_EQ(info->backAnimId, placeholder->backAnimId);
+        EXPECT_EQ(info->enemyShadowXOffset, placeholder->enemyShadowXOffset);
+        EXPECT_EQ(info->enemyShadowYOffset, placeholder->enemyShadowYOffset);
+        EXPECT_EQ((u32)info->enemyShadowSize, (u32)placeholder->enemyShadowSize);
+#if P_FOOTPRINTS
+        EXPECT(info->footprint == placeholder->footprint);
+#endif
+#if OW_POKEMON_OBJECT_EVENTS
+        EXPECT(info->overworldData.images == placeholder->overworldData.images);
+#if OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
+        EXPECT(info->overworldPalette == placeholder->overworldPalette);
+        EXPECT(info->overworldShinyPalette == placeholder->overworldShinyPalette);
+#endif
+#endif
+    }
+
+    EXPECT(gSpeciesInfo[SPECIES_CINGERM].frontPic != gSpeciesInfo[SPECIES_LECHONK].frontPic);
+    EXPECT(gSpeciesInfo[SPECIES_SERBRACE].frontPic != gSpeciesInfo[SPECIES_EKANS].frontPic);
+    EXPECT(gSpeciesInfo[SPECIES_ARDEINO].frontPic != gSpeciesInfo[SPECIES_DUCKLETT].frontPic);
 }
 
 TEST("Ausonia Fire starter base data matches the approved prototype")

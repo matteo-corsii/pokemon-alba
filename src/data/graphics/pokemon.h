@@ -25,6 +25,18 @@ const u32 gMonBackPic_Cingerm[] = INCGFX_U32("graphics/pokemon/cingerm/back.png"
 const u16 gMonShinyPalette_Cingerm[] = INCGFX_U16("graphics/pokemon/cingerm/shiny.pal", ".gbapal");
 const u8 gMonIcon_Cingerm[] = INCGFX_U8("graphics/pokemon/cingerm/icon.png", ".4bpp");
 
+// Pokémon Alba: original battle and menu graphics for the Grass starter evolutions.
+const u32 gMonFrontPic_Rovasco[] = INCGFX_U32("graphics/pokemon/rovasco/anim_front.png", ".4bpp.smol");
+const u16 gMonPalette_Rovasco[] = INCGFX_U16("graphics/pokemon/rovasco/normal.pal", ".gbapal");
+const u32 gMonBackPic_Rovasco[] = INCGFX_U32("graphics/pokemon/rovasco/back.png", ".4bpp.smol");
+const u16 gMonShinyPalette_Rovasco[] = INCGFX_U16("graphics/pokemon/rovasco/shiny.pal", ".gbapal");
+const u8 gMonIcon_Rovasco[] = INCGFX_U8("graphics/pokemon/rovasco/icon.png", ".4bpp");
+const u32 gMonFrontPic_Selvazanna[] = INCGFX_U32("graphics/pokemon/selvazanna/anim_front.png", ".4bpp.smol");
+const u16 gMonPalette_Selvazanna[] = INCGFX_U16("graphics/pokemon/selvazanna/normal.pal", ".gbapal");
+const u32 gMonBackPic_Selvazanna[] = INCGFX_U32("graphics/pokemon/selvazanna/back.png", ".4bpp.smol");
+const u16 gMonShinyPalette_Selvazanna[] = INCGFX_U16("graphics/pokemon/selvazanna/shiny.pal", ".gbapal");
+const u8 gMonIcon_Selvazanna[] = INCGFX_U8("graphics/pokemon/selvazanna/icon.png", ".4bpp");
+
 // Pokémon Alba: original battle and menu graphics for Serbrace.
 const u32 gMonFrontPic_Serbrace[] = INCGFX_U32("graphics/pokemon/serbrace/anim_front.png", ".4bpp.smol");
 const u16 gMonPalette_Serbrace[] = INCGFX_U16("graphics/pokemon/serbrace/normal.pal", ".gbapal");
@@ -32,12 +44,36 @@ const u32 gMonBackPic_Serbrace[] = INCGFX_U32("graphics/pokemon/serbrace/back.pn
 const u16 gMonShinyPalette_Serbrace[] = INCGFX_U16("graphics/pokemon/serbrace/shiny.pal", ".gbapal");
 const u8 gMonIcon_Serbrace[] = INCGFX_U8("graphics/pokemon/serbrace/icon.png", ".4bpp");
 
+// Pokémon Alba: original battle and menu graphics for the Fire starter evolutions.
+const u32 gMonFrontPic_Vipercen[] = INCGFX_U32("graphics/pokemon/vipercen/anim_front.png", ".4bpp.smol");
+const u16 gMonPalette_Vipercen[] = INCGFX_U16("graphics/pokemon/vipercen/normal.pal", ".gbapal");
+const u32 gMonBackPic_Vipercen[] = INCGFX_U32("graphics/pokemon/vipercen/back.png", ".4bpp.smol");
+const u16 gMonShinyPalette_Vipercen[] = INCGFX_U16("graphics/pokemon/vipercen/shiny.pal", ".gbapal");
+const u8 gMonIcon_Vipercen[] = INCGFX_U8("graphics/pokemon/vipercen/icon.png", ".4bpp");
+const u32 gMonFrontPic_Tossivampa[] = INCGFX_U32("graphics/pokemon/tossivampa/anim_front.png", ".4bpp.smol");
+const u16 gMonPalette_Tossivampa[] = INCGFX_U16("graphics/pokemon/tossivampa/normal.pal", ".gbapal");
+const u32 gMonBackPic_Tossivampa[] = INCGFX_U32("graphics/pokemon/tossivampa/back.png", ".4bpp.smol");
+const u16 gMonShinyPalette_Tossivampa[] = INCGFX_U16("graphics/pokemon/tossivampa/shiny.pal", ".gbapal");
+const u8 gMonIcon_Tossivampa[] = INCGFX_U8("graphics/pokemon/tossivampa/icon.png", ".4bpp");
+
 // Pokémon Alba: original battle and menu graphics for Ardeino.
 const u32 gMonFrontPic_Ardeino[] = INCGFX_U32("graphics/pokemon/ardeino/anim_front.png", ".4bpp.smol");
 const u16 gMonPalette_Ardeino[] = INCGFX_U16("graphics/pokemon/ardeino/normal.pal", ".gbapal");
 const u32 gMonBackPic_Ardeino[] = INCGFX_U32("graphics/pokemon/ardeino/back.png", ".4bpp.smol");
 const u16 gMonShinyPalette_Ardeino[] = INCGFX_U16("graphics/pokemon/ardeino/shiny.pal", ".gbapal");
 const u8 gMonIcon_Ardeino[] = INCGFX_U8("graphics/pokemon/ardeino/icon.png", ".4bpp");
+
+// Pokémon Alba: original battle and menu graphics for the Water starter evolutions.
+const u32 gMonFrontPic_Velairone[] = INCGFX_U32("graphics/pokemon/velairone/anim_front.png", ".4bpp.smol");
+const u16 gMonPalette_Velairone[] = INCGFX_U16("graphics/pokemon/velairone/normal.pal", ".gbapal");
+const u32 gMonBackPic_Velairone[] = INCGFX_U32("graphics/pokemon/velairone/back.png", ".4bpp.smol");
+const u16 gMonShinyPalette_Velairone[] = INCGFX_U16("graphics/pokemon/velairone/shiny.pal", ".gbapal");
+const u8 gMonIcon_Velairone[] = INCGFX_U8("graphics/pokemon/velairone/icon.png", ".4bpp");
+const u32 gMonFrontPic_Codairone[] = INCGFX_U32("graphics/pokemon/codairone/anim_front.png", ".4bpp.smol");
+const u16 gMonPalette_Codairone[] = INCGFX_U16("graphics/pokemon/codairone/normal.pal", ".gbapal");
+const u32 gMonBackPic_Codairone[] = INCGFX_U32("graphics/pokemon/codairone/back.png", ".4bpp.smol");
+const u16 gMonShinyPalette_Codairone[] = INCGFX_U16("graphics/pokemon/codairone/shiny.pal", ".gbapal");
+const u8 gMonIcon_Codairone[] = INCGFX_U8("graphics/pokemon/codairone/icon.png", ".4bpp");
 
 #if P_FAMILY_BULBASAUR
 #if !P_GBA_STYLE_SPECIES_GFX
