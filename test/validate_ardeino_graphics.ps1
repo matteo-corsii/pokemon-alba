@@ -229,14 +229,16 @@ Assert-Condition ($starter -match '#define WATER_STARTER\s+\(IS_FRLG \? SPECIES_
 Assert-Condition ($species.Contains('.frontPic = gMonFrontPic_Cingerm')) 'Cingerm original front sprite reference changed'
 Assert-Condition ($species.Contains('.frontPic = gMonFrontPic_Serbrace')) 'Serbrace original front sprite reference changed'
 
-foreach ($placeholder in @(
+foreach ($evolution in @(
     @('ROVASCO', 'OinkologneM'), @('SELVAZANNA', 'Mamoswine'),
     @('VIPERCEN', 'Arbok'), @('TOSSIVAMPA', 'Seviper'),
     @('VELAIRONE', 'Swanna'), @('CODAIRONE', 'Bombirdier')
 ))
 {
-    $record = [regex]::Match($species, "(?s)\[SPECIES_$($placeholder[0])\]\s*=\s*\{.*?\n    \},").Value
-    Assert-Condition ($record.Contains(".frontPic = gMonFrontPic_$($placeholder[1])")) "$($placeholder[0]) placeholder changed"
+    $symbol = $evolution[0].Substring(0, 1) + $evolution[0].Substring(1).ToLowerInvariant()
+    $record = [regex]::Match($species, "(?s)\[SPECIES_$($evolution[0])\]\s*=\s*\{.*?\n    \},").Value
+    Assert-Condition ($record.Contains(".frontPic = gMonFrontPic_$symbol")) "$($evolution[0]) original front sprite changed"
+    Assert-Condition (-not $record.Contains(".frontPic = gMonFrontPic_$($evolution[1])")) "$($evolution[0]) reverted to its placeholder"
 }
 
 $wildEncounters = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'src/data/wild_encounters.json') -Raw
