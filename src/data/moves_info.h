@@ -10521,8 +10521,8 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     {
         .name = COMPOUND_STRING("Sbigoattacco"),
         .description = COMPOUND_STRING(
-            "Colpisce per primo se il\n"
-            "bersaglio prepara un attacco."),
+            "Colpisce prima se il\n"
+            "bersaglio attacca."),
         .effect = EFFECT_SUCKER_PUNCH,
         .power = B_UPDATED_MOVE_DATA >= GEN_7 ? 70 : 80,
         .type = TYPE_DARK,
