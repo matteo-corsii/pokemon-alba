@@ -4,10 +4,10 @@
 
 #define FLAG_ALBERA_CAMPETTO_COMPLETED      0x020
 #define FLAG_ALBERA_WATER_RESEARCH_STARTED  0x021
-#define FLAG_0x022               0x022
-#define FLAG_0x023               0x023
-#define FLAG_0x024               0x024
-#define FLAG_0x025               0x025
+#define FLAG_ALBERA_HOME_ANOMALY_SEEN        0x022
+#define FLAG_ALBERA_NICO_BATTLE_COMPLETED    0x023
+#define FLAG_HIDE_ALBERA_LAB_NICO            0x024
+#define FLAG_HIDE_ALBERA_LAB_LIA             0x025
 #define FLAG_0x026               0x026
 #define FLAG_0x027               0x027
 

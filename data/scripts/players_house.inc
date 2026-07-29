@@ -159,7 +159,9 @@ PlayersHouse_1F_EventScript_PetalburgGymReportMale::
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	msgbox PlayersHouse_1F_Text_ItsOverWeMissedHim, MSGBOX_DEFAULT
-	msgbox PlayersHouse_1F_Text_GoIntroduceYourselfNextDoor, MSGBOX_DEFAULT
+	msgbox PlayersHouse_1F_Text_LauroAskedForYou, MSGBOX_DEFAULT
+	msgbox PlayersHouse_1F_Text_InitialWaterAnomaly, MSGBOX_DEFAULT
+	call PlayersHouse_1F_EventScript_StartAlberaOpening
 	closemessage
 	setvar VAR_TEMP_1, 1
 	applymovement VAR_0x8005, PlayersHouse_1F_Movement_MomReturnToSeatMale
@@ -184,13 +186,24 @@ PlayersHouse_1F_EventScript_PetalburgGymReportFemale::
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	msgbox PlayersHouse_1F_Text_ItsOverWeMissedHim, MSGBOX_DEFAULT
-	msgbox PlayersHouse_1F_Text_GoIntroduceYourselfNextDoor, MSGBOX_DEFAULT
+	msgbox PlayersHouse_1F_Text_LauroAskedForYou, MSGBOX_DEFAULT
+	msgbox PlayersHouse_1F_Text_InitialWaterAnomaly, MSGBOX_DEFAULT
+	call PlayersHouse_1F_EventScript_StartAlberaOpening
 	closemessage
 	setvar VAR_TEMP_1, 1
 	applymovement VAR_0x8005, PlayersHouse_1F_Movement_MomReturnToSeatFemale
 	waitmovement 0
 	goto PlayersHouse_1F_EventScript_SetWatchedBroadcast
 	end
+
+PlayersHouse_1F_EventScript_StartAlberaOpening::
+	setflag FLAG_ALBERA_HOME_ANOMALY_SEEN
+	setvar VAR_ALBERA_OPENING_STATE, 1
+	setvar VAR_LITTLEROOT_TOWN_STATE, 1
+	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH
+	clearflag FLAG_HIDE_ALBERA_LAB_NICO
+	clearflag FLAG_HIDE_ALBERA_LAB_LIA
+	return
 
 PlayersHouse_1F_EventScript_MomNoticeGymBroadcast::
 	playse SE_PIN
