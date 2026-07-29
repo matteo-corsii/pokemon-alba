@@ -44,6 +44,18 @@ const u32 gMonBackPic_Serbrace[] = INCGFX_U32("graphics/pokemon/serbrace/back.pn
 const u16 gMonShinyPalette_Serbrace[] = INCGFX_U16("graphics/pokemon/serbrace/shiny.pal", ".gbapal");
 const u8 gMonIcon_Serbrace[] = INCGFX_U8("graphics/pokemon/serbrace/icon.png", ".4bpp");
 
+// Pokémon Alba: original battle and menu graphics for the Fire starter evolutions.
+const u32 gMonFrontPic_Vipercen[] = INCGFX_U32("graphics/pokemon/vipercen/anim_front.png", ".4bpp.smol");
+const u16 gMonPalette_Vipercen[] = INCGFX_U16("graphics/pokemon/vipercen/normal.pal", ".gbapal");
+const u32 gMonBackPic_Vipercen[] = INCGFX_U32("graphics/pokemon/vipercen/back.png", ".4bpp.smol");
+const u16 gMonShinyPalette_Vipercen[] = INCGFX_U16("graphics/pokemon/vipercen/shiny.pal", ".gbapal");
+const u8 gMonIcon_Vipercen[] = INCGFX_U8("graphics/pokemon/vipercen/icon.png", ".4bpp");
+const u32 gMonFrontPic_Tossivampa[] = INCGFX_U32("graphics/pokemon/tossivampa/anim_front.png", ".4bpp.smol");
+const u16 gMonPalette_Tossivampa[] = INCGFX_U16("graphics/pokemon/tossivampa/normal.pal", ".gbapal");
+const u32 gMonBackPic_Tossivampa[] = INCGFX_U32("graphics/pokemon/tossivampa/back.png", ".4bpp.smol");
+const u16 gMonShinyPalette_Tossivampa[] = INCGFX_U16("graphics/pokemon/tossivampa/shiny.pal", ".gbapal");
+const u8 gMonIcon_Tossivampa[] = INCGFX_U8("graphics/pokemon/tossivampa/icon.png", ".4bpp");
+
 // Pokémon Alba: original battle and menu graphics for Ardeino.
 const u32 gMonFrontPic_Ardeino[] = INCGFX_U32("graphics/pokemon/ardeino/anim_front.png", ".4bpp.smol");
 const u16 gMonPalette_Ardeino[] = INCGFX_U16("graphics/pokemon/ardeino/normal.pal", ".gbapal");
