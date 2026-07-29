@@ -13,7 +13,7 @@ SINGLE_BATTLE_TEST("Revive restores a fainted battler's HP to half")
         TURN { USE_ITEM(player, ITEM_REVIVE, partyIndex: 0); }
         TURN { SWITCH(player, 0); }
     } SCENE {
-        MESSAGE("Wynaut had its HP restored.");
+        MESSAGE("Wynaut recupera PS.");
     } THEN {
         EXPECT_EQ(player->hp, 100);
     }
@@ -31,7 +31,7 @@ SINGLE_BATTLE_TEST("Max Revive restores a fainted battler's HP fully")
         TURN { USE_ITEM(player, ITEM_MAX_REVIVE, partyIndex: 0); }
         TURN { SWITCH(player, 0); }
     } SCENE {
-        MESSAGE("Wynaut had its HP restored.");
+        MESSAGE("Wynaut recupera PS.");
     } THEN {
         EXPECT_EQ(player->hp, 200);
     }
@@ -49,7 +49,7 @@ SINGLE_BATTLE_TEST("Revival Herb restores a fainted battler's HP fully")
         TURN { USE_ITEM(player, ITEM_REVIVAL_HERB, partyIndex: 0); }
         TURN { SWITCH(player, 0); }
     } SCENE {
-        MESSAGE("Wynaut had its HP restored.");
+        MESSAGE("Wynaut recupera PS.");
     } THEN {
         EXPECT_EQ(player->hp, 200);
     }
@@ -67,7 +67,7 @@ SINGLE_BATTLE_TEST("Max Honey restores a fainted battler's HP fully")
         TURN { USE_ITEM(player, ITEM_MAX_HONEY, partyIndex: 0); }
         TURN { SWITCH(player, 0); }
     } SCENE {
-        MESSAGE("Wynaut had its HP restored.");
+        MESSAGE("Wynaut recupera PS.");
     } THEN {
         EXPECT_EQ(player->hp, 200);
     }
@@ -92,7 +92,7 @@ DOUBLE_BATTLE_TEST("Revive works for a partner in a double battle")
         TURN { MOVE(opponentRight, MOVE_EXPLOSION); } // Everyone dies, the test can finish.
     } SCENE {
         MESSAGE("Wynaut non ha\npiù energie!");
-        MESSAGE("You used Revive!");
+        MESSAGE("Hai usato Revive!");
         // Switch-in animation
         MESSAGE("Wobbuffet non ha\npiù energie!");
         HP_BAR(playerLeft);
