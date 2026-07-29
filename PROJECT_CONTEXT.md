@@ -171,7 +171,7 @@ Saranno presenti tre nuovi starter, ciascuno con tre stadi evolutivi. I nomi pro
 - Serbrace, Vipercen e Tossivampa per la linea Fuoco;
 - Ardeino, Velairone e Codairone per la linea Acqua.
 
-Le tre linee completano la prima registrazione dati. Nel prototipo Emerald Cingerm, Serbrace e Ardeino occupano rispettivamente gli slot Erba, Fuoco e Acqua e sono ottenibili soltanto tramite la selezione iniziale; i rami collegati delle squadre di Nico e Lia usano gli stadi equivalenti delle tre linee. FireRed e LeafGreen conservano Bulbasaur, Charmander e Squirtle. Tutte e tre le forme base usano front sprite, back sprite, icona e palette normale originali; le palette shiny sono ancora provvisorie. Cry, impronta, overworld e ombra restano provvisori rispettivamente di Lechonk, Ekans e Ducklett. Le evoluzioni non dispongono ancora necessariamente di grafica originale.
+Le tre linee completano la prima registrazione dati. Nel prototipo Emerald Cingerm, Serbrace e Ardeino occupano rispettivamente gli slot Erba, Fuoco e Acqua e sono ottenibili soltanto tramite la selezione iniziale; i rami collegati delle squadre di Nico e Lia usano gli stadi equivalenti delle tre linee. FireRed e LeafGreen conservano Bulbasaur, Charmander e Squirtle. Tutte le nove specie usano front sprite animato, back sprite, icona e palette normale originali; le palette shiny sono ancora provvisorie. Cry, impronta, overworld e ombra continuano a riutilizzare i segnaposto documentati per ciascuna specie. Evoluzioni, gameplay, learnset, mappe, incontri e squadre non sono stati modificati dalla milestone grafica.
 
 Le 46 mosse uniche presenti nei learnset per livello delle nove specie sono state sottoposte ad audit. I nomi e le descrizioni ancora inglesi sono stati localizzati, `Fangosberla` è stata conservata e `Smokescreen` è ora `Muro di Fumo`; dati tecnici, livelli, ordine e contenuto dei learnset sono rimasti invariati. La localizzazione completa di tutte le mosse del gioco resta una milestone futura.
 
@@ -214,7 +214,7 @@ Durante la scelta iniziale, il giocatore dovrà poter selezionare:
 
 Questa funzionalità dovrà essere presente già nella prima beta.
 
-Nel prototipo corrente il motore genera ancora normalmente il sesso dello starter: il selettore dedicato è rinviato. Il trio è funzionale e le tre forme base dispongono del pacchetto grafico originale minimo; shiny definitive, cry, impronte, overworld e grafica originale delle evoluzioni restano da completare.
+Nel prototipo corrente il motore genera ancora normalmente il sesso dello starter: il selettore dedicato è rinviato. Il trio è funzionale e tutte le nove specie dispongono del pacchetto grafico originale minimo; shiny definitive, cry, impronte e overworld restano da completare.
 
 ## Nuova meccanica: Forma Riflesso
 

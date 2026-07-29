@@ -23,6 +23,8 @@ Le intestazioni inglesi `ABILITY` e `TRAINER MEMO`, incorporate nella tilemap up
 
 `Fangosberla` conserva potenza, precisione, PP, tipo, categoria, bersaglio, priorità, riduzione della precisione e animazione di `MOVE_MUD_SLAP`. Cingerm continua a impararla al livello 7. `Muro di Fumo` conserva integralmente i dati tecnici di `MOVE_SMOKESCREEN` e descrive in italiano la riduzione della Precisione del bersaglio. L'audit ha lasciato invariati livelli, ordine e contenuto di tutti e nove i learnset; soltanto nome e descrizione dei record globali previsti sono stati modificati.
 
+La milestone grafica delle sei evoluzioni non modifica stringhe, nomi di mosse, descrizioni, abilità o learnset. Le 46 mosse già verificate, comprese `Fangosberla` e `Muro di Fumo`, conservano lo stato italiano documentato.
+
 ## Testi inglesi mantenuti intenzionalmente
 
 La milestone non costituisce una traduzione completa del gioco. Restano intenzionalmente fuori ambito:

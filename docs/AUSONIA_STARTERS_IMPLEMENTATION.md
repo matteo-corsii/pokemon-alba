@@ -58,27 +58,27 @@ I rami di Nico e Lia collegati alle vecchie linee di Treecko, Torchic e Mudkip u
 
 ## Stato degli asset
 
-Gli asset originali approvati di Cingerm, Serbrace e Ardeino sono conservati nelle rispettive directory sotto `graphics/pokemon/`. Per gli elementi non ancora originali, `gSpeciesInfo` riusa direttamente asset già presenti:
+Gli asset originali approvati di tutte le nove specie sono conservati nelle rispettive directory sotto `graphics/pokemon/`. Ogni specie dispone di front animato a due frame, back, icona, palette normale e palette shiny provvisoria. Per cry, footprint, overworld e ombra, `gSpeciesInfo` continua a riusare direttamente asset già presenti:
 
 | Specie | Modello grafico | Cry |
 | --- | --- | --- |
-| Cingerm | Grafica originale; footprint, overworld e ombra di Lechonk | `CRY_LECHONK` |
-| Rovasco | Oinkologne maschio | `CRY_OINKOLOGNE_M` |
-| Selvazanna | Mamoswine | `CRY_MAMOSWINE` |
-| Serbrace | Grafica originale; footprint, overworld e ombra di Ekans | `CRY_EKANS` |
-| Vipercen | Arbok | `CRY_ARBOK` |
-| Tossivampa | Seviper | `CRY_SEVIPER` |
-| Ardeino | Grafica originale; footprint, overworld e ombra di Ducklett | `CRY_DUCKLETT` |
-| Velairone | Swanna | `CRY_SWANNA` |
-| Codairone | Bombirdier | `CRY_BOMBIRDIER` |
+| Cingerm | Grafica base originale; footprint, overworld e ombra di Lechonk | `CRY_LECHONK` |
+| Rovasco | Grafica base originale; footprint, overworld e ombra di Oinkologne maschio | `CRY_OINKOLOGNE_M` |
+| Selvazanna | Grafica base originale; footprint, overworld e ombra di Mamoswine | `CRY_MAMOSWINE` |
+| Serbrace | Grafica base originale; footprint, overworld e ombra di Ekans | `CRY_EKANS` |
+| Vipercen | Grafica base originale; footprint, overworld e ombra di Arbok | `CRY_ARBOK` |
+| Tossivampa | Grafica base originale; footprint, overworld e ombra di Seviper | `CRY_SEVIPER` |
+| Ardeino | Grafica base originale; footprint, overworld e ombra di Ducklett | `CRY_DUCKLETT` |
+| Velairone | Grafica base originale; footprint, overworld e ombra di Swanna | `CRY_SWANNA` |
+| Codairone | Grafica base originale; footprint, overworld e ombra di Bombirdier | `CRY_BOMBIRDIER` |
 
-I modelli danno silhouette piccole, intermedie e grandi distinguibili per ciascuna linea. Le coordinate, animazioni, ombre, palette, icone, impronte e sprite overworld seguono i rispettivi modelli. Non sono definite differenze grafiche fra sessi dedicate alle specie di Ausonia.
+Front, back, icone, palette, coordinate e animazioni sono ora specifici per ciascuna specie. Ombre, impronte, sprite overworld, relative palette e animazioni posteriori compatibili seguono ancora i rispettivi modelli provvisori. Non sono definite differenze grafiche fra sessi dedicate alle specie di Ausonia.
 
-Le concept art di Cingerm, Rovasco, Selvazanna, Serbrace, Vipercen, Tossivampa, Ardeino e Velairone sono approvate. Soltanto Codairone resta da progettare definitivamente. Le immagini di concept non sono conservate nel repository. Cingerm, Serbrace e Ardeino possiedono front, back, icona e palette normali originali, con shiny ancora provvisorie; cry, footprint, overworld e ombra restano segnaposto. Gli stadi evoluti continuano a usare i modelli grafici documentati. Il trio resta interamente selezionabile.
+Le concept art di Cingerm, Rovasco, Selvazanna, Serbrace, Vipercen, Tossivampa, Ardeino e Velairone sono approvate. Soltanto Codairone resta da progettare definitivamente. Le immagini di concept non sono conservate nel repository. Tutte le nove specie possiedono front, back, icona e palette normali originali, con shiny ancora provvisorie; cry, footprint, overworld e ombra restano segnaposto. Il trio resta interamente selezionabile e le evoluzioni conservano livelli e disponibilità precedenti.
 
 Le 46 mosse uniche ricavate dai nove learnset per livello sono state sottoposte ad audit. Le voci ancora inglesi hanno ricevuto nome e descrizione italiani; `Fangosberla` è rimasta invariata e `MOVE_SMOKESCREEN` è visualizzata come `Muro di Fumo`. Potenza, precisione, PP, tipo, categoria, effetti e ogni altro campo tecnico sono invariati, così come livelli, ordine e contenuto dei nove learnset. La traduzione globale delle mosse non appartenenti a questi learnset resta fuori ambito.
 
-Quando saranno disponibili asset originali, i riferimenti andranno sostituiti senza cambiare gli ID. Ogni forma richiederà front e back sprite, palette normale e cromatica, icona, impronta, animazioni, coordinate, ombra, eventuali sprite overworld e cry verificati. I segnaposto non sono direzione artistica definitiva.
+Le prossime sostituzioni dovranno riguardare soltanto shiny definitive, impronte, ombre, sprite overworld e cry, senza cambiare gli ID o i dati di gioco. I segnaposto residui non sono direzione artistica definitiva.
 
 ## Rischi e aggiornamenti upstream
 
@@ -93,7 +93,7 @@ Quando saranno disponibili asset originali, i riferimenti andranno sostituiti se
 1. Registrare e validare la linea Cingerm — registrazione dati completata.
 2. Registrare e validare la linea Serbrace — registrazione dati completata.
 3. Registrare e validare la linea Ardeino — registrazione dati completata.
-4. Integrare e validare il trio completo negli slot Emerald e nei rami del rivale — in corso.
-5. Completare gli asset originali delle evoluzioni, quindi sostituire shiny, cry, footprint e overworld ancora provvisori.
+4. Integrare e validare il trio completo negli slot Emerald e nei rami del rivale — completato.
+5. Completare front, back, icone e palette normali originali delle nove specie — completato; sostituire in seguito shiny, cry, footprint e overworld ancora provvisori.
 6. Aggiungere eventuali differenze sessuali approvate.
 7. Progettare e prototipare la Forma Riflesso senza considerarla ancora definitiva.
