@@ -22,10 +22,15 @@ LittlerootTown_ProfessorBirchsLab_MapScripts::
 LittlerootTown_ProfessorBirchsLab_OnTransition:
 	call Common_EventScript_SetupRivalGfxId
 	call ProfBirch_EventScript_UpdateLocation
+	call_if_ge VAR_ALBERA_OPENING_STATE, 1, LittlerootTown_ProfessorBirchsLab_EventScript_SetAlberaStarterLayout
 	goto_if_ge VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6, LittlerootTown_ProfessorBirchsLab_EventScript_SetAfterJohtoStarterLayout
 	goto_if_ge VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_SetJohtoStarterLayout
 	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 3, LittlerootTown_ProfessorBirchsLab_EventScript_CheckReadyForJohtoStarter
 	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_SetAlberaStarterLayout::
+	setmaplayoutindex LAYOUT_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB_WITH_TABLE
+	return
 
 LittlerootTown_ProfessorBirchsLab_EventScript_CheckReadyForJohtoStarter::
 	specialvar VAR_RESULT, HasAllHoennMons
@@ -96,14 +101,152 @@ LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForJohtoStarters::
 	end
 
 LittlerootTown_ProfessorBirchsLab_OnFrame:
+	map_script_2 VAR_ALBERA_OPENING_STATE, 1, LittlerootTown_ProfessorBirchsLab_EventScript_AlberaOpening
 	map_script_2 VAR_BIRCH_LAB_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_GiveStarterEvent
 	map_script_2 VAR_BIRCH_LAB_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedexEvent
 	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1, LittlerootTown_ProfessorBirchsLab_EventScript_UpgradeToNationalDex
 	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_ChooseJohtoStarter
 	.2byte 0
 
-@ The starter is technically given prior to this on Route 101 by special ChooseStarter
-@ This is just where the game tells you its yours and lets you nickname it
+LittlerootTown_ProfessorBirchsLab_EventScript_AlberaOpening::
+	lockall
+	turnobject LOCALID_PLAYER, DIR_NORTH
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_AlberaBriefing, MSGBOX_DEFAULT
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_LiaInitialObservation, MSGBOX_DEFAULT
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_NicoReadyToHelp, MSGBOX_DEFAULT
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_ChooseAusoniaStarter, MSGBOX_DEFAULT
+	setvar VAR_ALBERA_OPENING_STATE, 2
+	special ChooseStarter
+	setflag FLAG_SYS_POKEMON_GET
+	setvar VAR_BIRCH_LAB_STATE, 3
+	setvar VAR_ALBERA_OPENING_STATE, 3
+	bufferleadmonspeciesname STR_VAR_1
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_PlayerReceivedStarter, MSGBOX_DEFAULT
+	switch VAR_STARTER_MON
+	case 0, LittlerootTown_ProfessorBirchsLab_EventScript_AssignAfterCingerm
+	case 1, LittlerootTown_ProfessorBirchsLab_EventScript_AssignAfterSerbrace
+	case 2, LittlerootTown_ProfessorBirchsLab_EventScript_AssignAfterArdeino
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_AssignAfterCingerm
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_AssignAfterCingerm::
+	bufferspeciesname STR_VAR_1, SPECIES_SERBRACE
+	bufferspeciesname STR_VAR_2, SPECIES_ARDEINO
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_AssignNicoAndLia, MSGBOX_DEFAULT
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_StartNicoBattle
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_AssignAfterSerbrace::
+	bufferspeciesname STR_VAR_1, SPECIES_ARDEINO
+	bufferspeciesname STR_VAR_2, SPECIES_CINGERM
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_AssignNicoAndLia, MSGBOX_DEFAULT
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_StartNicoBattle
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_AssignAfterArdeino::
+	bufferspeciesname STR_VAR_1, SPECIES_CINGERM
+	bufferspeciesname STR_VAR_2, SPECIES_SERBRACE
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_AssignNicoAndLia, MSGBOX_DEFAULT
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_StartNicoBattle
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_StartNicoBattle::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_NicoBattleChallenge, MSGBOX_DEFAULT
+	switch VAR_STARTER_MON
+	case 0, LittlerootTown_ProfessorBirchsLab_EventScript_BattleNicoSerbrace
+	case 1, LittlerootTown_ProfessorBirchsLab_EventScript_BattleNicoArdeino
+	case 2, LittlerootTown_ProfessorBirchsLab_EventScript_BattleNicoCingerm
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_BattleNicoSerbrace
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_BattleNicoSerbrace::
+	trainerbattle_earlyrival TRAINER_BRENDAN_ROUTE_103_TREECKO, RIVAL_BATTLE_HEAL_AFTER, LittlerootTown_ProfessorBirchsLab_Text_NicoDefeated, LittlerootTown_ProfessorBirchsLab_Text_NicoVictory
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_AfterNicoBattle
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_BattleNicoArdeino::
+	trainerbattle_earlyrival TRAINER_BRENDAN_ROUTE_103_TORCHIC, RIVAL_BATTLE_HEAL_AFTER, LittlerootTown_ProfessorBirchsLab_Text_NicoDefeated, LittlerootTown_ProfessorBirchsLab_Text_NicoVictory
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_AfterNicoBattle
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_BattleNicoCingerm::
+	trainerbattle_earlyrival TRAINER_BRENDAN_ROUTE_103_MUDKIP, RIVAL_BATTLE_HEAL_AFTER, LittlerootTown_ProfessorBirchsLab_Text_NicoDefeated, LittlerootTown_ProfessorBirchsLab_Text_NicoVictory
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_AfterNicoBattle
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_AfterNicoBattle::
+	specialvar VAR_RESULT, GetBattleOutcome
+	setflag FLAG_ALBERA_NICO_BATTLE_COMPLETED
+	setvar VAR_ALBERA_OPENING_STATE, 4
+	goto_if_eq VAR_RESULT, B_OUTCOME_LOST, LittlerootTown_ProfessorBirchsLab_EventScript_NicoAfterLoss
+	special HealPlayerParty
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_NicoAfterWin, MSGBOX_DEFAULT
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_LiaDetectsAnomaly
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_NicoAfterLoss::
+	special HealPlayerParty
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_NicoAfterLoss, MSGBOX_DEFAULT
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_LiaDetectsAnomaly
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_LiaDetectsAnomaly::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_LiaDetectsAnomaly, MSGBOX_DEFAULT
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_LauroFieldAssignment, MSGBOX_DEFAULT
+	goto_if_set FLAG_SYS_POKEDEX_GET, LittlerootTown_ProfessorBirchsLab_EventScript_CompleteAlberaOpening
+	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_ExplainResearchPokedex, MSGBOX_DEFAULT
+
+LittlerootTown_ProfessorBirchsLab_EventScript_CompleteAlberaOpening::
+	setflag FLAG_ALBERA_WATER_RESEARCH_STARTED
+	setflag FLAG_RESCUED_BIRCH
+	setflag FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE
+	setflag FLAG_HIDE_ROUTE_101_ZIGZAGOON
+	setflag FLAG_HIDE_ROUTE_101_BIRCH_STARTERS_BAG
+	setflag FLAG_DEFEATED_RIVAL_ROUTE103
+	setflag FLAG_HIDE_ROUTE_103_RIVAL
+	clearflag FLAG_HIDE_ROUTE_101_BOY
+	setvar VAR_ROUTE101_STATE, 3
+	setvar VAR_BIRCH_LAB_STATE, 5
+	setvar VAR_LITTLEROOT_TOWN_STATE, 2
+	setvar VAR_ALBERA_OPENING_STATE, 5
+	setflag FLAG_ADVENTURE_STARTED
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_NicoAndLiaLeave, MSGBOX_DEFAULT
+	setflag FLAG_HIDE_ALBERA_LAB_NICO
+	setflag FLAG_HIDE_ALBERA_LAB_LIA
+	removeobject LOCALID_ALBERA_LAB_NICO
+	removeobject LOCALID_ALBERA_LAB_LIA
+	releaseall
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_Nico::
+	lock
+	faceplayer
+	goto_if_set FLAG_ALBERA_WATER_RESEARCH_STARTED, LittlerootTown_ProfessorBirchsLab_EventScript_NicoAfterAssignment
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_NicoWaiting, MSGBOX_DEFAULT
+	release
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_NicoAfterAssignment::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_NicoAfterAssignment, MSGBOX_DEFAULT
+	release
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_Lia::
+	lock
+	faceplayer
+	goto_if_set FLAG_ALBERA_WATER_RESEARCH_STARTED, LittlerootTown_ProfessorBirchsLab_EventScript_LiaAfterAssignment
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_LiaWaiting, MSGBOX_DEFAULT
+	release
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_LiaAfterAssignment::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_LiaAfterAssignment, MSGBOX_DEFAULT
+	release
+	end
+
+@ Legacy fallback for saves that still arrive from the original Route 101 flow.
+@ New Pokémon Alba saves select and receive their starter in the canonical lab event above.
 LittlerootTown_ProfessorBirchsLab_EventScript_GiveStarterEvent::
 	lockall
 	bufferleadmonspeciesname STR_VAR_1
@@ -463,11 +606,17 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter::
 LittlerootTown_ProfessorBirchsLab_EventScript_Birch::
 	lock
 	faceplayer
+	goto_if_lt VAR_ALBERA_OPENING_STATE, 5, LittlerootTown_ProfessorBirchsLab_EventScript_AlberaOpeningReminder
 	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 5, LittlerootTown_ProfessorBirchsLab_EventScript_CanHaveAnyOneOfRarePokemon
 	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_GrassyPatchWaiting
 	goto_if_unset FLAG_HAS_MATCH_CALL, LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister
 	goto_if_unset FLAG_ENABLE_PROF_BIRCH_MATCH_CALL, EventScript_RegisterProfBirch
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_AlberaOpeningReminder::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_AlberaOpeningReminder, MSGBOX_DEFAULT
+	release
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_CanHaveAnyOneOfRarePokemon::
@@ -668,6 +817,116 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ScottAboardSSTidalCall::
 	clearflag FLAG_SCOTT_CALL_BATTLE_FRONTIER
 	releaseall
 	end
+
+LittlerootTown_ProfessorBirchsLab_Text_AlberaBriefing:
+	.string "PROF. LAURO: Grazie di essere venuto,\n"
+	.string "{PLAYER}.\p"
+	.string "Da qualche ora registro variazioni\n"
+	.string "insolite nella pressione dell'acqua.\p"
+	.string "Non seguono i normali cicli delle\n"
+	.string "sorgenti e delle falde sotterranee.\p"
+	.string "Potrebbe essere un guasto passeggero,\n"
+	.string "ma servono osservazioni sul campo.\p"
+	.string "Non voglio però mandarvi fuori città\n"
+	.string "senza un POKéMON che vi protegga.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_LiaInitialObservation:
+	.string "LIA: Anche i POKéMON vicini alle\n"
+	.string "fontane sembrano più agitati.\p"
+	.string "È un dato piccolo, ma si è ripetuto\n"
+	.string "in punti diversi di ALBÈRA.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_NicoReadyToHelp:
+	.string "NICO: Allora controlliamo di persona!\n"
+	.string "Restare qui a fissare i grafici\l"
+	.string "non farà tornare normale l'acqua.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_ChooseAusoniaStarter:
+	.string "PROF. LAURO: Sul banco ci sono tre\n"
+	.string "POKé BALL. Scegli per primo.\p"
+	.string "CINGERM è resistente e prudente.\n"
+	.string "SERBRACE è vivace e determinato.\l"
+	.string "ARDEINO è curioso e molto sensibile\l"
+	.string "all'ambiente.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_PlayerReceivedStarter:
+	.string "PROF. LAURO: Da questo momento\n"
+	.string "quel POKéMON è il tuo compagno.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_AssignNicoAndLia:
+	.string "PROF. LAURO: NICO, a te {STR_VAR_1}.\n"
+	.string "LIA, tu lavorerai con {STR_VAR_2}.\p"
+	.string "Così ognuno di voi potrà affrontare\n"
+	.string "il sopralluogo in sicurezza.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_NicoBattleChallenge:
+	.string "NICO: Prima di uscire dobbiamo capire\n"
+	.string "chi dei nostri POKéMON è già pronto.\p"
+	.string "Dai, solo una lotta amichevole!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_NicoDefeated:
+	.string "NICO: Ehi, niente male!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_NicoVictory:
+	.string "NICO: Ottima lotta!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_NicoAfterWin:
+	.string "NICO: Hai vinto tu.\n"
+	.string "La prossima volta sarò più rapido!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_NicoAfterLoss:
+	.string "NICO: Bella lotta!\n"
+	.string "Il tuo POKéMON ha resistito bene.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_LiaDetectsAnomaly:
+	.string "LIA: Professore, la pressione è\n"
+	.string "cambiata di nuovo.\p"
+	.string "Questa volta il segnale arriva dalla\n"
+	.string "zona appena fuori città.\p"
+	.string "È debole. Potrebbe sparire presto.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_LauroFieldAssignment:
+	.string "PROF. LAURO: Non è un'emergenza,\n"
+	.string "quindi procediamo con prudenza.\p"
+	.string "Raggiungete il punto di rilevazione.\n"
+	.string "Osservate l'acqua e il comportamento\l"
+	.string "dei POKéMON locali.\p"
+	.string "Non cercate spiegazioni affrettate:\n"
+	.string "raccogliete soltanto dati affidabili.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_ExplainResearchPokedex:
+	.string "PROF. LAURO: Il POKéDEX registrerà\n"
+	.string "i POKéMON che incontrerai.\p"
+	.string "Usalo anche come riferimento per le\n"
+	.string "osservazioni sull'ambiente.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_NicoAndLiaLeave:
+	.string "LIA: Parto avanti e controllo se il\n"
+	.string "segnale resta stabile.\p"
+	.string "NICO: Io vado! {PLAYER}, raggiungici\n"
+	.string "fuori ALBÈRA appena sei pronto!\p"
+	.string "PROF. LAURO: La strada è stata\n"
+	.string "riaperta. Potete procedere.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_NicoWaiting:
+	.string "NICO: Appena scegli il tuo POKéMON,\n"
+	.string "vediamo subito cosa sa fare!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_NicoAfterAssignment:
+	.string "NICO: Ti aspetto fuori ALBÈRA.\n"
+	.string "Non metterci troppo!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_LiaWaiting:
+	.string "LIA: Sto confrontando le misurazioni.\n"
+	.string "Le variazioni non sono regolari.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_LiaAfterAssignment:
+	.string "LIA: Controllo il segnale fuori città.\n"
+	.string "Ci servono dati, non supposizioni.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_AlberaOpeningReminder:
+	.string "PROF. LAURO: Prima dobbiamo completare\n"
+	.string "la preparazione del sopralluogo.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_BirchAwayOnFieldwork:
 	.string "Eh? Il PROF. LAURO?\p"
