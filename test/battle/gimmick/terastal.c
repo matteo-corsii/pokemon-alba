@@ -18,7 +18,7 @@ SINGLE_BATTLE_TEST("(TERA) Terastallizing into a different type preserves other 
         MESSAGE("Bulbasaur usa\nVine Whip!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_VINE_WHIP, player);
         HP_BAR(opponent, captureDamage: &results[i].damage1);
-        MESSAGE("Bulbasaur usa\nSludge Bomb!");
+        MESSAGE("Bulbasaur usa\nFangobomba!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SLUDGE_BOMB, player);
         HP_BAR(opponent, captureDamage: &results[i].damage2);
     } FINALLY {
@@ -288,7 +288,7 @@ SINGLE_BATTLE_TEST("(TERA) Roost does not remove the user's Flying type while Te
     } WHEN {
         TURN { MOVE(player, MOVE_ROOST, gimmick: GIMMICK_TERA); MOVE(opponent, MOVE_ICE_BEAM); }
     } SCENE {
-        MESSAGE("Zapdos usa\nRoost!");
+        MESSAGE("Zapdos usa\nTrespolo!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ROOST, player);
         MESSAGE("Wobbuffet avversario usa\nIce Beam!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ICE_BEAM, opponent);
@@ -487,7 +487,7 @@ SINGLE_BATTLE_TEST("(TERA) Roost does not remove Flying-type ground immunity whe
     } WHEN {
         TURN { MOVE(player, MOVE_ROOST, gimmick: GIMMICK_TERA); MOVE(opponent, MOVE_ICE_BEAM); }
     } SCENE {
-        MESSAGE("Zapdos usa\nRoost!");
+        MESSAGE("Zapdos usa\nTrespolo!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ROOST, player);
         MESSAGE("Wobbuffet avversario usa\nIce Beam!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ICE_BEAM, opponent);
@@ -537,15 +537,15 @@ SINGLE_BATTLE_TEST("(TERA) Terastallizing into the Stellar-type provides a one-t
         TURN { MOVE(player, MOVE_TAKE_DOWN); }
     } SCENE {
         // turn 1
-        MESSAGE("Wobbuffet usa\nTake Down!");
+        MESSAGE("Wobbuffet usa\nRiduttore!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TAKE_DOWN, player);
         HP_BAR(opponent, captureDamage: &damage[0]);
         // turn 2
-        MESSAGE("Wobbuffet usa\nTake Down!");
+        MESSAGE("Wobbuffet usa\nRiduttore!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TAKE_DOWN, player);
         HP_BAR(opponent, captureDamage: &damage[1]);
         // turn 3
-        MESSAGE("Wobbuffet usa\nTake Down!");
+        MESSAGE("Wobbuffet usa\nRiduttore!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TAKE_DOWN, player);
         HP_BAR(opponent, captureDamage: &damage[2]);
     } THEN {
@@ -626,11 +626,11 @@ SINGLE_BATTLE_TEST("(TERA) Status moves don't expend Stellar's one-time type boo
         MESSAGE("Wobbuffet usa\nRUGGITO!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_GROWL, player);
         // turn 2
-        MESSAGE("Wobbuffet usa\nTake Down!");
+        MESSAGE("Wobbuffet usa\nRiduttore!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TAKE_DOWN, player);
         HP_BAR(opponent, captureDamage: &damage[0]);
         // turn 3
-        MESSAGE("Wobbuffet usa\nTake Down!");
+        MESSAGE("Wobbuffet usa\nRiduttore!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TAKE_DOWN, player);
         HP_BAR(opponent, captureDamage: &damage[1]);
     } THEN {
@@ -655,11 +655,11 @@ SINGLE_BATTLE_TEST("(TERA) Stellar type's one-time boost factors in dynamically-
         MESSAGE("Pelipper usa\nWeather Ball!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_WEATHER_BALL, player);
         // turn 2
-        MESSAGE("Pelipper usa\nTake Down!");
+        MESSAGE("Pelipper usa\nRiduttore!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TAKE_DOWN, player);
         HP_BAR(opponent, captureDamage: &damage[0]);
         // turn 3
-        MESSAGE("Pelipper usa\nTake Down!");
+        MESSAGE("Pelipper usa\nRiduttore!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TAKE_DOWN, player);
         HP_BAR(opponent, captureDamage: &damage[1]);
         // turn 4

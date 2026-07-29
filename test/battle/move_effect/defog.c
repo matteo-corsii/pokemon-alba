@@ -226,13 +226,13 @@ DOUBLE_BATTLE_TEST("Defog doesn't remove Mist or Safeguard from the user's side"
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SAFEGUARD, playerRight);
         ANIMATION(ANIM_TYPE_MOVE, move, playerLeft);
         NONE_OF {
-            MESSAGE("Your team's Mist wore off!");
+            MESSAGE("Your team's Nebbia wore off!");
             MESSAGE("Your team's Safeguard wore off!");
         }
         MESSAGE("Wobbuffet avversario usa\nScreech!");
         MESSAGE("Wobbuffet is protected by the mist!");
         NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-        MESSAGE("Wobbuffet avversario usa\nToxic!");
+        MESSAGE("Wobbuffet avversario usa\nTossina!");
         MESSAGE("Wobbuffet is protected by Safeguard!");
         NOT STATUS_ICON(playerRight, badPoison: TRUE);
     }
@@ -258,7 +258,7 @@ DOUBLE_BATTLE_TEST("Defog removes Mist and Safeguard from target's side")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SAFEGUARD, opponentRight);
         if (move == MOVE_DEFOG) {
             ANIMATION(ANIM_TYPE_MOVE, move, playerLeft);
-            MESSAGE("The opposing team's Mist wore off!");
+            MESSAGE("The opposing team's Nebbia wore off!");
             MESSAGE("The opposing team's Safeguard wore off!");
         }
         MESSAGE("Wobbuffet usa\nScreech!");
@@ -269,7 +269,7 @@ DOUBLE_BATTLE_TEST("Defog removes Mist and Safeguard from target's side")
             MESSAGE("The opposing Wobbuffet is protected by the mist!");
             NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
         }
-        MESSAGE("Wobbuffet usa\nToxic!");
+        MESSAGE("Wobbuffet usa\nTossina!");
         if (move == MOVE_DEFOG) {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_TOXIC, playerRight);
             STATUS_ICON(opponentRight, badPoison: TRUE);
@@ -691,7 +691,7 @@ DOUBLE_BATTLE_TEST("Defog removes everything it can")
         // Player side
         MESSAGE("Your team's Reflect wore off!");
         MESSAGE("Your team's Light Screen wore off!");
-        MESSAGE("Your team's Mist wore off!");
+        MESSAGE("Your team's Nebbia wore off!");
         MESSAGE("Your team's Aurora Veil wore off!");
         MESSAGE("Your team's Safeguard wore off!");
 

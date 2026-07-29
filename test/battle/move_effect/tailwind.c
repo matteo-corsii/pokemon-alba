@@ -23,7 +23,7 @@ SINGLE_BATTLE_TEST("Tailwind applies for 3 turns (Gen4) or 4 turns (Gen5+)")
         TURN {}
     } SCENE {
         MESSAGE("Wobbuffet avversario usa\nCelebrate!");
-        MESSAGE("Wobbuffet usa\nTailwind!");
+        MESSAGE("Wobbuffet usa\nVentoincoda!");
 
         MESSAGE("Wobbuffet usa\nCelebrate!");
         MESSAGE("Wobbuffet avversario usa\nCelebrate!");
@@ -52,7 +52,7 @@ DOUBLE_BATTLE_TEST("Tailwind doesn't affect the partner on the same turn it's us
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_TAILWIND); }
     } SCENE {
-        MESSAGE("Wobbuffet usa\nTailwind!");
+        MESSAGE("Wobbuffet usa\nVentoincoda!");
         MESSAGE("Wobbuffet avversario usa\nCelebrate!");
         MESSAGE("Wynaut avversario usa\nCelebrate!");
         MESSAGE("Wynaut usa\nCelebrate!");
@@ -70,7 +70,7 @@ DOUBLE_BATTLE_TEST("Tailwind affects the partner on the same turn it's used (Gen
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_TAILWIND); }
     } SCENE {
-        MESSAGE("Wobbuffet usa\nTailwind!");
+        MESSAGE("Wobbuffet usa\nVentoincoda!");
         MESSAGE("Wynaut usa\nCelebrate!");
         MESSAGE("Wobbuffet avversario usa\nCelebrate!");
         MESSAGE("Wynaut avversario usa\nCelebrate!");

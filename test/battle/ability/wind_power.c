@@ -243,19 +243,19 @@ DOUBLE_BATTLE_TEST("Wind Power activates correctly when Tailwind is used")
             ANIMATION(ANIM_TYPE_MOVE, MOVE_TAILWIND, opponentLeft);
 
             ABILITY_POPUP(opponentLeft, ABILITY_WIND_POWER);
-            MESSAGE("Being hit by Tailwind charged the opposing Wattrel with power!");
+            MESSAGE("Being hit by Ventoincoda charged the opposing Wattrel with power!");
 
             ABILITY_POPUP(opponentRight, ABILITY_WIND_POWER);
-            MESSAGE("Being hit by Tailwind charged the opposing Wattrel with power!");
+            MESSAGE("Being hit by Ventoincoda charged the opposing Wattrel with power!");
         }
         else {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_TAILWIND, playerLeft);
 
             ABILITY_POPUP(playerLeft, ABILITY_WIND_POWER);
-            MESSAGE("Being hit by Tailwind charged Wattrel with power!");
+            MESSAGE("Being hit by Ventoincoda charged Wattrel with power!");
 
             ABILITY_POPUP(playerRight, ABILITY_WIND_POWER);
-            MESSAGE("Being hit by Tailwind charged Wattrel with power!");
+            MESSAGE("Being hit by Ventoincoda charged Wattrel with power!");
         }
     }
 }
@@ -294,7 +294,7 @@ DOUBLE_BATTLE_TEST("Tailwind does not trigger Wind Power on an absent ally battl
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TAILWIND, playerLeft);
         NONE_OF {
             ABILITY_POPUP(playerRight, ABILITY_WIND_POWER);
-            MESSAGE("Being hit by Tailwind charged Wattrel with power!");
+            MESSAGE("Being hit by Ventoincoda charged Wattrel with power!");
         }
     }
 }

@@ -74,7 +74,8 @@ Assert-Contains $species '.frontPic = gMonFrontPic_Cingerm' 'Cingerm non usa pi�
 Assert-Contains $species '.backPic = gMonBackPic_Cingerm' 'Cingerm non usa più il back sprite originale.'
 Assert-Contains $species '.frontPic = gMonFrontPic_Serbrace' 'Serbrace non usa il front sprite originale.'
 Assert-Contains $species '.backPic = gMonBackPic_Serbrace' 'Serbrace non usa il back sprite originale.'
-Assert-Contains $species '.frontPic = gMonFrontPic_Ducklett' 'Ardeino non conserva il segnaposto previsto.'
+Assert-Contains $species '.frontPic = gMonFrontPic_Ardeino' 'Ardeino non usa il front sprite originale.'
+Assert-Contains $species '.backPic = gMonBackPic_Ardeino' 'Ardeino non usa il back sprite originale.'
 
 foreach ($heading in @('static const u8 sTextAbilityTitle[] = _("ABILITÀ");', 'static const u8 sTextTrainerMemoTitle[] = _("MEMO ALLENATORE");')) {
     Assert-Contains $summary $heading "Intestazione italiana mancante: $heading"

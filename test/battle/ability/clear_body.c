@@ -397,11 +397,11 @@ SINGLE_BATTLE_TEST("Clear Body, Full Metal Body, and White Smoke don't prevent S
         TURN {}
     } SCENE {
         if (ability == ABILITY_FULL_METAL_BODY)
-            MESSAGE("Solgaleo avversario usa\nAgility!");
+            MESSAGE("Solgaleo avversario usa\nAgilità!");
         else if (ability == ABILITY_WHITE_SMOKE)
-            MESSAGE("Torkoal avversario usa\nAgility!");
+            MESSAGE("Torkoal avversario usa\nAgilità!");
         else
-            MESSAGE("Metang avversario usa\nAgility!");
+            MESSAGE("Metang avversario usa\nAgilità!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_AGILITY, opponent);
         MESSAGE("Wobbuffet usa\nCelebrate!");
         if (ability == ABILITY_FULL_METAL_BODY)

@@ -115,17 +115,17 @@ DOUBLE_BATTLE_TEST("Court Change used by the player swaps Mist, Safeguard, Auror
         TURN {}
     } SCENE {
         MESSAGE("Wynaut usa\nSnowscape!");
-        MESSAGE("Wobbuffet avversario usa\nMist!");
+        MESSAGE("Wobbuffet avversario usa\nNebbia!");
         MESSAGE("Wobbuffet avversario usa\nSafeguard!");
         MESSAGE("Wobbuffet avversario usa\nAurora Veil!");
         MESSAGE("Wobbuffet avversario usa\nReflect!");
         MESSAGE("Wobbuffet avversario usa\nLight Screen!");
-        MESSAGE("Wobbuffet avversario usa\nTailwind!");
+        MESSAGE("Wobbuffet avversario usa\nVentoincoda!");
         MESSAGE("Wynaut usa\nCourt Change!");
         MESSAGE("Wynaut swapped the battle effects affecting each side of the field!");
         // The effects now end for the player side.
         MESSAGE("Your team is no longer protected by Safeguard!");
-        MESSAGE("Your team's Mist wore off!");
+        MESSAGE("Your team's Nebbia wore off!");
         MESSAGE("Your team's Reflect wore off!");
         MESSAGE("Your team's Tailwind petered out!");
         MESSAGE("Your team's Aurora Veil wore off!");
@@ -153,18 +153,18 @@ DOUBLE_BATTLE_TEST("Court Change used by the opponent swaps Mist, Safeguard, Aur
         TURN {}
         TURN {}
     } SCENE {
-        MESSAGE("Wobbuffet usa\nMist!");
+        MESSAGE("Wobbuffet usa\nNebbia!");
         MESSAGE("Wobbuffet usa\nSafeguard!");
         MESSAGE("Wobbuffet usa\nAurora Veil!");
         MESSAGE("Wobbuffet usa\nReflect!");
         MESSAGE("Wobbuffet usa\nLight Screen!");
-        MESSAGE("Wobbuffet usa\nTailwind!");
+        MESSAGE("Wobbuffet usa\nVentoincoda!");
         MESSAGE("Wynaut avversario usa\nCourt Change!");
         MESSAGE("The opposing Wynaut swapped the battle effects affecting each side of the field!");
         // The effects now end for the player side.
         MESSAGE("The snow stopped.");
         MESSAGE("The opposing team is no longer protected by Safeguard!");
-        MESSAGE("The opposing team's Mist wore off!");
+        MESSAGE("The opposing team's Nebbia wore off!");
         MESSAGE("The opposing team's Reflect wore off!");
         MESSAGE("The opposing team's Tailwind petered out!");
         MESSAGE("The opposing team's Aurora Veil wore off!");

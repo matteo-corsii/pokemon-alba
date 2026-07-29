@@ -13,7 +13,7 @@ SINGLE_BATTLE_TEST("Magic Bounce bounces back status moves")
     } SCENE {
         ABILITY_POPUP(opponent, ABILITY_MAGIC_BOUNCE);
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_TOXIC, player);
-        MESSAGE("Wynaut's Toxic was bounced back!");
+        MESSAGE("Wynaut's Tossina was bounced back!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TOXIC, opponent);
         STATUS_ICON(player, badPoison: TRUE);
     }
@@ -199,7 +199,7 @@ SINGLE_BATTLE_TEST("Magic Bounce bounced back status moves can not be bounced ba
     } SCENE {
         ABILITY_POPUP(opponent, ABILITY_MAGIC_BOUNCE);
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_TOXIC, player);
-        MESSAGE("Espeon's Toxic was bounced back!");
+        MESSAGE("Espeon's Tossina was bounced back!");
         NOT ABILITY_POPUP(player, ABILITY_MAGIC_BOUNCE);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TOXIC, opponent);
         STATUS_ICON(player, badPoison: TRUE);

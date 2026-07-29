@@ -429,7 +429,6 @@ TEST("Cingerm original graphics replace only its Lechonk placeholders")
         SPECIES_SELVAZANNA,
         SPECIES_VIPERCEN,
         SPECIES_TOSSIVAMPA,
-        SPECIES_ARDEINO,
         SPECIES_VELAIRONE,
         SPECIES_CODAIRONE,
     };
@@ -438,7 +437,6 @@ TEST("Cingerm original graphics replace only its Lechonk placeholders")
         SPECIES_MAMOSWINE,
         SPECIES_ARBOK,
         SPECIES_SEVIPER,
-        SPECIES_DUCKLETT,
         SPECIES_SWANNA,
         SPECIES_BOMBIRDIER,
     };
@@ -547,10 +545,76 @@ TEST("Serbrace original graphics replace only its Ekans placeholders")
     // The other two starter graphics retain their approved states.
     EXPECT(cingerm->frontPic != lechonk->frontPic);
     EXPECT(cingerm->backPic != lechonk->backPic);
-    EXPECT(ardeino->frontPic == ducklett->frontPic);
-    EXPECT(ardeino->backPic == ducklett->backPic);
-    EXPECT(ardeino->palette == ducklett->palette);
-    EXPECT(ardeino->iconSprite == ducklett->iconSprite);
+    EXPECT(ardeino->frontPic != ducklett->frontPic);
+    EXPECT(ardeino->backPic != ducklett->backPic);
+    EXPECT(ardeino->palette != ducklett->palette);
+    EXPECT(ardeino->iconSprite != ducklett->iconSprite);
+}
+
+TEST("Ardeino original graphics replace only its Ducklett placeholders")
+{
+    const struct SpeciesInfo *ardeino = &gSpeciesInfo[SPECIES_ARDEINO];
+    const struct SpeciesInfo *ducklett = &gSpeciesInfo[SPECIES_DUCKLETT];
+    const struct SpeciesInfo *cingerm = &gSpeciesInfo[SPECIES_CINGERM];
+    const struct SpeciesInfo *lechonk = &gSpeciesInfo[SPECIES_LECHONK];
+    const struct SpeciesInfo *serbrace = &gSpeciesInfo[SPECIES_SERBRACE];
+    const struct SpeciesInfo *ekans = &gSpeciesInfo[SPECIES_EKANS];
+    const struct Evolution *evolutions = GetSpeciesEvolutions(SPECIES_ARDEINO);
+
+    EXPECT(ardeino->frontPic != NULL);
+    EXPECT(ardeino->backPic != NULL);
+    EXPECT(ardeino->palette != NULL);
+    EXPECT(ardeino->shinyPalette != NULL);
+    EXPECT(ardeino->iconSprite != NULL);
+    EXPECT(ardeino->frontAnimFrames != NULL);
+    EXPECT(ardeino->frontPic != ducklett->frontPic);
+    EXPECT(ardeino->backPic != ducklett->backPic);
+    EXPECT(ardeino->palette != ducklett->palette);
+    EXPECT(ardeino->shinyPalette != ducklett->shinyPalette);
+    EXPECT(ardeino->iconSprite != ducklett->iconSprite);
+    EXPECT(ardeino->frontAnimFrames != ducklett->frontAnimFrames);
+    EXPECT_EQ(ardeino->frontPicSize, (7 << 4) | 8);
+    EXPECT_EQ(ardeino->backPicSize, (5 << 4) | 8);
+    EXPECT_EQ(ardeino->frontPicYOffset, 3);
+    EXPECT_EQ(ardeino->backPicYOffset, 4);
+    EXPECT_EQ((u32)ardeino->iconPalIndex, 3);
+
+    // Gameplay data and the remaining audiovisual placeholders stay unchanged.
+    EXPECT_EQ(ardeino->baseHP, 50);
+    EXPECT_EQ(ardeino->baseAttack, 45);
+    EXPECT_EQ(ardeino->baseDefense, 50);
+    EXPECT_EQ(ardeino->baseSpeed, 45);
+    EXPECT_EQ(ardeino->baseSpAttack, 65);
+    EXPECT_EQ(ardeino->baseSpDefense, 55);
+    EXPECT_EQ(ardeino->types[0], TYPE_WATER);
+    EXPECT_EQ(ardeino->types[1], TYPE_WATER);
+    EXPECT_EQ(ardeino->abilities[0], ABILITY_TORRENT);
+    EXPECT_EQ(ardeino->abilities[1], ABILITY_NONE);
+    EXPECT_EQ(ardeino->abilities[2], ABILITY_HYDRATION);
+    EXPECT_EQ((u32)ardeino->cryId, CRY_DUCKLETT);
+    EXPECT_EQ(ardeino->backAnimId, ducklett->backAnimId);
+    EXPECT_EQ(ardeino->enemyShadowXOffset, ducklett->enemyShadowXOffset);
+    EXPECT_EQ(ardeino->enemyShadowYOffset, ducklett->enemyShadowYOffset);
+    EXPECT_EQ((u32)ardeino->enemyShadowSize, (u32)ducklett->enemyShadowSize);
+    EXPECT(evolutions != NULL);
+    EXPECT_EQ(evolutions[0].method, EVO_LEVEL);
+    EXPECT_EQ(evolutions[0].param, 16);
+    EXPECT_EQ(evolutions[0].targetSpecies, SPECIES_VELAIRONE);
+#if P_FOOTPRINTS
+    EXPECT(ardeino->footprint == ducklett->footprint);
+#endif
+#if OW_POKEMON_OBJECT_EVENTS
+    EXPECT(ardeino->overworldData.images == ducklett->overworldData.images);
+#if OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
+    EXPECT(ardeino->overworldPalette == ducklett->overworldPalette);
+    EXPECT(ardeino->overworldShinyPalette == ducklett->overworldShinyPalette);
+#endif
+#endif
+
+    EXPECT(cingerm->frontPic != lechonk->frontPic);
+    EXPECT(cingerm->backPic != lechonk->backPic);
+    EXPECT(serbrace->frontPic != ekans->frontPic);
+    EXPECT(serbrace->backPic != ekans->backPic);
 }
 
 TEST("Ausonia Fire starter base data matches the approved prototype")
@@ -759,7 +823,7 @@ TEST("Ausonia Water starter level-up learnsets are complete and ordered")
     }
 }
 
-TEST("Ausonia Water starter placeholder assets and Pokédex data are valid")
+TEST("Ausonia Water starter graphics and Pokédex data are valid")
 {
     static const enum Species species[] = { SPECIES_ARDEINO, SPECIES_VELAIRONE, SPECIES_CODAIRONE };
     static const enum PokemonCry cries[] = { CRY_DUCKLETT, CRY_SWANNA, CRY_BOMBIRDIER };

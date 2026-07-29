@@ -32,6 +32,13 @@ const u32 gMonBackPic_Serbrace[] = INCGFX_U32("graphics/pokemon/serbrace/back.pn
 const u16 gMonShinyPalette_Serbrace[] = INCGFX_U16("graphics/pokemon/serbrace/shiny.pal", ".gbapal");
 const u8 gMonIcon_Serbrace[] = INCGFX_U8("graphics/pokemon/serbrace/icon.png", ".4bpp");
 
+// Pokémon Alba: original battle and menu graphics for Ardeino.
+const u32 gMonFrontPic_Ardeino[] = INCGFX_U32("graphics/pokemon/ardeino/anim_front.png", ".4bpp.smol");
+const u16 gMonPalette_Ardeino[] = INCGFX_U16("graphics/pokemon/ardeino/normal.pal", ".gbapal");
+const u32 gMonBackPic_Ardeino[] = INCGFX_U32("graphics/pokemon/ardeino/back.png", ".4bpp.smol");
+const u16 gMonShinyPalette_Ardeino[] = INCGFX_U16("graphics/pokemon/ardeino/shiny.pal", ".gbapal");
+const u8 gMonIcon_Ardeino[] = INCGFX_U8("graphics/pokemon/ardeino/icon.png", ".4bpp");
+
 #if P_FAMILY_BULBASAUR
 #if !P_GBA_STYLE_SPECIES_GFX
     const u32 gMonFrontPic_Bulbasaur[] = INCGFX_U32("graphics/pokemon/bulbasaur/anim_front.png", ".4bpp.smol");
