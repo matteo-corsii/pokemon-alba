@@ -67,9 +67,16 @@ di gioco. Lia riceve narrativamente la terza specie e non combatte.
 
 - Lo starter viene creato una sola volta durante lo script bloccante.
 - Lo stato viene avanzato prima e dopo lo selector per impedire riaperture.
+- L'ingresso nel laboratorio lascia il controllo al giocatore; una linea di
+  trigger vicina al gruppo normalizza la posizione prima di iniziare la scena.
+- Nico avanza verso il giocatore prima della lotta e le orientazioni del gruppo
+  vengono ripristinate al ritorno dalla battaglia.
 - La battaglia usa il flusso nativo `trainerbattle_earlyrival` con cura dopo
   la sconfitta; lo script cura la squadra dopo la vittoria e converge in
   entrambi gli esiti.
+- Il solo flag `RIVAL_BATTLE_HEAL_AFTER` non attiva più
+  `BATTLE_TYPE_FIRST_BATTLE`: la lotta resta una normale battaglia tra
+  allenatori e non richiama il tutorial di Oak/FRLG.
 - L'incarico imposta lo stato di Route 101 a `3`, nasconde borsa, Lauro e
   Pokémon del salvataggio vanilla, e nasconde il rivale alternativo di Route
   103 senza cancellarne gli script.
@@ -101,6 +108,12 @@ transizioni del laboratorio, sprite e icona, assenza di duplicazioni, esito di
 vittoria e sconfitta, rilevazione di Lia, incarico, accesso a Route 101,
 salvataggio/caricamento e ritorno ad Albèra. La verifica manuale resta aperta
 fino alla build privata successiva al merge.
+
+La regressione correttiva richiede inoltre tre prove separate della battaglia:
+vittoria senza oggetti, vittoria usando una Pozione e sconfitta volontaria. In
+tutti i casi verificare che Serbrace non fugga, che i messaggi di uso, recupero
+PS e richiamo siano in italiano, che il flusso converga senza crash e che
+rientrando nel laboratorio l'evento non riparta.
 
 ## Fuori ambito
 
