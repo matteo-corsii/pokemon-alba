@@ -43,6 +43,10 @@ If you're new to git and GitHub, [Team Aqua's Asset Repo](https://github.com/Paw
 
 For detailed documentation, visit the [pokeemerald-expansion documentation page](https://rh-hideout.github.io/pokeemerald-expansion/).
 
+Pokémon Alba team contributions follow the local
+[`docs/TEAM_WORKFLOW.md`](docs/TEAM_WORKFLOW.md), which defines task briefs,
+file ownership, Git handoff and review responsibilities.
+
 # [Contributions](CONTRIBUTING.md)
 If you are looking to [report a bug](CONTRIBUTING.md#Bug-Report), [open a pull request](CONTRIBUTING.md#Pull-Requests), or [request a feature](CONTRIBUTING.md#Feature-Request), our [`CONTRIBUTING.md`](CONTRIBUTING.md) has guides for each.
 

@@ -12,6 +12,24 @@ gli eventi e gli interni esistenti, la musica, il meteo, il tipo di mappa, la
 destinazione Fly e le heal location. Il prototipo usa soltanto i tileset
 `General` e `Petalburg`.
 
+## Progressione geografica approvata
+
+La sequenza canonica futura è:
+
+`Albèra Bassa → Via Verdi → Porta Pretoria → Albèra Storica → Anfiteatro Romano / prima Palestra → Via Consolare → Lago di Albèra`.
+
+La mappa descritta in questo documento rappresenta **Albèra Bassa**. Comprende
+Via dell'Armonia, casa del protagonista, casa di Lia, scuola, campetto,
+Laboratorio del Cratere e musicisti. Le altre tappe sono pianificate e non sono
+ancora presenti nella mappa.
+
+La connessione nord usa ancora internamente `Route101`. Il suo nome visibile
+approvato è **Via Verdi**, in omaggio a Giuseppe Verdi e al paesaggio verde; gli
+identificatori e le directory non devono essere rinominati. Via Verdi condurrà
+a Porta Pretoria e quindi ad Albèra Storica. Quest'ultima comprenderà strada e
+piazza storiche, Anfiteatro Romano con la prima Palestra, servizi cittadini,
+storia idraulica e una futura connessione permanente con Albèra Bassa.
+
 ## Pianta concettuale
 
 ```text
@@ -124,6 +142,23 @@ Il salvataggio vanilla di Lauro resta conservato negli script ma viene saltato
 dal nuovo stato di progressione; anche la battaglia alternativa di Route 103 è
 nascosta. L'ingresso in Route 101 registra il checkpoint stabile della
 milestone, senza sviluppare l'evento principale dell'area successiva.
+
+## Milestone successiva pianificata
+
+**Via Verdi — Prima indagine sulle sorgenti** è approvata ma non implementata.
+Lauro consegnerà esattamente **10 Poké Ball** e affiderà un sopralluogo su un
+percorso verde e collinare con sorgenti, canaletti, terreno umido e tracce di
+canalizzazioni antiche. Le catture resteranno facoltative e non sarà presente
+un tutorial lungo o obbligatorio.
+
+Lia guiderà tre punti concettuali di rilevazione: un canale o una sorgente quasi
+asciutta con terreno ancora umido; un'area attraversata o evitata in modo
+anomalo dai Pokémon; un'antica canalizzazione vicina a Porta Pretoria. Nico
+avrà una breve presenza senza battaglia. Nella conclusione, un suono profondo e
+un lieve tremore accompagneranno una variazione o un arresto del flusso, seguiti
+dalla ripresa improvvisa dell'acqua. Non sono ancora definiti coordinate,
+dialoghi, flag, variabili o script. Non fanno parte della milestone antagonisti,
+leggendari, disastri, una seconda lotta con Nico o la Palestra.
 
 I cartelli di scuola, campetto e strade chiuse restano rinviati finché il
 prototipo non disporrà di metatile-segnaletica chiaramente riconoscibili; non
