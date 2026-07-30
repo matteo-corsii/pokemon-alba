@@ -17,11 +17,18 @@ collocazioni definitive e non rende ottenibile alcuna nuova specie.
 - **NAME REVIEW:** nome da rivedere.
 - **LINE REVIEW:** struttura evolutiva da decidere.
 - **TYPE REVIEW:** typing da riequilibrare.
+- **BALANCE PROVISIONAL:** livello evolutivo, statistiche, abilità o altri
+  parametri tecnici ancora da confermare.
+- **PLACEMENT CANDIDATE:** area generale approvata come direzione, ma
+  coordinate, tassi e tabelle di incontro ancora da definire.
 - **PLACEMENT TBD:** collocazione non approvata.
+- **RETIRED WORKING NAME:** vecchio nome conservato soltanto come riferimento
+  storico e non conteggiato come specie attiva.
 - **POSSIBLE CUT:** concetto conservato ma potenzialmente eliminabile.
 
-Tutte le specie diverse dai nove starter partono come proposte. La presenza in
-questo catalogo non le promuove automaticamente a canone.
+Le specie diverse dai nove starter restano proposte salvo quando sono marcate
+esplicitamente **CANONICAL DESIGN**. Anche in quel caso, la presenza nel
+catalogo non equivale a implementazione o disponibilità nel gameplay.
 Nessun concetto è marcato **POSSIBLE CUT** in questa prima ricognizione, perché
 le fonti non indicano quale eliminare; lo stato resta disponibile per una
 futura decisione esplicita di review.
@@ -50,19 +57,25 @@ fra documentazione e sorgenti; **Vipercen** è la grafia implementata corretta.
 Il materiale iniziale usa una numerazione concettuale non sempre equivalente
 al numero di specie distinte:
 
-- Ghepio → Tinuncol è una famiglia proposta, ma contiene due specie nominate;
+- Ghepio → Tinuncol → Peregrinus è una famiglia approvata di tre specie;
+- Gazzuola → Brillazza → Gazzombra aggiunge una nuova famiglia di tre specie;
+- Lumella, Luscinco e Tritino aggiungono uno stadio alle rispettive famiglie
+  già censite;
 - Brinix e Glaciterno sono due concetti separati e potrebbero formare una linea,
   senza che il legame sia approvato;
 - Porchemecha o Bronzoverro è un solo concetto con due nomi alternativi;
+- Salampolla → Alchimandra sostituisce Saladoct come concetto attivo;
+  Saladoct resta soltanto un'etichetta storica;
 - le altre specie singole potrebbero ricevere stadi evolutivi futuri.
 
-Il catalogo censisce **24 famiglie o concetti**. Contiene **34 etichette
-nominali**, che corrispondono ad almeno **33 specie distinte nominate**:
-Porchemecha/Bronzoverro conta una volta, mentre le due forme di ciascuna linea
-esplicita contano separatamente. Il totale finale resta **TBD** perché linee
-come Brinix/Glaciterno non sono deliberate, diversi concetti singoli possono
-ottenere evoluzioni e l'ecosistema regionale presenta ancora lacune. Non sono
-assegnati numeri Pokédex regionali definitivi.
+Il catalogo censisce **25 famiglie o concetti**. Contiene **43 etichette
+nominali**, includendo Porchemecha e Bronzoverro come alternative e Saladoct
+come vecchio nome di lavorazione. Le etichette corrispondono ad almeno **41
+specie attive distinte attualmente nominate**: Porchemecha/Bronzoverro conta
+una volta e Saladoct non conta come specie attiva. Il totale finale resta
+**TBD** perché linee come Brinix/Glaciterno non sono deliberate, diversi
+concetti singoli possono ottenere evoluzioni e l'ecosistema regionale presenta
+ancora lacune. Non sono assegnati numeri Pokédex regionali definitivi.
 
 ## Implemented starter families
 
@@ -226,65 +239,115 @@ assegnati numeri Pokédex regionali definitivi.
 - **Open questions:** nomi, tipo base, metodo di ottenimento/evoluzione,
   statistiche e collocazione.
 
-## Other candidate concepts
+## Other regional concepts
 
-### Ghepio → Tinuncol
+### Ghepio → Tinuncol → Peregrinus
 
 - **Temporary family ID:** `AUS-FAM-FALCON`
-- **Species/stages:** Ghepio → Tinuncol.
-- **Current status:** CANDIDATE, LINE REVIEW, PLACEMENT TBD.
-- **Proposed typing:** Volante.
-- **Core concept:** falco dei borghi e possibile volatile regionale.
-- **Real-world inspiration:** gheppio e *Falco tinnunculus*.
-- **Evolution structure:** linea a due stadi proposta.
-- **Primary habitat candidate:** borghi e margini urbani, da approvare.
-- **Secondary habitat candidates:** campagne e alture, TBD.
-- **Earliest story band candidate:** possible candidate nelle prime aree.
-- **Gameplay role candidate:** volatile regionale comune.
+- **Species/stages:** Ghepio → Tinuncol → Peregrinus.
+- **Current status:** CANONICAL DESIGN; non implementata; PLACEMENT CANDIDATE;
+  parametri tecnici BALANCE PROVISIONAL.
+- **Proposed typing:** Ghepio Volante; Tinuncol Volante; Peregrinus
+  Volante/Lotta.
+- **Core concept:** linea di falconidi prevalentemente diurna, offensiva,
+  rapida e basata sulla picchiata.
+- **Real-world inspiration:** gheppio, *Falco tinnunculus* e falco pellegrino;
+  Peregrinus deriva direttamente da *Falco peregrinus*.
+- **Evolution structure:** linea canonica a tre stadi; livelli evolutivi
+  BALANCE PROVISIONAL.
+- **Primary habitat candidate:** Via Verdi durante il giorno per Ghepio;
+  PLACEMENT CANDIDATE, senza rendere l'orario un'esclusiva assoluta.
+- **Secondary habitat candidates:** campagne, borghi e alture; PLACEMENT
+  CANDIDATE.
+- **Earliest story band candidate:** Via Verdi per il primo stadio.
+- **Gameplay role candidate:** attaccante rapido basato sulla picchiata;
+  statistiche e learnset BALANCE PROVISIONAL.
 - **Narrative importance:** ordinaria; nessun ruolo narrativo approvato.
-- **Name review:** entrambi i nomi restano proposti.
-- **Type review:** tipo secondario non deciso.
-- **Placement review:** PLACEMENT TBD.
-- **Open questions:** nomi, metodo evolutivo, secondo tipo e distribuzione.
+- **Name review:** linea e nomi approvati.
+- **Type review:** tipi approvati per tutti e tre gli stadi.
+- **Placement review:** frequenze, orari esatti e presenza degli stadi evoluti
+  allo stato selvatico restano TBD.
+- **Open questions:** livelli evolutivi, abilità, statistiche, learnset,
+  frequenze, orari esatti e distribuzione degli stadi evoluti.
 
-### Omphalux
+### Gazzuola → Brillazza → Gazzombra
+
+- **Temporary family ID:** `AUS-FAM-MAGPIE`
+- **Species/stages:** Gazzuola → Brillazza → Gazzombra.
+- **Current status:** CANONICAL DESIGN; non implementata; PLACEMENT CANDIDATE;
+  parametri tecnici BALANCE PROVISIONAL.
+- **Proposed typing:** Gazzuola Normale/Volante; Brillazza Buio/Volante;
+  Gazzombra Buio/Volante.
+- **Core concept:** linea della gazza: curiosità, attrazione per oggetti
+  brillanti e infine comportamento furtivo.
+- **Real-world inspiration:** gazze e loro comportamento opportunista e
+  attrazione per oggetti luminosi.
+- **Evolution structure:** linea canonica a tre stadi; livelli evolutivi TBD.
+- **Primary habitat candidate:** borghi, giardini, rovine, fontane e strade;
+  PLACEMENT CANDIDATE.
+- **Secondary habitat candidates:** Via Verdi e Albèra Storica per Gazzuola;
+  presenza prevalentemente crepuscolare e notturna, ma non esclusiva.
+- **Earliest story band candidate:** Via Verdi per la forma base.
+- **Gameplay role candidate:** Gazzuola ha l'abilità approvata Raccolta
+  (Pickup); ruolo, statistiche e learnset degli stadi evoluti restano TBD.
+- **Narrative importance:** fauna opportunista di borghi e rovine; nessun
+  evento narrativo approvato.
+- **Name review:** linea e nomi approvati.
+- **Type review:** tipi approvati per tutti e tre gli stadi.
+- **Placement review:** tassi e fasce orarie precise restano TBD.
+- **Open questions:** livelli evolutivi, statistiche, learnset, seconda
+  abilità, abilità nascoste e abilità definitive di Brillazza e Gazzombra.
+
+### Lumella → Omphalux
 
 - **Temporary family ID:** `AUS-CONCEPT-OMPHALUX`
-- **Species/stages:** Omphalux, singolo stadio provvisorio.
-- **Current status:** CANDIDATE, LINE REVIEW, PLACEMENT TBD.
-- **Proposed typing:** Erba/Elettro.
-- **Core concept:** fungo dell'olivo notturno o bioluminescente.
-- **Real-world inspiration:** *Omphalotus* e *lux*.
-- **Evolution structure:** TBD; nessuna linea approvata.
-- **Primary habitat candidate:** oliveti, possible candidate.
-- **Secondary habitat candidates:** boschi notturni, TBD.
-- **Earliest story band candidate:** premature/TBD.
-- **Gameplay role candidate:** incontro notturno o specie a illuminazione.
-- **Narrative importance:** nessuna definita.
-- **Name review:** nome candidato, non canonico.
-- **Type review:** combinazione proposta da validare.
-- **Placement review:** PLACEMENT TBD.
-- **Open questions:** linea, meccanica notturna, abilità e distribuzione.
+- **Species/stages:** Lumella → Omphalux.
+- **Current status:** CANONICAL DESIGN; non implementata; PLACEMENT CANDIDATE;
+  evoluzione BALANCE PROVISIONAL.
+- **Proposed typing:** Lumella Erba; Omphalux Erba/Elettro.
+- **Core concept:** linea notturna di funghi bioluminescenti legati agli olivi.
+- **Real-world inspiration:** *Omphalotus*, oliveti e bioluminescenza.
+- **Evolution structure:** linea canonica a due stadi; evoluzione di lavoro al
+  livello 22 durante la notte, BALANCE PROVISIONAL.
+- **Primary habitat candidate:** Via Consolare, oliveti e Lago di Albèra;
+  PLACEMENT CANDIDATE.
+- **Secondary habitat candidates:** Lumella rara su Via Verdi; PLACEMENT
+  CANDIDATE.
+- **Earliest story band candidate:** Via Verdi, come incontro raro notturno.
+- **Gameplay role candidate:** Omphalux lento, orientato ad Attacco Speciale e
+  disturbo; statistiche e learnset restano TBD.
+- **Narrative importance:** nessun legame causale approvato con l'anomalia
+  dell'acqua.
+- **Name review:** linea e nomi approvati.
+- **Type review:** tipi approvati per entrambi gli stadi.
+- **Placement review:** tassi e fasce orarie precise restano TBD.
+- **Open questions:** statistiche, abilità, learnset e distribuzione esatta.
 
-### Luscerp
+### Luscinco → Luscerp
 
 - **Temporary family ID:** `AUS-CONCEPT-LUSCERP`
-- **Species/stages:** Luscerp, stadio non definito.
-- **Current status:** CANDIDATE, LINE REVIEW, TYPE REVIEW, PLACEMENT TBD.
-- **Proposed typing:** Erba/Drago.
-- **Core concept:** luscengola vegetale.
-- **Real-world inspiration:** luscengola.
-- **Evolution structure:** TBD; Drago potrebbe comparire solo dopo una futura
-  evoluzione.
-- **Primary habitat candidate:** aree erbose o pietrose, da approvare.
-- **Secondary habitat candidates:** campagne e margini boschivi, TBD.
-- **Earliest story band candidate:** premature/TBD.
-- **Gameplay role candidate:** rettile Erba; ruolo da definire.
-- **Narrative importance:** nessuna definita.
-- **Name review:** nome candidato, non canonico.
-- **Type review:** decidere se e quando assegnare Drago.
-- **Placement review:** PLACEMENT TBD.
-- **Open questions:** linea evolutiva, typing per stadio e habitat.
+- **Species/stages:** Luscinco → Luscerp.
+- **Current status:** CANONICAL DESIGN; non implementata; PLACEMENT CANDIDATE;
+  evoluzione e abilità BALANCE PROVISIONAL.
+- **Proposed typing:** Luscinco Erba; Luscerp Erba/Drago.
+- **Core concept:** linea terrestre e prevalentemente diurna ispirata a
+  luscengola e scinco.
+- **Real-world inspiration:** luscengole, scinchi, rive erbose e muretti.
+- **Evolution structure:** linea canonica a due stadi; evoluzione di lavoro al
+  livello 24, BALANCE PROVISIONAL; il tipo Drago compare solo in Luscerp.
+- **Primary habitat candidate:** rive erbose e muretti del Lago di Albèra;
+  PLACEMENT CANDIDATE.
+- **Secondary habitat candidates:** Luscinco raro su Via Verdi e più comune su
+  Via Consolare; PLACEMENT CANDIDATE.
+- **Earliest story band candidate:** Via Verdi, come incontro raro.
+- **Gameplay role candidate:** Luscerp fisico e rapido; Muta resta un'abilità
+  candidata e BALANCE PROVISIONAL, non approvata definitivamente.
+- **Narrative importance:** nessun legame narrativo causale con l'anomalia.
+- **Name review:** linea e nomi approvati.
+- **Type review:** tipi approvati per entrambi gli stadi.
+- **Placement review:** frequenze e orari esatti restano TBD.
+- **Open questions:** statistiche, learnset, abilità definitiva e
+  distribuzione esatta.
 
 ### Fragmagma
 
@@ -325,25 +388,31 @@ assegnati numeri Pokédex regionali definitivi.
 - **Placement review:** PLACEMENT TBD.
 - **Open questions:** linea, habitat, rarità e relazione con le sorgenti.
 
-### Tricrest
+### Tritino → Tricrest
 
 - **Temporary family ID:** `AUS-CONCEPT-TRICREST`
-- **Species/stages:** Tricrest, stadio non definito.
-- **Current status:** CANDIDATE, LINE REVIEW, TYPE REVIEW, PLACEMENT TBD.
-- **Proposed typing:** Acqua/Drago.
-- **Core concept:** tritone crestato.
-- **Real-world inspiration:** tritone crestato e zone umide.
-- **Evolution structure:** TBD.
-- **Primary habitat candidate:** ambiente lacustre o zona umida, da approvare.
-- **Secondary habitat candidates:** sorgenti o stagni, TBD.
-- **Earliest story band candidate:** premature/TBD.
-- **Gameplay role candidate:** specie acquatica rara o intermedia, da definire.
-- **Narrative importance:** nessuna definita.
-- **Name review:** nome candidato, non canonico.
-- **Type review:** decidere se Drago sia appropriato e a quale stadio.
-- **Placement review:** PLACEMENT TBD; non è assegnato automaticamente al Lago
-  di Albèra.
-- **Open questions:** linea, typing, frequenza e habitat definitivo.
+- **Species/stages:** Tritino → Tricrest.
+- **Current status:** CANONICAL DESIGN; non implementata; PLACEMENT CANDIDATE;
+  evoluzione e abilità BALANCE PROVISIONAL.
+- **Proposed typing:** Tritino Acqua; Tricrest Acqua/Drago.
+- **Core concept:** linea lacustre a due stadi ispirata al tritone crestato.
+- **Real-world inspiration:** tritoni crestati, raccolte d'acqua e ambienti
+  lacustri.
+- **Evolution structure:** linea canonica a due stadi; evoluzione di lavoro al
+  livello 27, BALANCE PROVISIONAL.
+- **Primary habitat candidate:** Lago di Albèra; PLACEMENT CANDIDATE.
+- **Secondary habitat candidates:** Tritino molto raro presso raccolte d'acqua
+  di Via Consolare e assente dagli incontri normali di Via Verdi; Tricrest
+  selvatico candidato solo per aree più avanzate o profonde.
+- **Earliest story band candidate:** Via Consolare per Tritino, molto raro.
+- **Gameplay role candidate:** Tritino resistente e più orientato al lato
+  speciale; Assorbacqua è candidata principale ma non definitiva.
+- **Narrative importance:** reagisce alle anomalie di pressione, ma non ne è
+  la causa.
+- **Name review:** linea e nomi approvati.
+- **Type review:** tipi approvati per entrambi gli stadi.
+- **Placement review:** tassi e posizione degli stadi evoluti restano TBD.
+- **Open questions:** statistiche, learnset, abilità definitiva e frequenze.
 
 ### Porchemecha / Bronzoverro
 
@@ -365,25 +434,31 @@ assegnati numeri Pokédex regionali definitivi.
 - **Placement review:** PLACEMENT TBD.
 - **Open questions:** nome, struttura evolutiva, habitat e rarità.
 
-### Saladoct
+### Salampolla → Alchimandra
 
 - **Temporary family ID:** `AUS-CONCEPT-SALADOCT`
-- **Species/stages:** Saladoct, singolo stadio provvisorio.
-- **Current status:** CANDIDATE, NAME REVIEW, LINE REVIEW, PLACEMENT TBD.
-- **Proposed typing:** Veleno/Folletto.
-- **Core concept:** salamandrina alchemica.
+- **Species/stages:** Salampolla → Alchimandra. Saladoct è un RETIRED WORKING
+  NAME e non una specie attiva separata.
+- **Current status:** CANONICAL DESIGN; non implementata; PLACEMENT CANDIDATE;
+  evoluzione BALANCE PROVISIONAL.
+- **Proposed typing:** Salampolla Veleno; Alchimandra Veleno/Folletto.
+- **Core concept:** linea notturna a due stadi della salamandrina alchemica.
 - **Real-world inspiration:** salamandrina e immaginario alchemico.
-- **Evolution structure:** TBD.
-- **Primary habitat candidate:** zona umida o sito storico-alchemico, da
-  approvare.
-- **Secondary habitat candidates:** boschi umidi, cisterne o rovine, TBD.
-- **Earliest story band candidate:** premature/TBD.
-- **Gameplay role candidate:** specie tecnica basata su stato, da definire.
-- **Narrative importance:** TBD.
-- **Name review:** obbligatoria.
-- **Type review:** combinazione proposta da validare.
-- **Placement review:** PLACEMENT TBD.
-- **Open questions:** nome, linea, tono alchemico e collocazione.
+- **Evolution structure:** linea canonica a due stadi; evoluzione di lavoro al
+  livello 28 durante la notte, BALANCE PROVISIONAL.
+- **Primary habitat candidate:** sottobosco umido e rive ombrose del Lago di
+  Albèra; PLACEMENT CANDIDATE.
+- **Secondary habitat candidates:** zone umide e rive ombrose, TBD.
+- **Earliest story band candidate:** prima comparsa importante candidata
+  nell'arco del Lago di Albèra.
+- **Gameplay role candidate:** supporto, veleni, cure e controllo degli stati;
+  statistiche e learnset restano TBD.
+- **Narrative importance:** nessun legame causale approvato con l'anomalia.
+- **Name review:** Salampolla e Alchimandra approvati; Saladoct conservato solo
+  come RETIRED WORKING NAME.
+- **Type review:** tipi approvati per entrambi gli stadi.
+- **Placement review:** tassi e fasce orarie precise restano TBD.
+- **Open questions:** statistiche, abilità, learnset e distribuzione esatta.
 
 ### Naufragus
 
@@ -625,36 +700,50 @@ Pontaria, Fioralia o Nemora non vengono resi canonici da questo documento.
 | Story band | Candidate species/families | Confidence | Open dependencies |
 | --- | --- | --- | --- |
 | Albèra Bassa | nessuna nuova assegnazione | premature/TBD | ruolo della fauna urbana e riuso di Pokémon ufficiali |
-| Via Verdi | Ghepio/Tinuncol; possibili specie ufficiali | possible candidate | fauna della route, layout, curve dei livelli e approvazione separata |
+| Via Verdi | Ghepio; Gazzuola; Lumella rara; Luscinco raro; possibili specie ufficiali | PLACEMENT CANDIDATE | tassi, fasce orarie non esclusive, curve dei livelli e approvazione degli incontri |
 | Porta Pretoria | Molospsy | premature/TBD | funzione delle rovine e spazio della soglia |
-| Albèra Storica | Molospsy; Lenghelis | possible candidate | blockout, ciclo giorno/notte e tono degli eventi |
+| Albèra Storica | Gazzuola; Molospsy; Lenghelis | PLACEMENT CANDIDATE | tassi, ciclo giorno/notte e tono degli eventi |
 | Anfiteatro Romano / prima Palestra | Molospsy | premature/TBD | tipo della Palestra e funzione narrativa non decisi |
-| Via Consolare | Ghepio/Tinuncol; Luscerp | possible candidate | bioma e composizione della route non progettati |
-| Lago di Albèra | Tricrest; Naufragus | premature/TBD | fauna lacustre non approvata; Naufragus non va collocato automaticamente qui |
+| Via Consolare | Lumella; Luscinco; Tritino molto raro; linea del falco | PLACEMENT CANDIDATE | bioma, tassi e composizione della route non progettati |
+| Lago di Albèra | Lumella/Omphalux; Luscinco/Luscerp; Tritino/Tricrest; Salampolla/Alchimandra | PLACEMENT CANDIDATE | tassi, fasce orarie e presenza degli stadi evoluti; Naufragus non va collocato automaticamente qui |
 | Futura area ispirata ad Ariccia | Fraschietto | strong thematic candidate | nome in-game, bioma e linea evolutiva |
 | Futura area ispirata a Genzano o Lago di Nemi | Fragmagma | strong thematic candidate | scelta dell'area, nome in-game e bilanciamento |
 | Futura area ispirata a Monte Cavo | Brinix; Glaciterno; Talpmagnet | possible candidate | linea Brinix/Glaciterno, ambiente montano e sottosuolo |
 | Futura area ispirata a Lariano | Boletushield | strong thematic candidate | revisione del nome, linea e blockout |
 | Futura area ispirata al Regillo | Marmorequus | strong thematic candidate | rarità, ruolo monumentale e nome in-game |
 | Aree rurali o vitivinicole future | Vitemosto | possible candidate | geografia e progressione non definite |
-| Oliveti o boschi futuri | Omphalux; Lenghelis | possible candidate | ciclo giorno/notte e habitat non definiti |
+| Oliveti o boschi futuri | Lumella/Omphalux; Lenghelis | possible candidate | ciclo giorno/notte e habitat non definiti |
 | Aree minerali, vulcaniche o sotterranee future | Solftraver; Porchemecha/Bronzoverro; Talpmagnet | possible candidate | nomi, blockout e distribuzione dei tipi rari |
-| Collocazione non ancora associabile | fossili, Saladoct, Glicidra | premature/TBD | ottenimento, narrativa e habitat definitivi |
+| Collocazione non ancora associabile | fossili; Glicidra | premature/TBD | ottenimento, narrativa e habitat definitivi |
 
 Questa tabella raccoglie soltanto affinità di design. Non definisce la fauna di
 Via Verdi, del Lago di Albèra o di qualunque area futura.
 
 ## Current ecosystem gaps
 
-Il catalogo non copre ancora in modo convincente:
+Il catalogo non copre ancora in modo convincente alcune priorità progettuali.
+Queste lacune non costituiscono specie approvate:
 
-- piccolo mammifero comune;
-- linea Coleottero iniziale;
+- **Fauna Normale:** una linea canina regionale e una linea felina regionale
+  potrebbero fornire una presenza Normale comune nelle aree abitate e nei
+  percorsi iniziali. Nomi, ispirazioni precise, numero di stadi, tipi evoluti e
+  collocazione restano TBD. La linea canina dovrà evitare sovrapposizioni con
+  Molospsy, che resta un molosso templare raro o specializzato.
+- **Prima famiglia Coleottero:** direzione preferita a tre stadi, disponibile
+  tra Albèra e Via Verdi, con evoluzione relativamente precoce e funzione di
+  sostegno al ritmo delle prime ore. Potrà avere in futuro un legame tematico
+  con fiori o impollinazione, ma non ha ancora nome, concetto zoologico o tipo
+  definitivo.
+- **Seconda famiglia Coleottero:** identità ecologica distinta per boschi,
+  vigne, zone umide, grotte o alture; non necessariamente disponibile nel
+  primo arco. La direzione preferita è una linea più specializzata,
+  probabilmente a due stadi o a stadio unico, senza escludere tre stadi finché
+  il concept non sarà approvato.
 - linea acquatica comune;
 - specie urbana;
 - specie cavernicola o da cisterna;
-- fauna specifica del Lago di Albèra;
-- impollinatore o linea floreale;
+- impollinatore o linea floreale, eventualmente collegabile alla prima linea
+  Coleottero;
 - possibile scarsità di Normale, Coleottero e Acqua comuni;
 - possibile eccesso di Acciaio, Drago e doppi tipi rari.
 
@@ -670,14 +759,15 @@ creare una specie originale per ogni ruolo ecologico o di gameplay.
 | `AUS-FAM-STARTER-3` | Ardeino → Velairone → Codairone | 3 | IMPLEMENTED | Acqua → Acqua → Acqua/Volante | Laboratorio del Cratere | concept definitiva di Codairone e asset residui |
 | `AUS-FAM-FOSSIL-ELEPHANT` | Eleby → Antiquas | 2 | CANDIDATE; NAME REVIEW | TBD → Roccia/Psico | premature/TBD | nome base e ottenimento fossile |
 | `AUS-FAM-FOSSIL-HIPPO` | Potamy → Plumbopotam | 2 | CANDIDATE; NAME REVIEW | TBD → Roccia/Acciaio | premature/TBD | nomi e ottenimento fossile |
-| `AUS-FAM-FALCON` | Ghepio → Tinuncol | 2 | CANDIDATE; LINE REVIEW | Volante | possible candidate: prime route | linea e collocazione |
-| `AUS-CONCEPT-OMPHALUX` | Omphalux | 1+ TBD | CANDIDATE | Erba/Elettro | possible candidate: oliveti/boschi | linea e meccanica notturna |
-| `AUS-CONCEPT-LUSCERP` | Luscerp | 1+ TBD | CANDIDATE; LINE REVIEW; TYPE REVIEW | Erba/Drago proposto | premature/TBD | assegnazione di Drago per stadio |
+| `AUS-FAM-FALCON` | Ghepio → Tinuncol → Peregrinus | 3 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Volante → Volante → Volante/Lotta | PLACEMENT CANDIDATE: Via Verdi di giorno | livelli, abilità, frequenze e orari esatti |
+| `AUS-FAM-MAGPIE` | Gazzuola → Brillazza → Gazzombra | 3 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Normale/Volante → Buio/Volante → Buio/Volante | PLACEMENT CANDIDATE: Via Verdi/Albèra Storica | livelli, abilità evolute e tassi |
+| `AUS-CONCEPT-OMPHALUX` | Lumella → Omphalux | 2 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Erba → Erba/Elettro | PLACEMENT CANDIDATE: Via Verdi rara, Via Consolare/oliveti/lago | evoluzione notturna e distribuzione esatta |
+| `AUS-CONCEPT-LUSCERP` | Luscinco → Luscerp | 2 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Erba → Erba/Drago | PLACEMENT CANDIDATE: Via Verdi/Via Consolare/lago | livello, abilità e frequenze |
 | `AUS-CONCEPT-FRAGMAGMA` | Fragmagma | 1+ TBD | CANDIDATE | Folletto/Fuoco | possible candidate: Genzano/Nemi | area e linea |
 | `AUS-CONCEPT-SOLFTRAVER` | Solftraver | 1+ TBD | CANDIDATE | Roccia/Veleno | possible candidate: area minerale | habitat e linea |
-| `AUS-CONCEPT-TRICREST` | Tricrest | 1+ TBD | CANDIDATE; LINE REVIEW; TYPE REVIEW | Acqua/Drago | premature/TBD: zona umida | typing e linea |
+| `AUS-CONCEPT-TRICREST` | Tritino → Tricrest | 2 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Acqua → Acqua/Drago | PLACEMENT CANDIDATE: Via Consolare rara/Lago di Albèra | livello, abilità e presenza evoluta |
 | `AUS-CONCEPT-FURNACE-BOAR` | Porchemecha / Bronzoverro | 1+ TBD | CANDIDATE; NAME REVIEW | Acciaio/Fuoco | possible candidate: area metallurgica | scegliere il nome |
-| `AUS-CONCEPT-SALADOCT` | Saladoct | 1+ TBD | CANDIDATE; NAME REVIEW | Veleno/Folletto | premature/TBD | nome e collocazione |
+| `AUS-CONCEPT-SALADOCT` | Salampolla → Alchimandra; Saladoct RETIRED WORKING NAME | 2 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Veleno → Veleno/Folletto | PLACEMENT CANDIDATE: Lago di Albèra | evoluzione notturna, abilità e tassi |
 | `AUS-CONCEPT-NAUFRAGUS` | Naufragus | 1+ TBD | CANDIDATE | Acqua/Acciaio | premature/TBD | ruolo narrativo; non assegnarlo automaticamente al lago |
 | `AUS-CONCEPT-MOLOSPSY` | Molospsy | 1+ TBD | CANDIDATE; NAME REVIEW | Lotta/Psico | possible candidate: rovine | nome e sito |
 | `AUS-CONCEPT-LENGHELIS` | Lenghelis | 1+ TBD | CANDIDATE | Spettro/Folletto | possible candidate: boschi/borghi | habitat e tono folklorico |
@@ -698,11 +788,14 @@ Il catalogo non decide:
 - totale finale delle specie;
 - approvazione o esclusione dei concetti;
 - nomi definitivi delle specie candidate;
+- nomi, numero di stadi e tipi definitivi delle linee canina e felina;
+- concetti zoologici e tipi delle due famiglie Coleottero;
+- livelli evolutivi definitivi;
 - statistiche;
-- abilità;
+- abilità non esplicitamente approvate;
 - mosse e learnset;
 - gruppi Uova;
-- rarità;
+- rarità, tassi di incontro e fasce orarie precise;
 - tassi di cattura;
 - sprite e altri asset;
 - habitat definitivi;
@@ -711,4 +804,5 @@ Il catalogo non decide:
 - metodo di ottenimento dei fossili;
 - nomi delle future città e aree;
 - specie leggendarie o mitiche;
-- coordinate, incontri, squadre o disponibilità nel gameplay.
+- coordinate, inserimento negli incontri, squadre o disponibilità nel
+  gameplay.
