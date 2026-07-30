@@ -343,8 +343,8 @@ assegnati numeri Pokédex regionali definitivi.
 - **Current status:** CANONICAL DESIGN; non implementata; PLACEMENT CANDIDATE;
   evoluzione e parametri tecnici BALANCE PROVISIONAL.
 - **Proposed typing:** Miciolo Normale; Felivates Normale/Psico.
-- **Core concept:** linea urbana agile e tecnica, basata su osservazione,
-  previsione e precisione.
+- **Core concept:** linea urbana di vicoli, cortili, fontane, giardini e
+  rovine, agile e tecnica, basata su osservazione, previsione e precisione.
 - **Real-world inspiration:** Miciolo unisce micio e vicolo; Felivates combina
   *felis/feles* con *vates*, veggente o profeta, richiamando l'identità romana
   di Albèra Storica.
