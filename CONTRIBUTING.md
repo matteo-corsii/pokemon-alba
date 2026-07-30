@@ -1,5 +1,10 @@
 # Contributing to pokeemerald-expansion
 
+> **Pokémon Alba:** per le attività specifiche del fork, leggere prima
+> [`docs/TEAM_WORKFLOW.md`](docs/TEAM_WORKFLOW.md). Il documento definisce ruoli,
+> proprietà temporanea dei file, brief, branch, handoff e limiti decisionali del
+> team; le regole upstream riportate di seguito restano il riferimento generale.
+
 First off, thanks for helping improve `pokeemerald-expansion`! ❤️
 
 All contributions are encouraged and valued. Please make sure to read the relevant section before making your contribution! It will make it a lot easier for you and the maintainers. We're excited to see your contributions. 🎉

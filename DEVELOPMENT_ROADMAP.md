@@ -4,6 +4,40 @@ Questa roadmap descrive una sequenza iniziale di attività. Ogni fase deve produ
 
 **Stato delle milestone:** è in validazione il primo segmento canonico giocabile di Albèra: anomalia domestica, convocazione di Lauro, scelta del trio nel laboratorio, distribuzione a Nico e Lia, battaglia con Nico, incarico e checkpoint su Route 101. FireRed e LeafGreen restano compatibili e conservano i propri starter. Tutte le nove specie possiedono front animato, back, icona e palette normale originali; shiny, cry, impronte e overworld non sono ancora definitivi. Le 46 mosse uniche dei nove learnset per livello restano localizzate senza cambiamenti tecnici.
 
+## Prossima milestone approvata: Via Verdi — Prima indagine sulle sorgenti
+
+Questa milestone è **approvata ma non ancora implementata**. `Route101` conserva
+identificatori e directory tecniche; **Via Verdi** sarà il nome mostrato al
+giocatore, scelto per il richiamo a Giuseppe Verdi e al paesaggio verde.
+
+Il segmento collegherà Albèra Bassa a Porta Pretoria con un percorso verde e
+collinare segnato da sorgenti, canaletti, terreno umido e canalizzazioni
+antiche. Lauro consegnerà esattamente **10 Poké Ball**. Le catture saranno
+facoltative e non è previsto un tutorial lungo o obbligatorio. Lia guiderà
+l'indagine; Nico comparirà brevemente senza una seconda battaglia.
+
+La progressione comprenderà tre punti concettuali di rilevazione: un canale o
+una sorgente quasi asciutta con terreno ancora umido; un'area attraversata o
+evitata in modo anomalo dai Pokémon; un'antica canalizzazione vicina a Porta
+Pretoria. Nella conclusione, un suono profondo e un lieve tremore accompagneranno
+una variazione o un arresto del flusso, seguiti dalla ripresa improvvisa
+dell'acqua. Non sono ancora approvati coordinate, testi, flag, variabili o
+script. Sono esclusi antagonisti, leggendari, disastri dichiarati e la prima
+Palestra, che appartiene alla successiva Albèra Storica.
+
+Progressione di livello approvata:
+
+- starter iniziale: livello 5;
+- Via Verdi: livelli 5–8;
+- preparazione ad Albèra Storica e prima Palestra: livelli 8–10;
+- prima Palestra: media livelli 9–10, asso livello 11;
+- dopo la Medaglia: livelli 11–12;
+- Via Consolare e Lago di Albèra: livelli 12–16;
+- prima evoluzione al livello 16 e seconda evoluzione al livello 36.
+
+Il bilanciamento non deve imporre grinding, contatori obbligatori, catture o
+Allenatori necessari: incontri e sfide aggiuntive devono restare facoltativi.
+
 ## 1. Verificare la compilazione pulita del progetto base
 
 **Esito della verifica:** la compilazione pulita è stata verificata con successo tramite GitHub Actions; tutti i job previsti dal workflow ufficiale sono riusciti e nessuna ROM è stata pubblicata come artefatto.

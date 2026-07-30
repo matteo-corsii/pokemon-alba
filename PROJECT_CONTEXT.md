@@ -42,6 +42,30 @@ Ausonia è una regione ispirata all’Italia, caratterizzata da:
 
 Albèra è la città iniziale, ispirata ad Albano Laziale.
 
+La progressione geografica canonica approvata è:
+
+`Albèra Bassa → Via Verdi → Porta Pretoria → Albèra Storica → Anfiteatro Romano / prima Palestra → Via Consolare → Lago di Albèra`.
+
+`Lago di Albèra` è il nome visibile nel gioco; il Lago Albano reale resta il
+riferimento geografico e ambientale. La distinzione evita di confondere il
+luogo narrativo con quello reale.
+
+**Stato implementato:** Albèra Bassa comprende Via dell’Armonia, la casa del
+protagonista, la casa di Lia, la scuola, il campetto, il Laboratorio del Cratere
+e i musicisti ambientali. Il primo segmento giocabile termina al checkpoint
+tecnico di `Route101`.
+
+**Stato approvato ma non implementato:** `Route101` avrà il nome visibile
+**Via Verdi**, in omaggio a Giuseppe Verdi e al paesaggio verde attraversato.
+Gli identificatori e le directory tecniche non saranno rinominati. Il nome
+visibile dovrà essere applicato in futuro a interfaccia, Town Map, cartelli,
+dialoghi e documentazione pertinenti.
+
+**Stato pianificato:** Albèra Storica comprenderà Porta Pretoria, strada e
+piazza storiche, l’Anfiteatro Romano con la prima Palestra, servizi cittadini,
+riferimenti alla storia idraulica e una futura connessione permanente con il
+resto di Albèra.
+
 La sua futura mappa comprenderà:
 
 - Via dell’Armonia;
@@ -72,6 +96,26 @@ di osservare pressione, sorgenti e comportamento dei Pokémon usando il Pokédex
 anche come riferimento scientifico. L'incarico apre Route 101 e avvia
 l'indagine senza dichiarare una crisi o introdurre spiegazioni definitive.
 
+La prosecuzione approvata dell'incarico è **Via Verdi — Prima indagine sulle
+sorgenti**. Lauro consegnerà esattamente **10 Poké Ball**; le catture resteranno
+facoltative e non sarà introdotto un tutorial lungo o obbligatorio. Lia guiderà
+l'osservazione, mentre Nico avrà una presenza breve e senza una seconda
+battaglia. Il giocatore non è presentato come un prescelto.
+
+Via Verdi collegherà Albèra Bassa a Porta Pretoria attraverso un ambiente verde
+e collinare, con sorgenti, canaletti, terreno umido e tracce di canalizzazioni
+antiche. L'indagine comprenderà tre punti concettuali di rilevazione e una
+conclusione vicino a Porta Pretoria:
+
+1. un canale o una sorgente quasi asciutta, con terreno ancora umido;
+2. un'area attraversata o evitata in modo anomalo dai Pokémon;
+3. un'antica canalizzazione vicina a Porta Pretoria.
+
+Nell'evento finale concettuale, un suono profondo e un lieve tremore
+accompagneranno una variazione o un arresto del flusso, seguiti dalla ripresa
+improvvisa dell'acqua. Coordinate, dialoghi, flag e script non sono ancora
+decisi.
+
 ### Nico e Lia
 
 Nico e Lia esistono contemporaneamente e hanno ruoli complementari,
@@ -79,9 +123,10 @@ indipendenti dal protagonista selezionato.
 
 - Nico è diretto, energico e competitivo senza essere ostile. Riceve lo starter
   avvantaggiato contro quello del giocatore ed è sempre il primo rivale da
-  battaglia.
+  battaglia. In Via Verdi compare brevemente e non combatte di nuovo.
 - Lia è calma, precisa e attenta ai dettagli. Riceve lo starter rimanente,
-  segue le misurazioni ambientali e non combatte nella prima milestone.
+  segue le misurazioni ambientali, guida la prima indagine sulle sorgenti e non
+  combatte in questa fase.
 
 Entrambi sono cresciuti nel territorio di Albèra. La loro importanza narrativa
 deriva rispettivamente dall'azione e dall'osservazione, non dal sesso scelto per
