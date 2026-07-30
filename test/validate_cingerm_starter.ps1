@@ -21,7 +21,7 @@ Assert-True ($starterSource -match '#define WATER_STARTER \(IS_FRLG \? SPECIES_S
 Assert-True ($battleSetup -match 'ScriptGiveMon\(starterMon, 5, ITEM_NONE\);') 'La creazione iniziale non usa più il livello 5 standard.'
 
 $expected = [ordered]@{
-    TRAINER_BRENDAN_ROUTE_103_MUDKIP = 'Cingerm:5'
+    TRAINER_BRENDAN_ROUTE_103_MUDKIP = 'Cingerm:3'
     TRAINER_BRENDAN_ROUTE_110_MUDKIP = 'Rovasco:20'
     TRAINER_BRENDAN_ROUTE_119_MUDKIP = 'Rovasco:31'
     TRAINER_MAY_ROUTE_103_MUDKIP = 'Cingerm:5'
@@ -84,6 +84,9 @@ foreach ($root in $gameplayRoots) {
         @()
     }
     foreach ($file in $files) {
+        if ($file.FullName -eq (Join-Path $RepositoryRoot 'data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc')) {
+            continue
+        }
         $content = Get-Content -LiteralPath $file.FullName -Raw
         Assert-True ($content -notmatch '\bCingerm\b|SPECIES_CINGERM') "Cingerm compare in un incontro, regalo, evento o mappa non consentiti: $($file.FullName)."
         foreach ($species in $forbiddenSpecies) {

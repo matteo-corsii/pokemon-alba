@@ -17,9 +17,15 @@ $flagsFrlg = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'include/consta
 $vars = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'include/constants/vars.h') -Raw
 $varsFrlg = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'include/constants/vars_frlg.h') -Raw
 $battleSetup = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'src/battle_setup.c') -Raw
+$battleMessage = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'src/battle_message.c') -Raw
+$trainerParty = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'src/data/trainers.party') -Raw
+$speciesInfo = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'src/data/pokemon/species_info.h') -Raw
 $newGame = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'data/scripts/new_game.inc') -Raw
 $house = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'data/scripts/players_house.inc') -Raw
 $houseText = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'data/maps/LittlerootTown_BrendansHouse_1F/scripts.inc') -Raw
+$liaHouse = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'data/maps/LittlerootTown_MaysHouse_1F/scripts.inc') -Raw
+$liaHouse2F = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'data/maps/LittlerootTown_MaysHouse_2F/scripts.inc') -Raw
+$liaHouseMap = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'data/maps/LittlerootTown_MaysHouse_1F/map.json') -Raw | ConvertFrom-Json
 $town = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'data/maps/LittlerootTown/scripts.inc') -Raw
 $lab = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc') -Raw
 $labMap = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'data/maps/LittlerootTown_ProfessorBirchsLab/map.json') -Raw | ConvertFrom-Json
@@ -44,6 +50,7 @@ foreach ($flag in @('FLAG_HIDE_ALBERA_LAB_NICO', 'FLAG_HIDE_ALBERA_LAB_LIA')) {
 }
 Assert-Contains $house 'setflag FLAG_ALBERA_HOME_ANOMALY_SEEN' 'L’anomalia domestica non viene registrata.'
 Assert-Contains $house 'setvar VAR_ALBERA_OPENING_STATE, 1' 'Lo stato narrativo non parte dalla casa.'
+Assert-True ($house -match 'setvar VAR_ALBERA_OPENING_STATE, 1\s+setvar VAR_LITTLEROOT_RIVAL_STATE, 3') 'Il flusso canonico non disattiva lo stato legacy che avvia il vecchio evento del campetto.'
 foreach ($italianText in @('pressione della rete', 'LABORATORIO DEL CRATERE', 'rumore profondo')) {
     Assert-Contains $houseText $italianText "Testo domestico italiano mancante: $italianText."
 }
@@ -54,6 +61,24 @@ Assert-True ($nico.Count -eq 1 -and $nico[0].graphics_id -eq 'OBJ_EVENT_GFX_BREN
 Assert-True ($lia.Count -eq 1 -and $lia[0].graphics_id -eq 'OBJ_EVENT_GFX_MAY_NORMAL') 'Oggetto dedicato di Lia non valido.'
 Assert-True ($nico[0].flag -eq 'FLAG_HIDE_ALBERA_LAB_NICO') 'Flag oggetto Nico inatteso.'
 Assert-True ($lia[0].flag -eq 'FLAG_HIDE_ALBERA_LAB_LIA') 'Flag oggetto Lia inatteso.'
+
+$openingTriggers = @($labMap.coord_events | Where-Object {
+    $_.type -eq 'trigger' -and
+    $_.y -eq 9 -and
+    $_.elevation -eq 3 -and
+    $_.var -eq 'VAR_ALBERA_OPENING_STATE' -and
+    $_.var_value -eq '1' -and
+    $_.script -eq 'LittlerootTown_ProfessorBirchsLab_EventScript_AlberaOpeningTrigger'
+})
+Assert-True ($openingTriggers.Count -eq 6) 'La linea di trigger del laboratorio deve coprire sei celle.'
+Assert-True ((@($openingTriggers.x | Sort-Object) -join ',') -eq '4,5,6,7,8,9') 'Coordinate dei trigger del laboratorio inattese.'
+Assert-True (-not $lab.Contains('map_script_2 VAR_ALBERA_OPENING_STATE, 1')) 'L’apertura non deve partire dalla porta tramite map script.'
+foreach ($token in @(
+    'LittlerootTown_ProfessorBirchsLab_EventScript_AlberaOpeningTrigger',
+    'LittlerootTown_ProfessorBirchsLab_EventScript_StageAlberaOpening',
+    'LittlerootTown_ProfessorBirchsLab_Movement_NicoApproachPlayer',
+    'applymovement LOCALID_PLAYER, Common_Movement_FaceLeft'
+)) { Assert-Contains $lab $token "Regia correttiva del laboratorio mancante: $token." }
 
 Assert-Contains $battleSetup 'if (VarGet(VAR_ALBERA_OPENING_STATE) == 2)' 'La modalità laboratorio dello selector starter manca.'
 Assert-Contains $battleSetup 'CB2_ReturnToFieldContinueScriptPlayMapMusic' 'Lo selector non ritorna allo script del laboratorio.'
@@ -74,6 +99,88 @@ Assert-Contains $lab 'trainerbattle_earlyrival TRAINER_BRENDAN_ROUTE_103_TREECKO
 Assert-Contains $lab 'goto_if_eq VAR_RESULT, B_OUTCOME_LOST' 'Il flusso non distingue la breve battuta dopo la sconfitta.'
 Assert-Contains $lab 'setflag FLAG_ALBERA_NICO_BATTLE_COMPLETED' 'La battaglia di Nico non è resa non ripetibile.'
 Assert-Contains $lab 'special HealPlayerParty' 'La squadra non viene ripristinata dopo la lotta amichevole.'
+Assert-Contains $battleSetup '(GetRivalBattleFlags() & RIVAL_BATTLE_TUTORIAL) == RIVAL_BATTLE_TUTORIAL' 'Il solo flag di cura continua ad attivare il tutorial della prima battaglia.'
+Assert-Contains $battleSetup 'GetRivalBattleFlags() & RIVAL_BATTLE_HEAL_AFTER' 'La cura dopo la sconfitta non è più attiva.'
+Assert-Contains $battleMessage '[STRINGID_PLAYERUSEDITEM]                       = COMPOUND_STRING("Hai usato {B_LAST_ITEM}!")' 'Messaggio di uso della Pozione non tradotto.'
+Assert-Contains $battleMessage '[STRINGID_ITEMRESTOREDSPECIESHEALTH]            = COMPOUND_STRING("{B_BUFF1} recupera PS.")' 'Messaggio di recupero PS non tradotto.'
+Assert-Contains $battleMessage '[STRINGID_TRAINER1MON1COMEBACK]                 = COMPOUND_STRING("{B_TRAINER1_NAME}: {B_OPPONENT_MON1_NAME},\nritorna!")' 'Messaggio di richiamo del Pokémon non tradotto.'
+
+$legacyCampettoTriggers = @($liaHouseMap.coord_events | Where-Object {
+    $_.type -eq 'trigger' -and
+    $_.var -eq 'VAR_LITTLEROOT_RIVAL_STATE' -and
+    $_.var_value -eq '2' -and
+    $_.script -match '^LittlerootTown_MaysHouse_1F_EventScript_MeetRival[012]$'
+})
+Assert-True ($legacyCampettoTriggers.Count -eq 3) 'I trigger legacy della casa di Lia non sono stati conservati integralmente.'
+foreach ($suffix in 0..2) {
+    Assert-Contains $liaHouse "LittlerootTown_MaysHouse_1F_EventScript_MeetRival${suffix}::" "Script legacy della casa di Lia mancante: $suffix."
+}
+Assert-Contains $liaHouse 'setvar VAR_LITTLEROOT_RIVAL_STATE, 3' 'Lo script legacy non conserva il proprio avanzamento di stato.'
+Assert-Contains $liaHouse2F 'campetto' 'Il testo legacy del campetto deve restare conservato per un possibile riuso.'
+
+function Get-IntroTrainerBlock([string]$TrainerId) {
+    $match = [regex]::Match($trainerParty, "(?ms)^=== $TrainerId ===\r?\n(?<Body>.*?)(?=^=== |\z)")
+    Assert-True $match.Success "Squadra introduttiva mancante: $TrainerId."
+    return $match.Groups['Body'].Value
+}
+
+function Get-BaseStat([string]$Species, [string]$Field) {
+    $block = [regex]::Match($speciesInfo, "(?ms)^\s*\[SPECIES_$Species\]\s*=\s*\{(?<Body>.*?)(?=^\s*\[SPECIES_|\z)")
+    Assert-True $block.Success "Dati specie mancanti: $Species."
+    $fieldMatch = [regex]::Match($block.Groups['Body'].Value, "\.$Field\s*=\s*(?<Value>\d+)")
+    Assert-True $fieldMatch.Success "Statistica $Field mancante per $Species."
+    return [int]$fieldMatch.Groups['Value'].Value
+}
+
+function Get-WorstCaseStat([int]$Base, [int]$Level, [double]$Nature) {
+    return [math]::Floor(([math]::Floor((2 * $Base * $Level) / 100) + 5) * $Nature)
+}
+
+function Get-WorstCaseHp([int]$Base, [int]$Level) {
+    return [math]::Floor((2 * $Base * $Level) / 100) + $Level + 10
+}
+
+function Get-Damage([int]$Level, [int]$Power, [int]$Attack, [int]$Defense, [int]$RandomPercent) {
+    $damage = [math]::Floor((2 * $Level) / 5) + 2
+    $damage = [math]::Floor(($damage * $Power * $Attack) / $Defense)
+    $damage = [math]::Floor($damage / 50) + 2
+    return [math]::Max(1, [math]::Floor(($damage * $RandomPercent) / 100))
+}
+
+$introMatchups = @(
+    @{ Trainer = 'TRAINER_BRENDAN_ROUTE_103_TREECKO'; Player = 'CINGERM'; Opponent = 'SERBRACE'; PlayerMove = 'MOVE_TACKLE'; OpponentMove = 'MOVE_SCRATCH'; LevelFourMove = 'MOVE_EMBER' },
+    @{ Trainer = 'TRAINER_BRENDAN_ROUTE_103_TORCHIC'; Player = 'SERBRACE'; Opponent = 'ARDEINO'; PlayerMove = 'MOVE_SCRATCH'; OpponentMove = 'MOVE_POUND'; LevelFourMove = 'MOVE_WATER_GUN' },
+    @{ Trainer = 'TRAINER_BRENDAN_ROUTE_103_MUDKIP'; Player = 'ARDEINO'; Opponent = 'CINGERM'; PlayerMove = 'MOVE_POUND'; OpponentMove = 'MOVE_TACKLE'; LevelFourMove = 'MOVE_LEAFAGE' }
+)
+
+foreach ($matchup in $introMatchups) {
+    $trainerBlock = Get-IntroTrainerBlock $matchup.Trainer
+    $opponentName = $matchup.Opponent.Substring(0, 1) + $matchup.Opponent.Substring(1).ToLower()
+    $playerName = $matchup.Player.Substring(0, 1) + $matchup.Player.Substring(1).ToLower()
+    Assert-True ($trainerBlock -match '(?m)^Name: NICO$') "Allenatore introduttivo inatteso: $($matchup.Trainer)."
+    Assert-True ($trainerBlock -match '(?m)^AI: Basic Trainer$') "IA introduttiva non uniforme: $($matchup.Trainer)."
+    Assert-True ($trainerBlock -match "(?m)^$opponentName\r?\nLevel: 3$") "Specie o livello introduttivo inatteso: $($matchup.Trainer)."
+    Assert-True ($trainerBlock -match '(?m)^IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe$') "IV introduttivi inattesi: $($matchup.Trainer)."
+    Assert-True ($trainerBlock -notmatch '(?m)^(Item:|- )') "La squadra introduttiva non deve avere strumenti o mosse forzate: $($matchup.Trainer)."
+
+    $learnset = [regex]::Match($speciesInfo, "(?ms)static const struct LevelUpMove s${opponentName}LevelUpLearnset\[\] = \{(?<Body>.*?)LEVEL_UP_END").Groups['Body'].Value
+    $playerLearnset = [regex]::Match($speciesInfo, "(?ms)static const struct LevelUpMove s${playerName}LevelUpLearnset\[\] = \{(?<Body>.*?)LEVEL_UP_END").Groups['Body'].Value
+    Assert-True ($learnset -match "LEVEL_UP_MOVE\(\s*1, $($matchup.OpponentMove)\)") "Mossa normale iniziale inattesa per $($matchup.Opponent)."
+    Assert-True ($playerLearnset -match "LEVEL_UP_MOVE\(\s*1, $($matchup.PlayerMove)\)") "Mossa normale iniziale inattesa per $($matchup.Player)."
+    Assert-True ($learnset -match "LEVEL_UP_MOVE\(\s*4, $($matchup.LevelFourMove)\)") "La prima mossa STAB deve restare al livello 4 per $($matchup.Opponent)."
+
+    $playerHp = Get-WorstCaseHp (Get-BaseStat $matchup.Player 'baseHP') 5
+    $playerAttack = Get-WorstCaseStat (Get-BaseStat $matchup.Player 'baseAttack') 5 0.9
+    $playerDefense = Get-WorstCaseStat (Get-BaseStat $matchup.Player 'baseDefense') 5 0.9
+    $opponentHp = Get-WorstCaseHp (Get-BaseStat $matchup.Opponent 'baseHP') 3
+    $opponentAttack = Get-WorstCaseStat (Get-BaseStat $matchup.Opponent 'baseAttack') 3 1.1
+    $opponentDefense = Get-WorstCaseStat (Get-BaseStat $matchup.Opponent 'baseDefense') 3 1.1
+    $playerDamage = Get-Damage 5 40 $playerAttack $opponentDefense 85
+    $opponentDamage = Get-Damage 3 40 $opponentAttack $playerDefense 100
+    $turnsToWin = [math]::Ceiling($opponentHp / $playerDamage)
+    $turnsToLose = [math]::Ceiling($playerHp / $opponentDamage)
+    Assert-True ($turnsToWin -lt $turnsToLose) "Matchup non vincibile senza critici o strumenti: $($matchup.Player) contro $($matchup.Opponent)."
+}
 
 foreach ($required in @(
     'LiaDetectsAnomaly',

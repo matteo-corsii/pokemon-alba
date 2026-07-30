@@ -144,7 +144,62 @@
       "dest_warp_id": "2"
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 9,
+      "elevation": 3,
+      "var": "VAR_ALBERA_OPENING_STATE",
+      "var_value": "1",
+      "script": "LittlerootTown_ProfessorBirchsLab_EventScript_AlberaOpeningTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 9,
+      "elevation": 3,
+      "var": "VAR_ALBERA_OPENING_STATE",
+      "var_value": "1",
+      "script": "LittlerootTown_ProfessorBirchsLab_EventScript_AlberaOpeningTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 9,
+      "elevation": 3,
+      "var": "VAR_ALBERA_OPENING_STATE",
+      "var_value": "1",
+      "script": "LittlerootTown_ProfessorBirchsLab_EventScript_AlberaOpeningTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 9,
+      "elevation": 3,
+      "var": "VAR_ALBERA_OPENING_STATE",
+      "var_value": "1",
+      "script": "LittlerootTown_ProfessorBirchsLab_EventScript_AlberaOpeningTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 9,
+      "elevation": 3,
+      "var": "VAR_ALBERA_OPENING_STATE",
+      "var_value": "1",
+      "script": "LittlerootTown_ProfessorBirchsLab_EventScript_AlberaOpeningTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 9,
+      "elevation": 3,
+      "var": "VAR_ALBERA_OPENING_STATE",
+      "var_value": "1",
+      "script": "LittlerootTown_ProfessorBirchsLab_EventScript_AlberaOpeningTrigger"
+    }
+  ],
   "bg_events": [
     {
       "type": "sign",
