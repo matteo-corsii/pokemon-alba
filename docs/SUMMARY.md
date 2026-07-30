@@ -28,6 +28,7 @@
 - [Piano di test di Via Verdi](VIA_VERDI_TEST_PLAN.md)
 - [Brief della mappa di Albèra Storica](ALBERA_STORICA_MAP_BRIEF.md)
 - [Implementazione degli starter di Ausonia](./AUSONIA_STARTERS_IMPLEMENTATION.md)
+- [Catalogo regionale provvisorio di Ausonia](AUSONIA_REGIONAL_DEX_PLAN.md)
 - [Pipeline degli sprite degli starter di Ausonia](./AUSONIA_STARTER_SPRITE_PIPELINE.md)
 - [Stato della localizzazione italiana](./ITALIAN_LOCALIZATION_STATUS.md)
 - [Workflow di squadra](TEAM_WORKFLOW.md)
