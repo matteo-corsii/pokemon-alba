@@ -59,6 +59,12 @@ al numero di specie distinte:
 
 - Ghepio → Tinuncol → Peregrinus è una famiglia approvata di tre specie;
 - Gazzuola → Brillazza → Gazzombra aggiunge una nuova famiglia di tre specie;
+- Borgotto → Pastufo e Miciolo → Felivates aggiungono due famiglie comuni a
+  due stadi;
+- Foliarva → Crisalvia → Infiorala aggiunge una famiglia Coleottero iniziale a
+  tre stadi;
+- Paludix → Sanguilex aggiunge una famiglia Coleottero specializzata a due
+  stadi;
 - Lumella, Luscinco e Tritino aggiungono uno stadio alle rispettive famiglie
   già censite;
 - Brinix e Glaciterno sono due concetti separati e potrebbero formare una linea,
@@ -68,14 +74,15 @@ al numero di specie distinte:
   Saladoct resta soltanto un'etichetta storica;
 - le altre specie singole potrebbero ricevere stadi evolutivi futuri.
 
-Il catalogo censisce **25 famiglie o concetti**. Contiene **43 etichette
+Il catalogo censisce **29 famiglie o concetti**. Contiene **52 etichette
 nominali**, includendo Porchemecha e Bronzoverro come alternative e Saladoct
-come vecchio nome di lavorazione. Le etichette corrispondono ad almeno **41
+come vecchio nome di lavorazione. Le etichette corrispondono ad almeno **50
 specie attive distinte attualmente nominate**: Porchemecha/Bronzoverro conta
-una volta e Saladoct non conta come specie attiva. Il totale finale resta
-**TBD** perché linee come Brinix/Glaciterno non sono deliberate, diversi
-concetti singoli possono ottenere evoluzioni e l'ecosistema regionale presenta
-ancora lacune. Non sono assegnati numeri Pokédex regionali definitivi.
+una volta e Saladoct non conta come specie attiva. Le quattro nuove famiglie
+aggiungono nove specie attive. Il totale finale resta **TBD** perché linee come
+Brinix/Glaciterno non sono deliberate, diversi concetti singoli possono
+ottenere evoluzioni e l'ecosistema regionale presenta ancora lacune. Non sono
+assegnati numeri Pokédex regionali definitivi.
 
 ## Implemented starter families
 
@@ -297,6 +304,134 @@ ancora lacune. Non sono assegnati numeri Pokédex regionali definitivi.
 - **Placement review:** tassi e fasce orarie precise restano TBD.
 - **Open questions:** livelli evolutivi, statistiche, learnset, seconda
   abilità, abilità nascoste e abilità definitive di Brillazza e Gazzombra.
+
+### Borgotto → Pastufo
+
+- **Temporary family ID:** `AUS-FAM-DOG`
+- **Species/stages:** Borgotto → Pastufo.
+- **Current status:** CANONICAL DESIGN; non implementata; PLACEMENT CANDIDATE;
+  evoluzione e parametri tecnici BALANCE PROVISIONAL.
+- **Proposed typing:** Borgotto Normale; Pastufo Normale/Terra.
+- **Core concept:** cane comune, rurale e protettivo di borghi, cortili e
+  campagne, distinto dal molosso templare Molospsy.
+- **Real-world inspiration:** Borgotto unisce borgo e cucciolotto; Pastufo
+  unisce pastore e tufo.
+- **Evolution structure:** linea canonica a due stadi; evoluzione di lavoro al
+  livello 23, BALANCE PROVISIONAL.
+- **Primary habitat candidate:** Borgotto tra Albèra Bassa, Via Verdi e le
+  campagne iniziali; PLACEMENT CANDIDATE.
+- **Secondary habitat candidates:** Pastufo tra Via Consolare e l'arco del
+  Lago di Albèra; PLACEMENT CANDIDATE.
+- **Earliest story band candidate:** Albèra Bassa per Borgotto.
+- **Gameplay role candidate:** fisico, resistente e affidabile, con buoni PS e
+  Difesa e Velocità non elevata; valori esatti BALANCE PROVISIONAL.
+- **Narrative importance:** Borgotto può essere accudito da più abitanti;
+  Pastufo protegge orti, vigne, sentieri e viandanti senza essere aggressivo
+  senza motivo.
+- **Name review:** linea e nomi approvati.
+- **Type review:** tipi approvati per entrambi gli stadi.
+- **Placement review:** incontri, coordinate, tassi e presenza selvatica di
+  Pastufo restano TBD.
+- **Open questions:** abilità, statistiche, learnset, frequenze e collocazioni
+  esatte; la sensibilità a vibrazioni e terreno umido può farne un indicatore
+  ecologico, ma la linea non causa l'anomalia.
+
+### Miciolo → Felivates
+
+- **Temporary family ID:** `AUS-FAM-CAT`
+- **Species/stages:** Miciolo → Felivates.
+- **Current status:** CANONICAL DESIGN; non implementata; PLACEMENT CANDIDATE;
+  evoluzione e parametri tecnici BALANCE PROVISIONAL.
+- **Proposed typing:** Miciolo Normale; Felivates Normale/Psico.
+- **Core concept:** linea urbana di vicoli, cortili, fontane, giardini e
+  rovine, agile e tecnica, basata su osservazione, previsione e precisione.
+- **Real-world inspiration:** Miciolo unisce micio e vicolo; Felivates combina
+  *felis/feles* con *vates*, veggente o profeta, richiamando l'identità romana
+  di Albèra Storica.
+- **Evolution structure:** linea canonica a due stadi; evoluzione di lavoro
+  tramite amicizia alta salendo di livello, BALANCE PROVISIONAL.
+- **Primary habitat candidate:** Miciolo visibile ad Albèra Bassa e catturabile
+  soprattutto ad Albèra Storica; PLACEMENT CANDIDATE.
+- **Secondary habitat candidates:** ville, muretti e rovine; Felivates
+  selvatico solo più avanti, se approvato.
+- **Earliest story band candidate:** Albèra Bassa come fauna urbana visibile.
+- **Gameplay role candidate:** agile, tecnico e orientato a previsione,
+  precisione e controllo; statistiche e learnset BALANCE PROVISIONAL.
+- **Narrative importance:** Felivates percepisce intenzioni, pericoli e
+  vibrazioni nelle rovine, ma non è sacro né leggendario.
+- **Name review:** linea e nomi approvati.
+- **Type review:** tipi approvati per entrambi gli stadi.
+- **Placement review:** incontri, tassi e disponibilità selvatica di Felivates
+  restano TBD.
+- **Open questions:** conferma tecnica dell'evoluzione per amicizia, abilità,
+  statistiche, learnset e distribuzione esatta. Diversamente da Gazzombra,
+  non è incentrato su strumenti, furto e disturbo.
+
+### Foliarva → Crisalvia → Infiorala
+
+- **Temporary family ID:** `AUS-FAM-EARLY-BUG`
+- **Species/stages:** Foliarva → Crisalvia → Infiorala.
+- **Current status:** CANONICAL DESIGN; non implementata; PLACEMENT CANDIDATE;
+  evoluzioni e parametri tecnici BALANCE PROVISIONAL.
+- **Proposed typing:** Foliarva Coleottero; Crisalvia Coleottero/Erba;
+  Infiorala Coleottero/Erba. Nessuno stadio riceve Folletto.
+- **Core concept:** linea Coleottero iniziale a tre stadi, legata a prati,
+  foglie, germogli e impollinazione.
+- **Real-world inspiration:** Foliarva combina *folia*/foglia e larva;
+  Crisalvia unisce crisalide e salvia; Infiorala unisce infiorata e ala in un
+  lepidottero impollinatore dalle ali simili a composizioni floreali.
+- **Evolution structure:** Foliarva evolve in Crisalvia al livello 7 e
+  Crisalvia in Infiorala al livello 13; entrambi i livelli sono BALANCE
+  PROVISIONAL.
+- **Primary habitat candidate:** Foliarva comune di giorno e Crisalvia rara su
+  Via Verdi; PLACEMENT CANDIDATE.
+- **Secondary habitat candidates:** Via Consolare; Infiorala è
+  particolarmente rappresentativa della futura area ispirata a Genzano.
+- **Earliest story band candidate:** fra Albèra e Via Verdi.
+- **Gameplay role candidate:** Infiorala orientata in generale ad Attacco
+  Speciale, Velocità, polveri e supporto vegetale; valori esatti TBD.
+- **Narrative importance:** forte legame tematico futuro con l'area ispirata a
+  Genzano; i Pokémon Folletto restano più peculiari, soprattutto rispetto al
+  futuro arco del Lago di Nemi.
+- **Name review:** linea e nomi approvati.
+- **Type review:** tipi approvati per tutti e tre gli stadi.
+- **Placement review:** incontri, percentuali e fasce orarie precise restano
+  TBD.
+- **Open questions:** abilità, statistiche, learnset, distribuzione esatta e
+  specie zoologica precisa oltre al concetto di lepidottero impollinatore.
+
+### Paludix → Sanguilex
+
+- **Temporary family ID:** `AUS-FAM-MOSQUITO`
+- **Species/stages:** Paludix → Sanguilex.
+- **Current status:** CANONICAL DESIGN; non implementata; PLACEMENT CANDIDATE;
+  evoluzione e parametri tecnici BALANCE PROVISIONAL.
+- **Proposed typing:** Paludix Coleottero/Acqua; Sanguilex
+  Coleottero/Veleno. Sanguilex non riceve il tipo Volante.
+- **Core concept:** linea della zanzara a due stadi, dalla larva acquatica dei
+  ristagni all'adulto rapido orientato alla puntura.
+- **Real-world inspiration:** Paludix combina *palus/paludis* e *culex*;
+  Sanguilex combina *sanguis* e *culex*.
+- **Evolution structure:** evoluzione di lavoro al livello 18, di sera o di
+  notte; livello e requisito temporale sono BALANCE PROVISIONAL.
+- **Primary habitat candidate:** Paludix raro su Via Consolare e linea
+  presente soprattutto nell'arco del Lago di Albèra; PLACEMENT CANDIDATE.
+- **Secondary habitat candidates:** canalette interrotte, pozze temporanee e
+  ristagni; Sanguilex è più attivo al tramonto e di notte.
+- **Earliest story band candidate:** Via Consolare per Paludix; la linea è
+  assente da Via Verdi.
+- **Gameplay role candidate:** Sanguilex molto veloce e fragile, orientato ad
+  assorbimento, punture e alterazioni di stato; il volo è espresso tramite
+  design, animazioni e mosse.
+- **Narrative importance:** nuovi ristagni e variazioni del flusso possono
+  spostare le colonie e fornire indizi a Lia; la linea non causa l'anomalia.
+- **Name review:** linea e nomi approvati.
+- **Type review:** tipi approvati per entrambi gli stadi; linea distinta da
+  Tritino/Tricrest e Salampolla/Alchimandra.
+- **Placement review:** incontri, coordinate, tassi e fasce orarie precise
+  restano TBD.
+- **Open questions:** abilità, statistiche, learnset, frequenze e
+  disponibilità selvatica di Sanguilex.
 
 ### Lumella → Omphalux
 
@@ -699,15 +834,15 @@ Pontaria, Fioralia o Nemora non vengono resi canonici da questo documento.
 
 | Story band | Candidate species/families | Confidence | Open dependencies |
 | --- | --- | --- | --- |
-| Albèra Bassa | nessuna nuova assegnazione | premature/TBD | ruolo della fauna urbana e riuso di Pokémon ufficiali |
-| Via Verdi | Ghepio; Gazzuola; Lumella rara; Luscinco raro; possibili specie ufficiali | PLACEMENT CANDIDATE | tassi, fasce orarie non esclusive, curve dei livelli e approvazione degli incontri |
+| Albèra Bassa | Borgotto; Miciolo visibile come fauna urbana | PLACEMENT CANDIDATE | incontri, ruolo della fauna urbana e riuso di Pokémon ufficiali |
+| Via Verdi | Ghepio; Gazzuola; Borgotto; Foliarva comune di giorno; Crisalvia rara; Lumella rara; Luscinco raro; possibili specie ufficiali | PLACEMENT CANDIDATE | tassi, fasce orarie non esclusive, curve dei livelli e approvazione degli incontri |
 | Porta Pretoria | Molospsy | premature/TBD | funzione delle rovine e spazio della soglia |
-| Albèra Storica | Gazzuola; Molospsy; Lenghelis | PLACEMENT CANDIDATE | tassi, ciclo giorno/notte e tono degli eventi |
+| Albèra Storica | Miciolo; Gazzuola; Molospsy; Lenghelis | PLACEMENT CANDIDATE | tassi, ciclo giorno/notte e tono degli eventi |
 | Anfiteatro Romano / prima Palestra | Molospsy | premature/TBD | tipo della Palestra e funzione narrativa non decisi |
-| Via Consolare | Lumella; Luscinco; Tritino molto raro; linea del falco | PLACEMENT CANDIDATE | bioma, tassi e composizione della route non progettati |
-| Lago di Albèra | Lumella/Omphalux; Luscinco/Luscerp; Tritino/Tricrest; Salampolla/Alchimandra | PLACEMENT CANDIDATE | tassi, fasce orarie e presenza degli stadi evoluti; Naufragus non va collocato automaticamente qui |
+| Via Consolare | Pastufo; linea Foliarva; Paludix raro; Lumella; Luscinco; Tritino molto raro; linea del falco | PLACEMENT CANDIDATE | bioma, tassi e composizione della route non progettati |
+| Lago di Albèra | Pastufo; Paludix/Sanguilex; Lumella/Omphalux; Luscinco/Luscerp; Tritino/Tricrest; Salampolla/Alchimandra | PLACEMENT CANDIDATE | tassi, fasce orarie e presenza degli stadi evoluti; Naufragus non va collocato automaticamente qui |
 | Futura area ispirata ad Ariccia | Fraschietto | strong thematic candidate | nome in-game, bioma e linea evolutiva |
-| Futura area ispirata a Genzano o Lago di Nemi | Fragmagma | strong thematic candidate | scelta dell'area, nome in-game e bilanciamento |
+| Futura area ispirata a Genzano o Lago di Nemi | Infiorala per Genzano; Fragmagma | strong thematic candidate | scelta dell'area per Fragmagma, nome in-game e bilanciamento |
 | Futura area ispirata a Monte Cavo | Brinix; Glaciterno; Talpmagnet | possible candidate | linea Brinix/Glaciterno, ambiente montano e sottosuolo |
 | Futura area ispirata a Lariano | Boletushield | strong thematic candidate | revisione del nome, linea e blockout |
 | Futura area ispirata al Regillo | Marmorequus | strong thematic candidate | rarità, ruolo monumentale e nome in-game |
@@ -721,29 +856,19 @@ Via Verdi, del Lago di Albèra o di qualunque area futura.
 
 ## Current ecosystem gaps
 
-Il catalogo non copre ancora in modo convincente alcune priorità progettuali.
-Queste lacune non costituiscono specie approvate:
+Quattro lacune hanno ora una soluzione progettuale approvata: Borgotto/Pastufo
+copre la linea canina comune, Miciolo/Felivates la linea felina urbana,
+Foliarva/Crisalvia/Infiorala il Coleottero iniziale a tre stadi e
+Paludix/Sanguilex la seconda famiglia Coleottero specializzata. Nessuna di
+queste linee è ancora implementata.
 
-- **Fauna Normale:** una linea canina regionale e una linea felina regionale
-  potrebbero fornire una presenza Normale comune nelle aree abitate e nei
-  percorsi iniziali. Nomi, ispirazioni precise, numero di stadi, tipi evoluti e
-  collocazione restano TBD. La linea canina dovrà evitare sovrapposizioni con
-  Molospsy, che resta un molosso templare raro o specializzato.
-- **Prima famiglia Coleottero:** direzione preferita a tre stadi, disponibile
-  tra Albèra e Via Verdi, con evoluzione relativamente precoce e funzione di
-  sostegno al ritmo delle prime ore. Potrà avere in futuro un legame tematico
-  con fiori o impollinazione, ma non ha ancora nome, concetto zoologico o tipo
-  definitivo.
-- **Seconda famiglia Coleottero:** identità ecologica distinta per boschi,
-  vigne, zone umide, grotte o alture; non necessariamente disponibile nel
-  primo arco. La direzione preferita è una linea più specializzata,
-  probabilmente a due stadi o a stadio unico, senza escludere tre stadi finché
-  il concept non sarà approvato.
-- linea acquatica comune;
-- specie urbana;
+Restano aperte:
+
+- una linea Acqua comune non anfibia;
+- fauna urbana aggiuntiva, soltanto se ancora necessaria;
 - specie cavernicola o da cisterna;
-- impollinatore o linea floreale, eventualmente collegabile alla prima linea
-  Coleottero;
+- fauna propria del Lago di Albèra oltre alle collocazioni candidate attuali;
+- ulteriori specie impollinatrici, soltanto se necessarie;
 - possibile scarsità di Normale, Coleottero e Acqua comuni;
 - possibile eccesso di Acciaio, Drago e doppi tipi rari.
 
@@ -761,6 +886,10 @@ creare una specie originale per ogni ruolo ecologico o di gameplay.
 | `AUS-FAM-FOSSIL-HIPPO` | Potamy → Plumbopotam | 2 | CANDIDATE; NAME REVIEW | TBD → Roccia/Acciaio | premature/TBD | nomi e ottenimento fossile |
 | `AUS-FAM-FALCON` | Ghepio → Tinuncol → Peregrinus | 3 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Volante → Volante → Volante/Lotta | PLACEMENT CANDIDATE: Via Verdi di giorno | livelli, abilità, frequenze e orari esatti |
 | `AUS-FAM-MAGPIE` | Gazzuola → Brillazza → Gazzombra | 3 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Normale/Volante → Buio/Volante → Buio/Volante | PLACEMENT CANDIDATE: Via Verdi/Albèra Storica | livelli, abilità evolute e tassi |
+| `AUS-FAM-DOG` | Borgotto → Pastufo | 2 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Normale → Normale/Terra | PLACEMENT CANDIDATE: Albèra Bassa/Via Verdi | livello, abilità e distribuzione di Pastufo |
+| `AUS-FAM-CAT` | Miciolo → Felivates | 2 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Normale → Normale/Psico | PLACEMENT CANDIDATE: Albèra Bassa/Albèra Storica | conferma tecnica dell'amicizia e disponibilità di Felivates |
+| `AUS-FAM-EARLY-BUG` | Foliarva → Crisalvia → Infiorala | 3 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Coleottero → Coleottero/Erba → Coleottero/Erba | PLACEMENT CANDIDATE: Via Verdi | livelli, abilità, statistiche e tassi |
+| `AUS-FAM-MOSQUITO` | Paludix → Sanguilex | 2 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Coleottero/Acqua → Coleottero/Veleno | PLACEMENT CANDIDATE: Via Consolare/Lago di Albèra | evoluzione temporale, abilità e tassi |
 | `AUS-CONCEPT-OMPHALUX` | Lumella → Omphalux | 2 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Erba → Erba/Elettro | PLACEMENT CANDIDATE: Via Verdi rara, Via Consolare/oliveti/lago | evoluzione notturna e distribuzione esatta |
 | `AUS-CONCEPT-LUSCERP` | Luscinco → Luscerp | 2 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Erba → Erba/Drago | PLACEMENT CANDIDATE: Via Verdi/Via Consolare/lago | livello, abilità e frequenze |
 | `AUS-CONCEPT-FRAGMAGMA` | Fragmagma | 1+ TBD | CANDIDATE | Folletto/Fuoco | possible candidate: Genzano/Nemi | area e linea |
@@ -788,19 +917,21 @@ Il catalogo non decide:
 - totale finale delle specie;
 - approvazione o esclusione dei concetti;
 - nomi definitivi delle specie candidate;
-- nomi, numero di stadi e tipi definitivi delle linee canina e felina;
-- concetti zoologici e tipi delle due famiglie Coleottero;
 - livelli evolutivi definitivi;
+- conferma tecnica dell'evoluzione per amicizia di Miciolo;
 - statistiche;
-- abilità non esplicitamente approvate;
+- abilità di tutte le nuove specie e ogni abilità non esplicitamente
+  approvata;
 - mosse e learnset;
 - gruppi Uova;
-- rarità, tassi di incontro e fasce orarie precise;
+- rarità, tabelle di incontro e fasce orarie precise;
 - tassi di cattura;
-- sprite e altri asset;
+- sprite, icone, animazioni e altri asset;
+- numeri Pokédex regionali;
+- ID specie tecnici;
+- disponibilità selvatica degli stadi evoluti;
 - habitat definitivi;
-- fauna definitiva di Via Verdi;
-- fauna definitiva del Lago di Albèra;
+- fauna definitiva di Via Verdi, Via Consolare e Lago di Albèra;
 - metodo di ottenimento dei fossili;
 - nomi delle future città e aree;
 - specie leggendarie o mitiche;
