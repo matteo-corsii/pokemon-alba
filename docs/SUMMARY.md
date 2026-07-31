@@ -28,6 +28,7 @@
 - [Piano di test di Via Verdi](VIA_VERDI_TEST_PLAN.md)
 - [Brief della mappa di Albèra Storica](ALBERA_STORICA_MAP_BRIEF.md)
 - [Design di Albèra Storica, Lirio e Via Consolare](ALBERA_STORICA_AND_VIA_CONSOLARE_DESIGN.md)
+- [Design del capitolo del Lago di Albèra](LAGO_DI_ALBERA_CHAPTER_DESIGN.md)
 - [Implementazione degli starter di Ausonia](./AUSONIA_STARTERS_IMPLEMENTATION.md)
 - [Catalogo regionale provvisorio di Ausonia](AUSONIA_REGIONAL_DEX_PLAN.md)
 - [Pipeline degli sprite degli starter di Ausonia](./AUSONIA_STARTER_SPRITE_PIPELINE.md)
