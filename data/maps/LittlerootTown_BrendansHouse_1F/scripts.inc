@@ -311,13 +311,12 @@ PlayersHouse_1F_Text_OhComeQuickly:
 	.string "Presto! Vieni qui!$"
 
 PlayersHouse_1F_Text_MaybeDadWillBeOn:
-	.string "MAMMA: Guarda! È la PALESTRA di PETALBURG!\n"
-	.string "Forse faranno vedere PAPÀ!$"
+	.string "MAMMA: Guarda! Alla TV trasmettono\n"
+	.string "un servizio sulle sorgenti di ALBÈRA!$"
 
 PlayersHouse_1F_Text_ItsOverWeMissedHim:
 	.string "MAMMA: Oh… È già finito.\p"
-	.string "Credo ci fosse PAPÀ, ma l'abbiamo perso.\n"
-	.string "Che peccato.$"
+	.string "Sembra una giornata importante.$"
 
 PlayersHouse_1F_Text_GoIntroduceYourselfNextDoor:
 	.string "Ah, già.\n"
@@ -387,9 +386,8 @@ PlayersHouse_1F_Text_Vigoroth2:
 	.string "Huggoh, uggo uggo…$"
 
 PlayersHouse_1F_Text_ReportFromPetalburgGym:
-	.string "INTERVISTATORE: …Questo servizio\n"
-	.string "arrivava dalla PALESTRA DI\n"
-	.string "PETALBURG.$"
+	.string "INTERVISTATORE: …Il PROF. LAURO\n"
+	.string "presenterà oggi nuovi rilevamenti.$"
 
 PlayersHouse_1F_Text_TheresAMovieOnTV:
 	.string "There is a movie on TV.\p"

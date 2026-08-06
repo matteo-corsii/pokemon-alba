@@ -286,10 +286,9 @@ Route101_Text_YouSavedMe:
 	.string "più tardi al mio LABORATORIO, d'accordo?$"
 
 Route101_Text_TakeTiredPokemonToPokeCenter:
-	.string "Se i POKéMON sono stanchi, portali in\n"
-	.string "un CENTRO POKéMON.\p"
-	.string "C'è un CENTRO POKéMON nella vicina\n"
-	.string "OLDALE.$"
+	.string "Proseguendo arriverai a\n"
+	.string "PORTA PRETORIA,\l"
+	.string "l'ingresso di ALBÈRA STORICA.$"
 
 Route101_Text_WildPokemonInTallGrass:
 	.string "Nell'erba alta, i POKéMON selvatici\n"
