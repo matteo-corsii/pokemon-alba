@@ -223,6 +223,25 @@ static u16 GetBaseStatTotalForTest(enum Species species)
          + gSpeciesInfo[species].baseSpDefense;
 }
 
+static bool32 MoveListContains(const u16 *moves, u16 move)
+{
+    for (u32 i = 0; moves[i] != MOVE_UNAVAILABLE; i++)
+    {
+        if (moves[i] == move)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+static u32 MoveListCount(const u16 *moves)
+{
+    u32 count = 0;
+
+    while (moves[count] != MOVE_UNAVAILABLE)
+        count++;
+    return count;
+}
+
 TEST("Ausonia starter IDs are append-only and distinct")
 {
     EXPECT_EQ(SPECIES_GLIMMORA_MEGA, 1572);
@@ -235,7 +254,11 @@ TEST("Ausonia starter IDs are append-only and distinct")
     EXPECT_EQ(SPECIES_ARDEINO, SPECIES_TOSSIVAMPA + 1);
     EXPECT_EQ(SPECIES_VELAIRONE, SPECIES_ARDEINO + 1);
     EXPECT_EQ(SPECIES_CODAIRONE, SPECIES_VELAIRONE + 1);
-    EXPECT_EQ(SPECIES_EGG, SPECIES_CODAIRONE + 1);
+    EXPECT_EQ(SPECIES_BORGOTTO, SPECIES_CODAIRONE + 1);
+    EXPECT_EQ(SPECIES_PASTUFO, SPECIES_BORGOTTO + 1);
+    EXPECT_EQ(SPECIES_MICIOLO, SPECIES_PASTUFO + 1);
+    EXPECT_EQ(SPECIES_FELIVATES, SPECIES_MICIOLO + 1);
+    EXPECT_EQ(SPECIES_EGG, SPECIES_FELIVATES + 1);
     EXPECT_EQ(NUM_SPECIES, SPECIES_EGG);
 
     EXPECT_EQ(NATIONAL_DEX_PECHARUNT, 1025);
@@ -248,7 +271,11 @@ TEST("Ausonia starter IDs are append-only and distinct")
     EXPECT_EQ(NATIONAL_DEX_ARDEINO, NATIONAL_DEX_TOSSIVAMPA + 1);
     EXPECT_EQ(NATIONAL_DEX_VELAIRONE, NATIONAL_DEX_ARDEINO + 1);
     EXPECT_EQ(NATIONAL_DEX_CODAIRONE, NATIONAL_DEX_VELAIRONE + 1);
-    EXPECT_EQ(NATIONAL_DEX_COUNT, NATIONAL_DEX_CODAIRONE);
+    EXPECT_EQ(NATIONAL_DEX_BORGOTTO, NATIONAL_DEX_CODAIRONE + 1);
+    EXPECT_EQ(NATIONAL_DEX_PASTUFO, NATIONAL_DEX_BORGOTTO + 1);
+    EXPECT_EQ(NATIONAL_DEX_MICIOLO, NATIONAL_DEX_PASTUFO + 1);
+    EXPECT_EQ(NATIONAL_DEX_FELIVATES, NATIONAL_DEX_MICIOLO + 1);
+    EXPECT_EQ(NATIONAL_DEX_COUNT, NATIONAL_DEX_FELIVATES);
 
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_CINGERM), COMPOUND_STRING("Cingerm")), 0);
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_ROVASCO), COMPOUND_STRING("Rovasco")), 0);
@@ -259,6 +286,10 @@ TEST("Ausonia starter IDs are append-only and distinct")
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_ARDEINO), COMPOUND_STRING("Ardeino")), 0);
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_VELAIRONE), COMPOUND_STRING("Velairone")), 0);
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_CODAIRONE), COMPOUND_STRING("Codairone")), 0);
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_BORGOTTO), COMPOUND_STRING("Borgotto")), 0);
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_PASTUFO), COMPOUND_STRING("Pastufo")), 0);
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_MICIOLO), COMPOUND_STRING("Miciolo")), 0);
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_FELIVATES), COMPOUND_STRING("Felivates")), 0);
 }
 
 TEST("Ausonia Grass starter base data matches the approved prototype")
@@ -914,4 +945,237 @@ TEST("Ausonia Water starter graphics and Pokédex data are valid")
     EXPECT_EQ(StringCompare(gSpeciesInfo[SPECIES_ARDEINO].categoryName, COMPOUND_STRING("PIUMALAGO")), 0);
     EXPECT_EQ(StringCompare(gSpeciesInfo[SPECIES_VELAIRONE].categoryName, COMPOUND_STRING("VELO")), 0);
     EXPECT_EQ(StringCompare(gSpeciesInfo[SPECIES_CODAIRONE].categoryName, COMPOUND_STRING("RIFLESSO")), 0);
+}
+
+TEST("Ausonia common fauna base data matches the canonical batch")
+{
+    static const enum Species species[] = { SPECIES_BORGOTTO, SPECIES_PASTUFO, SPECIES_MICIOLO, SPECIES_FELIVATES };
+    static const u8 stats[][NUM_STATS] = {
+        { 45, 50, 40, 55, 30, 40 },
+        { 80, 88, 78, 65, 42, 67 },
+        { 42, 40, 38, 65, 50, 45 },
+        { 70, 52, 60, 100, 98, 80 },
+    };
+    static const u16 statTotals[] = { 260, 420, 280, 460 };
+    static const u8 catchRates[] = { 255, 120, 190, 75 };
+    static const u16 expYields[] = { 64, 158, 70, 168 };
+    static const u16 heights[] = { 3, 6, 4, 9 };
+    static const u16 weights[] = { 32, 98, 41, 136 };
+
+    for (u32 i = 0; i < ARRAY_COUNT(species); i++)
+    {
+        const struct SpeciesInfo *info = &gSpeciesInfo[species[i]];
+
+        EXPECT_EQ(info->baseHP, stats[i][STAT_HP]);
+        EXPECT_EQ(info->baseAttack, stats[i][STAT_ATK]);
+        EXPECT_EQ(info->baseDefense, stats[i][STAT_DEF]);
+        EXPECT_EQ(info->baseSpeed, stats[i][STAT_SPEED]);
+        EXPECT_EQ(info->baseSpAttack, stats[i][STAT_SPATK]);
+        EXPECT_EQ(info->baseSpDefense, stats[i][STAT_SPDEF]);
+        EXPECT_EQ(GetBaseStatTotalForTest(species[i]), statTotals[i]);
+        EXPECT_EQ(info->catchRate, catchRates[i]);
+        EXPECT_EQ(info->expYield, expYields[i]);
+        EXPECT_EQ(info->height, heights[i]);
+        EXPECT_EQ(info->weight, weights[i]);
+        EXPECT_EQ(info->eggCycles, 15);
+        EXPECT_EQ(info->friendship, 70);
+        EXPECT_EQ(info->growthRate, GROWTH_MEDIUM_FAST);
+        EXPECT_EQ(info->eggGroups[0], EGG_GROUP_FIELD);
+        EXPECT_EQ(info->eggGroups[1], EGG_GROUP_FIELD);
+        EXPECT_NE(StringCompare(info->description, gFallbackPokedexText), 0);
+    }
+
+    EXPECT_EQ(gSpeciesInfo[SPECIES_BORGOTTO].types[0], TYPE_NORMAL);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_BORGOTTO].types[1], TYPE_NORMAL);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_PASTUFO].types[0], TYPE_NORMAL);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_PASTUFO].types[1], TYPE_GROUND);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_MICIOLO].types[0], TYPE_NORMAL);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_MICIOLO].types[1], TYPE_NORMAL);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_FELIVATES].types[0], TYPE_NORMAL);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_FELIVATES].types[1], TYPE_PSYCHIC);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_BORGOTTO].abilities[0], ABILITY_KEEN_EYE);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_BORGOTTO].abilities[2], ABILITY_PICKUP);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_PASTUFO].abilities[0], ABILITY_KEEN_EYE);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_PASTUFO].abilities[2], ABILITY_PICKUP);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_MICIOLO].abilities[0], ABILITY_LIMBER);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_MICIOLO].abilities[2], ABILITY_SYNCHRONIZE);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_FELIVATES].abilities[0], ABILITY_LIMBER);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_FELIVATES].abilities[2], ABILITY_SYNCHRONIZE);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_BORGOTTO].evYield_HP, 1);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_PASTUFO].evYield_HP, 2);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_MICIOLO].evYield_Speed, 1);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_FELIVATES].evYield_Speed, 2);
+    EXPECT_EQ(StringCompare(gSpeciesInfo[SPECIES_BORGOTTO].categoryName, COMPOUND_STRING("BORGO")), 0);
+    EXPECT_EQ(StringCompare(gSpeciesInfo[SPECIES_PASTUFO].categoryName, COMPOUND_STRING("PROVVISTA")), 0);
+    EXPECT_EQ(StringCompare(gSpeciesInfo[SPECIES_MICIOLO].categoryName, COMPOUND_STRING("GATTO")), 0);
+    EXPECT_EQ(StringCompare(gSpeciesInfo[SPECIES_FELIVATES].categoryName, COMPOUND_STRING("ARMONIA")), 0);
+}
+
+TEST("Ausonia common fauna evolutions use the canonical methods")
+{
+    const struct Evolution *borgottoEvolutions = GetSpeciesEvolutions(SPECIES_BORGOTTO);
+    const struct Evolution *micioloEvolutions = GetSpeciesEvolutions(SPECIES_MICIOLO);
+
+    EXPECT_EQ(borgottoEvolutions[0].method, EVO_LEVEL);
+    EXPECT_EQ(borgottoEvolutions[0].param, 18);
+    EXPECT_EQ(borgottoEvolutions[0].targetSpecies, SPECIES_PASTUFO);
+    EXPECT_EQ(borgottoEvolutions[1].method, EVOLUTIONS_END);
+    EXPECT(GetSpeciesEvolutions(SPECIES_PASTUFO) == NULL);
+
+    EXPECT_EQ(micioloEvolutions[0].method, EVO_LEVEL);
+    EXPECT_EQ(micioloEvolutions[0].param, 0);
+    EXPECT_EQ(micioloEvolutions[0].targetSpecies, SPECIES_FELIVATES);
+    EXPECT(micioloEvolutions[0].params != NULL);
+    EXPECT_EQ(micioloEvolutions[0].params[0].condition, IF_MIN_FRIENDSHIP);
+    EXPECT_EQ(micioloEvolutions[0].params[0].arg1, 160);
+    EXPECT_EQ(micioloEvolutions[0].params[1].condition, CONDITIONS_END);
+    EXPECT_EQ(micioloEvolutions[1].method, EVOLUTIONS_END);
+    EXPECT(GetSpeciesEvolutions(SPECIES_FELIVATES) == NULL);
+}
+
+TEST("Ausonia common fauna level-up learnsets are canonical and ordered")
+{
+    static const u8 borgottoLevels[] = { 1, 1, 4, 7, 10, 13, 16, 20, 24, 28 };
+    static const u16 borgottoMoves[] = {
+        MOVE_TACKLE, MOVE_TAIL_WHIP, MOVE_SAND_ATTACK, MOVE_BITE, MOVE_ODOR_SLEUTH,
+        MOVE_COVET, MOVE_HELPING_HAND, MOVE_WORK_UP, MOVE_TAKE_DOWN, MOVE_CRUNCH,
+    };
+    static const u8 pastufoLevels[] = { 0, 1, 1, 4, 7, 10, 13, 16, 20, 22, 27, 27, 27, 33, 39, 45, 52 };
+    static const u16 pastufoMoves[] = {
+        MOVE_MUD_SLAP, MOVE_TACKLE, MOVE_TAIL_WHIP, MOVE_SAND_ATTACK, MOVE_BITE,
+        MOVE_ODOR_SLEUTH, MOVE_COVET, MOVE_HELPING_HAND, MOVE_WORK_UP, MOVE_BULLDOZE,
+        MOVE_STOCKPILE, MOVE_SWALLOW, MOVE_SPIT_UP, MOVE_DIG, MOVE_BODY_SLAM,
+        MOVE_CRUNCH, MOVE_EARTHQUAKE,
+    };
+    static const u8 micioloLevels[] = { 1, 1, 4, 7, 10, 13, 16, 19, 23, 27, 31 };
+    static const u16 micioloMoves[] = {
+        MOVE_SCRATCH, MOVE_GROWL, MOVE_TAIL_WHIP, MOVE_FAKE_OUT, MOVE_COVET,
+        MOVE_SWIFT, MOVE_CHARM, MOVE_CONFUSION, MOVE_SING, MOVE_PSYBEAM, MOVE_AGILITY,
+    };
+    static const u8 felivatesLevels[] = { 0, 1, 1, 4, 7, 10, 13, 16, 19, 22, 26, 30, 34, 39, 44, 50, 56 };
+    static const u16 felivatesMoves[] = {
+        MOVE_CONFUSION, MOVE_SCRATCH, MOVE_GROWL, MOVE_TAIL_WHIP, MOVE_FAKE_OUT,
+        MOVE_COVET, MOVE_SWIFT, MOVE_CHARM, MOVE_CONFUSION, MOVE_PSYBEAM,
+        MOVE_CALM_MIND, MOVE_SAFEGUARD, MOVE_HEAL_BELL, MOVE_PSYCHIC,
+        MOVE_BATON_PASS, MOVE_MOONLIGHT, MOVE_FUTURE_SIGHT,
+    };
+    const struct LevelUpMove *learnsets[] = {
+        GetSpeciesLevelUpLearnset(SPECIES_BORGOTTO),
+        GetSpeciesLevelUpLearnset(SPECIES_PASTUFO),
+        GetSpeciesLevelUpLearnset(SPECIES_MICIOLO),
+        GetSpeciesLevelUpLearnset(SPECIES_FELIVATES),
+    };
+    const u8 *levels[] = { borgottoLevels, pastufoLevels, micioloLevels, felivatesLevels };
+    const u16 *moves[] = { borgottoMoves, pastufoMoves, micioloMoves, felivatesMoves };
+    const u32 counts[] = {
+        ARRAY_COUNT(borgottoMoves), ARRAY_COUNT(pastufoMoves),
+        ARRAY_COUNT(micioloMoves), ARRAY_COUNT(felivatesMoves),
+    };
+
+    for (u32 i = 0; i < ARRAY_COUNT(learnsets); i++)
+    {
+        for (u32 j = 0; j < counts[i]; j++)
+        {
+            EXPECT_EQ(learnsets[i][j].level, levels[i][j]);
+            EXPECT_EQ(learnsets[i][j].move, moves[i][j]);
+            if (j > 0)
+                EXPECT_GE(learnsets[i][j].level, learnsets[i][j - 1].level);
+        }
+        EXPECT_EQ(learnsets[i][counts[i]].move, LEVEL_UP_MOVE_END);
+    }
+}
+
+TEST("Ausonia common fauna teachable and Egg Move compatibility is complete")
+{
+    static const u16 borgottoTeachables[] = {
+        MOVE_PROTECT, MOVE_REST, MOVE_SLEEP_TALK, MOVE_SUBSTITUTE, MOVE_FACADE,
+        MOVE_ENDURE, MOVE_THIEF, MOVE_SNARL, MOVE_SWIFT, MOVE_CHARM, MOVE_DIG,
+        MOVE_ROCK_SMASH, MOVE_STRENGTH, MOVE_HELPING_HAND, MOVE_HYPER_VOICE,
+        MOVE_KNOCK_OFF, MOVE_SUPER_FANG, MOVE_ENDEAVOR, MOVE_UPROAR,
+    };
+    static const u16 pastufoExtraTeachables[] = {
+        MOVE_BULLDOZE, MOVE_EARTHQUAKE, MOVE_SANDSTORM, MOVE_ROCK_TOMB,
+        MOVE_ROCK_SLIDE, MOVE_BRICK_BREAK, MOVE_LOW_SWEEP, MOVE_STOMPING_TANTRUM,
+        MOVE_HIGH_HORSEPOWER, MOVE_IRON_HEAD,
+    };
+    static const u16 micioloTeachables[] = {
+        MOVE_PROTECT, MOVE_REST, MOVE_SLEEP_TALK, MOVE_SUBSTITUTE, MOVE_FACADE,
+        MOVE_ENDURE, MOVE_THIEF, MOVE_SWIFT, MOVE_CHARM, MOVE_DIG, MOVE_CALM_MIND,
+        MOVE_PSYCH_UP, MOVE_THUNDER_WAVE, MOVE_SHADOW_BALL, MOVE_LIGHT_SCREEN,
+        MOVE_REFLECT, MOVE_SAFEGUARD, MOVE_HELPING_HAND, MOVE_HEAL_BELL,
+        MOVE_HYPER_VOICE, MOVE_KNOCK_OFF, MOVE_COVET, MOVE_ZEN_HEADBUTT,
+    };
+    static const u16 felivatesExtraTeachables[] = {
+        MOVE_PSYCHIC, MOVE_PSYSHOCK, MOVE_DAZZLING_GLEAM, MOVE_ENERGY_BALL,
+        MOVE_TRICK_ROOM, MOVE_STORED_POWER, MOVE_TRICK, MOVE_MAGIC_COAT,
+        MOVE_ALLY_SWITCH, MOVE_EXPANDING_FORCE,
+    };
+    static const u16 borgottoEggMoves[] = {
+        MOVE_BABY_DOLL_EYES, MOVE_HOWL, MOVE_YAWN, MOVE_DOUBLE_EDGE,
+        MOVE_LAST_RESORT, MOVE_PLAY_ROUGH,
+    };
+    static const u16 micioloEggMoves[] = {
+        MOVE_COPYCAT, MOVE_FAKE_TEARS, MOVE_WISH, MOVE_YAWN,
+        MOVE_BATON_PASS, MOVE_HEAL_BELL, MOVE_TICKLE,
+    };
+    const u16 *borgotto = gSpeciesInfo[SPECIES_BORGOTTO].teachableLearnset;
+    const u16 *pastufo = gSpeciesInfo[SPECIES_PASTUFO].teachableLearnset;
+    const u16 *miciolo = gSpeciesInfo[SPECIES_MICIOLO].teachableLearnset;
+    const u16 *felivates = gSpeciesInfo[SPECIES_FELIVATES].teachableLearnset;
+
+    for (u32 i = 0; i < ARRAY_COUNT(borgottoTeachables); i++)
+    {
+        EXPECT(MoveListContains(borgotto, borgottoTeachables[i]));
+        EXPECT(MoveListContains(pastufo, borgottoTeachables[i]));
+    }
+    for (u32 i = 0; i < ARRAY_COUNT(pastufoExtraTeachables); i++)
+        EXPECT(MoveListContains(pastufo, pastufoExtraTeachables[i]));
+    for (u32 i = 0; i < ARRAY_COUNT(micioloTeachables); i++)
+    {
+        EXPECT(MoveListContains(miciolo, micioloTeachables[i]));
+        EXPECT(MoveListContains(felivates, micioloTeachables[i]));
+    }
+    for (u32 i = 0; i < ARRAY_COUNT(felivatesExtraTeachables); i++)
+        EXPECT(MoveListContains(felivates, felivatesExtraTeachables[i]));
+    for (u32 i = 0; i < ARRAY_COUNT(borgottoEggMoves); i++)
+        EXPECT(MoveListContains(gSpeciesInfo[SPECIES_BORGOTTO].eggMoveLearnset, borgottoEggMoves[i]));
+    for (u32 i = 0; i < ARRAY_COUNT(micioloEggMoves); i++)
+        EXPECT(MoveListContains(gSpeciesInfo[SPECIES_MICIOLO].eggMoveLearnset, micioloEggMoves[i]));
+
+    EXPECT_EQ(MoveListCount(borgotto), ARRAY_COUNT(borgottoTeachables));
+    EXPECT_EQ(MoveListCount(pastufo), 29);
+    EXPECT_EQ(MoveListCount(miciolo), ARRAY_COUNT(micioloTeachables));
+    EXPECT_EQ(MoveListCount(felivates), 33);
+    EXPECT_EQ(MoveListCount(gSpeciesInfo[SPECIES_BORGOTTO].eggMoveLearnset), ARRAY_COUNT(borgottoEggMoves));
+    EXPECT_EQ(MoveListCount(gSpeciesInfo[SPECIES_MICIOLO].eggMoveLearnset), ARRAY_COUNT(micioloEggMoves));
+}
+
+TEST("Ausonia common fauna uses only the authorized graphical placeholders")
+{
+    static const enum Species species[] = { SPECIES_BORGOTTO, SPECIES_PASTUFO, SPECIES_MICIOLO, SPECIES_FELIVATES };
+    static const enum Species placeholders[] = { SPECIES_LILLIPUP, SPECIES_HERDIER, SPECIES_SKITTY, SPECIES_ESPEON };
+
+    for (u32 i = 0; i < ARRAY_COUNT(species); i++)
+    {
+        const struct SpeciesInfo *info = &gSpeciesInfo[species[i]];
+        const struct SpeciesInfo *placeholder = &gSpeciesInfo[placeholders[i]];
+
+        EXPECT(info->frontPic == placeholder->frontPic);
+        EXPECT(info->backPic == placeholder->backPic);
+        EXPECT(info->palette == placeholder->palette);
+        EXPECT(info->shinyPalette == placeholder->shinyPalette);
+        EXPECT(info->iconSprite == placeholder->iconSprite);
+        EXPECT_EQ((u32)info->cryId, (u32)placeholder->cryId);
+        EXPECT_EQ(info->frontPicSize, placeholder->frontPicSize);
+        EXPECT_EQ(info->backPicSize, placeholder->backPicSize);
+        EXPECT_EQ(info->frontPicYOffset, placeholder->frontPicYOffset);
+        EXPECT_EQ(info->backPicYOffset, placeholder->backPicYOffset);
+        EXPECT_EQ((u32)info->iconPalIndex, (u32)placeholder->iconPalIndex);
+#if P_FOOTPRINTS
+        EXPECT(info->footprint == placeholder->footprint);
+#endif
+#if OW_POKEMON_OBJECT_EVENTS
+        EXPECT(info->overworldData.images == placeholder->overworldData.images);
+#endif
+    }
 }
