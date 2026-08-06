@@ -482,6 +482,17 @@ LittlerootTown_EventScript_BlockRouteUntilLabAssignment::
 	releaseall
 	end
 
+LittlerootTown_EventScript_BlockSecondaryNorthExit::
+	lockall
+	goto_if_set FLAG_ALBERA_WATER_RESEARCH_STARTED, LittlerootTown_EventScript_BlockSecondaryNorthExitEnd
+	msgbox LittlerootTown_Text_SecondaryNorthExitClosed, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_PLAYER, LittlerootTown_Movement_PushPlayerBackFromRoute
+	waitmovement 0
+LittlerootTown_EventScript_BlockSecondaryNorthExitEnd::
+	releaseall
+	end
+
 LittlerootTown_EventScript_BlockRouteUntilCampetto::
 	msgbox LittlerootTown_Text_GoToCampettoFirst, MSGBOX_DEFAULT
 	closemessage
@@ -1138,6 +1149,10 @@ LittlerootTown_Text_RouteClosedForMeasurements:
 	.string "La strada è momentaneamente chiusa.\p"
 	.string "Il PROF. LAURO sta controllando\n"
 	.string "alcune anomalie nella zona.$"
+
+LittlerootTown_Text_SecondaryNorthExitClosed:
+	.string "Il passaggio settentrionale è chiuso\n"
+	.string "per lavori sulla rete idrica.$"
 
 LittlerootTown_Text_IfYouGoInGrassPokemonWillJumpOut:
 	.string "Ehm, ehm, ehm!\p"
