@@ -463,6 +463,14 @@
 #define METATILE_Petalburg_Door_BirchsLab   0x249
 #define METATILE_Petalburg_Door_Littleroot  0x248
 #define METATILE_Petalburg_Door_Oldale      0x287
+#define METATILE_Petalburg_PretoriaArch_TopLeft        0x290
+#define METATILE_Petalburg_PretoriaArch_TopInnerLeft   0x291
+#define METATILE_Petalburg_PretoriaArch_TopCenterLeft  0x292
+#define METATILE_Petalburg_PretoriaArch_TopCenterRight 0x293
+#define METATILE_Petalburg_PretoriaArch_TopInnerRight  0x294
+#define METATILE_Petalburg_PretoriaArch_TopRight       0x295
+#define METATILE_Petalburg_PretoriaArch_PillarLeft     0x296
+#define METATILE_Petalburg_PretoriaArch_PillarRight    0x297
 
 // gTileset_PetalburgGym
 #define METATILE_PetalburgGym_Door                0x224
