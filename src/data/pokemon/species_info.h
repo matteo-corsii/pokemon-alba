@@ -347,128 +347,6 @@ static const struct LevelUpMove sFelivatesLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
-// This expansion exposes one teachable list per species. These arrays therefore
-// combine the canonical TM/HM and tutor compatibility without duplicates.
-static const u16 sBorgottoTeachableLearnset[] = {
-    MOVE_PROTECT,
-    MOVE_REST,
-    MOVE_SLEEP_TALK,
-    MOVE_SUBSTITUTE,
-    MOVE_FACADE,
-    MOVE_ENDURE,
-    MOVE_THIEF,
-    MOVE_SNARL,
-    MOVE_SWIFT,
-    MOVE_CHARM,
-    MOVE_DIG,
-    MOVE_ROCK_SMASH,
-    MOVE_STRENGTH,
-    MOVE_HELPING_HAND,
-    MOVE_HYPER_VOICE,
-    MOVE_KNOCK_OFF,
-    MOVE_SUPER_FANG,
-    MOVE_ENDEAVOR,
-    MOVE_UPROAR,
-    MOVE_UNAVAILABLE,
-};
-
-static const u16 sPastufoTeachableLearnset[] = {
-    MOVE_PROTECT,
-    MOVE_REST,
-    MOVE_SLEEP_TALK,
-    MOVE_SUBSTITUTE,
-    MOVE_FACADE,
-    MOVE_ENDURE,
-    MOVE_THIEF,
-    MOVE_SNARL,
-    MOVE_SWIFT,
-    MOVE_CHARM,
-    MOVE_DIG,
-    MOVE_ROCK_SMASH,
-    MOVE_STRENGTH,
-    MOVE_BULLDOZE,
-    MOVE_EARTHQUAKE,
-    MOVE_SANDSTORM,
-    MOVE_ROCK_TOMB,
-    MOVE_ROCK_SLIDE,
-    MOVE_BRICK_BREAK,
-    MOVE_LOW_SWEEP,
-    MOVE_STOMPING_TANTRUM,
-    MOVE_HIGH_HORSEPOWER,
-    MOVE_HELPING_HAND,
-    MOVE_HYPER_VOICE,
-    MOVE_KNOCK_OFF,
-    MOVE_SUPER_FANG,
-    MOVE_ENDEAVOR,
-    MOVE_UPROAR,
-    MOVE_IRON_HEAD,
-    MOVE_UNAVAILABLE,
-};
-
-static const u16 sMicioloTeachableLearnset[] = {
-    MOVE_PROTECT,
-    MOVE_REST,
-    MOVE_SLEEP_TALK,
-    MOVE_SUBSTITUTE,
-    MOVE_FACADE,
-    MOVE_ENDURE,
-    MOVE_THIEF,
-    MOVE_SWIFT,
-    MOVE_CHARM,
-    MOVE_DIG,
-    MOVE_CALM_MIND,
-    MOVE_PSYCH_UP,
-    MOVE_THUNDER_WAVE,
-    MOVE_SHADOW_BALL,
-    MOVE_LIGHT_SCREEN,
-    MOVE_REFLECT,
-    MOVE_SAFEGUARD,
-    MOVE_HELPING_HAND,
-    MOVE_HEAL_BELL,
-    MOVE_HYPER_VOICE,
-    MOVE_KNOCK_OFF,
-    MOVE_COVET,
-    MOVE_ZEN_HEADBUTT,
-    MOVE_UNAVAILABLE,
-};
-
-static const u16 sFelivatesTeachableLearnset[] = {
-    MOVE_PROTECT,
-    MOVE_REST,
-    MOVE_SLEEP_TALK,
-    MOVE_SUBSTITUTE,
-    MOVE_FACADE,
-    MOVE_ENDURE,
-    MOVE_THIEF,
-    MOVE_SWIFT,
-    MOVE_CHARM,
-    MOVE_DIG,
-    MOVE_CALM_MIND,
-    MOVE_PSYCH_UP,
-    MOVE_THUNDER_WAVE,
-    MOVE_SHADOW_BALL,
-    MOVE_LIGHT_SCREEN,
-    MOVE_REFLECT,
-    MOVE_SAFEGUARD,
-    MOVE_PSYCHIC,
-    MOVE_PSYSHOCK,
-    MOVE_DAZZLING_GLEAM,
-    MOVE_ENERGY_BALL,
-    MOVE_TRICK_ROOM,
-    MOVE_STORED_POWER,
-    MOVE_HELPING_HAND,
-    MOVE_HEAL_BELL,
-    MOVE_HYPER_VOICE,
-    MOVE_KNOCK_OFF,
-    MOVE_COVET,
-    MOVE_ZEN_HEADBUTT,
-    MOVE_TRICK,
-    MOVE_MAGIC_COAT,
-    MOVE_ALLY_SWITCH,
-    MOVE_EXPANDING_FORCE,
-    MOVE_UNAVAILABLE,
-};
-
 const struct SpeciesInfo gSpeciesInfo[] =
 {
     [SPECIES_NONE] =
@@ -1223,6 +1101,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
             gShinyOverworldPalette_Lillipup
         )
         .levelUpLearnset = sBorgottoLevelUpLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
         .teachableLearnset = sBorgottoTeachableLearnset,
         .eggMoveLearnset = sBorgottoEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 18, SPECIES_PASTUFO}),
@@ -1295,6 +1174,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
             gShinyOverworldPalette_Herdier
         )
         .levelUpLearnset = sPastufoLevelUpLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
         .teachableLearnset = sPastufoTeachableLearnset,
     },
 
@@ -1362,6 +1242,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
             gShinyOverworldPalette_Skitty
         )
         .levelUpLearnset = sMicioloLevelUpLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
         .teachableLearnset = sMicioloTeachableLearnset,
         .eggMoveLearnset = sMicioloEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 0, SPECIES_FELIVATES, CONDITIONS({IF_MIN_FRIENDSHIP, FRIENDSHIP_EVO_THRESHOLD})}),
@@ -1431,6 +1312,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
             gShinyOverworldPalette_Espeon
         )
         .levelUpLearnset = sFelivatesLevelUpLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
         .teachableLearnset = sFelivatesTeachableLearnset,
     },
 

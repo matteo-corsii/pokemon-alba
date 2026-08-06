@@ -30,5 +30,12 @@ Some moves are excluded, they are listed in SignatureTeachables
 */
 #define ALL_TEACHABLES      1
 
+/* EXPLICIT_TEACHABLES
+Custom species use: canonical teachable lists maintained in all_learnables.json
+Use the complete precomputed list without adding universal moves or filtering it
+against the teaching methods currently distributed by the ROM.
+*/
+#define EXPLICIT_TEACHABLES 1
+
 
 #endif  // GUARD_CONSTANTS_TEACHING_TYPES_H

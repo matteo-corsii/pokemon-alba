@@ -961,6 +961,10 @@ TEST("Ausonia common fauna base data matches the canonical batch")
     static const u16 expYields[] = { 64, 158, 70, 168 };
     static const u16 heights[] = { 3, 6, 4, 9 };
     static const u16 weights[] = { 32, 98, 41, 136 };
+    const u8 borgottoHpYield = gSpeciesInfo[SPECIES_BORGOTTO].evYield_HP;
+    const u8 pastufoHpYield = gSpeciesInfo[SPECIES_PASTUFO].evYield_HP;
+    const u8 micioloSpeedYield = gSpeciesInfo[SPECIES_MICIOLO].evYield_Speed;
+    const u8 felivatesSpeedYield = gSpeciesInfo[SPECIES_FELIVATES].evYield_Speed;
 
     for (u32 i = 0; i < ARRAY_COUNT(species); i++)
     {
@@ -1001,10 +1005,10 @@ TEST("Ausonia common fauna base data matches the canonical batch")
     EXPECT_EQ(gSpeciesInfo[SPECIES_MICIOLO].abilities[2], ABILITY_SYNCHRONIZE);
     EXPECT_EQ(gSpeciesInfo[SPECIES_FELIVATES].abilities[0], ABILITY_LIMBER);
     EXPECT_EQ(gSpeciesInfo[SPECIES_FELIVATES].abilities[2], ABILITY_SYNCHRONIZE);
-    EXPECT_EQ(gSpeciesInfo[SPECIES_BORGOTTO].evYield_HP, 1);
-    EXPECT_EQ(gSpeciesInfo[SPECIES_PASTUFO].evYield_HP, 2);
-    EXPECT_EQ(gSpeciesInfo[SPECIES_MICIOLO].evYield_Speed, 1);
-    EXPECT_EQ(gSpeciesInfo[SPECIES_FELIVATES].evYield_Speed, 2);
+    EXPECT_EQ(borgottoHpYield, 1);
+    EXPECT_EQ(pastufoHpYield, 2);
+    EXPECT_EQ(micioloSpeedYield, 1);
+    EXPECT_EQ(felivatesSpeedYield, 2);
     EXPECT_EQ(StringCompare(gSpeciesInfo[SPECIES_BORGOTTO].categoryName, COMPOUND_STRING("BORGO")), 0);
     EXPECT_EQ(StringCompare(gSpeciesInfo[SPECIES_PASTUFO].categoryName, COMPOUND_STRING("PROVVISTA")), 0);
     EXPECT_EQ(StringCompare(gSpeciesInfo[SPECIES_MICIOLO].categoryName, COMPOUND_STRING("GATTO")), 0);
