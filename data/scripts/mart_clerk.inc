@@ -1,13 +1,13 @@
 gText_HowMayIServeYou::
-	.string "Welcome!\p"
-	.string "How may I serve you?$"
+	.string "Benvenuto!\p"
+	.string "Come posso servirti?$"
 
 gText_PleaseComeAgain::
-	.string "Please come again!$"
+	.string "Grazie! Torna a trovarci!$"
 
 gText_PlayerWhatCanIDoForYou::
-	.string "{PLAYER}{KUN}, welcome!\p"
-	.string "What can I do for you?$"
+	.string "{PLAYER}{KUN}, benvenuto!\p"
+	.string "Cosa posso fare per te?$"
 
 Pokemart_DefaultItemList::
 	.2byte ITEM_ULTRA_BALL
