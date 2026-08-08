@@ -1432,14 +1432,14 @@ TEST("Ausonia early Bug fauna teachables Egg Moves and placeholders are complete
         const struct SpeciesInfo *info = &gSpeciesInfo[species[i]];
         const struct SpeciesInfo *placeholder = &gSpeciesInfo[placeholders[i]];
 
-        EXPECT(info->frontPic == placeholder->frontPic);
-        EXPECT(info->backPic == placeholder->backPic);
-        EXPECT(info->palette == placeholder->palette);
-        EXPECT(info->shinyPalette == placeholder->shinyPalette);
-        EXPECT(info->iconSprite == placeholder->iconSprite);
+        EXPECT(info->frontPic != placeholder->frontPic);
+        EXPECT(info->backPic != placeholder->backPic);
+        EXPECT(info->palette != placeholder->palette);
+        EXPECT(info->shinyPalette != placeholder->shinyPalette);
+        EXPECT(info->iconSprite != placeholder->iconSprite);
         EXPECT(info->frontAnimFrames != NULL);
         EXPECT_EQ((u32)info->cryId, (u32)placeholder->cryId);
-        EXPECT_EQ((u32)info->iconPalIndex, (u32)placeholder->iconPalIndex);
+        EXPECT_EQ((u32)info->iconPalIndex, 1);
 #if P_FOOTPRINTS
         EXPECT(info->footprint == placeholder->footprint);
 #endif
