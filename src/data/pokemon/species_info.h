@@ -276,6 +276,77 @@ static const struct LevelUpMove sCodaironeLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+static const struct LevelUpMove sBorgottoLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_TACKLE),
+    LEVEL_UP_MOVE( 1, MOVE_TAIL_WHIP),
+    LEVEL_UP_MOVE( 4, MOVE_SAND_ATTACK),
+    LEVEL_UP_MOVE( 7, MOVE_BITE),
+    LEVEL_UP_MOVE(10, MOVE_ODOR_SLEUTH),
+    LEVEL_UP_MOVE(13, MOVE_COVET),
+    LEVEL_UP_MOVE(16, MOVE_HELPING_HAND),
+    LEVEL_UP_MOVE(20, MOVE_WORK_UP),
+    LEVEL_UP_MOVE(24, MOVE_TAKE_DOWN),
+    LEVEL_UP_MOVE(28, MOVE_CRUNCH),
+    LEVEL_UP_END
+};
+
+static const struct LevelUpMove sPastufoLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 0, MOVE_MUD_SLAP),
+    LEVEL_UP_MOVE( 1, MOVE_TACKLE),
+    LEVEL_UP_MOVE( 1, MOVE_TAIL_WHIP),
+    LEVEL_UP_MOVE( 4, MOVE_SAND_ATTACK),
+    LEVEL_UP_MOVE( 7, MOVE_BITE),
+    LEVEL_UP_MOVE(10, MOVE_ODOR_SLEUTH),
+    LEVEL_UP_MOVE(13, MOVE_COVET),
+    LEVEL_UP_MOVE(16, MOVE_HELPING_HAND),
+    LEVEL_UP_MOVE(20, MOVE_WORK_UP),
+    LEVEL_UP_MOVE(22, MOVE_BULLDOZE),
+    LEVEL_UP_MOVE(27, MOVE_STOCKPILE),
+    LEVEL_UP_MOVE(27, MOVE_SWALLOW),
+    LEVEL_UP_MOVE(27, MOVE_SPIT_UP),
+    LEVEL_UP_MOVE(33, MOVE_DIG),
+    LEVEL_UP_MOVE(39, MOVE_BODY_SLAM),
+    LEVEL_UP_MOVE(45, MOVE_CRUNCH),
+    LEVEL_UP_MOVE(52, MOVE_EARTHQUAKE),
+    LEVEL_UP_END
+};
+
+static const struct LevelUpMove sMicioloLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_SCRATCH),
+    LEVEL_UP_MOVE( 1, MOVE_GROWL),
+    LEVEL_UP_MOVE( 4, MOVE_TAIL_WHIP),
+    LEVEL_UP_MOVE( 7, MOVE_FAKE_OUT),
+    LEVEL_UP_MOVE(10, MOVE_COVET),
+    LEVEL_UP_MOVE(13, MOVE_SWIFT),
+    LEVEL_UP_MOVE(16, MOVE_CHARM),
+    LEVEL_UP_MOVE(19, MOVE_CONFUSION),
+    LEVEL_UP_MOVE(23, MOVE_SING),
+    LEVEL_UP_MOVE(27, MOVE_PSYBEAM),
+    LEVEL_UP_MOVE(31, MOVE_AGILITY),
+    LEVEL_UP_END
+};
+
+static const struct LevelUpMove sFelivatesLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 0, MOVE_CONFUSION),
+    LEVEL_UP_MOVE( 1, MOVE_SCRATCH),
+    LEVEL_UP_MOVE( 1, MOVE_GROWL),
+    LEVEL_UP_MOVE( 4, MOVE_TAIL_WHIP),
+    LEVEL_UP_MOVE( 7, MOVE_FAKE_OUT),
+    LEVEL_UP_MOVE(10, MOVE_COVET),
+    LEVEL_UP_MOVE(13, MOVE_SWIFT),
+    LEVEL_UP_MOVE(16, MOVE_CHARM),
+    LEVEL_UP_MOVE(19, MOVE_CONFUSION),
+    LEVEL_UP_MOVE(22, MOVE_PSYBEAM),
+    LEVEL_UP_MOVE(26, MOVE_CALM_MIND),
+    LEVEL_UP_MOVE(30, MOVE_SAFEGUARD),
+    LEVEL_UP_MOVE(34, MOVE_HEAL_BELL),
+    LEVEL_UP_MOVE(39, MOVE_PSYCHIC),
+    LEVEL_UP_MOVE(44, MOVE_BATON_PASS),
+    LEVEL_UP_MOVE(50, MOVE_MOONLIGHT),
+    LEVEL_UP_MOVE(56, MOVE_FUTURE_SIGHT),
+    LEVEL_UP_END
+};
+
 const struct SpeciesInfo gSpeciesInfo[] =
 {
     [SPECIES_NONE] =
@@ -959,6 +1030,290 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .levelUpLearnset = sCodaironeLevelUpLearnset,
         .teachableLearnset = sNoneTeachableLearnset,
         .eggMoveLearnset = sNoneEggMoveLearnset,
+    },
+
+    // Pokémon Alba: common early fauna. Graphics remain authorized placeholders.
+    [SPECIES_BORGOTTO] =
+    {
+        .baseHP        = 45,
+        .baseAttack    = 50,
+        .baseDefense   = 40,
+        .baseSpeed     = 55,
+        .baseSpAttack  = 30,
+        .baseSpDefense = 40,
+        .types = MON_TYPES(TYPE_NORMAL),
+        .catchRate = 255,
+        .expYield = 64,
+        .evYield_HP = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 15,
+        .friendship = 70,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
+        .abilities = { ABILITY_KEEN_EYE, ABILITY_NONE, ABILITY_PICKUP },
+        .bodyColor = BODY_COLOR_BROWN,
+        .speciesName = _("Borgotto"),
+        .cryId = CRY_LILLIPUP,
+        .natDexNum = NATIONAL_DEX_BORGOTTO,
+        .categoryName = _("BORGO"),
+        .height = 3,
+        .weight = 32,
+        .description = COMPOUND_STRING(
+            "È molto curioso e ama esplorare\n"
+            "case e giardini. Raccoglie piccoli\n"
+            "oggetti e li porta nella propria\n"
+            "tana."),
+        .pokemonScale = 491,
+        .pokemonOffset = 15,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Lillipup,
+        .frontPicSize = MON_COORDS_SIZE(32, 40),
+        .frontPicYOffset = 12,
+        .frontAnimFrames = ANIM_FRAMES(
+            ANIMCMD_FRAME(0, 13),
+            ANIMCMD_FRAME(1, 7),
+            ANIMCMD_FRAME(0, 13),
+            ANIMCMD_FRAME(1, 7),
+            ANIMCMD_FRAME(0, 13),
+            ANIMCMD_FRAME(1, 7),
+            ANIMCMD_FRAME(0, 11),
+        ),
+        .frontAnimId = ANIM_H_JUMPS,
+        .backPic = gMonBackPic_Lillipup,
+        .backPicSize = MON_COORDS_SIZE(48, 48),
+        .backPicYOffset = 12,
+        .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
+        .palette = gMonPalette_Lillipup,
+        .shinyPalette = gMonShinyPalette_Lillipup,
+        .iconSprite = gMonIcon_Lillipup,
+        .iconPalIndex = 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_FAST,
+        SHADOW(2, 1, SHADOW_SIZE_S)
+        FOOTPRINT(Lillipup)
+        OVERWORLD(
+            sPicTable_Lillipup,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            sAnimTable_Following,
+            gOverworldPalette_Lillipup,
+            gShinyOverworldPalette_Lillipup
+        )
+        .levelUpLearnset = sBorgottoLevelUpLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sBorgottoTeachableLearnset,
+        .eggMoveLearnset = sBorgottoEggMoveLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 18, SPECIES_PASTUFO}),
+    },
+
+    [SPECIES_PASTUFO] =
+    {
+        .baseHP        = 80,
+        .baseAttack    = 88,
+        .baseDefense   = 78,
+        .baseSpeed     = 65,
+        .baseSpAttack  = 42,
+        .baseSpDefense = 67,
+        .types = MON_TYPES(TYPE_NORMAL, TYPE_GROUND),
+        .catchRate = 120,
+        .expYield = 158,
+        .evYield_HP = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 15,
+        .friendship = 70,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
+        .abilities = { ABILITY_KEEN_EYE, ABILITY_NONE, ABILITY_PICKUP },
+        .bodyColor = BODY_COLOR_GRAY,
+        .speciesName = _("Pastufo"),
+        .cryId = CRY_HERDIER,
+        .natDexNum = NATIONAL_DEX_PASTUFO,
+        .categoryName = _("PROVVISTA"),
+        .height = 6,
+        .weight = 98,
+        .description = COMPOUND_STRING(
+            "Accumula cibo e materiali per\n"
+            "prepararsi ai mesi freddi.\n"
+            "È robusto, laborioso e molto fedele\n"
+            "al proprio gruppo."),
+        .pokemonScale = 338,
+        .pokemonOffset = 9,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Herdier,
+        .frontPicSize = MON_COORDS_SIZE(48, 48),
+        .frontPicYOffset = 8,
+        .frontAnimFrames = ANIM_FRAMES(
+            ANIMCMD_FRAME(1, 8),
+            ANIMCMD_FRAME(0, 8),
+            ANIMCMD_FRAME(1, 8),
+            ANIMCMD_FRAME(0, 8),
+            ANIMCMD_FRAME(1, 40),
+            ANIMCMD_FRAME(0, 8),
+        ),
+        .frontAnimId = ANIM_H_STRETCH,
+        .backPic = gMonBackPic_Herdier,
+        .backPicSize = MON_COORDS_SIZE(48, 56),
+        .backPicYOffset = 10,
+        .backAnimId = BACK_ANIM_H_SHAKE,
+        .palette = gMonPalette_Herdier,
+        .shinyPalette = gMonShinyPalette_Herdier,
+        .iconSprite = gMonIcon_Herdier,
+        .iconPalIndex = 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        SHADOW(3, 5, SHADOW_SIZE_M)
+        FOOTPRINT(Herdier)
+        OVERWORLD(
+            sPicTable_Herdier,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            sAnimTable_Following,
+            gOverworldPalette_Herdier,
+            gShinyOverworldPalette_Herdier
+        )
+        .levelUpLearnset = sPastufoLevelUpLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sPastufoTeachableLearnset,
+    },
+
+    [SPECIES_MICIOLO] =
+    {
+        .baseHP        = 42,
+        .baseAttack    = 40,
+        .baseDefense   = 38,
+        .baseSpeed     = 65,
+        .baseSpAttack  = 50,
+        .baseSpDefense = 45,
+        .types = MON_TYPES(TYPE_NORMAL),
+        .catchRate = 190,
+        .expYield = 70,
+        .evYield_Speed = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 15,
+        .friendship = 70,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
+        .abilities = { ABILITY_LIMBER, ABILITY_NONE, ABILITY_SYNCHRONIZE },
+        .bodyColor = BODY_COLOR_PINK,
+        .speciesName = _("Miciolo"),
+        .cryId = CRY_SKITTY,
+        .natDexNum = NATIONAL_DEX_MICIOLO,
+        .categoryName = _("GATTO"),
+        .height = 4,
+        .weight = 41,
+        .description = COMPOUND_STRING(
+            "Ama le coccole e vive in armonia con\n"
+            "le persone. Di notte i suoi grandi\n"
+            "occhi riflettono una tenue luce\n"
+            "lunare."),
+        .pokemonScale = 492,
+        .pokemonOffset = 19,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Skitty,
+        .frontPicSize = P_GBA_STYLE_SPECIES_GFX ? MON_COORDS_SIZE(48, 48) : MON_COORDS_SIZE(56, 40),
+        .frontPicYOffset = P_GBA_STYLE_SPECIES_GFX ? 11 : 12,
+        .frontAnimFrames = ANIM_FRAMES(
+            ANIMCMD_FRAME(0, 15),
+            ANIMCMD_FRAME(1, 35),
+            ANIMCMD_FRAME(0, 9),
+        ),
+        .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        .backPic = gMonBackPic_Skitty,
+        .backPicSize = P_GBA_STYLE_SPECIES_GFX ? MON_COORDS_SIZE(64, 48) : MON_COORDS_SIZE(64, 56),
+        .backPicYOffset = P_GBA_STYLE_SPECIES_GFX ? 10 : 6,
+        .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
+        .palette = gMonPalette_Skitty,
+        .shinyPalette = gMonShinyPalette_Skitty,
+        .iconSprite = gMonIcon_Skitty,
+        .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
+        SHADOW(-3, 1, SHADOW_SIZE_S)
+        FOOTPRINT(Skitty)
+        OVERWORLD(
+            sPicTable_Skitty,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            sAnimTable_Following,
+            gOverworldPalette_Skitty,
+            gShinyOverworldPalette_Skitty
+        )
+        .levelUpLearnset = sMicioloLevelUpLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sMicioloTeachableLearnset,
+        .eggMoveLearnset = sMicioloEggMoveLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 0, SPECIES_FELIVATES, CONDITIONS({IF_MIN_FRIENDSHIP, FRIENDSHIP_EVO_THRESHOLD})}),
+    },
+
+    [SPECIES_FELIVATES] =
+    {
+        .baseHP        = 70,
+        .baseAttack    = 52,
+        .baseDefense   = 60,
+        .baseSpeed     = 100,
+        .baseSpAttack  = 98,
+        .baseSpDefense = 80,
+        .types = MON_TYPES(TYPE_NORMAL, TYPE_PSYCHIC),
+        .catchRate = 75,
+        .expYield = 168,
+        .evYield_Speed = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 15,
+        .friendship = 70,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
+        .abilities = { ABILITY_LIMBER, ABILITY_NONE, ABILITY_SYNCHRONIZE },
+        .bodyColor = BODY_COLOR_PURPLE,
+        .speciesName = _("Felivates"),
+        .cryId = CRY_ESPEON,
+        .natDexNum = NATIONAL_DEX_FELIVATES,
+        .categoryName = _("ARMONIA"),
+        .height = 9,
+        .weight = 136,
+        .description = COMPOUND_STRING(
+            "La gemma sulla fronte emana una luce\n"
+            "ipnotica. La sua presenza calma gli\n"
+            "animi inquieti e protegge chi gli è\n"
+            "vicino."),
+        .pokemonScale = 363,
+        .pokemonOffset = 14,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Espeon,
+        .frontPicSize = P_GBA_STYLE_SPECIES_GFX ? MON_COORDS_SIZE(48, 48) : MON_COORDS_SIZE(48, 56),
+        .frontPicYOffset = P_GBA_STYLE_SPECIES_GFX ? 8 : 9,
+        .frontAnimFrames = ANIM_FRAMES(
+            ANIMCMD_FRAME(0, 15),
+            ANIMCMD_FRAME(1, 25),
+            ANIMCMD_FRAME(0, 20),
+        ),
+        .frontAnimId = ANIM_GROW_VIBRATE,
+        .backPic = gMonBackPic_Espeon,
+        .backPicSize = P_GBA_STYLE_SPECIES_GFX ? MON_COORDS_SIZE(56, 48) : MON_COORDS_SIZE(64, 56),
+        .backPicYOffset = P_GBA_STYLE_SPECIES_GFX ? 11 : 8,
+        .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
+        .palette = gMonPalette_Espeon,
+        .shinyPalette = gMonShinyPalette_Espeon,
+        .iconSprite = gMonIcon_Espeon,
+        .iconPalIndex = 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        SHADOW(2, 4, SHADOW_SIZE_M)
+        FOOTPRINT(Espeon)
+        OVERWORLD(
+            sPicTable_Espeon,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            sAnimTable_Following,
+            gOverworldPalette_Espeon,
+            gShinyOverworldPalette_Espeon
+        )
+        .levelUpLearnset = sFelivatesLevelUpLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sFelivatesTeachableLearnset,
     },
 
     /* You may add any custom species below this point based on the following structure: */

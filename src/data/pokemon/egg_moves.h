@@ -4,6 +4,28 @@ static const u16 sNoneEggMoveLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
+// Pokémon Alba: canonical Egg Moves for the first common Ausonia fauna batch.
+static const u16 sBorgottoEggMoveLearnset[] = {
+    MOVE_BABY_DOLL_EYES,
+    MOVE_HOWL,
+    MOVE_YAWN,
+    MOVE_DOUBLE_EDGE,
+    MOVE_LAST_RESORT,
+    MOVE_PLAY_ROUGH,
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sMicioloEggMoveLearnset[] = {
+    MOVE_COPYCAT,
+    MOVE_FAKE_TEARS,
+    MOVE_WISH,
+    MOVE_YAWN,
+    MOVE_BATON_PASS,
+    MOVE_HEAL_BELL,
+    MOVE_TICKLE,
+    MOVE_UNAVAILABLE,
+};
+
 #if P_FAMILY_BULBASAUR
 static const u16 sBulbasaurEggMoveLearnset[] = {
     MOVE_SKULL_BASH,

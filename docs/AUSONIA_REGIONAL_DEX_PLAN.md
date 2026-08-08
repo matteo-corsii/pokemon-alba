@@ -82,7 +82,8 @@ una volta e Saladoct non conta come specie attiva. Le quattro nuove famiglie
 aggiungono nove specie attive. Il totale finale resta **TBD** perché linee come
 Brinix/Glaciterno non sono deliberate, diversi concetti singoli possono
 ottenere evoluzioni e l'ecosistema regionale presenta ancora lacune. Non sono
-assegnati numeri Pokédex regionali definitivi.
+assegnati numeri Pokédex regionali definitivi oltre al primo batch di fauna
+comune: Borgotto 010, Pastufo 011, Miciolo 012 e Felivates 013.
 
 ## Implemented starter families
 
@@ -309,15 +310,14 @@ assegnati numeri Pokédex regionali definitivi.
 
 - **Temporary family ID:** `AUS-FAM-DOG`
 - **Species/stages:** Borgotto → Pastufo.
-- **Current status:** CANONICAL DESIGN; non implementata; PLACEMENT CANDIDATE;
-  evoluzione e parametri tecnici BALANCE PROVISIONAL.
+- **Current status:** IMPLEMENTED; CANONICAL DESIGN; PLACEMENT CANDIDATE.
 - **Proposed typing:** Borgotto Normale; Pastufo Normale/Terra.
 - **Core concept:** cane comune, rurale e protettivo di borghi, cortili e
   campagne, distinto dal molosso templare Molospsy.
 - **Real-world inspiration:** Borgotto unisce borgo e cucciolotto; Pastufo
   unisce pastore e tufo.
-- **Evolution structure:** linea canonica a due stadi; evoluzione di lavoro al
-  livello 23, BALANCE PROVISIONAL.
+- **Evolution structure:** linea canonica a due stadi; Borgotto evolve in
+  Pastufo al livello 18.
 - **Primary habitat candidate:** Borgotto tra Albèra Bassa, Via Verdi e le
   campagne iniziali; PLACEMENT CANDIDATE.
 - **Secondary habitat candidates:** Pastufo tra Via Consolare e l'arco del
@@ -332,24 +332,23 @@ assegnati numeri Pokédex regionali definitivi.
 - **Type review:** tipi approvati per entrambi gli stadi.
 - **Placement review:** incontri, coordinate, tassi e presenza selvatica di
   Pastufo restano TBD.
-- **Open questions:** abilità, statistiche, learnset, frequenze e collocazioni
-  esatte; la sensibilità a vibrazioni e terreno umido può farne un indicatore
-  ecologico, ma la linea non causa l'anomalia.
+- **Open questions:** frequenze, collocazioni esatte e sostituzione futura
+  degli asset segnaposto; la sensibilità a vibrazioni e terreno umido può
+  farne un indicatore ecologico, ma la linea non causa l'anomalia.
 
 ### Miciolo → Felivates
 
 - **Temporary family ID:** `AUS-FAM-CAT`
 - **Species/stages:** Miciolo → Felivates.
-- **Current status:** CANONICAL DESIGN; non implementata; PLACEMENT CANDIDATE;
-  evoluzione e parametri tecnici BALANCE PROVISIONAL.
+- **Current status:** IMPLEMENTED; CANONICAL DESIGN; PLACEMENT CANDIDATE.
 - **Proposed typing:** Miciolo Normale; Felivates Normale/Psico.
 - **Core concept:** linea urbana di vicoli, cortili, fontane, giardini e
   rovine, agile e tecnica, basata su osservazione, previsione e precisione.
 - **Real-world inspiration:** Miciolo unisce micio e vicolo; Felivates combina
   *felis/feles* con *vates*, veggente o profeta, richiamando l'identità romana
   di Albèra Storica.
-- **Evolution structure:** linea canonica a due stadi; evoluzione di lavoro
-  tramite amicizia alta salendo di livello, BALANCE PROVISIONAL.
+- **Evolution structure:** linea canonica a due stadi; Miciolo evolve in
+  Felivates salendo di livello con amicizia almeno 160.
 - **Primary habitat candidate:** Miciolo visibile ad Albèra Bassa e catturabile
   soprattutto ad Albèra Storica; PLACEMENT CANDIDATE.
 - **Secondary habitat candidates:** ville, muretti e rovine; Felivates
@@ -363,9 +362,16 @@ assegnati numeri Pokédex regionali definitivi.
 - **Type review:** tipi approvati per entrambi gli stadi.
 - **Placement review:** incontri, tassi e disponibilità selvatica di Felivates
   restano TBD.
-- **Open questions:** conferma tecnica dell'evoluzione per amicizia, abilità,
-  statistiche, learnset e distribuzione esatta. Diversamente da Gazzombra,
-  non è incentrato su strumenti, furto e disturbo.
+- **Open questions:** distribuzione esatta e sostituzione futura degli asset
+  segnaposto. Diversamente da Gazzombra, non è incentrato su strumenti, furto
+  e disturbo.
+
+| Regional Dex | Species | Technical species ID | Technical Pokédex number | Implemented type(s) | Evolution |
+| ---: | --- | ---: | ---: | --- | --- |
+| 010 | Borgotto | `SPECIES_BORGOTTO` = 1582 | `NATIONAL_DEX_BORGOTTO` = 1035 | Normale | livello 18 → Pastufo |
+| 011 | Pastufo | `SPECIES_PASTUFO` = 1583 | `NATIONAL_DEX_PASTUFO` = 1036 | Normale/Terra | stadio finale |
+| 012 | Miciolo | `SPECIES_MICIOLO` = 1584 | `NATIONAL_DEX_MICIOLO` = 1037 | Normale | amicizia ≥ 160 → Felivates |
+| 013 | Felivates | `SPECIES_FELIVATES` = 1585 | `NATIONAL_DEX_FELIVATES` = 1038 | Normale/Psico | stadio finale |
 
 ### Foliarva → Crisalvia → Infiorala
 
@@ -886,8 +892,8 @@ creare una specie originale per ogni ruolo ecologico o di gameplay.
 | `AUS-FAM-FOSSIL-HIPPO` | Potamy → Plumbopotam | 2 | CANDIDATE; NAME REVIEW | TBD → Roccia/Acciaio | premature/TBD | nomi e ottenimento fossile |
 | `AUS-FAM-FALCON` | Ghepio → Tinuncol → Peregrinus | 3 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Volante → Volante → Volante/Lotta | PLACEMENT CANDIDATE: Via Verdi di giorno | livelli, abilità, frequenze e orari esatti |
 | `AUS-FAM-MAGPIE` | Gazzuola → Brillazza → Gazzombra | 3 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Normale/Volante → Buio/Volante → Buio/Volante | PLACEMENT CANDIDATE: Via Verdi/Albèra Storica | livelli, abilità evolute e tassi |
-| `AUS-FAM-DOG` | Borgotto → Pastufo | 2 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Normale → Normale/Terra | PLACEMENT CANDIDATE: Albèra Bassa/Via Verdi | livello, abilità e distribuzione di Pastufo |
-| `AUS-FAM-CAT` | Miciolo → Felivates | 2 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Normale → Normale/Psico | PLACEMENT CANDIDATE: Albèra Bassa/Albèra Storica | conferma tecnica dell'amicizia e disponibilità di Felivates |
+| `AUS-FAM-DOG` | Borgotto → Pastufo | 2 | IMPLEMENTED; CANONICAL DESIGN | Normale → Normale/Terra | PLACEMENT CANDIDATE: Albèra Bassa/Via Verdi | incontri e asset originali |
+| `AUS-FAM-CAT` | Miciolo → Felivates | 2 | IMPLEMENTED; CANONICAL DESIGN | Normale → Normale/Psico | PLACEMENT CANDIDATE: Albèra Bassa/Albèra Storica | incontri e asset originali |
 | `AUS-FAM-EARLY-BUG` | Foliarva → Crisalvia → Infiorala | 3 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Coleottero → Coleottero/Erba → Coleottero/Erba | PLACEMENT CANDIDATE: Via Verdi | livelli, abilità, statistiche e tassi |
 | `AUS-FAM-MOSQUITO` | Paludix → Sanguilex | 2 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Coleottero/Acqua → Coleottero/Veleno | PLACEMENT CANDIDATE: Via Consolare/Lago di Albèra | evoluzione temporale, abilità e tassi |
 | `AUS-CONCEPT-OMPHALUX` | Lumella → Omphalux | 2 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Erba → Erba/Elettro | PLACEMENT CANDIDATE: Via Verdi rara, Via Consolare/oliveti/lago | evoluzione notturna e distribuzione esatta |
