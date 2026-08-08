@@ -27,9 +27,30 @@ $allowedPaths = @(
     'src/data/pokemon/egg_moves.h',
     'src/data/pokemon/pokedex_orders.h',
     'src/data/pokemon/species_info.h',
+    'src/data/graphics/pokemon.h',
+    'src/graphics.c',
+    'src/pokemon_icon.c',
+    'src/pokemon_storage_system.c',
     'test/save.c',
     'test/species.c',
-    'test/validate_early_ausonia_fauna_batch_d.ps1'
+    'test/validate_early_ausonia_fauna_batch_d.ps1',
+    'test/validate_early_ausonia_graphics_batch_d.ps1',
+    'graphics/pokemon/icon_palettes/pal6.pal',
+    'graphics/pokemon/gazzuola/anim_front.png',
+    'graphics/pokemon/gazzuola/back.png',
+    'graphics/pokemon/gazzuola/icon.png',
+    'graphics/pokemon/gazzuola/normal.pal',
+    'graphics/pokemon/gazzuola/shiny.pal',
+    'graphics/pokemon/brillazza/anim_front.png',
+    'graphics/pokemon/brillazza/back.png',
+    'graphics/pokemon/brillazza/icon.png',
+    'graphics/pokemon/brillazza/normal.pal',
+    'graphics/pokemon/brillazza/shiny.pal',
+    'graphics/pokemon/gazzombra/anim_front.png',
+    'graphics/pokemon/gazzombra/back.png',
+    'graphics/pokemon/gazzombra/icon.png',
+    'graphics/pokemon/gazzombra/normal.pal',
+    'graphics/pokemon/gazzombra/shiny.pal'
 )
 $changedPaths = @(
     git diff --name-only develop...HEAD
