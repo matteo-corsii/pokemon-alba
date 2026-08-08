@@ -97,6 +97,23 @@ const u32 gMonBackPic_Felivates[] = INCGFX_U32("graphics/pokemon/felivates/back.
 const u16 gMonShinyPalette_Felivates[] = INCGFX_U16("graphics/pokemon/felivates/shiny.pal", ".gbapal");
 const u8 gMonIcon_Felivates[] = INCGFX_U8("graphics/pokemon/felivates/icon.png", ".4bpp");
 
+// Pokémon Alba: original battle and menu graphics for early Ausonia fauna batch B.
+const u32 gMonFrontPic_Foliarva[] = INCGFX_U32("graphics/pokemon/foliarva/anim_front.png", ".4bpp.smol");
+const u16 gMonPalette_Foliarva[] = INCGFX_U16("graphics/pokemon/foliarva/normal.pal", ".gbapal");
+const u32 gMonBackPic_Foliarva[] = INCGFX_U32("graphics/pokemon/foliarva/back.png", ".4bpp.smol");
+const u16 gMonShinyPalette_Foliarva[] = INCGFX_U16("graphics/pokemon/foliarva/shiny.pal", ".gbapal");
+const u8 gMonIcon_Foliarva[] = INCGFX_U8("graphics/pokemon/foliarva/icon.png", ".4bpp");
+const u32 gMonFrontPic_Crisalvia[] = INCGFX_U32("graphics/pokemon/crisalvia/anim_front.png", ".4bpp.smol");
+const u16 gMonPalette_Crisalvia[] = INCGFX_U16("graphics/pokemon/crisalvia/normal.pal", ".gbapal");
+const u32 gMonBackPic_Crisalvia[] = INCGFX_U32("graphics/pokemon/crisalvia/back.png", ".4bpp.smol");
+const u16 gMonShinyPalette_Crisalvia[] = INCGFX_U16("graphics/pokemon/crisalvia/shiny.pal", ".gbapal");
+const u8 gMonIcon_Crisalvia[] = INCGFX_U8("graphics/pokemon/crisalvia/icon.png", ".4bpp");
+const u32 gMonFrontPic_Infiorala[] = INCGFX_U32("graphics/pokemon/infiorala/anim_front.png", ".4bpp.smol");
+const u16 gMonPalette_Infiorala[] = INCGFX_U16("graphics/pokemon/infiorala/normal.pal", ".gbapal");
+const u32 gMonBackPic_Infiorala[] = INCGFX_U32("graphics/pokemon/infiorala/back.png", ".4bpp.smol");
+const u16 gMonShinyPalette_Infiorala[] = INCGFX_U16("graphics/pokemon/infiorala/shiny.pal", ".gbapal");
+const u8 gMonIcon_Infiorala[] = INCGFX_U8("graphics/pokemon/infiorala/icon.png", ".4bpp");
+
 #if P_FAMILY_BULBASAUR
 #if !P_GBA_STYLE_SPECIES_GFX
     const u32 gMonFrontPic_Bulbasaur[] = INCGFX_U32("graphics/pokemon/bulbasaur/anim_front.png", ".4bpp.smol");
