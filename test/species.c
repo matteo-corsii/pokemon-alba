@@ -1159,16 +1159,16 @@ TEST("Ausonia common fauna uses original battle graphics and provisional auxilia
     static const enum Species species[] = { SPECIES_BORGOTTO, SPECIES_PASTUFO, SPECIES_MICIOLO, SPECIES_FELIVATES };
     static const enum Species placeholders[] = { SPECIES_LILLIPUP, SPECIES_HERDIER, SPECIES_SKITTY, SPECIES_ESPEON };
     static const u8 frontPicSizes[] = {
-        MON_COORDS_SIZE(48, 56),
-        MON_COORDS_SIZE(56, 64),
-        MON_COORDS_SIZE(48, 64),
-        MON_COORDS_SIZE(56, 64),
+        (6 << 4) | 7,
+        (7 << 4) | 8,
+        (6 << 4) | 8,
+        (7 << 4) | 8,
     };
     static const u8 backPicSizes[] = {
-        MON_COORDS_SIZE(48, 48),
-        MON_COORDS_SIZE(56, 64),
-        MON_COORDS_SIZE(48, 64),
-        MON_COORDS_SIZE(56, 64),
+        (6 << 4) | 6,
+        (7 << 4) | 8,
+        (6 << 4) | 8,
+        (7 << 4) | 8,
     };
     static const u8 picOffsets[] = { 4, 3, 3, 3 };
     static const u8 iconPalIndices[] = { 2, 1, 0, 1 };
