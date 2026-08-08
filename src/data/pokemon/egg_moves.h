@@ -26,6 +26,15 @@ static const u16 sMicioloEggMoveLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
+// Pokemon Alba: canonical Egg Moves for the early Ausonia Bug line.
+static const u16 sFoliarvaEggMoveLearnset[] = {
+    MOVE_RAGE_POWDER,
+    MOVE_WORRY_SEED,
+    MOVE_BATON_PASS,
+    MOVE_GRASSY_TERRAIN,
+    MOVE_UNAVAILABLE,
+};
+
 #if P_FAMILY_BULBASAUR
 static const u16 sBulbasaurEggMoveLearnset[] = {
     MOVE_SKULL_BASH,

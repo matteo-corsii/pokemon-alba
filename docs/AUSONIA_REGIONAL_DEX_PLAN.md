@@ -377,25 +377,23 @@ comune: Borgotto 010, Pastufo 011, Miciolo 012 e Felivates 013.
 
 - **Temporary family ID:** `AUS-FAM-EARLY-BUG`
 - **Species/stages:** Foliarva → Crisalvia → Infiorala.
-- **Current status:** CANONICAL DESIGN; non implementata; PLACEMENT CANDIDATE;
-  evoluzioni e parametri tecnici BALANCE PROVISIONAL.
-- **Proposed typing:** Foliarva Coleottero; Crisalvia Coleottero/Erba;
+- **Current status:** IMPLEMENTED; CANONICAL DESIGN; PLACEMENT CANDIDATE.
+- **Implemented typing:** Foliarva Coleottero; Crisalvia Coleottero/Erba;
   Infiorala Coleottero/Erba. Nessuno stadio riceve Folletto.
 - **Core concept:** linea Coleottero iniziale a tre stadi, legata a prati,
   foglie, germogli e impollinazione.
 - **Real-world inspiration:** Foliarva combina *folia*/foglia e larva;
   Crisalvia unisce crisalide e salvia; Infiorala unisce infiorata e ala in un
   lepidottero impollinatore dalle ali simili a composizioni floreali.
-- **Evolution structure:** Foliarva evolve in Crisalvia al livello 7 e
-  Crisalvia in Infiorala al livello 13; entrambi i livelli sono BALANCE
-  PROVISIONAL.
+- **Evolution structure:** Foliarva evolve in Crisalvia al livello 10 e
+  Crisalvia in Infiorala al livello 18.
 - **Primary habitat candidate:** Foliarva comune di giorno e Crisalvia rara su
   Via Verdi; PLACEMENT CANDIDATE.
 - **Secondary habitat candidates:** Via Consolare; Infiorala è
   particolarmente rappresentativa della futura area ispirata a Genzano.
 - **Earliest story band candidate:** fra Albèra e Via Verdi.
-- **Gameplay role candidate:** Infiorala orientata in generale ad Attacco
-  Speciale, Velocità, polveri e supporto vegetale; valori esatti TBD.
+- **Gameplay role:** Infiorala è orientata ad Attacco Speciale, Velocità,
+  polveri e supporto vegetale; dati di specie e learnset canonici v1.0.
 - **Narrative importance:** forte legame tematico futuro con l'area ispirata a
   Genzano; i Pokémon Folletto restano più peculiari, soprattutto rispetto al
   futuro arco del Lago di Nemi.
@@ -403,8 +401,22 @@ comune: Borgotto 010, Pastufo 011, Miciolo 012 e Felivates 013.
 - **Type review:** tipi approvati per tutti e tre gli stadi.
 - **Placement review:** incontri, percentuali e fasce orarie precise restano
   TBD.
-- **Open questions:** abilità, statistiche, learnset, distribuzione esatta e
-  specie zoologica precisa oltre al concetto di lepidottero impollinatore.
+- **Open questions:** distribuzione esatta, tassi d'incontro, asset originali
+  e specie zoologica precisa oltre al concetto di lepidottero impollinatore.
+
+| Regional Dex | Species | Technical species ID | Technical Pokédex number | Implemented type(s) | Evolution |
+| ---: | --- | ---: | ---: | --- | --- |
+| 014 | Foliarva | `SPECIES_FOLIARVA` = 1586 | `NATIONAL_DEX_FOLIARVA` = 1039 | Coleottero | livello 10 → Crisalvia |
+| 015 | Crisalvia | `SPECIES_CRISALVIA` = 1587 | `NATIONAL_DEX_CRISALVIA` = 1040 | Coleottero/Erba | livello 18 → Infiorala |
+| 016 | Infiorala | `SPECIES_INFIORALA` = 1588 | `NATIONAL_DEX_INFIORALA` = 1041 | Coleottero/Erba | stadio finale |
+
+- **Canonical v1.0 data:** statistiche base 240/290/450; abilità
+  Polvoscudo/Aiutinsetto/Clorofilla per Foliarva,
+  Muta/Fogliamanto/Copricapo per Crisalvia e Insettocchi/Clorofilla/Lentifumé
+  per Infiorala; learnset per livello, insegnabili e mosse Uovo registrati.
+- **Temporary graphical placeholders:** Caterpie per Foliarva, Metapod per
+  Crisalvia e Butterfree per Infiorala; nessun asset grafico originale è
+  incluso in questo batch.
 
 ### Paludix → Sanguilex
 
@@ -865,8 +877,9 @@ Via Verdi, del Lago di Albèra o di qualunque area futura.
 Quattro lacune hanno ora una soluzione progettuale approvata: Borgotto/Pastufo
 copre la linea canina comune, Miciolo/Felivates la linea felina urbana,
 Foliarva/Crisalvia/Infiorala il Coleottero iniziale a tre stadi e
-Paludix/Sanguilex la seconda famiglia Coleottero specializzata. Nessuna di
-queste linee è ancora implementata.
+Paludix/Sanguilex la seconda famiglia Coleottero specializzata. Le linee
+canina, felina e del Coleottero iniziale sono implementate nei dati; la linea
+della zanzara resta non implementata.
 
 Restano aperte:
 
@@ -894,7 +907,7 @@ creare una specie originale per ogni ruolo ecologico o di gameplay.
 | `AUS-FAM-MAGPIE` | Gazzuola → Brillazza → Gazzombra | 3 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Normale/Volante → Buio/Volante → Buio/Volante | PLACEMENT CANDIDATE: Via Verdi/Albèra Storica | livelli, abilità evolute e tassi |
 | `AUS-FAM-DOG` | Borgotto → Pastufo | 2 | IMPLEMENTED; CANONICAL DESIGN | Normale → Normale/Terra | PLACEMENT CANDIDATE: Albèra Bassa/Via Verdi | incontri e asset originali |
 | `AUS-FAM-CAT` | Miciolo → Felivates | 2 | IMPLEMENTED; CANONICAL DESIGN | Normale → Normale/Psico | PLACEMENT CANDIDATE: Albèra Bassa/Albèra Storica | incontri e asset originali |
-| `AUS-FAM-EARLY-BUG` | Foliarva → Crisalvia → Infiorala | 3 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Coleottero → Coleottero/Erba → Coleottero/Erba | PLACEMENT CANDIDATE: Via Verdi | livelli, abilità, statistiche e tassi |
+| `AUS-FAM-EARLY-BUG` | Foliarva → Crisalvia → Infiorala | 3 | IMPLEMENTED; CANONICAL DESIGN | Coleottero → Coleottero/Erba → Coleottero/Erba | PLACEMENT CANDIDATE: Via Verdi | incontri e asset originali |
 | `AUS-FAM-MOSQUITO` | Paludix → Sanguilex | 2 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Coleottero/Acqua → Coleottero/Veleno | PLACEMENT CANDIDATE: Via Consolare/Lago di Albèra | evoluzione temporale, abilità e tassi |
 | `AUS-CONCEPT-OMPHALUX` | Lumella → Omphalux | 2 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Erba → Erba/Elettro | PLACEMENT CANDIDATE: Via Verdi rara, Via Consolare/oliveti/lago | evoluzione notturna e distribuzione esatta |
 | `AUS-CONCEPT-LUSCERP` | Luscinco → Luscerp | 2 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Erba → Erba/Drago | PLACEMENT CANDIDATE: Via Verdi/Via Consolare/lago | livello, abilità e frequenze |
