@@ -265,7 +265,10 @@ TEST("Ausonia starter IDs are append-only and distinct")
     EXPECT_EQ(SPECIES_GHEPIO, SPECIES_INFIORALA + 1);
     EXPECT_EQ(SPECIES_TINUNCOL, SPECIES_GHEPIO + 1);
     EXPECT_EQ(SPECIES_PEREGRINUS, SPECIES_TINUNCOL + 1);
-    EXPECT_EQ(SPECIES_EGG, SPECIES_PEREGRINUS + 1);
+    EXPECT_EQ(SPECIES_GAZZUOLA, SPECIES_PEREGRINUS + 1);
+    EXPECT_EQ(SPECIES_BRILLAZZA, SPECIES_GAZZUOLA + 1);
+    EXPECT_EQ(SPECIES_GAZZOMBRA, SPECIES_BRILLAZZA + 1);
+    EXPECT_EQ(SPECIES_EGG, SPECIES_GAZZOMBRA + 1);
     EXPECT_EQ(NUM_SPECIES, SPECIES_EGG);
 
     EXPECT_EQ(NATIONAL_DEX_PECHARUNT, 1025);
@@ -288,7 +291,10 @@ TEST("Ausonia starter IDs are append-only and distinct")
     EXPECT_EQ(NATIONAL_DEX_GHEPIO, NATIONAL_DEX_INFIORALA + 1);
     EXPECT_EQ(NATIONAL_DEX_TINUNCOL, NATIONAL_DEX_GHEPIO + 1);
     EXPECT_EQ(NATIONAL_DEX_PEREGRINUS, NATIONAL_DEX_TINUNCOL + 1);
-    EXPECT_EQ(NATIONAL_DEX_COUNT, NATIONAL_DEX_PEREGRINUS);
+    EXPECT_EQ(NATIONAL_DEX_GAZZUOLA, NATIONAL_DEX_PEREGRINUS + 1);
+    EXPECT_EQ(NATIONAL_DEX_BRILLAZZA, NATIONAL_DEX_GAZZUOLA + 1);
+    EXPECT_EQ(NATIONAL_DEX_GAZZOMBRA, NATIONAL_DEX_BRILLAZZA + 1);
+    EXPECT_EQ(NATIONAL_DEX_COUNT, NATIONAL_DEX_GAZZOMBRA);
 
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_CINGERM), COMPOUND_STRING("Cingerm")), 0);
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_ROVASCO), COMPOUND_STRING("Rovasco")), 0);
@@ -309,6 +315,9 @@ TEST("Ausonia starter IDs are append-only and distinct")
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_GHEPIO), COMPOUND_STRING("Ghepio")), 0);
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_TINUNCOL), COMPOUND_STRING("Tinuncol")), 0);
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_PEREGRINUS), COMPOUND_STRING("Peregrinus")), 0);
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_GAZZUOLA), COMPOUND_STRING("Gazzuola")), 0);
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_BRILLAZZA), COMPOUND_STRING("Brillazza")), 0);
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_GAZZOMBRA), COMPOUND_STRING("Gazzombra")), 0);
 }
 
 TEST("Ausonia Grass starter base data matches the approved prototype")
@@ -1670,4 +1679,149 @@ TEST("Ausonia early falcon fauna teachables Egg Moves graphics and auxiliary pla
 #endif
 #endif
     }
+}
+
+TEST("Ausonia early magpie fauna base data matches the canonical batch")
+{
+    static const enum Species species[] = { SPECIES_GAZZUOLA, SPECIES_BRILLAZZA, SPECIES_GAZZOMBRA };
+    static const u8 stats[][NUM_STATS] = {
+        { 45, 40, 40, 60, 35, 40 },
+        { 60, 65, 55, 80, 45, 55 },
+        { 75, 95, 70, 100, 55, 75 },
+    };
+    static const u16 statTotals[] = { 260, 360, 470 };
+    static const u8 catchRates[] = { 255, 120, 60 };
+    static const u16 expYields[] = { 56, 116, 170 };
+    static const u16 heights[] = { 3, 6, 9 };
+    static const u16 weights[] = { 19, 55, 98 };
+    const u8 gazzuolaSpeedYield = gSpeciesInfo[SPECIES_GAZZUOLA].evYield_Speed;
+    const u8 brillazzaAttackYield = gSpeciesInfo[SPECIES_BRILLAZZA].evYield_Attack;
+    const u8 brillazzaSpeedYield = gSpeciesInfo[SPECIES_BRILLAZZA].evYield_Speed;
+    const u8 gazzombraAttackYield = gSpeciesInfo[SPECIES_GAZZOMBRA].evYield_Attack;
+
+    for (u32 i = 0; i < ARRAY_COUNT(species); i++)
+    {
+        const struct SpeciesInfo *info = &gSpeciesInfo[species[i]];
+
+        EXPECT_EQ(info->baseHP, stats[i][STAT_HP]);
+        EXPECT_EQ(info->baseAttack, stats[i][STAT_ATK]);
+        EXPECT_EQ(info->baseDefense, stats[i][STAT_DEF]);
+        EXPECT_EQ(info->baseSpeed, stats[i][STAT_SPEED]);
+        EXPECT_EQ(info->baseSpAttack, stats[i][STAT_SPATK]);
+        EXPECT_EQ(info->baseSpDefense, stats[i][STAT_SPDEF]);
+        EXPECT_EQ(GetBaseStatTotalForTest(species[i]), statTotals[i]);
+        EXPECT_EQ(info->catchRate, catchRates[i]);
+        EXPECT_EQ(info->expYield, expYields[i]);
+        EXPECT_EQ(info->height, heights[i]);
+        EXPECT_EQ(info->weight, weights[i]);
+        EXPECT_EQ(info->genderRatio, (50 * 255) / 100);
+        EXPECT_EQ(info->eggCycles, 15);
+        EXPECT_EQ(info->friendship, 70);
+        EXPECT_EQ(info->growthRate, GROWTH_MEDIUM_FAST);
+        EXPECT_EQ(info->eggGroups[0], EGG_GROUP_FLYING);
+        EXPECT_EQ(info->eggGroups[1], EGG_GROUP_FLYING);
+        EXPECT_EQ((u32)info->bodyColor, BODY_COLOR_BLACK);
+        EXPECT_NE(StringCompare(info->description, gFallbackPokedexText), 0);
+        EXPECT_EQ((u32)info->teachingType, EXPLICIT_TEACHABLES);
+    }
+
+    EXPECT_EQ(gSpeciesInfo[SPECIES_GAZZUOLA].types[0], TYPE_NORMAL);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_GAZZUOLA].types[1], TYPE_FLYING);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_BRILLAZZA].types[0], TYPE_DARK);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_BRILLAZZA].types[1], TYPE_FLYING);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_GAZZOMBRA].types[0], TYPE_DARK);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_GAZZOMBRA].types[1], TYPE_FLYING);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_GAZZUOLA].abilities[0], ABILITY_PICKUP);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_GAZZUOLA].abilities[1], ABILITY_KEEN_EYE);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_GAZZUOLA].abilities[2], ABILITY_SUPER_LUCK);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_BRILLAZZA].abilities[0], ABILITY_PICKUP);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_BRILLAZZA].abilities[1], ABILITY_FRISK);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_BRILLAZZA].abilities[2], ABILITY_SUPER_LUCK);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_GAZZOMBRA].abilities[0], ABILITY_FRISK);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_GAZZOMBRA].abilities[1], ABILITY_PICKPOCKET);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_GAZZOMBRA].abilities[2], ABILITY_SUPER_LUCK);
+    EXPECT_EQ(gazzuolaSpeedYield, 1);
+    EXPECT_EQ(brillazzaAttackYield, 1);
+    EXPECT_EQ(brillazzaSpeedYield, 1);
+    EXPECT_EQ(gazzombraAttackYield, 2);
+    EXPECT_EQ(StringCompare(gSpeciesInfo[SPECIES_GAZZUOLA].categoryName, COMPOUND_STRING("CURIOSA")), 0);
+    EXPECT_EQ(StringCompare(gSpeciesInfo[SPECIES_BRILLAZZA].categoryName, COMPOUND_STRING("MONILE")), 0);
+    EXPECT_EQ(StringCompare(gSpeciesInfo[SPECIES_GAZZOMBRA].categoryName, COMPOUND_STRING("BOTTINO")), 0);
+}
+
+TEST("Ausonia early magpie fauna evolutions use the canonical levels")
+{
+    const struct Evolution *gazzuolaEvolutions = GetSpeciesEvolutions(SPECIES_GAZZUOLA);
+    const struct Evolution *brillazzaEvolutions = GetSpeciesEvolutions(SPECIES_BRILLAZZA);
+
+    EXPECT_EQ(gazzuolaEvolutions[0].method, EVO_LEVEL);
+    EXPECT_EQ(gazzuolaEvolutions[0].param, 18);
+    EXPECT_EQ(gazzuolaEvolutions[0].targetSpecies, SPECIES_BRILLAZZA);
+    EXPECT_EQ(gazzuolaEvolutions[1].method, EVOLUTIONS_END);
+    EXPECT_EQ(brillazzaEvolutions[0].method, EVO_LEVEL);
+    EXPECT_EQ(brillazzaEvolutions[0].param, 34);
+    EXPECT_EQ(brillazzaEvolutions[0].targetSpecies, SPECIES_GAZZOMBRA);
+    EXPECT_EQ(brillazzaEvolutions[1].method, EVOLUTIONS_END);
+    EXPECT(GetSpeciesEvolutions(SPECIES_GAZZOMBRA) == NULL);
+}
+
+TEST("Ausonia early magpie fauna level-up learnsets are canonical and ordered")
+{
+    static const u8 gazzuolaLevels[] = { 1, 1, 4, 7, 10, 13, 16, 18, 22, 26 };
+    static const u16 gazzuolaMoves[] = { MOVE_PECK, MOVE_GROWL, MOVE_COVET, MOVE_QUICK_ATTACK, MOVE_PLUCK, MOVE_THIEF, MOVE_ASSURANCE, MOVE_AERIAL_ACE, MOVE_TAUNT, MOVE_AGILITY };
+    static const u8 brillazzaLevels[] = { 1, 1, 1, 1, 10, 13, 16, 18, 22, 26, 30, 34 };
+    static const u16 brillazzaMoves[] = { MOVE_PECK, MOVE_GROWL, MOVE_COVET, MOVE_QUICK_ATTACK, MOVE_PLUCK, MOVE_THIEF, MOVE_ASSURANCE, MOVE_AERIAL_ACE, MOVE_TAUNT, MOVE_AGILITY, MOVE_KNOCK_OFF, MOVE_TAILWIND };
+    static const u8 gazzombraLevels[] = { 1, 1, 1, 1, 10, 13, 16, 18, 22, 26, 30, 34, 38, 42, 46, 50 };
+    static const u16 gazzombraMoves[] = { MOVE_PECK, MOVE_GROWL, MOVE_COVET, MOVE_QUICK_ATTACK, MOVE_PLUCK, MOVE_THIEF, MOVE_ASSURANCE, MOVE_AERIAL_ACE, MOVE_TAUNT, MOVE_AGILITY, MOVE_KNOCK_OFF, MOVE_FOUL_PLAY, MOVE_U_TURN, MOVE_ROOST, MOVE_BRAVE_BIRD, MOVE_SWITCHEROO };
+    const struct LevelUpMove *learnsets[] = { GetSpeciesLevelUpLearnset(SPECIES_GAZZUOLA), GetSpeciesLevelUpLearnset(SPECIES_BRILLAZZA), GetSpeciesLevelUpLearnset(SPECIES_GAZZOMBRA) };
+    const u8 *levels[] = { gazzuolaLevels, brillazzaLevels, gazzombraLevels };
+    const u16 *moves[] = { gazzuolaMoves, brillazzaMoves, gazzombraMoves };
+    const u32 counts[] = { ARRAY_COUNT(gazzuolaMoves), ARRAY_COUNT(brillazzaMoves), ARRAY_COUNT(gazzombraMoves) };
+
+    for (u32 i = 0; i < ARRAY_COUNT(learnsets); i++)
+    {
+        for (u32 j = 0; j < counts[i]; j++)
+        {
+            EXPECT_EQ(learnsets[i][j].level, levels[i][j]);
+            EXPECT_EQ(learnsets[i][j].move, moves[i][j]);
+            if (j > 0)
+                EXPECT_GE(learnsets[i][j].level, learnsets[i][j - 1].level);
+        }
+        EXPECT_EQ(learnsets[i][counts[i]].move, LEVEL_UP_MOVE_END);
+    }
+}
+
+TEST("Ausonia early magpie fauna teachables Egg Moves and placeholders are complete")
+{
+    static const u16 gazzuolaTeachables[] = { MOVE_PROTECT, MOVE_REST, MOVE_SLEEP_TALK, MOVE_SUBSTITUTE, MOVE_AERIAL_ACE, MOVE_ACROBATICS, MOVE_U_TURN, MOVE_THIEF, MOVE_FLY };
+    static const u16 brillazzaExtras[] = { MOVE_TAUNT, MOVE_SNARL, MOVE_DARK_PULSE, MOVE_FOUL_PLAY };
+    static const u16 gazzombraExtras[] = { MOVE_KNOCK_OFF, MOVE_ROOST, MOVE_TAILWIND, MOVE_STEEL_WING };
+    static const u16 eggMoves[] = { MOVE_FEATHER_DANCE, MOVE_DEFOG, MOVE_ROOST, MOVE_SWITCHEROO };
+    const u16 *gazzuola = gSpeciesInfo[SPECIES_GAZZUOLA].teachableLearnset;
+    const u16 *brillazza = gSpeciesInfo[SPECIES_BRILLAZZA].teachableLearnset;
+    const u16 *gazzombra = gSpeciesInfo[SPECIES_GAZZOMBRA].teachableLearnset;
+
+    for (u32 i = 0; i < ARRAY_COUNT(gazzuolaTeachables); i++)
+    {
+        EXPECT(MoveListContains(gazzuola, gazzuolaTeachables[i]));
+        EXPECT(MoveListContains(brillazza, gazzuolaTeachables[i]));
+        EXPECT(MoveListContains(gazzombra, gazzuolaTeachables[i]));
+    }
+    for (u32 i = 0; i < ARRAY_COUNT(brillazzaExtras); i++)
+    {
+        EXPECT(MoveListContains(brillazza, brillazzaExtras[i]));
+        EXPECT(MoveListContains(gazzombra, brillazzaExtras[i]));
+    }
+    for (u32 i = 0; i < ARRAY_COUNT(gazzombraExtras); i++)
+        EXPECT(MoveListContains(gazzombra, gazzombraExtras[i]));
+    for (u32 i = 0; i < ARRAY_COUNT(eggMoves); i++)
+        EXPECT(MoveListContains(gSpeciesInfo[SPECIES_GAZZUOLA].eggMoveLearnset, eggMoves[i]));
+
+    EXPECT_EQ(MoveListCount(gazzuola), ARRAY_COUNT(gazzuolaTeachables));
+    EXPECT_EQ(MoveListCount(brillazza), 13);
+    EXPECT_EQ(MoveListCount(gazzombra), 17);
+    EXPECT_EQ(MoveListCount(gSpeciesInfo[SPECIES_GAZZUOLA].eggMoveLearnset), ARRAY_COUNT(eggMoves));
+    EXPECT(gSpeciesInfo[SPECIES_GAZZUOLA].frontPic == gSpeciesInfo[SPECIES_ROOKIDEE].frontPic);
+    EXPECT(gSpeciesInfo[SPECIES_BRILLAZZA].frontPic == gSpeciesInfo[SPECIES_CORVISQUIRE].frontPic);
+    EXPECT(gSpeciesInfo[SPECIES_GAZZOMBRA].frontPic == gSpeciesInfo[SPECIES_CORVIKNIGHT].frontPic);
 }
