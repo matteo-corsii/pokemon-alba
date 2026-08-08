@@ -1706,7 +1706,7 @@ TEST("Ausonia early magpie fauna graphics retain only approved auxiliary placeho
         EXPECT_EQ((u32)info->iconPalIndex, 6);
 
         EXPECT_EQ((u32)info->cryId, (u32)placeholder->cryId);
-        EXPECT(info->frontAnimFrames == placeholder->frontAnimFrames);
+        EXPECT(info->frontAnimFrames != placeholder->frontAnimFrames);
         EXPECT_EQ(info->frontAnimId, placeholder->frontAnimId);
         EXPECT_EQ(info->backAnimId, placeholder->backAnimId);
         EXPECT_EQ(info->enemyMonElevation, placeholder->enemyMonElevation);
@@ -1866,7 +1866,7 @@ TEST("Ausonia early magpie fauna teachables Egg Moves and placeholders are compl
     EXPECT_EQ(MoveListCount(brillazza), 13);
     EXPECT_EQ(MoveListCount(gazzombra), 17);
     EXPECT_EQ(MoveListCount(gSpeciesInfo[SPECIES_GAZZUOLA].eggMoveLearnset), ARRAY_COUNT(eggMoves));
-    EXPECT(gSpeciesInfo[SPECIES_GAZZUOLA].frontPic == gSpeciesInfo[SPECIES_ROOKIDEE].frontPic);
-    EXPECT(gSpeciesInfo[SPECIES_BRILLAZZA].frontPic == gSpeciesInfo[SPECIES_CORVISQUIRE].frontPic);
-    EXPECT(gSpeciesInfo[SPECIES_GAZZOMBRA].frontPic == gSpeciesInfo[SPECIES_CORVIKNIGHT].frontPic);
+    EXPECT(gSpeciesInfo[SPECIES_GAZZUOLA].frontPic != gSpeciesInfo[SPECIES_ROOKIDEE].frontPic);
+    EXPECT(gSpeciesInfo[SPECIES_BRILLAZZA].frontPic != gSpeciesInfo[SPECIES_CORVISQUIRE].frontPic);
+    EXPECT(gSpeciesInfo[SPECIES_GAZZOMBRA].frontPic != gSpeciesInfo[SPECIES_CORVIKNIGHT].frontPic);
 }
