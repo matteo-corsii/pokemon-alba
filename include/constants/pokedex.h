@@ -1098,6 +1098,16 @@ enum NationalDexOrder
 
 #define POKEMON_SLOTS_NUMBER (NATIONAL_DEX_COUNT + 1)
 
+// Persistent Pokédex flag storage. Keep these independent from the logical
+// National Dex count to preserve the save layout as new species are added.
+#define DEX_SAVE_LEGACY_CAPACITY       1040
+#define DEX_SAVE_LEGACY_FLAG_BYTES     130
+#define DEX_SAVE_EXTENSION_BYTES       24
+#define DEX_SAVE_EXTENSION_CAPACITY    192
+#define DEX_SAVE_MAX_NATIONAL          1232
+#define AUSONIA_DEX_SAVE_SIGNATURE_SIZE 4
+#define AUSONIA_DEX_SAVE_VERSION       1
+
 #if P_NEW_EVOS_IN_REGIONAL_DEX
 #define HOENN_DEX_IF(config, ...) CAT(HOENN_DEX_IF_, config)(__VA_ARGS__)
 #define HOENN_DEX_IF_0(...)

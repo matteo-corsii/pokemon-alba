@@ -3053,16 +3053,9 @@ static enum Species GetRandomDifferentSpeciesSeenByPlayer(enum Species excludedS
     enum NationalDexOrder excludexNatDex = SpeciesToNationalPokedexNum(excludedSpecies);
     enum NationalDexOrder *natDexArray = Alloc(POKEMON_SLOTS_NUMBER * sizeof(enum NationalDexOrder));
     u32 count = 0;
-    for (u32 i = 0; i < NUM_DEX_FLAG_BYTES; i++)
-    {
-        u32 tmp = gSaveBlock1Ptr->dexSeen[i];
-        for (u32 j = 0; j < 8; j++)
-        {
-            if (tmp & 1)
-                natDexArray[count++] = i * 8 + j + 1;
-            tmp >>= 1;
-        }
-    }
+    for (enum NationalDexOrder dexNum = 1; dexNum <= NATIONAL_DEX_COUNT; dexNum++)
+        if (GetSetPokedexFlag(dexNum, FLAG_GET_SEEN))
+            natDexArray[count++] = dexNum;
     if (count <= 1)
     {
         Free(natDexArray);

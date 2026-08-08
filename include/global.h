@@ -142,7 +142,7 @@
 
 #define ROUND_BITS_TO_BYTES(numBits) DIV_ROUND_UP(numBits, 8)
 
-#define NUM_DEX_FLAG_BYTES ROUND_BITS_TO_BYTES(POKEMON_SLOTS_NUMBER)
+#define NUM_DEX_FLAG_BYTES DEX_SAVE_LEGACY_FLAG_BYTES
 #define NUM_FLAG_BYTES ROUND_BITS_TO_BYTES(FLAGS_COUNT)
 #define NUM_TRENDY_SAYING_BYTES ROUND_BITS_TO_BYTES(NUM_TRENDY_SAYINGS)
 
@@ -151,6 +151,12 @@
 // This produces an error at compile-time if expr is zero.
 // It looks like file.c:line: size of array `id' is negative
 #define STATIC_ASSERT(expr, id) typedef char id[(expr) ? 1 : -1];
+
+STATIC_ASSERT(DEX_SAVE_LEGACY_FLAG_BYTES * 8 == DEX_SAVE_LEGACY_CAPACITY, LegacyDexSaveCapacityMismatch);
+STATIC_ASSERT(DEX_SAVE_EXTENSION_BYTES * 8 == DEX_SAVE_EXTENSION_CAPACITY, ExtendedDexSaveCapacityMismatch);
+STATIC_ASSERT(DEX_SAVE_LEGACY_CAPACITY + DEX_SAVE_EXTENSION_CAPACITY == DEX_SAVE_MAX_NATIONAL, DexSaveCapacityMismatch);
+STATIC_ASSERT(NATIONAL_DEX_COUNT <= DEX_SAVE_MAX_NATIONAL, NationalDexCountExceedsSaveCapacity);
+STATIC_ASSERT(FREE_EXTRA_SEEN_FLAGS_SAVEBLOCK1 == FALSE, AusoniaDexSaveRequiresLegacyFiller);
 
 #define FEATURE_FLAG_ASSERT(flag, id) STATIC_ASSERT(flag > TEMP_FLAGS_END || flag == 0, id)
 
@@ -1117,7 +1123,9 @@ struct SaveBlock1
     /*0x560*/ struct Bag bag;
     /*0x848*/ struct Pokeblock pokeblocks[POKEBLOCKS_COUNT];
 #if FREE_EXTRA_SEEN_FLAGS_SAVEBLOCK1 == FALSE
-    /*0x988*/ u8 filler1[0x34]; // Previously Dex Flags, feel free to remove.
+    /*0x988*/ u8 ausoniaDexSaveSignature[AUSONIA_DEX_SAVE_SIGNATURE_SIZE];
+    /*0x98C*/ u8 extendedDexSeen[DEX_SAVE_EXTENSION_BYTES];
+    /*0x9A4*/ u8 extendedDexCaught[DEX_SAVE_EXTENSION_BYTES];
 #endif //FREE_EXTRA_SEEN_FLAGS_SAVEBLOCK1
     /*0x9BC*/ u16 berryBlenderRecords[3];
     /*0x9C2*/ u8 unused_9C2[2];
@@ -1183,8 +1191,8 @@ struct SaveBlock1
 #if FREE_MYSTERY_GIFT == FALSE
     /*0x322C*/ struct MysteryGiftSave mysteryGift;
 #endif //FREE_MYSTERY_GIFT
-    /*0x3???*/ u8 dexSeen[NUM_DEX_FLAG_BYTES];
-    /*0x3???*/ u8 dexCaught[NUM_DEX_FLAG_BYTES];
+    /*0x3598*/ u8 dexSeen[DEX_SAVE_LEGACY_FLAG_BYTES];
+    /*0x361A*/ u8 dexCaught[DEX_SAVE_LEGACY_FLAG_BYTES];
 #if FREE_TRAINER_HILL == FALSE
     /*0x3???*/ u32 trainerHillTimes[NUM_TRAINER_HILL_MODES];
 #endif //FREE_TRAINER_HILL

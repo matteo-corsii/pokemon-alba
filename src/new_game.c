@@ -107,11 +107,11 @@ static void SetDefaultOptions(void)
     gSaveBlock2Ptr->regionMapZoom = FALSE;
 }
 
-static void ClearPokedexFlags(void)
+static void InitializePokedexFlags(void)
 {
     gUnusedPokedexU8 = 0;
-    memset(&gSaveBlock1Ptr->dexCaught, 0, sizeof(gSaveBlock1Ptr->dexCaught));
-    memset(&gSaveBlock1Ptr->dexSeen, 0, sizeof(gSaveBlock1Ptr->dexSeen));
+    // ClearSav1 has already zeroed both legacy and extended flag storage.
+    EnsureAusoniaDexSaveInitialized();
 }
 
 void ClearAllContestWinnerPics(void)
@@ -182,7 +182,7 @@ void NewGameInitData(void)
     gSaveBlock2Ptr->gcnLinkFlags = 0;
     InitPlayerTrainerId();
     PlayTimeCounter_Reset();
-    ClearPokedexFlags();
+    InitializePokedexFlags();
     InitEventData();
     ClearTVShowData();
     ResetGabbyAndTy();
