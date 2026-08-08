@@ -1154,27 +1154,41 @@ TEST("Ausonia common fauna teachable and Egg Move compatibility is complete")
     EXPECT_EQ(MoveListCount(gSpeciesInfo[SPECIES_MICIOLO].eggMoveLearnset), ARRAY_COUNT(micioloEggMoves));
 }
 
-TEST("Ausonia common fauna uses only the authorized graphical placeholders")
+TEST("Ausonia common fauna uses original battle graphics and provisional auxiliary assets")
 {
     static const enum Species species[] = { SPECIES_BORGOTTO, SPECIES_PASTUFO, SPECIES_MICIOLO, SPECIES_FELIVATES };
     static const enum Species placeholders[] = { SPECIES_LILLIPUP, SPECIES_HERDIER, SPECIES_SKITTY, SPECIES_ESPEON };
+    static const u8 frontPicSizes[] = {
+        MON_COORDS_SIZE(48, 56),
+        MON_COORDS_SIZE(56, 64),
+        MON_COORDS_SIZE(48, 64),
+        MON_COORDS_SIZE(56, 64),
+    };
+    static const u8 backPicSizes[] = {
+        MON_COORDS_SIZE(48, 48),
+        MON_COORDS_SIZE(56, 64),
+        MON_COORDS_SIZE(48, 64),
+        MON_COORDS_SIZE(56, 64),
+    };
+    static const u8 picOffsets[] = { 4, 3, 3, 3 };
+    static const u8 iconPalIndices[] = { 2, 1, 0, 1 };
 
     for (u32 i = 0; i < ARRAY_COUNT(species); i++)
     {
         const struct SpeciesInfo *info = &gSpeciesInfo[species[i]];
         const struct SpeciesInfo *placeholder = &gSpeciesInfo[placeholders[i]];
 
-        EXPECT(info->frontPic == placeholder->frontPic);
-        EXPECT(info->backPic == placeholder->backPic);
-        EXPECT(info->palette == placeholder->palette);
-        EXPECT(info->shinyPalette == placeholder->shinyPalette);
-        EXPECT(info->iconSprite == placeholder->iconSprite);
+        EXPECT(info->frontPic != placeholder->frontPic);
+        EXPECT(info->backPic != placeholder->backPic);
+        EXPECT(info->palette != placeholder->palette);
+        EXPECT(info->shinyPalette != placeholder->shinyPalette);
+        EXPECT(info->iconSprite != placeholder->iconSprite);
         EXPECT_EQ((u32)info->cryId, (u32)placeholder->cryId);
-        EXPECT_EQ(info->frontPicSize, placeholder->frontPicSize);
-        EXPECT_EQ(info->backPicSize, placeholder->backPicSize);
-        EXPECT_EQ(info->frontPicYOffset, placeholder->frontPicYOffset);
-        EXPECT_EQ(info->backPicYOffset, placeholder->backPicYOffset);
-        EXPECT_EQ((u32)info->iconPalIndex, (u32)placeholder->iconPalIndex);
+        EXPECT_EQ((u32)info->frontPicSize, (u32)frontPicSizes[i]);
+        EXPECT_EQ((u32)info->backPicSize, (u32)backPicSizes[i]);
+        EXPECT_EQ((u32)info->frontPicYOffset, (u32)picOffsets[i]);
+        EXPECT_EQ((u32)info->backPicYOffset, (u32)picOffsets[i]);
+        EXPECT_EQ((u32)info->iconPalIndex, (u32)iconPalIndices[i]);
 #if P_FOOTPRINTS
         EXPECT(info->footprint == placeholder->footprint);
 #endif
