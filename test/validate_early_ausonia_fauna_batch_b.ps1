@@ -33,13 +33,30 @@ $allowedPaths = @(
     'src/pokedex.c',
     'src/rom_header_gf.c',
     'src/tv.c',
+    'src/data/graphics/pokemon.h',
     'src/data/pokemon/all_learnables.json',
     'src/data/pokemon/egg_moves.h',
     'src/data/pokemon/pokedex_orders.h',
     'src/data/pokemon/species_info.h',
     'test/save.c',
     'test/species.c',
-    'test/validate_early_ausonia_fauna_batch_b.ps1'
+    'test/validate_early_ausonia_fauna_batch_b.ps1',
+    'test/validate_early_ausonia_graphics_batch_b.ps1',
+    'graphics/pokemon/foliarva/anim_front.png',
+    'graphics/pokemon/foliarva/back.png',
+    'graphics/pokemon/foliarva/icon.png',
+    'graphics/pokemon/foliarva/normal.pal',
+    'graphics/pokemon/foliarva/shiny.pal',
+    'graphics/pokemon/crisalvia/anim_front.png',
+    'graphics/pokemon/crisalvia/back.png',
+    'graphics/pokemon/crisalvia/icon.png',
+    'graphics/pokemon/crisalvia/normal.pal',
+    'graphics/pokemon/crisalvia/shiny.pal',
+    'graphics/pokemon/infiorala/anim_front.png',
+    'graphics/pokemon/infiorala/back.png',
+    'graphics/pokemon/infiorala/icon.png',
+    'graphics/pokemon/infiorala/normal.pal',
+    'graphics/pokemon/infiorala/shiny.pal'
 )
 $changedPaths = @(
     git diff --name-only develop...HEAD
@@ -72,8 +89,8 @@ $speciesChecks = @{
         '.evYield_HP = 1', '.abilities = { ABILITY_SHIELD_DUST, ABILITY_SWARM, ABILITY_CHLOROPHYLL }',
         '.natDexNum = NATIONAL_DEX_FOLIARVA', '.categoryName = _("LARVAFOGLIA")', '.height = 3', '.weight = 24',
         'Si nutre delle foglie più tenere senza', 'una pianta sana.',
-        '.frontPic = gMonFrontPic_Caterpie', '.backPic = gMonBackPic_Caterpie',
-        '.iconSprite = gMonIcon_Caterpie', '.teachingType = EXPLICIT_TEACHABLES',
+        '.frontPic = gMonFrontPic_Foliarva', '.backPic = gMonBackPic_Foliarva',
+        '.iconSprite = gMonIcon_Foliarva', '.teachingType = EXPLICIT_TEACHABLES',
         '.evolutions = EVOLUTION({EVO_LEVEL, 10, SPECIES_CRISALVIA})'
     )
     CRISALVIA = @(
@@ -83,8 +100,8 @@ $speciesChecks = @{
         '.evYield_Defense = 2', '.abilities = { ABILITY_SHED_SKIN, ABILITY_LEAF_GUARD, ABILITY_OVERCOAT }',
         '.natDexNum = NATIONAL_DEX_CRISALVIA', '.categoryName = _("CRISALIDE")', '.height = 5', '.weight = 68',
         'Avvolge il corpo in strati di fibra', 'accelera la metamorfosi.',
-        '.frontPic = gMonFrontPic_Metapod', '.backPic = gMonBackPic_Metapod',
-        '.iconSprite = gMonIcon_Metapod', '.teachingType = EXPLICIT_TEACHABLES',
+        '.frontPic = gMonFrontPic_Crisalvia', '.backPic = gMonBackPic_Crisalvia',
+        '.iconSprite = gMonIcon_Crisalvia', '.teachingType = EXPLICIT_TEACHABLES',
         '.evolutions = EVOLUTION({EVO_LEVEL, 18, SPECIES_INFIORALA})'
     )
     INFIORALA = @(
@@ -94,8 +111,8 @@ $speciesChecks = @{
         '.evYield_SpAttack = 2', '.abilities = { ABILITY_COMPOUND_EYES, ABILITY_CHLOROPHYLL, ABILITY_TINTED_LENS }',
         '.natDexNum = NATIONAL_DEX_INFIORALA', '.categoryName = _("FLOREALE")', '.height = 9', '.weight = 142',
         'Trasporta il polline tra i fiori delle', 'rapidamente.',
-        '.frontPic = gMonFrontPic_Butterfree', '.backPic = gMonBackPic_Butterfree',
-        '.iconSprite = gMonIcon_Butterfree', '.teachingType = EXPLICIT_TEACHABLES'
+        '.frontPic = gMonFrontPic_Infiorala', '.backPic = gMonBackPic_Infiorala',
+        '.iconSprite = gMonIcon_Infiorala', '.teachingType = EXPLICIT_TEACHABLES'
     )
 }
 $expectedBst = @{ FOLIARVA = 240; CRISALVIA = 290; INFIORALA = 450 }
@@ -158,11 +175,24 @@ foreach ($row in @(
 }
 Assert-Contains $docs '| `AUS-FAM-EARLY-BUG` | Foliarva → Crisalvia → Infiorala | 3 | IMPLEMENTED; CANONICAL DESIGN |' 'Catalog status'
 
-$speciesDiff = @(git diff --unified=0 develop -- 'src/data/pokemon/species_info.h')
-$removedSpeciesLines = @($speciesDiff | Where-Object { $_ -match '^-(?:[^-]|$)' })
-Assert-True ($removedSpeciesLines.Count -eq 0) 'Existing species data was removed or replaced'
+$baseSpeciesInfo = (& git show develop:src/data/pokemon/species_info.h | Out-String) -replace "`r`n", "`n"
+Assert-True ($LASTEXITCODE -eq 0) 'Could not read develop version of species_info.h'
+$currentSpeciesInfoUtf8 = (Get-Content 'src/data/pokemon/species_info.h' -Raw -Encoding UTF8) -replace "`r`n", "`n"
+$recordPattern = '(?s)\[(SPECIES_[A-Z0-9_]+)\]\s*=\s*\{.*?\n    \},'
+$currentRecords = [regex]::Matches($currentSpeciesInfoUtf8, $recordPattern)
+$baseRecords = [regex]::Matches($baseSpeciesInfo, $recordPattern)
+Assert-True ($currentRecords.Count -eq $baseRecords.Count) 'Species record count changed'
+for ($index = 0; $index -lt $currentRecords.Count; $index++) {
+    $match = $currentRecords[$index]
+    $baseMatch = $baseRecords[$index]
+    $name = $match.Groups[1].Value
+    Assert-True ($name -ceq $baseMatch.Groups[1].Value) "Species record order changed at index $index"
+    if ($name -notin @('SPECIES_FOLIARVA', 'SPECIES_CRISALVIA', 'SPECIES_INFIORALA')) {
+        Assert-True ($match.Value -ceq $baseMatch.Value) "Unrelated species record changed: $name"
+    }
+}
 
-foreach ($forbidden in @('data/maps/', 'data/wild_encounters', 'graphics/pokemon/', 'graphics/pokemon_icons/')) {
+foreach ($forbidden in @('data/maps/', 'data/wild_encounters')) {
     Assert-True (-not ($changedPaths | Where-Object { $_ -like "*$forbidden*" })) "Forbidden functional or graphics change detected: $forbidden"
 }
 

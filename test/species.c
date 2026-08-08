@@ -1208,6 +1208,58 @@ TEST("Ausonia common fauna uses original battle graphics and provisional auxilia
     }
 }
 
+TEST("Ausonia early Bug fauna uses original battle graphics and provisional auxiliary assets")
+{
+    static const enum Species species[] = { SPECIES_FOLIARVA, SPECIES_CRISALVIA, SPECIES_INFIORALA };
+    static const enum Species placeholders[] = { SPECIES_CATERPIE, SPECIES_METAPOD, SPECIES_BUTTERFREE };
+    static const u8 frontPicSizes[] = {
+        (6 << 4) | 6,
+        (5 << 4) | 8,
+        (8 << 4) | 7,
+    };
+    static const u8 backPicSizes[] = {
+        (5 << 4) | 6,
+        (5 << 4) | 8,
+        (8 << 4) | 7,
+    };
+    static const u8 frontOffsets[] = { 8, 3, 4 };
+    static const u8 backOffsets[] = { 8, 3, 4 };
+
+    for (u32 i = 0; i < ARRAY_COUNT(species); i++)
+    {
+        const struct SpeciesInfo *info = &gSpeciesInfo[species[i]];
+        const struct SpeciesInfo *placeholder = &gSpeciesInfo[placeholders[i]];
+
+        EXPECT(info->frontPic != placeholder->frontPic);
+        EXPECT(info->backPic != placeholder->backPic);
+        EXPECT(info->palette != placeholder->palette);
+        EXPECT(info->shinyPalette != placeholder->shinyPalette);
+        EXPECT(info->iconSprite != placeholder->iconSprite);
+        EXPECT_EQ((u32)info->frontPicSize, (u32)frontPicSizes[i]);
+        EXPECT_EQ((u32)info->backPicSize, (u32)backPicSizes[i]);
+        EXPECT_EQ((u32)info->frontPicYOffset, (u32)frontOffsets[i]);
+        EXPECT_EQ((u32)info->backPicYOffset, (u32)backOffsets[i]);
+        EXPECT_EQ((u32)info->iconPalIndex, 1);
+
+        // Audio, footprint, overworld, shadow and back animation stay provisional.
+        EXPECT_EQ((u32)info->cryId, (u32)placeholder->cryId);
+        EXPECT_EQ(info->backAnimId, placeholder->backAnimId);
+        EXPECT_EQ(info->enemyShadowXOffset, placeholder->enemyShadowXOffset);
+        EXPECT_EQ(info->enemyShadowYOffset, placeholder->enemyShadowYOffset);
+        EXPECT_EQ((u32)info->enemyShadowSize, (u32)placeholder->enemyShadowSize);
+#if P_FOOTPRINTS
+        EXPECT(info->footprint == placeholder->footprint);
+#endif
+#if OW_POKEMON_OBJECT_EVENTS
+        EXPECT(info->overworldData.images == placeholder->overworldData.images);
+#if OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
+        EXPECT(info->overworldPalette == placeholder->overworldPalette);
+        EXPECT(info->overworldShinyPalette == placeholder->overworldShinyPalette);
+#endif
+#endif
+    }
+}
+
 TEST("Ausonia early Bug fauna base data matches the canonical batch")
 {
     static const enum Species species[] = { SPECIES_FOLIARVA, SPECIES_CRISALVIA, SPECIES_INFIORALA };
@@ -1380,14 +1432,14 @@ TEST("Ausonia early Bug fauna teachables Egg Moves and placeholders are complete
         const struct SpeciesInfo *info = &gSpeciesInfo[species[i]];
         const struct SpeciesInfo *placeholder = &gSpeciesInfo[placeholders[i]];
 
-        EXPECT(info->frontPic == placeholder->frontPic);
-        EXPECT(info->backPic == placeholder->backPic);
-        EXPECT(info->palette == placeholder->palette);
-        EXPECT(info->shinyPalette == placeholder->shinyPalette);
-        EXPECT(info->iconSprite == placeholder->iconSprite);
+        EXPECT(info->frontPic != placeholder->frontPic);
+        EXPECT(info->backPic != placeholder->backPic);
+        EXPECT(info->palette != placeholder->palette);
+        EXPECT(info->shinyPalette != placeholder->shinyPalette);
+        EXPECT(info->iconSprite != placeholder->iconSprite);
         EXPECT(info->frontAnimFrames != NULL);
         EXPECT_EQ((u32)info->cryId, (u32)placeholder->cryId);
-        EXPECT_EQ((u32)info->iconPalIndex, (u32)placeholder->iconPalIndex);
+        EXPECT_EQ((u32)info->iconPalIndex, 1);
 #if P_FOOTPRINTS
         EXPECT(info->footprint == placeholder->footprint);
 #endif
