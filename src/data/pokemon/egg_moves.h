@@ -44,6 +44,15 @@ static const u16 sGhepioEggMoveLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
+// Pokemon Alba: canonical Egg Moves for the early Ausonia magpie line.
+static const u16 sGazzuolaEggMoveLearnset[] = {
+    MOVE_FEATHER_DANCE,
+    MOVE_DEFOG,
+    MOVE_ROOST,
+    MOVE_SWITCHEROO,
+    MOVE_UNAVAILABLE,
+};
+
 #if P_FAMILY_BULBASAUR
 static const u16 sBulbasaurEggMoveLearnset[] = {
     MOVE_SKULL_BASH,

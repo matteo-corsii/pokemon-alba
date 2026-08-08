@@ -441,6 +441,56 @@ static const struct LevelUpMove sPeregrinusLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+static const struct LevelUpMove sGazzuolaLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_PECK),
+    LEVEL_UP_MOVE( 1, MOVE_GROWL),
+    LEVEL_UP_MOVE( 4, MOVE_COVET),
+    LEVEL_UP_MOVE( 7, MOVE_QUICK_ATTACK),
+    LEVEL_UP_MOVE(10, MOVE_PLUCK),
+    LEVEL_UP_MOVE(13, MOVE_THIEF),
+    LEVEL_UP_MOVE(16, MOVE_ASSURANCE),
+    LEVEL_UP_MOVE(18, MOVE_AERIAL_ACE),
+    LEVEL_UP_MOVE(22, MOVE_TAUNT),
+    LEVEL_UP_MOVE(26, MOVE_AGILITY),
+    LEVEL_UP_END
+};
+
+static const struct LevelUpMove sBrillazzaLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_PECK),
+    LEVEL_UP_MOVE( 1, MOVE_GROWL),
+    LEVEL_UP_MOVE( 1, MOVE_COVET),
+    LEVEL_UP_MOVE( 1, MOVE_QUICK_ATTACK),
+    LEVEL_UP_MOVE(10, MOVE_PLUCK),
+    LEVEL_UP_MOVE(13, MOVE_THIEF),
+    LEVEL_UP_MOVE(16, MOVE_ASSURANCE),
+    LEVEL_UP_MOVE(18, MOVE_AERIAL_ACE),
+    LEVEL_UP_MOVE(22, MOVE_TAUNT),
+    LEVEL_UP_MOVE(26, MOVE_AGILITY),
+    LEVEL_UP_MOVE(30, MOVE_KNOCK_OFF),
+    LEVEL_UP_MOVE(34, MOVE_TAILWIND),
+    LEVEL_UP_END
+};
+
+static const struct LevelUpMove sGazzombraLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_PECK),
+    LEVEL_UP_MOVE( 1, MOVE_GROWL),
+    LEVEL_UP_MOVE( 1, MOVE_COVET),
+    LEVEL_UP_MOVE( 1, MOVE_QUICK_ATTACK),
+    LEVEL_UP_MOVE(10, MOVE_PLUCK),
+    LEVEL_UP_MOVE(13, MOVE_THIEF),
+    LEVEL_UP_MOVE(16, MOVE_ASSURANCE),
+    LEVEL_UP_MOVE(18, MOVE_AERIAL_ACE),
+    LEVEL_UP_MOVE(22, MOVE_TAUNT),
+    LEVEL_UP_MOVE(26, MOVE_AGILITY),
+    LEVEL_UP_MOVE(30, MOVE_KNOCK_OFF),
+    LEVEL_UP_MOVE(34, MOVE_FOUL_PLAY),
+    LEVEL_UP_MOVE(38, MOVE_U_TURN),
+    LEVEL_UP_MOVE(42, MOVE_ROOST),
+    LEVEL_UP_MOVE(46, MOVE_BRAVE_BIRD),
+    LEVEL_UP_MOVE(50, MOVE_SWITCHEROO),
+    LEVEL_UP_END
+};
+
 const struct SpeciesInfo gSpeciesInfo[] =
 {
     [SPECIES_NONE] =
@@ -1778,6 +1828,200 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .levelUpLearnset = sPeregrinusLevelUpLearnset,
         .teachingType = EXPLICIT_TEACHABLES,
         .teachableLearnset = sPeregrinusTeachableLearnset,
+    },
+
+    [SPECIES_GAZZUOLA] =
+    {
+        .baseHP        = 45,
+        .baseAttack    = 40,
+        .baseDefense   = 40,
+        .baseSpeed     = 60,
+        .baseSpAttack  = 35,
+        .baseSpDefense = 40,
+        .types = MON_TYPES(TYPE_NORMAL, TYPE_FLYING),
+        .catchRate = 255,
+        .expYield = 56,
+        .evYield_Speed = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 15,
+        .friendship = 70,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING),
+        .abilities = { ABILITY_PICKUP, ABILITY_KEEN_EYE, ABILITY_SUPER_LUCK },
+        .bodyColor = BODY_COLOR_BLACK,
+        .speciesName = _("Gazzuola"),
+        .cryId = CRY_ROOKIDEE,
+        .natDexNum = NATIONAL_DEX_GAZZUOLA,
+        .categoryName = _("CURIOSA"),
+        .height = 3,
+        .weight = 19,
+        .description = COMPOUND_STRING(
+            "Raccoglie frammenti di vetro e metallo\n"
+            "che brillano al sole e li nasconde tra\n"
+            "i rami. Ricorda a lungo il luogo di\n"
+            "ogni piccolo tesoro."),
+        .pokemonScale = 682,
+        .pokemonOffset = 24,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Rookidee,
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
+        .frontPicYOffset = 16,
+        .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        .frontAnimId = ANIM_H_JUMPS,
+        .backPic = gMonBackPic_Rookidee,
+        .backPicSize = MON_COORDS_SIZE(64, 32),
+        .backPicYOffset = 17,
+        .palette = gMonPalette_Rookidee,
+        .shinyPalette = gMonShinyPalette_Rookidee,
+        .iconSprite = gMonIcon_Rookidee,
+        .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        SHADOW(-1, -3, SHADOW_SIZE_S)
+        FOOTPRINT(Rookidee)
+        OVERWORLD(
+            sPicTable_Rookidee,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            sAnimTable_Following,
+            gOverworldPalette_Rookidee,
+            gShinyOverworldPalette_Rookidee
+        )
+        .levelUpLearnset = sGazzuolaLevelUpLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sGazzuolaTeachableLearnset,
+        .eggMoveLearnset = sGazzuolaEggMoveLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 18, SPECIES_BRILLAZZA}),
+    },
+
+    [SPECIES_BRILLAZZA] =
+    {
+        .baseHP        = 60,
+        .baseAttack    = 65,
+        .baseDefense   = 55,
+        .baseSpeed     = 80,
+        .baseSpAttack  = 45,
+        .baseSpDefense = 55,
+        .types = MON_TYPES(TYPE_DARK, TYPE_FLYING),
+        .catchRate = 120,
+        .expYield = 116,
+        .evYield_Attack = 1,
+        .evYield_Speed = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 15,
+        .friendship = 70,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING),
+        .abilities = { ABILITY_PICKUP, ABILITY_FRISK, ABILITY_SUPER_LUCK },
+        .bodyColor = BODY_COLOR_BLACK,
+        .speciesName = _("Brillazza"),
+        .cryId = CRY_CORVISQUIRE,
+        .natDexNum = NATIONAL_DEX_BRILLAZZA,
+        .categoryName = _("MONILE"),
+        .height = 6,
+        .weight = 55,
+        .description = COMPOUND_STRING(
+            "Sa distinguere a colpo d'occhio ciò\n"
+            "che ha davvero valore. Se un oggetto\n"
+            "attira la sua attenzione, studia per\n"
+            "giorni il momento migliore per prenderlo."),
+        .pokemonScale = 366,
+        .pokemonOffset = 7,
+        .trainerScale = 257,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Corvisquire,
+        .frontPicSize = MON_COORDS_SIZE(64, 56),
+        .frontPicYOffset = 5,
+        .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        .frontAnimId = ANIM_CIRCLE_INTO_BG,
+        .enemyMonElevation = 10,
+        .backPic = gMonBackPic_Corvisquire,
+        .backPicSize = MON_COORDS_SIZE(56, 48),
+        .backPicYOffset = 9,
+        .palette = gMonPalette_Corvisquire,
+        .shinyPalette = gMonShinyPalette_Corvisquire,
+        .iconSprite = gMonIcon_Corvisquire,
+        .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        SHADOW(2, 16, SHADOW_SIZE_S)
+        FOOTPRINT(Corvisquire)
+        OVERWORLD(
+            sPicTable_Corvisquire,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            sAnimTable_Following,
+            gOverworldPalette_Corvisquire,
+            gShinyOverworldPalette_Corvisquire
+        )
+        .levelUpLearnset = sBrillazzaLevelUpLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sBrillazzaTeachableLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 34, SPECIES_GAZZOMBRA}),
+    },
+
+    [SPECIES_GAZZOMBRA] =
+    {
+        .baseHP        = 75,
+        .baseAttack    = 95,
+        .baseDefense   = 70,
+        .baseSpeed     = 100,
+        .baseSpAttack  = 55,
+        .baseSpDefense = 75,
+        .types = MON_TYPES(TYPE_DARK, TYPE_FLYING),
+        .catchRate = 60,
+        .expYield = 170,
+        .evYield_Attack = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 15,
+        .friendship = 70,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING),
+        .abilities = { ABILITY_FRISK, ABILITY_PICKPOCKET, ABILITY_SUPER_LUCK },
+        .bodyColor = BODY_COLOR_BLACK,
+        .speciesName = _("Gazzombra"),
+        .cryId = CRY_CORVIKNIGHT,
+        .natDexNum = NATIONAL_DEX_GAZZOMBRA,
+        .categoryName = _("BOTTINO"),
+        .height = 9,
+        .weight = 98,
+        .description = COMPOUND_STRING(
+            "Osserva silenziosa i passanti dai tetti\n"
+            "e sceglie solo oggetti che considera\n"
+            "degni della sua collezione. Spesso lascia\n"
+            "un gingillo senza valore al loro posto."),
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 348,
+        .trainerOffset = 6,
+        .frontPic = gMonFrontPic_Corviknight,
+        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicYOffset = 2,
+        .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        .frontAnimId = ANIM_H_STRETCH_FAR_SLOW,
+        .backPic = gMonBackPic_Corviknight,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 3,
+        .palette = gMonPalette_Corviknight,
+        .shinyPalette = gMonShinyPalette_Corviknight,
+        .iconSprite = gMonIcon_Corviknight,
+        .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        SHADOW(-1, 9, SHADOW_SIZE_L)
+        FOOTPRINT(Corviknight)
+        OVERWORLD(
+            sPicTable_Corviknight,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            sAnimTable_Following,
+            gOverworldPalette_Corviknight,
+            gShinyOverworldPalette_Corviknight
+        )
+        .levelUpLearnset = sGazzombraLevelUpLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sGazzombraTeachableLearnset,
     },
 
     /* You may add any custom species below this point based on the following structure: */

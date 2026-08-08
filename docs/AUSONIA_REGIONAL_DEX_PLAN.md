@@ -295,29 +295,42 @@ comune: Borgotto 010, Pastufo 011, Miciolo 012 e Felivates 013.
 
 - **Temporary family ID:** `AUS-FAM-MAGPIE`
 - **Species/stages:** Gazzuola → Brillazza → Gazzombra.
-- **Current status:** CANONICAL DESIGN; non implementata; PLACEMENT CANDIDATE;
-  parametri tecnici BALANCE PROVISIONAL.
-- **Proposed typing:** Gazzuola Normale/Volante; Brillazza Buio/Volante;
+- **Current status:** IMPLEMENTED; CANONICAL DESIGN; PLACEMENT CANDIDATE.
+- **Implemented typing:** Gazzuola Normale/Volante; Brillazza Buio/Volante;
   Gazzombra Buio/Volante.
 - **Core concept:** linea della gazza: curiosità, attrazione per oggetti
   brillanti e infine comportamento furtivo.
 - **Real-world inspiration:** gazze e loro comportamento opportunista e
   attrazione per oggetti luminosi.
-- **Evolution structure:** linea canonica a tre stadi; livelli evolutivi TBD.
+- **Evolution structure:** Gazzuola evolve in Brillazza al livello 18;
+  Brillazza evolve in Gazzombra al livello 34.
 - **Primary habitat candidate:** borghi, giardini, rovine, fontane e strade;
   PLACEMENT CANDIDATE.
 - **Secondary habitat candidates:** Via Verdi e Albèra Storica per Gazzuola;
   presenza prevalentemente crepuscolare e notturna, ma non esclusiva.
 - **Earliest story band candidate:** Via Verdi per la forma base.
-- **Gameplay role candidate:** Gazzuola ha l'abilità approvata Raccolta
-  (Pickup); ruolo, statistiche e learnset degli stadi evoluti restano TBD.
+- **Gameplay role:** statistiche, abilità, learnset per livello, insegnabili e
+  mosse Uovo sono registrati nei dati di gioco.
 - **Narrative importance:** fauna opportunista di borghi e rovine; nessun
   evento narrativo approvato.
 - **Name review:** linea e nomi approvati.
 - **Type review:** tipi approvati per tutti e tre gli stadi.
 - **Placement review:** tassi e fasce orarie precise restano TBD.
-- **Open questions:** livelli evolutivi, statistiche, learnset, seconda
-  abilità, abilità nascoste e abilità definitive di Brillazza e Gazzombra.
+- **Open questions:** frequenze, orari esatti, distribuzione degli stadi
+  evoluti e sostituzione degli asset grafici temporanei.
+
+| Regional Dex | Species | Technical species ID | Technical Pokédex number | Implemented type(s) | Evolution |
+| ---: | --- | ---: | ---: | --- | --- |
+| 020 | Gazzuola | `SPECIES_GAZZUOLA` = 1592 | `NATIONAL_DEX_GAZZUOLA` = 1045 | Normale/Volante | livello 18 → Brillazza |
+| 021 | Brillazza | `SPECIES_BRILLAZZA` = 1593 | `NATIONAL_DEX_BRILLAZZA` = 1046 | Buio/Volante | livello 34 → Gazzombra |
+| 022 | Gazzombra | `SPECIES_GAZZOMBRA` = 1594 | `NATIONAL_DEX_GAZZOMBRA` = 1047 | Buio/Volante | stadio finale |
+
+- **Canonical v1.0 data:** statistiche base 260/360/470; Raccolta,
+  Sguardofermo e Supersorte per Gazzuola; Raccolta, Indagine e Supersorte
+  per Brillazza; Indagine, Arraffalesto e Supersorte per Gazzombra.
+- **Temporary graphical placeholders:** Rookidee per Gazzuola, Corvisquire
+  per Brillazza e Corviknight per Gazzombra; nessun asset grafico originale è
+  incluso in questo batch.
 
 ### Borgotto → Pastufo
 
@@ -917,7 +930,7 @@ creare una specie originale per ogni ruolo ecologico o di gameplay.
 | `AUS-FAM-FOSSIL-ELEPHANT` | Eleby → Antiquas | 2 | CANDIDATE; NAME REVIEW | TBD → Roccia/Psico | premature/TBD | nome base e ottenimento fossile |
 | `AUS-FAM-FOSSIL-HIPPO` | Potamy → Plumbopotam | 2 | CANDIDATE; NAME REVIEW | TBD → Roccia/Acciaio | premature/TBD | nomi e ottenimento fossile |
 | `AUS-FAM-FALCON` | Ghepio → Tinuncol → Peregrinus | 3 | IMPLEMENTED; CANONICAL DESIGN | Volante → Volante → Volante/Lotta | PLACEMENT CANDIDATE: Via Verdi di giorno | incontri e asset originali |
-| `AUS-FAM-MAGPIE` | Gazzuola → Brillazza → Gazzombra | 3 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Normale/Volante → Buio/Volante → Buio/Volante | PLACEMENT CANDIDATE: Via Verdi/Albèra Storica | livelli, abilità evolute e tassi |
+| `AUS-FAM-MAGPIE` | Gazzuola → Brillazza → Gazzombra | 3 | IMPLEMENTED; CANONICAL DESIGN | Normale/Volante → Buio/Volante → Buio/Volante | PLACEMENT CANDIDATE: Via Verdi/Albèra Storica | incontri e asset originali |
 | `AUS-FAM-DOG` | Borgotto → Pastufo | 2 | IMPLEMENTED; CANONICAL DESIGN | Normale → Normale/Terra | PLACEMENT CANDIDATE: Albèra Bassa/Via Verdi | incontri e asset originali |
 | `AUS-FAM-CAT` | Miciolo → Felivates | 2 | IMPLEMENTED; CANONICAL DESIGN | Normale → Normale/Psico | PLACEMENT CANDIDATE: Albèra Bassa/Albèra Storica | incontri e asset originali |
 | `AUS-FAM-EARLY-BUG` | Foliarva → Crisalvia → Infiorala | 3 | IMPLEMENTED; CANONICAL DESIGN | Coleottero → Coleottero/Erba → Coleottero/Erba | PLACEMENT CANDIDATE: Via Verdi | incontri e asset originali |
