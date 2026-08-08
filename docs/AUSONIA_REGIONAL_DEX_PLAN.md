@@ -253,30 +253,43 @@ comune: Borgotto 010, Pastufo 011, Miciolo 012 e Felivates 013.
 
 - **Temporary family ID:** `AUS-FAM-FALCON`
 - **Species/stages:** Ghepio → Tinuncol → Peregrinus.
-- **Current status:** CANONICAL DESIGN; non implementata; PLACEMENT CANDIDATE;
-  parametri tecnici BALANCE PROVISIONAL.
-- **Proposed typing:** Ghepio Volante; Tinuncol Volante; Peregrinus
+- **Current status:** IMPLEMENTED; CANONICAL DESIGN; PLACEMENT CANDIDATE.
+- **Implemented typing:** Ghepio Volante; Tinuncol Volante; Peregrinus
   Volante/Lotta.
 - **Core concept:** linea di falconidi prevalentemente diurna, offensiva,
   rapida e basata sulla picchiata.
 - **Real-world inspiration:** gheppio, *Falco tinnunculus* e falco pellegrino;
   Peregrinus deriva direttamente da *Falco peregrinus*.
-- **Evolution structure:** linea canonica a tre stadi; livelli evolutivi
-  BALANCE PROVISIONAL.
+- **Evolution structure:** Ghepio evolve in Tinuncol al livello 16; Tinuncol
+  evolve in Peregrinus al livello 34.
 - **Primary habitat candidate:** Via Verdi durante il giorno per Ghepio;
   PLACEMENT CANDIDATE, senza rendere l'orario un'esclusiva assoluta.
 - **Secondary habitat candidates:** campagne, borghi e alture; PLACEMENT
   CANDIDATE.
 - **Earliest story band candidate:** Via Verdi per il primo stadio.
-- **Gameplay role candidate:** attaccante rapido basato sulla picchiata;
-  statistiche e learnset BALANCE PROVISIONAL.
+- **Gameplay role:** attaccante rapido basato sulla picchiata; statistiche,
+  abilità e learnset sono registrati nei dati di gioco.
 - **Narrative importance:** ordinaria; nessun ruolo narrativo approvato.
 - **Name review:** linea e nomi approvati.
 - **Type review:** tipi approvati per tutti e tre gli stadi.
 - **Placement review:** frequenze, orari esatti e presenza degli stadi evoluti
   allo stato selvatico restano TBD.
-- **Open questions:** livelli evolutivi, abilità, statistiche, learnset,
-  frequenze, orari esatti e distribuzione degli stadi evoluti.
+- **Open questions:** frequenze, orari esatti, distribuzione degli stadi
+  evoluti e sostituzione degli asset grafici temporanei.
+
+| Regional Dex | Species | Technical species ID | Technical Pokédex number | Implemented type(s) | Evolution |
+| ---: | --- | ---: | ---: | --- | --- |
+| 017 | Ghepio | `SPECIES_GHEPIO` = 1589 | `NATIONAL_DEX_GHEPIO` = 1042 | Volante | livello 16 → Tinuncol |
+| 018 | Tinuncol | `SPECIES_TINUNCOL` = 1590 | `NATIONAL_DEX_TINUNCOL` = 1043 | Volante | livello 34 → Peregrinus |
+| 019 | Peregrinus | `SPECIES_PEREGRINUS` = 1591 | `NATIONAL_DEX_PEREGRINUS` = 1044 | Volante/Lotta | stadio finale |
+
+- **Canonical v1.0 data:** statistiche base 255/350/500; abilità
+  Sguardofermo/Pettinfuori/Temerarietà per Ghepio e Tinuncol,
+  Sguardofermo/Agonismo/Temerarietà per Peregrinus; learnset per livello,
+  insegnabili e mosse Uovo registrati.
+- **Temporary graphical placeholders:** Fletchling per Ghepio, Fletchinder per
+  Tinuncol e Talonflame per Peregrinus; nessun asset grafico originale è
+  incluso in questo batch.
 
 ### Gazzuola → Brillazza → Gazzombra
 
@@ -903,7 +916,7 @@ creare una specie originale per ogni ruolo ecologico o di gameplay.
 | `AUS-FAM-STARTER-3` | Ardeino → Velairone → Codairone | 3 | IMPLEMENTED | Acqua → Acqua → Acqua/Volante | Laboratorio del Cratere | concept definitiva di Codairone e asset residui |
 | `AUS-FAM-FOSSIL-ELEPHANT` | Eleby → Antiquas | 2 | CANDIDATE; NAME REVIEW | TBD → Roccia/Psico | premature/TBD | nome base e ottenimento fossile |
 | `AUS-FAM-FOSSIL-HIPPO` | Potamy → Plumbopotam | 2 | CANDIDATE; NAME REVIEW | TBD → Roccia/Acciaio | premature/TBD | nomi e ottenimento fossile |
-| `AUS-FAM-FALCON` | Ghepio → Tinuncol → Peregrinus | 3 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Volante → Volante → Volante/Lotta | PLACEMENT CANDIDATE: Via Verdi di giorno | livelli, abilità, frequenze e orari esatti |
+| `AUS-FAM-FALCON` | Ghepio → Tinuncol → Peregrinus | 3 | IMPLEMENTED; CANONICAL DESIGN | Volante → Volante → Volante/Lotta | PLACEMENT CANDIDATE: Via Verdi di giorno | incontri e asset originali |
 | `AUS-FAM-MAGPIE` | Gazzuola → Brillazza → Gazzombra | 3 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Normale/Volante → Buio/Volante → Buio/Volante | PLACEMENT CANDIDATE: Via Verdi/Albèra Storica | livelli, abilità evolute e tassi |
 | `AUS-FAM-DOG` | Borgotto → Pastufo | 2 | IMPLEMENTED; CANONICAL DESIGN | Normale → Normale/Terra | PLACEMENT CANDIDATE: Albèra Bassa/Via Verdi | incontri e asset originali |
 | `AUS-FAM-CAT` | Miciolo → Felivates | 2 | IMPLEMENTED; CANONICAL DESIGN | Normale → Normale/Psico | PLACEMENT CANDIDATE: Albèra Bassa/Albèra Storica | incontri e asset originali |

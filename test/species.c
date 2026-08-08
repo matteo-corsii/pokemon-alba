@@ -262,7 +262,10 @@ TEST("Ausonia starter IDs are append-only and distinct")
     EXPECT_EQ(SPECIES_FOLIARVA, SPECIES_FELIVATES + 1);
     EXPECT_EQ(SPECIES_CRISALVIA, SPECIES_FOLIARVA + 1);
     EXPECT_EQ(SPECIES_INFIORALA, SPECIES_CRISALVIA + 1);
-    EXPECT_EQ(SPECIES_EGG, SPECIES_INFIORALA + 1);
+    EXPECT_EQ(SPECIES_GHEPIO, SPECIES_INFIORALA + 1);
+    EXPECT_EQ(SPECIES_TINUNCOL, SPECIES_GHEPIO + 1);
+    EXPECT_EQ(SPECIES_PEREGRINUS, SPECIES_TINUNCOL + 1);
+    EXPECT_EQ(SPECIES_EGG, SPECIES_PEREGRINUS + 1);
     EXPECT_EQ(NUM_SPECIES, SPECIES_EGG);
 
     EXPECT_EQ(NATIONAL_DEX_PECHARUNT, 1025);
@@ -282,7 +285,10 @@ TEST("Ausonia starter IDs are append-only and distinct")
     EXPECT_EQ(NATIONAL_DEX_FOLIARVA, NATIONAL_DEX_FELIVATES + 1);
     EXPECT_EQ(NATIONAL_DEX_CRISALVIA, NATIONAL_DEX_FOLIARVA + 1);
     EXPECT_EQ(NATIONAL_DEX_INFIORALA, NATIONAL_DEX_CRISALVIA + 1);
-    EXPECT_EQ(NATIONAL_DEX_COUNT, NATIONAL_DEX_INFIORALA);
+    EXPECT_EQ(NATIONAL_DEX_GHEPIO, NATIONAL_DEX_INFIORALA + 1);
+    EXPECT_EQ(NATIONAL_DEX_TINUNCOL, NATIONAL_DEX_GHEPIO + 1);
+    EXPECT_EQ(NATIONAL_DEX_PEREGRINUS, NATIONAL_DEX_TINUNCOL + 1);
+    EXPECT_EQ(NATIONAL_DEX_COUNT, NATIONAL_DEX_PEREGRINUS);
 
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_CINGERM), COMPOUND_STRING("Cingerm")), 0);
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_ROVASCO), COMPOUND_STRING("Rovasco")), 0);
@@ -300,6 +306,9 @@ TEST("Ausonia starter IDs are append-only and distinct")
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_FOLIARVA), COMPOUND_STRING("Foliarva")), 0);
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_CRISALVIA), COMPOUND_STRING("Crisalvia")), 0);
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_INFIORALA), COMPOUND_STRING("Infiorala")), 0);
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_GHEPIO), COMPOUND_STRING("Ghepio")), 0);
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_TINUNCOL), COMPOUND_STRING("Tinuncol")), 0);
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_PEREGRINUS), COMPOUND_STRING("Peregrinus")), 0);
 }
 
 TEST("Ausonia Grass starter base data matches the approved prototype")
@@ -1445,6 +1454,200 @@ TEST("Ausonia early Bug fauna teachables Egg Moves and placeholders are complete
 #endif
 #if OW_POKEMON_OBJECT_EVENTS
         EXPECT(info->overworldData.images == placeholder->overworldData.images);
+#endif
+    }
+}
+
+TEST("Ausonia early falcon fauna base data matches the canonical batch")
+{
+    static const enum Species species[] = { SPECIES_GHEPIO, SPECIES_TINUNCOL, SPECIES_PEREGRINUS };
+    static const u8 stats[][NUM_STATS] = {
+        { 40, 45, 35, 70, 30, 35 },
+        { 55, 65, 50, 90, 40, 50 },
+        { 75, 110, 70, 120, 55, 70 },
+    };
+    static const u16 statTotals[] = { 255, 350, 500 };
+    static const u8 catchRates[] = { 255, 120, 45 };
+    static const u16 expYields[] = { 56, 113, 177 };
+    static const u16 heights[] = { 3, 6, 11 };
+    static const u16 weights[] = { 21, 72, 234 };
+    const u8 ghepioSpeedYield = gSpeciesInfo[SPECIES_GHEPIO].evYield_Speed;
+    const u8 tinuncolSpeedYield = gSpeciesInfo[SPECIES_TINUNCOL].evYield_Speed;
+    const u8 peregrinusSpeedYield = gSpeciesInfo[SPECIES_PEREGRINUS].evYield_Speed;
+
+    for (u32 i = 0; i < ARRAY_COUNT(species); i++)
+    {
+        const struct SpeciesInfo *info = &gSpeciesInfo[species[i]];
+
+        EXPECT_EQ(info->baseHP, stats[i][STAT_HP]);
+        EXPECT_EQ(info->baseAttack, stats[i][STAT_ATK]);
+        EXPECT_EQ(info->baseDefense, stats[i][STAT_DEF]);
+        EXPECT_EQ(info->baseSpeed, stats[i][STAT_SPEED]);
+        EXPECT_EQ(info->baseSpAttack, stats[i][STAT_SPATK]);
+        EXPECT_EQ(info->baseSpDefense, stats[i][STAT_SPDEF]);
+        EXPECT_EQ(GetBaseStatTotalForTest(species[i]), statTotals[i]);
+        EXPECT_EQ(info->catchRate, catchRates[i]);
+        EXPECT_EQ(info->expYield, expYields[i]);
+        EXPECT_EQ(info->height, heights[i]);
+        EXPECT_EQ(info->weight, weights[i]);
+        EXPECT_EQ(info->genderRatio, (50 * 255) / 100);
+        EXPECT_EQ(info->eggCycles, 15);
+        EXPECT_EQ(info->friendship, 70);
+        EXPECT_EQ(info->growthRate, GROWTH_MEDIUM_FAST);
+        EXPECT_EQ(info->eggGroups[0], EGG_GROUP_FLYING);
+        EXPECT_EQ(info->eggGroups[1], EGG_GROUP_FLYING);
+        EXPECT_NE(StringCompare(info->description, gFallbackPokedexText), 0);
+        EXPECT_EQ((u32)info->teachingType, EXPLICIT_TEACHABLES);
+    }
+
+    EXPECT_EQ(gSpeciesInfo[SPECIES_GHEPIO].types[0], TYPE_FLYING);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_GHEPIO].types[1], TYPE_FLYING);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_TINUNCOL].types[0], TYPE_FLYING);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_TINUNCOL].types[1], TYPE_FLYING);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_PEREGRINUS].types[0], TYPE_FLYING);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_PEREGRINUS].types[1], TYPE_FIGHTING);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_GHEPIO].abilities[0], ABILITY_KEEN_EYE);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_GHEPIO].abilities[1], ABILITY_BIG_PECKS);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_GHEPIO].abilities[2], ABILITY_RECKLESS);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_TINUNCOL].abilities[0], ABILITY_KEEN_EYE);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_TINUNCOL].abilities[1], ABILITY_BIG_PECKS);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_TINUNCOL].abilities[2], ABILITY_RECKLESS);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_PEREGRINUS].abilities[0], ABILITY_KEEN_EYE);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_PEREGRINUS].abilities[1], ABILITY_DEFIANT);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_PEREGRINUS].abilities[2], ABILITY_RECKLESS);
+    EXPECT_EQ(ghepioSpeedYield, 1);
+    EXPECT_EQ(tinuncolSpeedYield, 2);
+    EXPECT_EQ(peregrinusSpeedYield, 2);
+    EXPECT_EQ((u32)gSpeciesInfo[SPECIES_GHEPIO].bodyColor, BODY_COLOR_BROWN);
+    EXPECT_EQ((u32)gSpeciesInfo[SPECIES_TINUNCOL].bodyColor, BODY_COLOR_BROWN);
+    EXPECT_EQ((u32)gSpeciesInfo[SPECIES_PEREGRINUS].bodyColor, BODY_COLOR_GRAY);
+    EXPECT_EQ(StringCompare(gSpeciesInfo[SPECIES_GHEPIO].categoryName, COMPOUND_STRING("FALCHETTO")), 0);
+    EXPECT_EQ(StringCompare(gSpeciesInfo[SPECIES_TINUNCOL].categoryName, COMPOUND_STRING("GHEPPIO")), 0);
+    EXPECT_EQ(StringCompare(gSpeciesInfo[SPECIES_PEREGRINUS].categoryName, COMPOUND_STRING("PICCHIATA")), 0);
+}
+
+TEST("Ausonia early falcon fauna evolutions use the canonical levels")
+{
+    const struct Evolution *ghepioEvolutions = GetSpeciesEvolutions(SPECIES_GHEPIO);
+    const struct Evolution *tinuncolEvolutions = GetSpeciesEvolutions(SPECIES_TINUNCOL);
+
+    EXPECT_EQ(ghepioEvolutions[0].method, EVO_LEVEL);
+    EXPECT_EQ(ghepioEvolutions[0].param, 16);
+    EXPECT_EQ(ghepioEvolutions[0].targetSpecies, SPECIES_TINUNCOL);
+    EXPECT_EQ(ghepioEvolutions[1].method, EVOLUTIONS_END);
+    EXPECT_EQ(tinuncolEvolutions[0].method, EVO_LEVEL);
+    EXPECT_EQ(tinuncolEvolutions[0].param, 34);
+    EXPECT_EQ(tinuncolEvolutions[0].targetSpecies, SPECIES_PEREGRINUS);
+    EXPECT_EQ(tinuncolEvolutions[1].method, EVOLUTIONS_END);
+    EXPECT(GetSpeciesEvolutions(SPECIES_PEREGRINUS) == NULL);
+}
+
+TEST("Ausonia early falcon fauna level-up learnsets are canonical and ordered")
+{
+    static const u8 ghepioLevels[] = { 1, 1, 4, 7, 10, 13, 16, 20, 24 };
+    static const u16 ghepioMoves[] = {
+        MOVE_PECK, MOVE_GROWL, MOVE_QUICK_ATTACK, MOVE_LEER, MOVE_WING_ATTACK,
+        MOVE_FOCUS_ENERGY, MOVE_AERIAL_ACE, MOVE_AGILITY, MOVE_TAILWIND,
+    };
+    static const u8 tinuncolLevels[] = { 1, 1, 1, 1, 10, 13, 16, 20, 24, 28, 32 };
+    static const u16 tinuncolMoves[] = {
+        MOVE_PECK, MOVE_GROWL, MOVE_QUICK_ATTACK, MOVE_LEER, MOVE_WING_ATTACK,
+        MOVE_FOCUS_ENERGY, MOVE_AERIAL_ACE, MOVE_AGILITY, MOVE_TAILWIND,
+        MOVE_DETECT, MOVE_ACROBATICS,
+    };
+    static const u8 peregrinusLevels[] = { 1, 1, 1, 1, 10, 13, 16, 20, 24, 28, 32, 34, 38, 42, 46, 50 };
+    static const u16 peregrinusMoves[] = {
+        MOVE_PECK, MOVE_GROWL, MOVE_QUICK_ATTACK, MOVE_LEER, MOVE_WING_ATTACK,
+        MOVE_FOCUS_ENERGY, MOVE_AERIAL_ACE, MOVE_AGILITY, MOVE_TAILWIND,
+        MOVE_DETECT, MOVE_ACROBATICS, MOVE_CLOSE_COMBAT, MOVE_ROOST,
+        MOVE_DUAL_WINGBEAT, MOVE_BRAVE_BIRD, MOVE_QUICK_GUARD,
+    };
+    const struct LevelUpMove *learnsets[] = {
+        GetSpeciesLevelUpLearnset(SPECIES_GHEPIO),
+        GetSpeciesLevelUpLearnset(SPECIES_TINUNCOL),
+        GetSpeciesLevelUpLearnset(SPECIES_PEREGRINUS),
+    };
+    const u8 *levels[] = { ghepioLevels, tinuncolLevels, peregrinusLevels };
+    const u16 *moves[] = { ghepioMoves, tinuncolMoves, peregrinusMoves };
+    const u32 counts[] = {
+        ARRAY_COUNT(ghepioMoves), ARRAY_COUNT(tinuncolMoves), ARRAY_COUNT(peregrinusMoves),
+    };
+
+    for (u32 i = 0; i < ARRAY_COUNT(learnsets); i++)
+    {
+        for (u32 j = 0; j < counts[i]; j++)
+        {
+            EXPECT_EQ(learnsets[i][j].level, levels[i][j]);
+            EXPECT_EQ(learnsets[i][j].move, moves[i][j]);
+            if (j > 0)
+                EXPECT_GE(learnsets[i][j].level, learnsets[i][j - 1].level);
+        }
+        EXPECT_EQ(learnsets[i][counts[i]].move, LEVEL_UP_MOVE_END);
+    }
+}
+
+TEST("Ausonia early falcon fauna teachables Egg Moves and placeholders are complete")
+{
+    static const enum Species species[] = { SPECIES_GHEPIO, SPECIES_TINUNCOL, SPECIES_PEREGRINUS };
+    static const enum Species placeholders[] = { SPECIES_FLETCHLING, SPECIES_FLETCHINDER, SPECIES_TALONFLAME };
+    static const u16 ghepioTeachables[] = {
+        MOVE_PROTECT, MOVE_REST, MOVE_SLEEP_TALK, MOVE_SUBSTITUTE, MOVE_SUNNY_DAY,
+        MOVE_AERIAL_ACE, MOVE_ACROBATICS, MOVE_U_TURN, MOVE_FLY,
+    };
+    static const u16 tinuncolExtraTeachables[] = { MOVE_ROOST, MOVE_TAILWIND, MOVE_STEEL_WING };
+    static const u16 peregrinusExtraTeachables[] = { MOVE_CLOSE_COMBAT, MOVE_BRICK_BREAK, MOVE_LOW_SWEEP, MOVE_BULK_UP };
+    static const u16 eggMoves[] = { MOVE_FEINT, MOVE_QUICK_GUARD, MOVE_DEFOG, MOVE_SKY_ATTACK };
+    const u16 *ghepio = gSpeciesInfo[SPECIES_GHEPIO].teachableLearnset;
+    const u16 *tinuncol = gSpeciesInfo[SPECIES_TINUNCOL].teachableLearnset;
+    const u16 *peregrinus = gSpeciesInfo[SPECIES_PEREGRINUS].teachableLearnset;
+
+    for (u32 i = 0; i < ARRAY_COUNT(ghepioTeachables); i++)
+    {
+        EXPECT(MoveListContains(ghepio, ghepioTeachables[i]));
+        EXPECT(MoveListContains(tinuncol, ghepioTeachables[i]));
+        EXPECT(MoveListContains(peregrinus, ghepioTeachables[i]));
+    }
+    for (u32 i = 0; i < ARRAY_COUNT(tinuncolExtraTeachables); i++)
+    {
+        EXPECT(MoveListContains(tinuncol, tinuncolExtraTeachables[i]));
+        EXPECT(MoveListContains(peregrinus, tinuncolExtraTeachables[i]));
+    }
+    for (u32 i = 0; i < ARRAY_COUNT(peregrinusExtraTeachables); i++)
+        EXPECT(MoveListContains(peregrinus, peregrinusExtraTeachables[i]));
+    for (u32 i = 0; i < ARRAY_COUNT(eggMoves); i++)
+        EXPECT(MoveListContains(gSpeciesInfo[SPECIES_GHEPIO].eggMoveLearnset, eggMoves[i]));
+
+    EXPECT_EQ(MoveListCount(ghepio), ARRAY_COUNT(ghepioTeachables));
+    EXPECT_EQ(MoveListCount(tinuncol), 12);
+    EXPECT_EQ(MoveListCount(peregrinus), 16);
+    EXPECT_EQ(MoveListCount(gSpeciesInfo[SPECIES_GHEPIO].eggMoveLearnset), ARRAY_COUNT(eggMoves));
+
+    for (u32 i = 0; i < ARRAY_COUNT(species); i++)
+    {
+        const struct SpeciesInfo *info = &gSpeciesInfo[species[i]];
+        const struct SpeciesInfo *placeholder = &gSpeciesInfo[placeholders[i]];
+
+        EXPECT(info->frontPic == placeholder->frontPic);
+        EXPECT(info->backPic == placeholder->backPic);
+        EXPECT(info->palette == placeholder->palette);
+        EXPECT(info->shinyPalette == placeholder->shinyPalette);
+        EXPECT(info->iconSprite == placeholder->iconSprite);
+        EXPECT_EQ((u32)info->cryId, (u32)placeholder->cryId);
+        EXPECT_EQ(info->frontAnimId, placeholder->frontAnimId);
+        EXPECT_EQ(info->backAnimId, placeholder->backAnimId);
+        EXPECT_EQ(info->enemyMonElevation, placeholder->enemyMonElevation);
+        EXPECT_EQ(info->enemyShadowXOffset, placeholder->enemyShadowXOffset);
+        EXPECT_EQ(info->enemyShadowYOffset, placeholder->enemyShadowYOffset);
+        EXPECT_EQ((u32)info->enemyShadowSize, (u32)placeholder->enemyShadowSize);
+#if P_FOOTPRINTS
+        EXPECT(info->footprint == placeholder->footprint);
+#endif
+#if OW_POKEMON_OBJECT_EVENTS
+        EXPECT(info->overworldData.images == placeholder->overworldData.images);
+#if OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
+        EXPECT(info->overworldPalette == placeholder->overworldPalette);
+        EXPECT(info->overworldShinyPalette == placeholder->overworldShinyPalette);
+#endif
 #endif
     }
 }

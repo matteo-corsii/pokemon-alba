@@ -35,6 +35,15 @@ static const u16 sFoliarvaEggMoveLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
+// Pokemon Alba: canonical Egg Moves for the early Ausonia falcon line.
+static const u16 sGhepioEggMoveLearnset[] = {
+    MOVE_FEINT,
+    MOVE_QUICK_GUARD,
+    MOVE_DEFOG,
+    MOVE_SKY_ATTACK,
+    MOVE_UNAVAILABLE,
+};
+
 #if P_FAMILY_BULBASAUR
 static const u16 sBulbasaurEggMoveLearnset[] = {
     MOVE_SKULL_BASH,

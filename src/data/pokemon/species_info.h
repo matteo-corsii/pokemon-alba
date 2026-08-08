@@ -393,6 +393,54 @@ static const struct LevelUpMove sInfioralaLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+static const struct LevelUpMove sGhepioLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_PECK),
+    LEVEL_UP_MOVE( 1, MOVE_GROWL),
+    LEVEL_UP_MOVE( 4, MOVE_QUICK_ATTACK),
+    LEVEL_UP_MOVE( 7, MOVE_LEER),
+    LEVEL_UP_MOVE(10, MOVE_WING_ATTACK),
+    LEVEL_UP_MOVE(13, MOVE_FOCUS_ENERGY),
+    LEVEL_UP_MOVE(16, MOVE_AERIAL_ACE),
+    LEVEL_UP_MOVE(20, MOVE_AGILITY),
+    LEVEL_UP_MOVE(24, MOVE_TAILWIND),
+    LEVEL_UP_END
+};
+
+static const struct LevelUpMove sTinuncolLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_PECK),
+    LEVEL_UP_MOVE( 1, MOVE_GROWL),
+    LEVEL_UP_MOVE( 1, MOVE_QUICK_ATTACK),
+    LEVEL_UP_MOVE( 1, MOVE_LEER),
+    LEVEL_UP_MOVE(10, MOVE_WING_ATTACK),
+    LEVEL_UP_MOVE(13, MOVE_FOCUS_ENERGY),
+    LEVEL_UP_MOVE(16, MOVE_AERIAL_ACE),
+    LEVEL_UP_MOVE(20, MOVE_AGILITY),
+    LEVEL_UP_MOVE(24, MOVE_TAILWIND),
+    LEVEL_UP_MOVE(28, MOVE_DETECT),
+    LEVEL_UP_MOVE(32, MOVE_ACROBATICS),
+    LEVEL_UP_END
+};
+
+static const struct LevelUpMove sPeregrinusLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_PECK),
+    LEVEL_UP_MOVE( 1, MOVE_GROWL),
+    LEVEL_UP_MOVE( 1, MOVE_QUICK_ATTACK),
+    LEVEL_UP_MOVE( 1, MOVE_LEER),
+    LEVEL_UP_MOVE(10, MOVE_WING_ATTACK),
+    LEVEL_UP_MOVE(13, MOVE_FOCUS_ENERGY),
+    LEVEL_UP_MOVE(16, MOVE_AERIAL_ACE),
+    LEVEL_UP_MOVE(20, MOVE_AGILITY),
+    LEVEL_UP_MOVE(24, MOVE_TAILWIND),
+    LEVEL_UP_MOVE(28, MOVE_DETECT),
+    LEVEL_UP_MOVE(32, MOVE_ACROBATICS),
+    LEVEL_UP_MOVE(34, MOVE_CLOSE_COMBAT),
+    LEVEL_UP_MOVE(38, MOVE_ROOST),
+    LEVEL_UP_MOVE(42, MOVE_DUAL_WINGBEAT),
+    LEVEL_UP_MOVE(46, MOVE_BRAVE_BIRD),
+    LEVEL_UP_MOVE(50, MOVE_QUICK_GUARD),
+    LEVEL_UP_END
+};
+
 const struct SpeciesInfo gSpeciesInfo[] =
 {
     [SPECIES_NONE] =
@@ -1533,6 +1581,222 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .levelUpLearnset = sInfioralaLevelUpLearnset,
         .teachingType = EXPLICIT_TEACHABLES,
         .teachableLearnset = sInfioralaTeachableLearnset,
+    },
+
+    [SPECIES_GHEPIO] =
+    {
+        .baseHP        = 40,
+        .baseAttack    = 45,
+        .baseDefense   = 35,
+        .baseSpeed     = 70,
+        .baseSpAttack  = 30,
+        .baseSpDefense = 35,
+        .types = MON_TYPES(TYPE_FLYING),
+        .catchRate = 255,
+        .expYield = 56,
+        .evYield_Speed = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 15,
+        .friendship = 70,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING),
+        .abilities = { ABILITY_KEEN_EYE, ABILITY_BIG_PECKS, ABILITY_RECKLESS },
+        .bodyColor = BODY_COLOR_BROWN,
+        .speciesName = _("Ghepio"),
+        .cryId = CRY_FLETCHLING,
+        .natDexNum = NATIONAL_DEX_GHEPIO,
+        .categoryName = _("FALCHETTO"),
+        .height = 3,
+        .weight = 21,
+        .description = COMPOUND_STRING(
+            "Rimane sospeso controvento scrutando\n"
+            "i prati dall’alto. Quando individua una\n"
+            "preda, si lascia cadere all’improvviso\n"
+            "con sorprendente precisione."),
+        .pokemonScale = 530,
+        .pokemonOffset = 13,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Fletchling,
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
+        .frontPicYOffset = 13,
+        .frontAnimFrames = ANIM_FRAMES(
+            ANIMCMD_FRAME(1, 7),
+            ANIMCMD_FRAME(0, 3),
+            ANIMCMD_FRAME(1, 7),
+            ANIMCMD_FRAME(0, 3),
+            ANIMCMD_FRAME(1, 10),
+            ANIMCMD_FRAME(0, 5),
+        ),
+        .frontAnimId = ANIM_V_JUMPS_SMALL,
+        .backPic = gMonBackPic_Fletchling,
+        .backPicSize = MON_COORDS_SIZE(64, 40),
+        .backPicYOffset = 14,
+        .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
+        .palette = gMonPalette_Fletchling,
+        .shinyPalette = gMonShinyPalette_Fletchling,
+        .iconSprite = gMonIcon_Fletchling,
+        .iconPalIndex = 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        SHADOW(-2, 0, SHADOW_SIZE_S)
+        FOOTPRINT(Fletchling)
+        OVERWORLD(
+            sPicTable_Fletchling,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            sAnimTable_Following,
+            gOverworldPalette_Fletchling,
+            gShinyOverworldPalette_Fletchling
+        )
+        .levelUpLearnset = sGhepioLevelUpLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sGhepioTeachableLearnset,
+        .eggMoveLearnset = sGhepioEggMoveLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_TINUNCOL}),
+    },
+
+    [SPECIES_TINUNCOL] =
+    {
+        .baseHP        = 55,
+        .baseAttack    = 65,
+        .baseDefense   = 50,
+        .baseSpeed     = 90,
+        .baseSpAttack  = 40,
+        .baseSpDefense = 50,
+        .types = MON_TYPES(TYPE_FLYING),
+        .catchRate = 120,
+        .expYield = 113,
+        .evYield_Speed = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 15,
+        .friendship = 70,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING),
+        .abilities = { ABILITY_KEEN_EYE, ABILITY_BIG_PECKS, ABILITY_RECKLESS },
+        .bodyColor = BODY_COLOR_BROWN,
+        .speciesName = _("Tinuncol"),
+        .cryId = CRY_FLETCHINDER,
+        .natDexNum = NATIONAL_DEX_TINUNCOL,
+        .categoryName = _("GHEPPIO"),
+        .height = 6,
+        .weight = 72,
+        .description = COMPOUND_STRING(
+            "Studia le correnti ascensionali per ore\n"
+            "prima di attaccare. Sa correggere la\n"
+            "traiettoria in volo con movimenti quasi\n"
+            "impercettibili delle ali."),
+        .pokemonScale = 365,
+        .pokemonOffset = 12,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Fletchinder,
+        .frontPicSize = MON_COORDS_SIZE(56, 48),
+        .frontPicYOffset = 8,
+        .frontAnimFrames = ANIM_FRAMES(
+            ANIMCMD_FRAME(1, 5),
+            ANIMCMD_FRAME(0, 10),
+            ANIMCMD_FRAME(1, 5),
+            ANIMCMD_FRAME(0, 30),
+            ANIMCMD_FRAME(1, 5),
+            ANIMCMD_FRAME(0, 10),
+            ANIMCMD_FRAME(1, 5),
+            ANIMCMD_FRAME(0, 5),
+        ),
+        .frontAnimId = ANIM_V_SLIDE_SLOW,
+        .enemyMonElevation = 9,
+        .backPic = gMonBackPic_Fletchinder,
+        .backPicSize = MON_COORDS_SIZE(64, 48),
+        .backPicYOffset = 11,
+        .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
+        .palette = gMonPalette_Fletchinder,
+        .shinyPalette = gMonShinyPalette_Fletchinder,
+        .iconSprite = gMonIcon_Fletchinder,
+        .iconPalIndex = 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        SHADOW(0, 12, SHADOW_SIZE_S)
+        FOOTPRINT(Fletchinder)
+        OVERWORLD(
+            sPicTable_Fletchinder,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            sAnimTable_Following,
+            gOverworldPalette_Fletchinder,
+            gShinyOverworldPalette_Fletchinder
+        )
+        .levelUpLearnset = sTinuncolLevelUpLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sTinuncolTeachableLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 34, SPECIES_PEREGRINUS}),
+    },
+
+    [SPECIES_PEREGRINUS] =
+    {
+        .baseHP        = 75,
+        .baseAttack    = 110,
+        .baseDefense   = 70,
+        .baseSpeed     = 120,
+        .baseSpAttack  = 55,
+        .baseSpDefense = 70,
+        .types = MON_TYPES(TYPE_FLYING, TYPE_FIGHTING),
+        .catchRate = 45,
+        .expYield = 177,
+        .evYield_Speed = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 15,
+        .friendship = 70,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING),
+        .abilities = { ABILITY_KEEN_EYE, ABILITY_DEFIANT, ABILITY_RECKLESS },
+        .bodyColor = BODY_COLOR_GRAY,
+        .speciesName = _("Peregrinus"),
+        .cryId = CRY_TALONFLAME,
+        .natDexNum = NATIONAL_DEX_PEREGRINUS,
+        .categoryName = _("PICCHIATA"),
+        .height = 11,
+        .weight = 234,
+        .description = COMPOUND_STRING(
+            "In picchiata concentra tutto il peso del\n"
+            "corpo in un solo impatto. Può cambiare\n"
+            "direzione pochi istanti prima di colpire\n"
+            "senza perdere velocità."),
+        .pokemonScale = 282,
+        .pokemonOffset = 4,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Talonflame,
+        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 1,
+        .frontAnimFrames = ANIM_FRAMES(
+            ANIMCMD_FRAME(1, 55),
+            ANIMCMD_FRAME(0, 5),
+        ),
+        .frontAnimId = ANIM_V_SLIDE_WOBBLE,
+        .enemyMonElevation = 7,
+        .backPic = gMonBackPic_Talonflame,
+        .backPicSize = MON_COORDS_SIZE(64, 56),
+        .backPicYOffset = 5,
+        .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
+        .palette = gMonPalette_Talonflame,
+        .shinyPalette = gMonShinyPalette_Talonflame,
+        .iconSprite = gMonIcon_Talonflame,
+        .iconPalIndex = 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        SHADOW(-2, 17, SHADOW_SIZE_M)
+        FOOTPRINT(Talonflame)
+        OVERWORLD(
+            sPicTable_Talonflame,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            sAnimTable_Following,
+            gOverworldPalette_Talonflame,
+            gShinyOverworldPalette_Talonflame
+        )
+        .levelUpLearnset = sPeregrinusLevelUpLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sPeregrinusTeachableLearnset,
     },
 
     /* You may add any custom species below this point based on the following structure: */
