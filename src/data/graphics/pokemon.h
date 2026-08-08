@@ -114,6 +114,23 @@ const u32 gMonBackPic_Infiorala[] = INCGFX_U32("graphics/pokemon/infiorala/back.
 const u16 gMonShinyPalette_Infiorala[] = INCGFX_U16("graphics/pokemon/infiorala/shiny.pal", ".gbapal");
 const u8 gMonIcon_Infiorala[] = INCGFX_U8("graphics/pokemon/infiorala/icon.png", ".4bpp");
 
+// Pokémon Alba: original battle and menu graphics for early Ausonia fauna batch C.
+const u32 gMonFrontPic_Ghepio[] = INCGFX_U32("graphics/pokemon/ghepio/anim_front.png", ".4bpp.smol");
+const u16 gMonPalette_Ghepio[] = INCGFX_U16("graphics/pokemon/ghepio/normal.pal", ".gbapal");
+const u32 gMonBackPic_Ghepio[] = INCGFX_U32("graphics/pokemon/ghepio/back.png", ".4bpp.smol");
+const u16 gMonShinyPalette_Ghepio[] = INCGFX_U16("graphics/pokemon/ghepio/shiny.pal", ".gbapal");
+const u8 gMonIcon_Ghepio[] = INCGFX_U8("graphics/pokemon/ghepio/icon.png", ".4bpp");
+const u32 gMonFrontPic_Tinuncol[] = INCGFX_U32("graphics/pokemon/tinuncol/anim_front.png", ".4bpp.smol");
+const u16 gMonPalette_Tinuncol[] = INCGFX_U16("graphics/pokemon/tinuncol/normal.pal", ".gbapal");
+const u32 gMonBackPic_Tinuncol[] = INCGFX_U32("graphics/pokemon/tinuncol/back.png", ".4bpp.smol");
+const u16 gMonShinyPalette_Tinuncol[] = INCGFX_U16("graphics/pokemon/tinuncol/shiny.pal", ".gbapal");
+const u8 gMonIcon_Tinuncol[] = INCGFX_U8("graphics/pokemon/tinuncol/icon.png", ".4bpp");
+const u32 gMonFrontPic_Peregrinus[] = INCGFX_U32("graphics/pokemon/peregrinus/anim_front.png", ".4bpp.smol");
+const u16 gMonPalette_Peregrinus[] = INCGFX_U16("graphics/pokemon/peregrinus/normal.pal", ".gbapal");
+const u32 gMonBackPic_Peregrinus[] = INCGFX_U32("graphics/pokemon/peregrinus/back.png", ".4bpp.smol");
+const u16 gMonShinyPalette_Peregrinus[] = INCGFX_U16("graphics/pokemon/peregrinus/shiny.pal", ".gbapal");
+const u8 gMonIcon_Peregrinus[] = INCGFX_U8("graphics/pokemon/peregrinus/icon.png", ".4bpp");
+
 #if P_FAMILY_BULBASAUR
 #if !P_GBA_STYLE_SPECIES_GFX
     const u32 gMonFrontPic_Bulbasaur[] = INCGFX_U32("graphics/pokemon/bulbasaur/anim_front.png", ".4bpp.smol");

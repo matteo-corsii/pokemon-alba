@@ -1586,10 +1586,22 @@ TEST("Ausonia early falcon fauna level-up learnsets are canonical and ordered")
     }
 }
 
-TEST("Ausonia early falcon fauna teachables Egg Moves and placeholders are complete")
+TEST("Ausonia early falcon fauna teachables Egg Moves graphics and auxiliary placeholders are complete")
 {
     static const enum Species species[] = { SPECIES_GHEPIO, SPECIES_TINUNCOL, SPECIES_PEREGRINUS };
     static const enum Species placeholders[] = { SPECIES_FLETCHLING, SPECIES_FLETCHINDER, SPECIES_TALONFLAME };
+    static const u8 frontPicSizes[] = {
+        (8 << 4) | 7,
+        (8 << 4) | 8,
+        (8 << 4) | 5,
+    };
+    static const u8 backPicSizes[] = {
+        (6 << 4) | 7,
+        (7 << 4) | 8,
+        (7 << 4) | 7,
+    };
+    static const u8 frontOffsets[] = { 4, 2, 12 };
+    static const u8 backOffsets[] = { 4, 2, 4 };
     static const u16 ghepioTeachables[] = {
         MOVE_PROTECT, MOVE_REST, MOVE_SLEEP_TALK, MOVE_SUBSTITUTE, MOVE_SUNNY_DAY,
         MOVE_AERIAL_ACE, MOVE_ACROBATICS, MOVE_U_TURN, MOVE_FLY,
@@ -1627,11 +1639,19 @@ TEST("Ausonia early falcon fauna teachables Egg Moves and placeholders are compl
         const struct SpeciesInfo *info = &gSpeciesInfo[species[i]];
         const struct SpeciesInfo *placeholder = &gSpeciesInfo[placeholders[i]];
 
-        EXPECT(info->frontPic == placeholder->frontPic);
-        EXPECT(info->backPic == placeholder->backPic);
-        EXPECT(info->palette == placeholder->palette);
-        EXPECT(info->shinyPalette == placeholder->shinyPalette);
-        EXPECT(info->iconSprite == placeholder->iconSprite);
+        EXPECT(info->frontPic != placeholder->frontPic);
+        EXPECT(info->backPic != placeholder->backPic);
+        EXPECT(info->palette != placeholder->palette);
+        EXPECT(info->shinyPalette != placeholder->shinyPalette);
+        EXPECT(info->iconSprite != placeholder->iconSprite);
+        EXPECT(info->frontAnimFrames != placeholder->frontAnimFrames);
+        EXPECT_EQ((u32)info->frontPicSize, (u32)frontPicSizes[i]);
+        EXPECT_EQ((u32)info->backPicSize, (u32)backPicSizes[i]);
+        EXPECT_EQ((u32)info->frontPicYOffset, (u32)frontOffsets[i]);
+        EXPECT_EQ((u32)info->backPicYOffset, (u32)backOffsets[i]);
+        EXPECT_EQ((u32)info->iconPalIndex, 3);
+
+        // Audio, footprint, overworld, shadow and auxiliary animations stay provisional.
         EXPECT_EQ((u32)info->cryId, (u32)placeholder->cryId);
         EXPECT_EQ(info->frontAnimId, placeholder->frontAnimId);
         EXPECT_EQ(info->backAnimId, placeholder->backAnimId);
