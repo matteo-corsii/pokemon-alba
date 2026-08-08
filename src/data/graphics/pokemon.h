@@ -75,6 +75,28 @@ const u32 gMonBackPic_Codairone[] = INCGFX_U32("graphics/pokemon/codairone/back.
 const u16 gMonShinyPalette_Codairone[] = INCGFX_U16("graphics/pokemon/codairone/shiny.pal", ".gbapal");
 const u8 gMonIcon_Codairone[] = INCGFX_U8("graphics/pokemon/codairone/icon.png", ".4bpp");
 
+// Pokémon Alba: original battle and menu graphics for early Ausonia fauna batch A.
+const u32 gMonFrontPic_Borgotto[] = INCGFX_U32("graphics/pokemon/borgotto/anim_front.png", ".4bpp.smol");
+const u16 gMonPalette_Borgotto[] = INCGFX_U16("graphics/pokemon/borgotto/normal.pal", ".gbapal");
+const u32 gMonBackPic_Borgotto[] = INCGFX_U32("graphics/pokemon/borgotto/back.png", ".4bpp.smol");
+const u16 gMonShinyPalette_Borgotto[] = INCGFX_U16("graphics/pokemon/borgotto/shiny.pal", ".gbapal");
+const u8 gMonIcon_Borgotto[] = INCGFX_U8("graphics/pokemon/borgotto/icon.png", ".4bpp");
+const u32 gMonFrontPic_Pastufo[] = INCGFX_U32("graphics/pokemon/pastufo/anim_front.png", ".4bpp.smol");
+const u16 gMonPalette_Pastufo[] = INCGFX_U16("graphics/pokemon/pastufo/normal.pal", ".gbapal");
+const u32 gMonBackPic_Pastufo[] = INCGFX_U32("graphics/pokemon/pastufo/back.png", ".4bpp.smol");
+const u16 gMonShinyPalette_Pastufo[] = INCGFX_U16("graphics/pokemon/pastufo/shiny.pal", ".gbapal");
+const u8 gMonIcon_Pastufo[] = INCGFX_U8("graphics/pokemon/pastufo/icon.png", ".4bpp");
+const u32 gMonFrontPic_Miciolo[] = INCGFX_U32("graphics/pokemon/miciolo/anim_front.png", ".4bpp.smol");
+const u16 gMonPalette_Miciolo[] = INCGFX_U16("graphics/pokemon/miciolo/normal.pal", ".gbapal");
+const u32 gMonBackPic_Miciolo[] = INCGFX_U32("graphics/pokemon/miciolo/back.png", ".4bpp.smol");
+const u16 gMonShinyPalette_Miciolo[] = INCGFX_U16("graphics/pokemon/miciolo/shiny.pal", ".gbapal");
+const u8 gMonIcon_Miciolo[] = INCGFX_U8("graphics/pokemon/miciolo/icon.png", ".4bpp");
+const u32 gMonFrontPic_Felivates[] = INCGFX_U32("graphics/pokemon/felivates/anim_front.png", ".4bpp.smol");
+const u16 gMonPalette_Felivates[] = INCGFX_U16("graphics/pokemon/felivates/normal.pal", ".gbapal");
+const u32 gMonBackPic_Felivates[] = INCGFX_U32("graphics/pokemon/felivates/back.png", ".4bpp.smol");
+const u16 gMonShinyPalette_Felivates[] = INCGFX_U16("graphics/pokemon/felivates/shiny.pal", ".gbapal");
+const u8 gMonIcon_Felivates[] = INCGFX_U8("graphics/pokemon/felivates/icon.png", ".4bpp");
+
 #if P_FAMILY_BULBASAUR
 #if !P_GBA_STYLE_SPECIES_GFX
     const u32 gMonFrontPic_Bulbasaur[] = INCGFX_U32("graphics/pokemon/bulbasaur/anim_front.png", ".4bpp.smol");
