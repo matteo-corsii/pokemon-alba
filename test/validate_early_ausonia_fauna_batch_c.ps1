@@ -21,6 +21,21 @@ function Get-Section([string]$Text, [string]$Start, [string]$End) {
     return $Text.Substring($startIndex, $endIndex - $startIndex)
 }
 
+function Remove-AllowedGraphicsFields([string]$Record) {
+    $normalized = $Record.Replace("`r`n", "`n")
+    $normalized = [regex]::Replace(
+        $normalized,
+        '(?m)^\s*\.(frontPic|frontPicSize|frontPicYOffset|backPic|backPicSize|backPicYOffset|palette|shinyPalette|iconSprite|iconPalIndex)\s*=.*\n',
+        ''
+    )
+    $normalized = [regex]::Replace(
+        $normalized,
+        '(?ms)^\s*\.frontAnimFrames\s*=\s*(?:ANIM_FRAMES\(.*?^\s*\),|[^,\n]+,)\n',
+        ''
+    )
+    return $normalized
+}
+
 $allowedPaths = @(
     'docs/AUSONIA_REGIONAL_DEX_PLAN.md',
     'include/constants/pokedex.h',
@@ -28,11 +43,18 @@ $allowedPaths = @(
     'src/data/pokemon/all_learnables.json',
     'src/data/pokemon/egg_moves.h',
     'src/data/pokemon/pokedex_orders.h',
+    'src/data/graphics/pokemon.h',
     'src/data/pokemon/species_info.h',
     'test/save.c',
     'test/species.c',
-    'test/validate_early_ausonia_fauna_batch_c.ps1'
+    'test/validate_early_ausonia_fauna_batch_c.ps1',
+    'test/validate_early_ausonia_graphics_batch_c.ps1'
 )
+foreach ($folder in 'ghepio', 'tinuncol', 'peregrinus') {
+    foreach ($file in 'anim_front.png', 'back.png', 'icon.png', 'normal.pal', 'shiny.pal') {
+        $allowedPaths += "graphics/pokemon/$folder/$file"
+    }
+}
 $changedPaths = @(
     git diff --name-only develop...HEAD
     git diff --name-only
@@ -68,6 +90,9 @@ $speciesChecks = @{
         '.bodyColor = BODY_COLOR_BROWN', '.natDexNum = NATIONAL_DEX_GHEPIO',
         '.categoryName = _("FALCHETTO")', '.height = 3', '.weight = 21',
         'Rimane sospeso controvento scrutando', 'con sorprendente precisione.',
+        '.frontPic = gMonFrontPic_Ghepio', '.backPic = gMonBackPic_Ghepio',
+        '.palette = gMonPalette_Ghepio', '.shinyPalette = gMonShinyPalette_Ghepio',
+        '.iconSprite = gMonIcon_Ghepio', '.iconPalIndex = 3',
         '.evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_TINUNCOL})'
     )
     TINUNCOL = @(
@@ -78,6 +103,9 @@ $speciesChecks = @{
         '.bodyColor = BODY_COLOR_BROWN', '.natDexNum = NATIONAL_DEX_TINUNCOL',
         '.categoryName = _("GHEPPIO")', '.height = 6', '.weight = 72',
         'Studia le correnti ascensionali per ore', 'impercettibili delle ali.',
+        '.frontPic = gMonFrontPic_Tinuncol', '.backPic = gMonBackPic_Tinuncol',
+        '.palette = gMonPalette_Tinuncol', '.shinyPalette = gMonShinyPalette_Tinuncol',
+        '.iconSprite = gMonIcon_Tinuncol', '.iconPalIndex = 3',
         '.evolutions = EVOLUTION({EVO_LEVEL, 34, SPECIES_PEREGRINUS})'
     )
     PEREGRINUS = @(
@@ -87,7 +115,10 @@ $speciesChecks = @{
         '.evYield_Speed = 2', '.abilities = { ABILITY_KEEN_EYE, ABILITY_DEFIANT, ABILITY_RECKLESS }',
         '.bodyColor = BODY_COLOR_GRAY', '.natDexNum = NATIONAL_DEX_PEREGRINUS',
         '.categoryName = _("PICCHIATA")', '.height = 11', '.weight = 234',
-        'In picchiata concentra tutto il peso del', 'senza perdere velocit'
+        'In picchiata concentra tutto il peso del', 'senza perdere velocit',
+        '.frontPic = gMonFrontPic_Peregrinus', '.backPic = gMonBackPic_Peregrinus',
+        '.palette = gMonPalette_Peregrinus', '.shinyPalette = gMonShinyPalette_Peregrinus',
+        '.iconSprite = gMonIcon_Peregrinus', '.iconPalIndex = 3'
     )
 }
 $expectedBst = @{ GHEPIO = 255; TINUNCOL = 350; PEREGRINUS = 500 }
@@ -113,12 +144,17 @@ Assert-True ($LASTEXITCODE -eq 0) 'Could not read develop version of species_inf
 $recordPattern = '(?s)\[(SPECIES_[A-Z0-9_]+)\]\s*=\s*\{.*?\n    \},'
 $currentRecords = [regex]::Matches($speciesInfo, $recordPattern)
 $baseRecords = [regex]::Matches($baseSpeciesInfo, $recordPattern)
-$existingRecords = @($currentRecords | Where-Object { $_.Groups[1].Value -notin @('SPECIES_GHEPIO','SPECIES_TINUNCOL','SPECIES_PEREGRINUS') })
-Assert-True ($currentRecords.Count -eq $baseRecords.Count + 3) 'Unexpected species record count'
-Assert-True ($existingRecords.Count -eq $baseRecords.Count) 'An existing species record is missing'
-for ($index = 0; $index -lt $baseRecords.Count; $index++) {
-    Assert-True ($existingRecords[$index].Groups[1].Value -ceq $baseRecords[$index].Groups[1].Value) "Species record order changed at index $index"
-    Assert-True ($existingRecords[$index].Value -ceq $baseRecords[$index].Value) "Unrelated species record changed: $($baseRecords[$index].Groups[1].Value)"
+Assert-True ($currentRecords.Count -eq $baseRecords.Count) 'Species record count changed'
+for ($index = 0; $index -lt $currentRecords.Count; $index++) {
+    $currentRecord = $currentRecords[$index]
+    $baseRecord = $baseRecords[$index]
+    $name = $currentRecord.Groups[1].Value
+    Assert-True ($name -ceq $baseRecord.Groups[1].Value) "Species record order changed at index $index"
+    if ($name -in @('SPECIES_GHEPIO','SPECIES_TINUNCOL','SPECIES_PEREGRINUS')) {
+        Assert-True ((Remove-AllowedGraphicsFields $currentRecord.Value) -ceq (Remove-AllowedGraphicsFields $baseRecord.Value)) "$name changed outside allowed graphics fields"
+    } else {
+        Assert-True ($currentRecord.Value -ceq $baseRecord.Value) "Unrelated species record changed: $name"
+    }
 }
 
 $expectedLevelMoves = @{
@@ -150,7 +186,7 @@ foreach ($property in $baseLearnables.PSObject.Properties) {
     $base = @($property.Value)
     Assert-True (($current -join ',') -ceq ($base -join ',')) "Unrelated teachable list changed: $($property.Name)"
 }
-Assert-True (@($learnables.PSObject.Properties).Count -eq @($baseLearnables.PSObject.Properties).Count + 3) 'Unexpected all_learnables key count'
+Assert-True (@($learnables.PSObject.Properties).Count -eq @($baseLearnables.PSObject.Properties).Count) 'Unexpected all_learnables key count'
 
 $eggBlock = Get-Section $eggMoves 'static const u16 sGhepioEggMoveLearnset[]' '};'
 foreach ($move in @('MOVE_FEINT','MOVE_QUICK_GUARD','MOVE_DEFOG','MOVE_SKY_ATTACK','MOVE_UNAVAILABLE')) {
@@ -164,11 +200,13 @@ $placeholders = @{
 }
 foreach ($name in $placeholders.Keys) {
     $placeholder = $placeholders[$name]
+    $symbol = $name.Substring(0,1) + $name.Substring(1).ToLower()
     $record = Get-Section $speciesInfo "[SPECIES_$name] =" "`n    },"
     foreach ($reference in @(
-        ".frontPic = gMonFrontPic_$placeholder", ".backPic = gMonBackPic_$placeholder",
-        ".palette = gMonPalette_$placeholder", ".shinyPalette = gMonShinyPalette_$placeholder",
-        ".iconSprite = gMonIcon_$placeholder", ".cryId = CRY_$($placeholder.ToUpper())",
+        ".frontPic = gMonFrontPic_$symbol", ".backPic = gMonBackPic_$symbol",
+        ".palette = gMonPalette_$symbol", ".shinyPalette = gMonShinyPalette_$symbol",
+        ".iconSprite = gMonIcon_$symbol", '.frontAnimFrames = sAnims_SingleFramePlaceHolder',
+        ".cryId = CRY_$($placeholder.ToUpper())",
         "FOOTPRINT($placeholder)", "sPicTable_$placeholder"
     )) {
         Assert-Contains $record $reference "SPECIES_$name placeholder"
@@ -201,12 +239,8 @@ foreach ($dexNum in 1041, 1042, 1043, 1044) {
 Assert-Contains $saveTests 'EXPECT_EQ(gSaveBlock1Ptr->extendedDexSeen[0], 0x0F);' 'Extended seen flags'
 Assert-Contains $saveTests 'EXPECT_EQ(gSaveBlock1Ptr->extendedDexCaught[0], 0x0F);' 'Extended caught flags'
 
-& git diff --quiet develop -- include/global.h include/pokedex.h src/pokedex.c src/new_game.c src/overworld.c
+& git diff --quiet develop -- include/global.h include/constants/pokedex.h include/pokedex.h src/pokedex.c src/new_game.c src/overworld.c test/save.c
 Assert-True ($LASTEXITCODE -eq 0) 'Save runtime or SaveBlock1 layout changed'
 & git diff --quiet develop -- data/wild_encounters.json data/maps
 Assert-True ($LASTEXITCODE -eq 0) 'Encounter, map, script, or event data changed'
-foreach ($folder in 'ghepio', 'tinuncol', 'peregrinus') {
-    Assert-True (-not (Test-Path "graphics/pokemon/$folder")) "Final graphics were added prematurely: $folder"
-}
-
 Write-Host 'Functional Fauna Batch C validation passed.' -ForegroundColor Green
