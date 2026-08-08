@@ -45,6 +45,27 @@ enum
     PAGE_SIZE
 };
 
+static const u8 sAusoniaDexSaveSignature[AUSONIA_DEX_SAVE_SIGNATURE_SIZE] = {'A', 'L', 'B', AUSONIA_DEX_SAVE_VERSION};
+
+void EnsureAusoniaDexSaveInitialized(void)
+{
+    if (memcmp(gSaveBlock1Ptr->ausoniaDexSaveSignature, sAusoniaDexSaveSignature, sizeof(sAusoniaDexSaveSignature)) != 0)
+    {
+        memset(gSaveBlock1Ptr->extendedDexSeen, 0, sizeof(gSaveBlock1Ptr->extendedDexSeen));
+        memset(gSaveBlock1Ptr->extendedDexCaught, 0, sizeof(gSaveBlock1Ptr->extendedDexCaught));
+        memcpy(gSaveBlock1Ptr->ausoniaDexSaveSignature, sAusoniaDexSaveSignature, sizeof(sAusoniaDexSaveSignature));
+    }
+}
+
+void ClearPokedexSaveFlags(void)
+{
+    memset(gSaveBlock1Ptr->dexSeen, 0, sizeof(gSaveBlock1Ptr->dexSeen));
+    memset(gSaveBlock1Ptr->dexCaught, 0, sizeof(gSaveBlock1Ptr->dexCaught));
+    memset(gSaveBlock1Ptr->extendedDexSeen, 0, sizeof(gSaveBlock1Ptr->extendedDexSeen));
+    memset(gSaveBlock1Ptr->extendedDexCaught, 0, sizeof(gSaveBlock1Ptr->extendedDexCaught));
+    memcpy(gSaveBlock1Ptr->ausoniaDexSaveSignature, sAusoniaDexSaveSignature, sizeof(sAusoniaDexSaveSignature));
+}
+
 enum
 {
     AREA_SCREEN,
@@ -1501,8 +1522,6 @@ static const struct WindowTemplate sSearchMenu_WindowTemplate[] =
 
 void ResetPokedex(void)
 {
-    u16 i;
-
     sLastSelectedPokemon = 0;
     sPokeBallRotation = POKEBALL_ROTATION_TOP;
     gUnusedPokedexU8 = 0;
@@ -1514,11 +1533,7 @@ void ResetPokedex(void)
     gSaveBlock2Ptr->pokedex.spindaPersonality = 0;
     gSaveBlock2Ptr->pokedex.unknown3 = 0;
     DisableNationalPokedex();
-    for (i = 0; i < NUM_DEX_FLAG_BYTES; i++)
-    {
-        gSaveBlock1Ptr->dexCaught[i] = 0;
-        gSaveBlock1Ptr->dexSeen[i] = 0;
-    }
+    ClearPokedexSaveFlags();
 }
 
 void ResetPokedexScrollPositions(void)
@@ -4512,27 +4527,43 @@ static u8* ConvertMeasurementToMetricString(u32 num, u32* index)
 
 s8 GetSetPokedexFlag(enum NationalDexOrder nationalDexNo, u8 caseID)
 {
+    u8 *seenFlags;
+    u8 *caughtFlags;
     u32 index, bit, mask;
     s8 retVal = 0;
 
-    nationalDexNo--;
-    index = nationalDexNo / 8;
-    bit = nationalDexNo % 8;
+    if (nationalDexNo == 0 || nationalDexNo > NATIONAL_DEX_COUNT || nationalDexNo > DEX_SAVE_MAX_NATIONAL)
+        return FALSE;
+
+    if (nationalDexNo <= DEX_SAVE_LEGACY_CAPACITY)
+    {
+        seenFlags = gSaveBlock1Ptr->dexSeen;
+        caughtFlags = gSaveBlock1Ptr->dexCaught;
+        index = (nationalDexNo - 1) / 8;
+        bit = (nationalDexNo - 1) % 8;
+    }
+    else
+    {
+        seenFlags = gSaveBlock1Ptr->extendedDexSeen;
+        caughtFlags = gSaveBlock1Ptr->extendedDexCaught;
+        index = (nationalDexNo - DEX_SAVE_LEGACY_CAPACITY - 1) / 8;
+        bit = (nationalDexNo - DEX_SAVE_LEGACY_CAPACITY - 1) % 8;
+    }
     mask = 1 << bit;
 
     switch (caseID)
     {
     case FLAG_GET_SEEN:
-        retVal = ((gSaveBlock1Ptr->dexSeen[index] & mask) != 0);
+        retVal = ((seenFlags[index] & mask) != 0);
         break;
     case FLAG_GET_CAUGHT:
-         retVal = ((gSaveBlock1Ptr->dexCaught[index] & mask) != 0);
+         retVal = ((caughtFlags[index] & mask) != 0);
         break;
     case FLAG_SET_SEEN:
-        gSaveBlock1Ptr->dexSeen[index] |= mask;
+        seenFlags[index] |= mask;
         break;
     case FLAG_SET_CAUGHT:
-        gSaveBlock1Ptr->dexCaught[index] |= mask;
+        caughtFlags[index] |= mask;
         break;
     }
 

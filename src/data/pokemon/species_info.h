@@ -347,6 +347,52 @@ static const struct LevelUpMove sFelivatesLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+static const struct LevelUpMove sFoliarvaLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_TACKLE),
+    LEVEL_UP_MOVE( 1, MOVE_STRING_SHOT),
+    LEVEL_UP_MOVE( 4, MOVE_ABSORB),
+    LEVEL_UP_MOVE( 6, MOVE_BUG_BITE),
+    LEVEL_UP_MOVE( 8, MOVE_STUN_SPORE),
+    LEVEL_UP_MOVE(10, MOVE_RAZOR_LEAF),
+    LEVEL_UP_MOVE(13, MOVE_STRUGGLE_BUG),
+    LEVEL_UP_MOVE(15, MOVE_MEGA_DRAIN),
+    LEVEL_UP_END
+};
+
+static const struct LevelUpMove sCrisalviaLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_HARDEN),
+    LEVEL_UP_MOVE( 1, MOVE_STRING_SHOT),
+    LEVEL_UP_MOVE( 1, MOVE_ABSORB),
+    LEVEL_UP_MOVE( 6, MOVE_BUG_BITE),
+    LEVEL_UP_MOVE( 8, MOVE_STUN_SPORE),
+    LEVEL_UP_MOVE(10, MOVE_HARDEN),
+    LEVEL_UP_MOVE(12, MOVE_PROTECT),
+    LEVEL_UP_MOVE(15, MOVE_MEGA_DRAIN),
+    LEVEL_UP_MOVE(18, MOVE_STRUGGLE_BUG),
+    LEVEL_UP_END
+};
+
+static const struct LevelUpMove sInfioralaLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_TACKLE),
+    LEVEL_UP_MOVE( 1, MOVE_STRING_SHOT),
+    LEVEL_UP_MOVE( 1, MOVE_ABSORB),
+    LEVEL_UP_MOVE( 6, MOVE_BUG_BITE),
+    LEVEL_UP_MOVE( 8, MOVE_STUN_SPORE),
+    LEVEL_UP_MOVE(10, MOVE_RAZOR_LEAF),
+    LEVEL_UP_MOVE(13, MOVE_STRUGGLE_BUG),
+    LEVEL_UP_MOVE(15, MOVE_MEGA_DRAIN),
+    LEVEL_UP_MOVE(18, MOVE_GUST),
+    LEVEL_UP_MOVE(20, MOVE_SLEEP_POWDER),
+    LEVEL_UP_MOVE(23, MOVE_AIR_CUTTER),
+    LEVEL_UP_MOVE(26, MOVE_POLLEN_PUFF),
+    LEVEL_UP_MOVE(30, MOVE_GIGA_DRAIN),
+    LEVEL_UP_MOVE(34, MOVE_BUG_BUZZ),
+    LEVEL_UP_MOVE(38, MOVE_QUIVER_DANCE),
+    LEVEL_UP_MOVE(42, MOVE_ENERGY_BALL),
+    LEVEL_UP_MOVE(46, MOVE_AROMATHERAPY),
+    LEVEL_UP_END
+};
+
 const struct SpeciesInfo gSpeciesInfo[] =
 {
     [SPECIES_NONE] =
@@ -1291,6 +1337,228 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .levelUpLearnset = sFelivatesLevelUpLearnset,
         .teachingType = EXPLICIT_TEACHABLES,
         .teachableLearnset = sFelivatesTeachableLearnset,
+    },
+
+    [SPECIES_FOLIARVA] =
+    {
+        .baseHP        = 45,
+        .baseAttack    = 35,
+        .baseDefense   = 40,
+        .baseSpeed     = 45,
+        .baseSpAttack  = 35,
+        .baseSpDefense = 40,
+        .types = MON_TYPES(TYPE_BUG),
+        .catchRate = 255,
+        .expYield = 54,
+        .evYield_HP = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 15,
+        .friendship = 70,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
+        .abilities = { ABILITY_SHIELD_DUST, ABILITY_SWARM, ABILITY_CHLOROPHYLL },
+        .bodyColor = BODY_COLOR_GREEN,
+        .speciesName = _("Foliarva"),
+        .cryId = CRY_CATERPIE,
+        .natDexNum = NATIONAL_DEX_FOLIARVA,
+        .categoryName = _("LARVAFOGLIA"),
+        .height = 3,
+        .weight = 24,
+        .description = COMPOUND_STRING(
+            "Si nutre delle foglie più tenere senza\n"
+            "danneggiarne le nervature. Le antenne\n"
+            "arancioni cambiano tono quando trova\n"
+            "una pianta sana."),
+        .pokemonScale = 549,
+        .pokemonOffset = 22,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Caterpie,
+        .frontPicSize = P_GBA_STYLE_SPECIES_GFX ? MON_COORDS_SIZE(32, 40) : MON_COORDS_SIZE(40, 40),
+        .frontPicYOffset = P_GBA_STYLE_SPECIES_GFX ? 16 : 12,
+        .frontAnimFrames = ANIM_FRAMES(
+            ANIMCMD_FRAME(1, 15),
+            ANIMCMD_FRAME(0, 15),
+            ANIMCMD_FRAME(1, 15),
+            ANIMCMD_FRAME(0, 15),
+            ANIMCMD_FRAME(1, 15),
+            ANIMCMD_FRAME(0, 15),
+            ANIMCMD_FRAME(1, 15),
+            ANIMCMD_FRAME(0, 5),
+        ),
+        .frontAnimId = ANIM_SWING_CONCAVE,
+        .backPic = gMonBackPic_Caterpie,
+        .backPicSize = P_GBA_STYLE_SPECIES_GFX ? MON_COORDS_SIZE(40, 40) : MON_COORDS_SIZE(48, 40),
+        .backPicYOffset = P_GBA_STYLE_SPECIES_GFX ? 15 : 12,
+        .backAnimId = BACK_ANIM_H_SLIDE,
+        .palette = gMonPalette_Caterpie,
+        .shinyPalette = gMonShinyPalette_Caterpie,
+        .iconSprite = gMonIcon_Caterpie,
+        .iconPalIndex = 1,
+        .pokemonJumpType = PKMN_JUMP_TYPE_FAST,
+        SHADOW(4, 1, SHADOW_SIZE_S)
+        FOOTPRINT(Caterpie)
+        OVERWORLD(
+            sPicTable_Caterpie,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_SPOT,
+            sAnimTable_Following,
+            gOverworldPalette_Caterpie,
+            gShinyOverworldPalette_Caterpie
+        )
+        .levelUpLearnset = sFoliarvaLevelUpLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sFoliarvaTeachableLearnset,
+        .eggMoveLearnset = sFoliarvaEggMoveLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 10, SPECIES_CRISALVIA}),
+    },
+
+    [SPECIES_CRISALVIA] =
+    {
+        .baseHP        = 55,
+        .baseAttack    = 30,
+        .baseDefense   = 75,
+        .baseSpeed     = 25,
+        .baseSpAttack  = 40,
+        .baseSpDefense = 65,
+        .types = MON_TYPES(TYPE_BUG, TYPE_GRASS),
+        .catchRate = 120,
+        .expYield = 108,
+        .evYield_Defense = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 15,
+        .friendship = 70,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
+        .abilities = { ABILITY_SHED_SKIN, ABILITY_LEAF_GUARD, ABILITY_OVERCOAT },
+        .bodyColor = BODY_COLOR_GREEN,
+        .speciesName = _("Crisalvia"),
+        .cryId = CRY_METAPOD,
+        .natDexNum = NATIONAL_DEX_CRISALVIA,
+        .categoryName = _("CRISALIDE"),
+        .height = 5,
+        .weight = 68,
+        .description = COMPOUND_STRING(
+            "Avvolge il corpo in strati di fibra\n"
+            "vegetale e resta immobile per giorni.\n"
+            "La luce filtrata dalle foglie ne\n"
+            "accelera la metamorfosi."),
+        .pokemonScale = 350,
+        .pokemonOffset = 18,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Metapod,
+        .frontPicSize = P_GBA_STYLE_SPECIES_GFX ? MON_COORDS_SIZE(40, 32) : MON_COORDS_SIZE(40, 40),
+        .frontPicYOffset = P_GBA_STYLE_SPECIES_GFX ? 20 : 14,
+        .frontAnimFrames = ANIM_FRAMES(
+            ANIMCMD_FRAME(1, 45),
+            ANIMCMD_FRAME(0, 5),
+        ),
+        .frontAnimId = ANIM_SWING_CONCAVE,
+        .backPic = gMonBackPic_Metapod,
+        .backPicSize = P_GBA_STYLE_SPECIES_GFX ? MON_COORDS_SIZE(48, 40) : MON_COORDS_SIZE(40, 48),
+        .backPicYOffset = P_GBA_STYLE_SPECIES_GFX ? 12 : 8,
+        .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
+        .palette = gMonPalette_Metapod,
+        .shinyPalette = gMonShinyPalette_Metapod,
+        .iconSprite = gMonIcon_Metapod,
+        .iconPalIndex = 1,
+        .pokemonJumpType = PKMN_JUMP_TYPE_FAST,
+        SHADOW(3, 0, SHADOW_SIZE_S)
+        FOOTPRINT(Metapod)
+        OVERWORLD(
+            sPicTable_Metapod,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_SPOT,
+            sAnimTable_Following,
+            gOverworldPalette_Metapod,
+            gShinyOverworldPalette_Metapod
+        )
+        .levelUpLearnset = sCrisalviaLevelUpLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sCrisalviaTeachableLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 18, SPECIES_INFIORALA}),
+    },
+
+    [SPECIES_INFIORALA] =
+    {
+        .baseHP        = 70,
+        .baseAttack    = 45,
+        .baseDefense   = 65,
+        .baseSpeed     = 90,
+        .baseSpAttack  = 100,
+        .baseSpDefense = 80,
+        .types = MON_TYPES(TYPE_BUG, TYPE_GRASS),
+        .catchRate = 75,
+        .expYield = 178,
+        .evYield_SpAttack = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 15,
+        .friendship = 70,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
+        .abilities = { ABILITY_COMPOUND_EYES, ABILITY_CHLOROPHYLL, ABILITY_TINTED_LENS },
+        .bodyColor = BODY_COLOR_GREEN,
+        .speciesName = _("Infiorala"),
+        .cryId = CRY_BUTTERFREE,
+        .natDexNum = NATIONAL_DEX_INFIORALA,
+        .categoryName = _("FLOREALE"),
+        .height = 9,
+        .weight = 142,
+        .description = COMPOUND_STRING(
+            "Trasporta il polline tra i fiori delle\n"
+            "radure con il battito delle ali. Dove\n"
+            "passa, la vegetazione rifiorisce più\n"
+            "rapidamente."),
+        .pokemonScale = 312,
+        .pokemonOffset = 2,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Butterfree,
+        .frontPicSize = P_GBA_STYLE_SPECIES_GFX ? MON_COORDS_SIZE(56, 48) : MON_COORDS_SIZE(64, 56),
+        .frontPicYOffset = P_GBA_STYLE_SPECIES_GFX ? 9 : 10,
+        .frontAnimFrames = ANIM_FRAMES(
+            ANIMCMD_FRAME(0, 5),
+            ANIMCMD_FRAME(1, 5),
+            ANIMCMD_FRAME(0, 5),
+            ANIMCMD_FRAME(1, 5),
+            ANIMCMD_FRAME(0, 5),
+            ANIMCMD_FRAME(1, 5),
+            ANIMCMD_FRAME(0, 25),
+            ANIMCMD_FRAME(1, 5),
+            ANIMCMD_FRAME(0, 5),
+            ANIMCMD_FRAME(1, 5),
+            ANIMCMD_FRAME(0, 5),
+            ANIMCMD_FRAME(1, 5),
+            ANIMCMD_FRAME(0, 5),
+        ),
+        .frontAnimId = P_GBA_STYLE_SPECIES_GFX ? ANIM_H_SLIDE_WOBBLE : ANIM_V_SLIDE_WOBBLE,
+        .enemyMonElevation = P_GBA_STYLE_SPECIES_GFX ? 8 : 12,
+        .backPic = gMonBackPic_Butterfree,
+        .backPicSize = MON_COORDS_SIZE(64, 56),
+        .backPicYOffset = P_GBA_STYLE_SPECIES_GFX ? 6 : 5,
+        .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
+        .palette = gMonPalette_Butterfree,
+        .shinyPalette = gMonShinyPalette_Butterfree,
+        .iconSprite = gMonIcon_Butterfree,
+        .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        SHADOW(-3, 13, SHADOW_SIZE_S)
+        FOOTPRINT(Butterfree)
+        OVERWORLD(
+            sPicTable_Butterfree,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            sAnimTable_Following,
+            gOverworldPalette_Butterfree,
+            gShinyOverworldPalette_Butterfree
+        )
+        .levelUpLearnset = sInfioralaLevelUpLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sInfioralaTeachableLearnset,
     },
 
     /* You may add any custom species below this point based on the following structure: */

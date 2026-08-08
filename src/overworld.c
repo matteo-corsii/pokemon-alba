@@ -50,6 +50,7 @@
 #include "oras_dowse.h"
 #include "palette.h"
 #include "play_time.h"
+#include "pokedex.h"
 #include "random.h"
 #include "roamer.h"
 #include "rotating_gate.h"
@@ -2117,6 +2118,9 @@ void CB2_ContinueSavedGame(void)
     ResetSafariZoneFlag_();
     if (gSaveFileStatus == SAVE_STATUS_ERROR)
         ResetWinStreaks();
+
+    // The save has already passed sector validation and checksum checks here.
+    EnsureAusoniaDexSaveInitialized();
 
     LoadSaveblockMapHeader();
     ClearDiveAndHoleWarps();

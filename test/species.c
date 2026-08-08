@@ -3,6 +3,7 @@
 #include "string_util.h"
 #include "test/test.h"
 #include "constants/form_change_types.h"
+#include "constants/teaching_types.h"
 
 TEST("Form species ID tables are shared between all forms")
 {
@@ -258,7 +259,10 @@ TEST("Ausonia starter IDs are append-only and distinct")
     EXPECT_EQ(SPECIES_PASTUFO, SPECIES_BORGOTTO + 1);
     EXPECT_EQ(SPECIES_MICIOLO, SPECIES_PASTUFO + 1);
     EXPECT_EQ(SPECIES_FELIVATES, SPECIES_MICIOLO + 1);
-    EXPECT_EQ(SPECIES_EGG, SPECIES_FELIVATES + 1);
+    EXPECT_EQ(SPECIES_FOLIARVA, SPECIES_FELIVATES + 1);
+    EXPECT_EQ(SPECIES_CRISALVIA, SPECIES_FOLIARVA + 1);
+    EXPECT_EQ(SPECIES_INFIORALA, SPECIES_CRISALVIA + 1);
+    EXPECT_EQ(SPECIES_EGG, SPECIES_INFIORALA + 1);
     EXPECT_EQ(NUM_SPECIES, SPECIES_EGG);
 
     EXPECT_EQ(NATIONAL_DEX_PECHARUNT, 1025);
@@ -275,7 +279,10 @@ TEST("Ausonia starter IDs are append-only and distinct")
     EXPECT_EQ(NATIONAL_DEX_PASTUFO, NATIONAL_DEX_BORGOTTO + 1);
     EXPECT_EQ(NATIONAL_DEX_MICIOLO, NATIONAL_DEX_PASTUFO + 1);
     EXPECT_EQ(NATIONAL_DEX_FELIVATES, NATIONAL_DEX_MICIOLO + 1);
-    EXPECT_EQ(NATIONAL_DEX_COUNT, NATIONAL_DEX_FELIVATES);
+    EXPECT_EQ(NATIONAL_DEX_FOLIARVA, NATIONAL_DEX_FELIVATES + 1);
+    EXPECT_EQ(NATIONAL_DEX_CRISALVIA, NATIONAL_DEX_FOLIARVA + 1);
+    EXPECT_EQ(NATIONAL_DEX_INFIORALA, NATIONAL_DEX_CRISALVIA + 1);
+    EXPECT_EQ(NATIONAL_DEX_COUNT, NATIONAL_DEX_INFIORALA);
 
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_CINGERM), COMPOUND_STRING("Cingerm")), 0);
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_ROVASCO), COMPOUND_STRING("Rovasco")), 0);
@@ -290,6 +297,9 @@ TEST("Ausonia starter IDs are append-only and distinct")
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_PASTUFO), COMPOUND_STRING("Pastufo")), 0);
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_MICIOLO), COMPOUND_STRING("Miciolo")), 0);
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_FELIVATES), COMPOUND_STRING("Felivates")), 0);
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_FOLIARVA), COMPOUND_STRING("Foliarva")), 0);
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_CRISALVIA), COMPOUND_STRING("Crisalvia")), 0);
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_INFIORALA), COMPOUND_STRING("Infiorala")), 0);
 }
 
 TEST("Ausonia Grass starter base data matches the approved prototype")
@@ -1189,6 +1199,195 @@ TEST("Ausonia common fauna uses original battle graphics and provisional auxilia
         EXPECT_EQ((u32)info->frontPicYOffset, (u32)picOffsets[i]);
         EXPECT_EQ((u32)info->backPicYOffset, (u32)picOffsets[i]);
         EXPECT_EQ((u32)info->iconPalIndex, (u32)iconPalIndices[i]);
+#if P_FOOTPRINTS
+        EXPECT(info->footprint == placeholder->footprint);
+#endif
+#if OW_POKEMON_OBJECT_EVENTS
+        EXPECT(info->overworldData.images == placeholder->overworldData.images);
+#endif
+    }
+}
+
+TEST("Ausonia early Bug fauna base data matches the canonical batch")
+{
+    static const enum Species species[] = { SPECIES_FOLIARVA, SPECIES_CRISALVIA, SPECIES_INFIORALA };
+    static const u8 stats[][NUM_STATS] = {
+        { 45, 35, 40, 45, 35, 40 },
+        { 55, 30, 75, 25, 40, 65 },
+        { 70, 45, 65, 90, 100, 80 },
+    };
+    static const u16 statTotals[] = { 240, 290, 450 };
+    static const u8 catchRates[] = { 255, 120, 75 };
+    static const u16 expYields[] = { 54, 108, 178 };
+    static const u16 heights[] = { 3, 5, 9 };
+    static const u16 weights[] = { 24, 68, 142 };
+    const u8 foliarvaHpYield = gSpeciesInfo[SPECIES_FOLIARVA].evYield_HP;
+    const u8 crisalviaDefenseYield = gSpeciesInfo[SPECIES_CRISALVIA].evYield_Defense;
+    const u8 infioralaSpAttackYield = gSpeciesInfo[SPECIES_INFIORALA].evYield_SpAttack;
+
+    for (u32 i = 0; i < ARRAY_COUNT(species); i++)
+    {
+        const struct SpeciesInfo *info = &gSpeciesInfo[species[i]];
+
+        EXPECT_EQ(info->baseHP, stats[i][STAT_HP]);
+        EXPECT_EQ(info->baseAttack, stats[i][STAT_ATK]);
+        EXPECT_EQ(info->baseDefense, stats[i][STAT_DEF]);
+        EXPECT_EQ(info->baseSpeed, stats[i][STAT_SPEED]);
+        EXPECT_EQ(info->baseSpAttack, stats[i][STAT_SPATK]);
+        EXPECT_EQ(info->baseSpDefense, stats[i][STAT_SPDEF]);
+        EXPECT_EQ(GetBaseStatTotalForTest(species[i]), statTotals[i]);
+        EXPECT_EQ(info->catchRate, catchRates[i]);
+        EXPECT_EQ(info->expYield, expYields[i]);
+        EXPECT_EQ(info->height, heights[i]);
+        EXPECT_EQ(info->weight, weights[i]);
+        EXPECT_EQ(info->genderRatio, (50 * 255) / 100);
+        EXPECT_EQ(info->eggCycles, 15);
+        EXPECT_EQ(info->friendship, 70);
+        EXPECT_EQ(info->growthRate, GROWTH_MEDIUM_FAST);
+        EXPECT_EQ(info->eggGroups[0], EGG_GROUP_BUG);
+        EXPECT_EQ(info->eggGroups[1], EGG_GROUP_BUG);
+        EXPECT_EQ((u32)info->bodyColor, BODY_COLOR_GREEN);
+        EXPECT_NE(StringCompare(info->description, gFallbackPokedexText), 0);
+        EXPECT_EQ((u32)info->teachingType, EXPLICIT_TEACHABLES);
+    }
+
+    EXPECT_EQ(gSpeciesInfo[SPECIES_FOLIARVA].types[0], TYPE_BUG);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_FOLIARVA].types[1], TYPE_BUG);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_CRISALVIA].types[0], TYPE_BUG);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_CRISALVIA].types[1], TYPE_GRASS);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_INFIORALA].types[0], TYPE_BUG);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_INFIORALA].types[1], TYPE_GRASS);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_FOLIARVA].abilities[0], ABILITY_SHIELD_DUST);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_FOLIARVA].abilities[1], ABILITY_SWARM);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_FOLIARVA].abilities[2], ABILITY_CHLOROPHYLL);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_CRISALVIA].abilities[0], ABILITY_SHED_SKIN);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_CRISALVIA].abilities[1], ABILITY_LEAF_GUARD);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_CRISALVIA].abilities[2], ABILITY_OVERCOAT);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_INFIORALA].abilities[0], ABILITY_COMPOUND_EYES);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_INFIORALA].abilities[1], ABILITY_CHLOROPHYLL);
+    EXPECT_EQ(gSpeciesInfo[SPECIES_INFIORALA].abilities[2], ABILITY_TINTED_LENS);
+    EXPECT_EQ(foliarvaHpYield, 1);
+    EXPECT_EQ(crisalviaDefenseYield, 2);
+    EXPECT_EQ(infioralaSpAttackYield, 2);
+    EXPECT_EQ(StringCompare(gSpeciesInfo[SPECIES_FOLIARVA].categoryName, COMPOUND_STRING("LARVAFOGLIA")), 0);
+    EXPECT_EQ(StringCompare(gSpeciesInfo[SPECIES_CRISALVIA].categoryName, COMPOUND_STRING("CRISALIDE")), 0);
+    EXPECT_EQ(StringCompare(gSpeciesInfo[SPECIES_INFIORALA].categoryName, COMPOUND_STRING("FLOREALE")), 0);
+}
+
+TEST("Ausonia early Bug fauna evolutions use the canonical levels")
+{
+    const struct Evolution *foliarvaEvolutions = GetSpeciesEvolutions(SPECIES_FOLIARVA);
+    const struct Evolution *crisalviaEvolutions = GetSpeciesEvolutions(SPECIES_CRISALVIA);
+
+    EXPECT_EQ(foliarvaEvolutions[0].method, EVO_LEVEL);
+    EXPECT_EQ(foliarvaEvolutions[0].param, 10);
+    EXPECT_EQ(foliarvaEvolutions[0].targetSpecies, SPECIES_CRISALVIA);
+    EXPECT_EQ(foliarvaEvolutions[1].method, EVOLUTIONS_END);
+    EXPECT_EQ(crisalviaEvolutions[0].method, EVO_LEVEL);
+    EXPECT_EQ(crisalviaEvolutions[0].param, 18);
+    EXPECT_EQ(crisalviaEvolutions[0].targetSpecies, SPECIES_INFIORALA);
+    EXPECT_EQ(crisalviaEvolutions[1].method, EVOLUTIONS_END);
+    EXPECT(GetSpeciesEvolutions(SPECIES_INFIORALA) == NULL);
+}
+
+TEST("Ausonia early Bug fauna level-up learnsets are canonical and ordered")
+{
+    static const u8 foliarvaLevels[] = { 1, 1, 4, 6, 8, 10, 13, 15 };
+    static const u16 foliarvaMoves[] = {
+        MOVE_TACKLE, MOVE_STRING_SHOT, MOVE_ABSORB, MOVE_BUG_BITE,
+        MOVE_STUN_SPORE, MOVE_RAZOR_LEAF, MOVE_STRUGGLE_BUG, MOVE_MEGA_DRAIN,
+    };
+    static const u8 crisalviaLevels[] = { 1, 1, 1, 6, 8, 10, 12, 15, 18 };
+    static const u16 crisalviaMoves[] = {
+        MOVE_HARDEN, MOVE_STRING_SHOT, MOVE_ABSORB, MOVE_BUG_BITE,
+        MOVE_STUN_SPORE, MOVE_HARDEN, MOVE_PROTECT, MOVE_MEGA_DRAIN,
+        MOVE_STRUGGLE_BUG,
+    };
+    static const u8 infioralaLevels[] = { 1, 1, 1, 6, 8, 10, 13, 15, 18, 20, 23, 26, 30, 34, 38, 42, 46 };
+    static const u16 infioralaMoves[] = {
+        MOVE_TACKLE, MOVE_STRING_SHOT, MOVE_ABSORB, MOVE_BUG_BITE,
+        MOVE_STUN_SPORE, MOVE_RAZOR_LEAF, MOVE_STRUGGLE_BUG, MOVE_MEGA_DRAIN,
+        MOVE_GUST, MOVE_SLEEP_POWDER, MOVE_AIR_CUTTER, MOVE_POLLEN_PUFF,
+        MOVE_GIGA_DRAIN, MOVE_BUG_BUZZ, MOVE_QUIVER_DANCE, MOVE_ENERGY_BALL,
+        MOVE_AROMATHERAPY,
+    };
+    const struct LevelUpMove *learnsets[] = {
+        GetSpeciesLevelUpLearnset(SPECIES_FOLIARVA),
+        GetSpeciesLevelUpLearnset(SPECIES_CRISALVIA),
+        GetSpeciesLevelUpLearnset(SPECIES_INFIORALA),
+    };
+    const u8 *levels[] = { foliarvaLevels, crisalviaLevels, infioralaLevels };
+    const u16 *moves[] = { foliarvaMoves, crisalviaMoves, infioralaMoves };
+    const u32 counts[] = {
+        ARRAY_COUNT(foliarvaMoves), ARRAY_COUNT(crisalviaMoves), ARRAY_COUNT(infioralaMoves),
+    };
+
+    for (u32 i = 0; i < ARRAY_COUNT(learnsets); i++)
+    {
+        for (u32 j = 0; j < counts[i]; j++)
+        {
+            EXPECT_EQ(learnsets[i][j].level, levels[i][j]);
+            EXPECT_EQ(learnsets[i][j].move, moves[i][j]);
+            if (j > 0)
+                EXPECT_GE(learnsets[i][j].level, learnsets[i][j - 1].level);
+        }
+        EXPECT_EQ(learnsets[i][counts[i]].move, LEVEL_UP_MOVE_END);
+    }
+}
+
+TEST("Ausonia early Bug fauna teachables Egg Moves and placeholders are complete")
+{
+    static const enum Species species[] = { SPECIES_FOLIARVA, SPECIES_CRISALVIA, SPECIES_INFIORALA };
+    static const enum Species placeholders[] = { SPECIES_CATERPIE, SPECIES_METAPOD, SPECIES_BUTTERFREE };
+    static const u16 foliarvaTeachables[] = {
+        MOVE_PROTECT, MOVE_REST, MOVE_SLEEP_TALK, MOVE_SUBSTITUTE,
+        MOVE_SUNNY_DAY, MOVE_STRUGGLE_BUG, MOVE_GIGA_DRAIN, MOVE_ENERGY_BALL,
+    };
+    static const u16 crisalviaExtraTeachables[] = { MOVE_SOLAR_BEAM, MOVE_GRASS_KNOT };
+    static const u16 infioralaExtraTeachables[] = {
+        MOVE_U_TURN, MOVE_ACROBATICS, MOVE_AIR_SLASH, MOVE_POLLEN_PUFF,
+    };
+    static const u16 eggMoves[] = {
+        MOVE_RAGE_POWDER, MOVE_WORRY_SEED, MOVE_BATON_PASS, MOVE_GRASSY_TERRAIN,
+    };
+    const u16 *foliarva = gSpeciesInfo[SPECIES_FOLIARVA].teachableLearnset;
+    const u16 *crisalvia = gSpeciesInfo[SPECIES_CRISALVIA].teachableLearnset;
+    const u16 *infiorala = gSpeciesInfo[SPECIES_INFIORALA].teachableLearnset;
+
+    for (u32 i = 0; i < ARRAY_COUNT(foliarvaTeachables); i++)
+    {
+        EXPECT(MoveListContains(foliarva, foliarvaTeachables[i]));
+        EXPECT(MoveListContains(crisalvia, foliarvaTeachables[i]));
+        EXPECT(MoveListContains(infiorala, foliarvaTeachables[i]));
+    }
+    for (u32 i = 0; i < ARRAY_COUNT(crisalviaExtraTeachables); i++)
+    {
+        EXPECT(MoveListContains(crisalvia, crisalviaExtraTeachables[i]));
+        EXPECT(MoveListContains(infiorala, crisalviaExtraTeachables[i]));
+    }
+    for (u32 i = 0; i < ARRAY_COUNT(infioralaExtraTeachables); i++)
+        EXPECT(MoveListContains(infiorala, infioralaExtraTeachables[i]));
+    for (u32 i = 0; i < ARRAY_COUNT(eggMoves); i++)
+        EXPECT(MoveListContains(gSpeciesInfo[SPECIES_FOLIARVA].eggMoveLearnset, eggMoves[i]));
+
+    EXPECT_EQ(MoveListCount(foliarva), ARRAY_COUNT(foliarvaTeachables));
+    EXPECT_EQ(MoveListCount(crisalvia), 10);
+    EXPECT_EQ(MoveListCount(infiorala), 14);
+    EXPECT_EQ(MoveListCount(gSpeciesInfo[SPECIES_FOLIARVA].eggMoveLearnset), ARRAY_COUNT(eggMoves));
+
+    for (u32 i = 0; i < ARRAY_COUNT(species); i++)
+    {
+        const struct SpeciesInfo *info = &gSpeciesInfo[species[i]];
+        const struct SpeciesInfo *placeholder = &gSpeciesInfo[placeholders[i]];
+
+        EXPECT(info->frontPic == placeholder->frontPic);
+        EXPECT(info->backPic == placeholder->backPic);
+        EXPECT(info->palette == placeholder->palette);
+        EXPECT(info->shinyPalette == placeholder->shinyPalette);
+        EXPECT(info->iconSprite == placeholder->iconSprite);
+        EXPECT(info->frontAnimFrames != NULL);
+        EXPECT_EQ((u32)info->cryId, (u32)placeholder->cryId);
+        EXPECT_EQ((u32)info->iconPalIndex, (u32)placeholder->iconPalIndex);
 #if P_FOOTPRINTS
         EXPECT(info->footprint == placeholder->footprint);
 #endif

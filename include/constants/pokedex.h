@@ -1053,12 +1053,15 @@ enum NationalDexOrder
     NATIONAL_DEX_PASTUFO,
     NATIONAL_DEX_MICIOLO,
     NATIONAL_DEX_FELIVATES,
+    NATIONAL_DEX_FOLIARVA,
+    NATIONAL_DEX_CRISALVIA,
+    NATIONAL_DEX_INFIORALA,
 };
 
 #define JOHTO_DEX_COUNT     NATIONAL_DEX_CELEBI
 
 #if P_GEN_9_POKEMON == TRUE
-    #define NATIONAL_DEX_COUNT  NATIONAL_DEX_FELIVATES
+    #define NATIONAL_DEX_COUNT  NATIONAL_DEX_INFIORALA
 #elif P_GEN_9_CROSS_EVOS == TRUE
     #define NATIONAL_DEX_COUNT  NATIONAL_DEX_HYDRAPPLE
 #elif P_PALDEAN_FORMS == TRUE
@@ -1094,6 +1097,16 @@ enum NationalDexOrder
 #endif
 
 #define POKEMON_SLOTS_NUMBER (NATIONAL_DEX_COUNT + 1)
+
+// Persistent Pokédex flag storage. Keep these independent from the logical
+// National Dex count to preserve the save layout as new species are added.
+#define DEX_SAVE_LEGACY_CAPACITY       1040
+#define DEX_SAVE_LEGACY_FLAG_BYTES     130
+#define DEX_SAVE_EXTENSION_BYTES       24
+#define DEX_SAVE_EXTENSION_CAPACITY    192
+#define DEX_SAVE_MAX_NATIONAL          1232
+#define AUSONIA_DEX_SAVE_SIGNATURE_SIZE 4
+#define AUSONIA_DEX_SAVE_VERSION       1
 
 #if P_NEW_EVOS_IN_REGIONAL_DEX
 #define HOENN_DEX_IF(config, ...) CAT(HOENN_DEX_IF_, config)(__VA_ARGS__)

@@ -113,6 +113,7 @@ __attribute__((section(".text.header_gf"))) USED static const struct GFRomHeader
     .flagsOffset = offsetof(struct SaveBlock1, flags),
     .varsOffset = offsetof(struct SaveBlock1, vars),
     .pokedexOffset = offsetof(struct SaveBlock2, pokedex),
+    // The Ausonia extension is noncontiguous, so external tools only see the legacy range here.
     .seen1Offset = offsetof(struct SaveBlock1, dexSeen),
     .seen2Offset = offsetof(struct SaveBlock1, dexSeen), // dex flags are combined, just provide the same pointer
     .pokedexVar = VAR_NATIONAL_DEX - VARS_START,
