@@ -6,10 +6,29 @@ Route101_MapScripts::
 Route101_OnTransition:
 	call ProfBirch_EventScript_UpdateLocation
 	call_if_eq VAR_ALBERA_OPENING_STATE, 5, Route101_EventScript_SetAlberaCheckpoint
+	call_if_eq VAR_ALBERA_VIA_VERDI_STATE, 2, Route101_EventScript_SetLiaAtPokemonBehavior
+	call_if_eq VAR_ALBERA_VIA_VERDI_STATE, 3, Route101_EventScript_SetLiaAtAncientCanal
+	call_if_ge VAR_ALBERA_VIA_VERDI_STATE, 4, Route101_EventScript_EndViaVerdiInvestigation
 	end
 
 Route101_EventScript_SetAlberaCheckpoint::
 	setvar VAR_ALBERA_OPENING_STATE, 6
+	return
+
+Route101_EventScript_SetLiaAtPokemonBehavior::
+	setobjectxyperm LOCALID_ROUTE101_LIA, 21, 9
+	removeobject LOCALID_ROUTE101_NICO
+	return
+
+Route101_EventScript_SetLiaAtAncientCanal::
+	setobjectxyperm LOCALID_ROUTE101_LIA, 10, 3
+	removeobject LOCALID_ROUTE101_NICO
+	return
+
+Route101_EventScript_EndViaVerdiInvestigation::
+	setflag FLAG_HIDE_ROUTE101_RESEARCH_PARTY
+	removeobject LOCALID_ROUTE101_LIA
+	removeobject LOCALID_ROUTE101_NICO
 	return
 
 Route101_OnFrame:
@@ -216,6 +235,57 @@ Route101_EventScript_Boy::
 	msgbox Route101_Text_WildPokemonInTallGrass, MSGBOX_NPC
 	end
 
+Route101_EventScript_Lia::
+	msgbox Route101_Text_LiaResearchReminder, MSGBOX_NPC
+	end
+
+Route101_EventScript_Nico::
+	msgbox Route101_Text_NicoResearchReminder, MSGBOX_NPC
+	end
+
+Route101_EventScript_InvestigateSource::
+	lockall
+	applymovement LOCALID_ROUTE101_LIA, Common_Movement_FaceRight
+	applymovement LOCALID_ROUTE101_NICO, Common_Movement_FaceRight
+	waitmovement 0
+	msgbox Route101_Text_LiaAlmostDrySource, MSGBOX_DEFAULT
+	msgbox Route101_Text_NicoAtSource, MSGBOX_DEFAULT
+	setvar VAR_ALBERA_VIA_VERDI_STATE, 2
+	setobjectxyperm LOCALID_ROUTE101_LIA, 21, 9
+	removeobject LOCALID_ROUTE101_NICO
+	releaseall
+	end
+
+Route101_EventScript_InvestigatePokemonBehavior::
+	lockall
+	applymovement LOCALID_ROUTE101_LIA, Common_Movement_FaceDown
+	waitmovement 0
+	msgbox Route101_Text_LiaPokemonBehavior, MSGBOX_DEFAULT
+	setvar VAR_ALBERA_VIA_VERDI_STATE, 3
+	setobjectxyperm LOCALID_ROUTE101_LIA, 10, 3
+	releaseall
+	end
+
+Route101_EventScript_InvestigateAncientCanal::
+	lockall
+	applymovement LOCALID_ROUTE101_LIA, Common_Movement_FaceDown
+	waitmovement 0
+	msgbox Route101_Text_LiaAncientCanal, MSGBOX_DEFAULT
+	playse SE_M_UPROAR
+	setvar VAR_0x8006, 4
+	setvar VAR_0x8007, 2
+	special ShakeScreen
+	delay 16
+	msgbox Route101_Text_WaterFlowStops, MSGBOX_DEFAULT
+	delay 12
+	playse SE_M_WATERFALL
+	msgbox Route101_Text_WaterFlowReturns, MSGBOX_DEFAULT
+	setvar VAR_ALBERA_VIA_VERDI_STATE, 4
+	setflag FLAG_HIDE_ROUTE101_RESEARCH_PARTY
+	removeobject LOCALID_ROUTE101_LIA
+	releaseall
+	end
+
 Route101_EventScript_RouteSign::
 	msgbox Route101_Text_RouteSign, MSGBOX_SIGN
 	end
@@ -297,5 +367,46 @@ Route101_Text_WildPokemonInTallGrass:
 	.string "nell'erba alta e cercarli.$"
 
 Route101_Text_RouteSign:
-	.string "PERCORSO 101\n"
-	.string "{UP_ARROW} OLDALE$"
+	.string "VIA VERDI\n"
+	.string "{UP_ARROW} PORTA PRETORIA$"
+
+Route101_Text_LiaResearchReminder:
+	.string "LIA: Seguiamo il percorso e annotiamo\n"
+	.string "solo cio' che osserviamo.$"
+
+Route101_Text_NicoResearchReminder:
+	.string "NICO: Va bene, niente sfide.\n"
+	.string "Tengo gli occhi aperti.$"
+
+Route101_Text_LiaAlmostDrySource:
+	.string "LIA: Il canale e' quasi asciutto,\n"
+	.string "ma il terreno e' ancora umido.\p"
+	.string "Non sembra una semplice\n"
+	.string "mancanza d'acqua in superficie.$"
+
+Route101_Text_NicoAtSource:
+	.string "NICO: Niente sfida, eh?\n"
+	.string "Va bene: guardiamo cosa succede.$"
+
+Route101_Text_LiaPokemonBehavior:
+	.string "LIA: Qui i POKéMON passano oltre\n"
+	.string "o evitano il tratto.\p"
+	.string "E' un'osservazione, non una\n"
+	.string "spiegazione. Segniamola.$"
+
+Route101_Text_LiaAncientCanal:
+	.string "LIA: Queste pietre seguono una linea.\n"
+	.string "Sembrano parte di una vecchia\n"
+	.string "canalizzazione.\p"
+	.string "E' diretta verso\n"
+	.string "PORTA PRETORIA.$"
+
+Route101_Text_WaterFlowStops:
+	.string "Un suono profondo attraversa\n"
+	.string "il canale.\p"
+	.string "Per un attimo, il filo d'acqua\n"
+	.string "si ferma.$"
+
+Route101_Text_WaterFlowReturns:
+	.string "Poi l'acqua riprende\n"
+	.string "a scorrere.$"
