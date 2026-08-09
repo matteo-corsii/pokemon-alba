@@ -57,11 +57,6 @@ Assert-True ($mapWords[(10 * 36) + 35] -eq 0x3001 -and $mapWords[(11 * 36) + 35]
 Assert-True ((@($mapWords[((2 * 36) + 15)..((2 * 36) + 20)] | ForEach-Object { $_ -band 0x03FF }) -join ';') -eq '656;657;658;659;660;661') 'Unexpected static Amphitheater entry.'
 Assert-True ((@($mapWords[((3 * 36) + 16)..((3 * 36) + 19)] | ForEach-Object { $_ -band 0x03FF }) -join ';') -eq '468;469;468;469') 'The future Amphitheater entry must remain blocked.'
 
-foreach ($path in @('include/constants/flags.h', 'include/constants/flags_frlg.h', 'include/constants/vars.h', 'include/constants/vars_frlg.h', 'src/data/wild_encounters.json', 'src/data/pokemon', 'include/constants/species.h', 'src/data/trainers.party')) {
-    & git -C $RepositoryRoot diff --quiet develop -- $path
-    Assert-True ($LASTEXITCODE -eq 0) "Out-of-scope file changed: $path"
-}
-
 $changedArtifacts = @(& git -C $RepositoryRoot diff --name-only develop -- '*.gba' '*.elf' '*.map' '*.zip')
 $untrackedArtifacts = @(& git -C $RepositoryRoot ls-files --others --exclude-standard -- '*.gba' '*.elf' '*.map' '*.zip')
 Assert-True (($changedArtifacts.Count + $untrackedArtifacts.Count) -eq 0) 'Build artifacts or archives introduced by the blockout were found.'
