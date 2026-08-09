@@ -882,7 +882,7 @@ Pontaria, Fioralia o Nemora non vengono resi canonici da questo documento.
 | Via Verdi | Ghepio; Gazzuola; Borgotto; Foliarva comune di giorno; Crisalvia rara; Lumella rara; Luscinco raro; possibili specie ufficiali | PLACEMENT CANDIDATE | tassi, fasce orarie non esclusive, curve dei livelli e approvazione degli incontri |
 | Porta Pretoria | Molospsy | premature/TBD | funzione delle rovine e spazio della soglia |
 | Albèra Storica | Miciolo; Gazzuola; Molospsy; Lenghelis | PLACEMENT CANDIDATE | tassi, ciclo giorno/notte e tono degli eventi |
-| Anfiteatro Romano / prima Palestra | Molospsy | premature/TBD | tipo della Palestra e funzione narrativa non decisi |
+| Anfiteatro Romano / prima Palestra | Molospsy | premature/TBD | implementazione tecnica dell'Anfiteatro e placement della fauna |
 | Via Consolare | Pastufo; linea Foliarva; Paludix raro; Lumella; Luscinco; Tritino molto raro; linea del falco | PLACEMENT CANDIDATE | bioma, tassi e composizione della route non progettati |
 | Lago di Albèra | Pastufo; Paludix/Sanguilex; Lumella/Omphalux; Luscinco/Luscerp; Tritino/Tricrest; Salampolla/Alchimandra | PLACEMENT CANDIDATE | tassi, fasce orarie e presenza degli stadi evoluti; Naufragus non va collocato automaticamente qui |
 | Futura area ispirata ad Ariccia | Fraschietto | strong thematic candidate | nome in-game, bioma e linea evolutiva |
