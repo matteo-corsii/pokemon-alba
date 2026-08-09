@@ -65,6 +65,11 @@ al numero di specie distinte:
   tre stadi;
 - Paludix → Sanguilex aggiunge una famiglia Coleottero specializzata a due
   stadi;
+- Carpulus → Carpulutum, Lucinus → Umbracius e Cisternide → Calcistern
+  aggiungono tre nuove famiglie a due stadi e sei specie attive;
+- Glicidra, già censita come concetto a stadio singolo, viene formalizzata
+  come stadio finale di Gliciscia → Pergoluber → Glicidra: la famiglia
+  esistente riceve due nuove specie senza essere duplicata;
 - Lumella, Luscinco e Tritino aggiungono uno stadio alle rispettive famiglie
   già censite;
 - Brinix e Glaciterno sono due concetti separati e potrebbero formare una linea,
@@ -74,12 +79,13 @@ al numero di specie distinte:
   Saladoct resta soltanto un'etichetta storica;
 - le altre specie singole potrebbero ricevere stadi evolutivi futuri.
 
-Il catalogo censisce **29 famiglie o concetti**. Contiene **52 etichette
+Il catalogo censisce **32 famiglie o concetti**. Contiene **60 etichette
 nominali**, includendo Porchemecha e Bronzoverro come alternative e Saladoct
-come vecchio nome di lavorazione. Le etichette corrispondono ad almeno **50
+come vecchio nome di lavorazione. Le etichette corrispondono ad almeno **58
 specie attive distinte attualmente nominate**: Porchemecha/Bronzoverro conta
-una volta e Saladoct non conta come specie attiva. Le quattro nuove famiglie
-aggiungono nove specie attive. Il totale finale resta **TBD** perché linee come
+una volta e Saladoct non conta come specie attiva. Le tre famiglie nuove
+aggiungono sei specie; l'ampliamento del concetto esistente di Glicidra ne
+aggiunge due. Il totale finale resta **TBD** perché linee come
 Brinix/Glaciterno non sono deliberate, diversi concetti singoli possono
 ottenere evoluzioni e l'ecosistema regionale presenta ancora lacune. Non sono
 assegnati numeri Pokédex regionali definitivi oltre al primo batch di fauna
@@ -477,6 +483,93 @@ comune: Borgotto 010, Pastufo 011, Miciolo 012 e Felivates 013.
 - **Open questions:** abilità, statistiche, learnset, frequenze e
   disponibilità selvatica di Sanguilex.
 
+### Carpulus → Carpulutum
+
+- **Temporary family ID:** `AUS-FAM-CARP`
+- **Species/stages:** Carpulus → Carpulutum.
+- **Current status:** CANONICAL DESIGN; non implementata; PLACEMENT CANDIDATE;
+  evoluzione e parametri tecnici BALANCE PROVISIONAL.
+- **Proposed typing:** Carpulus Acqua; Carpulutum Acqua/Terra.
+- **Core concept:** linea comune di carpe del Lago di Albèra, dalle acque basse
+  ai fondali fangosi.
+- **Real-world inspiration:** carpe di lago, canneti, rive e fondali fangosi.
+- **Evolution structure:** linea canonica a due stadi; evoluzione proposta
+  intorno al livello 25, BALANCE PROVISIONAL.
+- **Primary habitat candidate:** Lago di Albèra; PLACEMENT CANDIDATE.
+- **Secondary habitat candidates:** Carpulus presso acque basse, rive, pontili
+  e canneti; Carpulutum nei fondali fangosi.
+- **Earliest story band candidate:** arco del Lago di Albèra.
+- **Gameplay role candidate:** lento e resistente, con molti PS e buona
+  Difesa; statistiche esatte BALANCE PROVISIONAL.
+- **Narrative importance:** percepisce vibrazioni e mutamenti del fondale e
+  reagisce alle anomalie del lago, ma non ne è la causa.
+- **Name review:** linea e nomi approvati.
+- **Type review:** tipi approvati per entrambi gli stadi.
+- **Placement review:** incontri, coordinate, tassi e distribuzione degli
+  stadi restano TBD.
+- **Open questions:** livello definitivo, abilità, statistiche, learnset,
+  frequenze e disponibilità selvatica di Carpulutum.
+
+### Lucinus → Umbracius
+
+- **Temporary family ID:** `AUS-FAM-PIKE`
+- **Species/stages:** Lucinus → Umbracius.
+- **Current status:** CANONICAL DESIGN; non implementata; PLACEMENT CANDIDATE;
+  evoluzione e parametri tecnici BALANCE PROVISIONAL.
+- **Proposed typing:** Lucinus Acqua; Umbracius Acqua/Spettro.
+- **Core concept:** rara linea di lucci del Lago di Albèra, legata ad agguati
+  tra canneti e ombre nelle acque profonde.
+- **Real-world inspiration:** lucci, rive isolate, acque quiete e sagome sotto
+  la superficie.
+- **Evolution structure:** linea canonica a due stadi; evoluzione proposta
+  intorno al livello 30 durante la notte, BALANCE PROVISIONAL.
+- **Primary habitat candidate:** Lago di Albèra; PLACEMENT CANDIDATE.
+- **Secondary habitat candidates:** Lucinus tra canneti, rive isolate e acque
+  quiete; Umbracius nelle zone profonde.
+- **Earliest story band candidate:** arco del Lago di Albèra.
+- **Gameplay role candidate:** attaccante fisico basato su agguati, morsi e
+  scatti; statistiche e learnset BALANCE PROVISIONAL.
+- **Narrative importance:** reagisce alle anomalie del lago, ma non ne è la
+  causa.
+- **Name review:** linea e nomi approvati.
+- **Type review:** tipi approvati per entrambi gli stadi.
+- **Placement review:** incontri, coordinate, tassi, fasce orarie e presenza
+  selvatica di Umbracius restano TBD.
+- **Open questions:** livello definitivo, abilità, statistiche, learnset e
+  rarità. La linea resta distinta da Naufragus, riservato al futuro arco
+  ispirato al Lago di Nemi.
+
+### Cisternide → Calcistern
+
+- **Temporary family ID:** `AUS-FAM-CISTERN-CRUSTACEAN`
+- **Species/stages:** Cisternide → Calcistern.
+- **Current status:** CANONICAL DESIGN; non implementata; PLACEMENT CANDIDATE;
+  evoluzione e parametri tecnici BALANCE PROVISIONAL.
+- **Proposed typing:** Cisternide Acqua; Calcistern Acqua/Roccia.
+- **Core concept:** linea di crostacei cavernicoli dei Cisternoni, dei condotti
+  antichi e delle sorgenti sotterranee di Albèra.
+- **Real-world inspiration:** piccoli crostacei cavernicoli, cisterne antiche,
+  calcare e sedimenti.
+- **Evolution structure:** linea canonica a due stadi; evoluzione proposta
+  intorno al livello 26, BALANCE PROVISIONAL.
+- **Primary habitat candidate:** primo avvistamento nei Cisternoni di Albèra
+  Storica; PLACEMENT CANDIDATE.
+- **Secondary habitat candidates:** cattura candidata nei condotti sotterranei
+  tra Via Consolare e Lago di Albèra.
+- **Earliest story band candidate:** Albèra Storica, come avvistamento nei
+  Cisternoni.
+- **Gameplay role candidate:** lento, difensivo e orientato a guscio,
+  pressione e controllo; statistiche e learnset BALANCE PROVISIONAL.
+- **Narrative importance:** percepisce variazioni della pressione sotterranea,
+  ma non causa l'anomalia.
+- **Name review:** linea e nomi approvati.
+- **Type review:** tipi approvati per entrambi gli stadi.
+- **Placement review:** incontri, accesso ai condotti, coordinate e tassi
+  restano TBD.
+- **Open questions:** livello definitivo, abilità, statistiche, learnset e
+  distribuzione. Cisternide è piccolo e pallido, con occhi ridotti, lunghe
+  antenne e carapace morbido; Calcistern sviluppa un guscio mineralizzato.
+
 ### Lumella → Omphalux
 
 - **Temporary family ID:** `AUS-CONCEPT-OMPHALUX`
@@ -739,24 +832,42 @@ comune: Borgotto 010, Pastufo 011, Miciolo 012 e Felivates 013.
 - **Placement review:** PLACEMENT TBD.
 - **Open questions:** linea, resa del tema Fuoco e collocazione.
 
-### Glicidra
+### Gliciscia → Pergoluber → Glicidra
 
 - **Temporary family ID:** `AUS-CONCEPT-GLICIDRA`
-- **Species/stages:** Glicidra, singolo stadio provvisorio.
-- **Current status:** CANDIDATE, TYPE REVIEW, PLACEMENT TBD.
-- **Proposed typing:** Drago/Veleno.
-- **Core concept:** drago delle ville ispirato al glicine.
-- **Real-world inspiration:** glicine e ville storiche.
-- **Evolution structure:** TBD.
-- **Primary habitat candidate:** ville o giardini storici, possible candidate.
-- **Secondary habitat candidates:** parchi monumentali, TBD.
-- **Earliest story band candidate:** premature/TBD.
-- **Gameplay role candidate:** specie rara.
-- **Narrative importance:** possibile, ma non approvata.
-- **Name review:** nome candidato, non canonico.
-- **Type review:** Drago/Veleno richiede revisione di rarità e bilanciamento.
-- **Placement review:** PLACEMENT TBD.
-- **Open questions:** linea, rarità, accesso e rapporto col glicine.
+- **Species/stages:** Gliciscia → Pergoluber → Glicidra. Glicidra era già
+  presente nel catalogo come concetto a stadio singolo e viene ora
+  formalizzata come stadio finale, senza creare una seconda famiglia.
+- **Current status:** CANONICAL DESIGN; non implementata; PLACEMENT CANDIDATE;
+  evoluzioni e parametri tecnici BALANCE PROVISIONAL.
+- **Proposed typing:** Gliciscia Erba; Pergoluber Erba/Veleno; Glicidra
+  Drago/Veleno. Il tipo Erba viene perso nello stadio finale.
+- **Core concept:** linea tardiva di rettili del glicine, dal mimetismo fra i
+  tralci a un raro drago sinuoso dei giardini monumentali.
+- **Real-world inspiration:** Gliciscia combina glicine e biscia; Pergoluber
+  combina pergola e il latino *coluber*; Glicidra combina glicine e idra.
+- **Evolution structure:** Gliciscia evolve in Pergoluber intorno al livello
+  26 e Pergoluber in Glicidra intorno al livello 44; entrambi i livelli sono
+  BALANCE PROVISIONAL.
+- **Primary habitat candidate:** Gliciscia nei giardini e nelle ville della
+  futura area ispirata ad Ariccia; PLACEMENT CANDIDATE.
+- **Secondary habitat candidates:** Gliciscia e Pergoluber fra pergolati e
+  coltivazioni della futura area ispirata a Genzano; Glicidra soprattutto
+  ottenibile tramite evoluzione.
+- **Earliest story band candidate:** soltanto dopo l'arco del Lago di Albèra;
+  la linea non compare nel primo arco.
+- **Gameplay role candidate:** Gliciscia si mimetizza fra tralci, siepi e
+  giardini; Pergoluber è rampicante e sviluppa spine e secrezioni tossiche;
+  parametri di battaglia ancora TBD.
+- **Narrative importance:** Glicidra è rara e prestigiosa, ma è una specie
+  normale, non leggendaria; i tralci attorno al collo sembrano false teste e
+  confondono gli avversari.
+- **Name review:** linea e nomi approvati.
+- **Type review:** tipi approvati per tutti e tre gli stadi.
+- **Placement review:** incontri, accesso alle aree future, tassi e
+  disponibilità selvatica degli stadi evoluti restano TBD.
+- **Open questions:** livelli definitivi, abilità, statistiche, learnset,
+  rarità e distribuzione esatta.
 
 ### Fraschietto
 
@@ -881,19 +992,19 @@ Pontaria, Fioralia o Nemora non vengono resi canonici da questo documento.
 | Albèra Bassa | Borgotto; Miciolo visibile come fauna urbana | PLACEMENT CANDIDATE | incontri, ruolo della fauna urbana e riuso di Pokémon ufficiali |
 | Via Verdi | Ghepio; Gazzuola; Borgotto; Foliarva comune di giorno; Crisalvia rara; Lumella rara; Luscinco raro; possibili specie ufficiali | PLACEMENT CANDIDATE | tassi, fasce orarie non esclusive, curve dei livelli e approvazione degli incontri |
 | Porta Pretoria | Molospsy | premature/TBD | funzione delle rovine e spazio della soglia |
-| Albèra Storica | Miciolo; Gazzuola; Molospsy; Lenghelis | PLACEMENT CANDIDATE | tassi, ciclo giorno/notte e tono degli eventi |
+| Albèra Storica | Cisternide come primo avvistamento nei Cisternoni; Miciolo; Gazzuola; Molospsy; Lenghelis | PLACEMENT CANDIDATE | accesso ai Cisternoni, tassi, ciclo giorno/notte e tono degli eventi |
 | Anfiteatro Romano / prima Palestra | Molospsy | premature/TBD | tipo della Palestra e funzione narrativa non decisi |
-| Via Consolare | Pastufo; linea Foliarva; Paludix raro; Lumella; Luscinco; Tritino molto raro; linea del falco | PLACEMENT CANDIDATE | bioma, tassi e composizione della route non progettati |
-| Lago di Albèra | Pastufo; Paludix/Sanguilex; Lumella/Omphalux; Luscinco/Luscerp; Tritino/Tricrest; Salampolla/Alchimandra | PLACEMENT CANDIDATE | tassi, fasce orarie e presenza degli stadi evoluti; Naufragus non va collocato automaticamente qui |
-| Futura area ispirata ad Ariccia | Fraschietto | strong thematic candidate | nome in-game, bioma e linea evolutiva |
-| Futura area ispirata a Genzano o Lago di Nemi | Infiorala per Genzano; Fragmagma | strong thematic candidate | scelta dell'area per Fragmagma, nome in-game e bilanciamento |
+| Via Consolare | Cisternide nei condotti sotterranei; Pastufo; linea Foliarva; Paludix raro; Lumella; Luscinco; Tritino molto raro; linea del falco | PLACEMENT CANDIDATE | accesso ai condotti, bioma, tassi e composizione della route non progettati |
+| Lago di Albèra | Carpulus/Carpulutum; Lucinus/Umbracius; Pastufo; Paludix/Sanguilex; Lumella/Omphalux; Luscinco/Luscerp; Tritino/Tricrest; Salampolla/Alchimandra | PLACEMENT CANDIDATE | tassi, fasce orarie e presenza degli stadi evoluti; Naufragus non va collocato automaticamente qui |
+| Futura area ispirata ad Ariccia | Gliciscia; Fraschietto | strong thematic candidate | nomi in-game, bioma e distribuzione delle linee |
+| Futura area ispirata a Genzano o Lago di Nemi | Gliciscia/Pergoluber e Infiorala per Genzano; Fragmagma | strong thematic candidate | scelta dell'area per Fragmagma, nomi in-game e bilanciamento |
 | Futura area ispirata a Monte Cavo | Brinix; Glaciterno; Talpmagnet | possible candidate | linea Brinix/Glaciterno, ambiente montano e sottosuolo |
 | Futura area ispirata a Lariano | Boletushield | strong thematic candidate | revisione del nome, linea e blockout |
 | Futura area ispirata al Regillo | Marmorequus | strong thematic candidate | rarità, ruolo monumentale e nome in-game |
 | Aree rurali o vitivinicole future | Vitemosto | possible candidate | geografia e progressione non definite |
 | Oliveti o boschi futuri | Lumella/Omphalux; Lenghelis | possible candidate | ciclo giorno/notte e habitat non definiti |
 | Aree minerali, vulcaniche o sotterranee future | Solftraver; Porchemecha/Bronzoverro; Talpmagnet | possible candidate | nomi, blockout e distribuzione dei tipi rari |
-| Collocazione non ancora associabile | fossili; Glicidra | premature/TBD | ottenimento, narrativa e habitat definitivi |
+| Collocazione non ancora associabile | fossili | premature/TBD | ottenimento, narrativa e habitat definitivi |
 
 Questa tabella raccoglie soltanto affinità di design. Non definisce la fauna di
 Via Verdi, del Lago di Albèra o di qualunque area futura.
@@ -907,12 +1018,15 @@ Paludix/Sanguilex la seconda famiglia Coleottero specializzata. Le linee
 canina, felina e del Coleottero iniziale sono implementate nei dati; la linea
 della zanzara resta non implementata.
 
+Carpulus/Carpulutum offre ora una soluzione progettuale per la linea Acqua
+comune non anfibia, mentre Cisternide/Calcistern copre la fauna cavernicola e
+da cisterna. Lucinus/Umbracius rafforza la fauna propria del Lago di Albèra.
+Anche queste collocazioni restano candidate e non implementate.
+
 Restano aperte:
 
-- una linea Acqua comune non anfibia;
 - fauna urbana aggiuntiva, soltanto se ancora necessaria;
-- specie cavernicola o da cisterna;
-- fauna propria del Lago di Albèra oltre alle collocazioni candidate attuali;
+- ulteriore fauna propria del Lago di Albèra, soltanto se necessaria;
 - ulteriori specie impollinatrici, soltanto se necessarie;
 - possibile scarsità di Normale, Coleottero e Acqua comuni;
 - possibile eccesso di Acciaio, Drago e doppi tipi rari.
@@ -935,6 +1049,9 @@ creare una specie originale per ogni ruolo ecologico o di gameplay.
 | `AUS-FAM-CAT` | Miciolo → Felivates | 2 | IMPLEMENTED; CANONICAL DESIGN | Normale → Normale/Psico | PLACEMENT CANDIDATE: Albèra Bassa/Albèra Storica | incontri e asset originali |
 | `AUS-FAM-EARLY-BUG` | Foliarva → Crisalvia → Infiorala | 3 | IMPLEMENTED; CANONICAL DESIGN | Coleottero → Coleottero/Erba → Coleottero/Erba | PLACEMENT CANDIDATE: Via Verdi | incontri e asset originali |
 | `AUS-FAM-MOSQUITO` | Paludix → Sanguilex | 2 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Coleottero/Acqua → Coleottero/Veleno | PLACEMENT CANDIDATE: Via Consolare/Lago di Albèra | evoluzione temporale, abilità e tassi |
+| `AUS-FAM-CARP` | Carpulus → Carpulutum | 2 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Acqua → Acqua/Terra | PLACEMENT CANDIDATE: Lago di Albèra | livello, abilità e distribuzione degli stadi |
+| `AUS-FAM-PIKE` | Lucinus → Umbracius | 2 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Acqua → Acqua/Spettro | PLACEMENT CANDIDATE: Lago di Albèra | evoluzione notturna, rarità e distribuzione |
+| `AUS-FAM-CISTERN-CRUSTACEAN` | Cisternide → Calcistern | 2 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Acqua → Acqua/Roccia | PLACEMENT CANDIDATE: Cisternoni di Albèra Storica | accesso ai condotti, livello e abilità |
 | `AUS-CONCEPT-OMPHALUX` | Lumella → Omphalux | 2 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Erba → Erba/Elettro | PLACEMENT CANDIDATE: Via Verdi rara, Via Consolare/oliveti/lago | evoluzione notturna e distribuzione esatta |
 | `AUS-CONCEPT-LUSCERP` | Luscinco → Luscerp | 2 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Erba → Erba/Drago | PLACEMENT CANDIDATE: Via Verdi/Via Consolare/lago | livello, abilità e frequenze |
 | `AUS-CONCEPT-FRAGMAGMA` | Fragmagma | 1+ TBD | CANDIDATE | Folletto/Fuoco | possible candidate: Genzano/Nemi | area e linea |
@@ -947,7 +1064,7 @@ creare una specie originale per ogni ruolo ecologico o di gameplay.
 | `AUS-CONCEPT-LENGHELIS` | Lenghelis | 1+ TBD | CANDIDATE | Spettro/Folletto | possible candidate: boschi/borghi | habitat e tono folklorico |
 | `AUS-CONCEPT-TALPMAGNET` | Talpmagnet | 1+ TBD | CANDIDATE; NAME REVIEW; LINE REVIEW | Terra/Elettro | possible candidate: sottosuolo | nome e linea |
 | `AUS-CONCEPT-VITEMOSTO` | Vitemosto | 1+ TBD | CANDIDATE; LINE REVIEW | Erba/Fuoco | possible candidate: area vitivinicola | linea e collocazione |
-| `AUS-CONCEPT-GLICIDRA` | Glicidra | 1+ TBD | CANDIDATE; TYPE REVIEW | Drago/Veleno | possible candidate: ville | rarità e typing |
+| `AUS-CONCEPT-GLICIDRA` | Gliciscia → Pergoluber → Glicidra | 3 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Erba → Erba/Veleno → Drago/Veleno | PLACEMENT CANDIDATE: dopo il Lago, future aree ispirate ad Ariccia/Genzano | livelli, abilità, rarità e distribuzione |
 | `AUS-CONCEPT-FRASCHIETTO` | Fraschietto | 1+ TBD | CANDIDATE; LINE REVIEW | Lotta/Erba | strong thematic candidate: Ariccia | linea e tono culturale |
 | `AUS-CONCEPT-BRINIX` | Brinix | 1 | CANDIDATE; LINE REVIEW | Ghiaccio | possible candidate: Monte Cavo | possibile legame con Glaciterno |
 | `AUS-CONCEPT-GLACITERNO` | Glaciterno | 1 | CANDIDATE; LINE REVIEW | Ghiaccio/Terra | possible candidate: Monte Cavo | possibile legame con Brinix |
