@@ -25,7 +25,7 @@
       "direction": "down"
     },
     {
-      "map": "MAP_ROUTE102",
+      "map": "MAP_ALBERA_STORICA",
       "offset": 0,
       "direction": "left"
     }
@@ -153,24 +153,6 @@
       "var": "VAR_ALBERA_OPENING_STATE",
       "var_value": "7",
       "script": "OldaleTown_EventScript_BlockNorthExit"
-    },
-    {
-      "type": "trigger",
-      "x": 0,
-      "y": 10,
-      "elevation": 3,
-      "var": "VAR_ALBERA_OPENING_STATE",
-      "var_value": "7",
-      "script": "OldaleTown_EventScript_BlockWestExit"
-    },
-    {
-      "type": "trigger",
-      "x": 0,
-      "y": 11,
-      "elevation": 3,
-      "var": "VAR_ALBERA_OPENING_STATE",
-      "var_value": "7",
-      "script": "OldaleTown_EventScript_BlockWestExit"
     }
   ],
   "bg_events": [
