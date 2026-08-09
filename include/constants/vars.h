@@ -268,8 +268,8 @@
 #define VAR_RIVAL_RAYQUAZA_CALL_STEP_COUNTER             0x40F6
 #define VAR_ALBERA_OPENING_STATE                          0x40F7 // Canonical first playable Albèra segment
 #define VAR_ALBERA_VIA_VERDI_STATE                        0x40F8 // Via Verdi first investigation progression
-#define VAR_UNUSED_0x40F9                                0x40F9 // Unused Var
-#define VAR_UNUSED_0x40FA                                0x40FA // Unused Var
+#define VAR_ALBERA_GYM_STATE                              0x40F9 // Albèra Amphitheatre progression
+#define VAR_ALBERA_GYM_INPUT                              0x40FA // Current Strofa input
 #define VAR_UNUSED_0x40FB                                0x40FB // Unused Var
 #define VAR_UNUSED_0x40FC                                0x40FC // Unused Var
 #define VAR_UNUSED_0x40FD                                0x40FD // Unused Var

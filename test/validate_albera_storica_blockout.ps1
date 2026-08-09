@@ -19,12 +19,10 @@ $oldale = Read-Json 'data/maps/OldaleTown/map.json'
 $alberaStorica = Read-Json 'data/maps/AlberaStorica/map.json'
 
 $townsAndRoutes = @($groups.gMapGroup_TownsAndRoutes)
-Assert-True ($townsAndRoutes[-1] -eq 'AlberaStorica') 'AlberaStorica must be append-only in gMapGroup_TownsAndRoutes.'
 Assert-True (($townsAndRoutes | Where-Object { $_ -eq 'AlberaStorica' }).Count -eq 1) 'AlberaStorica must appear exactly once in the map group.'
 
 $layout = @($layouts.layouts | Where-Object { $_.id -eq 'LAYOUT_ALBERA_STORICA' })
 Assert-True ($layout.Count -eq 1) 'LAYOUT_ALBERA_STORICA missing or duplicated.'
-Assert-True ($layouts.layouts[-1].id -eq 'LAYOUT_ALBERA_STORICA') 'The layout must be append-only.'
 Assert-True ($layout[0].width -eq 36 -and $layout[0].height -eq 30) 'Unexpected layout dimensions.'
 Assert-True ($layout[0].primary_tileset -eq 'gTileset_General' -and $layout[0].secondary_tileset -eq 'gTileset_Petalburg') 'Unexpected tilesets.'
 Assert-True ($layout[0].layout_version -eq 'emerald') 'The layout must remain Emerald-only.'
@@ -37,9 +35,7 @@ Assert-True ($alberaStorica.id -eq 'MAP_ALBERA_STORICA' -and $alberaStorica.layo
 Assert-True (@($alberaStorica.connections).Count -eq 1) 'Albera Storica must have only the Porta Pretoria connection.'
 $returnConnection = @($alberaStorica.connections | Where-Object { $_.direction -eq 'right' -and $_.map -eq 'MAP_OLDALE_TOWN' -and $_.offset -eq 0 })
 Assert-True ($returnConnection.Count -eq 1) 'Return connection to Porta Pretoria is invalid.'
-Assert-True (@($alberaStorica.warp_events).Count -eq 0) 'The blockout must not have warps.'
-Assert-True (@($alberaStorica.object_events).Count -eq 0 -and @($alberaStorica.coord_events).Count -eq 0) 'The blockout must not have events or NPCs.'
-Assert-True ((Get-Content -LiteralPath (Join-Path $RepositoryRoot 'data/maps/AlberaStorica/scripts.inc') -Raw) -notmatch 'Anfiteatro|FLAG_|VAR_') 'The new map must not introduce Amphitheater, flag, or variable logic.'
+Assert-True (@($alberaStorica.object_events).Count -eq 0 -and @($alberaStorica.coord_events).Count -eq 0) 'Albera Storica must not gain unrelated NPC or coordinate events.'
 
 $westConnection = @($oldale.connections | Where-Object { $_.direction -eq 'left' })
 Assert-True ($westConnection.Count -eq 1 -and $westConnection[0].map -eq 'MAP_ALBERA_STORICA') 'Porta Pretoria west must connect to Albera Storica.'
@@ -54,8 +50,7 @@ Assert-True ($mapBytes.Length -eq (36 * 30 * 2)) 'Unexpected map.bin size.'
 Assert-True (Test-Path (Join-Path $RepositoryRoot 'data/layouts/AlberaStorica/border.bin')) 'Missing border.bin.'
 $mapWords = for ($index = 0; $index -lt 36 * 30; $index++) { [BitConverter]::ToUInt16($mapBytes, $index * 2) }
 Assert-True ($mapWords[(10 * 36) + 35] -eq 0x3001 -and $mapWords[(11 * 36) + 35] -eq 0x3001) 'The east entrance to Porta Pretoria is not walkable.'
-Assert-True ((@($mapWords[((2 * 36) + 15)..((2 * 36) + 20)] | ForEach-Object { $_ -band 0x03FF }) -join ';') -eq '656;657;658;659;660;661') 'Unexpected static Amphitheater entry.'
-Assert-True ((@($mapWords[((3 * 36) + 16)..((3 * 36) + 19)] | ForEach-Object { $_ -band 0x03FF }) -join ';') -eq '468;469;468;469') 'The future Amphitheater entry must remain blocked.'
+Assert-True ((@($mapWords[((2 * 36) + 15)..((2 * 36) + 20)] | ForEach-Object { $_ -band 0x03FF }) -join ';') -eq '656;657;658;659;660;661') 'The Amphitheater landmark facade changed unexpectedly.'
 
 $changedArtifacts = @(& git -C $RepositoryRoot diff --name-only develop -- '*.gba' '*.elf' '*.map' '*.zip')
 $untrackedArtifacts = @(& git -C $RepositoryRoot ls-files --others --exclude-standard -- '*.gba' '*.elf' '*.map' '*.zip')

@@ -9334,6 +9334,17 @@
       "border_filepath": "data/layouts/AlberaStorica/border.bin",
       "blockdata_filepath": "data/layouts/AlberaStorica/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ALBERA_STORICA_ANFITEATRO",
+      "name": "AlberaStorica_Anfiteatro_Layout",
+      "width": 15,
+      "height": 11,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Contest",
+      "border_filepath": "data/layouts/ContestHall/border.bin",
+      "blockdata_filepath": "data/layouts/ContestHall/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

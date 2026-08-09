@@ -20,6 +20,15 @@ provvisori.
   microhabitat e nomi descrittivi non ancora canonici.
 - **NON IMPLEMENTED:** tutto il contenuto descritto in questo documento.
 
+### Stato Demo 0.1
+
+**IMPLEMENTED / DEMO 0.1:** ingresso dell'Anfiteatro, tre Strofe, Dario,
+Mara, Elio, battaglia con Lirio e Medaglia Ballata.
+
+Team, livelli, mosse, MT e dettagli di bilanciamento restano **BALANCE /
+IMPLEMENTATION PROVISIONAL**. Restano **NON IMPLEMENTED** il gameplay dei
+Cisternoni, Cisternide, Via Consolare e Lago di Albèra.
+
 Né Lauro, né Lia, né Lirio conoscono la causa definitiva dell’anomalia.
 Cisternide e Paludix reagiscono ai cambiamenti osservati, ma non li causano.
 
