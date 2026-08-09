@@ -250,6 +250,18 @@ LittlerootTown_ProfessorBirchsLab_EventScript_LiaDetectsAnomaly::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_ExplainResearchPokedex, MSGBOX_DEFAULT
 
 LittlerootTown_ProfessorBirchsLab_EventScript_CompleteAlberaOpening::
+	checkitemspace ITEM_POKE_BALL, 10
+	goto_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_NoRoomForViaVerdiPokeBalls
+	giveitem ITEM_POKE_BALL, 10
+	goto_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_NoRoomForViaVerdiPokeBalls
+	playfanfare MUS_OBTAIN_ITEM
+	message LittlerootTown_ProfessorBirchsLab_Text_ReceivedViaVerdiPokeBalls
+	waitmessage
+	waitfanfare
+	setvar VAR_ALBERA_VIA_VERDI_STATE, 1
+	#ifdef EMERALD
+	clearflag FLAG_HIDE_ROUTE101_RESEARCH_PARTY
+	#endif
 	setflag FLAG_ALBERA_WATER_RESEARCH_STARTED
 	setflag FLAG_RESCUED_BIRCH
 	setflag FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE
@@ -268,6 +280,11 @@ LittlerootTown_ProfessorBirchsLab_EventScript_CompleteAlberaOpening::
 	setflag FLAG_HIDE_ALBERA_LAB_LIA
 	removeobject LOCALID_ALBERA_LAB_NICO
 	removeobject LOCALID_ALBERA_LAB_LIA
+	releaseall
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_NoRoomForViaVerdiPokeBalls::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_NoRoomForViaVerdiPokeBalls, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -701,6 +718,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter::
 LittlerootTown_ProfessorBirchsLab_EventScript_Birch::
 	lock
 	faceplayer
+	goto_if_eq VAR_ALBERA_OPENING_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_CompleteAlberaOpening
 	goto_if_lt VAR_ALBERA_OPENING_STATE, 5, LittlerootTown_ProfessorBirchsLab_EventScript_AlberaOpeningReminder
 	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 5, LittlerootTown_ProfessorBirchsLab_EventScript_CanHaveAnyOneOfRarePokemon
 	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_GrassyPatchWaiting
@@ -994,6 +1012,13 @@ LittlerootTown_ProfessorBirchsLab_Text_ExplainResearchPokedex:
 	.string "i POKéMON che incontrerai.\p"
 	.string "Usalo anche come riferimento per le\n"
 	.string "osservazioni sull'ambiente.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_ReceivedViaVerdiPokeBalls:
+	.string "{PLAYER} riceve 10 POKÃ© BALL!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_NoRoomForViaVerdiPokeBalls:
+	.string "PROF. LAURO: Non hai spazio per le\\n"
+	.string "POKÃ© BALL. Sistema la BORSA e riparla con me.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_NicoAndLiaLeave:
 	.string "LIA: Parto avanti e controllo se il\n"

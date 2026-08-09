@@ -105,6 +105,34 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route101_EventScript_Boy",
       "flag": "FLAG_HIDE_ROUTE_101_BOY"
+    },
+    {
+      "local_id": "LOCALID_ROUTE101_LIA",
+      "graphics_id": "OBJ_EVENT_GFX_MAY_NORMAL",
+      "x": 8,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route101_EventScript_Lia",
+      "flag": "FLAG_HIDE_ROUTE101_RESEARCH_PARTY"
+    },
+    {
+      "local_id": "LOCALID_ROUTE101_NICO",
+      "graphics_id": "OBJ_EVENT_GFX_BRENDAN_NORMAL",
+      "x": 9,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route101_EventScript_Nico",
+      "flag": "FLAG_HIDE_ROUTE101_RESEARCH_PARTY"
     }
   ],
   "warp_events": [],
@@ -189,6 +217,60 @@
       "var": "VAR_ROUTE101_STATE",
       "var_value": "2",
       "script": "Route101_EventScript_PreventExitNorth"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 16,
+      "elevation": 3,
+      "var": "VAR_ALBERA_VIA_VERDI_STATE",
+      "var_value": "1",
+      "script": "Route101_EventScript_InvestigateSource"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 16,
+      "elevation": 3,
+      "var": "VAR_ALBERA_VIA_VERDI_STATE",
+      "var_value": "1",
+      "script": "Route101_EventScript_InvestigateSource"
+    },
+    {
+      "type": "trigger",
+      "x": 21,
+      "y": 10,
+      "elevation": 3,
+      "var": "VAR_ALBERA_VIA_VERDI_STATE",
+      "var_value": "2",
+      "script": "Route101_EventScript_InvestigatePokemonBehavior"
+    },
+    {
+      "type": "trigger",
+      "x": 22,
+      "y": 10,
+      "elevation": 3,
+      "var": "VAR_ALBERA_VIA_VERDI_STATE",
+      "var_value": "2",
+      "script": "Route101_EventScript_InvestigatePokemonBehavior"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 4,
+      "elevation": 3,
+      "var": "VAR_ALBERA_VIA_VERDI_STATE",
+      "var_value": "3",
+      "script": "Route101_EventScript_InvestigateAncientCanal"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 4,
+      "elevation": 3,
+      "var": "VAR_ALBERA_VIA_VERDI_STATE",
+      "var_value": "3",
+      "script": "Route101_EventScript_InvestigateAncientCanal"
     }
   ],
   "bg_events": [
