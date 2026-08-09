@@ -1681,6 +1681,51 @@ TEST("Ausonia early falcon fauna teachables Egg Moves graphics and auxiliary pla
     }
 }
 
+TEST("Ausonia early magpie fauna graphics retain only approved auxiliary placeholders")
+{
+    static const enum Species species[] = { SPECIES_GAZZUOLA, SPECIES_BRILLAZZA, SPECIES_GAZZOMBRA };
+    static const enum Species placeholders[] = { SPECIES_ROOKIDEE, SPECIES_CORVISQUIRE, SPECIES_CORVIKNIGHT };
+    static const u8 frontPicSizes[] = { (5 << 4) | 5, (5 << 4) | 5, (6 << 4) | 7 };
+    static const u8 backPicSizes[] = { (4 << 4) | 5, (4 << 4) | 5, (6 << 4) | 7 };
+    static const u8 picOffsets[] = { 12, 12, 4 };
+
+    for (u32 i = 0; i < ARRAY_COUNT(species); i++)
+    {
+        const struct SpeciesInfo *info = &gSpeciesInfo[species[i]];
+        const struct SpeciesInfo *placeholder = &gSpeciesInfo[placeholders[i]];
+
+        EXPECT(info->frontPic != placeholder->frontPic);
+        EXPECT(info->backPic != placeholder->backPic);
+        EXPECT(info->palette != placeholder->palette);
+        EXPECT(info->shinyPalette != placeholder->shinyPalette);
+        EXPECT(info->iconSprite != placeholder->iconSprite);
+        EXPECT_EQ((u32)info->frontPicSize, (u32)frontPicSizes[i]);
+        EXPECT_EQ((u32)info->backPicSize, (u32)backPicSizes[i]);
+        EXPECT_EQ((u32)info->frontPicYOffset, (u32)picOffsets[i]);
+        EXPECT_EQ((u32)info->backPicYOffset, (u32)picOffsets[i]);
+        EXPECT_EQ((u32)info->iconPalIndex, 6);
+
+        EXPECT_EQ((u32)info->cryId, (u32)placeholder->cryId);
+        EXPECT(info->frontAnimFrames != placeholder->frontAnimFrames);
+        EXPECT_EQ(info->frontAnimId, placeholder->frontAnimId);
+        EXPECT_EQ(info->backAnimId, placeholder->backAnimId);
+        EXPECT_EQ(info->enemyMonElevation, placeholder->enemyMonElevation);
+        EXPECT_EQ(info->enemyShadowXOffset, placeholder->enemyShadowXOffset);
+        EXPECT_EQ(info->enemyShadowYOffset, placeholder->enemyShadowYOffset);
+        EXPECT_EQ((u32)info->enemyShadowSize, (u32)placeholder->enemyShadowSize);
+#if P_FOOTPRINTS
+        EXPECT(info->footprint == placeholder->footprint);
+#endif
+#if OW_POKEMON_OBJECT_EVENTS
+        EXPECT(info->overworldData.images == placeholder->overworldData.images);
+#if OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
+        EXPECT(info->overworldPalette == placeholder->overworldPalette);
+        EXPECT(info->overworldShinyPalette == placeholder->overworldShinyPalette);
+#endif
+#endif
+    }
+}
+
 TEST("Ausonia early magpie fauna base data matches the canonical batch")
 {
     static const enum Species species[] = { SPECIES_GAZZUOLA, SPECIES_BRILLAZZA, SPECIES_GAZZOMBRA };
@@ -1821,7 +1866,7 @@ TEST("Ausonia early magpie fauna teachables Egg Moves and placeholders are compl
     EXPECT_EQ(MoveListCount(brillazza), 13);
     EXPECT_EQ(MoveListCount(gazzombra), 17);
     EXPECT_EQ(MoveListCount(gSpeciesInfo[SPECIES_GAZZUOLA].eggMoveLearnset), ARRAY_COUNT(eggMoves));
-    EXPECT(gSpeciesInfo[SPECIES_GAZZUOLA].frontPic == gSpeciesInfo[SPECIES_ROOKIDEE].frontPic);
-    EXPECT(gSpeciesInfo[SPECIES_BRILLAZZA].frontPic == gSpeciesInfo[SPECIES_CORVISQUIRE].frontPic);
-    EXPECT(gSpeciesInfo[SPECIES_GAZZOMBRA].frontPic == gSpeciesInfo[SPECIES_CORVIKNIGHT].frontPic);
+    EXPECT(gSpeciesInfo[SPECIES_GAZZUOLA].frontPic != gSpeciesInfo[SPECIES_ROOKIDEE].frontPic);
+    EXPECT(gSpeciesInfo[SPECIES_BRILLAZZA].frontPic != gSpeciesInfo[SPECIES_CORVISQUIRE].frontPic);
+    EXPECT(gSpeciesInfo[SPECIES_GAZZOMBRA].frontPic != gSpeciesInfo[SPECIES_CORVIKNIGHT].frontPic);
 }

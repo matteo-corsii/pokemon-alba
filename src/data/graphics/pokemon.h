@@ -131,6 +131,23 @@ const u32 gMonBackPic_Peregrinus[] = INCGFX_U32("graphics/pokemon/peregrinus/bac
 const u16 gMonShinyPalette_Peregrinus[] = INCGFX_U16("graphics/pokemon/peregrinus/shiny.pal", ".gbapal");
 const u8 gMonIcon_Peregrinus[] = INCGFX_U8("graphics/pokemon/peregrinus/icon.png", ".4bpp");
 
+// Pokémon Alba: original battle and menu graphics for early Ausonia fauna batch D.
+const u32 gMonFrontPic_Gazzuola[] = INCGFX_U32("graphics/pokemon/gazzuola/anim_front.png", ".4bpp.smol");
+const u16 gMonPalette_Gazzuola[] = INCGFX_U16("graphics/pokemon/gazzuola/normal.pal", ".gbapal");
+const u32 gMonBackPic_Gazzuola[] = INCGFX_U32("graphics/pokemon/gazzuola/back.png", ".4bpp.smol");
+const u16 gMonShinyPalette_Gazzuola[] = INCGFX_U16("graphics/pokemon/gazzuola/shiny.pal", ".gbapal");
+const u8 gMonIcon_Gazzuola[] = INCGFX_U8("graphics/pokemon/gazzuola/icon.png", ".4bpp");
+const u32 gMonFrontPic_Brillazza[] = INCGFX_U32("graphics/pokemon/brillazza/anim_front.png", ".4bpp.smol");
+const u16 gMonPalette_Brillazza[] = INCGFX_U16("graphics/pokemon/brillazza/normal.pal", ".gbapal");
+const u32 gMonBackPic_Brillazza[] = INCGFX_U32("graphics/pokemon/brillazza/back.png", ".4bpp.smol");
+const u16 gMonShinyPalette_Brillazza[] = INCGFX_U16("graphics/pokemon/brillazza/shiny.pal", ".gbapal");
+const u8 gMonIcon_Brillazza[] = INCGFX_U8("graphics/pokemon/brillazza/icon.png", ".4bpp");
+const u32 gMonFrontPic_Gazzombra[] = INCGFX_U32("graphics/pokemon/gazzombra/anim_front.png", ".4bpp.smol");
+const u16 gMonPalette_Gazzombra[] = INCGFX_U16("graphics/pokemon/gazzombra/normal.pal", ".gbapal");
+const u32 gMonBackPic_Gazzombra[] = INCGFX_U32("graphics/pokemon/gazzombra/back.png", ".4bpp.smol");
+const u16 gMonShinyPalette_Gazzombra[] = INCGFX_U16("graphics/pokemon/gazzombra/shiny.pal", ".gbapal");
+const u8 gMonIcon_Gazzombra[] = INCGFX_U8("graphics/pokemon/gazzombra/icon.png", ".4bpp");
+
 #if P_FAMILY_BULBASAUR
 #if !P_GBA_STYLE_SPECIES_GFX
     const u32 gMonFrontPic_Bulbasaur[] = INCGFX_U32("graphics/pokemon/bulbasaur/anim_front.png", ".4bpp.smol");
