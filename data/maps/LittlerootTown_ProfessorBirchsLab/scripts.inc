@@ -1017,7 +1017,7 @@ LittlerootTown_ProfessorBirchsLab_Text_ReceivedViaVerdiPokeBalls:
 	.string "{PLAYER} riceve 10 POKé BALL!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_NoRoomForViaVerdiPokeBalls:
-	.string "PROF. LAURO: Non hai spazio per le\\n"
+	.string "PROF. LAURO: Non hai spazio per le\n"
 	.string "POKé BALL. Sistema la BORSA e riparla con me.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_NicoAndLiaLeave:
