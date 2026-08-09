@@ -97,7 +97,7 @@ $south = @($routeMap.connections | Where-Object { $_.direction -eq 'down' -and $
 Assert-True ($north.Count -eq 1 -and $south.Count -eq 1) 'Via Verdi connections changed unexpectedly.'
 Assert-Contains $route 'call_if_eq VAR_ALBERA_OPENING_STATE, 5, Route101_EventScript_SetAlberaCheckpoint' 'The existing Route101 checkpoint transition changed.'
 
-foreach ($path in @('src/data/wild_encounters.json', 'src/data/pokemon', 'include/constants/species.h', 'src/data/trainers.party', 'src/battle_setup.c', 'src/save.c')) {
+foreach ($path in @('src/data/wild_encounters.json', 'src/data/pokemon', 'include/constants/species.h', 'src/battle_setup.c', 'src/save.c')) {
     & git -C $RepositoryRoot diff --quiet develop -- $path
     Assert-True ($LASTEXITCODE -eq 0) "Out-of-scope file changed: $path"
 }

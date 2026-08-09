@@ -261,8 +261,8 @@
 #define VAR_0x40F6                 0x40F6
 #define VAR_ALBERA_OPENING_STATE   0x40F7
 #define VAR_ALBERA_VIA_VERDI_STATE  0x40F8
-#define VAR_0x40F9                 0x40F9
-#define VAR_0x40FA                 0x40FA
+#define VAR_ALBERA_GYM_STATE       0x40F9
+#define VAR_ALBERA_GYM_INPUT       0x40FA
 #define VAR_0x40FB                 0x40FB
 #define VAR_0x40FC                 0x40FC
 #define VAR_0x40FD                 0x40FD
