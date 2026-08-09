@@ -859,10 +859,12 @@
 #define TRAINER_LEAF                        852
 #define TRAINER_BRENDAN_PLACEHOLDER         853
 #define TRAINER_MAY_PLACEHOLDER             854
+#if !IS_FRLG
 #define TRAINER_ALBERA_DARIO                 855
 #define TRAINER_ALBERA_MARA                  856
 #define TRAINER_ALBERA_ELIO                  857
 #define TRAINER_LEADER_LIRIO                 858
+#endif
 
 // NOTE: Because each Trainer uses a flag to determine when they are defeated, there is only space for 9 additional trainers before trainer flag space overflows
 //       More space can be made by shifting flags around in constants/flags.h or changing how trainer flags are handled
