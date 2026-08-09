@@ -1014,11 +1014,11 @@ LittlerootTown_ProfessorBirchsLab_Text_ExplainResearchPokedex:
 	.string "osservazioni sull'ambiente.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_ReceivedViaVerdiPokeBalls:
-	.string "{PLAYER} riceve 10 POKÃ© BALL!$"
+	.string "{PLAYER} riceve 10 POKé BALL!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_NoRoomForViaVerdiPokeBalls:
 	.string "PROF. LAURO: Non hai spazio per le\\n"
-	.string "POKÃ© BALL. Sistema la BORSA e riparla con me.$"
+	.string "POKé BALL. Sistema la BORSA e riparla con me.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_NicoAndLiaLeave:
 	.string "LIA: Parto avanti e controllo se il\n"
