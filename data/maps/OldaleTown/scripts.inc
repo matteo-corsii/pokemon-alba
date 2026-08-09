@@ -48,21 +48,8 @@ OldaleTown_EventScript_BlockNorthExit::
 	releaseall
 	end
 
-OldaleTown_EventScript_BlockWestExit::
-	lockall
-	msgbox OldaleTown_Text_WestExitClosed, MSGBOX_DEFAULT
-	closemessage
-	applymovement LOCALID_PLAYER, OldaleTown_Movement_StepEast
-	waitmovement 0
-	releaseall
-	end
-
 OldaleTown_Movement_StepSouth:
 	walk_down
-	step_end
-
-OldaleTown_Movement_StepEast:
-	walk_right
 	step_end
 
 OldaleTown_Text_TownSign:
@@ -89,14 +76,9 @@ OldaleTown_Text_Traveler:
 	.string "prima di entrare ad ALBÈRA STORICA.$"
 
 OldaleTown_Text_WestGateWorker:
-	.string "Il VIALE PRETORIO è ancora chiuso.\n"
-	.string "I tecnici stanno controllando il percorso.$"
+	.string "Il VIALE PRETORIO conduce ad\n"
+	.string "ALBÈRA STORICA.$"
 
 OldaleTown_Text_NorthExitClosed:
 	.string "Il passaggio settentrionale è chiuso\n"
 	.string "per lavori sulla rete idrica.$"
-
-OldaleTown_Text_WestExitClosed:
-	.string "Il VIALE PRETORIO è temporaneamente\n"
-	.string "chiuso.\p"
-	.string "L'accesso riaprirà dopo l'ispezione.$"
