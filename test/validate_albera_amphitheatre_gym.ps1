@@ -16,6 +16,7 @@ $groups = Read-Json 'data/maps/map_groups.json'
 $layouts = Read-Json 'data/layouts/layouts.json'
 $city = Read-Json 'data/maps/AlberaStorica/map.json'
 $gym = Read-Json 'data/maps/AlberaStorica_Anfiteatro/map.json'
+$cityScripts = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'data/maps/AlberaStorica/scripts.inc') -Raw
 $vars = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'include/constants/vars.h') -Raw
 $varsFrlg = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'include/constants/vars_frlg.h') -Raw
 $opponents = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'include/constants/opponents.h') -Raw
@@ -30,7 +31,9 @@ Assert-True ((@($layouts.layouts | Where-Object { $_.id -eq 'LAYOUT_ALBERA_STORI
 Assert-True ($gym.id -eq 'MAP_ALBERA_STORICA_ANFITEATRO' -and $gym.layout -eq 'LAYOUT_ALBERA_STORICA_ANFITEATRO') 'Map and layout are not linked.'
 Assert-True ($gym.music -eq 'MUS_GYM' -and $gym.battle_scene -eq 'MAP_BATTLE_SCENE_GYM') 'Unexpected Gym map presentation.'
 Assert-True ($gym.region_map_section -eq 'MAPSEC_ALBERA_STORICA' -and $null -eq $gym.connections) 'Unexpected regional map section or connection.'
-Assert-True (@($city.warp_events | Where-Object { $_.dest_map -eq 'MAP_ALBERA_STORICA_ANFITEATRO' -and $_.x -eq 15 -and $_.y -eq 26 }).Count -eq 1) 'City-to-Amphitheatre warp is invalid.'
+Assert-True (@($city.coord_events | Where-Object { $_.x -in @(17, 18) -and $_.y -eq 4 -and $_.elevation -eq 3 -and $_.var -eq 'VAR_ALBERA_GYM_INPUT' -and $_.var_value -eq '0' -and $_.script -eq 'AlberaStorica_EventScript_EnterAnfiteatro' }).Count -eq 2) 'City-to-Amphitheatre entrance triggers are invalid.'
+Assert-True ($cityScripts.Contains("warp MAP_ALBERA_STORICA_ANFITEATRO, 7, 10")) 'City-to-Amphitheatre entrance script is invalid.'
+Assert-True (@($city.warp_events | Where-Object { $_.x -eq 17 -and $_.y -eq 5 -and $_.elevation -eq 0 -and $_.dest_map -eq 'MAP_ALBERA_STORICA_ANFITEATRO' -and $_.dest_warp_id -eq '0' }).Count -eq 1) 'Amphitheatre return anchor is invalid.'
 Assert-True (@($gym.warp_events | Where-Object { $_.dest_map -eq 'MAP_ALBERA_STORICA' -and $_.dest_warp_id -eq '0' }).Count -eq 1) 'Amphitheatre return warp is invalid.'
 Assert-True ($eventScripts.Contains('.include "data/maps/AlberaStorica_Anfiteatro/scripts.inc"')) 'Amphitheatre scripts are not registered.'
 

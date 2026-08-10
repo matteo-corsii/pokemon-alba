@@ -35,7 +35,9 @@ Assert-True ($alberaStorica.id -eq 'MAP_ALBERA_STORICA' -and $alberaStorica.layo
 Assert-True (@($alberaStorica.connections).Count -eq 1) 'Albera Storica must have only the Porta Pretoria connection.'
 $returnConnection = @($alberaStorica.connections | Where-Object { $_.direction -eq 'right' -and $_.map -eq 'MAP_OLDALE_TOWN' -and $_.offset -eq 0 })
 Assert-True ($returnConnection.Count -eq 1) 'Return connection to Porta Pretoria is invalid.'
-Assert-True (@($alberaStorica.object_events).Count -eq 0 -and @($alberaStorica.coord_events).Count -eq 0) 'Albera Storica must not gain unrelated NPC or coordinate events.'
+Assert-True (@($alberaStorica.object_events).Count -eq 0) 'Albera Storica must not gain unrelated NPCs.'
+$amphitheatreEntranceTriggers = @($alberaStorica.coord_events | Where-Object { $_.x -in @(17, 18) -and $_.y -eq 4 -and $_.elevation -eq 3 -and $_.var -eq 'VAR_ALBERA_GYM_INPUT' -and $_.var_value -eq '0' -and $_.script -eq 'AlberaStorica_EventScript_EnterAnfiteatro' })
+Assert-True ($amphitheatreEntranceTriggers.Count -eq 2 -and @($alberaStorica.coord_events).Count -eq 2) 'Albera Storica must not gain unrelated coordinate events.'
 
 $westConnection = @($oldale.connections | Where-Object { $_.direction -eq 'left' })
 Assert-True ($westConnection.Count -eq 1 -and $westConnection[0].map -eq 'MAP_ALBERA_STORICA') 'Porta Pretoria west must connect to Albera Storica.'
