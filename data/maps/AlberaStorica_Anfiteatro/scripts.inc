@@ -271,8 +271,6 @@ AlberaStorica_Anfiteatro_EventScript_Lirio::
 
 AlberaStorica_Anfiteatro_EventScript_LirioBattle:
 	trainerbattle_single TRAINER_LEADER_LIRIO, AlberaStorica_Anfiteatro_Text_LirioIntro, AlberaStorica_Anfiteatro_Text_LirioDefeat, AlberaStorica_Anfiteatro_EventScript_LirioDefeated, NO_MUSIC
-	msgbox AlberaStorica_Anfiteatro_Text_LirioPostVictoryText, MSGBOX_DEFAULT
-	releaseall
 	end
 
 AlberaStorica_Anfiteatro_EventScript_LirioDefeated:
@@ -281,7 +279,9 @@ AlberaStorica_Anfiteatro_EventScript_LirioDefeated:
 	setvar VAR_ALBERA_GYM_STATE, 4
 	setvar VAR_ALBERA_GYM_INPUT, 0
 	msgbox AlberaStorica_Anfiteatro_Text_MedagliaBallata, MSGBOX_DEFAULT
-	return
+	msgbox AlberaStorica_Anfiteatro_Text_LirioPostVictoryText, MSGBOX_DEFAULT
+	releaseall
+	end
 
 AlberaStorica_Anfiteatro_EventScript_LirioPostVictory:
 	msgbox AlberaStorica_Anfiteatro_Text_LirioPostVictoryText, MSGBOX_DEFAULT

@@ -27,6 +27,7 @@ $scripts = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'data/maps/Albera
 $eventScripts = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'data/event_scripts.s') -Raw
 $emeraldTrainers = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'src/data/trainers.party') -Raw
 $frlgTrainers = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'src/data/trainers_frlg.party') -Raw
+$blockdata = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/layouts/ContestHall/map.bin'))
 
 Assert-True ((@($groups.gMapGroup_TownsAndRoutes | Where-Object { $_ -eq 'AlberaStorica_Anfiteatro' }).Count) -eq 1) 'Amphitheatre map missing or duplicated.'
 Assert-True ((@($layouts.layouts | Where-Object { $_.id -eq 'LAYOUT_ALBERA_STORICA_ANFITEATRO' }).Count) -eq 1) 'Amphitheatre layout missing or duplicated.'
@@ -78,6 +79,8 @@ foreach ($text in @($emeraldTrainers, $frlgTrainers)) {
 foreach ($device in @(@(4, 'Tamburo'), @(7, 'Corda'), @(10, 'Voce'))) {
     Assert-True (@($gym.bg_events | Where-Object { $_.x -eq $device[0] -and $_.y -eq 5 -and $_.script -eq "AlberaStorica_Anfiteatro_EventScript_$($device[1])" }).Count -eq 1) "Missing $($device[1]) sign event."
     Assert-True (@($gym.object_events | Where-Object { $_.graphics_id -eq 'OBJ_EVENT_GFX_SIGN' -and $_.x -eq $device[0] -and $_.y -eq 5 -and $_.elevation -eq 3 -and $_.script -eq "AlberaStorica_Anfiteatro_EventScript_$($device[1])" }).Count -eq 1) "Missing visible $($device[1]) post."
+    $word = [BitConverter]::ToUInt16($blockdata, ((5 * 15) + $device[0]) * 2)
+    Assert-True ($word -eq 0x3281) "Missing physical device cube for $($device[1])."
 }
 
 foreach ($token in @('FLAG_ALBERA_GYM_TUTORIAL_SEEN', 'AlberaStorica_Anfiteatro_Text_Tutorial', 'TAMBuro!', 'CORDA!', 'VOCE!', 'Simbolo: CERCHIO.', 'Simbolo: TRE LINEE.', 'Simbolo: ONDA.', 'Riprova: TAMBuro -> CORDA.', 'Riprova: VOCE -> CORDA -> VOCE.', 'Riprova: TAMBuro -> CORDA -> VOCE.', 'TRAINER_ALBERA_DARIO', 'TRAINER_ALBERA_MARA', 'TRAINER_ALBERA_ELIO', 'TRAINER_LEADER_LIRIO', 'FLAG_ALBERA_GYM_STROFA_I_COMPLETE', 'FLAG_ALBERA_GYM_STROFA_II_COMPLETE', 'FLAG_ALBERA_GYM_STROFA_III_COMPLETE', 'setvar VAR_ALBERA_GYM_STATE, 1', 'setvar VAR_ALBERA_GYM_STATE, 2', 'setvar VAR_ALBERA_GYM_STATE, 3', 'setvar VAR_ALBERA_GYM_STATE, 4', 'setvar VAR_ALBERA_GYM_INPUT, 0', 'FLAG_BADGE01_GET', 'MEDAGLIA BALLATA', "L'eco è tornato prima della nota.")) {
@@ -88,6 +91,11 @@ foreach ($required in @('AlberaStorica_Anfiteatro_EventScript_DarioBattle:', 'Al
     Assert-True ($scripts.Contains($required)) "Missing Gym progression fixture: $required"
 }
 Assert-True (-not $scripts.Contains('giveitem ITEM_TM')) 'No MT may be assigned in Demo 0.1.'
+Assert-True ($scripts -match '(?s)AlberaStorica_Anfiteatro_EventScript_LirioDefeated:.*?setflag FLAG_BADGE01_GET.*?setvar VAR_ALBERA_GYM_STATE, 4.*?Text_MedagliaBallata.*?Text_LirioPostVictoryText.*?releaseall\s*end') 'Lirio post-battle flow must end safely after badge and dialogue.'
+Assert-True ($scripts -notmatch '(?s)AlberaStorica_Anfiteatro_EventScript_LirioDefeated:.*?\breturn\b') 'Lirio post-battle flow must not return without a caller.'
+Assert-True (@($gym.object_events | Where-Object { $_.local_id -eq 'LOCALID_ALBERA_GYM_LIRIO' -and $_.graphics_id -eq 'OBJ_EVENT_GFX_ARTIST' }).Count -eq 1) 'Lirio must use the male Artist overworld sprite.'
+Assert-True ($emeraldTrainers -match '(?s)=== TRAINER_LEADER_LIRIO ===.*?Pic: Leader Brawly') 'Lirio Emerald trainer pic must be male.'
+Assert-True ($frlgTrainers -match '(?s)=== TRAINER_LEADER_LIRIO ===.*?Pic: Leader Lt Surge Frlg') 'Lirio FRLG trainer pic must be male.'
 
 foreach ($path in @('src/data/wild_encounters.json', 'src/data/pokemon', 'src/save.c', 'include/constants/species.h')) {
     & git -C $RepositoryRoot diff --quiet develop -- $path
