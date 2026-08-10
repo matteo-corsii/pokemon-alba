@@ -19,6 +19,8 @@ $gym = Read-Json 'data/maps/AlberaStorica_Anfiteatro/map.json'
 $cityScripts = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'data/maps/AlberaStorica/scripts.inc') -Raw
 $vars = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'include/constants/vars.h') -Raw
 $varsFrlg = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'include/constants/vars_frlg.h') -Raw
+$flags = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'include/constants/flags.h') -Raw
+$flagsFrlg = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'include/constants/flags_frlg.h') -Raw
 $opponents = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'include/constants/opponents.h') -Raw
 $opponentsFrlg = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'include/constants/opponents_frlg.h') -Raw
 $scripts = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'data/maps/AlberaStorica_Anfiteatro/scripts.inc') -Raw
@@ -32,14 +34,27 @@ Assert-True ($gym.id -eq 'MAP_ALBERA_STORICA_ANFITEATRO' -and $gym.layout -eq 'L
 Assert-True ($gym.music -eq 'MUS_GYM' -and $gym.battle_scene -eq 'MAP_BATTLE_SCENE_GYM') 'Unexpected Gym map presentation.'
 Assert-True ($gym.region_map_section -eq 'MAPSEC_ALBERA_STORICA' -and $null -eq $gym.connections) 'Unexpected regional map section or connection.'
 Assert-True (@($city.coord_events | Where-Object { $_.x -in @(17, 18) -and $_.y -eq 4 -and $_.elevation -eq 3 -and $_.var -eq 'VAR_ALBERA_GYM_INPUT' -and $_.var_value -eq '0' -and $_.script -eq 'AlberaStorica_EventScript_EnterAnfiteatro' }).Count -eq 2) 'City-to-Amphitheatre entrance triggers are invalid.'
-Assert-True ($cityScripts.Contains("warp MAP_ALBERA_STORICA_ANFITEATRO, 7, 10")) 'City-to-Amphitheatre entrance script is invalid.'
+Assert-True ($cityScripts -match '(?s)AlberaStorica_EventScript_EnterAnfiteatro::\s*warp MAP_ALBERA_STORICA_ANFITEATRO, 7, 10\s*waitstate\s*end') 'City-to-Amphitheatre entrance script is invalid.'
 Assert-True (@($city.warp_events | Where-Object { $_.x -eq 17 -and $_.y -eq 5 -and $_.elevation -eq 0 -and $_.dest_map -eq 'MAP_ALBERA_STORICA_ANFITEATRO' -and $_.dest_warp_id -eq '0' }).Count -eq 1) 'Amphitheatre return anchor is invalid.'
-Assert-True (@($gym.warp_events | Where-Object { $_.dest_map -eq 'MAP_ALBERA_STORICA' -and $_.dest_warp_id -eq '0' }).Count -eq 1) 'Amphitheatre return warp is invalid.'
+Assert-True (@($gym.coord_events | Where-Object { $_.x -eq 7 -and $_.y -eq 10 -and $_.elevation -eq 3 -and $_.var -eq 'VAR_TEMP_1' -and $_.var_value -eq '0' -and $_.script -eq 'AlberaStorica_Anfiteatro_EventScript_Exit' }).Count -eq 1) 'Amphitheatre exit trigger is invalid.'
+Assert-True ($scripts -match '(?s)AlberaStorica_Anfiteatro_EventScript_Exit::\s*setvar VAR_ALBERA_GYM_INPUT, 0\s*warp MAP_ALBERA_STORICA, 17, 5\s*waitstate\s*end') 'Amphitheatre return script is invalid.'
 Assert-True ($eventScripts.Contains('.include "data/maps/AlberaStorica_Anfiteatro/scripts.inc"')) 'Amphitheatre scripts are not registered.'
+Assert-True ($scripts -match '(?s)map_script MAP_SCRIPT_ON_FRAME_TABLE, AlberaStorica_Anfiteatro_OnFrame.*?map_script_2 VAR_TEMP_0, 0, AlberaStorica_Anfiteatro_EventScript_ShowTutorial.*?setflag FLAG_ALBERA_GYM_TUTORIAL_SEEN') 'One-time Gym tutorial setup is invalid.'
 
 foreach ($pair in @(@('VAR_ALBERA_GYM_STATE', '0x40F9'), @('VAR_ALBERA_GYM_INPUT', '0x40FA'))) {
     Assert-True ($vars -match "#define\s+$($pair[0])\s+$($pair[1])\b") "Missing Emerald $($pair[0])."
     Assert-True ($varsFrlg -match "#define\s+$($pair[0])\s+$($pair[1])\b") "Missing FRLG $($pair[0])."
+}
+
+foreach ($pair in @(@('FLAG_ALBERA_GYM_TUTORIAL_SEEN', '0x8E5'), @('FLAG_ALBERA_GYM_STROFA_I_COMPLETE', '0x8E6'), @('FLAG_ALBERA_GYM_STROFA_II_COMPLETE', '0x8E7'), @('FLAG_ALBERA_GYM_STROFA_III_COMPLETE', '0x8E8'))) {
+    Assert-True ($flags -match "#define\s+$($pair[0])\s+$($pair[1])\b") "Missing Emerald $($pair[0])."
+    Assert-True ($flagsFrlg -match "#define\s+$($pair[0])\s+$($pair[1])\b") "Missing FRLG $($pair[0])."
+}
+foreach ($legacy in @('FLAG_UNUSED_0x8E5', 'FLAG_UNUSED_0x8E6', 'FLAG_UNUSED_0x8E7', 'FLAG_UNUSED_0x8E8')) {
+    Assert-True (-not $flags.Contains($legacy)) "Legacy Emerald flag alias remains: $legacy"
+}
+foreach ($legacy in @('FLAG_0x8E5', 'FLAG_0x8E6', 'FLAG_0x8E7', 'FLAG_0x8E8')) {
+    Assert-True ($flagsFrlg -notmatch "#define\s+$legacy\s+\(SYS_FLAGS") "Active FRLG flag alias remains: $legacy"
 }
 
 foreach ($pair in @(@('TRAINER_ALBERA_DARIO', '855', '624'), @('TRAINER_ALBERA_MARA', '856', '625'), @('TRAINER_ALBERA_ELIO', '857', '626'), @('TRAINER_LEADER_LIRIO', '858', '627'))) {
@@ -60,8 +75,17 @@ foreach ($text in @($emeraldTrainers, $frlgTrainers)) {
     }
 }
 
-foreach ($token in @('Tamburo', 'Corda', 'Voce', 'CERCHIO', 'TRE LINEE', 'ONDA', 'TRAINER_ALBERA_DARIO', 'TRAINER_ALBERA_MARA', 'TRAINER_ALBERA_ELIO', 'TRAINER_LEADER_LIRIO', 'setvar VAR_ALBERA_GYM_STATE, 1', 'setvar VAR_ALBERA_GYM_STATE, 2', 'setvar VAR_ALBERA_GYM_STATE, 3', 'setvar VAR_ALBERA_GYM_STATE, 4', 'setvar VAR_ALBERA_GYM_INPUT, 0', 'FLAG_BADGE01_GET', 'MEDAGLIA BALLATA', "L'eco è tornato prima della nota.")) {
+foreach ($device in @(@(4, 'Tamburo'), @(7, 'Corda'), @(10, 'Voce'))) {
+    Assert-True (@($gym.bg_events | Where-Object { $_.x -eq $device[0] -and $_.y -eq 5 -and $_.script -eq "AlberaStorica_Anfiteatro_EventScript_$($device[1])" }).Count -eq 1) "Missing $($device[1]) sign event."
+    Assert-True (@($gym.object_events | Where-Object { $_.graphics_id -eq 'OBJ_EVENT_GFX_SIGN' -and $_.x -eq $device[0] -and $_.y -eq 5 -and $_.elevation -eq 3 -and $_.script -eq "AlberaStorica_Anfiteatro_EventScript_$($device[1])" }).Count -eq 1) "Missing visible $($device[1]) post."
+}
+
+foreach ($token in @('FLAG_ALBERA_GYM_TUTORIAL_SEEN', 'AlberaStorica_Anfiteatro_Text_Tutorial', 'TAMBuro!', 'CORDA!', 'VOCE!', 'Simbolo: CERCHIO.', 'Simbolo: TRE LINEE.', 'Simbolo: ONDA.', 'Riprova: TAMBuro -> CORDA.', 'Riprova: VOCE -> CORDA -> VOCE.', 'Riprova: TAMBuro -> CORDA -> VOCE.', 'TRAINER_ALBERA_DARIO', 'TRAINER_ALBERA_MARA', 'TRAINER_ALBERA_ELIO', 'TRAINER_LEADER_LIRIO', 'FLAG_ALBERA_GYM_STROFA_I_COMPLETE', 'FLAG_ALBERA_GYM_STROFA_II_COMPLETE', 'FLAG_ALBERA_GYM_STROFA_III_COMPLETE', 'setvar VAR_ALBERA_GYM_STATE, 1', 'setvar VAR_ALBERA_GYM_STATE, 2', 'setvar VAR_ALBERA_GYM_STATE, 3', 'setvar VAR_ALBERA_GYM_STATE, 4', 'setvar VAR_ALBERA_GYM_INPUT, 0', 'FLAG_BADGE01_GET', 'MEDAGLIA BALLATA', "L'eco è tornato prima della nota.")) {
     Assert-True ($scripts.Contains($token)) "Missing Gym script token: $token"
+}
+Assert-True ([regex]::Matches($scripts, '\btrainerbattle_single\b').Count -eq 4) 'Gym device completion must not start trainer battles automatically.'
+foreach ($required in @('AlberaStorica_Anfiteatro_EventScript_DarioBattle:', 'AlberaStorica_Anfiteatro_EventScript_MaraBattle:', 'AlberaStorica_Anfiteatro_EventScript_ElioBattle:', 'AlberaStorica_Anfiteatro_Text_StrofaICompletata:', 'AlberaStorica_Anfiteatro_Text_StrofaIICompletata:', 'AlberaStorica_Anfiteatro_Text_StrofaIIICompletata:', 'AlberaStorica_Anfiteatro_Text_LirioSbloccato:')) {
+    Assert-True ($scripts.Contains($required)) "Missing Gym progression fixture: $required"
 }
 Assert-True (-not $scripts.Contains('giveitem ITEM_TM')) 'No MT may be assigned in Demo 0.1.'
 

@@ -3,4 +3,5 @@ AlberaStorica_MapScripts::
 
 AlberaStorica_EventScript_EnterAnfiteatro::
 	warp MAP_ALBERA_STORICA_ANFITEATRO, 7, 10
+	waitstate
 	end

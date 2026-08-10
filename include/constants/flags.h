@@ -55,6 +55,10 @@
 #define FLAG_ALBERA_WATER_RESEARCH_STARTED 0x21 // Professor Lauro's parallel water research assignment started
 #define FLAG_ALBERA_HOME_ANOMALY_SEEN 0x22 // Initial domestic water-pressure anomaly completed
 #define FLAG_ALBERA_NICO_BATTLE_COMPLETED 0x23 // Friendly opening battle with Nico completed
+#define FLAG_ALBERA_GYM_TUTORIAL_SEEN      0x8E5
+#define FLAG_ALBERA_GYM_STROFA_I_COMPLETE  0x8E6
+#define FLAG_ALBERA_GYM_STROFA_II_COMPLETE 0x8E7
+#define FLAG_ALBERA_GYM_STROFA_III_COMPLETE 0x8E8
 #define FLAG_HIDE_ALBERA_LAB_NICO 0x24 // Nico's dedicated Albèra lab object
 #define FLAG_HIDE_ALBERA_LAB_LIA 0x25 // Lia's dedicated Albèra lab object
 #define FLAG_HIDE_ROUTE101_RESEARCH_PARTY 0x26 // Via Verdi investigation party objects
@@ -1507,10 +1511,6 @@
 
 #define FLAG_RECEIVED_POKEDEX_FROM_BIRCH            (SYSTEM_FLAGS + 0x84)
 
-#define FLAG_UNUSED_0x8E5                           (SYSTEM_FLAGS + 0x85) // Unused Flag
-#define FLAG_UNUSED_0x8E6                           (SYSTEM_FLAGS + 0x86) // Unused Flag
-#define FLAG_UNUSED_0x8E7                           (SYSTEM_FLAGS + 0x87) // Unused Flag
-#define FLAG_UNUSED_0x8E8                           (SYSTEM_FLAGS + 0x88) // Unused Flag
 #define FLAG_UNUSED_0x8E9                           (SYSTEM_FLAGS + 0x89) // Unused Flag
 #define FLAG_UNUSED_0x8EA                           (SYSTEM_FLAGS + 0x8A) // Unused Flag
 #define FLAG_UNUSED_0x8EB                           (SYSTEM_FLAGS + 0x8B) // Unused Flag

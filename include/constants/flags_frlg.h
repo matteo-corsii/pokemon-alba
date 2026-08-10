@@ -6,6 +6,10 @@
 #define FLAG_ALBERA_WATER_RESEARCH_STARTED  0x021
 #define FLAG_ALBERA_HOME_ANOMALY_SEEN        0x022
 #define FLAG_ALBERA_NICO_BATTLE_COMPLETED    0x023
+#define FLAG_ALBERA_GYM_TUTORIAL_SEEN         0x8E5
+#define FLAG_ALBERA_GYM_STROFA_I_COMPLETE     0x8E6
+#define FLAG_ALBERA_GYM_STROFA_II_COMPLETE    0x8E7
+#define FLAG_ALBERA_GYM_STROFA_III_COMPLETE   0x8E8
 #define FLAG_HIDE_ALBERA_LAB_NICO            0x024
 #define FLAG_HIDE_ALBERA_LAB_LIA             0x025
 #define FLAG_HIDE_ROUTE101_RESEARCH_PARTY  0x026
@@ -1461,10 +1465,6 @@
 #define FLAG_0x8E2                                                  (SYS_FLAGS + 0xE2)
 #define FLAG_0x8E3                                                  (SYS_FLAGS + 0xE3)
 #define FLAG_0x8E4                                                  (SYS_FLAGS + 0xE4)
-#define FLAG_0x8E5                                                  (SYS_FLAGS + 0xE5)
-#define FLAG_0x8E6                                                  (SYS_FLAGS + 0xE6)
-#define FLAG_0x8E7                                                  (SYS_FLAGS + 0xE7)
-#define FLAG_0x8E8                                                  (SYS_FLAGS + 0xE8)
 #define FLAG_0x8E9                                                  (SYS_FLAGS + 0xE9)
 #define FLAG_0x8EA                                                  (SYS_FLAGS + 0xEA)
 #define FLAG_0x8EB                                                  (SYS_FLAGS + 0xEB)
