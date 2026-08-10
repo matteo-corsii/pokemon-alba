@@ -95,7 +95,7 @@ Assert-True ($scripts -match '(?s)AlberaStorica_Anfiteatro_EventScript_LirioDefe
 Assert-True ($scripts -notmatch '(?s)AlberaStorica_Anfiteatro_EventScript_LirioDefeated:.*?\breturn\b') 'Lirio post-battle flow must not return without a caller.'
 Assert-True (@($gym.object_events | Where-Object { $_.local_id -eq 'LOCALID_ALBERA_GYM_LIRIO' -and $_.graphics_id -eq 'OBJ_EVENT_GFX_ARTIST' }).Count -eq 1) 'Lirio must use the male Artist overworld sprite.'
 Assert-True ($emeraldTrainers -match '(?s)=== TRAINER_LEADER_LIRIO ===.*?Pic: Leader Brawly') 'Lirio Emerald trainer pic must be male.'
-Assert-True ($frlgTrainers -match '(?s)=== TRAINER_LEADER_LIRIO ===.*?Pic: Leader Lt\. Surge Frlg') 'Lirio FRLG trainer pic must be male.'
+Assert-True ($frlgTrainers -match '(?s)=== TRAINER_LEADER_LIRIO ===.*?Pic: Leader Lt Surge Frlg') 'Lirio FRLG trainer pic must be male.'
 
 foreach ($path in @('src/data/wild_encounters.json', 'src/data/pokemon', 'src/save.c', 'include/constants/species.h')) {
     & git -C $RepositoryRoot diff --quiet develop -- $path
