@@ -23,13 +23,32 @@
   "object_events": [],
   "warp_events": [
     {
-      "x": 15,
-      "y": 26,
+      "x": 17,
+      "y": 5,
       "elevation": 0,
       "dest_map": "MAP_ALBERA_STORICA_ANFITEATRO",
       "dest_warp_id": "0"
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 4,
+      "elevation": 3,
+      "var": "VAR_ALBERA_GYM_INPUT",
+      "var_value": "0",
+      "script": "AlberaStorica_EventScript_EnterAnfiteatro"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 4,
+      "elevation": 3,
+      "var": "VAR_ALBERA_GYM_INPUT",
+      "var_value": "0",
+      "script": "AlberaStorica_EventScript_EnterAnfiteatro"
+    }
+  ],
   "bg_events": []
 }
