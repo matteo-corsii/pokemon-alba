@@ -277,8 +277,8 @@ AlberaStorica_Anfiteatro_EventScript_LirioDefeated:
 	setflag FLAG_BADGE01_GET
 	setvar VAR_ALBERA_GYM_STATE, 4
 	setvar VAR_ALBERA_GYM_INPUT, 0
-	msgbox AlberaStorica_Anfiteatro_Text_MedagliaBallata, MSGBOX_DEFAULT
 	releaseall
+	msgbox AlberaStorica_Anfiteatro_Text_MedagliaBallata, MSGBOX_DEFAULT
 	end
 
 AlberaStorica_Anfiteatro_EventScript_LirioPostVictory:
