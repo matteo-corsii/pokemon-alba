@@ -132,7 +132,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route101_EventScript_Nico",
-      "flag": "FLAG_HIDE_ROUTE101_RESEARCH_PARTY"
+      "flag": "FLAG_HIDE_ROUTE101_NICO"
     }
   ],
   "warp_events": [],

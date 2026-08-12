@@ -17,16 +17,28 @@ Route101_EventScript_SetAlberaCheckpoint::
 
 Route101_EventScript_SetLiaAtPokemonBehavior::
 	setobjectxyperm LOCALID_ROUTE101_LIA, 21, 9
+	call Route101_EventScript_RestoreLiaForInvestigation
+	setflag FLAG_HIDE_ROUTE101_NICO
 	removeobject LOCALID_ROUTE101_NICO
 	return
 
 Route101_EventScript_SetLiaAtAncientCanal::
 	setobjectxyperm LOCALID_ROUTE101_LIA, 10, 3
+	call Route101_EventScript_RestoreLiaForInvestigation
+	setflag FLAG_HIDE_ROUTE101_NICO
 	removeobject LOCALID_ROUTE101_NICO
+	return
+
+Route101_EventScript_RestoreLiaForInvestigation::
+	goto_if_unset FLAG_HIDE_ROUTE101_RESEARCH_PARTY, Route101_EventScript_RestoreLiaForInvestigation_Return
+	clearflag FLAG_HIDE_ROUTE101_RESEARCH_PARTY
+	addobject LOCALID_ROUTE101_LIA
+Route101_EventScript_RestoreLiaForInvestigation_Return::
 	return
 
 Route101_EventScript_EndViaVerdiInvestigation::
 	setflag FLAG_HIDE_ROUTE101_RESEARCH_PARTY
+	setflag FLAG_HIDE_ROUTE101_NICO
 	removeobject LOCALID_ROUTE101_LIA
 	removeobject LOCALID_ROUTE101_NICO
 	return
@@ -253,6 +265,7 @@ Route101_EventScript_InvestigateSource::
 	setvar VAR_ALBERA_VIA_VERDI_STATE, 2
 	setobjectxy LOCALID_ROUTE101_LIA, 21, 9
 	setobjectxyperm LOCALID_ROUTE101_LIA, 21, 9
+	setflag FLAG_HIDE_ROUTE101_NICO
 	removeobject LOCALID_ROUTE101_NICO
 	releaseall
 	end
@@ -284,6 +297,7 @@ Route101_EventScript_InvestigateAncientCanal::
 	msgbox Route101_Text_WaterFlowReturns, MSGBOX_DEFAULT
 	setvar VAR_ALBERA_VIA_VERDI_STATE, 4
 	setflag FLAG_HIDE_ROUTE101_RESEARCH_PARTY
+	setflag FLAG_HIDE_ROUTE101_NICO
 	removeobject LOCALID_ROUTE101_LIA
 	releaseall
 	end

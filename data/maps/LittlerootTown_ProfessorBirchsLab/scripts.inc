@@ -261,6 +261,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_CompleteAlberaOpening::
 	setvar VAR_ALBERA_VIA_VERDI_STATE, 1
 	#ifdef EMERALD
 	clearflag FLAG_HIDE_ROUTE101_RESEARCH_PARTY
+	clearflag FLAG_HIDE_ROUTE101_NICO
 	#endif
 	setflag FLAG_ALBERA_WATER_RESEARCH_STARTED
 	setflag FLAG_RESCUED_BIRCH
