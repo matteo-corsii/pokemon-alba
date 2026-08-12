@@ -251,6 +251,7 @@ Route101_EventScript_InvestigateSource::
 	msgbox Route101_Text_LiaAlmostDrySource, MSGBOX_DEFAULT
 	msgbox Route101_Text_NicoAtSource, MSGBOX_DEFAULT
 	setvar VAR_ALBERA_VIA_VERDI_STATE, 2
+	setobjectxy LOCALID_ROUTE101_LIA, 21, 9
 	setobjectxyperm LOCALID_ROUTE101_LIA, 21, 9
 	removeobject LOCALID_ROUTE101_NICO
 	releaseall
@@ -262,6 +263,7 @@ Route101_EventScript_InvestigatePokemonBehavior::
 	waitmovement 0
 	msgbox Route101_Text_LiaPokemonBehavior, MSGBOX_DEFAULT
 	setvar VAR_ALBERA_VIA_VERDI_STATE, 3
+	setobjectxy LOCALID_ROUTE101_LIA, 10, 3
 	setobjectxyperm LOCALID_ROUTE101_LIA, 10, 3
 	releaseall
 	end
