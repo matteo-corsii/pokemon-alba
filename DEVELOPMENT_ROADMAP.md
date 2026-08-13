@@ -2,27 +2,27 @@
 
 Questa roadmap descrive una sequenza iniziale di attività. Ogni fase deve produrre un risultato verificabile prima di passare alla successiva. I dettagli tecnici e gli eventuali comandi saranno definiti solo dopo essere stati verificati sulla documentazione e sull’ambiente effettivamente utilizzato.
 
-**Stato delle milestone:** è in validazione il primo segmento canonico giocabile di Albèra: anomalia domestica, convocazione di Lauro, scelta del trio nel laboratorio, distribuzione a Nico e Lia, battaglia con Nico, incarico e checkpoint su Route 101. FireRed e LeafGreen restano compatibili e conservano i propri starter. Tutte le nove specie possiedono front animato, back, icona e palette normale originali; shiny, cry, impronte e overworld non sono ancora definitivi. Le 46 mosse uniche dei nove learnset per livello restano localizzate senza cambiamenti tecnici.
+**Stato delle milestone:** il primo segmento canonico giocabile di Albèra e la prima indagine di Via Verdi sono stati validati end-to-end nella baseline `v0.1.0-playtest-stable` del 13 agosto 2026, commit `d37c05cc43eb2d918ab3dbaa0b9eb54652cf6dfd`. Sono stati verificati Lia/Nico, ritorno dell'acqua, prima Palestra e post-battaglia di Lirio, uscita dalla Palestra e salvataggio; non risultano bug bloccanti nel segmento testato. Il commit è il checkpoint consigliato per le regressioni future. FireRed e LeafGreen restano compatibili e conservano i propri starter. Tutte le nove specie possiedono front animato, back, icona e palette normale originali; shiny, cry, impronte e overworld non sono ancora definitivi. Le 46 mosse uniche dei nove learnset per livello restano localizzate senza cambiamenti tecnici.
 
-## Prossima milestone approvata: Via Verdi — Prima indagine sulle sorgenti
+## Milestone validata: Via Verdi — Prima indagine sulle sorgenti
 
-Questa milestone è **approvata ma non ancora implementata**. `Route101` conserva
-identificatori e directory tecniche; **Via Verdi** sarà il nome mostrato al
+Questa milestone è **implementata e validata end-to-end**. `Route101` conserva
+identificatori e directory tecniche; **Via Verdi** è il nome mostrato al
 giocatore, scelto per il richiamo a Giuseppe Verdi e al paesaggio verde.
 
-Il segmento collegherà Albèra Bassa a Porta Pretoria con un percorso verde e
+Il segmento collega Albèra Bassa a Porta Pretoria con un percorso verde e
 collinare segnato da sorgenti, canaletti, terreno umido e canalizzazioni
 antiche. Lauro consegnerà esattamente **10 Poké Ball**. Le catture saranno
 facoltative e non è previsto un tutorial lungo o obbligatorio. Lia guiderà
 l'indagine; Nico comparirà brevemente senza una seconda battaglia.
 
-La progressione comprenderà tre punti concettuali di rilevazione: un canale o
+La progressione comprende tre punti concettuali di rilevazione: un canale o
 una sorgente quasi asciutta con terreno ancora umido; un'area attraversata o
 evitata in modo anomalo dai Pokémon; un'antica canalizzazione vicina a Porta
-Pretoria. Nella conclusione, un suono profondo e un lieve tremore accompagneranno
+Pretoria. Nella conclusione, un suono profondo e un lieve tremore accompagnano
 una variazione o un arresto del flusso, seguiti dalla ripresa improvvisa
-dell'acqua. Non sono ancora approvati coordinate, testi, flag, variabili o
-script. Sono esclusi antagonisti, leggendari, disastri dichiarati e la prima
+dell'acqua. Coordinate, testi, flag, variabili e script sono implementati e
+validati. Sono esclusi antagonisti, leggendari, disastri dichiarati e la prima
 Palestra, che appartiene alla successiva Albèra Storica.
 
 Progressione di livello approvata:
@@ -156,7 +156,7 @@ Allenatori necessari: incontri e sfide aggiuntive devono restare facoltativi.
 
 ## 11. Sviluppare eventi e dialoghi del prologo
 
-**Stato:** il flusso successivo all'arrivo ad Albèra è stato riallineato al canone. Il primo segnale è domestico; Lauro convoca il protagonista nel laboratorio, assegna i tre starter al giocatore, a Nico e a Lia, e dopo la lotta amichevole con Nico affida il sopralluogo. Lia non combatte e individua la nuova variazione. Route 101 viene sbloccata come checkpoint stabile. Restano da completare CI e collaudo manuale dei tre percorsi.
+**Stato:** il flusso successivo all'arrivo ad Albèra è stato riallineato al canone e validato nella baseline `v0.1.0-playtest-stable`. Il primo segnale è domestico; Lauro convoca il protagonista nel laboratorio, assegna i tre starter al giocatore, a Nico e a Lia, e dopo la lotta amichevole con Nico affida il sopralluogo. Lia non combatte e individua la nuova variazione. Route 101 viene sbloccata come checkpoint stabile. CI e collaudo manuale del segmento sono completati.
 
 **Obiettivo:** introdurre protagonista, quartiere, rivale, starter e primi segnali della crisi idrica attraverso il gioco.
 
