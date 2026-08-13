@@ -28,9 +28,12 @@ $regionSections = Read-Json 'src/data/region_map/region_map_sections.json'
 
 Assert-True ($flags -match '#define\s+FLAG_HIDE_ROUTE101_RESEARCH_PARTY\s+0x26\b') 'Missing Emerald research-party flag.'
 Assert-True ($flagsFrlg -match '#define\s+FLAG_HIDE_ROUTE101_RESEARCH_PARTY\s+0x026\b') 'Missing FRLG research-party flag.'
+Assert-True ($flags -match '#define\s+FLAG_HIDE_ROUTE101_NICO\s+0x27\b') 'Missing Emerald Nico visibility flag.'
+Assert-True ($flagsFrlg -match '#define\s+FLAG_HIDE_ROUTE101_NICO\s+0x027\b') 'Missing FRLG Nico visibility flag.'
 Assert-True ($vars -match '#define\s+VAR_ALBERA_VIA_VERDI_STATE\s+0x40F8\b') 'Missing Emerald Via Verdi state variable.'
 Assert-True ($varsFrlg -match '#define\s+VAR_ALBERA_VIA_VERDI_STATE\s+0x40F8\b') 'Missing FRLG Via Verdi state variable.'
 Assert-Contains $newGame 'setflag FLAG_HIDE_ROUTE101_RESEARCH_PARTY' 'New games must hide the research party by default.'
+Assert-Contains $newGame 'setflag FLAG_HIDE_ROUTE101_NICO' 'New games must hide Nico by default.'
 
 Assert-Contains $lab 'checkitemspace ITEM_POKE_BALL, 10' 'The laboratory must check room for ten Poke Balls.'
 Assert-Contains $lab 'giveitem ITEM_POKE_BALL, 10' 'The laboratory must give exactly ten Poke Balls.'
@@ -38,17 +41,18 @@ Assert-Contains $lab 'LittlerootTown_ProfessorBirchsLab_EventScript_NoRoomForVia
 Assert-Contains $lab 'setvar VAR_ALBERA_VIA_VERDI_STATE, 1' 'The investigation must start after the Poke Balls are given.'
 Assert-True ($lab -match 'goto_if_eq VAR_ALBERA_OPENING_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_CompleteAlberaOpening') 'Lauro cannot resume the full-bag handoff.'
 Assert-Contains $lab 'setflag FLAG_ALBERA_WATER_RESEARCH_STARTED' 'The existing research flag must remain part of the canonical handoff.'
+Assert-Contains $lab 'clearflag FLAG_HIDE_ROUTE101_NICO' 'The laboratory must reveal Nico with Lia for the first investigation point.'
 
 $expectedObjects = @{
-    LOCALID_ROUTE101_LIA = 'OBJ_EVENT_GFX_MAY_NORMAL'
-    LOCALID_ROUTE101_NICO = 'OBJ_EVENT_GFX_BRENDAN_NORMAL'
+    LOCALID_ROUTE101_LIA = @{ Graphics = 'OBJ_EVENT_GFX_MAY_NORMAL'; Flag = 'FLAG_HIDE_ROUTE101_RESEARCH_PARTY' }
+    LOCALID_ROUTE101_NICO = @{ Graphics = 'OBJ_EVENT_GFX_BRENDAN_NORMAL'; Flag = 'FLAG_HIDE_ROUTE101_NICO' }
 }
 foreach ($localId in $expectedObjects.Keys) {
     $object = @($routeMap.object_events | Where-Object { $_.local_id -eq $localId })
     Assert-True ($object.Count -eq 1) "Missing Route101 object: $localId."
-    Assert-True ($object[0].graphics_id -eq $expectedObjects[$localId]) "Unexpected graphics for $localId."
+    Assert-True ($object[0].graphics_id -eq $expectedObjects[$localId].Graphics) "Unexpected graphics for $localId."
     Assert-True ($object[0].trainer_type -eq 'TRAINER_TYPE_NONE') "$localId must not initiate a trainer battle."
-    Assert-True ($object[0].flag -eq 'FLAG_HIDE_ROUTE101_RESEARCH_PARTY') "$localId must use the investigation visibility flag."
+    Assert-True ($object[0].flag -eq $expectedObjects[$localId].Flag) "$localId must use its dedicated investigation visibility flag."
 }
 
 $expectedTriggers = @(
@@ -80,7 +84,11 @@ foreach ($token in @(
     'setvar VAR_0x8007, 2',
     'special ShakeScreen',
     'playse SE_M_WATERFALL',
-    'setflag FLAG_HIDE_ROUTE101_RESEARCH_PARTY'
+    'setflag FLAG_HIDE_ROUTE101_RESEARCH_PARTY',
+    'setflag FLAG_HIDE_ROUTE101_NICO',
+    'Route101_EventScript_RestoreLiaForInvestigation',
+    'clearflag FLAG_HIDE_ROUTE101_RESEARCH_PARTY',
+    'addobject LOCALID_ROUTE101_LIA'
 )) { Assert-Contains $route $token "Missing investigation script token: $token." }
 Assert-True (-not $route.Contains('trainerbattle')) 'The Via Verdi investigation must not start a battle.'
 

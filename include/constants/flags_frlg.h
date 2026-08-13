@@ -13,7 +13,7 @@
 #define FLAG_HIDE_ALBERA_LAB_NICO            0x024
 #define FLAG_HIDE_ALBERA_LAB_LIA             0x025
 #define FLAG_HIDE_ROUTE101_RESEARCH_PARTY  0x026
-#define FLAG_0x027               0x027
+#define FLAG_HIDE_ROUTE101_NICO            0x027
 
 // Hide/show flags
 #define FLAG_HIDE_BULBASAUR_BALL                           0x028
