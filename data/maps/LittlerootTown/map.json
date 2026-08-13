@@ -165,6 +165,13 @@
       "elevation": 0,
       "dest_map": "MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB",
       "dest_warp_id": "0"
+    },
+    {
+      "x": 28,
+      "y": 7,
+      "elevation": 0,
+      "dest_map": "MAP_ALBERA_BASSA_SCHOOL",
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [

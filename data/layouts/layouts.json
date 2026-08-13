@@ -9345,6 +9345,17 @@
       "border_filepath": "data/layouts/ContestHall/border.bin",
       "blockdata_filepath": "data/layouts/ContestHall/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ALBERA_BASSA_SCHOOL",
+      "name": "AlberaBassa_School_Layout",
+      "width": 12,
+      "height": 11,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_PokemonSchool",
+      "border_filepath": "data/layouts/AlberaBassa_School/border.bin",
+      "blockdata_filepath": "data/layouts/AlberaBassa_School/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }
