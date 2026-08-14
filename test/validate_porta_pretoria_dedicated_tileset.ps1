@@ -114,9 +114,9 @@ foreach ($property in @('object_events', 'warp_events', 'coord_events', 'bg_even
 $mapBin = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/layouts/OldaleTown/map.bin'))
 Assert-True ($mapBin.Length -eq 800) 'OldaleTown map.bin size changed unexpectedly.'
 $expectedDedicatedPlacements = [ordered]@{
-    '4,6' = 0x29B; '6,6' = 0x29C; '7,6' = 0x29D; '4,7' = 0x298; '6,7' = 0x299; '7,7' = 0x29A
-    '14,15' = 0x29B; '16,15' = 0x29C; '17,15' = 0x29D; '14,16' = 0x298; '16,16' = 0x299; '17,16' = 0x29A
-    '5,16' = 0x29E; '7,16' = 0x29F; '13,6' = 0x2A0; '15,6' = 0x2A1; '16,6' = 0x2A1
+    '4,6' = 0x2A9; '6,6' = 0x2AA; '7,6' = 0x2AB; '4,7' = 0x298; '6,7' = 0x299; '7,7' = 0x29A
+    '14,15' = 0x2A9; '16,15' = 0x2AA; '17,15' = 0x2AB; '14,16' = 0x298; '16,16' = 0x299; '17,16' = 0x29A
+    '5,15' = 0x2AC; '5,16' = 0x29E; '7,16' = 0x29F; '13,5' = 0x2AE; '13,6' = 0x2A0; '15,6' = 0x2A1; '16,6' = 0x2A1
 }
 foreach ($placement in $expectedDedicatedPlacements.GetEnumerator()) {
     $coordinate = $placement.Key.Split(',')
@@ -129,10 +129,10 @@ $newMetatileCells = 0
 for ($y = 0; $y -lt 20; $y++) {
     for ($x = 0; $x -lt 20; $x++) {
         $id = (Get-MapCell $mapBin $x $y) -band 0x03FF
-        if ($id -ge 0x298 -and $id -le 0x2A4) { $newMetatileCells++ }
+        if ($id -ge 0x298 -and $id -le 0x2B1) { $newMetatileCells++ }
     }
 }
-Assert-True ($newMetatileCells -ge 55) 'OldaleTown must use the new Porta Pretoria metatiles extensively.'
+Assert-True ($newMetatileCells -ge 90) 'OldaleTown must use the new Porta Pretoria metatiles extensively.'
 $polishedCells = @(
     @(9,8), @(10,8), @(9,9), @(10,9), @(9,10), @(10,10), @(11,10),
     @(2,12), @(3,12), @(4,12), @(15,12), @(16,12), @(17,12),
