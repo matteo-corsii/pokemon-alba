@@ -1,0 +1,95 @@
+param(
+    [string]$RepositoryRoot = (Split-Path -Parent $PSScriptRoot)
+)
+
+$ErrorActionPreference = 'Stop'
+
+function Assert-True([bool]$Condition, [string]$Message) {
+    if (-not $Condition) { throw $Message }
+}
+
+function Read-Json([string]$RelativePath) {
+    return [IO.File]::ReadAllText((Join-Path $RepositoryRoot $RelativePath), [Text.Encoding]::UTF8) | ConvertFrom-Json
+}
+
+function Get-BaseJson([string]$RelativePath) {
+    return ((& git -C $RepositoryRoot show "develop:$RelativePath") -join "`n") | ConvertFrom-Json
+}
+
+function Get-MapCell([byte[]]$MapBin, [int]$X, [int]$Y) {
+    return [BitConverter]::ToUInt16($MapBin, 2 * (($Y * 20) + $X))
+}
+
+$palettePaths = 0..15 | ForEach-Object { "data/tilesets/secondary/porta_pretoria/palettes/{0:D2}.pal" -f $_ }
+$allowedPaths = @(
+    'data/layouts/OldaleTown/map.bin',
+    'data/layouts/layouts.json',
+    'data/tilesets/secondary/porta_pretoria/tiles.png',
+    'data/tilesets/secondary/porta_pretoria/metatiles.bin',
+    'data/tilesets/secondary/porta_pretoria/metatile_attributes.bin',
+    'include/tilesets.h',
+    'src/data/tilesets/graphics.h',
+    'src/data/tilesets/headers.h',
+    'src/data/tilesets/metatiles.h',
+    'src/field_door.c',
+    'test/validate_porta_pretoria_dedicated_tileset.ps1',
+    'test/validate_porta_pretoria_localization.ps1'
+) + $palettePaths
+
+$changedPaths = @(& git -C $RepositoryRoot diff --name-only develop)
+$changedPaths += @(& git -C $RepositoryRoot ls-files --others --exclude-standard)
+foreach ($changedPath in $changedPaths) {
+    Assert-True ($allowedPaths -contains $changedPath) "Unexpected file changed by Porta Pretoria dedicated tileset batch: $changedPath"
+}
+
+$layouts = Read-Json 'data/layouts/layouts.json'
+$oldaleLayout = @($layouts.layouts | Where-Object id -eq 'LAYOUT_OLDALE_TOWN')
+Assert-True ($oldaleLayout.Count -eq 1) 'LAYOUT_OLDALE_TOWN is missing or duplicated.'
+Assert-True ($oldaleLayout[0].primary_tileset -eq 'gTileset_General') 'OldaleTown primary tileset changed unexpectedly.'
+Assert-True ($oldaleLayout[0].secondary_tileset -eq 'gTileset_PortaPretoria') 'OldaleTown must use the dedicated Porta Pretoria secondary tileset.'
+Assert-True ($oldaleLayout[0].width -eq 20 -and $oldaleLayout[0].height -eq 20) 'OldaleTown dimensions changed unexpectedly.'
+
+foreach ($path in @('data/tilesets/primary/general', 'data/tilesets/secondary/petalburg')) {
+    & git -C $RepositoryRoot diff --quiet develop -- $path
+    Assert-True ($LASTEXITCODE -eq 0) "Shared tileset changed unexpectedly: $path"
+}
+
+foreach ($relativePath in @('tiles.png', 'metatiles.bin', 'metatile_attributes.bin')) {
+    Assert-True (Test-Path (Join-Path $RepositoryRoot "data/tilesets/secondary/porta_pretoria/$relativePath")) "Dedicated tileset asset missing: $relativePath"
+}
+foreach ($relativePath in $palettePaths) {
+    Assert-True (Test-Path (Join-Path $RepositoryRoot $relativePath)) "Dedicated tileset palette missing: $relativePath"
+}
+
+$graphics = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'src/data/tilesets/graphics.h') -Raw
+$headers = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'src/data/tilesets/headers.h') -Raw
+$metatiles = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'src/data/tilesets/metatiles.h') -Raw
+$doors = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'src/field_door.c') -Raw
+Assert-True ($graphics.Contains('gTilesetTiles_PortaPretoria')) 'Dedicated tileset graphics are not registered.'
+Assert-True ($headers.Contains('const struct Tileset gTileset_PortaPretoria')) 'Dedicated tileset header is not registered.'
+Assert-True ($metatiles.Contains('gMetatiles_PortaPretoria')) 'Dedicated metatiles are not registered.'
+Assert-True ($doors.Contains('{METATILE_Petalburg_Door_Oldale,                        &gTileset_PortaPretoria')) 'Oldale house door animation is not registered for the dedicated tileset.'
+
+$oldale = Read-Json 'data/maps/OldaleTown/map.json'
+$baseOldale = Get-BaseJson 'data/maps/OldaleTown/map.json'
+foreach ($property in @('object_events', 'warp_events', 'coord_events', 'bg_events', 'connections')) {
+    $actual = ($oldale.$property | ConvertTo-Json -Depth 20 -Compress)
+    $expected = ($baseOldale.$property | ConvertTo-Json -Depth 20 -Compress)
+    Assert-True ($actual -eq $expected) "OldaleTown $property changed unexpectedly."
+}
+
+$mapBin = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/layouts/OldaleTown/map.bin'))
+Assert-True ($mapBin.Length -eq 800) 'OldaleTown map.bin size changed unexpectedly.'
+$polishedCells = @(
+    @(9,8), @(10,8), @(9,9), @(10,9), @(9,10), @(10,10), @(11,10),
+    @(2,12), @(3,12), @(4,12), @(15,12), @(16,12), @(17,12),
+    @(2,13), @(3,13), @(4,13), @(13,14), @(13,15), @(13,16),
+    @(4,17), @(5,17), @(6,17), @(12,17), @(13,17), @(14,17), @(15,17),
+    @(2,4), @(3,4), @(17,4), @(17,5), @(2,14), @(3,14)
+)
+foreach ($coordinate in $polishedCells) {
+    $cell = Get-MapCell $mapBin $coordinate[0] $coordinate[1]
+    Assert-True (($cell -band 0xFC00) -eq 0x3000) "Collision or elevation changed at polished cell ($($coordinate[0]),$($coordinate[1]))."
+}
+
+Write-Output 'Porta Pretoria dedicated tileset validation passed.'

@@ -26,7 +26,7 @@ function Get-Route101MapCell([int]$X, [int]$Y) {
     return [BitConverter]::ToUInt16($mapBin, 2 * (($Y * 36) + $X))
 }
 
-$expectedPaths = @(
+$allowedPaths = @(
     'data/maps/OldaleTown/scripts.inc',
     'data/maps/OldaleTown_House1/scripts.inc',
     'data/maps/OldaleTown_House2/scripts.inc',
@@ -35,11 +35,40 @@ $expectedPaths = @(
     'data/layouts/Route101/map.bin',
     'data/maps/Route101/map.json',
     'data/maps/Route101/scripts.inc',
+    'data/layouts/OldaleTown/map.bin',
+    'data/layouts/layouts.json',
+    'data/tilesets/secondary/porta_pretoria/tiles.png',
+    'data/tilesets/secondary/porta_pretoria/metatiles.bin',
+    'data/tilesets/secondary/porta_pretoria/metatile_attributes.bin',
+    'data/tilesets/secondary/porta_pretoria/palettes/00.pal',
+    'data/tilesets/secondary/porta_pretoria/palettes/01.pal',
+    'data/tilesets/secondary/porta_pretoria/palettes/02.pal',
+    'data/tilesets/secondary/porta_pretoria/palettes/03.pal',
+    'data/tilesets/secondary/porta_pretoria/palettes/04.pal',
+    'data/tilesets/secondary/porta_pretoria/palettes/05.pal',
+    'data/tilesets/secondary/porta_pretoria/palettes/06.pal',
+    'data/tilesets/secondary/porta_pretoria/palettes/07.pal',
+    'data/tilesets/secondary/porta_pretoria/palettes/08.pal',
+    'data/tilesets/secondary/porta_pretoria/palettes/09.pal',
+    'data/tilesets/secondary/porta_pretoria/palettes/10.pal',
+    'data/tilesets/secondary/porta_pretoria/palettes/11.pal',
+    'data/tilesets/secondary/porta_pretoria/palettes/12.pal',
+    'data/tilesets/secondary/porta_pretoria/palettes/13.pal',
+    'data/tilesets/secondary/porta_pretoria/palettes/14.pal',
+    'data/tilesets/secondary/porta_pretoria/palettes/15.pal',
+    'include/tilesets.h',
+    'src/data/tilesets/graphics.h',
+    'src/data/tilesets/headers.h',
+    'src/data/tilesets/metatiles.h',
+    'src/field_door.c',
+    'test/validate_porta_pretoria_dedicated_tileset.ps1',
     'test/validate_porta_pretoria_localization.ps1'
 )
 $changedPaths = @(& git -C $RepositoryRoot diff --name-only develop)
 $changedPaths += @(& git -C $RepositoryRoot ls-files --others --exclude-standard)
-Assert-True ((Compare-Object $changedPaths $expectedPaths).Count -eq 0) 'Unexpected file changed by Porta Pretoria localization.'
+foreach ($changedPath in $changedPaths) {
+    Assert-True ($allowedPaths -contains $changedPath) "Unexpected file changed by Porta Pretoria localization: $changedPath"
+}
 
 $house1 = Read-Text 'data/maps/OldaleTown_House1/scripts.inc'
 $house2 = Read-Text 'data/maps/OldaleTown_House2/scripts.inc'
@@ -72,7 +101,7 @@ $villaSigns = @($route.bg_events | Where-Object {
     $_.player_facing_dir -eq 'BG_EVENT_PLAYER_FACING_ANY' -and $_.script -eq 'Route101_EventScript_AnticaVillaSign'
 })
 Assert-True ($villaSigns.Count -eq 1) 'Villa dei Cavallacci sign is missing or invalid.'
-Assert-True ($route.bg_events.Count -eq ($baseRoute.bg_events.Count + 1)) 'Route101 must add exactly one background event.'
+Assert-True ($route.bg_events.Count -eq $baseRoute.bg_events.Count) 'Route101 background event count changed unexpectedly.'
 $villaSignMetatile = Get-Route101MapCell 28 5
 Assert-True (($villaSignMetatile -band 0x03FF) -eq 0x0003) 'Villa dei Cavallacci must use the visible Route101 sign metatile.'
 Assert-True ((($villaSignMetatile -shr 10) -band 3) -eq 0) 'Villa sign collision changed unexpectedly.'
