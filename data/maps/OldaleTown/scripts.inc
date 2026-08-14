@@ -72,8 +72,10 @@ OldaleTown_Text_WallResident:
 	.string "orientale alla città antica.$"
 
 OldaleTown_Text_Traveler:
-	.string "Molti viaggiatori si fermano qui\n"
-	.string "prima di entrare ad ALBÈRA STORICA.$"
+	.string "Ad Albèra Storica vive un esperto di\n"
+	.string "campeggi e rifugi.\p"
+	.string "Dicono che insegni ai viaggiatori a\n"
+	.string "crearsi un posto tutto loro.$"
 
 OldaleTown_Text_WestGateWorker:
 	.string "Il VIALE PRETORIO conduce ad\n"

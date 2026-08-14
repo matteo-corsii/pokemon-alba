@@ -38,14 +38,12 @@ OldaleTown_PokemonCenter_1F_EventScript_WirelessClubAvailable::
 	end
 
 OldaleTown_PokemonCenter_1F_Text_TrainersCanUsePC:
-	.string "Quel PC nell'angolo è a disposizione\n"
-	.string "di tutti gli Allenatori.\p"
-	.string "Naturalmente puoi usarlo anche tu.$"
+	.string "Molti viaggiatori si fermano qui prima\n"
+	.string "di entrare ad Albèra Storica.$"
 
 OldaleTown_PokemonCenter_1F_Text_PokemonCentersAreGreat:
-	.string "I CENTRI POKéMON sono fantastici!\p"
-	.string "Puoi usare i loro servizi tutte le\n"
-	.string "volte che vuoi, senza pagare.$"
+	.string "Da Via Verdi arrivano sempre scarpe\n"
+	.string "infangate e POKéMON stanchi!$"
 
 OldaleTown_PokemonCenter_1F_Text_WirelessClubNotAvailable:
 	.string "Il CLUB WIRELESS POKéMON al piano\n"

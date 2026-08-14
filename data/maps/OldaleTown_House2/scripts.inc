@@ -10,9 +10,11 @@ OldaleTown_House2_EventScript_Man::
 	end
 
 OldaleTown_House2_Text_PokemonLevelUp:
-	.string "Lottando, i POKéMON salgono di livello\n"
-	.string "e diventano più forti.$"
+	.string "Le pietre di Porta Pretoria conservano\n"
+	.string "ancora tracce delle antiche opere\n"
+	.string "romane.$"
 
 OldaleTown_House2_Text_YoullGoFurtherWithStrongPokemon:
-	.string "Con POKéMON più forti al tuo fianco\n"
-	.string "potrai affrontare viaggi più lunghi.$"
+	.string "Da qui si passa verso Albèra Storica.\p"
+	.string "Là sembra che ogni strada abbia una\n"
+	.string "storia da raccontare.$"

@@ -6,8 +6,7 @@ OldaleTown_House1_EventScript_Woman::
 	end
 
 OldaleTown_House1_Text_LeftPokemonGoesOutFirst:
-	.string "Quando inizia una lotta, il primo\n"
-	.string "POKéMON della squadra scende in campo.\p"
-	.string "Se ne hai più di uno, prova a cambiare\n"
-	.string "l'ordine della squadra.\p"
-	.string "Potresti ottenere un vantaggio.$"
+	.string "Prima di proseguire, controlla l'ordine\n"
+	.string "della tua squadra.\p"
+	.string "Il primo POKéMON sarà quello che\n"
+	.string "scenderà in campo!$"
