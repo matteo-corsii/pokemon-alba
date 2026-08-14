@@ -60,6 +60,9 @@ foreach ($relativePath in @('tiles.png', 'metatiles.bin', 'metatile_attributes.b
 foreach ($relativePath in $palettePaths) {
     Assert-True (Test-Path (Join-Path $RepositoryRoot $relativePath)) "Dedicated tileset palette missing: $relativePath"
 }
+$sourceTilesHash = (Get-FileHash (Join-Path $RepositoryRoot 'data/tilesets/secondary/petalburg/tiles.png') -Algorithm SHA256).Hash
+$dedicatedTilesHash = (Get-FileHash (Join-Path $RepositoryRoot 'data/tilesets/secondary/porta_pretoria/tiles.png') -Algorithm SHA256).Hash
+Assert-True ($sourceTilesHash -ne $dedicatedTilesHash) 'Dedicated Porta Pretoria tile graphics must differ from shared Petalburg graphics.'
 
 $graphics = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'src/data/tilesets/graphics.h') -Raw
 $headers = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'src/data/tilesets/headers.h') -Raw
@@ -85,7 +88,9 @@ $polishedCells = @(
     @(2,12), @(3,12), @(4,12), @(15,12), @(16,12), @(17,12),
     @(2,13), @(3,13), @(4,13), @(13,14), @(13,15), @(13,16),
     @(4,17), @(5,17), @(6,17), @(12,17), @(13,17), @(14,17), @(15,17),
-    @(2,4), @(3,4), @(17,4), @(17,5), @(2,14), @(3,14)
+    @(2,4), @(3,4), @(17,4), @(17,5), @(2,14), @(3,14),
+    @(2,5), @(2,8), @(3,8), @(4,8), @(19,8), @(2,9), @(19,9),
+    @(1,10), @(18,10), @(19,10), @(4,14), @(4,15), @(4,16)
 )
 foreach ($coordinate in $polishedCells) {
     $cell = Get-MapCell $mapBin $coordinate[0] $coordinate[1]
