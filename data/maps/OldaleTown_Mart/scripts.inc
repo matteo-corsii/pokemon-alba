@@ -61,7 +61,5 @@ OldaleTown_Mart_Text_ImGoingToBuyPokeBalls:
 	.string "e catturerò tanti POKéMON!$"
 
 OldaleTown_Mart_Text_RestoreHPWithPotion:
-	.string "Se un POKéMON perde tutti i PS,\n"
-	.string "non può più lottare.\p"
-	.string "Usa una POZIONE per recuperare i PS\n"
-	.string "prima che vada KO.$"
+	.string "Tra l'erba di Via Verdi, un ANTIDOTO\n"
+	.string "può sempre tornare utile!$"

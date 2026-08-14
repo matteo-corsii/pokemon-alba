@@ -310,6 +310,10 @@ Route101_EventScript_RouteSign::
 	msgbox Route101_Text_RouteSign, MSGBOX_SIGN
 	end
 
+Route101_EventScript_AnticaVillaSign::
+	msgbox Route101_Text_AnticaVillaSign, MSGBOX_SIGN
+	end
+
 Route101_EventScript_BirchsBag::
 	lock
 	faceplayer
@@ -393,6 +397,10 @@ Route101_Text_WildPokemonInTallGrass:
 Route101_Text_RouteSign:
 	.string "VIA VERDI\n"
 	.string "{UP_ARROW} PORTA PRETORIA$"
+
+Route101_Text_AnticaVillaSign:
+	.string "RESTI ROMANI\n"
+	.string "Antica Villa dei Cavallacci$"
 
 Route101_Text_LiaResearchReminder:
 	.string "LIA: Seguiamo il percorso e annotiamo\n"
