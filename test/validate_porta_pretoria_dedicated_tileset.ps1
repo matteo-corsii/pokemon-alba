@@ -67,17 +67,31 @@ $sharedMetatiles = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/tile
 $dedicatedMetatiles = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/tilesets/secondary/porta_pretoria/metatiles.bin'))
 $sharedAttributes = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/tilesets/secondary/petalburg/metatile_attributes.bin'))
 $dedicatedAttributes = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/tilesets/secondary/porta_pretoria/metatile_attributes.bin'))
-Assert-True ($dedicatedMetatiles.Length -eq ($sharedMetatiles.Length + (13 * 16))) 'Dedicated Porta Pretoria metatile count must add exactly 13 append-only entries.'
-Assert-True ($dedicatedAttributes.Length -eq ($sharedAttributes.Length + (13 * 2))) 'Dedicated Porta Pretoria attribute count must add exactly 13 append-only entries.'
+Assert-True ($dedicatedMetatiles.Length -eq ($sharedMetatiles.Length + (26 * 16))) 'Dedicated Porta Pretoria metatile count must add exactly 26 append-only entries.'
+Assert-True ($dedicatedAttributes.Length -eq ($sharedAttributes.Length + (26 * 2))) 'Dedicated Porta Pretoria attribute count must add exactly 26 append-only entries.'
+for ($index = 0; $index -lt $sharedMetatiles.Length; $index++) {
+    Assert-True ($dedicatedMetatiles[$index] -eq $sharedMetatiles[$index]) 'Existing Petalburg-compatible metatile data changed unexpectedly.'
+}
 $expectedAttributes = @{
     0x298 = 0x1000; 0x299 = 0x1000; 0x29A = 0x1000
     0x29B = 0x0000; 0x29C = 0x0000; 0x29D = 0x0000
     0x29E = 0x1000; 0x29F = 0x1000; 0x2A0 = 0x1000; 0x2A1 = 0x1000
-    0x2A2 = 0x0000; 0x2A3 = 0x0000; 0x2A4 = 0x0000
+    0x2A2 = 0x0000; 0x2A3 = 0x0000; 0x2A4 = 0x0000; 0x2A5 = 0x0000
+    0x2A6 = 0x0000; 0x2A7 = 0x0000; 0x2A8 = 0x0000; 0x2A9 = 0x0000
+    0x2AA = 0x0000; 0x2AB = 0x0000; 0x2AC = 0x1000; 0x2AD = 0x0000
+    0x2AE = 0x1000; 0x2AF = 0x0000; 0x2B0 = 0x0000; 0x2B1 = 0x0000
 }
 foreach ($id in $expectedAttributes.Keys) {
     $attribute = [BitConverter]::ToUInt16($dedicatedAttributes, 2 * ($id - 0x200))
     Assert-True ($attribute -eq $expectedAttributes[$id]) ("Unexpected behavior/elevation attribute for Porta Pretoria metatile 0x{0:X3}." -f $id)
+}
+foreach ($id in 0x298..0x2B1) {
+    $containsDedicatedGraphic = $false
+    for ($word = 0; $word -lt 8; $word++) {
+        $tileId = [BitConverter]::ToUInt16($dedicatedMetatiles, ((($id - 0x200) * 16) + ($word * 2))) -band 0x03FF
+        if ($tileId -ge 704 -and $tileId -le 721) { $containsDedicatedGraphic = $true }
+    }
+    Assert-True $containsDedicatedGraphic ("Porta Pretoria metatile 0x{0:X3} must reference a dedicated 8x8 graphic." -f $id)
 }
 
 $graphics = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'src/data/tilesets/graphics.h') -Raw
