@@ -243,6 +243,10 @@ Route101_EventScript_Youngster::
 	msgbox Route101_Text_TakeTiredPokemonToPokeCenter, MSGBOX_NPC
 	end
 
+Route101_EventScript_AmbientHiker::
+	msgbox Route101_Text_AmbientHiker, MSGBOX_NPC
+	end
+
 Route101_EventScript_Boy::
 	msgbox Route101_Text_WildPokemonInTallGrass, MSGBOX_NPC
 	end
@@ -375,6 +379,10 @@ Route101_Text_TakeTiredPokemonToPokeCenter:
 	.string "Proseguendo arriverai a\n"
 	.string "PORTA PRETORIA,\l"
 	.string "l'ingresso di ALBÈRA STORICA.$"
+
+Route101_Text_AmbientHiker:
+	.string "Da queste parti il terreno resta umido\n"
+	.string "anche quando il sole picchia.$"
 
 Route101_Text_WildPokemonInTallGrass:
 	.string "Nell'erba alta, i POKéMON selvatici\n"
