@@ -20,12 +20,19 @@ function Get-BaseJson([string]$RelativePath) {
     return ((& git -C $RepositoryRoot show "develop:$RelativePath") -join "`n") | ConvertFrom-Json
 }
 
+function Get-Route101MapCell([int]$X, [int]$Y) {
+    $mapBin = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/layouts/Route101/map.bin'))
+    Assert-True ($mapBin.Length -eq 1440) 'Route101 map.bin size changed unexpectedly.'
+    return [BitConverter]::ToUInt16($mapBin, 2 * (($Y * 36) + $X))
+}
+
 $expectedPaths = @(
     'data/maps/OldaleTown/scripts.inc',
     'data/maps/OldaleTown_House1/scripts.inc',
     'data/maps/OldaleTown_House2/scripts.inc',
     'data/maps/OldaleTown_Mart/scripts.inc',
     'data/maps/OldaleTown_PokemonCenter_1F/scripts.inc',
+    'data/layouts/Route101/map.bin',
     'data/maps/Route101/map.json',
     'data/maps/Route101/scripts.inc',
     'test/validate_porta_pretoria_localization.ps1'
@@ -66,6 +73,10 @@ $villaSigns = @($route.bg_events | Where-Object {
 })
 Assert-True ($villaSigns.Count -eq 1) 'Villa dei Cavallacci sign is missing or invalid.'
 Assert-True ($route.bg_events.Count -eq ($baseRoute.bg_events.Count + 1)) 'Route101 must add exactly one background event.'
+$villaSignMetatile = Get-Route101MapCell 28 5
+Assert-True (($villaSignMetatile -band 0x03FF) -eq 0x0003) 'Villa dei Cavallacci must use the visible Route101 sign metatile.'
+Assert-True ((($villaSignMetatile -shr 10) -band 3) -eq 0) 'Villa sign collision changed unexpectedly.'
+Assert-True ((($villaSignMetatile -shr 12) -band 0xF) -eq 3) 'Villa sign elevation must match the surrounding path.'
 Assert-True ((@($route.object_events | ConvertTo-Json -Depth 10 -Compress) -join "`n") -eq (@($baseRoute.object_events | ConvertTo-Json -Depth 10 -Compress) -join "`n")) 'Route101 object events changed unexpectedly.'
 Assert-True ((@($route.coord_events | ConvertTo-Json -Depth 10 -Compress) -join "`n") -eq (@($baseRoute.coord_events | ConvertTo-Json -Depth 10 -Compress) -join "`n")) 'Route101 triggers changed unexpectedly.'
 Assert-True (($route.connections | ConvertTo-Json -Depth 10 -Compress) -eq ($baseRoute.connections | ConvertTo-Json -Depth 10 -Compress)) 'Route101 connections changed unexpectedly.'
