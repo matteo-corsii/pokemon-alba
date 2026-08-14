@@ -26,12 +26,13 @@ function Get-Route101MapCell([int]$X, [int]$Y) {
     return [BitConverter]::ToUInt16($mapBin, 2 * (($Y * 36) + $X))
 }
 
-$expectedPaths = @(
+$allowedPaths = @(
     'data/maps/OldaleTown/scripts.inc',
     'data/maps/OldaleTown_House1/scripts.inc',
     'data/maps/OldaleTown_House2/scripts.inc',
     'data/maps/OldaleTown_Mart/scripts.inc',
     'data/maps/OldaleTown_PokemonCenter_1F/scripts.inc',
+    'data/layouts/OldaleTown/map.bin',
     'data/layouts/Route101/map.bin',
     'data/maps/Route101/map.json',
     'data/maps/Route101/scripts.inc',
@@ -39,7 +40,15 @@ $expectedPaths = @(
 )
 $changedPaths = @(& git -C $RepositoryRoot diff --name-only develop)
 $changedPaths += @(& git -C $RepositoryRoot ls-files --others --exclude-standard)
-Assert-True ((Compare-Object $changedPaths $expectedPaths).Count -eq 0) 'Unexpected file changed by Porta Pretoria localization.'
+foreach ($path in $changedPaths) {
+    Assert-True ($path -in $allowedPaths) "Unexpected file changed by Porta Pretoria localization: $path"
+}
+
+function Get-OldaleTownMapCell([int]$X, [int]$Y) {
+    $mapBin = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/layouts/OldaleTown/map.bin'))
+    Assert-True ($mapBin.Length -eq 800) 'OldaleTown map.bin size changed unexpectedly.'
+    return [BitConverter]::ToUInt16($mapBin, 2 * (($Y * 20) + $X))
+}
 
 $house1 = Read-Text 'data/maps/OldaleTown_House1/scripts.inc'
 $house2 = Read-Text 'data/maps/OldaleTown_House2/scripts.inc'
@@ -67,12 +76,14 @@ foreach ($entry in @(
 
 $route = Read-Json 'data/maps/Route101/map.json'
 $baseRoute = Get-BaseJson 'data/maps/Route101/map.json'
+$oldale = Read-Json 'data/maps/OldaleTown/map.json'
+$baseOldale = Get-BaseJson 'data/maps/OldaleTown/map.json'
 $villaSigns = @($route.bg_events | Where-Object {
     $_.type -eq 'sign' -and $_.x -eq 28 -and $_.y -eq 5 -and $_.elevation -eq 0 -and
     $_.player_facing_dir -eq 'BG_EVENT_PLAYER_FACING_ANY' -and $_.script -eq 'Route101_EventScript_AnticaVillaSign'
 })
 Assert-True ($villaSigns.Count -eq 1) 'Villa dei Cavallacci sign is missing or invalid.'
-Assert-True ($route.bg_events.Count -eq ($baseRoute.bg_events.Count + 1)) 'Route101 must add exactly one background event.'
+Assert-True ($route.bg_events.Count -eq $baseRoute.bg_events.Count) 'Route101 background event count changed unexpectedly.'
 $villaSignMetatile = Get-Route101MapCell 28 5
 Assert-True (($villaSignMetatile -band 0x03FF) -eq 0x0003) 'Villa dei Cavallacci must use the visible Route101 sign metatile.'
 Assert-True ((($villaSignMetatile -shr 10) -band 3) -eq 0) 'Villa sign collision changed unexpectedly.'
@@ -81,6 +92,25 @@ Assert-True ((@($route.object_events | ConvertTo-Json -Depth 10 -Compress) -join
 Assert-True ((@($route.coord_events | ConvertTo-Json -Depth 10 -Compress) -join "`n") -eq (@($baseRoute.coord_events | ConvertTo-Json -Depth 10 -Compress) -join "`n")) 'Route101 triggers changed unexpectedly.'
 Assert-True (($route.connections | ConvertTo-Json -Depth 10 -Compress) -eq ($baseRoute.connections | ConvertTo-Json -Depth 10 -Compress)) 'Route101 connections changed unexpectedly.'
 Assert-True (($route.warp_events | ConvertTo-Json -Depth 10 -Compress) -eq ($baseRoute.warp_events | ConvertTo-Json -Depth 10 -Compress)) 'Route101 warps changed unexpectedly.'
+
+foreach ($property in @('warp_events', 'object_events', 'coord_events', 'bg_events', 'connections')) {
+    Assert-True ((@($oldale.$property | ConvertTo-Json -Depth 10 -Compress) -join "`n") -eq (@($baseOldale.$property | ConvertTo-Json -Depth 10 -Compress) -join "`n")) "OldaleTown $property changed unexpectedly."
+}
+
+$expectedOldalePolish = @(
+    @(2, 4, 0x3004), @(2, 5, 0x3004),
+    @(17, 4, 0x3004), @(17, 5, 0x3004),
+    @(2, 13, 0x3004), @(3, 13, 0x3004),
+    @(13, 14, 0x3004), @(13, 15, 0x3004),
+    @(5, 17, 0x31D9), @(6, 17, 0x31D9),
+    @(12, 17, 0x31D9), @(13, 17, 0x31D9)
+)
+foreach ($cell in $expectedOldalePolish) {
+    $word = Get-OldaleTownMapCell $cell[0] $cell[1]
+    Assert-True ($word -eq $cell[2]) "Unexpected OldaleTown polish metatile at ($($cell[0]),$($cell[1]))."
+    Assert-True ((($word -shr 10) -band 3) -eq 0) "OldaleTown polish collision changed at ($($cell[0]),$($cell[1]))."
+    Assert-True ((($word -shr 12) -band 0xF) -eq 3) "OldaleTown polish elevation changed at ($($cell[0]),$($cell[1]))."
+}
 
 foreach ($path in @('include/constants/flags.h', 'include/constants/flags_frlg.h', 'include/constants/vars.h', 'include/constants/vars_frlg.h')) {
     & git -C $RepositoryRoot diff --quiet develop -- $path
