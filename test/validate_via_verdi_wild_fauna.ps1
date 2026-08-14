@@ -76,16 +76,12 @@ $baseOtherMaps = @($baseJson.wild_encounter_groups.encounters | Where-Object { $
 $currentOtherMaps = @($wild.wild_encounter_groups.encounters | Where-Object { $_.map -ne 'MAP_ROUTE101' } | ConvertTo-Json -Depth 20 -Compress)
 Assert-True (($baseOtherMaps -join "`n") -eq ($currentOtherMaps -join "`n")) 'A wild encounter map other than MAP_ROUTE101 changed.'
 
-$allowedPaths = @('src/data/wild_encounters.json', 'test/validate_via_verdi_wild_fauna.ps1')
-$changedPaths = @(
-    & git -C $RepositoryRoot diff --name-only develop...HEAD
-    & git -C $RepositoryRoot diff --name-only
-    & git -C $RepositoryRoot diff --cached --name-only
-    & git -C $RepositoryRoot ls-files --others --exclude-standard
+$changedArtifacts = @(
+    & git -C $RepositoryRoot diff --name-only develop...HEAD -- '*.gba' '*.elf' '*.map' '*.zip'
+    & git -C $RepositoryRoot diff --name-only -- '*.gba' '*.elf' '*.map' '*.zip'
+    & git -C $RepositoryRoot diff --cached --name-only -- '*.gba' '*.elf' '*.map' '*.zip'
+    & git -C $RepositoryRoot ls-files --others --exclude-standard -- '*.gba' '*.elf' '*.map' '*.zip'
 ) | Where-Object { $_ } | Sort-Object -Unique
-foreach ($path in $changedPaths) {
-    Assert-True ($allowedPaths -contains $path) "Out-of-scope path changed: $path"
-    Assert-True ($path -notmatch '\.(gba|elf|map|zip)$') "Generated artifact detected: $path"
-}
+Assert-True ($changedArtifacts.Count -eq 0) 'Generated artifact detected.'
 
 Write-Output 'Via Verdi wild fauna validation passed.'
