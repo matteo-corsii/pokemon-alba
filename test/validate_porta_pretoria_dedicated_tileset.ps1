@@ -63,6 +63,22 @@ foreach ($relativePath in $palettePaths) {
 $sourceTilesHash = (Get-FileHash (Join-Path $RepositoryRoot 'data/tilesets/secondary/petalburg/tiles.png') -Algorithm SHA256).Hash
 $dedicatedTilesHash = (Get-FileHash (Join-Path $RepositoryRoot 'data/tilesets/secondary/porta_pretoria/tiles.png') -Algorithm SHA256).Hash
 Assert-True ($sourceTilesHash -ne $dedicatedTilesHash) 'Dedicated Porta Pretoria tile graphics must differ from shared Petalburg graphics.'
+$sharedMetatiles = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/tilesets/secondary/petalburg/metatiles.bin'))
+$dedicatedMetatiles = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/tilesets/secondary/porta_pretoria/metatiles.bin'))
+$sharedAttributes = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/tilesets/secondary/petalburg/metatile_attributes.bin'))
+$dedicatedAttributes = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/tilesets/secondary/porta_pretoria/metatile_attributes.bin'))
+Assert-True ($dedicatedMetatiles.Length -eq ($sharedMetatiles.Length + (13 * 16))) 'Dedicated Porta Pretoria metatile count must add exactly 13 append-only entries.'
+Assert-True ($dedicatedAttributes.Length -eq ($sharedAttributes.Length + (13 * 2))) 'Dedicated Porta Pretoria attribute count must add exactly 13 append-only entries.'
+$expectedAttributes = @{
+    0x298 = 0x1000; 0x299 = 0x1000; 0x29A = 0x1000
+    0x29B = 0x0000; 0x29C = 0x0000; 0x29D = 0x0000
+    0x29E = 0x1000; 0x29F = 0x1000; 0x2A0 = 0x1000; 0x2A1 = 0x1000
+    0x2A2 = 0x0000; 0x2A3 = 0x0000; 0x2A4 = 0x0000
+}
+foreach ($id in $expectedAttributes.Keys) {
+    $attribute = [BitConverter]::ToUInt16($dedicatedAttributes, 2 * ($id - 0x200))
+    Assert-True ($attribute -eq $expectedAttributes[$id]) ("Unexpected behavior/elevation attribute for Porta Pretoria metatile 0x{0:X3}." -f $id)
+}
 
 $graphics = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'src/data/tilesets/graphics.h') -Raw
 $headers = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'src/data/tilesets/headers.h') -Raw
@@ -83,6 +99,26 @@ foreach ($property in @('object_events', 'warp_events', 'coord_events', 'bg_even
 
 $mapBin = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/layouts/OldaleTown/map.bin'))
 Assert-True ($mapBin.Length -eq 800) 'OldaleTown map.bin size changed unexpectedly.'
+$expectedDedicatedPlacements = [ordered]@{
+    '4,6' = 0x29B; '6,6' = 0x29C; '7,6' = 0x29D; '4,7' = 0x298; '6,7' = 0x299; '7,7' = 0x29A
+    '14,15' = 0x29B; '16,15' = 0x29C; '17,15' = 0x29D; '14,16' = 0x298; '16,16' = 0x299; '17,16' = 0x29A
+    '5,16' = 0x29E; '7,16' = 0x29F; '13,6' = 0x2A0; '15,6' = 0x2A1; '16,6' = 0x2A1
+}
+foreach ($placement in $expectedDedicatedPlacements.GetEnumerator()) {
+    $coordinate = $placement.Key.Split(',')
+    $x = [int]$coordinate[0]
+    $y = [int]$coordinate[1]
+    $cell = Get-MapCell $mapBin $x $y
+    Assert-True (($cell -band 0x03FF) -eq $placement.Value) "Dedicated facade metatile missing at $($placement.Key)."
+}
+$newMetatileCells = 0
+for ($y = 0; $y -lt 20; $y++) {
+    for ($x = 0; $x -lt 20; $x++) {
+        $id = (Get-MapCell $mapBin $x $y) -band 0x03FF
+        if ($id -ge 0x298 -and $id -le 0x2A4) { $newMetatileCells++ }
+    }
+}
+Assert-True ($newMetatileCells -ge 55) 'OldaleTown must use the new Porta Pretoria metatiles extensively.'
 $polishedCells = @(
     @(9,8), @(10,8), @(9,9), @(10,9), @(9,10), @(10,10), @(11,10),
     @(2,12), @(3,12), @(4,12), @(15,12), @(16,12), @(17,12),
