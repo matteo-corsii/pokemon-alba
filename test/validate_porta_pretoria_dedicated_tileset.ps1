@@ -67,8 +67,8 @@ $sharedMetatiles = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/tile
 $dedicatedMetatiles = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/tilesets/secondary/porta_pretoria/metatiles.bin'))
 $sharedAttributes = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/tilesets/secondary/petalburg/metatile_attributes.bin'))
 $dedicatedAttributes = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/tilesets/secondary/porta_pretoria/metatile_attributes.bin'))
-Assert-True ($dedicatedMetatiles.Length -eq ($sharedMetatiles.Length + (39 * 16))) 'Dedicated Porta Pretoria metatile count must add exactly 39 append-only entries.'
-Assert-True ($dedicatedAttributes.Length -eq ($sharedAttributes.Length + (39 * 2))) 'Dedicated Porta Pretoria attribute count must add exactly 39 append-only entries.'
+Assert-True ($dedicatedMetatiles.Length -eq ($sharedMetatiles.Length + (69 * 16))) 'Dedicated Porta Pretoria metatile count must add exactly 69 append-only entries.'
+Assert-True ($dedicatedAttributes.Length -eq ($sharedAttributes.Length + (69 * 2))) 'Dedicated Porta Pretoria attribute count must add exactly 69 append-only entries.'
 for ($index = 0; $index -lt $sharedMetatiles.Length; $index++) {
     Assert-True ($dedicatedMetatiles[$index] -eq $sharedMetatiles[$index]) 'Existing Petalburg-compatible metatile data changed unexpectedly.'
 }
@@ -103,6 +103,14 @@ foreach ($id in 0x2B2..0x2BE) {
         Assert-True ($tileId -ge 0x334 -and $tileId -le 0x353) ("Rustboro donor metatile 0x{0:X3} must use only cloned Porta Pretoria tile IDs." -f $id)
     }
 }
+foreach ($id in 0x2BF..0x2DC) {
+    $attribute = [BitConverter]::ToUInt16($dedicatedAttributes, 2 * ($id - 0x200))
+    Assert-True ($attribute -eq 0x0000) ("Unexpected behavior/layer attribute for donor metatile 0x{0:X3}." -f $id)
+    for ($word = 0; $word -lt 8; $word++) {
+        $tileId = [BitConverter]::ToUInt16($dedicatedMetatiles, ((($id - 0x200) * 16) + ($word * 2))) -band 0x03FF
+        Assert-True ($tileId -eq 0 -or ($tileId -ge 0x334 -and $tileId -le 0x385)) ("Completed donor metatile 0x{0:X3} uses an unexpected tile ID." -f $id)
+    }
+}
 
 $graphics = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'src/data/tilesets/graphics.h') -Raw
 $headers = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'src/data/tilesets/headers.h') -Raw
@@ -112,21 +120,21 @@ Assert-True ($graphics.Contains('gTilesetTiles_PortaPretoria')) 'Dedicated tiles
 Assert-True ($headers.Contains('const struct Tileset gTileset_PortaPretoria')) 'Dedicated tileset header is not registered.'
 Assert-True ($metatiles.Contains('gMetatiles_PortaPretoria')) 'Dedicated metatiles are not registered.'
 Assert-True ($doors.Contains('{METATILE_Petalburg_Door_Oldale,                        &gTileset_PortaPretoria')) 'Oldale house door animation is not registered for the dedicated tileset.'
-Assert-True ($graphics.Contains('gTilesetTiles_PortaPretoria[] = INCGFX_U32("data/tilesets/secondary/porta_pretoria/tiles.png", ".4bpp.fastSmol", "-num_tiles 340 -Wnum_tiles")')) 'Porta Pretoria tile capacity must load 340 tiles.'
+Assert-True ($graphics.Contains('gTilesetTiles_PortaPretoria[] = INCGFX_U32("data/tilesets/secondary/porta_pretoria/tiles.png", ".4bpp.fastSmol", "-num_tiles 390 -Wnum_tiles")')) 'Porta Pretoria tile capacity must load 390 tiles.'
 
 $maximumReferencedTileId = 0
 for ($offset = 0; $offset -lt $dedicatedMetatiles.Length; $offset += 2) {
     $tileId = [BitConverter]::ToUInt16($dedicatedMetatiles, $offset) -band 0x03FF
     if ($tileId -gt $maximumReferencedTileId) { $maximumReferencedTileId = $tileId }
 }
-Assert-True ($maximumReferencedTileId -eq 0x353) 'Unexpected highest Porta Pretoria tile reference.'
-Assert-True ($maximumReferencedTileId -le (0x200 + 340 - 1)) 'Porta Pretoria references a tile beyond its declared capacity.'
+Assert-True ($maximumReferencedTileId -eq 0x385) 'Unexpected highest Porta Pretoria tile reference.'
+Assert-True ($maximumReferencedTileId -le (0x200 + 390 - 1)) 'Porta Pretoria references a tile beyond its declared capacity.'
 
 Add-Type -AssemblyName System.Drawing
 $tileImage = [Drawing.Image]::FromFile((Join-Path $RepositoryRoot 'data/tilesets/secondary/porta_pretoria/tiles.png'))
-Assert-True ($tileImage.Width -eq 128 -and $tileImage.Height -eq 176) 'Porta Pretoria tile image dimensions must provide the donor tile capacity.'
+Assert-True ($tileImage.Width -eq 128 -and $tileImage.Height -eq 200) 'Porta Pretoria tile image dimensions must provide the donor tile capacity.'
 $tileImage.Dispose()
-foreach ($pair in @(@('12.pal', '10.pal'), @('13.pal', '11.pal'))) {
+foreach ($pair in @(@('12.pal', '10.pal'), @('13.pal', '11.pal'), @('14.pal', '08.pal'))) {
     $actualPalette = Get-Content -LiteralPath (Join-Path $RepositoryRoot "data/tilesets/secondary/porta_pretoria/palettes/$($pair[0])")
     $sourcePalette = Get-Content -LiteralPath (Join-Path $RepositoryRoot "data/tilesets/secondary/rustboro/palettes/$($pair[1])")
     Assert-True ($actualPalette.Count -eq $sourcePalette.Count) "Rustboro donor palette $($pair[1]) length differs from Porta Pretoria slot $($pair[0])."

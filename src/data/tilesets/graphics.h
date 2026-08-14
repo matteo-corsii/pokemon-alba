@@ -20,7 +20,7 @@ const u16 gTilesetPalettes_Petalburg[][16] =
     INCGFX_U16("data/tilesets/secondary/petalburg/palettes/15.pal", ".gbapal"),
 };
 
-const u32 gTilesetTiles_PortaPretoria[] = INCGFX_U32("data/tilesets/secondary/porta_pretoria/tiles.png", ".4bpp.fastSmol", "-num_tiles 340 -Wnum_tiles");
+const u32 gTilesetTiles_PortaPretoria[] = INCGFX_U32("data/tilesets/secondary/porta_pretoria/tiles.png", ".4bpp.fastSmol", "-num_tiles 390 -Wnum_tiles");
 
 const u16 gTilesetPalettes_PortaPretoria[][16] =
 {
