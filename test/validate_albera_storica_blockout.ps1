@@ -51,7 +51,17 @@ $mapBytes = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/layouts/Alb
 Assert-True ($mapBytes.Length -eq (36 * 30 * 2)) 'Unexpected map.bin size.'
 Assert-True (Test-Path (Join-Path $RepositoryRoot 'data/layouts/AlberaStorica/border.bin')) 'Missing border.bin.'
 $mapWords = for ($index = 0; $index -lt 36 * 30; $index++) { [BitConverter]::ToUInt16($mapBytes, $index * 2) }
-Assert-True ($mapWords[(10 * 36) + 35] -eq 0x3001 -and $mapWords[(11 * 36) + 35] -eq 0x3001) 'The east entrance to Porta Pretoria is not walkable.'
+# The approved visual rework may replace the old grass at the seamless entrance
+# with any compatible Porta Pretoria metatile. Keep the technical invariant:
+# both connection cells must remain passable at town elevation, and the former
+# cut-tree edge must not return around the entrance strip.
+foreach ($index in @(395; 431)) {
+    $cell = $mapWords[$index]
+    Assert-True ((($cell -shr 10) -band 3) -eq 0 -and (($cell -shr 12) -band 0xF) -eq 3) 'The east entrance to Porta Pretoria is not walkable.'
+}
+foreach ($index in @(8..14 | ForEach-Object { ($_ * 36) + 35 })) {
+    Assert-True (($mapWords[$index] -band 0x03FF) -notin @(0x0D4, 0x0D5, 0x0DC, 0x0DD)) 'The cut-tree artifact returned at the Porta Pretoria connection.'
+}
 Assert-True ((@($mapWords[((2 * 36) + 15)..((2 * 36) + 20)] | ForEach-Object { $_ -band 0x03FF }) -join ';') -eq '656;657;658;659;660;661') 'The Amphitheater landmark facade changed unexpectedly.'
 
 $changedArtifacts = @(& git -C $RepositoryRoot diff --name-only develop -- '*.gba' '*.elf' '*.map' '*.zip')
