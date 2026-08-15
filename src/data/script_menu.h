@@ -36,6 +36,8 @@ static const struct MenuAction MultichoiceList_ContestType[] =
 const u8 gText_Decoration2[] = _("DECORATION");
 const u8 gText_PackUp[] = _("PACK UP");
 const u8 gText_Registry[] = _("REGISTRY");
+const u8 gText_Storage[] = _("STORAGE");
+const u8 gText_Rest[] = _("REST");
 
 static const struct MenuAction MultichoiceList_BasePCWithRegistry[] =
 {
@@ -48,6 +50,25 @@ static const struct MenuAction MultichoiceList_BasePCWithRegistry[] =
 static const struct MenuAction MultichoiceList_BasePCNoRegistry[] =
 {
     {gText_Decoration2},
+    {gText_PackUp},
+    {gText_Exit},
+};
+
+static const struct MenuAction MultichoiceList_SecretBaseOwnerPCWithRegistry[] =
+{
+    {gText_Decoration2},
+    {gText_Storage},
+    {gText_Rest},
+    {gText_PackUp},
+    {gText_Registry},
+    {gText_Exit},
+};
+
+static const struct MenuAction MultichoiceList_SecretBaseOwnerPCNoRegistry[] =
+{
+    {gText_Decoration2},
+    {gText_Storage},
+    {gText_Rest},
     {gText_PackUp},
     {gText_Exit},
 };
@@ -448,7 +469,6 @@ const u8 gText_Opponent[] = _("OPPONENT");
 const u8 gText_Tourney_Tree[] = _("TOURNEY TREE");
 const u8 gText_ReadyToStart[] = _("READY TO START");
 const u8 gText_Record2[] = _("RECORD");
-const u8 gText_Rest[] = _("REST");
 const u8 gText_Retire[] = _("RETIRE");
 
 static const struct MenuAction MultichoiceList_TourneyWithRecord[] =
@@ -1142,6 +1162,8 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_CONTEST_TYPE]               = MULTICHOICE(MultichoiceList_ContestType),
     [MULTI_BASE_PC_NO_REGISTRY]        = MULTICHOICE(MultichoiceList_BasePCNoRegistry),
     [MULTI_BASE_PC_WITH_REGISTRY]      = MULTICHOICE(MultichoiceList_BasePCWithRegistry),
+    [MULTI_SECRET_BASE_OWNER_PC_NO_REGISTRY] = MULTICHOICE(MultichoiceList_SecretBaseOwnerPCNoRegistry),
+    [MULTI_SECRET_BASE_OWNER_PC_WITH_REGISTRY] = MULTICHOICE(MultichoiceList_SecretBaseOwnerPCWithRegistry),
     [MULTI_REGISTER_MENU]              = MULTICHOICE(MultichoiceList_RegisterMenu),
     [MULTI_SSTIDAL_LILYCOVE]           = MULTICHOICE(MultichoiceList_Exit),
     [MULTI_UNUSED_9]                   = MULTICHOICE(MultichoiceList_Exit),
