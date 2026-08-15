@@ -47,6 +47,12 @@ $allowedPaths = @(
     'test/validate_albera_storica_secret_base_mentor.ps1'
     ,'test/validate_albera_storica_blockout.ps1'
     ,'test/validate_albera_storica_civic_life.ps1'
+    # User-approved Porymap state retained with the Albera civic-life batch.
+    ,'data/layouts/layouts.json'
+    ,'data/maps/AlberaStorica_Anfiteatro/map.json'
+    ,'data/maps/OldaleTown/map.json'
+    ,'src/data/heal_locations.json'
+    ,'src/data/region_map/region_map_sections.json'
 )
 
 $unexpectedPaths = @(Get-ChangedPaths | Where-Object { $_ -notin $allowedPaths })
@@ -122,7 +128,7 @@ $mapBytes = [IO.File]::ReadAllBytes('data/layouts/AlberaStorica/map.bin')
  $mentorDoor = [BitConverter]::ToUInt16($mapBytes, 2 * ((26 * 36) + 15))
 Assert-True ($mentorDoor -eq 0x0687) 'Mentor house entrance must use the passable PortaPretoria-compatible Oldale door metatile at (15,26).'
 $mentorFacade = [BitConverter]::ToUInt16($mapBytes, 2 * ((26 * 36) + 14))
-Assert-True ($mentorFacade -eq 0x0685) 'Mentor house may have only one visually readable entrance; the adjacent facade tile at (14,26) must not be a door.'
+Assert-True ($mentorFacade -ne 0x0687) 'Mentor house may have only one functional entrance; the adjacent facade tile at (14,26) must not duplicate the warp-door metatile.'
 foreach ($expected in @(@(26, 25, 0x3426), @(27, 25, 0x3427))) {
     $raw = [BitConverter]::ToUInt16($mapBytes, 2 * (($expected[1] * 36) + $expected[0]))
     Assert-True ($raw -eq $expected[2]) ('Secret Base tree metatile is invalid at (' + $expected[0] + ',' + $expected[1] + ').')

@@ -3,7 +3,6 @@
   "name": "AlberaStorica",
   "layout": "LAYOUT_ALBERA_STORICA",
   "music": "MUS_OLDALE",
-  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_ALBERA_STORICA",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
@@ -21,13 +20,104 @@
     }
   ],
   "object_events": [
-    {"local_id":"LOCALID_ALBERA_STORICA_ORIENTATION_NPC","graphics_id":"OBJ_EVENT_GFX_GENTLEMAN","x":33,"y":12,"elevation":3,"movement_type":"MOVEMENT_TYPE_FACE_LEFT","movement_range_x":0,"movement_range_y":0,"trainer_type":"TRAINER_TYPE_NONE","trainer_sight_or_berry_tree_id":"0","script":"AlberaStorica_EventScript_OrientationNpc","flag":"0"},
-    {"local_id":"LOCALID_ALBERA_STORICA_SHOP_NPC","graphics_id":"OBJ_EVENT_GFX_WOMAN_2","x":29,"y":9,"elevation":3,"movement_type":"MOVEMENT_TYPE_LOOK_AROUND","movement_range_x":0,"movement_range_y":0,"trainer_type":"TRAINER_TYPE_NONE","trainer_sight_or_berry_tree_id":"0","script":"AlberaStorica_EventScript_ShopNpc","flag":"0"},
-    {"local_id":"LOCALID_ALBERA_STORICA_PLAZA_NPC","graphics_id":"OBJ_EVENT_GFX_MAN_2","x":18,"y":15,"elevation":3,"movement_type":"MOVEMENT_TYPE_LOOK_AROUND","movement_range_x":0,"movement_range_y":0,"trainer_type":"TRAINER_TYPE_NONE","trainer_sight_or_berry_tree_id":"0","script":"AlberaStorica_EventScript_PlazaNpc","flag":"0"},
-    {"local_id":"LOCALID_ALBERA_STORICA_GREEN_NPC","graphics_id":"OBJ_EVENT_GFX_LASS","x":29,"y":23,"elevation":3,"movement_type":"MOVEMENT_TYPE_FACE_UP","movement_range_x":0,"movement_range_y":0,"trainer_type":"TRAINER_TYPE_NONE","trainer_sight_or_berry_tree_id":"0","script":"AlberaStorica_EventScript_GreenNpc","flag":"0"},
-    {"local_id":"LOCALID_ALBERA_STORICA_ARCHIVE_NPC","graphics_id":"OBJ_EVENT_GFX_POKEFAN_F","x":10,"y":9,"elevation":3,"movement_type":"MOVEMENT_TYPE_FACE_RIGHT","movement_range_x":0,"movement_range_y":0,"trainer_type":"TRAINER_TYPE_NONE","trainer_sight_or_berry_tree_id":"0","script":"AlberaStorica_EventScript_ArchiveNpc","flag":"0"},
-    {"local_id":"LOCALID_ALBERA_STORICA_GYM_NPC","graphics_id":"OBJ_EVENT_GFX_YOUNGSTER","x":21,"y":7,"elevation":3,"movement_type":"MOVEMENT_TYPE_FACE_LEFT","movement_range_x":0,"movement_range_y":0,"trainer_type":"TRAINER_TYPE_NONE","trainer_sight_or_berry_tree_id":"0","script":"AlberaStorica_EventScript_GymNpc","flag":"0"},
-    {"local_id":"LOCALID_ALBERA_STORICA_NICO","graphics_id":"OBJ_EVENT_GFX_BRENDAN_NORMAL","x":20,"y":6,"elevation":3,"movement_type":"MOVEMENT_TYPE_FACE_LEFT","movement_range_x":0,"movement_range_y":0,"trainer_type":"TRAINER_TYPE_NONE","trainer_sight_or_berry_tree_id":"0","script":"AlberaStorica_EventScript_NicoPostGym","flag":"FLAG_ALBERA_NICO_GYM_ENCOUNTER_COMPLETE"}
+    {
+      "local_id": "LOCALID_ALBERA_STORICA_ORIENTATION_NPC",
+      "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
+      "x": 33,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "AlberaStorica_EventScript_OrientationNpc",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ALBERA_STORICA_SHOP_NPC",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
+      "x": 29,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "AlberaStorica_EventScript_ShopNpc",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ALBERA_STORICA_PLAZA_NPC",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_2",
+      "x": 18,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "AlberaStorica_EventScript_PlazaNpc",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ALBERA_STORICA_GREEN_NPC",
+      "graphics_id": "OBJ_EVENT_GFX_LASS",
+      "x": 29,
+      "y": 23,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "AlberaStorica_EventScript_GreenNpc",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ALBERA_STORICA_ARCHIVE_NPC",
+      "graphics_id": "OBJ_EVENT_GFX_POKEFAN_F",
+      "x": 10,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "AlberaStorica_EventScript_ArchiveNpc",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ALBERA_STORICA_GYM_NPC",
+      "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
+      "x": 19,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "AlberaStorica_EventScript_GymNpc",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ALBERA_STORICA_NICO",
+      "graphics_id": "OBJ_EVENT_GFX_BRENDAN_NORMAL",
+      "x": 18,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "AlberaStorica_EventScript_NicoPostGym",
+      "flag": "FLAG_ALBERA_NICO_GYM_ENCOUNTER_COMPLETE"
+    }
   ],
   "warp_events": [
     {
@@ -45,14 +135,14 @@
       "dest_warp_id": "0"
     },
     {
-      "x": 7,
+      "x": 6,
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_ALBERA_STORICA_CIVIC_ARCHIVE",
       "dest_warp_id": "0"
     },
     {
-      "x": 29,
+      "x": 28,
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_ALBERA_STORICA_SECRET_BASE_SHOP",
@@ -87,5 +177,6 @@
       "elevation": 3,
       "secret_base_id": "SECRET_BASE_ALBERA_TREE_1"
     }
-  ]
+  ],
+  "region": "REGION_HOENN"
 }
