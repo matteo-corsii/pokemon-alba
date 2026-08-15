@@ -24,7 +24,7 @@ Assert-True (($townsAndRoutes | Where-Object { $_ -eq 'AlberaStorica' }).Count -
 $layout = @($layouts.layouts | Where-Object { $_.id -eq 'LAYOUT_ALBERA_STORICA' })
 Assert-True ($layout.Count -eq 1) 'LAYOUT_ALBERA_STORICA missing or duplicated.'
 Assert-True ($layout[0].width -eq 36 -and $layout[0].height -eq 30) 'Unexpected layout dimensions.'
-Assert-True ($layout[0].primary_tileset -eq 'gTileset_General' -and $layout[0].secondary_tileset -eq 'gTileset_Petalburg') 'Unexpected tilesets.'
+Assert-True ($layout[0].primary_tileset -eq 'gTileset_General' -and $layout[0].secondary_tileset -eq 'gTileset_PortaPretoria') 'Unexpected tilesets.'
 Assert-True ($layout[0].layout_version -eq 'emerald') 'The layout must remain Emerald-only.'
 
 $section = @($regionSections.map_sections | Where-Object { $_.id -eq 'MAPSEC_ALBERA_STORICA' })
