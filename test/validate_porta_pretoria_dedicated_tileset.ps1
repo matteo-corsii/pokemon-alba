@@ -138,11 +138,19 @@ for ($offset = 0; $offset -lt $dedicatedMetatiles.Length; $offset += 2) {
 Assert-True ($maximumReferencedTileId -eq 0x394) 'Unexpected highest Porta Pretoria tile reference.'
 Assert-True ($maximumReferencedTileId -le (0x200 + 405 - 1)) 'Porta Pretoria references a tile beyond its declared capacity.'
 
+# General owns palettes 0-5 and the engine loads a secondary tileset only into
+# palettes 6-12. The appended Porta Pretoria metatiles must not depend on
+# transient, unloaded BG palette slots during camera transitions.
+for ($offset = $sharedMetatiles.Length; $offset -lt $dedicatedMetatiles.Length; $offset += 2) {
+    $paletteId = ([BitConverter]::ToUInt16($dedicatedMetatiles, $offset) -shr 12) -band 0xF
+    Assert-True ($paletteId -le 12) 'Porta Pretoria appended metatile references an unloaded BG palette slot.'
+}
+
 Add-Type -AssemblyName System.Drawing
 $tileImage = [Drawing.Image]::FromFile((Join-Path $RepositoryRoot 'data/tilesets/secondary/porta_pretoria/tiles.png'))
 Assert-True ($tileImage.Width -eq 128 -and $tileImage.Height -eq 208) 'Porta Pretoria tile image dimensions must provide the donor tile capacity.'
 $tileImage.Dispose()
-foreach ($pair in @(@('12.pal', '10.pal'), @('13.pal', '11.pal'), @('14.pal', '08.pal'))) {
+foreach ($pair in @(@('07.pal', '11.pal'), @('11.pal', '08.pal'), @('12.pal', '10.pal'))) {
     $actualPalette = Get-Content -LiteralPath (Join-Path $RepositoryRoot "data/tilesets/secondary/porta_pretoria/palettes/$($pair[0])")
     $sourcePalette = Get-Content -LiteralPath (Join-Path $RepositoryRoot "data/tilesets/secondary/rustboro/palettes/$($pair[1])")
     Assert-True ($actualPalette.Count -eq $sourcePalette.Count) "Rustboro donor palette $($pair[1]) length differs from Porta Pretoria slot $($pair[0])."
@@ -169,6 +177,13 @@ for ($y = 0; $y -lt 20; $y++) {
             Assert-True ($id -le 0x394) "OldaleTown references a Porta Pretoria metatile outside the declared tile capacity at ($x,$y)."
         }
         if ($id -ge 0x2B2 -and $id -le 0x33C) { $donorMetatileCells++ }
+        if ($id -ge 0x200) {
+            $metatileOffset = 16 * ($id - 0x200)
+            for ($word = 0; $word -lt 8; $word++) {
+                $paletteId = ([BitConverter]::ToUInt16($dedicatedMetatiles, $metatileOffset + (2 * $word)) -shr 12) -band 0xF
+                Assert-True ($paletteId -le 12) "OldaleTown references an unloaded BG palette slot at ($x,$y)."
+            }
+        }
     }
 }
 Assert-True ($donorMetatileCells -gt 0) 'OldaleTown must use the imported Porta Pretoria donor metatiles.'
