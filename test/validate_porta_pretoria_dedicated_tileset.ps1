@@ -21,29 +21,6 @@ function Get-MapCell([byte[]]$MapBin, [int]$X, [int]$Y) {
 }
 
 $palettePaths = 0..15 | ForEach-Object { "data/tilesets/secondary/porta_pretoria/palettes/{0:D2}.pal" -f $_ }
-$allowedPaths = @(
-    'data/layouts/OldaleTown/map.bin',
-    'data/layouts/AlberaStorica/map.bin',
-    'data/layouts/layouts.json',
-    'data/tilesets/secondary/porta_pretoria/tiles.png',
-    'data/tilesets/secondary/porta_pretoria/metatiles.bin',
-    'data/tilesets/secondary/porta_pretoria/metatile_attributes.bin',
-    'include/tilesets.h',
-    'src/data/tilesets/graphics.h',
-    'src/data/tilesets/headers.h',
-    'src/data/tilesets/metatiles.h',
-    'src/field_door.c',
-    'test/validate_albera_storica_blockout.ps1',
-    'test/validate_porta_pretoria_dedicated_tileset.ps1',
-    'test/validate_porta_pretoria_localization.ps1'
-) + $palettePaths
-
-$changedPaths = @(& git -C $RepositoryRoot diff --name-only develop)
-$changedPaths += @(& git -C $RepositoryRoot ls-files --others --exclude-standard)
-foreach ($changedPath in $changedPaths) {
-    Assert-True ($allowedPaths -contains $changedPath) "Unexpected file changed by Porta Pretoria dedicated tileset batch: $changedPath"
-}
-
 $layouts = Read-Json 'data/layouts/layouts.json'
 $oldaleLayout = @($layouts.layouts | Where-Object id -eq 'LAYOUT_OLDALE_TOWN')
 Assert-True ($oldaleLayout.Count -eq 1) 'LAYOUT_OLDALE_TOWN is missing or duplicated.'

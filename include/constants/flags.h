@@ -61,6 +61,7 @@
 #define FLAG_ALBERA_GYM_STROFA_III_COMPLETE 0x8E8
 #define FLAG_ITEM_ROUTE101_POTION           0x8E9
 #define FLAG_HIDDEN_ITEM_ROUTE101_ANTIDOTE  0x8EA
+#define FLAG_ALBERA_SECRET_BASES_UNLOCKED   0x8EB // Albera Storica shelter mentor unlock
 #define FLAG_HIDE_ALBERA_LAB_NICO 0x24 // Nico's dedicated Albèra lab object
 #define FLAG_HIDE_ALBERA_LAB_LIA 0x25 // Lia's dedicated Albèra lab object
 #define FLAG_HIDE_ROUTE101_RESEARCH_PARTY 0x26 // Via Verdi investigation party objects

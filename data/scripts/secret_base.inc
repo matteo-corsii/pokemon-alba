@@ -28,15 +28,21 @@ SecretBase_EventScript_CheckEntrance::
 	special GetSecretBaseTypeInFrontOfPlayer
 	special CheckPlayerHasSecretBase
 	goto_if_eq VAR_RESULT, TRUE, SecretBase_EventScript_AlreadyHasSecretBase
-	checkfieldmove FIELD_MOVE_SECRET_POWER
-	setfieldeffectargument 0, VAR_RESULT
-	buffermovename STR_VAR_2, MOVE_SECRET_POWER
-	goto_if_eq VAR_0x8007, SECRET_BASE_RED_CAVE, SecretBase_EventScript_Cave
-	goto_if_eq VAR_0x8007, SECRET_BASE_BROWN_CAVE, SecretBase_EventScript_Cave
-	goto_if_eq VAR_0x8007, SECRET_BASE_BLUE_CAVE, SecretBase_EventScript_Cave
-	goto_if_eq VAR_0x8007, SECRET_BASE_YELLOW_CAVE, SecretBase_EventScript_Cave
-	goto_if_eq VAR_0x8007, SECRET_BASE_TREE, SecretBase_EventScript_Tree
-	goto_if_eq VAR_0x8007, SECRET_BASE_SHRUB, SecretBase_EventScript_Shrub
+	goto_if_unset FLAG_ALBERA_SECRET_BASES_UNLOCKED, SecretBase_EventScript_UnlockRequired
+	goto SecretBase_EventScript_CreateWithoutSecretPower
+
+SecretBase_EventScript_UnlockRequired::
+	lockall
+	msgbox SecretBase_Text_UnlockRequired, MSGBOX_DEFAULT
+	releaseall
+	end
+
+SecretBase_EventScript_CreateWithoutSecretPower::
+	lockall
+	msgbox SecretBase_Text_CreateWithoutSecretPower, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, SecretBase_EventScript_CancelOnEntrance
+	special ToggleSecretBaseEntranceMetatile
+	goto SecretBase_EventScript_InitSecretBase
 	end
 
 SecretBase_EventScript_Cave::
@@ -185,6 +191,7 @@ SecretBase_EventScript_EnterPlayersBase::
 	end
 
 SecretBase_EventScript_AlreadyHasSecretBase::
+	goto_if_set FLAG_ALBERA_SECRET_BASES_UNLOCKED, SecretBase_EventScript_MoveWithoutSecretPower
 	checkfieldmove FIELD_MOVE_SECRET_POWER
 	goto_if_eq VAR_RESULT, PARTY_SIZE, SecretBase_EventScript_NoSecretPower
 	setfieldeffectargument 0, VAR_RESULT
@@ -214,6 +221,22 @@ SecretBase_EventScript_AlreadyHasSecretBase::
 	goto_if_eq VAR_0x8007, SECRET_BASE_SHRUB, SecretBase_EventScript_ShrubUseSecretPower
 	releaseall
 	end
+
+SecretBase_EventScript_MoveWithoutSecretPower::
+	lockall
+	special GetSecretBaseNearbyMapName
+	msgbox SecretBase_Text_WouldYouLikeToMoveBases, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, SecretBase_EventScript_CancelOnEntrance
+	msgbox SecretBase_Text_AllDecorationsWillBeReturned, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, SecretBase_EventScript_CancelOnEntrance
+	fadescreenswapbuffers FADE_TO_BLACK
+	special MoveOutOfSecretBaseFromOutside
+	closemessage
+	fadescreenswapbuffers FADE_FROM_BLACK
+	msgbox SecretBase_Text_MovingCompleted, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, SecretBase_EventScript_CancelOnEntrance
+	special ToggleSecretBaseEntranceMetatile
+	goto SecretBase_EventScript_InitSecretBase
 
 SecretBase_EventScript_NoSecretPower::
 	lockall
@@ -734,3 +757,16 @@ SecretBase_Text_WouldYouLikeToMoveBases:
 SecretBase_Text_MovingCompletedUseSecretPower:
 	.string "Moving completed.\p"
 	.string "Would you like to use the SECRET POWER?$"
+
+SecretBase_Text_UnlockRequired:
+	.string "Devi prima imparare come creare un\n"
+	.string "rifugio personale.$"
+
+SecretBase_Text_CreateWithoutSecretPower:
+	.string "Questo sembra un buon posto per un\n"
+	.string "rifugio personale.\p"
+	.string "Creare qui la tua BASE SEGRETA?$"
+
+SecretBase_Text_MovingCompleted:
+	.string "Trasloco completato.\p"
+	.string "Creare qui la tua BASE SEGRETA?$"
