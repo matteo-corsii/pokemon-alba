@@ -61,6 +61,7 @@ $allowedPaths = @(
     'src/data/tilesets/headers.h',
     'src/data/tilesets/metatiles.h',
     'src/field_door.c',
+    'test/validate_albera_storica_blockout.ps1',
     'test/validate_porta_pretoria_dedicated_tileset.ps1',
     'test/validate_porta_pretoria_localization.ps1'
 )

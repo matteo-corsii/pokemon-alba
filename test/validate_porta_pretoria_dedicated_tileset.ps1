@@ -32,6 +32,7 @@ $allowedPaths = @(
     'src/data/tilesets/headers.h',
     'src/data/tilesets/metatiles.h',
     'src/field_door.c',
+    'test/validate_albera_storica_blockout.ps1',
     'test/validate_porta_pretoria_dedicated_tileset.ps1',
     'test/validate_porta_pretoria_localization.ps1'
 ) + $palettePaths
@@ -48,6 +49,16 @@ Assert-True ($oldaleLayout.Count -eq 1) 'LAYOUT_OLDALE_TOWN is missing or duplic
 Assert-True ($oldaleLayout[0].primary_tileset -eq 'gTileset_General') 'OldaleTown primary tileset changed unexpectedly.'
 Assert-True ($oldaleLayout[0].secondary_tileset -eq 'gTileset_PortaPretoria') 'OldaleTown must use the dedicated Porta Pretoria secondary tileset.'
 Assert-True ($oldaleLayout[0].width -eq 20 -and $oldaleLayout[0].height -eq 20) 'OldaleTown dimensions changed unexpectedly.'
+
+# Connected-map blocks are rendered with the active map layout's tilesets.
+# Every map directly connected to OldaleTown must therefore share its compatible
+# secondary tileset; the Porta Pretoria prefix is byte-identical to Petalburg.
+foreach ($layoutId in @('LAYOUT_ROUTE101', 'LAYOUT_ROUTE103', 'LAYOUT_ALBERA_STORICA')) {
+    $layout = @($layouts.layouts | Where-Object id -eq $layoutId)
+    Assert-True ($layout.Count -eq 1) "$layoutId is missing or duplicated."
+    Assert-True ($layout[0].primary_tileset -eq 'gTileset_General') "$layoutId primary tileset changed unexpectedly."
+    Assert-True ($layout[0].secondary_tileset -eq 'gTileset_PortaPretoria') "$layoutId must share Porta Pretoria's compatible secondary tileset for seamless connections."
+}
 
 foreach ($path in @('data/tilesets/primary/general', 'data/tilesets/secondary/petalburg', 'data/tilesets/secondary/rustboro')) {
     & git -C $RepositoryRoot diff --quiet develop -- $path

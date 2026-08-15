@@ -183,7 +183,7 @@
       "width": 36,
       "height": 20,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Petalburg",
+      "secondary_tileset": "gTileset_PortaPretoria",
       "border_filepath": "data/layouts/Route101/border.bin",
       "blockdata_filepath": "data/layouts/Route101/map.bin",
       "layout_version": "emerald"
@@ -205,7 +205,7 @@
       "width": 80,
       "height": 22,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Petalburg",
+      "secondary_tileset": "gTileset_PortaPretoria",
       "border_filepath": "data/layouts/Route103/border.bin",
       "blockdata_filepath": "data/layouts/Route103/map.bin",
       "layout_version": "emerald"
@@ -9330,7 +9330,7 @@
       "width": 36,
       "height": 30,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Petalburg",
+      "secondary_tileset": "gTileset_PortaPretoria",
       "border_filepath": "data/layouts/AlberaStorica/border.bin",
       "blockdata_filepath": "data/layouts/AlberaStorica/map.bin",
       "layout_version": "emerald"
