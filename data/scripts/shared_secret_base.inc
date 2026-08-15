@@ -32,7 +32,7 @@ SecretBase_EventScript_PC::
 	waitmessage
 	waitbuttonpress
 	playse SE_SELECT
-	goto SecretBase_EventScript_PCShowMainMenu
+	goto SecretBase_EventScript_PCSelectMainMenu
 	end
 
 SecretBase_EventScript_PCShowMainMenu::
@@ -42,9 +42,61 @@ SecretBase_EventScript_PCShowMainMenu::
 	goto SecretBase_EventScript_PCMainMenuWithoutRegister
 	end
 
+SecretBase_EventScript_PCSelectMainMenu::
+	special IsCurSecretBaseOwnedByAnotherPlayer
+	goto_if_eq VAR_RESULT, TRUE, SecretBase_EventScript_PCShowMainMenu
+	goto SecretBase_EventScript_PCOwnerShowMainMenu
+	end
+
+SecretBase_EventScript_PCOwnerShowMainMenu::
+	message SecretBase_Text_WhatWouldYouLikeToDo
+	waitmessage
+	goto_if_set FLAG_SECRET_BASE_REGISTRY_ENABLED, SecretBase_EventScript_PCOwnerMainMenuWithRegister
+	goto SecretBase_EventScript_PCOwnerMainMenuWithoutRegister
+	end
+
 SecretBase_EventScript_PCCancel::
 	lockall
-	goto SecretBase_EventScript_PCShowMainMenu
+	goto SecretBase_EventScript_PCSelectMainMenu
+	end
+
+SecretBase_EventScript_PCOwnerMainMenuWithRegister::
+	multichoice 0, 0, MULTI_SECRET_BASE_OWNER_PC_WITH_REGISTRY, FALSE
+	switch VAR_RESULT
+	case 0, SecretBase_EventScript_PCDecorationMenu
+	case 1, SecretBase_EventScript_PCAccessStorage
+	case 2, SecretBase_EventScript_PCRest
+	case 3, SecretBase_EventScript_PCPackUp
+	case 4, SecretBase_EventScript_PCRegistryMenu
+	case 5, SecretBase_EventScript_PCTurnOff
+	case MULTI_B_PRESSED, SecretBase_EventScript_PCTurnOff
+	end
+
+SecretBase_EventScript_PCOwnerMainMenuWithoutRegister::
+	multichoice 0, 0, MULTI_SECRET_BASE_OWNER_PC_NO_REGISTRY, FALSE
+	switch VAR_RESULT
+	case 0, SecretBase_EventScript_PCDecorationMenu
+	case 1, SecretBase_EventScript_PCAccessStorage
+	case 2, SecretBase_EventScript_PCRest
+	case 3, SecretBase_EventScript_PCPackUp
+	case 4, SecretBase_EventScript_PCTurnOff
+	case MULTI_B_PRESSED, SecretBase_EventScript_PCTurnOff
+	end
+
+SecretBase_EventScript_PCAccessStorage::
+	playse SE_PC_LOGIN
+	msgbox gText_StorageSystemOpened, MSGBOX_DEFAULT
+	special ShowPokemonStorageSystemPC
+	goto SecretBase_EventScript_PCOwnerShowMainMenu
+	end
+
+SecretBase_EventScript_PCRest::
+	msgbox SecretBase_Text_RestAtBase, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, SecretBase_EventScript_PCOwnerShowMainMenu
+	closemessage
+	call Common_EventScript_OutOfCenterPartyHeal
+	msgbox SecretBase_Text_PartyRestored, MSGBOX_DEFAULT
+	goto SecretBase_EventScript_PCOwnerShowMainMenu
 	end
 
 SecretBase_EventScript_PCMainMenuWithRegister::
@@ -213,3 +265,9 @@ SecretBase_Text_DiscoveredSmallCavern::
 
 SecretBase_Text_WantToMakeYourSecretBaseHere:
 	.string "Want to make your SECRET BASE here?$"
+
+SecretBase_Text_RestAtBase:
+	.string "Take a short rest at your\nSECRET BASE?$"
+
+SecretBase_Text_PartyRestored:
+	.string "Your POKéMON are refreshed.$"

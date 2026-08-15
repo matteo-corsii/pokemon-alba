@@ -28,11 +28,14 @@ $allowedPaths = @(
     'data/maps/AlberaStorica_MentorsHouse/scripts.inc',
     'data/maps/map_groups.json',
     'data/scripts/secret_base.inc',
+    'data/scripts/shared_secret_base.inc',
     'data/specials.inc',
     'data/layouts/AlberaStorica/map.bin',
     'include/constants/flags.h',
     'include/constants/flags_frlg.h',
     'include/constants/secret_bases.h',
+    'include/constants/script_menu.h',
+    'src/data/script_menu.h',
     'src/secret_base.c',
     'test/validate_porta_pretoria_dedicated_tileset.ps1',
     'test/validate_porta_pretoria_localization.ps1',
@@ -64,6 +67,18 @@ Assert-True ($secretBaseScripts -match 'SecretBase_EventScript_CreateWithoutSecr
 Assert-True ($secretBaseScripts -match 'SecretBase_EventScript_AlreadyHasSecretBase::\s*goto_if_set FLAG_ALBERA_SECRET_BASES_UNLOCKED, SecretBase_EventScript_MoveWithoutSecretPower') 'Moving an existing base must use the unlocked path.'
 Assert-True ($secretBaseScripts -match 'SecretBase_EventScript_MoveWithoutSecretPower::[\s\S]*?special ToggleSecretBaseEntranceMetatile[\s\S]*?goto SecretBase_EventScript_InitSecretBase') 'Unlocked base movement must not require Secret Power.'
 Assert-True ($secretBaseScripts -match 'SecretBase_EventScript_UnlockRequired::[\s\S]*?releaseall\s*\r?\n\s*end') 'Locked Secret Base spots must release player controls.'
+
+$sharedSecretBaseScripts = Get-Content -Raw -Encoding utf8 'data/scripts/shared_secret_base.inc'
+Assert-True ($sharedSecretBaseScripts -match 'SecretBase_EventScript_PCSelectMainMenu::[\s\S]*?special IsCurSecretBaseOwnedByAnotherPlayer[\s\S]*?goto_if_eq VAR_RESULT, TRUE, SecretBase_EventScript_PCShowMainMenu[\s\S]*?goto SecretBase_EventScript_PCOwnerShowMainMenu') 'Secret Base personal utilities must be gated by the existing ownership check.'
+Assert-True ($sharedSecretBaseScripts -match 'SecretBase_EventScript_PCAccessStorage::[\s\S]*?special ShowPokemonStorageSystemPC[\s\S]*?goto SecretBase_EventScript_PCOwnerShowMainMenu') 'Own Secret Base storage must use the direct Storage System special and return safely.'
+Assert-True ($sharedSecretBaseScripts -match 'SecretBase_EventScript_PCRest::[\s\S]*?call Common_EventScript_OutOfCenterPartyHeal[\s\S]*?goto SecretBase_EventScript_PCOwnerShowMainMenu') 'Own Secret Base healing must use the out-of-center party-heal flow and return safely.'
+Assert-True ($sharedSecretBaseScripts -notmatch 'sethealplace|setrespawn') 'Secret Base utilities must not change the respawn location.'
+
+$scriptMenuConstants = Get-Content -Raw -Encoding utf8 'include/constants/script_menu.h'
+$scriptMenus = Get-Content -Raw -Encoding utf8 'src/data/script_menu.h'
+Assert-True ($scriptMenuConstants -match 'MULTI_SECRET_BASE_OWNER_PC_NO_REGISTRY') 'Missing own-base PC menu constant.'
+Assert-True ($scriptMenuConstants -match 'MULTI_SECRET_BASE_OWNER_PC_WITH_REGISTRY') 'Missing own-base registered-PC menu constant.'
+Assert-True ($scriptMenus -match 'MultichoiceList_SecretBaseOwnerPCNoRegistry[\s\S]*?gText_Storage[\s\S]*?gText_Rest') 'Own-base PC menu must expose Storage and Rest.'
 
 $groups = Read-JsonFile 'data/maps/map_groups.json'
 Assert-True ((@($groups.gMapGroup_IndoorOldale | Where-Object { $_ -eq 'AlberaStorica_MentorsHouse' })).Count -eq 1) 'Mentor house must be appended exactly once to the indoor map group.'
@@ -99,6 +114,8 @@ Assert-True (([regex]::Matches($eventScripts, [regex]::Escape('.include "data/ma
 $mapBytes = [IO.File]::ReadAllBytes('data/layouts/AlberaStorica/map.bin')
  $mentorDoor = [BitConverter]::ToUInt16($mapBytes, 2 * ((26 * 36) + 15))
 Assert-True ($mentorDoor -eq 0x0687) 'Mentor house entrance must use the passable PortaPretoria-compatible Oldale door metatile at (15,26).'
+$mentorFacade = [BitConverter]::ToUInt16($mapBytes, 2 * ((26 * 36) + 14))
+Assert-True ($mentorFacade -eq 0x0685) 'Mentor house may have only one visually readable entrance; the adjacent facade tile at (14,26) must not be a door.'
 foreach ($expected in @(@(26, 25, 0x3426), @(27, 25, 0x3427))) {
     $raw = [BitConverter]::ToUInt16($mapBytes, 2 * (($expected[1] * 36) + $expected[0]))
     Assert-True ($raw -eq $expected[2]) ('Secret Base tree metatile is invalid at (' + $expected[0] + ',' + $expected[1] + ').')
