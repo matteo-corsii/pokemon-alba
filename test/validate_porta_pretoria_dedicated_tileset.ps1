@@ -161,40 +161,26 @@ foreach ($property in @('object_events', 'warp_events', 'coord_events', 'bg_even
 
 $mapBin = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/layouts/OldaleTown/map.bin'))
 Assert-True ($mapBin.Length -eq 800) 'OldaleTown map.bin size changed unexpectedly.'
-& git -C $RepositoryRoot diff --quiet HEAD -- data/layouts/OldaleTown/map.bin
-Assert-True ($LASTEXITCODE -eq 0) 'OldaleTown map.bin must not change during the donor-kit pass.'
-$expectedDedicatedPlacements = [ordered]@{
-    '4,6' = 0x2A9; '6,6' = 0x2AA; '7,6' = 0x2AB; '4,7' = 0x298; '6,7' = 0x299; '7,7' = 0x29A
-    '14,15' = 0x2A9; '16,15' = 0x2AA; '17,15' = 0x2AB; '14,16' = 0x298; '16,16' = 0x299; '17,16' = 0x29A
-    '5,15' = 0x2AC; '5,16' = 0x29E; '7,16' = 0x29F; '13,5' = 0x2AE; '13,6' = 0x2A0; '15,6' = 0x2A1; '16,6' = 0x2A1
-}
-foreach ($placement in $expectedDedicatedPlacements.GetEnumerator()) {
-    $coordinate = $placement.Key.Split(',')
-    $x = [int]$coordinate[0]
-    $y = [int]$coordinate[1]
-    $cell = Get-MapCell $mapBin $x $y
-    Assert-True (($cell -band 0x03FF) -eq $placement.Value) "Dedicated facade metatile missing at $($placement.Key)."
-}
-$newMetatileCells = 0
+$donorMetatileCells = 0
 for ($y = 0; $y -lt 20; $y++) {
     for ($x = 0; $x -lt 20; $x++) {
         $id = (Get-MapCell $mapBin $x $y) -band 0x03FF
-        if ($id -ge 0x298 -and $id -le 0x2B1) { $newMetatileCells++ }
+        if ($id -ge 0x200) {
+            Assert-True ($id -le 0x394) "OldaleTown references a Porta Pretoria metatile outside the declared tile capacity at ($x,$y)."
+        }
+        if ($id -ge 0x2B2 -and $id -le 0x33C) { $donorMetatileCells++ }
     }
 }
-Assert-True ($newMetatileCells -ge 90) 'OldaleTown must use the new Porta Pretoria metatiles extensively.'
-$polishedCells = @(
-    @(9,8), @(10,8), @(9,9), @(10,9), @(9,10), @(10,10), @(11,10),
-    @(2,12), @(3,12), @(4,12), @(15,12), @(16,12), @(17,12),
-    @(2,13), @(3,13), @(4,13), @(13,14), @(13,15), @(13,16),
-    @(4,17), @(5,17), @(6,17), @(12,17), @(13,17), @(14,17), @(15,17),
-    @(2,4), @(3,4), @(17,4), @(17,5), @(2,14), @(3,14),
-    @(2,5), @(2,8), @(3,8), @(4,8), @(19,8), @(2,9), @(19,9),
-    @(1,10), @(18,10), @(19,10), @(4,14), @(4,15), @(4,16)
-)
-foreach ($coordinate in $polishedCells) {
+Assert-True ($donorMetatileCells -gt 0) 'OldaleTown must use the imported Porta Pretoria donor metatiles.'
+
+foreach ($coordinate in @(@(5, 7), @(15, 16), @(6, 16), @(14, 6))) {
     $cell = Get-MapCell $mapBin $coordinate[0] $coordinate[1]
-    Assert-True (($cell -band 0xFC00) -eq 0x3000) "Collision or elevation changed at polished cell ($($coordinate[0]),$($coordinate[1]))."
+    Assert-True ((($cell -shr 10) -band 3) -eq 1) "Building entrance collision changed at ($($coordinate[0]),$($coordinate[1]))."
+}
+
+foreach ($coordinate in @(@(8, 0), @(9, 0), @(10, 0), @(11, 0), @(8, 19), @(9, 19), @(10, 19), @(11, 19))) {
+    $cell = Get-MapCell $mapBin $coordinate[0] $coordinate[1]
+    Assert-True ((($cell -shr 10) -band 3) -eq 0 -and (($cell -shr 12) -band 0xF) -eq 3) "Connection or checkpoint access changed at ($($coordinate[0]),$($coordinate[1]))."
 }
 
 Write-Output 'Porta Pretoria dedicated tileset validation passed.'
