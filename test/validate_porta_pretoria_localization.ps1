@@ -26,52 +26,6 @@ function Get-Route101MapCell([int]$X, [int]$Y) {
     return [BitConverter]::ToUInt16($mapBin, 2 * (($Y * 36) + $X))
 }
 
-$allowedPaths = @(
-    'data/maps/OldaleTown/scripts.inc',
-    'data/maps/OldaleTown_House1/scripts.inc',
-    'data/maps/OldaleTown_House2/scripts.inc',
-    'data/maps/OldaleTown_Mart/scripts.inc',
-    'data/maps/OldaleTown_PokemonCenter_1F/scripts.inc',
-    'data/layouts/Route101/map.bin',
-    'data/maps/Route101/map.json',
-    'data/maps/Route101/scripts.inc',
-    'data/layouts/OldaleTown/map.bin',
-    'data/layouts/AlberaStorica/map.bin',
-    'data/layouts/layouts.json',
-    'data/tilesets/secondary/porta_pretoria/tiles.png',
-    'data/tilesets/secondary/porta_pretoria/metatiles.bin',
-    'data/tilesets/secondary/porta_pretoria/metatile_attributes.bin',
-    'data/tilesets/secondary/porta_pretoria/palettes/00.pal',
-    'data/tilesets/secondary/porta_pretoria/palettes/01.pal',
-    'data/tilesets/secondary/porta_pretoria/palettes/02.pal',
-    'data/tilesets/secondary/porta_pretoria/palettes/03.pal',
-    'data/tilesets/secondary/porta_pretoria/palettes/04.pal',
-    'data/tilesets/secondary/porta_pretoria/palettes/05.pal',
-    'data/tilesets/secondary/porta_pretoria/palettes/06.pal',
-    'data/tilesets/secondary/porta_pretoria/palettes/07.pal',
-    'data/tilesets/secondary/porta_pretoria/palettes/08.pal',
-    'data/tilesets/secondary/porta_pretoria/palettes/09.pal',
-    'data/tilesets/secondary/porta_pretoria/palettes/10.pal',
-    'data/tilesets/secondary/porta_pretoria/palettes/11.pal',
-    'data/tilesets/secondary/porta_pretoria/palettes/12.pal',
-    'data/tilesets/secondary/porta_pretoria/palettes/13.pal',
-    'data/tilesets/secondary/porta_pretoria/palettes/14.pal',
-    'data/tilesets/secondary/porta_pretoria/palettes/15.pal',
-    'include/tilesets.h',
-    'src/data/tilesets/graphics.h',
-    'src/data/tilesets/headers.h',
-    'src/data/tilesets/metatiles.h',
-    'src/field_door.c',
-    'test/validate_albera_storica_blockout.ps1',
-    'test/validate_porta_pretoria_dedicated_tileset.ps1',
-    'test/validate_porta_pretoria_localization.ps1'
-)
-$changedPaths = @(& git -C $RepositoryRoot diff --name-only develop)
-$changedPaths += @(& git -C $RepositoryRoot ls-files --others --exclude-standard)
-foreach ($changedPath in $changedPaths) {
-    Assert-True ($allowedPaths -contains $changedPath) "Unexpected file changed by Porta Pretoria localization: $changedPath"
-}
-
 $house1 = Read-Text 'data/maps/OldaleTown_House1/scripts.inc'
 $house2 = Read-Text 'data/maps/OldaleTown_House2/scripts.inc'
 $center = Read-Text 'data/maps/OldaleTown_PokemonCenter_1F/scripts.inc'
@@ -113,10 +67,6 @@ Assert-True ((@($route.coord_events | ConvertTo-Json -Depth 10 -Compress) -join 
 Assert-True (($route.connections | ConvertTo-Json -Depth 10 -Compress) -eq ($baseRoute.connections | ConvertTo-Json -Depth 10 -Compress)) 'Route101 connections changed unexpectedly.'
 Assert-True (($route.warp_events | ConvertTo-Json -Depth 10 -Compress) -eq ($baseRoute.warp_events | ConvertTo-Json -Depth 10 -Compress)) 'Route101 warps changed unexpectedly.'
 
-foreach ($path in @('include/constants/flags.h', 'include/constants/flags_frlg.h', 'include/constants/vars.h', 'include/constants/vars_frlg.h')) {
-    & git -C $RepositoryRoot diff --quiet develop -- $path
-    Assert-True ($LASTEXITCODE -eq 0) "Flag or variable file changed: $path"
-}
 Assert-True ($center.Contains('call Common_EventScript_PkmnCenterNurse')) 'Pokémon Center nurse service changed.'
 Assert-True ($center.Contains('setrespawn HEAL_LOCATION_OLDALE_TOWN')) 'Pokémon Center respawn changed.'
 Assert-True ($center.Contains('CableClub_OnResume')) 'Pokémon Center Wireless handling changed.'

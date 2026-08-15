@@ -166,6 +166,11 @@
 
 #define SECRET_BASE_SHRUB4 SECRET_BASE_GROUP(23)
 
-#define NUM_SECRET_BASE_GROUPS 24
+// Albera Storica's first tutorial tree reuses the Tree1 interior.
+#define SECRET_BASE_ALBERA_TREE_1 241
+
+#define SECRET_BASE_ALBERA_TREE SECRET_BASE_GROUP(24)
+
+#define NUM_SECRET_BASE_GROUPS 25
 
 #endif  // GUARD_CONSTANTS_SECRET_BASES_H

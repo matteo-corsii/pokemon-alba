@@ -28,6 +28,13 @@
       "elevation": 0,
       "dest_map": "MAP_ALBERA_STORICA_ANFITEATRO",
       "dest_warp_id": "0"
+    },
+    {
+      "x": 15,
+      "y": 26,
+      "elevation": 0,
+      "dest_map": "MAP_ALBERA_STORICA_MENTORS_HOUSE",
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [
@@ -50,5 +57,13 @@
       "script": "AlberaStorica_EventScript_EnterAnfiteatro"
     }
   ],
-  "bg_events": []
+  "bg_events": [
+    {
+      "type": "secret_base",
+      "x": 26,
+      "y": 25,
+      "elevation": 3,
+      "secret_base_id": "SECRET_BASE_ALBERA_TREE_1"
+    }
+  ]
 }
