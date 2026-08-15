@@ -36,6 +36,7 @@ $allowedPaths = @(
     'data/maps/Route101/map.json',
     'data/maps/Route101/scripts.inc',
     'data/layouts/OldaleTown/map.bin',
+    'data/layouts/AlberaStorica/map.bin',
     'data/layouts/layouts.json',
     'data/tilesets/secondary/porta_pretoria/tiles.png',
     'data/tilesets/secondary/porta_pretoria/metatiles.bin',

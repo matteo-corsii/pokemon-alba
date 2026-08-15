@@ -23,6 +23,7 @@ function Get-MapCell([byte[]]$MapBin, [int]$X, [int]$Y) {
 $palettePaths = 0..15 | ForEach-Object { "data/tilesets/secondary/porta_pretoria/palettes/{0:D2}.pal" -f $_ }
 $allowedPaths = @(
     'data/layouts/OldaleTown/map.bin',
+    'data/layouts/AlberaStorica/map.bin',
     'data/layouts/layouts.json',
     'data/tilesets/secondary/porta_pretoria/tiles.png',
     'data/tilesets/secondary/porta_pretoria/metatiles.bin',
