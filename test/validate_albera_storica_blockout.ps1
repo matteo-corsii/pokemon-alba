@@ -35,7 +35,10 @@ Assert-True ($alberaStorica.id -eq 'MAP_ALBERA_STORICA' -and $alberaStorica.layo
 Assert-True (@($alberaStorica.connections).Count -eq 1) 'Albera Storica must have only the Porta Pretoria connection.'
 $returnConnection = @($alberaStorica.connections | Where-Object { $_.direction -eq 'right' -and $_.map -eq 'MAP_OLDALE_TOWN' -and $_.offset -eq 0 })
 Assert-True ($returnConnection.Count -eq 1) 'Return connection to Porta Pretoria is invalid.'
-Assert-True (@($alberaStorica.object_events).Count -eq 0) 'Albera Storica must not gain unrelated NPCs.'
+$requiredCivicNpcs = @('LOCALID_ALBERA_STORICA_ORIENTATION_NPC', 'LOCALID_ALBERA_STORICA_SHOP_NPC', 'LOCALID_ALBERA_STORICA_PLAZA_NPC', 'LOCALID_ALBERA_STORICA_GREEN_NPC', 'LOCALID_ALBERA_STORICA_ARCHIVE_NPC', 'LOCALID_ALBERA_STORICA_GYM_NPC', 'LOCALID_ALBERA_STORICA_NICO')
+$actualCivicNpcs = (@($alberaStorica.object_events.local_id) | Sort-Object) -join ';'
+$expectedCivicNpcs = ($requiredCivicNpcs | Sort-Object) -join ';'
+Assert-True ($actualCivicNpcs -eq $expectedCivicNpcs) 'Unexpected Albera Storica exterior object set.'
 $amphitheatreEntranceTriggers = @($alberaStorica.coord_events | Where-Object { $_.x -in @(17, 18) -and $_.y -eq 4 -and $_.elevation -eq 3 -and $_.var -eq 'VAR_ALBERA_GYM_INPUT' -and $_.var_value -eq '0' -and $_.script -eq 'AlberaStorica_EventScript_EnterAnfiteatro' })
 Assert-True ($amphitheatreEntranceTriggers.Count -eq 2 -and @($alberaStorica.coord_events).Count -eq 2) 'Albera Storica must not gain unrelated coordinate events.'
 

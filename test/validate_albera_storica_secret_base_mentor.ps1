@@ -24,8 +24,13 @@ function Get-ChangedPaths {
 $allowedPaths = @(
     'data/event_scripts.s',
     'data/maps/AlberaStorica/map.json',
+    'data/maps/AlberaStorica/scripts.inc',
     'data/maps/AlberaStorica_MentorsHouse/map.json',
     'data/maps/AlberaStorica_MentorsHouse/scripts.inc',
+    'data/maps/AlberaStorica_CivicArchive/map.json',
+    'data/maps/AlberaStorica_CivicArchive/scripts.inc',
+    'data/maps/AlberaStorica_SecretBaseShop/map.json',
+    'data/maps/AlberaStorica_SecretBaseShop/scripts.inc',
     'data/maps/map_groups.json',
     'data/scripts/secret_base.inc',
     'data/scripts/shared_secret_base.inc',
@@ -40,6 +45,8 @@ $allowedPaths = @(
     'test/validate_porta_pretoria_dedicated_tileset.ps1',
     'test/validate_porta_pretoria_localization.ps1',
     'test/validate_albera_storica_secret_base_mentor.ps1'
+    ,'test/validate_albera_storica_blockout.ps1'
+    ,'test/validate_albera_storica_civic_life.ps1'
 )
 
 $unexpectedPaths = @(Get-ChangedPaths | Where-Object { $_ -notin $allowedPaths })
@@ -85,7 +92,7 @@ Assert-True ((@($groups.gMapGroup_IndoorOldale | Where-Object { $_ -eq 'AlberaSt
 
 $albera = Read-JsonFile 'data/maps/AlberaStorica/map.json'
 $mentorHouse = Read-JsonFile 'data/maps/AlberaStorica_MentorsHouse/map.json'
-Assert-True (@($albera.object_events).Count -eq 0) 'Mentor must remain inside the house; Albera Storica gains no exterior NPC.'
+Assert-True (@($albera.object_events | Where-Object { $_.local_id -eq 'LOCALID_ALBERA_SECRET_BASE_MENTOR' }).Count -eq 0) 'Mentor must remain inside the house.'
 Assert-True ((@($albera.warp_events | Where-Object { $_.x -eq 17 -and $_.y -eq 5 -and $_.dest_map -eq 'MAP_ALBERA_STORICA_ANFITEATRO' })).Count -eq 1) 'Amphitheatre warp changed.'
 Assert-True ((@($albera.warp_events | Where-Object { $_.x -eq 15 -and $_.y -eq 26 -and $_.dest_map -eq 'MAP_ALBERA_STORICA_MENTORS_HOUSE' -and $_.dest_warp_id -eq '0' })).Count -eq 1) 'Mentor house entrance must remain at (15,26).'
 Assert-True (@($albera.coord_events).Count -eq 2) 'No new Albera Storica coordinate events are allowed.'
