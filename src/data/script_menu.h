@@ -37,6 +37,7 @@ const u8 gText_Decoration2[] = _("DECORATION");
 const u8 gText_PackUp[] = _("PACK UP");
 const u8 gText_Registry[] = _("REGISTRY");
 const u8 gText_Storage[] = _("STORAGE");
+const u8 gText_Rest[] = _("REST");
 
 static const struct MenuAction MultichoiceList_BasePCWithRegistry[] =
 {
@@ -468,7 +469,6 @@ const u8 gText_Opponent[] = _("OPPONENT");
 const u8 gText_Tourney_Tree[] = _("TOURNEY TREE");
 const u8 gText_ReadyToStart[] = _("READY TO START");
 const u8 gText_Record2[] = _("RECORD");
-const u8 gText_Rest[] = _("REST");
 const u8 gText_Retire[] = _("RETIRE");
 
 static const struct MenuAction MultichoiceList_TourneyWithRecord[] =
