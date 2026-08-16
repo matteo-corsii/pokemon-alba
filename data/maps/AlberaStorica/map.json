@@ -116,7 +116,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "AlberaStorica_EventScript_NicoPostGym",
-      "flag": "FLAG_ALBERA_NICO_GYM_ENCOUNTER_COMPLETE"
+      "flag": "FLAG_HIDE_ALBERA_STORICA_NICO"
     }
   ],
   "warp_events": [

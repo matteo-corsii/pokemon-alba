@@ -63,6 +63,7 @@
 #define FLAG_HIDDEN_ITEM_ROUTE101_ANTIDOTE  0x8EA
 #define FLAG_ALBERA_SECRET_BASES_UNLOCKED   0x8EB // Albera Storica shelter mentor unlock
 #define FLAG_ALBERA_NICO_GYM_ENCOUNTER_COMPLETE 0x8EC // Nico's one-time post-Lirio encounter
+#define FLAG_HIDE_ALBERA_STORICA_NICO 0x8ED // Technical visibility flag for Nico's post-Gym object
 #define FLAG_HIDE_ALBERA_LAB_NICO 0x24 // Nico's dedicated Albèra lab object
 #define FLAG_HIDE_ALBERA_LAB_LIA 0x25 // Lia's dedicated Albèra lab object
 #define FLAG_HIDE_ROUTE101_RESEARCH_PARTY 0x26 // Via Verdi investigation party objects

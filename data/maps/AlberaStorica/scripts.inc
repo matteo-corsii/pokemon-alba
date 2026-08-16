@@ -1,15 +1,15 @@
 AlberaStorica_MapScripts::
-	map_script MAP_SCRIPT_ON_TRANSITION, AlberaStorica_OnTransition
+	map_script MAP_SCRIPT_ON_LOAD, AlberaStorica_OnLoad
 	.byte 0
 
-AlberaStorica_OnTransition:
-	goto_if_unset FLAG_BADGE01_GET, AlberaStorica_OnTransition_HideNico
-	goto_if_set FLAG_ALBERA_NICO_GYM_ENCOUNTER_COMPLETE, AlberaStorica_OnTransition_HideNico
-	showobjectat LOCALID_ALBERA_STORICA_NICO, MAP_ALBERA_STORICA
+AlberaStorica_OnLoad:
+	goto_if_unset FLAG_BADGE01_GET, AlberaStorica_OnLoad_HideNico
+	goto_if_set FLAG_ALBERA_NICO_GYM_ENCOUNTER_COMPLETE, AlberaStorica_OnLoad_HideNico
+	clearflag FLAG_HIDE_ALBERA_STORICA_NICO
 	end
 
-AlberaStorica_OnTransition_HideNico:
-	hideobjectat LOCALID_ALBERA_STORICA_NICO, MAP_ALBERA_STORICA
+AlberaStorica_OnLoad_HideNico:
+	setflag FLAG_HIDE_ALBERA_STORICA_NICO
 	end
 
 AlberaStorica_EventScript_EnterAnfiteatro::
@@ -46,6 +46,7 @@ AlberaStorica_EventScript_NicoPostGym::
 	faceplayer
 	msgbox AlberaStorica_Text_NicoPostGym, MSGBOX_DEFAULT
 	setflag FLAG_ALBERA_NICO_GYM_ENCOUNTER_COMPLETE
+	setflag FLAG_HIDE_ALBERA_STORICA_NICO
 	removeobject LOCALID_ALBERA_STORICA_NICO
 	releaseall
 	end
