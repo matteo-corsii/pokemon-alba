@@ -15,7 +15,7 @@ Assert-True ($routeLayout.width -eq 80 -and $routeLayout.height -eq 22) 'Route10
 Assert-True ($routeLayout.primary_tileset -eq 'gTileset_General' -and $routeLayout.secondary_tileset -eq 'gTileset_PortaPretoria') 'Route103 tilesets must remain General + PortaPretoria.'
 Assert-True ($route.connections.Count -eq 1 -and $route.connections[0].map -eq 'MAP_OLDALE_TOWN' -and $route.connections[0].direction -eq 'down') 'Route103 must retain only its south Porta Pretoria connection.'
 Assert-True ($route.object_events.Count -eq 0) 'Route103 must not retain vanilla NPC or rival events.'
-Assert-True ($route.bg_events.Count -eq 1 -and $route.bg_events[0].x -eq 52 -and $route.bg_events[0].y -eq 8 -and $route.bg_events[0].script -eq 'Route103_EventScript_CisternoniAccessClosed') 'Cisternoni gate sign is missing or displaced.'
+Assert-True ($route.bg_events.Count -eq 1 -and $route.bg_events[0].x -eq 52 -and $route.bg_events[0].y -eq 8 -and $route.bg_events[0].player_facing_dir -eq 'BG_EVENT_PLAYER_FACING_NORTH' -and $route.bg_events[0].script -eq 'Route103_EventScript_CisternoniAccessClosed') 'Cisternoni gate sign is missing, displaced, or uses an invalid facing direction.'
 Assert-True ($route.warp_events.Count -eq 1 -and $route.warp_events[0].dest_map -eq 'MAP_CISTERNONI') 'Route103 must provide only the Cisternoni return-warp architecture.'
 Assert-True ($cisternoniLayout.width -eq 34 -and $cisternoniLayout.height -eq 24) 'Cisternoni must remain a single 34x24 interior.'
 Assert-True ($cisternoniLayout.primary_tileset -eq 'gTileset_General' -and $cisternoniLayout.secondary_tileset -eq 'gTileset_Cisternoni') 'Cisternoni tileset contract changed.'
