@@ -3,9 +3,13 @@ AlberaStorica_MapScripts::
 	.byte 0
 
 AlberaStorica_OnTransition:
-	goto_if_set FLAG_BADGE01_GET, AlberaStorica_OnTransition_End
+	goto_if_unset FLAG_BADGE01_GET, AlberaStorica_OnTransition_HideNico
+	goto_if_set FLAG_ALBERA_NICO_GYM_ENCOUNTER_COMPLETE, AlberaStorica_OnTransition_HideNico
+	showobjectat LOCALID_ALBERA_STORICA_NICO, MAP_ALBERA_STORICA
+	end
+
+AlberaStorica_OnTransition_HideNico:
 	hideobjectat LOCALID_ALBERA_STORICA_NICO, MAP_ALBERA_STORICA
-AlberaStorica_OnTransition_End:
 	end
 
 AlberaStorica_EventScript_EnterAnfiteatro::
