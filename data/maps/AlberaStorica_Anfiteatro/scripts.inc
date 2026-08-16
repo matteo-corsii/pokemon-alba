@@ -275,6 +275,7 @@ AlberaStorica_Anfiteatro_EventScript_LirioBattle:
 
 AlberaStorica_Anfiteatro_EventScript_LirioDefeated:
 	setflag FLAG_BADGE01_GET
+	clearflag FLAG_HIDE_ALBERA_STORICA_NICO
 	setvar VAR_ALBERA_GYM_STATE, 4
 	setvar VAR_ALBERA_GYM_INPUT, 0
 	releaseall

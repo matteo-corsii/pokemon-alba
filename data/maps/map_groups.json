@@ -151,7 +151,9 @@
     "OldaleTown_PokemonCenter_1F",
     "OldaleTown_PokemonCenter_2F",
     "OldaleTown_Mart",
-    "AlberaStorica_MentorsHouse"
+    "AlberaStorica_MentorsHouse",
+    "AlberaStorica_CivicArchive",
+    "AlberaStorica_SecretBaseShop"
   ],
   "gMapGroup_IndoorDewford": [
     "DewfordTown_House1",
