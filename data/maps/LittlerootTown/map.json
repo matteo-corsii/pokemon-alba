@@ -172,6 +172,27 @@
       "elevation": 0,
       "dest_map": "MAP_ALBERA_BASSA_SCHOOL",
       "dest_warp_id": "0"
+    },
+    {
+      "x": 5,
+      "y": 26,
+      "elevation": 0,
+      "dest_map": "MAP_ALBERA_BASSA_CONDOMINIUM1",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 19,
+      "y": 26,
+      "elevation": 0,
+      "dest_map": "MAP_ALBERA_BASSA_CONDOMINIUM2",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 31,
+      "y": 26,
+      "elevation": 0,
+      "dest_map": "MAP_ALBERA_BASSA_CONDOMINIUM3",
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [

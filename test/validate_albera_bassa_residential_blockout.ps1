@@ -30,7 +30,17 @@ $allowedPaths = @(
     'data/layouts/Route101/map.bin',
     'data/maps/OldaleTown/map.json',
     'data/maps/Route101/map.json',
+    'data/maps/LittlerootTown/map.json',
+    'data/maps/map_groups.json',
+    'data/maps/AlberaBassa_Condominium1/map.json',
+    'data/maps/AlberaBassa_Condominium1/scripts.inc',
+    'data/maps/AlberaBassa_Condominium2/map.json',
+    'data/maps/AlberaBassa_Condominium2/scripts.inc',
+    'data/maps/AlberaBassa_Condominium3/map.json',
+    'data/maps/AlberaBassa_Condominium3/scripts.inc',
+    'data/event_scripts.s',
     'test/validate_albera_bassa_school.ps1',
+    'test/validate_albera_bassa_condominiums.ps1',
     'test/validate_porta_pretoria_dedicated_tileset.ps1',
     'test/validate_porta_pretoria_localization.ps1',
     'test/validate_via_verdi_ambient_npc.ps1',
@@ -75,7 +85,12 @@ foreach ($footprint in $footprints) {
 foreach ($eventCollection in @('object_events', 'warp_events', 'coord_events', 'bg_events')) {
     foreach ($event in @($town.$eventCollection)) {
         foreach ($footprint in $footprints) {
-            Assert-True (-not ($event.x -ge $footprint[0] -and $event.x -le ($footprint[0] + 4) -and $event.y -ge $footprint[1] -and $event.y -le ($footprint[1] + 4))) "A $eventCollection event overlaps the residential footprint at ($($footprint[0]),$($footprint[1]))."
+            $isApprovedCondominiumDoor = $eventCollection -eq 'warp_events' -and (
+                ($event.x -eq 5 -and $event.y -eq 26) -or
+                ($event.x -eq 19 -and $event.y -eq 26) -or
+                ($event.x -eq 31 -and $event.y -eq 26)
+            )
+            Assert-True ($isApprovedCondominiumDoor -or -not ($event.x -ge $footprint[0] -and $event.x -le ($footprint[0] + 4) -and $event.y -ge $footprint[1] -and $event.y -le ($footprint[1] + 4))) "A $eventCollection event overlaps the residential footprint at ($($footprint[0]),$($footprint[1]))."
         }
     }
 }
