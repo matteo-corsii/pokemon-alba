@@ -29,13 +29,21 @@ $allowedPaths = @(
     "data/event_scripts.s",
     "data/layouts/AlberaBassa_School/border.bin",
     "data/layouts/AlberaBassa_School/map.bin",
+    "data/layouts/LittlerootTown/map.bin",
+    "data/layouts/Route101/map.bin",
     "data/layouts/layouts.json",
     "data/maps/AlberaBassa_School/map.json",
     "data/maps/AlberaBassa_School/scripts.inc",
     "data/maps/LittlerootTown/map.json",
     "data/maps/LittlerootTown/scripts.inc",
+    "data/maps/OldaleTown/map.json",
+    "data/maps/Route101/map.json",
     "data/maps/map_groups.json",
-    "test/validate_albera_bassa_school.ps1"
+    "test/validate_albera_bassa_school.ps1",
+    "test/validate_albera_bassa_residential_blockout.ps1",
+    "test/validate_porta_pretoria_dedicated_tileset.ps1",
+    "test/validate_porta_pretoria_localization.ps1",
+    "test/validate_via_verdi_ambient_npc.ps1"
 )
 
 $unexpectedPaths = @(Get-ChangedPaths | Where-Object { $_ -notin $allowedPaths })

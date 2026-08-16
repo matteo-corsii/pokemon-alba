@@ -62,7 +62,13 @@ $villaSignMetatile = Get-Route101MapCell 28 5
 Assert-True (($villaSignMetatile -band 0x03FF) -eq 0x0003) 'Villa dei Cavallacci must use the visible Route101 sign metatile.'
 Assert-True ((($villaSignMetatile -shr 10) -band 3) -eq 0) 'Villa sign collision changed unexpectedly.'
 Assert-True ((($villaSignMetatile -shr 12) -band 0xF) -eq 3) 'Villa sign elevation must match the surrounding path.'
-Assert-True ((@($route.object_events | ConvertTo-Json -Depth 10 -Compress) -join "`n") -eq (@($baseRoute.object_events | ConvertTo-Json -Depth 10 -Compress) -join "`n")) 'Route101 object events changed unexpectedly.'
+$youngster = @($route.object_events | Where-Object { $_.graphics_id -eq 'OBJ_EVENT_GFX_YOUNGSTER' -and $_.script -eq 'Route101_EventScript_Youngster' })
+$baseYoungster = @($baseRoute.object_events | Where-Object { $_.graphics_id -eq 'OBJ_EVENT_GFX_YOUNGSTER' -and $_.script -eq 'Route101_EventScript_Youngster' })
+Assert-True ($youngster.Count -eq 1 -and $baseYoungster.Count -eq 1) 'Route101 Youngster identity changed unexpectedly.'
+Assert-True ($youngster[0].x -eq 16 -and $youngster[0].y -eq 9 -and $youngster[0].elevation -eq 3 -and $youngster[0].movement_type -eq 'MOVEMENT_TYPE_LOOK_AROUND' -and $youngster[0].movement_range_x -eq 0 -and $youngster[0].movement_range_y -eq 0 -and $youngster[0].trainer_type -eq 'TRAINER_TYPE_NONE' -and $youngster[0].flag -eq '0') 'Approved Route101 Youngster move must be limited to (16,8) -> (16,9).'
+$otherObjects = @($route.object_events | Where-Object { $_ -ne $youngster[0] })
+$baseOtherObjects = @($baseRoute.object_events | Where-Object { $_ -ne $baseYoungster[0] })
+Assert-True (($otherObjects | ConvertTo-Json -Depth 20 -Compress) -eq ($baseOtherObjects | ConvertTo-Json -Depth 20 -Compress)) 'Route101 object events other than the approved Youngster move changed unexpectedly.'
 Assert-True ((@($route.coord_events | ConvertTo-Json -Depth 10 -Compress) -join "`n") -eq (@($baseRoute.coord_events | ConvertTo-Json -Depth 10 -Compress) -join "`n")) 'Route101 triggers changed unexpectedly.'
 Assert-True (($route.connections | ConvertTo-Json -Depth 10 -Compress) -eq ($baseRoute.connections | ConvertTo-Json -Depth 10 -Compress)) 'Route101 connections changed unexpectedly.'
 Assert-True (($route.warp_events | ConvertTo-Json -Depth 10 -Compress) -eq ($baseRoute.warp_events | ConvertTo-Json -Depth 10 -Compress)) 'Route101 warps changed unexpectedly.'

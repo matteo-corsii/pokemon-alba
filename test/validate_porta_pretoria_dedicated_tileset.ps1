@@ -150,11 +150,18 @@ foreach ($pair in @(@('07.pal', '11.pal'), @('11.pal', '08.pal'), @('12.pal', '1
 
 $oldale = Read-Json 'data/maps/OldaleTown/map.json'
 $baseOldale = Get-BaseJson 'data/maps/OldaleTown/map.json'
-foreach ($property in @('object_events', 'warp_events', 'coord_events', 'bg_events', 'connections')) {
+foreach ($property in @('warp_events', 'coord_events', 'bg_events', 'connections')) {
     $actual = ($oldale.$property | ConvertTo-Json -Depth 20 -Compress)
     $expected = ($baseOldale.$property | ConvertTo-Json -Depth 20 -Compress)
     Assert-True ($actual -eq $expected) "OldaleTown $property changed unexpectedly."
 }
+$traveler = @($oldale.object_events | Where-Object { $_.graphics_id -eq 'OBJ_EVENT_GFX_GIRL_3' -and $_.script -eq 'OldaleTown_EventScript_Traveler' })
+$baseTraveler = @($baseOldale.object_events | Where-Object { $_.graphics_id -eq 'OBJ_EVENT_GFX_GIRL_3' -and $_.script -eq 'OldaleTown_EventScript_Traveler' })
+Assert-True ($traveler.Count -eq 1 -and $baseTraveler.Count -eq 1) 'Porta Pretoria traveler identity changed unexpectedly.'
+Assert-True ($traveler[0].x -eq 10 -and $traveler[0].y -eq 15 -and $traveler[0].elevation -eq 3 -and $traveler[0].movement_type -eq 'MOVEMENT_TYPE_FACE_LEFT' -and $traveler[0].movement_range_x -eq 0 -and $traveler[0].movement_range_y -eq 0 -and $traveler[0].flag -eq '0') 'Approved Porta Pretoria traveler move must be limited to (9,15) -> (10,15).'
+$otherObjects = @($oldale.object_events | Where-Object { $_ -ne $traveler[0] })
+$baseOtherObjects = @($baseOldale.object_events | Where-Object { $_ -ne $baseTraveler[0] })
+Assert-True (($otherObjects | ConvertTo-Json -Depth 20 -Compress) -eq ($baseOtherObjects | ConvertTo-Json -Depth 20 -Compress)) 'OldaleTown object events other than the approved traveler move changed unexpectedly.'
 
 $mapBin = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/layouts/OldaleTown/map.bin'))
 Assert-True ($mapBin.Length -eq 800) 'OldaleTown map.bin size changed unexpectedly.'
