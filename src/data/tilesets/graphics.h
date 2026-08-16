@@ -438,6 +438,28 @@ const u16 gTilesetPalettes_Cave[][16] =
     INCGFX_U16("data/tilesets/secondary/cave/palettes/15.pal", ".gbapal"),
 };
 
+const u32 gTilesetTiles_Cisternoni[] = INCGFX_U32("data/tilesets/secondary/cisternoni/tiles.png", ".4bpp.fastSmol", "-num_tiles 405 -Wnum_tiles");
+
+const u16 gTilesetPalettes_Cisternoni[][16] =
+{
+    INCGFX_U16("data/tilesets/secondary/cisternoni/palettes/00.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/cisternoni/palettes/01.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/cisternoni/palettes/02.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/cisternoni/palettes/03.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/cisternoni/palettes/04.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/cisternoni/palettes/05.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/cisternoni/palettes/06.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/cisternoni/palettes/07.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/cisternoni/palettes/08.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/cisternoni/palettes/09.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/cisternoni/palettes/10.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/cisternoni/palettes/11.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/cisternoni/palettes/12.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/cisternoni/palettes/13.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/cisternoni/palettes/14.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/cisternoni/palettes/15.pal", ".gbapal"),
+};
+
 const u32 gTilesetTiles_PokemonSchool[] = INCGFX_U32("data/tilesets/secondary/pokemon_school/tiles.png", ".4bpp.fastSmol", "-num_tiles 278 -Wnum_tiles");
 
 const u16 gTilesetPalettes_PokemonSchool[][16] =

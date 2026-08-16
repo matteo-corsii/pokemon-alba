@@ -261,6 +261,17 @@ const struct Tileset gTileset_Cave =
     .callback = InitTilesetAnim_Cave,
 };
 
+const struct Tileset gTileset_Cisternoni =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_Cisternoni,
+    .palettes = gTilesetPalettes_Cisternoni,
+    .metatiles = gMetatiles_Cisternoni,
+    .metatileAttributes = gMetatileAttributes_Cisternoni,
+    .callback = InitTilesetAnim_Petalburg,
+};
+
 const struct Tileset gTileset_PokemonSchool =
 {
     .isCompressed = TRUE,
