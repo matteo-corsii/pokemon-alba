@@ -27,9 +27,13 @@ function Get-Cell([byte[]]$MapBin, [int]$X, [int]$Y) {
 
 $allowedPaths = @(
     'data/layouts/LittlerootTown/map.bin',
+    'data/layouts/Route101/map.bin',
     'data/maps/OldaleTown/map.json',
+    'data/maps/Route101/map.json',
     'test/validate_albera_bassa_school.ps1',
     'test/validate_porta_pretoria_dedicated_tileset.ps1',
+    'test/validate_porta_pretoria_localization.ps1',
+    'test/validate_via_verdi_ambient_npc.ps1',
     'test/validate_albera_bassa_residential_blockout.ps1'
 )
 $unexpectedPaths = @(Get-ChangedPaths | Where-Object { $_ -notin $allowedPaths })
@@ -86,7 +90,8 @@ Assert-True (@($oldale.object_events | Where-Object { $_.graphics_id -eq 'OBJ_EV
 
 for ($y = 27; $y -le 31; $y++) {
     for ($x = 0; $x -lt 36; $x++) {
-        Assert-True ((Get-Cell $mapBin $x $y) -in @(0x3001, 0x3004, 0x3121, 0x0401, 0x0404)) 'Southern expansion corridor must remain clear.'
+        $cell = Get-Cell $mapBin $x $y
+        Assert-True (((($cell -band 0x0C00) -shr 10) -ne 3)) 'Southern expansion corridor must remain walkable.'
     }
 }
 

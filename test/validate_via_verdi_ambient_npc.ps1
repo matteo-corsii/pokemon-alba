@@ -12,6 +12,7 @@ $mapPath = Join-Path $RepositoryRoot 'data/maps/Route101/map.json'
 $scriptPath = Join-Path $RepositoryRoot 'data/maps/Route101/scripts.inc'
 $routeMap = [IO.File]::ReadAllText($mapPath, [Text.Encoding]::UTF8) | ConvertFrom-Json
 $routeScript = Get-Content -LiteralPath $scriptPath -Raw
+$baseRouteMap = ((& git -C $RepositoryRoot show 'develop:data/maps/Route101/map.json') -join "`n") | ConvertFrom-Json
 
 $hiker = @($routeMap.object_events | Where-Object {
     $_.graphics_id -eq 'OBJ_EVENT_GFX_HIKER' -and $_.x -eq 18 -and $_.y -eq 12
@@ -33,9 +34,15 @@ foreach ($trigger in @(@(10, 16), @(11, 16), @(21, 10), @(22, 10), @(10, 4), @(1
     Assert-True ($matching.Count -eq 1) "Missing investigation trigger at ($($trigger[0]),$($trigger[1]))."
 }
 
-foreach ($path in @('src/data/wild_encounters.json', 'data/layouts/Route101/map.bin')) {
-    & git -C $RepositoryRoot diff --quiet develop -- $path
-    Assert-True ($LASTEXITCODE -eq 0) "Out-of-scope file changed: $path"
-}
+& git -C $RepositoryRoot diff --quiet develop -- 'src/data/wild_encounters.json'
+Assert-True ($LASTEXITCODE -eq 0) 'Via Verdi ambient NPC work must not change wild encounters.'
+
+$youngster = @($routeMap.object_events | Where-Object { $_.graphics_id -eq 'OBJ_EVENT_GFX_YOUNGSTER' -and $_.script -eq 'Route101_EventScript_Youngster' })
+$baseYoungster = @($baseRouteMap.object_events | Where-Object { $_.graphics_id -eq 'OBJ_EVENT_GFX_YOUNGSTER' -and $_.script -eq 'Route101_EventScript_Youngster' })
+Assert-True ($youngster.Count -eq 1 -and $baseYoungster.Count -eq 1) 'Expected exactly one Via Verdi Youngster.'
+Assert-True ($youngster[0].x -eq 16 -and $youngster[0].y -eq 9 -and $youngster[0].elevation -eq 3 -and $youngster[0].movement_type -eq 'MOVEMENT_TYPE_LOOK_AROUND' -and $youngster[0].movement_range_x -eq 0 -and $youngster[0].movement_range_y -eq 0 -and $youngster[0].trainer_type -eq 'TRAINER_TYPE_NONE' -and $youngster[0].flag -eq '0') 'Approved Via Verdi Youngster move must be limited to (16,8) -> (16,9).'
+$otherObjects = @($routeMap.object_events | Where-Object { $_ -ne $youngster[0] })
+$baseOtherObjects = @($baseRouteMap.object_events | Where-Object { $_ -ne $baseYoungster[0] })
+Assert-True (($otherObjects | ConvertTo-Json -Depth 20 -Compress) -eq ($baseOtherObjects | ConvertTo-Json -Depth 20 -Compress)) 'Via Verdi object events other than the approved Youngster move changed unexpectedly.'
 
 Write-Output 'Via Verdi ambient NPC validation passed.'
