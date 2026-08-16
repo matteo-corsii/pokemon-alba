@@ -143,7 +143,10 @@
     "LittlerootTown_MaysHouse_1F",
     "LittlerootTown_MaysHouse_2F",
     "LittlerootTown_ProfessorBirchsLab",
-    "AlberaBassa_School"
+    "AlberaBassa_School",
+    "AlberaBassa_Condominium1",
+    "AlberaBassa_Condominium2",
+    "AlberaBassa_Condominium3"
   ],
   "gMapGroup_IndoorOldale": [
     "OldaleTown_House1",
