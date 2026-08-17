@@ -54,6 +54,10 @@ foreach ($coord in @(@(13, 14), @(13, 15))) {
     Assert-True ($null -ne $trigger -and $trigger.elevation -eq 3 -and $trigger.var -eq 'VAR_ALBERA_GYM_STATE' -and $trigger.var_value -eq '4' -and $trigger.script -eq 'Route103_EventScript_LiaBeforeCisternoni') "Lia approach trigger ($($coord[0]),$($coord[1])) changed."
 }
 Assert-True ($routeScripts -match 'map_script MAP_SCRIPT_ON_LOAD, Route103_OnLoad') 'Route103 must synchronize Lia/Nico visibility on map load.'
+Assert-True ($routeScripts -match 'call_if_unset FLAG_BADGE01_GET, Route103_EventScript_CloseCisternoniEntrance') 'Route103 must keep the Cisternoni entrance closed before Badge 1.'
+Assert-True ($routeScripts -match 'call_if_set FLAG_BADGE01_GET, Route103_EventScript_OpenCisternoniEntrance') 'Route103 must open the Cisternoni entrance after Badge 1.'
+Assert-True ($routeScripts -match 'Route103_EventScript_CloseCisternoniEntrance:[\s\S]*setmetatile 52, 7, METATILE_General_CaveEntrance_Bottom, TRUE[\s\S]*return') 'The pre-Badge Cisternoni entrance close script changed.'
+Assert-True ($routeScripts -match 'Route103_EventScript_OpenCisternoniEntrance:[\s\S]*setmetatile 52, 7, METATILE_General_CaveEntrance_Bottom, FALSE[\s\S]*return') 'The post-Badge Cisternoni entrance open script changed.'
 Assert-True ($routeScripts -match 'goto_if_unset FLAG_BADGE01_GET, Route103_OnLoad_HideParty') 'Lia and Nico must both be hidden before Badge 1.'
 Assert-True ($routeScripts -match 'goto_if_set FLAG_CISTERNONI_AUREA_ENCOUNTER_COMPLETE, Route103_OnLoad_ShowNico') 'Nico must appear after the Cisternoni Team Aurea encounter.'
 Assert-True ($routeScripts -match 'goto_if_set FLAG_CISTERNONI_LIA_READY, Route103_OnLoad_HideParty') 'Lia must not remain duplicated outside once she has directed the player inside.'

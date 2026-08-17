@@ -3,12 +3,22 @@ Route103_MapScripts::
 	.byte 0
 
 Route103_OnLoad:
+	call_if_unset FLAG_BADGE01_GET, Route103_EventScript_CloseCisternoniEntrance
+	call_if_set FLAG_BADGE01_GET, Route103_EventScript_OpenCisternoniEntrance
 	goto_if_unset FLAG_BADGE01_GET, Route103_OnLoad_HideParty
 	goto_if_set FLAG_CISTERNONI_AUREA_ENCOUNTER_COMPLETE, Route103_OnLoad_ShowNico
 	goto_if_set FLAG_CISTERNONI_LIA_READY, Route103_OnLoad_HideParty
 	clearflag FLAG_HIDE_ROUTE103_LIA
 	setflag FLAG_HIDE_ROUTE103_NICO
 	end
+
+Route103_EventScript_CloseCisternoniEntrance:
+	setmetatile 52, 7, METATILE_General_CaveEntrance_Bottom, TRUE
+	return
+
+Route103_EventScript_OpenCisternoniEntrance:
+	setmetatile 52, 7, METATILE_General_CaveEntrance_Bottom, FALSE
+	return
 
 Route103_OnLoad_ShowNico:
 	setflag FLAG_HIDE_ROUTE103_LIA
