@@ -46,9 +46,12 @@ $westConnection = @($oldale.connections | Where-Object { $_.direction -eq 'left'
 Assert-True ($westConnection.Count -eq 1 -and $westConnection[0].map -eq 'MAP_ALBERA_STORICA') 'Porta Pretoria west must connect to Albera Storica.'
 Assert-True (-not (@($oldale.connections | Where-Object { $_.direction -eq 'left' -and $_.map -eq 'MAP_ROUTE102' }).Count)) 'The old Route102 destination was not removed.'
 Assert-True (@($oldale.coord_events | Where-Object { $_.script -eq 'OldaleTown_EventScript_BlockWestExit' }).Count -eq 0) 'The state-7 west block is still active.'
-$northBlocks = @($oldale.coord_events | Where-Object { $_.script -eq 'OldaleTown_EventScript_BlockNorthExit' })
-Assert-True ($northBlocks.Count -eq 4) 'The north block must remain unchanged.'
-Assert-True ((@($northBlocks | ForEach-Object { "$($_.x),$($_.y)" }) -join ';') -eq '8,0;9,0;10,0;11,0') 'North block coordinates changed.'
+Assert-True (@($oldale.coord_events).Count -eq 0) 'Porta Pretoria must not retain a north-exit blocking trigger.'
+$oldaleBytes = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/layouts/OldaleTown/map.bin'))
+foreach ($x in 8..11) {
+    $northCell = [BitConverter]::ToUInt16($oldaleBytes, 2 * $x)
+    Assert-True ((($northCell -shr 10) -band 3) -eq 0 -and (($northCell -shr 12) -band 0xF) -eq 3) "Porta Pretoria north passage cell ($x,0) must remain walkable at town elevation."
+}
 
 $mapBytes = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/layouts/AlberaStorica/map.bin'))
 Assert-True ($mapBytes.Length -eq (36 * 30 * 2)) 'Unexpected map.bin size.'

@@ -39,19 +39,6 @@ OldaleTown_EventScript_SouthEntranceResident::
 	msgbox OldaleTown_Text_SouthEntranceResident, MSGBOX_NPC
 	end
 
-OldaleTown_EventScript_BlockNorthExit::
-	lockall
-	msgbox OldaleTown_Text_NorthExitClosed, MSGBOX_DEFAULT
-	closemessage
-	applymovement LOCALID_PLAYER, OldaleTown_Movement_StepSouth
-	waitmovement 0
-	releaseall
-	end
-
-OldaleTown_Movement_StepSouth:
-	walk_down
-	step_end
-
 OldaleTown_Text_TownSign:
 	.string "PORTA PRETORIA\n"
 	.string "Ingresso orientale di ALBÈRA STORICA.$"
@@ -80,7 +67,3 @@ OldaleTown_Text_Traveler:
 OldaleTown_Text_WestGateWorker:
 	.string "Il VIALE PRETORIO conduce ad\n"
 	.string "ALBÈRA STORICA.$"
-
-OldaleTown_Text_NorthExitClosed:
-	.string "Il passaggio settentrionale è chiuso\n"
-	.string "per lavori sulla rete idrica.$"
