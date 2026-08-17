@@ -63,7 +63,7 @@
     {
       "type": "trigger",
       "x": 16,
-      "y": 6,
+      "y": 9,
       "elevation": 3,
       "var": "VAR_ALBERA_GYM_STATE",
       "var_value": "4",
@@ -72,7 +72,7 @@
     {
       "type": "trigger",
       "x": 17,
-      "y": 6,
+      "y": 9,
       "elevation": 3,
       "var": "VAR_ALBERA_GYM_STATE",
       "var_value": "4",

@@ -34,7 +34,9 @@ Cisternoni_EventScript_StartAureaScene::
 	waitmovement 0
 	msgbox Cisternoni_Text_LiaSuspicious, MSGBOX_DEFAULT
 	msgbox Cisternoni_Text_AureaCoverBroken, MSGBOX_DEFAULT
-	trainerbattle_single TRAINER_CISTERNONI_AUREA_RECRUIT, Cisternoni_Text_AureaBattleIntro, Cisternoni_Text_AureaDefeat, Cisternoni_EventScript_AureaDefeated
+	msgbox Cisternoni_Text_AureaBattleIntro, MSGBOX_DEFAULT
+	trainerbattle_no_intro TRAINER_CISTERNONI_AUREA_RECRUIT, Cisternoni_Text_AureaDefeat
+	goto Cisternoni_EventScript_AureaDefeated
 	end
 
 Cisternoni_EventScript_AureaDefeated:

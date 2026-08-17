@@ -150,6 +150,14 @@
       "script": "Route103_EventScript_LiaBeforeCisternoni"
     }
   ],
-  "bg_events": [],
+  "bg_events": [
+    {
+      "type": "secret_base",
+      "x": 26,
+      "y": 5,
+      "elevation": 3,
+      "secret_base_id": "SECRET_BASE_CISTERNONI_TREE_1"
+    }
+  ],
   "region": "REGION_HOENN"
 }

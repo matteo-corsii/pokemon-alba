@@ -23,8 +23,8 @@ Assert-True ($null -ne $lia -and $lia.x -eq 15 -and $lia.y -eq 5 -and $lia.eleva
 Assert-True ($null -ne $recruit -and $recruit.x -eq 18 -and $recruit.y -eq 10 -and $recruit.elevation -eq 3 -and $recruit.graphics_id -eq 'OBJ_EVENT_GFX_WOMAN_2' -and $recruit.flag -eq 'FLAG_HIDE_CISTERNONI_AUREA_RECRUIT') 'Team Aurea recruit must remain a civilian-looking Woman 2 before the reveal.'
 Assert-True ($cisternoni.coord_events.Count -eq 2) 'Cisternoni must retain exactly the two post-Gym scene triggers.'
 foreach ($x in @(16, 17)) {
-    $trigger = $cisternoni.coord_events | Where-Object { $_.x -eq $x -and $_.y -eq 6 }
-    Assert-True ($null -ne $trigger -and $trigger.elevation -eq 3 -and $trigger.var -eq 'VAR_ALBERA_GYM_STATE' -and $trigger.var_value -eq '4' -and $trigger.script -eq 'Cisternoni_EventScript_StartAureaScene') "Cisternoni scene trigger ($x,6) changed."
+    $trigger = $cisternoni.coord_events | Where-Object { $_.x -eq $x -and $_.y -eq 9 }
+    Assert-True ($null -ne $trigger -and $trigger.elevation -eq 3 -and $trigger.var -eq 'VAR_ALBERA_GYM_STATE' -and $trigger.var_value -eq '4' -and $trigger.script -eq 'Cisternoni_EventScript_StartAureaScene') "Cisternoni scene trigger ($x,9) changed."
 }
 
 foreach ($source in @($emeraldFlags, $frlgFlags)) {
@@ -40,9 +40,24 @@ Assert-True ($cisternoniScripts -match 'map_script MAP_SCRIPT_ON_LOAD, Cisternon
 Assert-True ($cisternoniScripts -match 'goto_if_unset FLAG_BADGE01_GET, Cisternoni_OnLoad_HideScene') 'Cisternoni scene must be hidden before Badge 1.'
 Assert-True ($cisternoniScripts -match 'goto_if_unset FLAG_CISTERNONI_LIA_READY, Cisternoni_OnLoad_HideScene') 'Cisternoni scene must wait until Lia directs the player inside.'
 Assert-True ($cisternoniScripts -match 'goto_if_set FLAG_CISTERNONI_AUREA_ENCOUNTER_COMPLETE, Cisternoni_OnLoad_HideScene') 'Cisternoni scene must remain hidden after completion.'
-Assert-True ($cisternoniScripts -match 'trainerbattle_single TRAINER_CISTERNONI_AUREA_RECRUIT') 'The Team Aurea confrontation must remain a mandatory single battle.'
+Assert-True ($cisternoniScripts -notmatch 'trainerbattle_single TRAINER_CISTERNONI_AUREA_RECRUIT') 'The coord-triggered Team Aurea scene must not use the object-event trainer battle command.'
+Assert-True ($cisternoniScripts -match 'msgbox Cisternoni_Text_AureaBattleIntro, MSGBOX_DEFAULT\s*\r?\n\s*trainerbattle_no_intro TRAINER_CISTERNONI_AUREA_RECRUIT, Cisternoni_Text_AureaDefeat\s*\r?\n\s*goto Cisternoni_EventScript_AureaDefeated') 'The Team Aurea cutscene must use the player-safe no-intro battle pattern and continue into the post-battle script.'
 Assert-True ($cisternoniScripts -match 'setflag FLAG_CISTERNONI_AUREA_ENCOUNTER_COMPLETE') 'The Team Aurea encounter must persist after victory.'
 Assert-True ($cisternoniScripts -notmatch 'Salampolla') 'Salampolla must not be introduced by the Cisternoni encounter.'
+
+$secretBaseConstants = Get-Content -Raw (Join-Path $root 'include/constants/secret_bases.h')
+$secretBaseCode = Get-Content -Raw (Join-Path $root 'src/secret_base.c')
+Assert-True ($secretBaseConstants -match '#define\s+SECRET_BASE_CISTERNONI_TREE_1\s+251\b') 'Via dei Cisternoni Secret Base must use append-only ID 251.'
+Assert-True ($secretBaseConstants -match '#define\s+SECRET_BASE_CISTERNONI_TREE\s+SECRET_BASE_GROUP\(25\)') 'Via dei Cisternoni Secret Base must use its own group.'
+Assert-True ($secretBaseConstants -match '#define\s+NUM_SECRET_BASE_GROUPS\s+26\b') 'Secret Base group count must include the Via dei Cisternoni tree.'
+Assert-True ($secretBaseCode -match '\[SECRET_BASE_CISTERNONI_TREE\]\s*=\s*MAP_NUM\(MAP_SECRET_BASE_TREE1\),\s*0,\s*2,\s*3') 'Via dei Cisternoni tree must reuse the SecretBase_Tree1 interior entry.'
+$cisternoniTree = @($route.bg_events | Where-Object { $_.type -eq 'secret_base' -and $_.x -eq 26 -and $_.y -eq 5 -and $_.elevation -eq 3 -and $_.secret_base_id -eq 'SECRET_BASE_CISTERNONI_TREE_1' })
+Assert-True ($cisternoniTree.Count -eq 1) 'Via dei Cisternoni tree must have one dedicated Secret Base event at (26,5).'
+$routeBlockdata = [System.IO.File]::ReadAllBytes((Join-Path $root 'data/layouts/Route103/map.bin'))
+foreach ($cell in @(@{ X = 26; Y = 5; Raw = 0x3026 }, @{ X = 27; Y = 5; Raw = 0x3027 })) {
+    $raw = [System.BitConverter]::ToUInt16($routeBlockdata, 2 * ($cell.Y * 80 + $cell.X))
+    Assert-True ($raw -eq $cell.Raw) "Via dei Cisternoni Secret Base tree cell ($($cell.X),$($cell.Y)) must be closed, elevation 3, and not pre-opened."
+}
 
 $routeLia = $route.object_events | Where-Object { $_.local_id -eq 'LOCALID_ROUTE103_LIA' }
 $routeNico = $route.object_events | Where-Object { $_.local_id -eq 'LOCALID_ROUTE103_NICO' }

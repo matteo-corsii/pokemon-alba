@@ -32,7 +32,8 @@ foreach ($expected in $routeExpectedObjects) {
         Assert-True ($actual.flag -eq $expected.flag) "Route103 event at ($($expected.x),$($expected.y)) must use $($expected.flag)."
     }
 }
-Assert-True ($route.bg_events.Count -eq 0) 'Route103 must not retain the obsolete Cisternoni access-closed sign.'
+$cisternoniTree = @($route.bg_events | Where-Object { $_.type -eq 'secret_base' -and $_.x -eq 26 -and $_.y -eq 5 -and $_.elevation -eq 3 -and $_.secret_base_id -eq 'SECRET_BASE_CISTERNONI_TREE_1' })
+Assert-True ($route.bg_events.Count -eq 1 -and $cisternoniTree.Count -eq 1) 'Route103 must retain only the available Via dei Cisternoni Secret Base tree, not the obsolete access-closed sign.'
 Assert-True ($route.coord_events.Count -eq 2) 'Route103 must contain exactly two Lia approach triggers.'
 foreach ($coord in @(@(13, 14), @(13, 15))) {
     $trigger = $route.coord_events | Where-Object { $_.x -eq $coord[0] -and $_.y -eq $coord[1] }
