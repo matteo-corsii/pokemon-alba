@@ -4,6 +4,7 @@ Cisternoni_MapScripts::
 
 Cisternoni_OnLoad:
 	goto_if_unset FLAG_BADGE01_GET, Cisternoni_OnLoad_HideScene
+	goto_if_unset FLAG_CISTERNONI_LIA_READY, Cisternoni_OnLoad_HideScene
 	goto_if_set FLAG_CISTERNONI_AUREA_ENCOUNTER_COMPLETE, Cisternoni_OnLoad_HideScene
 	clearflag FLAG_HIDE_CISTERNONI_LIA
 	clearflag FLAG_HIDE_CISTERNONI_AUREA_RECRUIT

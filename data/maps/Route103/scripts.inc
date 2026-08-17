@@ -1,5 +1,53 @@
 Route103_MapScripts::
+	map_script MAP_SCRIPT_ON_LOAD, Route103_OnLoad
 	.byte 0
+
+Route103_OnLoad:
+	goto_if_unset FLAG_BADGE01_GET, Route103_OnLoad_HideParty
+	goto_if_set FLAG_CISTERNONI_AUREA_ENCOUNTER_COMPLETE, Route103_OnLoad_ShowNico
+	goto_if_set FLAG_CISTERNONI_LIA_READY, Route103_OnLoad_HideParty
+	clearflag FLAG_HIDE_ROUTE103_LIA
+	setflag FLAG_HIDE_ROUTE103_NICO
+	end
+
+Route103_OnLoad_ShowNico:
+	setflag FLAG_HIDE_ROUTE103_LIA
+	clearflag FLAG_HIDE_ROUTE103_NICO
+	end
+
+Route103_OnLoad_HideParty:
+	setflag FLAG_HIDE_ROUTE103_LIA
+	setflag FLAG_HIDE_ROUTE103_NICO
+	end
+
+Route103_EventScript_LiaBeforeCisternoni::
+	lockall
+	goto_if_set FLAG_CISTERNONI_LIA_READY, Route103_EventScript_LiaBeforeCisternoniEnd
+	goto_if_set FLAG_CISTERNONI_AUREA_ENCOUNTER_COMPLETE, Route103_EventScript_LiaBeforeCisternoniEnd
+	msgbox Route103_Text_LiaBeforeCisternoni, MSGBOX_DEFAULT
+	setflag FLAG_CISTERNONI_LIA_READY
+	setflag FLAG_HIDE_ROUTE103_LIA
+	removeobject LOCALID_ROUTE103_LIA
+	releaseall
+	end
+
+Route103_EventScript_LiaBeforeCisternoniEnd:
+	releaseall
+	end
+
+Route103_EventScript_NicoAfterCisternoni::
+	lockall
+	faceplayer
+	goto_if_set FLAG_CISTERNONI_NICO_POST_AUREA_TALKED, Route103_EventScript_NicoReminder
+	msgbox Route103_Text_NicoAfterCisternoni, MSGBOX_DEFAULT
+	setflag FLAG_CISTERNONI_NICO_POST_AUREA_TALKED
+	releaseall
+	end
+
+Route103_EventScript_NicoReminder:
+	msgbox Route103_Text_NicoReminder, MSGBOX_DEFAULT
+	releaseall
+	end
 
 Route103_EventScript_Marco::
 	trainerbattle_single TRAINER_CISTERNONI_MARCO, Route103_Text_MarcoIntro, Route103_Text_MarcoDefeat
@@ -56,6 +104,23 @@ Route103_Text_Visitor:
 Route103_Text_Walker:
 	.string "La Via dei Cisternoni porta lontano,\n"
 	.string "ma tutti parlano delle sue vasche.$"
+
+Route103_Text_LiaBeforeCisternoni:
+	.string "LIA: Nei documenti che ho letto\n"
+	.string "c'era un indizio che portava proprio\l"
+	.string "ai CISTERNONI.\p"
+	.string "Voglio controllare di persona.\n"
+	.string "Entriamo insieme?$"
+
+Route103_Text_NicoAfterCisternoni:
+	.string "NICO: Una tipa losca nei CISTERNONI?\n"
+	.string "Mmh... questa storia mi puzza.\p"
+	.string "Meno male che c'eravate voi!\p"
+	.string "Io intanto ho battuto LIRIO!\n"
+	.string "Ora si va verso la VIA CONSOLARE!$"
+
+Route103_Text_NicoReminder:
+	.string "NICO: Direzione VIA CONSOLARE!$"
 
 Route103_EventScript_CisternoniAccessClosed::
 	msgbox Route103_Text_CisternoniAccessClosed, MSGBOX_SIGN

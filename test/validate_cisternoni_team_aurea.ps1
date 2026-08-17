@@ -2,6 +2,7 @@ $ErrorActionPreference = 'Stop'
 
 $root = (Resolve-Path "$PSScriptRoot\\..").Path
 $cisternoni = Get-Content -Raw (Join-Path $root 'data/maps/Cisternoni/map.json') | ConvertFrom-Json
+$route = Get-Content -Raw (Join-Path $root 'data/maps/Route103/map.json') | ConvertFrom-Json
 $cisternoniScripts = Get-Content -Raw (Join-Path $root 'data/maps/Cisternoni/scripts.inc')
 $routeScripts = Get-Content -Raw (Join-Path $root 'data/maps/Route103/scripts.inc')
 $emeraldFlags = Get-Content -Raw (Join-Path $root 'include/constants/flags.h')
@@ -30,13 +31,37 @@ foreach ($source in @($emeraldFlags, $frlgFlags)) {
     Assert-True ($source -match '#define FLAG_CISTERNONI_AUREA_ENCOUNTER_COMPLETE\s+0x8EE') 'Cisternoni completion flag must be 0x8EE.'
     Assert-True ($source -match '#define FLAG_HIDE_CISTERNONI_LIA\s+0x8EF') 'Lia visibility flag must be 0x8EF.'
     Assert-True ($source -match '#define FLAG_HIDE_CISTERNONI_AUREA_RECRUIT\s+0x8F0') 'Recruit visibility flag must be 0x8F0.'
+    Assert-True ($source -match '#define FLAG_CISTERNONI_LIA_READY\s+0x8F1') 'Lia route-to-interior handoff flag must be 0x8F1.'
+    Assert-True ($source -match '#define FLAG_HIDE_ROUTE103_LIA\s+0x8F2') 'Route103 Lia visibility flag must be 0x8F2.'
+    Assert-True ($source -match '#define FLAG_HIDE_ROUTE103_NICO\s+0x8F3') 'Route103 Nico visibility flag must be 0x8F3.'
+    Assert-True ($source -match '#define FLAG_CISTERNONI_NICO_POST_AUREA_TALKED\s+0x8F4') 'Nico reminder flag must be 0x8F4.'
 }
 Assert-True ($cisternoniScripts -match 'map_script MAP_SCRIPT_ON_LOAD, Cisternoni_OnLoad') 'Cisternoni visibility flags must be synchronized on map load.'
 Assert-True ($cisternoniScripts -match 'goto_if_unset FLAG_BADGE01_GET, Cisternoni_OnLoad_HideScene') 'Cisternoni scene must be hidden before Badge 1.'
+Assert-True ($cisternoniScripts -match 'goto_if_unset FLAG_CISTERNONI_LIA_READY, Cisternoni_OnLoad_HideScene') 'Cisternoni scene must wait until Lia directs the player inside.'
 Assert-True ($cisternoniScripts -match 'goto_if_set FLAG_CISTERNONI_AUREA_ENCOUNTER_COMPLETE, Cisternoni_OnLoad_HideScene') 'Cisternoni scene must remain hidden after completion.'
 Assert-True ($cisternoniScripts -match 'trainerbattle_single TRAINER_CISTERNONI_AUREA_RECRUIT') 'The Team Aurea confrontation must remain a mandatory single battle.'
 Assert-True ($cisternoniScripts -match 'setflag FLAG_CISTERNONI_AUREA_ENCOUNTER_COMPLETE') 'The Team Aurea encounter must persist after victory.'
 Assert-True ($cisternoniScripts -notmatch 'Salampolla') 'Salampolla must not be introduced by the Cisternoni encounter.'
+
+$routeLia = $route.object_events | Where-Object { $_.local_id -eq 'LOCALID_ROUTE103_LIA' }
+$routeNico = $route.object_events | Where-Object { $_.local_id -eq 'LOCALID_ROUTE103_NICO' }
+Assert-True ($null -ne $routeLia -and $routeLia.x -eq 10 -and $routeLia.y -eq 14 -and $routeLia.graphics_id -eq 'OBJ_EVENT_GFX_MAY_NORMAL' -and $routeLia.flag -eq 'FLAG_HIDE_ROUTE103_LIA') 'Lia must preserve the approved Porymap position on Via dei Cisternoni with her route visibility flag.'
+Assert-True ($null -ne $routeNico -and $routeNico.x -eq 50 -and $routeNico.y -eq 10 -and $routeNico.graphics_id -eq 'OBJ_EVENT_GFX_BRENDAN_NORMAL' -and $routeNico.flag -eq 'FLAG_HIDE_ROUTE103_NICO') 'Nico must be available near the Cisternoni exit only after the Team Aurea encounter.'
+Assert-True ($route.coord_events.Count -eq 2) 'Lia must use exactly two walkable approach triggers because her approved visual position is not directly talkable.'
+foreach ($coord in @(@(13, 14), @(13, 15))) {
+    $trigger = $route.coord_events | Where-Object { $_.x -eq $coord[0] -and $_.y -eq $coord[1] }
+    Assert-True ($null -ne $trigger -and $trigger.elevation -eq 3 -and $trigger.var -eq 'VAR_ALBERA_GYM_STATE' -and $trigger.var_value -eq '4' -and $trigger.script -eq 'Route103_EventScript_LiaBeforeCisternoni') "Lia approach trigger ($($coord[0]),$($coord[1])) changed."
+}
+Assert-True ($routeScripts -match 'map_script MAP_SCRIPT_ON_LOAD, Route103_OnLoad') 'Route103 must synchronize Lia/Nico visibility on map load.'
+Assert-True ($routeScripts -match 'goto_if_unset FLAG_BADGE01_GET, Route103_OnLoad_HideParty') 'Lia and Nico must both be hidden before Badge 1.'
+Assert-True ($routeScripts -match 'goto_if_set FLAG_CISTERNONI_AUREA_ENCOUNTER_COMPLETE, Route103_OnLoad_ShowNico') 'Nico must appear after the Cisternoni Team Aurea encounter.'
+Assert-True ($routeScripts -match 'goto_if_set FLAG_CISTERNONI_LIA_READY, Route103_OnLoad_HideParty') 'Lia must not remain duplicated outside once she has directed the player inside.'
+Assert-True ($routeScripts -match 'clearflag FLAG_HIDE_ROUTE103_LIA[\s\S]*setflag FLAG_HIDE_ROUTE103_NICO') 'Before the Cisternoni scene, Lia must be visible and Nico hidden.'
+Assert-True ($routeScripts -match 'setflag FLAG_HIDE_ROUTE103_LIA[\s\S]*clearflag FLAG_HIDE_ROUTE103_NICO') 'After the Cisternoni scene, Lia must be hidden and Nico visible.'
+Assert-True ($routeScripts -match 'Route103_Text_LiaBeforeCisternoni:[\s\S]*documenti[\s\S]*indizio[\s\S]*CISTERNONI[\s\S]*Entriamo insieme') 'Lia route dialogue must reference the documents, the clue, and entering the Cisternoni.'
+Assert-True ($routeScripts -match 'Route103_Text_NicoAfterCisternoni:[\s\S]*tipa losca[\s\S]*CISTERNONI[\s\S]*battuto LIRIO[\s\S]*VIA CONSOLARE') 'Nico dialogue must reference the suspicious woman, Lirio, and Via Consolare.'
+Assert-True ($routeScripts -match 'Route103_Text_NicoReminder:[\s\S]*Direzione VIA CONSOLARE') 'Nico must have the approved short repeat reminder.'
 
 foreach ($source in @($opponents, $opponentsFrlg)) {
     Assert-True ($source -match '#define TRAINER_CISTERNONI_MARCO') 'Marco trainer constant is missing.'

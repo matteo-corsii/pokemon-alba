@@ -67,6 +67,10 @@
 #define FLAG_CISTERNONI_AUREA_ENCOUNTER_COMPLETE 0x8EE // One-time Team Aurea investigation encounter completed
 #define FLAG_HIDE_CISTERNONI_LIA 0x8EF // Technical visibility flag for the Cisternoni investigation scene
 #define FLAG_HIDE_CISTERNONI_AUREA_RECRUIT 0x8F0 // Technical visibility flag for the Cisternoni recruit
+#define FLAG_CISTERNONI_LIA_READY 0x8F1 // Lia has directed the player into the Cisternoni investigation
+#define FLAG_HIDE_ROUTE103_LIA 0x8F2 // Technical visibility flag for Lia on Via dei Cisternoni
+#define FLAG_HIDE_ROUTE103_NICO 0x8F3 // Technical visibility flag for Nico on Via dei Cisternoni
+#define FLAG_CISTERNONI_NICO_POST_AUREA_TALKED 0x8F4 // Nico's short post-Cisternoni reminder state
 #define FLAG_HIDE_ALBERA_LAB_NICO 0x24 // Nico's dedicated Albèra lab object
 #define FLAG_HIDE_ALBERA_LAB_LIA 0x25 // Lia's dedicated Albèra lab object
 #define FLAG_HIDE_ROUTE101_RESEARCH_PARTY 0x26 // Via Verdi investigation party objects

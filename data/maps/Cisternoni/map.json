@@ -3,7 +3,6 @@
   "name": "Cisternoni",
   "layout": "LAYOUT_CISTERNONI",
   "music": "MUS_SEALED_CHAMBER",
-  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_ALBERA_STORICA",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -45,8 +44,20 @@
     }
   ],
   "warp_events": [
-    { "x": 16, "y": 2, "elevation": 3, "dest_map": "MAP_ROUTE103", "dest_warp_id": "1" },
-    { "x": 17, "y": 2, "elevation": 3, "dest_map": "MAP_ROUTE103", "dest_warp_id": "1" }
+    {
+      "x": 16,
+      "y": 2,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE103",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 17,
+      "y": 2,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE103",
+      "dest_warp_id": "1"
+    }
   ],
   "coord_events": [
     {
@@ -68,5 +79,6 @@
       "script": "Cisternoni_EventScript_StartAureaScene"
     }
   ],
-  "bg_events": []
+  "bg_events": [],
+  "region": "REGION_HOENN"
 }
