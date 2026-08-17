@@ -677,7 +677,8 @@ static void LoadCurrentMapData(void)
 static void LoadSaveblockMapHeader(void)
 {
     gMapHeader = *Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
-    gMapHeader.mapLayout = GetMapLayout(gSaveBlock1Ptr->mapLayoutId);
+    gSaveBlock1Ptr->mapLayoutId = gMapHeader.mapLayoutId;
+    gMapHeader.mapLayout = GetMapLayout(gMapHeader.mapLayoutId);
 }
 
 static void SetPlayerCoordsFromWarp(void)
