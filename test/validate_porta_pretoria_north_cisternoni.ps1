@@ -32,14 +32,14 @@ foreach ($expected in $routeExpectedObjects) {
         Assert-True ($actual.flag -eq $expected.flag) "Route103 event at ($($expected.x),$($expected.y)) must use $($expected.flag)."
     }
 }
-Assert-True ($route.bg_events.Count -eq 1 -and $route.bg_events[0].x -eq 52 -and $route.bg_events[0].y -eq 8 -and $route.bg_events[0].player_facing_dir -eq 'BG_EVENT_PLAYER_FACING_NORTH' -and $route.bg_events[0].script -eq 'Route103_EventScript_CisternoniAccessClosed') 'Cisternoni gate sign is missing, displaced, or uses an invalid facing direction.'
+Assert-True ($route.bg_events.Count -eq 0) 'Route103 must not retain the obsolete Cisternoni access-closed sign.'
 Assert-True ($route.coord_events.Count -eq 2) 'Route103 must contain exactly two Lia approach triggers.'
 foreach ($coord in @(@(13, 14), @(13, 15))) {
     $trigger = $route.coord_events | Where-Object { $_.x -eq $coord[0] -and $_.y -eq $coord[1] }
     Assert-True ($null -ne $trigger -and $trigger.elevation -eq 3 -and $trigger.var -eq 'VAR_ALBERA_GYM_STATE' -and $trigger.var_value -eq '4' -and $trigger.script -eq 'Route103_EventScript_LiaBeforeCisternoni') "Lia approach trigger ($($coord[0]),$($coord[1])) changed."
 }
-Assert-True ($route.warp_events.Count -eq 2) 'Route103 must provide the badge-gated entrance and the safe Cisternoni return destination.'
-Assert-True ($route.warp_events[0].x -eq 52 -and $route.warp_events[0].y -eq 7 -and $route.warp_events[0].elevation -eq 0 -and $route.warp_events[0].dest_map -eq 'MAP_CISTERNONI' -and $route.warp_events[0].dest_warp_id -eq '0') 'Cisternoni badge-gated entrance warp changed.'
+Assert-True ($route.warp_events.Count -eq 2) 'Route103 must provide the open Cisternoni entrance and the safe Cisternoni return destination.'
+Assert-True ($route.warp_events[0].x -eq 52 -and $route.warp_events[0].y -eq 7 -and $route.warp_events[0].elevation -eq 0 -and $route.warp_events[0].dest_map -eq 'MAP_CISTERNONI' -and $route.warp_events[0].dest_warp_id -eq '0') 'Open Cisternoni entrance warp changed.'
 Assert-True ($route.warp_events[1].x -eq 52 -and $route.warp_events[1].y -eq 9 -and $route.warp_events[1].elevation -eq 3 -and $route.warp_events[1].dest_map -eq 'MAP_CISTERNONI' -and $route.warp_events[1].dest_warp_id -eq '0') 'Cisternoni safe return destination changed.'
 Assert-True ($cisternoniLayout.width -eq 34 -and $cisternoniLayout.height -eq 24) 'Cisternoni must remain a single 34x24 interior.'
 Assert-True ($cisternoniLayout.primary_tileset -eq 'gTileset_General' -and $cisternoniLayout.secondary_tileset -eq 'gTileset_Cisternoni') 'Cisternoni tileset contract changed.'
@@ -58,11 +58,10 @@ $readRouteRawCell = {
 }
 $cisternoniEntranceRaw = & $readRouteRawCell 52 7
 Assert-True (($cisternoniEntranceRaw -band 0x3FF) -eq 0x0A7) 'Route103 Cisternoni entrance must remain the cave entrance bottom metatile.'
-Assert-True (($cisternoniEntranceRaw -band 0x400) -ne 0) 'Route103 Cisternoni entrance must remain physically closed in base map data before Badge 1.'
-Assert-True ($routeScripts -match 'call_if_unset FLAG_BADGE01_GET, Route103_EventScript_CloseCisternoniEntrance') 'Route103 must close the Cisternoni entrance before Badge 1.'
-Assert-True ($routeScripts -match 'call_if_set FLAG_BADGE01_GET, Route103_EventScript_OpenCisternoniEntrance') 'Route103 must open the Cisternoni entrance after Badge 1.'
-Assert-True ($routeScripts -match 'Route103_EventScript_CloseCisternoniEntrance:[\s\S]*setmetatile 52, 7, METATILE_General_CaveEntrance_Bottom, TRUE[\s\S]*return') 'Route103 pre-Badge Cisternoni entrance close script changed.'
-Assert-True ($routeScripts -match 'Route103_EventScript_OpenCisternoniEntrance:[\s\S]*setmetatile 52, 7, METATILE_General_CaveEntrance_Bottom, FALSE[\s\S]*return') 'Route103 post-Badge Cisternoni entrance open script changed.'
+Assert-True (($cisternoniEntranceRaw -band 0x400) -eq 0) 'Route103 Cisternoni entrance must be physically open in base map data.'
+Assert-True ($routeScripts -notmatch 'Route103_EventScript_CisternoniAccessClosed|Route103_Text_CisternoniAccessClosed|Route103_EventScript_CloseCisternoniEntrance|Route103_EventScript_OpenCisternoniEntrance') 'Obsolete Cisternoni access-closed scripts must be removed.'
+Assert-True ($routeScripts -notmatch 'setmetatile 52, 7') 'Route103 must not dynamically block or unblock the Cisternoni entrance.'
+Assert-True ($routeScripts -notmatch 'call_if_(?:un)?set FLAG_BADGE01_GET, Route103_EventScript_(?:Close|Open)CisternoniEntrance') 'Cisternoni physical access must not depend on Badge 1.'
 Assert-True ((0..21 | Where-Object { ((& $readRouteRawCell 0 $_) -band 0x400) -eq 0 }).Count -gt 0) 'The west Via Consolare passage must remain physically open.'
 Assert-True ((0..79 | Where-Object { ((& $readRouteRawCell $_ 0) -band 0x400) -eq 0 }).Count -eq 0) 'The north Castel Gandolfo boundary must remain blocked until its future connection exists.'
 foreach ($coord in @(@(13, 14), @(13, 15), @(50, 10))) {
