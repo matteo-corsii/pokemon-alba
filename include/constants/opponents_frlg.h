@@ -631,12 +631,15 @@
 #define TRAINER_ALBERA_MARA                         625
 #define TRAINER_ALBERA_ELIO                         626
 #define TRAINER_LEADER_LIRIO                        627
+#define TRAINER_CISTERNONI_MARCO                     628
+#define TRAINER_CISTERNONI_TEO                       629
+#define TRAINER_CISTERNONI_AUREA_RECRUIT             630
 
 // NOTE: Because each Trainer uses a flag to determine when they are defeated, there is
 //       only space for 25 additional trainers before trainer flag space overflows.
 //       MAX_TRAINERS_COUNT_FRLG can be increased but will take up additional saveblock space
 
-#define TRAINERS_COUNT_FRLG                      628
+#define TRAINERS_COUNT_FRLG                      631
 #define MAX_TRAINERS_COUNT_FRLG                  768
 
 #endif  // GUARD_CONSTANTS_OPPONENTS_FRLG_H

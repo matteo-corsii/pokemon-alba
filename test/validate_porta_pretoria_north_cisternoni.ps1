@@ -14,7 +14,18 @@ $cisternoniLayout = $layouts.layouts | Where-Object id -eq 'LAYOUT_CISTERNONI'
 Assert-True ($routeLayout.width -eq 80 -and $routeLayout.height -eq 22) 'Route103 must retain its 80x22 seamless-connection footprint.'
 Assert-True ($routeLayout.primary_tileset -eq 'gTileset_General' -and $routeLayout.secondary_tileset -eq 'gTileset_PortaPretoria') 'Route103 tilesets must remain General + PortaPretoria.'
 Assert-True ($route.connections.Count -eq 1 -and $route.connections[0].map -eq 'MAP_OLDALE_TOWN' -and $route.connections[0].direction -eq 'down') 'Route103 must retain only its south Porta Pretoria connection.'
-Assert-True ($route.object_events.Count -eq 0) 'Route103 must not retain vanilla NPC or rival events.'
+Assert-True ($route.object_events.Count -eq 5) 'Route103 must contain exactly the approved Via dei Cisternoni trainers and ambient NPCs.'
+$routeExpectedObjects = @(
+    @{ x = 22; y = 8; graphics_id = 'OBJ_EVENT_GFX_HIKER'; script = 'Route103_EventScript_Marco'; trainer_type = 'TRAINER_TYPE_NORMAL' },
+    @{ x = 34; y = 11; graphics_id = 'OBJ_EVENT_GFX_CAMPER'; script = 'Route103_EventScript_Teo'; trainer_type = 'TRAINER_TYPE_NORMAL' },
+    @{ x = 27; y = 4; graphics_id = 'OBJ_EVENT_GFX_FISHERMAN'; script = 'Route103_EventScript_Fisherman'; trainer_type = 'TRAINER_TYPE_NONE' },
+    @{ x = 38; y = 10; graphics_id = 'OBJ_EVENT_GFX_WOMAN_5'; script = 'Route103_EventScript_Visitor'; trainer_type = 'TRAINER_TYPE_NONE' },
+    @{ x = 45; y = 8; graphics_id = 'OBJ_EVENT_GFX_MAN_2'; script = 'Route103_EventScript_Walker'; trainer_type = 'TRAINER_TYPE_NONE' }
+)
+foreach ($expected in $routeExpectedObjects) {
+    $actual = $route.object_events | Where-Object { $_.x -eq $expected.x -and $_.y -eq $expected.y }
+    Assert-True ($null -ne $actual -and $actual.graphics_id -eq $expected.graphics_id -and $actual.script -eq $expected.script -and $actual.trainer_type -eq $expected.trainer_type -and $actual.elevation -eq 3) "Route103 event at ($($expected.x),$($expected.y)) changed."
+}
 Assert-True ($route.bg_events.Count -eq 1 -and $route.bg_events[0].x -eq 52 -and $route.bg_events[0].y -eq 8 -and $route.bg_events[0].player_facing_dir -eq 'BG_EVENT_PLAYER_FACING_NORTH' -and $route.bg_events[0].script -eq 'Route103_EventScript_CisternoniAccessClosed') 'Cisternoni gate sign is missing, displaced, or uses an invalid facing direction.'
 Assert-True ($route.warp_events.Count -eq 2) 'Route103 must provide the blocked entrance and the safe Cisternoni return destination.'
 Assert-True ($route.warp_events[0].x -eq 52 -and $route.warp_events[0].y -eq 7 -and $route.warp_events[0].elevation -eq 0 -and $route.warp_events[0].dest_map -eq 'MAP_CISTERNONI' -and $route.warp_events[0].dest_warp_id -eq '0') 'Cisternoni blocked entrance warp changed.'
