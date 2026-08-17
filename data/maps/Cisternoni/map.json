@@ -16,7 +16,8 @@
   "connections": null,
   "object_events": [],
   "warp_events": [
-    { "x": 16, "y": 2, "elevation": 3, "dest_map": "MAP_ROUTE103", "dest_warp_id": "0" }
+    { "x": 16, "y": 2, "elevation": 3, "dest_map": "MAP_ROUTE103", "dest_warp_id": "1" },
+    { "x": 17, "y": 2, "elevation": 3, "dest_map": "MAP_ROUTE103", "dest_warp_id": "1" }
   ],
   "coord_events": [],
   "bg_events": []

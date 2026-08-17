@@ -18,7 +18,8 @@
   ],
   "object_events": [],
   "warp_events": [
-    { "x": 52, "y": 7, "elevation": 3, "dest_map": "MAP_CISTERNONI", "dest_warp_id": "0" }
+    { "x": 52, "y": 7, "elevation": 0, "dest_map": "MAP_CISTERNONI", "dest_warp_id": "0" },
+    { "x": 52, "y": 9, "elevation": 3, "dest_map": "MAP_CISTERNONI", "dest_warp_id": "0" }
   ],
   "coord_events": [],
   "bg_events": [
