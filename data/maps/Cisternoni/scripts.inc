@@ -52,9 +52,9 @@ Cisternoni_EventScript_EndScene:
 	end
 
 Cisternoni_Movement_LiaApproachWater:
-	step_down
-	step_down
-	step_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 Cisternoni_Text_LiaReminder:
