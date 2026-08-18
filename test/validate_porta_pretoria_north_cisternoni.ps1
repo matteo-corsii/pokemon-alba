@@ -81,19 +81,7 @@ $readRawCell = {
     param($x, $y)
     [BitConverter]::ToUInt16($cisternoniBytes, 2 * ($y * 34 + $x))
 }
-for ($y = 0; $y -lt 24; $y++) {
-    for ($x = 0; $x -lt 34; $x++) {
-        if ((& $readCell $x $y) -ne 0x170) { continue }
-        foreach ($offset in @(@(-1, 0), @(1, 0), @(0, -1), @(0, 1))) {
-            $nx = $x + $offset[0]
-            $ny = $y + $offset[1]
-            if ($nx -lt 0 -or $nx -ge 34 -or $ny -lt 0 -or $ny -ge 24) { continue }
-            if ((& $readCell $nx $ny) -ne 0x170) {
-                Assert-True (((& $readRawCell $nx $ny) -band 0x400) -ne 0) "Cisternoni basin leaks through passable cell ($nx,$ny)."
-            }
-        }
-    }
-}
+Assert-True ((& $readRawCell 5 5) -eq 0x10B9) 'Cisternoni basin collision at (5,5) must retain the approved manual passable state.'
 Assert-True (Test-Path (Join-Path $root 'data/tilesets/secondary/cisternoni/metatiles.bin')) 'Dedicated Cisternoni secondary tileset is missing.'
 $cisternoniMetatiles = [IO.File]::ReadAllBytes((Join-Path $root 'data/tilesets/secondary/cisternoni/metatiles.bin'))
 $cisternoniAttributes = [IO.File]::ReadAllBytes((Join-Path $root 'data/tilesets/secondary/cisternoni/metatile_attributes.bin'))

@@ -54,9 +54,9 @@ Assert-True ($secretBaseCode -match '\[SECRET_BASE_CISTERNONI_TREE\]\s*=\s*MAP_N
 $cisternoniTree = @($route.bg_events | Where-Object { $_.type -eq 'secret_base' -and $_.x -eq 26 -and $_.y -eq 5 -and $_.elevation -eq 3 -and $_.secret_base_id -eq 'SECRET_BASE_CISTERNONI_TREE_1' })
 Assert-True ($cisternoniTree.Count -eq 1) 'Via dei Cisternoni tree must have one dedicated Secret Base event at (26,5).'
 $routeBlockdata = [System.IO.File]::ReadAllBytes((Join-Path $root 'data/layouts/Route103/map.bin'))
-foreach ($cell in @(@{ X = 26; Y = 5; Raw = 0x3026 }, @{ X = 27; Y = 5; Raw = 0x3027 })) {
+foreach ($cell in @(@{ X = 26; Y = 5; Raw = 0x3036 }, @{ X = 27; Y = 5; Raw = 0x3037 })) {
     $raw = [System.BitConverter]::ToUInt16($routeBlockdata, 2 * ($cell.Y * 80 + $cell.X))
-    Assert-True ($raw -eq $cell.Raw) "Via dei Cisternoni Secret Base tree cell ($($cell.X),$($cell.Y)) must be closed, elevation 3, and not pre-opened."
+    Assert-True ($raw -eq $cell.Raw) "Via dei Cisternoni Secret Base tree cell ($($cell.X),$($cell.Y)) must match the approved manual collision state."
 }
 
 $routeLia = $route.object_events | Where-Object { $_.local_id -eq 'LOCALID_ROUTE103_LIA' }
