@@ -47,7 +47,7 @@ Assert-True ($cisternoniScripts -notmatch 'Salampolla') 'Salampolla must not be 
 
 $secretBaseConstants = Get-Content -Raw (Join-Path $root 'include/constants/secret_bases.h')
 $secretBaseCode = Get-Content -Raw (Join-Path $root 'src/secret_base.c')
-Assert-True ($secretBaseConstants -match '#define\s+SECRET_BASE_CISTERNONI_TREE_1\s+251\b') 'Via dei Cisternoni Secret Base must use append-only ID 251.'
+Assert-True ($secretBaseConstants -match '#define\s+SECRET_BASE_CISTERNONI_TREE_1\s+252\b') 'Via dei Cisternoni Secret Base must use the freed append-only ID 252.'
 Assert-True ($secretBaseConstants -match '#define\s+SECRET_BASE_CISTERNONI_TREE\s+SECRET_BASE_GROUP\(25\)') 'Via dei Cisternoni Secret Base must use its own group.'
 Assert-True ($secretBaseConstants -match '#define\s+NUM_SECRET_BASE_GROUPS\s+26\b') 'Secret Base group count must include the Via dei Cisternoni tree.'
 Assert-True ($secretBaseCode -match '\[SECRET_BASE_CISTERNONI_TREE\]\s*=\s*MAP_NUM\(MAP_SECRET_BASE_TREE1\),\s*0,\s*2,\s*3') 'Via dei Cisternoni tree must reuse the SecretBase_Tree1 interior entry.'
