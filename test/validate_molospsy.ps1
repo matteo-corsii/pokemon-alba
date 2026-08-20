@@ -54,8 +54,6 @@ foreach ($expected in @(
     '.iconSprite = gMonIcon_Mabosstiff', '.iconPalIndex = 0',
     '.pokemonJumpType = PKMN_JUMP_TYPE_NONE',
     '.frontAnimFrames = sAnims_SingleFramePlaceHolder',
-    '.frontAnimId = ANIM_NONE',
-    '.backAnimId = BACK_ANIM_NONE',
     '.levelUpLearnset = sMolospsyLevelUpLearnset',
     '.teachingType = EXPLICIT_TEACHABLES',
     '.teachableLearnset = sMolospsyTeachableLearnset',

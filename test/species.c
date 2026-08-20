@@ -1946,7 +1946,7 @@ TEST("Molospsy canonical data and placeholder assets are valid")
     EXPECT_EQ(info->catchRate, 90);
     EXPECT_EQ(info->expYield, 145);
     EXPECT_EQ(info->evYield_Attack, 1);
-    EXPECT_EQ(info->genderRatio, PERCENT_FEMALE(50));
+    EXPECT_EQ((u32)info->genderRatio, 127);
     EXPECT_EQ(info->eggCycles, 20);
     EXPECT_EQ(info->friendship, 50);
     EXPECT_EQ(info->growthRate, GROWTH_MEDIUM_FAST);
