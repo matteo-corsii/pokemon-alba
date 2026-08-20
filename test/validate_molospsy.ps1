@@ -24,6 +24,7 @@ function Get-Section([string]$Text, [string]$Start, [string]$End) {
 $speciesConstants = (Get-Content 'include/constants/species.h' -Raw) -replace "`r`n", "`n"
 $dexConstants = (Get-Content 'include/constants/pokedex.h' -Raw) -replace "`r`n", "`n"
 $speciesInfo = (Get-Content 'src/data/pokemon/species_info.h' -Raw -Encoding UTF8) -replace "`r`n", "`n"
+$graphics = (Get-Content 'src/data/graphics/pokemon.h' -Raw) -replace "`r`n", "`n"
 $eggMoves = (Get-Content 'src/data/pokemon/egg_moves.h' -Raw) -replace "`r`n", "`n"
 $orders = (Get-Content 'src/data/pokemon/pokedex_orders.h' -Raw) -replace "`r`n", "`n"
 $docs = (Get-Content 'docs/AUSONIA_REGIONAL_DEX_PLAN.md' -Raw -Encoding UTF8) -replace "`r`n", "`n"
@@ -38,6 +39,12 @@ Assert-Contains $dexConstants '#define NATIONAL_DEX_COUNT  NATIONAL_DEX_MOLOSPSY
 
 $record = Get-Section $speciesInfo '[SPECIES_MOLOSPSY] =' "`n    },"
 Assert-True ($speciesInfo.IndexOf('[SPECIES_MOLOSPSY] =') -lt $speciesInfo.IndexOf('/* You may add any custom species below this point based on the following structure: */')) 'Molospsy must remain the last custom species record'
+foreach ($asset in @('anim_front.png', 'back.png', 'icon.png', 'normal.pal', 'shiny.pal')) {
+    Assert-True (Test-Path "graphics/pokemon/molospsy/$asset") "Missing Molospsy asset: $asset"
+}
+foreach ($symbol in @('gMonFrontPic_Molospsy', 'gMonBackPic_Molospsy', 'gMonIcon_Molospsy', 'gMonPalette_Molospsy', 'gMonShinyPalette_Molospsy')) {
+    Assert-Contains $graphics $symbol 'Molospsy graphics symbols'
+}
 foreach ($expected in @(
     '.baseHP        = 65', '.baseAttack    = 85', '.baseDefense   = 80',
     '.baseSpeed     = 45', '.baseSpAttack  = 60', '.baseSpDefense = 70',
@@ -49,9 +56,9 @@ foreach ($expected in @(
     '.bodyColor = BODY_COLOR_GRAY', '.natDexNum = NATIONAL_DEX_MOLOSPSY',
     '.categoryName = _("GUARDIANO")', '.height = 12', '.weight = 610',
     'Molospsy sorveglia rovine e', 'si avvicina prima di muoversi.',
-    '.frontPic = gMonFrontPic_Mabosstiff', '.backPic = gMonBackPic_Mabosstiff',
-    '.palette = gMonPalette_Mabosstiff', '.shinyPalette = gMonShinyPalette_Mabosstiff',
-    '.iconSprite = gMonIcon_Mabosstiff', '.iconPalIndex = 0',
+    '.frontPic = gMonFrontPic_Molospsy', '.backPic = gMonBackPic_Molospsy',
+    '.palette = gMonPalette_Molospsy', '.shinyPalette = gMonShinyPalette_Molospsy',
+    '.iconSprite = gMonIcon_Molospsy', '.iconPalIndex = 0',
     '.pokemonJumpType = PKMN_JUMP_TYPE_NONE',
     '.frontAnimFrames = sAnims_SingleFramePlaceHolder',
     '.levelUpLearnset = sMolospsyLevelUpLearnset',
@@ -61,6 +68,11 @@ foreach ($expected in @(
 )) {
     Assert-Contains $record $expected 'SPECIES_MOLOSPSY'
 }
+Assert-Contains $record 'FOOTPRINT(Mabosstiff)' 'Molospsy temporary footprint placeholder'
+Assert-Contains $record 'sPicTable_Mabosstiff' 'Molospsy temporary overworld placeholder'
+Assert-Contains $record 'gOverworldPalette_Mabosstiff' 'Molospsy temporary overworld palette placeholder'
+Assert-Contains $record 'gShinyOverworldPalette_Mabosstiff' 'Molospsy temporary shiny overworld palette placeholder'
+Assert-Contains $record '.cryId = CRY_MABOSSTIFF' 'Molospsy temporary cry placeholder'
 Assert-True ($record -notmatch 'SPECIES_MOLOSPSY.*EVOLUTION\(') 'Molospsy must remain single stage'
 
 $learnsetBlock = Get-Section $speciesInfo 'static const struct LevelUpMove sMolospsyLevelUpLearnset[]' '};'
