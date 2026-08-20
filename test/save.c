@@ -102,6 +102,7 @@ TEST("Pokédex flags route independently across legacy and extension storage")
         1045,
         1046,
         1047,
+        1048,
     };
 
     ClearPokedexSaveFlags();
@@ -119,8 +120,8 @@ TEST("Pokédex flags route independently across legacy and extension storage")
     }
 
     EXPECT_EQ(gSaveBlock1Ptr->dexSeen[DEX_SAVE_LEGACY_FLAG_BYTES - 1], 0xE0);
-    EXPECT_EQ(gSaveBlock1Ptr->extendedDexSeen[0], 0x7F);
-    EXPECT_EQ(gSaveBlock1Ptr->extendedDexCaught[0], 0x7F);
+    EXPECT_EQ(gSaveBlock1Ptr->extendedDexSeen[0], 0xFF);
+    EXPECT_EQ(gSaveBlock1Ptr->extendedDexCaught[0], 0xFF);
 }
 
 TEST("Pokédex flag access rejects invalid and future logical numbers")

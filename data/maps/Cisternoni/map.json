@@ -1,0 +1,84 @@
+{
+  "id": "MAP_CISTERNONI",
+  "name": "Cisternoni",
+  "layout": "LAYOUT_CISTERNONI",
+  "music": "MUS_SEALED_CHAMBER",
+  "region_map_section": "MAPSEC_ALBERA_STORICA",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_cycling": false,
+  "allow_escaping": true,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "local_id": "LOCALID_CISTERNONI_LIA",
+      "graphics_id": "OBJ_EVENT_GFX_MAY_NORMAL",
+      "x": 15,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Cisternoni_EventScript_Lia",
+      "flag": "FLAG_HIDE_CISTERNONI_LIA"
+    },
+    {
+      "local_id": "LOCALID_CISTERNONI_AUREA_RECRUIT",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
+      "x": 18,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Cisternoni_EventScript_AureaRecruit",
+      "flag": "FLAG_HIDE_CISTERNONI_AUREA_RECRUIT"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 16,
+      "y": 2,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE103",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 17,
+      "y": 2,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE103",
+      "dest_warp_id": "1"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 9,
+      "elevation": 3,
+      "var": "VAR_ALBERA_GYM_STATE",
+      "var_value": "4",
+      "script": "Cisternoni_EventScript_StartAureaScene"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 9,
+      "elevation": 3,
+      "var": "VAR_ALBERA_GYM_STATE",
+      "var_value": "4",
+      "script": "Cisternoni_EventScript_StartAureaScene"
+    }
+  ],
+  "bg_events": [],
+  "region": "REGION_HOENN"
+}

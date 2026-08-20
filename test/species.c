@@ -268,7 +268,8 @@ TEST("Ausonia starter IDs are append-only and distinct")
     EXPECT_EQ(SPECIES_GAZZUOLA, SPECIES_PEREGRINUS + 1);
     EXPECT_EQ(SPECIES_BRILLAZZA, SPECIES_GAZZUOLA + 1);
     EXPECT_EQ(SPECIES_GAZZOMBRA, SPECIES_BRILLAZZA + 1);
-    EXPECT_EQ(SPECIES_EGG, SPECIES_GAZZOMBRA + 1);
+    EXPECT_EQ(SPECIES_MOLOSPSY, SPECIES_GAZZOMBRA + 1);
+    EXPECT_EQ(SPECIES_EGG, SPECIES_MOLOSPSY + 1);
     EXPECT_EQ(NUM_SPECIES, SPECIES_EGG);
 
     EXPECT_EQ(NATIONAL_DEX_PECHARUNT, 1025);
@@ -294,7 +295,8 @@ TEST("Ausonia starter IDs are append-only and distinct")
     EXPECT_EQ(NATIONAL_DEX_GAZZUOLA, NATIONAL_DEX_PEREGRINUS + 1);
     EXPECT_EQ(NATIONAL_DEX_BRILLAZZA, NATIONAL_DEX_GAZZUOLA + 1);
     EXPECT_EQ(NATIONAL_DEX_GAZZOMBRA, NATIONAL_DEX_BRILLAZZA + 1);
-    EXPECT_EQ(NATIONAL_DEX_COUNT, NATIONAL_DEX_GAZZOMBRA);
+    EXPECT_EQ(NATIONAL_DEX_MOLOSPSY, NATIONAL_DEX_GAZZOMBRA + 1);
+    EXPECT_EQ(NATIONAL_DEX_COUNT, NATIONAL_DEX_MOLOSPSY);
 
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_CINGERM), COMPOUND_STRING("Cingerm")), 0);
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_ROVASCO), COMPOUND_STRING("Rovasco")), 0);
@@ -318,6 +320,7 @@ TEST("Ausonia starter IDs are append-only and distinct")
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_GAZZUOLA), COMPOUND_STRING("Gazzuola")), 0);
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_BRILLAZZA), COMPOUND_STRING("Brillazza")), 0);
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_GAZZOMBRA), COMPOUND_STRING("Gazzombra")), 0);
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_MOLOSPSY), COMPOUND_STRING("Molospsy")), 0);
 }
 
 TEST("Ausonia Grass starter base data matches the approved prototype")
@@ -1869,4 +1872,144 @@ TEST("Ausonia early magpie fauna teachables Egg Moves and placeholders are compl
     EXPECT(gSpeciesInfo[SPECIES_GAZZUOLA].frontPic != gSpeciesInfo[SPECIES_ROOKIDEE].frontPic);
     EXPECT(gSpeciesInfo[SPECIES_BRILLAZZA].frontPic != gSpeciesInfo[SPECIES_CORVISQUIRE].frontPic);
     EXPECT(gSpeciesInfo[SPECIES_GAZZOMBRA].frontPic != gSpeciesInfo[SPECIES_CORVIKNIGHT].frontPic);
+}
+
+TEST("Molospsy canonical data and placeholder assets are valid")
+{
+    static const u8 expectedLevels[] = { 1, 1, 4, 7, 10, 13, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52 };
+    static const u16 expectedMoves[] = {
+        MOVE_TACKLE,
+        MOVE_LEER,
+        MOVE_MEDITATE,
+        MOVE_LOW_KICK,
+        MOVE_PROTECT,
+        MOVE_CONFUSION,
+        MOVE_DETECT,
+        MOVE_HELPING_HAND,
+        MOVE_PSYBEAM,
+        MOVE_BULK_UP,
+        MOVE_SAFEGUARD,
+        MOVE_FORCE_PALM,
+        MOVE_ZEN_HEADBUTT,
+        MOVE_IRON_DEFENSE,
+        MOVE_CALM_MIND,
+        MOVE_WIDE_GUARD,
+    };
+    static const u16 expectedTeachables[] = {
+        MOVE_PROTECT,
+        MOVE_REST,
+        MOVE_SLEEP_TALK,
+        MOVE_SUBSTITUTE,
+        MOVE_ENDURE,
+        MOVE_MEDITATE,
+        MOVE_SWIFT,
+        MOVE_LOW_KICK,
+        MOVE_ROCK_SMASH,
+        MOVE_HELPING_HAND,
+        MOVE_DETECT,
+        MOVE_FORCE_PALM,
+        MOVE_BULK_UP,
+        MOVE_CALM_MIND,
+        MOVE_SAFEGUARD,
+        MOVE_IRON_DEFENSE,
+        MOVE_ZEN_HEADBUTT,
+        MOVE_POWER_UP_PUNCH,
+        MOVE_QUICK_GUARD,
+        MOVE_WIDE_GUARD,
+        MOVE_PSYCH_UP,
+        MOVE_MIRROR_COAT,
+    };
+    static const u16 expectedEggMoves[] = {
+        MOVE_COUNTER,
+        MOVE_DETECT,
+        MOVE_ENDURE,
+        MOVE_HELPING_HAND,
+        MOVE_MIRROR_COAT,
+        MOVE_POWER_UP_PUNCH,
+        MOVE_QUICK_GUARD,
+        MOVE_WIDE_GUARD,
+    };
+    const struct SpeciesInfo *info = &gSpeciesInfo[SPECIES_MOLOSPSY];
+    const struct SpeciesInfo *placeholder = &gSpeciesInfo[SPECIES_MABOSSTIFF];
+    const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(SPECIES_MOLOSPSY);
+    const u16 *teachable = info->teachableLearnset;
+    const u16 *eggMoves = info->eggMoveLearnset;
+
+    EXPECT_EQ(info->baseHP, 65);
+    EXPECT_EQ(info->baseAttack, 85);
+    EXPECT_EQ(info->baseDefense, 80);
+    EXPECT_EQ(info->baseSpeed, 45);
+    EXPECT_EQ(info->baseSpAttack, 60);
+    EXPECT_EQ(info->baseSpDefense, 70);
+    EXPECT_EQ(info->types[0], TYPE_FIGHTING);
+    EXPECT_EQ(info->types[1], TYPE_PSYCHIC);
+    EXPECT_EQ(info->catchRate, 90);
+    EXPECT_EQ(info->expYield, 145);
+    EXPECT_EQ((u32)info->evYield_Attack, 1);
+    EXPECT_EQ((u32)info->genderRatio, 127);
+    EXPECT_EQ(info->eggCycles, 20);
+    EXPECT_EQ(info->friendship, 50);
+    EXPECT_EQ(info->growthRate, GROWTH_MEDIUM_FAST);
+    EXPECT_EQ(info->eggGroups[0], EGG_GROUP_FIELD);
+    EXPECT_EQ(info->eggGroups[1], EGG_GROUP_FIELD);
+    EXPECT_EQ((u32)info->abilities[0], ABILITY_INNER_FOCUS);
+    EXPECT_EQ((u32)info->abilities[1], ABILITY_STEADFAST);
+    EXPECT_EQ((u32)info->abilities[2], ABILITY_GUARD_DOG);
+    EXPECT_EQ((u32)info->bodyColor, BODY_COLOR_GRAY);
+    EXPECT_EQ((u32)info->natDexNum, NATIONAL_DEX_MOLOSPSY);
+    EXPECT_EQ(StringCompare(info->speciesName, COMPOUND_STRING("Molospsy")), 0);
+    EXPECT_EQ(StringCompare(info->categoryName, COMPOUND_STRING("GUARDIANO")), 0);
+    EXPECT_EQ(info->height, 12);
+    EXPECT_EQ(info->weight, 610);
+    EXPECT_NE(StringCompare(info->description, gFallbackPokedexText), 0);
+    EXPECT_EQ(info->frontPic, placeholder->frontPic);
+    EXPECT_EQ(info->backPic, placeholder->backPic);
+    EXPECT_EQ(info->palette, placeholder->palette);
+    EXPECT_EQ(info->shinyPalette, placeholder->shinyPalette);
+    EXPECT_EQ(info->iconSprite, placeholder->iconSprite);
+    EXPECT_EQ(info->frontPicSize, placeholder->frontPicSize);
+    EXPECT_EQ(info->backPicSize, placeholder->backPicSize);
+    EXPECT_EQ(info->frontPicYOffset, placeholder->frontPicYOffset);
+    EXPECT_EQ(info->backPicYOffset, placeholder->backPicYOffset);
+    EXPECT_EQ(info->frontAnimFrames, placeholder->frontAnimFrames);
+    EXPECT_EQ(info->frontAnimId, placeholder->frontAnimId);
+    EXPECT_EQ(info->backAnimId, placeholder->backAnimId);
+    EXPECT_EQ((u32)info->iconPalIndex, (u32)placeholder->iconPalIndex);
+    EXPECT_EQ((u32)info->pokemonJumpType, (u32)placeholder->pokemonJumpType);
+    EXPECT_EQ(info->pokemonScale, placeholder->pokemonScale);
+    EXPECT_EQ(info->pokemonOffset, placeholder->pokemonOffset);
+    EXPECT_EQ(info->trainerScale, placeholder->trainerScale);
+    EXPECT_EQ(info->trainerOffset, placeholder->trainerOffset);
+    EXPECT_EQ((u32)info->cryId, (u32)placeholder->cryId);
+#if P_FOOTPRINTS
+    EXPECT(info->footprint == placeholder->footprint);
+#endif
+    EXPECT_EQ(info->enemyShadowXOffset, placeholder->enemyShadowXOffset);
+    EXPECT_EQ(info->enemyShadowYOffset, placeholder->enemyShadowYOffset);
+    EXPECT_EQ((u32)info->enemyShadowSize, (u32)placeholder->enemyShadowSize);
+#if OW_POKEMON_OBJECT_EVENTS
+    EXPECT(info->overworldData.images == placeholder->overworldData.images);
+#if OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
+    EXPECT(info->overworldPalette == placeholder->overworldPalette);
+    EXPECT(info->overworldShinyPalette == placeholder->overworldShinyPalette);
+#endif
+#endif
+    EXPECT(GetSpeciesEvolutions(SPECIES_MOLOSPSY) == NULL);
+
+    for (u32 i = 0; i < ARRAY_COUNT(expectedMoves); i++)
+    {
+        EXPECT_EQ(learnset[i].level, expectedLevels[i]);
+        EXPECT_EQ(learnset[i].move, expectedMoves[i]);
+        if (i != 0)
+            EXPECT_GE(learnset[i].level, learnset[i - 1].level);
+    }
+    EXPECT_EQ(learnset[ARRAY_COUNT(expectedMoves)].move, LEVEL_UP_MOVE_END);
+
+    for (u32 i = 0; i < ARRAY_COUNT(expectedTeachables); i++)
+        EXPECT_EQ(teachable[i], expectedTeachables[i]);
+    EXPECT_EQ(teachable[ARRAY_COUNT(expectedTeachables)], MOVE_UNAVAILABLE);
+
+    for (u32 i = 0; i < ARRAY_COUNT(expectedEggMoves); i++)
+        EXPECT_EQ(eggMoves[i], expectedEggMoves[i]);
+    EXPECT_EQ(eggMoves[ARRAY_COUNT(expectedEggMoves)], MOVE_UNAVAILABLE);
 }

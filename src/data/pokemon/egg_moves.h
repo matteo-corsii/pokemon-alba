@@ -53,6 +53,19 @@ static const u16 sGazzuolaEggMoveLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
+// Pokemon Alba: canonical Egg Moves for Molospsy.
+static const u16 sMolospsyEggMoveLearnset[] = {
+    MOVE_COUNTER,
+    MOVE_DETECT,
+    MOVE_ENDURE,
+    MOVE_HELPING_HAND,
+    MOVE_MIRROR_COAT,
+    MOVE_POWER_UP_PUNCH,
+    MOVE_QUICK_GUARD,
+    MOVE_WIDE_GUARD,
+    MOVE_UNAVAILABLE,
+};
+
 #if P_FAMILY_BULBASAUR
 static const u16 sBulbasaurEggMoveLearnset[] = {
     MOVE_SKULL_BASH,

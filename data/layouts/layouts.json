@@ -211,6 +211,17 @@
       "layout_version": "emerald"
     },
     {
+      "id": "LAYOUT_CISTERNONI",
+      "name": "Cisternoni_Layout",
+      "width": 34,
+      "height": 24,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cisternoni",
+      "border_filepath": "data/layouts/Cisternoni/border.bin",
+      "blockdata_filepath": "data/layouts/Cisternoni/map.bin",
+      "layout_version": "emerald"
+    },
+    {
       "id": "LAYOUT_ROUTE104",
       "name": "Route104_Layout",
       "width": 40,

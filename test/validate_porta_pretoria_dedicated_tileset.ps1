@@ -150,11 +150,12 @@ foreach ($pair in @(@('07.pal', '11.pal'), @('11.pal', '08.pal'), @('12.pal', '1
 
 $oldale = Read-Json 'data/maps/OldaleTown/map.json'
 $baseOldale = Get-BaseJson 'data/maps/OldaleTown/map.json'
-foreach ($property in @('warp_events', 'coord_events', 'bg_events', 'connections')) {
+foreach ($property in @('warp_events', 'bg_events', 'connections')) {
     $actual = ($oldale.$property | ConvertTo-Json -Depth 20 -Compress)
     $expected = ($baseOldale.$property | ConvertTo-Json -Depth 20 -Compress)
     Assert-True ($actual -eq $expected) "OldaleTown $property changed unexpectedly."
 }
+Assert-True (@($oldale.coord_events).Count -eq 0) 'Porta Pretoria must not retain the obsolete north-exit blocker triggers.'
 $traveler = @($oldale.object_events | Where-Object { $_.graphics_id -eq 'OBJ_EVENT_GFX_GIRL_3' -and $_.script -eq 'OldaleTown_EventScript_Traveler' })
 $baseTraveler = @($baseOldale.object_events | Where-Object { $_.graphics_id -eq 'OBJ_EVENT_GFX_GIRL_3' -and $_.script -eq 'OldaleTown_EventScript_Traveler' })
 Assert-True ($traveler.Count -eq 1 -and $baseTraveler.Count -eq 1) 'Porta Pretoria traveler identity changed unexpectedly.'
