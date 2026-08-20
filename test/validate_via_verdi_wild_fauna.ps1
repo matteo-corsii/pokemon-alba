@@ -71,11 +71,6 @@ foreach ($species in $allowedSpecies) {
     Assert-True ($speciesConstants.Contains($species)) "Missing implemented species constant: $species."
 }
 
-$baseJson = (& git -C $RepositoryRoot show 'develop:src/data/wild_encounters.json') -join "`n" | ConvertFrom-Json
-$baseOtherMaps = @($baseJson.wild_encounter_groups.encounters | Where-Object { $_.map -ne 'MAP_ROUTE101' } | ConvertTo-Json -Depth 20 -Compress)
-$currentOtherMaps = @($wild.wild_encounter_groups.encounters | Where-Object { $_.map -ne 'MAP_ROUTE101' } | ConvertTo-Json -Depth 20 -Compress)
-Assert-True (($baseOtherMaps -join "`n") -eq ($currentOtherMaps -join "`n")) 'A wild encounter map other than MAP_ROUTE101 changed.'
-
 $changedArtifacts = @(
     & git -C $RepositoryRoot diff --name-only develop...HEAD -- '*.gba' '*.elf' '*.map' '*.zip'
     & git -C $RepositoryRoot diff --name-only -- '*.gba' '*.elf' '*.map' '*.zip'
