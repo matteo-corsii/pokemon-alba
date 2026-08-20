@@ -87,7 +87,7 @@ Assert-Contains $docs '| `AUS-FAM-MAGPIE` |' 'Magpie catalog row'
 Assert-Contains (Get-Section $docs '| `AUS-FAM-MAGPIE` |' "`n") 'IMPLEMENTED; CANONICAL DESIGN' 'Magpie catalog status'
 
 foreach ($dexNum in 1041..1048) { Assert-Contains $saveTests "        $dexNum," 'Save extension coverage' }
-Assert-Contains $saveTests 'EXPECT_EQ(gSaveBlock1Ptr->extendedDexSeen[0], 0x7F);' 'Extended seen flags'
-Assert-Contains $saveTests 'EXPECT_EQ(gSaveBlock1Ptr->extendedDexCaught[0], 0x7F);' 'Extended caught flags'
+Assert-Contains $saveTests 'EXPECT_EQ(gSaveBlock1Ptr->extendedDexSeen[0], 0xFF);' 'Extended seen flags'
+Assert-Contains $saveTests 'EXPECT_EQ(gSaveBlock1Ptr->extendedDexCaught[0], 0xFF);' 'Extended caught flags'
 
 Write-Host 'Functional Fauna Batch D validation passed.' -ForegroundColor Green
