@@ -491,6 +491,26 @@ static const struct LevelUpMove sGazzombraLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+static const struct LevelUpMove sMolospsyLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_TACKLE),
+    LEVEL_UP_MOVE( 1, MOVE_LEER),
+    LEVEL_UP_MOVE( 4, MOVE_MEDITATE),
+    LEVEL_UP_MOVE( 7, MOVE_LOW_KICK),
+    LEVEL_UP_MOVE(10, MOVE_PROTECT),
+    LEVEL_UP_MOVE(13, MOVE_CONFUSION),
+    LEVEL_UP_MOVE(16, MOVE_DETECT),
+    LEVEL_UP_MOVE(20, MOVE_HELPING_HAND),
+    LEVEL_UP_MOVE(24, MOVE_PSYBEAM),
+    LEVEL_UP_MOVE(28, MOVE_BULK_UP),
+    LEVEL_UP_MOVE(32, MOVE_SAFEGUARD),
+    LEVEL_UP_MOVE(36, MOVE_FORCE_PALM),
+    LEVEL_UP_MOVE(40, MOVE_ZEN_HEADBUTT),
+    LEVEL_UP_MOVE(44, MOVE_IRON_DEFENSE),
+    LEVEL_UP_MOVE(48, MOVE_CALM_MIND),
+    LEVEL_UP_MOVE(52, MOVE_WIDE_GUARD),
+    LEVEL_UP_END
+};
+
 const struct SpeciesInfo gSpeciesInfo[] =
 {
     [SPECIES_NONE] =
@@ -2022,6 +2042,71 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .levelUpLearnset = sGazzombraLevelUpLearnset,
         .teachingType = EXPLICIT_TEACHABLES,
         .teachableLearnset = sGazzombraTeachableLearnset,
+    },
+
+    [SPECIES_MOLOSPSY] =
+    {
+        .baseHP        = 65,
+        .baseAttack    = 85,
+        .baseDefense   = 80,
+        .baseSpeed     = 45,
+        .baseSpAttack  = 60,
+        .baseSpDefense = 70,
+        .types = MON_TYPES(TYPE_FIGHTING, TYPE_PSYCHIC),
+        .catchRate = 90,
+        .expYield = 145,
+        .evYield_Attack = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = 50,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
+        .abilities = { ABILITY_INNER_FOCUS, ABILITY_STEADFAST, ABILITY_GUARD_DOG },
+        .bodyColor = BODY_COLOR_GRAY,
+        .speciesName = _("Molospsy"),
+        .cryId = CRY_MABOSSTIFF,
+        .natDexNum = NATIONAL_DEX_MOLOSPSY,
+        .categoryName = _("GUARDIANO"),
+        .height = 12,
+        .weight = 610,
+        .description = COMPOUND_STRING(
+            "Molospsy sorveglia rovine e\n"
+            "varchi antichi. Si dice che\n"
+            "percepisca l'intenzione di chi\n"
+            "si avvicina prima di muoversi."),
+        .pokemonScale = 356,
+        .pokemonOffset = 17,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Mabosstiff,
+        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 5,
+        .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        .frontAnimId = ANIM_NONE,
+        .backPic = gMonBackPic_Mabosstiff,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 13,
+        .backAnimId = BACK_ANIM_NONE,
+        .palette = gMonPalette_Mabosstiff,
+        .shinyPalette = gMonShinyPalette_Mabosstiff,
+        .iconSprite = gMonIcon_Mabosstiff,
+        .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        SHADOW(1, 5, SHADOW_SIZE_XL_BATTLE_ONLY)
+        FOOTPRINT(Mabosstiff)
+        OVERWORLD(
+            sPicTable_Mabosstiff,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            sAnimTable_Following,
+            gOverworldPalette_Mabosstiff,
+            gShinyOverworldPalette_Mabosstiff
+        )
+        .levelUpLearnset = sMolospsyLevelUpLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sMolospsyTeachableLearnset,
+        .eggMoveLearnset = sMolospsyEggMoveLearnset,
     },
 
     /* You may add any custom species below this point based on the following structure: */

@@ -663,21 +663,32 @@ comune: Borgotto 010, Pastufo 011, Miciolo 012 e Felivates 013.
 ### Molospsy
 
 - **Temporary family ID:** `AUS-CONCEPT-MOLOSPSY`
-- **Species/stages:** Molospsy, singolo stadio provvisorio.
-- **Current status:** CANDIDATE, NAME REVIEW, LINE REVIEW, PLACEMENT TBD.
-- **Proposed typing:** Lotta/Psico.
+- **Species/stages:** Molospsy, singolo stadio.
+- **Current status:** IMPLEMENTED; CANONICAL DESIGN; PLACEMENT CANDIDATE.
+- **Implemented typing:** Lotta/Psico.
 - **Core concept:** molosso guardiano del tempio.
 - **Real-world inspiration:** molossi e complessi sacri.
-- **Evolution structure:** TBD.
-- **Primary habitat candidate:** rovine o complesso sacro, possible candidate.
-- **Secondary habitat candidates:** siti monumentali, TBD.
-- **Earliest story band candidate:** premature/TBD.
-- **Gameplay role candidate:** guardiano fisico/mentale, da definire.
-- **Narrative importance:** possibile custode, non approvato.
-- **Name review:** obbligatoria.
-- **Type review:** combinazione proposta da validare.
-- **Placement review:** PLACEMENT TBD.
-- **Open questions:** nome, linea, sito e importanza narrativa.
+- **Evolution structure:** nessuna evoluzione.
+- **Primary habitat candidate:** Via dei Cisternoni; PLACEMENT CANDIDATE.
+- **Secondary habitat candidates:** rovine e complessi sacri di Albèra.
+- **Earliest story band candidate:** primo ecosistema urbano/periurbano di Albèra.
+- **Gameplay role candidate:** guardiano fisico/mentale, da definire nei dettagli di placement.
+- **Narrative importance:** custode silenzioso di soglie e rovine, senza evento narrativo dedicato.
+- **Name review:** completata.
+- **Type review:** completata.
+- **Placement review:** Via dei Cisternoni, encounter band e rarità restano da finalizzare.
+- **Open questions:** encounter table e distribuzione esatta.
+
+| Regional Dex | Species | Technical species ID | Technical Pokédex number | Implemented type(s) | Evolution |
+| ---: | --- | ---: | ---: | --- | --- |
+| 023 | Molospsy | `SPECIES_MOLOSPSY` = 1595 | `NATIONAL_DEX_MOLOSPSY` = 1048 | Lotta/Psico | stadio singolo |
+
+- **Canonical v1.0 data:** statistiche base 65/85/80/45/60/70; abilità
+  Inner Focus / Steadfast / Guard Dog; learnset per livello, insegnabili e
+  mosse Uovo registrati.
+- **Temporary graphical placeholders:** Mabosstiff per battaglia e
+  overworld; nessun asset grafico originale Molospsy è incluso in questo
+  batch.
 
 ### Lenghelis
 
@@ -880,9 +891,9 @@ Pontaria, Fioralia o Nemora non vengono resi canonici da questo documento.
 | --- | --- | --- | --- |
 | Albèra Bassa | Borgotto; Miciolo visibile come fauna urbana | PLACEMENT CANDIDATE | incontri, ruolo della fauna urbana e riuso di Pokémon ufficiali |
 | Via Verdi | Ghepio; Gazzuola; Borgotto; Foliarva comune di giorno; Crisalvia rara; Lumella rara; Luscinco raro; possibili specie ufficiali | PLACEMENT CANDIDATE | tassi, fasce orarie non esclusive, curve dei livelli e approvazione degli incontri |
-| Porta Pretoria | Molospsy | premature/TBD | funzione delle rovine e spazio della soglia |
+| Porta Pretoria | Molospsy | PLACEMENT CANDIDATE | funzione delle rovine e spazio della soglia |
 | Albèra Storica | Miciolo; Gazzuola; Molospsy; Lenghelis | PLACEMENT CANDIDATE | tassi, ciclo giorno/notte e tono degli eventi |
-| Anfiteatro Romano / prima Palestra | Molospsy | premature/TBD | implementazione tecnica dell'Anfiteatro e placement della fauna |
+| Anfiteatro Romano / prima Palestra | Molospsy | PLACEMENT CANDIDATE | implementazione tecnica dell'Anfiteatro e placement della fauna |
 | Via Consolare | Pastufo; linea Foliarva; Paludix raro; Lumella; Luscinco; Tritino molto raro; linea del falco | PLACEMENT CANDIDATE | bioma, tassi e composizione della route non progettati |
 | Lago di Albèra | Pastufo; Paludix/Sanguilex; Lumella/Omphalux; Luscinco/Luscerp; Tritino/Tricrest; Salampolla/Alchimandra | PLACEMENT CANDIDATE | tassi, fasce orarie e presenza degli stadi evoluti; Naufragus non va collocato automaticamente qui |
 | Futura area ispirata ad Ariccia | Fraschietto | strong thematic candidate | nome in-game, bioma e linea evolutiva |
@@ -943,7 +954,7 @@ creare una specie originale per ogni ruolo ecologico o di gameplay.
 | `AUS-CONCEPT-FURNACE-BOAR` | Porchemecha / Bronzoverro | 1+ TBD | CANDIDATE; NAME REVIEW | Acciaio/Fuoco | possible candidate: area metallurgica | scegliere il nome |
 | `AUS-CONCEPT-SALADOCT` | Salampolla → Alchimandra; Saladoct RETIRED WORKING NAME | 2 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Veleno → Veleno/Folletto | PLACEMENT CANDIDATE: Lago di Albèra | evoluzione notturna, abilità e tassi |
 | `AUS-CONCEPT-NAUFRAGUS` | Naufragus | 1+ TBD | CANDIDATE | Acqua/Acciaio | premature/TBD | ruolo narrativo; non assegnarlo automaticamente al lago |
-| `AUS-CONCEPT-MOLOSPSY` | Molospsy | 1+ TBD | CANDIDATE; NAME REVIEW | Lotta/Psico | possible candidate: rovine | nome e sito |
+| `AUS-CONCEPT-MOLOSPSY` | Molospsy | 1+ TBD | IMPLEMENTED; CANONICAL DESIGN; PLACEMENT CANDIDATE | Lotta/Psico | Via dei Cisternoni / rovine e soglie | encounter band e rarità |
 | `AUS-CONCEPT-LENGHELIS` | Lenghelis | 1+ TBD | CANDIDATE | Spettro/Folletto | possible candidate: boschi/borghi | habitat e tono folklorico |
 | `AUS-CONCEPT-TALPMAGNET` | Talpmagnet | 1+ TBD | CANDIDATE; NAME REVIEW; LINE REVIEW | Terra/Elettro | possible candidate: sottosuolo | nome e linea |
 | `AUS-CONCEPT-VITEMOSTO` | Vitemosto | 1+ TBD | CANDIDATE; LINE REVIEW | Erba/Fuoco | possible candidate: area vitivinicola | linea e collocazione |

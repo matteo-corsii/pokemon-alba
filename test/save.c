@@ -102,6 +102,7 @@ TEST("Pokédex flags route independently across legacy and extension storage")
         1045,
         1046,
         1047,
+        1048,
     };
 
     ClearPokedexSaveFlags();
