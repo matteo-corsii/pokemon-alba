@@ -1945,7 +1945,7 @@ TEST("Molospsy canonical data and placeholder assets are valid")
     EXPECT_EQ(info->types[1], TYPE_PSYCHIC);
     EXPECT_EQ(info->catchRate, 90);
     EXPECT_EQ(info->expYield, 145);
-    EXPECT_EQ(info->evYield_Attack, 1);
+    EXPECT_EQ((u32)info->evYield_Attack, 1);
     EXPECT_EQ((u32)info->genderRatio, 127);
     EXPECT_EQ(info->eggCycles, 20);
     EXPECT_EQ(info->friendship, 50);
@@ -1956,7 +1956,7 @@ TEST("Molospsy canonical data and placeholder assets are valid")
     EXPECT_EQ((u32)info->abilities[1], ABILITY_STEADFAST);
     EXPECT_EQ((u32)info->abilities[2], ABILITY_GUARD_DOG);
     EXPECT_EQ((u32)info->bodyColor, BODY_COLOR_GRAY);
-    EXPECT_EQ(info->natDexNum, NATIONAL_DEX_MOLOSPSY);
+    EXPECT_EQ((u32)info->natDexNum, NATIONAL_DEX_MOLOSPSY);
     EXPECT_EQ(StringCompare(info->speciesName, COMPOUND_STRING("Molospsy")), 0);
     EXPECT_EQ(StringCompare(info->categoryName, COMPOUND_STRING("GUARDIANO")), 0);
     EXPECT_EQ(info->height, 12);
@@ -1974,19 +1974,19 @@ TEST("Molospsy canonical data and placeholder assets are valid")
     EXPECT_EQ(info->frontAnimFrames, placeholder->frontAnimFrames);
     EXPECT_EQ(info->frontAnimId, placeholder->frontAnimId);
     EXPECT_EQ(info->backAnimId, placeholder->backAnimId);
-    EXPECT_EQ(info->iconPalIndex, placeholder->iconPalIndex);
-    EXPECT_EQ(info->pokemonJumpType, placeholder->pokemonJumpType);
+    EXPECT_EQ((u32)info->iconPalIndex, (u32)placeholder->iconPalIndex);
+    EXPECT_EQ((u32)info->pokemonJumpType, (u32)placeholder->pokemonJumpType);
     EXPECT_EQ(info->pokemonScale, placeholder->pokemonScale);
     EXPECT_EQ(info->pokemonOffset, placeholder->pokemonOffset);
     EXPECT_EQ(info->trainerScale, placeholder->trainerScale);
     EXPECT_EQ(info->trainerOffset, placeholder->trainerOffset);
-    EXPECT_EQ(info->cryId, placeholder->cryId);
+    EXPECT_EQ((u32)info->cryId, (u32)placeholder->cryId);
 #if P_FOOTPRINTS
     EXPECT(info->footprint == placeholder->footprint);
 #endif
     EXPECT_EQ(info->enemyShadowXOffset, placeholder->enemyShadowXOffset);
     EXPECT_EQ(info->enemyShadowYOffset, placeholder->enemyShadowYOffset);
-    EXPECT_EQ(info->enemyShadowSize, placeholder->enemyShadowSize);
+    EXPECT_EQ((u32)info->enemyShadowSize, (u32)placeholder->enemyShadowSize);
 #if OW_POKEMON_OBJECT_EVENTS
     EXPECT(info->overworldData.images == placeholder->overworldData.images);
 #if OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
