@@ -9378,6 +9378,17 @@
       "border_filepath": "data/layouts/ViaConsolare/border.bin",
       "blockdata_filepath": "data/layouts/ViaConsolare/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_VIA_CONSOLARE_MANSIO",
+      "name": "ViaConsolare_Mansio_Layout",
+      "width": 24,
+      "height": 16,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/ViaConsolare_Mansio/border.bin",
+      "blockdata_filepath": "data/layouts/ViaConsolare_Mansio/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }
