@@ -9367,6 +9367,17 @@
       "border_filepath": "data/layouts/AlberaBassa_School/border.bin",
       "blockdata_filepath": "data/layouts/AlberaBassa_School/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_VIA_CONSOLARE",
+      "name": "ViaConsolare_Layout",
+      "width": 60,
+      "height": 30,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_PortaPretoria",
+      "border_filepath": "data/layouts/ViaConsolare/border.bin",
+      "blockdata_filepath": "data/layouts/ViaConsolare/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

@@ -14,7 +14,15 @@ $routeLayout = $layouts.layouts | Where-Object id -eq 'LAYOUT_ROUTE103'
 $cisternoniLayout = $layouts.layouts | Where-Object id -eq 'LAYOUT_CISTERNONI'
 Assert-True ($routeLayout.width -eq 80 -and $routeLayout.height -eq 22) 'Route103 must retain its 80x22 seamless-connection footprint.'
 Assert-True ($routeLayout.primary_tileset -eq 'gTileset_General' -and $routeLayout.secondary_tileset -eq 'gTileset_PortaPretoria') 'Route103 tilesets must remain General + PortaPretoria.'
-Assert-True ($route.connections.Count -eq 1 -and $route.connections[0].map -eq 'MAP_OLDALE_TOWN' -and $route.connections[0].direction -eq 'down') 'Route103 must retain only its south Porta Pretoria connection.'
+$southConnection = @($route.connections | Where-Object {
+    $_.direction -eq 'down' -and $_.map -eq 'MAP_OLDALE_TOWN'
+})
+$viaConsolareConnection = @($route.connections | Where-Object {
+    $_.direction -eq 'left' -and $_.map -eq 'MAP_VIA_CONSOLARE' -and $_.offset -eq 0
+})
+Assert-True ($route.connections.Count -eq 2) 'Route103 must retain its south connection and the approved Via Consolare connection.'
+Assert-True ($southConnection.Count -eq 1) 'Route103 must retain exactly one south Porta Pretoria connection.'
+Assert-True ($viaConsolareConnection.Count -eq 1) 'Route103 must retain exactly one left Via Consolare connection with offset 0.'
 Assert-True ($route.object_events.Count -eq 7) 'Route103 must contain the approved Via dei Cisternoni trainers, ambient NPCs, Lia, and Nico.'
 $routeExpectedObjects = @(
     @{ x = 22; y = 8; graphics_id = 'OBJ_EVENT_GFX_HIKER'; script = 'Route103_EventScript_Marco'; trainer_type = 'TRAINER_TYPE_NORMAL' },
