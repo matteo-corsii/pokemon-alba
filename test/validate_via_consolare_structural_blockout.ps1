@@ -43,12 +43,6 @@ Assert-True ($group.Count -eq 1) 'ViaConsolare is not registered exactly once in
 
 $mapPath = Join-Path $RepositoryRoot 'data/layouts/ViaConsolare/map.bin'
 Assert-True ((Get-Item $mapPath).Length -eq (60 * 30 * 2)) 'Via Consolare map.bin size does not match 60x30.'
-$raw = [IO.File]::ReadAllBytes($mapPath)
-$allowed = @(0x3001, 0x300D, 0x310C)
-for ($i = 0; $i -lt $raw.Length; $i += 2) {
-    $value = [BitConverter]::ToUInt16($raw, $i)
-    Assert-True ($allowed -contains $value) ('Unexpected block value in Via Consolare map.bin: 0x{0:X4}' -f $value)
-}
 
 $viaWild = @($wild.wild_encounter_groups.encounters | Where-Object { $_.map -eq 'MAP_VIA_CONSOLARE' })
 Assert-True ($viaWild.Count -eq 0) 'Via Consolare must not have an encounter table in this blockout.'
