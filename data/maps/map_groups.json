@@ -157,7 +157,8 @@
     "OldaleTown_Mart",
     "AlberaStorica_MentorsHouse",
     "AlberaStorica_CivicArchive",
-    "AlberaStorica_SecretBaseShop"
+    "AlberaStorica_SecretBaseShop",
+    "ViaConsolare_Mansio"
   ],
   "gMapGroup_IndoorDewford": [
     "DewfordTown_House1",

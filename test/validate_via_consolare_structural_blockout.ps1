@@ -23,7 +23,19 @@ Assert-True ($map.id -eq 'MAP_VIA_CONSOLARE') 'Via Consolare map id is incorrect
 Assert-True ($map.layout -eq 'LAYOUT_VIA_CONSOLARE') 'Via Consolare layout id is incorrect.'
 Assert-True ($map.map_type -eq 'MAP_TYPE_ROUTE') 'Via Consolare must be an outdoor route.'
 Assert-True ($map.connections.Count -eq 1 -and $map.connections[0].direction -eq 'right' -and $map.connections[0].map -eq 'MAP_ROUTE103' -and [int]$map.connections[0].offset -eq 0) 'Via Consolare connection to Route103 is incorrect.'
-Assert-True (@($map.warp_events).Count -eq 0) 'Via Consolare must not contain warps.'
+$leftMansioWarp = @($map.warp_events | Where-Object {
+    $_.x -eq 5 -and $_.y -eq 21 -and
+    $_.dest_map -eq 'MAP_VIA_CONSOLARE_MANSIO' -and
+    $_.dest_warp_id -eq '0'
+})
+$rightMansioWarp = @($map.warp_events | Where-Object {
+    $_.x -eq 12 -and $_.y -eq 21 -and
+    $_.dest_map -eq 'MAP_VIA_CONSOLARE_MANSIO' -and
+    $_.dest_warp_id -eq '1'
+})
+Assert-True (@($map.warp_events).Count -eq 2) 'Via Consolare must contain exactly two Mansio warps.'
+Assert-True ($leftMansioWarp.Count -eq 1) 'Via Consolare left Mansio warp is incorrect.'
+Assert-True ($rightMansioWarp.Count -eq 1) 'Via Consolare right Mansio warp is incorrect.'
 Assert-True (@($map.object_events).Count -eq 0 -and @($map.coord_events).Count -eq 0 -and @($map.bg_events).Count -eq 0) 'Via Consolare must not contain events in the structural blockout.'
 
 $reverse = @($route.connections | Where-Object { $_.direction -eq 'left' -and $_.map -eq 'MAP_VIA_CONSOLARE' })
