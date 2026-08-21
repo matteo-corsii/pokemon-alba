@@ -17,6 +17,11 @@
       "map": "MAP_OLDALE_TOWN",
       "offset": 0,
       "direction": "down"
+    },
+    {
+      "map": "MAP_VIA_CONSOLARE",
+      "offset": 0,
+      "direction": "left"
     }
   ],
   "object_events": [
