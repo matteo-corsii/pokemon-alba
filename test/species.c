@@ -1874,7 +1874,7 @@ TEST("Ausonia early magpie fauna teachables Egg Moves and placeholders are compl
     EXPECT(gSpeciesInfo[SPECIES_GAZZOMBRA].frontPic != gSpeciesInfo[SPECIES_CORVIKNIGHT].frontPic);
 }
 
-TEST("Molospsy canonical data and placeholder assets are valid")
+TEST("Molospsy canonical data and graphics are valid")
 {
     static const u8 expectedLevels[] = { 1, 1, 4, 7, 10, 13, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52 };
     static const u16 expectedMoves[] = {
@@ -1962,11 +1962,11 @@ TEST("Molospsy canonical data and placeholder assets are valid")
     EXPECT_EQ(info->height, 12);
     EXPECT_EQ(info->weight, 610);
     EXPECT_NE(StringCompare(info->description, gFallbackPokedexText), 0);
-    EXPECT_EQ(info->frontPic, placeholder->frontPic);
-    EXPECT_EQ(info->backPic, placeholder->backPic);
-    EXPECT_EQ(info->palette, placeholder->palette);
-    EXPECT_EQ(info->shinyPalette, placeholder->shinyPalette);
-    EXPECT_EQ(info->iconSprite, placeholder->iconSprite);
+    EXPECT_NE(info->frontPic, placeholder->frontPic);
+    EXPECT_NE(info->backPic, placeholder->backPic);
+    EXPECT_NE(info->palette, placeholder->palette);
+    EXPECT_NE(info->shinyPalette, placeholder->shinyPalette);
+    EXPECT_NE(info->iconSprite, placeholder->iconSprite);
     EXPECT_EQ(info->frontPicSize, placeholder->frontPicSize);
     EXPECT_EQ(info->backPicSize, placeholder->backPicSize);
     EXPECT_EQ(info->frontPicYOffset, placeholder->frontPicYOffset);
