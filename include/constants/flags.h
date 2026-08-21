@@ -71,6 +71,9 @@
 #define FLAG_HIDE_ROUTE103_LIA 0x8F2 // Technical visibility flag for Lia on Via dei Cisternoni
 #define FLAG_HIDE_ROUTE103_NICO 0x8F3 // Technical visibility flag for Nico on Via dei Cisternoni
 #define FLAG_CISTERNONI_NICO_POST_AUREA_TALKED 0x8F4 // Nico's short post-Cisternoni reminder state
+#define FLAG_ITEM_VIA_CONSOLARE_SUPER_POTION 0x8F5
+#define FLAG_ITEM_VIA_CONSOLARE_REPEL 0x8F6
+#define FLAG_HIDDEN_ITEM_VIA_CONSOLARE_STARDUST 0x8F7
 #define FLAG_HIDE_ALBERA_LAB_NICO 0x24 // Nico's dedicated Albèra lab object
 #define FLAG_HIDE_ALBERA_LAB_LIA 0x25 // Lia's dedicated Albèra lab object
 #define FLAG_HIDE_ROUTE101_RESEARCH_PARTY 0x26 // Via Verdi investigation party objects

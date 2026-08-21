@@ -25,7 +25,7 @@ Assert-True ($external.connections.Count -eq 1 -and $external.connections[0].dir
 Assert-True (@($external.warp_events).Count -eq 2) 'Via Consolare must have exactly two Mansio entrance warps.'
 Assert-True (@($external.warp_events | Where-Object { $_.x -eq 5 -and $_.y -eq 21 -and $_.dest_map -eq 'MAP_VIA_CONSOLARE_MANSIO' -and $_.dest_warp_id -eq '0' }).Count -eq 1) 'Left Mansio entrance warp is incorrect.'
 Assert-True (@($external.warp_events | Where-Object { $_.x -eq 12 -and $_.y -eq 21 -and $_.dest_map -eq 'MAP_VIA_CONSOLARE_MANSIO' -and $_.dest_warp_id -eq '1' }).Count -eq 1) 'Right Mansio entrance warp is incorrect.'
-Assert-True (@($external.object_events).Count -eq 0 -and @($external.coord_events).Count -eq 0 -and @($external.bg_events).Count -eq 0) 'Via Consolare received unexpected events.'
+Assert-True (@($external.coord_events).Count -eq 0) 'Via Consolare must not contain coordinate events.'
 
 Assert-True ($internal.id -eq 'MAP_VIA_CONSOLARE_MANSIO' -and $internal.layout -eq 'LAYOUT_VIA_CONSOLARE_MANSIO') 'Mansio identity changed.'
 Assert-True ($internal.map_type -eq 'MAP_TYPE_INDOOR' -and $internal.allow_cycling -eq $false -and $internal.allow_escaping -eq $false) 'Mansio indoor properties are incorrect.'

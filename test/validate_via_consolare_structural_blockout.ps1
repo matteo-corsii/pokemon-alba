@@ -18,6 +18,7 @@ $route = Read-Json 'data/maps/Route103/map.json'
 $groups = Read-Json 'data/maps/map_groups.json'
 $layouts = Read-Json 'data/layouts/layouts.json'
 $wild = Read-Json 'src/data/wild_encounters.json'
+$scripts = Get-Content (Join-Path $RepositoryRoot 'data/maps/ViaConsolare/scripts.inc') -Raw
 
 Assert-True ($map.id -eq 'MAP_VIA_CONSOLARE') 'Via Consolare map id is incorrect.'
 Assert-True ($map.layout -eq 'LAYOUT_VIA_CONSOLARE') 'Via Consolare layout id is incorrect.'
@@ -36,7 +37,49 @@ $rightMansioWarp = @($map.warp_events | Where-Object {
 Assert-True (@($map.warp_events).Count -eq 2) 'Via Consolare must contain exactly two Mansio warps.'
 Assert-True ($leftMansioWarp.Count -eq 1) 'Via Consolare left Mansio warp is incorrect.'
 Assert-True ($rightMansioWarp.Count -eq 1) 'Via Consolare right Mansio warp is incorrect.'
-Assert-True (@($map.object_events).Count -eq 0 -and @($map.coord_events).Count -eq 0 -and @($map.bg_events).Count -eq 0) 'Via Consolare must not contain events in the structural blockout.'
+Assert-True (@($map.object_events).Count -eq 7) 'Via Consolare must contain exactly seven object events.'
+Assert-True (@($map.coord_events).Count -eq 0) 'Via Consolare must not contain coordinate events.'
+Assert-True (@($map.bg_events).Count -eq 12) 'Via Consolare must contain exactly twelve background events.'
+$expectedObjects = @(
+    @{ x = 30; y = 5; movement = 'MOVEMENT_TYPE_FACE_DOWN'; trainer = 'TRAINER_TYPE_NONE'; script = 'ViaConsolare_EventScript_Custode' },
+    @{ x = 41; y = 15; movement = 'MOVEMENT_TYPE_FACE_LEFT'; trainer = 'TRAINER_TYPE_NONE'; script = 'ViaConsolare_EventScript_Olivicoltrice' },
+    @{ x = 26; y = 14; movement = 'MOVEMENT_TYPE_FACE_RIGHT'; trainer = 'TRAINER_TYPE_NONE'; script = 'ViaConsolare_EventScript_Caposquadra' },
+    @{ x = 9; y = 8; movement = 'MOVEMENT_TYPE_FACE_RIGHT'; trainer = 'TRAINER_TYPE_NORMAL'; script = 'ViaConsolare_EventScript_Livio' },
+    @{ x = 47; y = 20; movement = 'MOVEMENT_TYPE_FACE_RIGHT'; trainer = 'TRAINER_TYPE_NORMAL'; script = 'ViaConsolare_EventScript_Elio' }
+)
+foreach ($expected in $expectedObjects) {
+    $found = @($map.object_events | Where-Object {
+        $_.x -eq $expected.x -and $_.y -eq $expected.y -and
+        $_.movement_type -eq $expected.movement -and $_.trainer_type -eq $expected.trainer -and
+        $_.script -eq $expected.script
+    })
+    Assert-True ($found.Count -eq 1) ("Via Consolare object event is incorrect at $($expected.x),$($expected.y).")
+}
+$itemObjects = @($map.object_events | Where-Object { $_.graphics_id -eq 'OBJ_EVENT_GFX_ITEM_BALL' })
+Assert-True ($itemObjects.Count -eq 2) 'Via Consolare must contain exactly two visible item balls.'
+Assert-True (@($itemObjects | Where-Object { $_.x -eq 52 -and $_.y -eq 16 -and $_.trainer_sight_or_berry_tree_id -eq 'ITEM_SUPER_POTION' -and $_.flag -eq 'FLAG_ITEM_VIA_CONSOLARE_SUPER_POTION' }).Count -eq 1) 'Super Potion item is incorrect.'
+Assert-True (@($itemObjects | Where-Object { $_.x -eq 13 -and $_.y -eq 11 -and $_.trainer_sight_or_berry_tree_id -eq 'ITEM_REPEL' -and $_.flag -eq 'FLAG_ITEM_VIA_CONSOLARE_REPEL' }).Count -eq 1) 'Repel item is incorrect.'
+$hidden = @($map.bg_events | Where-Object { $_.type -eq 'hidden_item' })
+Assert-True ($hidden.Count -eq 1 -and $hidden[0].x -eq 56 -and $hidden[0].y -eq 27 -and $hidden[0].item -eq 'ITEM_STARDUST' -and $hidden[0].flag -eq 'FLAG_HIDDEN_ITEM_VIA_CONSOLARE_STARDUST') 'Hidden Stardust is incorrect.'
+$expectedBg = @(
+    @{ x = 32; y = 5; script = 'ViaConsolare_EventScript_CippoNord' },
+    @{ x = 1; y = 5; script = 'ViaConsolare_EventScript_CippoOccidentale' },
+    @{ x = 14; y = 22; script = 'ViaConsolare_EventScript_CartelloMansio' },
+    @{ x = 5; y = 25; script = 'ViaConsolare_EventScript_VascaMansio' },
+    @{ x = 6; y = 25; script = 'ViaConsolare_EventScript_VascaMansio' },
+    @{ x = 7; y = 25; script = 'ViaConsolare_EventScript_VascaMansio' },
+    @{ x = 8; y = 25; script = 'ViaConsolare_EventScript_VascaMansio' },
+    @{ x = 0; y = 6; script = 'ViaConsolare_EventScript_SbarramentoOccidentale' },
+    @{ x = 0; y = 7; script = 'ViaConsolare_EventScript_SbarramentoOccidentale' },
+    @{ x = 0; y = 8; script = 'ViaConsolare_EventScript_SbarramentoOccidentale' },
+    @{ x = 0; y = 9; script = 'ViaConsolare_EventScript_SbarramentoOccidentale' }
+)
+foreach ($expected in $expectedBg) {
+    Assert-True (@($map.bg_events | Where-Object { $_.type -eq 'sign' -and $_.x -eq $expected.x -and $_.y -eq $expected.y -and $_.script -eq $expected.script }).Count -eq 1) ("Via Consolare BG event is incorrect at $($expected.x),$($expected.y).")
+}
+Assert-True ($scripts.Contains('trainerbattle_single TRAINER_VIA_CONSOLARE_LIVIO') -and $scripts.Contains('trainerbattle_single TRAINER_VIA_CONSOLARE_ELIO')) 'Via Consolare trainer scripts are missing.'
+Assert-True ($scripts.Contains('ViaConsolare_Text_Custode') -and $scripts.Contains('ViaConsolare_Text_Olivicoltrice') -and $scripts.Contains('ViaConsolare_Text_Caposquadra')) 'Via Consolare ambient NPC scripts are missing.'
+Assert-True ($scripts.Contains('ViaConsolare_Text_VascaMansio') -and $scripts.Contains('ViaConsolare_Text_SbarramentoOccidentale')) 'Via Consolare interaction scripts are missing.'
 
 $reverse = @($route.connections | Where-Object { $_.direction -eq 'left' -and $_.map -eq 'MAP_VIA_CONSOLARE' })
 Assert-True ($reverse.Count -eq 1 -and [int]$reverse[0].offset -eq 0) 'Route103 reciprocal connection is missing or misaligned.'
@@ -55,6 +98,12 @@ Assert-True ($group.Count -eq 1) 'ViaConsolare is not registered exactly once in
 
 $mapPath = Join-Path $RepositoryRoot 'data/layouts/ViaConsolare/map.bin'
 Assert-True ((Get-Item $mapPath).Length -eq (60 * 30 * 2)) 'Via Consolare map.bin size does not match 60x30.'
+git -C $RepositoryRoot diff --quiet develop -- data/layouts/ViaConsolare/map.bin data/layouts/ViaConsolare/border.bin
+Assert-True ($LASTEXITCODE -eq 0) 'Via Consolare binary layout files changed.'
+git -C $RepositoryRoot diff --quiet develop -- data/layouts/Route103/map.bin data/layouts/Route103/border.bin data/maps/Route103/map.json
+Assert-True ($LASTEXITCODE -eq 0) 'Route103 was modified.'
+git -C $RepositoryRoot diff --quiet develop -- data/layouts/ViaConsolare_Mansio/map.bin data/layouts/ViaConsolare_Mansio/border.bin data/maps/ViaConsolare_Mansio/map.json
+Assert-True ($LASTEXITCODE -eq 0) 'Mansio content was modified.'
 
 $viaWild = @($wild.wild_encounter_groups.encounters | Where-Object { $_.map -eq 'MAP_VIA_CONSOLARE' })
 Assert-True ($viaWild.Count -eq 0) 'Via Consolare must not have an encounter table in this blockout.'
