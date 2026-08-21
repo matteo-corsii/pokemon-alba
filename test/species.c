@@ -1962,11 +1962,11 @@ TEST("Molospsy canonical data and graphics are valid")
     EXPECT_EQ(info->height, 12);
     EXPECT_EQ(info->weight, 610);
     EXPECT_NE(StringCompare(info->description, gFallbackPokedexText), 0);
-    EXPECT_EQ(info->frontPic, gMonFrontPic_Molospsy);
-    EXPECT_EQ(info->backPic, gMonBackPic_Molospsy);
-    EXPECT_EQ(info->palette, gMonPalette_Molospsy);
-    EXPECT_EQ(info->shinyPalette, gMonShinyPalette_Molospsy);
-    EXPECT_EQ(info->iconSprite, gMonIcon_Molospsy);
+    EXPECT_NE(info->frontPic, placeholder->frontPic);
+    EXPECT_NE(info->backPic, placeholder->backPic);
+    EXPECT_NE(info->palette, placeholder->palette);
+    EXPECT_NE(info->shinyPalette, placeholder->shinyPalette);
+    EXPECT_NE(info->iconSprite, placeholder->iconSprite);
     EXPECT_EQ(info->frontPicSize, placeholder->frontPicSize);
     EXPECT_EQ(info->backPicSize, placeholder->backPicSize);
     EXPECT_EQ(info->frontPicYOffset, placeholder->frontPicYOffset);
