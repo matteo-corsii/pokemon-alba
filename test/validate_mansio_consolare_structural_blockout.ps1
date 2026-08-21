@@ -31,8 +31,8 @@ Assert-True ($internal.map_type -eq 'MAP_TYPE_INDOOR' -and $internal.allow_cycli
 Assert-True ($null -eq $internal.connections) 'Mansio must not have connections.'
 Assert-True (@($internal.object_events).Count -eq 0 -and @($internal.coord_events).Count -eq 0 -and @($internal.bg_events).Count -eq 0) 'Mansio must be an empty structural blockout.'
 Assert-True (@($internal.warp_events).Count -eq 2) 'Mansio must have exactly two exit warps.'
-Assert-True (@($internal.warp_events | Where-Object { $_.x -eq 7 -and $_.y -eq 14 -and $_.dest_map -eq 'MAP_VIA_CONSOLARE' -and $_.dest_warp_id -eq '0' }).Count -eq 1) 'Mansio left exit warp is incorrect.'
-Assert-True (@($internal.warp_events | Where-Object { $_.x -eq 16 -and $_.y -eq 14 -and $_.dest_map -eq 'MAP_VIA_CONSOLARE' -and $_.dest_warp_id -eq '1' }).Count -eq 1) 'Mansio right exit warp is incorrect.'
+Assert-True (@($internal.warp_events | Where-Object { $_.x -eq 5 -and $_.y -eq 15 -and $_.dest_map -eq 'MAP_VIA_CONSOLARE' -and $_.dest_warp_id -eq '0' }).Count -eq 1) 'Mansio left exit warp is incorrect.'
+Assert-True (@($internal.warp_events | Where-Object { $_.x -eq 17 -and $_.y -eq 15 -and $_.dest_map -eq 'MAP_VIA_CONSOLARE' -and $_.dest_warp_id -eq '1' }).Count -eq 1) 'Mansio right exit warp is incorrect.'
 
 Assert-True ($externalLayout.Count -eq 1 -and $externalLayout[0].width -eq 60 -and $externalLayout[0].height -eq 30) 'External Via Consolare dimensions changed.'
 Assert-True ($internalLayout.Count -eq 1 -and $internalLayout[0].width -eq 24 -and $internalLayout[0].height -eq 16) 'Mansio dimensions must be 24x16.'
