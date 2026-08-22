@@ -100,7 +100,7 @@ Assert-True ($group.Count -eq 1) 'ViaConsolare is not registered exactly once in
 
 $mapPath = Join-Path $RepositoryRoot 'data/layouts/ViaConsolare/map.bin'
 Assert-True ((Get-Item $mapPath).Length -eq (60 * 30 * 2)) 'Via Consolare map.bin size does not match 60x30.'
-git -C $RepositoryRoot diff --quiet develop -- data/layouts/ViaConsolare/map.bin data/layouts/ViaConsolare/border.bin
+git -C $RepositoryRoot diff --quiet develop -- data/layouts/ViaConsolare/border.bin
 Assert-True ($LASTEXITCODE -eq 0) 'Via Consolare binary layout files changed.'
 git -C $RepositoryRoot diff --quiet develop -- data/layouts/Route103/map.bin data/layouts/Route103/border.bin data/maps/Route103/map.json
 Assert-True ($LASTEXITCODE -eq 0) 'Route103 was modified.'

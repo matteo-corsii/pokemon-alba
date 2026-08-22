@@ -374,18 +374,66 @@
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
-              { "min_level": 12, "max_level": 13, "species": "SPECIES_GHEPIO" },
-              { "min_level": 13, "max_level": 14, "species": "SPECIES_BORGOTTO" },
-              { "min_level": 13, "max_level": 14, "species": "SPECIES_GHEPIO" },
-              { "min_level": 14, "max_level": 15, "species": "SPECIES_BORGOTTO" },
-              { "min_level": 13, "max_level": 14, "species": "SPECIES_CRISALVIA" },
-              { "min_level": 14, "max_level": 15, "species": "SPECIES_CRISALVIA" },
-              { "min_level": 14, "max_level": 15, "species": "SPECIES_LUSCINCO" },
-              { "min_level": 15, "max_level": 16, "species": "SPECIES_LUSCINCO" },
-              { "min_level": 14, "max_level": 16, "species": "SPECIES_LUSCINCO" },
-              { "min_level": 14, "max_level": 16, "species": "SPECIES_PALUDIX" },
-              { "min_level": 16, "max_level": 16, "species": "SPECIES_LUSCINCO" },
-              { "min_level": 15, "max_level": 16, "species": "SPECIES_PALUDIX" }
+              {
+                "min_level": 12,
+                "max_level": 13,
+                "species": "SPECIES_GHEPIO"
+              },
+              {
+                "min_level": 13,
+                "max_level": 14,
+                "species": "SPECIES_BORGOTTO"
+              },
+              {
+                "min_level": 13,
+                "max_level": 14,
+                "species": "SPECIES_GHEPIO"
+              },
+              {
+                "min_level": 14,
+                "max_level": 15,
+                "species": "SPECIES_BORGOTTO"
+              },
+              {
+                "min_level": 13,
+                "max_level": 14,
+                "species": "SPECIES_CRISALVIA"
+              },
+              {
+                "min_level": 14,
+                "max_level": 15,
+                "species": "SPECIES_CRISALVIA"
+              },
+              {
+                "min_level": 14,
+                "max_level": 15,
+                "species": "SPECIES_LUSCINCO"
+              },
+              {
+                "min_level": 15,
+                "max_level": 16,
+                "species": "SPECIES_LUSCINCO"
+              },
+              {
+                "min_level": 14,
+                "max_level": 16,
+                "species": "SPECIES_LUSCINCO"
+              },
+              {
+                "min_level": 14,
+                "max_level": 16,
+                "species": "SPECIES_PALUDIX"
+              },
+              {
+                "min_level": 16,
+                "max_level": 16,
+                "species": "SPECIES_LUSCINCO"
+              },
+              {
+                "min_level": 15,
+                "max_level": 16,
+                "species": "SPECIES_PALUDIX"
+              }
             ]
           }
         },
@@ -395,18 +443,66 @@
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
-              { "min_level": 12, "max_level": 13, "species": "SPECIES_GHEPIO" },
-              { "min_level": 13, "max_level": 14, "species": "SPECIES_BORGOTTO" },
-              { "min_level": 13, "max_level": 14, "species": "SPECIES_GHEPIO" },
-              { "min_level": 14, "max_level": 15, "species": "SPECIES_BORGOTTO" },
-              { "min_level": 13, "max_level": 14, "species": "SPECIES_CRISALVIA" },
-              { "min_level": 14, "max_level": 15, "species": "SPECIES_CRISALVIA" },
-              { "min_level": 14, "max_level": 15, "species": "SPECIES_LUSCINCO" },
-              { "min_level": 15, "max_level": 16, "species": "SPECIES_LUSCINCO" },
-              { "min_level": 14, "max_level": 16, "species": "SPECIES_LUSCINCO" },
-              { "min_level": 14, "max_level": 16, "species": "SPECIES_PALUDIX" },
-              { "min_level": 16, "max_level": 16, "species": "SPECIES_LUSCINCO" },
-              { "min_level": 15, "max_level": 16, "species": "SPECIES_PALUDIX" }
+              {
+                "min_level": 12,
+                "max_level": 13,
+                "species": "SPECIES_GHEPIO"
+              },
+              {
+                "min_level": 13,
+                "max_level": 14,
+                "species": "SPECIES_BORGOTTO"
+              },
+              {
+                "min_level": 13,
+                "max_level": 14,
+                "species": "SPECIES_GHEPIO"
+              },
+              {
+                "min_level": 14,
+                "max_level": 15,
+                "species": "SPECIES_BORGOTTO"
+              },
+              {
+                "min_level": 13,
+                "max_level": 14,
+                "species": "SPECIES_CRISALVIA"
+              },
+              {
+                "min_level": 14,
+                "max_level": 15,
+                "species": "SPECIES_CRISALVIA"
+              },
+              {
+                "min_level": 14,
+                "max_level": 15,
+                "species": "SPECIES_LUSCINCO"
+              },
+              {
+                "min_level": 15,
+                "max_level": 16,
+                "species": "SPECIES_LUSCINCO"
+              },
+              {
+                "min_level": 14,
+                "max_level": 16,
+                "species": "SPECIES_LUSCINCO"
+              },
+              {
+                "min_level": 14,
+                "max_level": 16,
+                "species": "SPECIES_PALUDIX"
+              },
+              {
+                "min_level": 16,
+                "max_level": 16,
+                "species": "SPECIES_LUSCINCO"
+              },
+              {
+                "min_level": 15,
+                "max_level": 16,
+                "species": "SPECIES_PALUDIX"
+              }
             ]
           }
         },
@@ -416,18 +512,66 @@
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
-              { "min_level": 13, "max_level": 14, "species": "SPECIES_BORGOTTO" },
-              { "min_level": 13, "max_level": 14, "species": "SPECIES_GAZZUOLA" },
-              { "min_level": 14, "max_level": 15, "species": "SPECIES_BORGOTTO" },
-              { "min_level": 14, "max_level": 15, "species": "SPECIES_GAZZUOLA" },
-              { "min_level": 14, "max_level": 15, "species": "SPECIES_CRISALVIA" },
-              { "min_level": 15, "max_level": 16, "species": "SPECIES_CRISALVIA" },
-              { "min_level": 14, "max_level": 15, "species": "SPECIES_LUMELLA" },
-              { "min_level": 15, "max_level": 16, "species": "SPECIES_LUMELLA" },
-              { "min_level": 14, "max_level": 16, "species": "SPECIES_LUMELLA" },
-              { "min_level": 14, "max_level": 16, "species": "SPECIES_PALUDIX" },
-              { "min_level": 16, "max_level": 16, "species": "SPECIES_LUMELLA" },
-              { "min_level": 15, "max_level": 16, "species": "SPECIES_PALUDIX" }
+              {
+                "min_level": 13,
+                "max_level": 14,
+                "species": "SPECIES_BORGOTTO"
+              },
+              {
+                "min_level": 13,
+                "max_level": 14,
+                "species": "SPECIES_GAZZUOLA"
+              },
+              {
+                "min_level": 14,
+                "max_level": 15,
+                "species": "SPECIES_BORGOTTO"
+              },
+              {
+                "min_level": 14,
+                "max_level": 15,
+                "species": "SPECIES_GAZZUOLA"
+              },
+              {
+                "min_level": 14,
+                "max_level": 15,
+                "species": "SPECIES_CRISALVIA"
+              },
+              {
+                "min_level": 15,
+                "max_level": 16,
+                "species": "SPECIES_CRISALVIA"
+              },
+              {
+                "min_level": 14,
+                "max_level": 15,
+                "species": "SPECIES_LUMELLA"
+              },
+              {
+                "min_level": 15,
+                "max_level": 16,
+                "species": "SPECIES_LUMELLA"
+              },
+              {
+                "min_level": 14,
+                "max_level": 16,
+                "species": "SPECIES_LUMELLA"
+              },
+              {
+                "min_level": 14,
+                "max_level": 16,
+                "species": "SPECIES_PALUDIX"
+              },
+              {
+                "min_level": 16,
+                "max_level": 16,
+                "species": "SPECIES_LUMELLA"
+              },
+              {
+                "min_level": 15,
+                "max_level": 16,
+                "species": "SPECIES_PALUDIX"
+              }
             ]
           }
         },
@@ -437,18 +581,66 @@
           "land_mons": {
             "encounter_rate": 20,
             "mons": [
-              { "min_level": 14, "max_level": 15, "species": "SPECIES_GAZZUOLA" },
-              { "min_level": 14, "max_level": 16, "species": "SPECIES_LUMELLA" },
-              { "min_level": 15, "max_level": 16, "species": "SPECIES_GAZZUOLA" },
-              { "min_level": 13, "max_level": 14, "species": "SPECIES_BORGOTTO" },
-              { "min_level": 14, "max_level": 15, "species": "SPECIES_BORGOTTO" },
-              { "min_level": 14, "max_level": 15, "species": "SPECIES_LUSCINCO" },
-              { "min_level": 15, "max_level": 16, "species": "SPECIES_LUSCINCO" },
-              { "min_level": 14, "max_level": 16, "species": "SPECIES_PALUDIX" },
-              { "min_level": 14, "max_level": 16, "species": "SPECIES_LUSCINCO" },
-              { "min_level": 15, "max_level": 16, "species": "SPECIES_LENGHELIS" },
-              { "min_level": 16, "max_level": 16, "species": "SPECIES_LUSCINCO" },
-              { "min_level": 16, "max_level": 16, "species": "SPECIES_LENGHELIS" }
+              {
+                "min_level": 14,
+                "max_level": 15,
+                "species": "SPECIES_GAZZUOLA"
+              },
+              {
+                "min_level": 14,
+                "max_level": 16,
+                "species": "SPECIES_LUMELLA"
+              },
+              {
+                "min_level": 15,
+                "max_level": 16,
+                "species": "SPECIES_GAZZUOLA"
+              },
+              {
+                "min_level": 13,
+                "max_level": 14,
+                "species": "SPECIES_BORGOTTO"
+              },
+              {
+                "min_level": 14,
+                "max_level": 15,
+                "species": "SPECIES_BORGOTTO"
+              },
+              {
+                "min_level": 14,
+                "max_level": 15,
+                "species": "SPECIES_LUSCINCO"
+              },
+              {
+                "min_level": 15,
+                "max_level": 16,
+                "species": "SPECIES_LUSCINCO"
+              },
+              {
+                "min_level": 14,
+                "max_level": 16,
+                "species": "SPECIES_PALUDIX"
+              },
+              {
+                "min_level": 14,
+                "max_level": 16,
+                "species": "SPECIES_LUSCINCO"
+              },
+              {
+                "min_level": 15,
+                "max_level": 16,
+                "species": "SPECIES_LENGHELIS"
+              },
+              {
+                "min_level": 16,
+                "max_level": 16,
+                "species": "SPECIES_LUSCINCO"
+              },
+              {
+                "min_level": 16,
+                "max_level": 16,
+                "species": "SPECIES_LENGHELIS"
+              }
             ]
           }
         },

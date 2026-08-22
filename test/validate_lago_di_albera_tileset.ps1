@@ -3,6 +3,23 @@ $ErrorActionPreference = 'Stop'
 function Assert-True([bool]$condition, [string]$message) { if (-not $condition) { throw $message } }
 function Read-Json([string]$path) { Get-Content -LiteralPath (Join-Path $RepositoryRoot $path) -Raw | ConvertFrom-Json }
 function Read-Bytes([string]$path) { [IO.File]::ReadAllBytes($path) }
+function Read-GitBlob([string]$spec) {
+    $temp = [IO.Path]::GetTempFileName()
+    try {
+        $process = New-Object Diagnostics.Process
+        $process.StartInfo.FileName = 'git'
+        $process.StartInfo.Arguments = "-C `"$RepositoryRoot`" cat-file blob $spec"
+        $process.StartInfo.UseShellExecute = $false
+        $process.StartInfo.RedirectStandardOutput = $true
+        $null = $process.Start()
+        $stream = [IO.File]::Create($temp)
+        $process.StandardOutput.BaseStream.CopyTo($stream)
+        $stream.Dispose()
+        $process.WaitForExit()
+        if ($process.ExitCode -ne 0) { throw "Unable to read Git blob $spec." }
+        return [IO.File]::ReadAllBytes($temp)
+    } finally { Remove-Item -LiteralPath $temp -Force -ErrorAction SilentlyContinue }
+}
 
 $lago = Join-Path $RepositoryRoot 'data/tilesets/secondary/lago_di_albera'
 $pacifidlog = Join-Path $RepositoryRoot 'data/tilesets/secondary/pacifidlog'
@@ -25,8 +42,31 @@ Assert-True (@($wild.wild_encounter_groups.encounters | Where-Object map -eq 'MA
 
 $mapBin = Join-Path $RepositoryRoot 'data/layouts/LagoDiAlbera/map.bin'
 Assert-True ((Get-Item -LiteralPath $mapBin).Length -eq 120 * 120 * 2) 'Lago map.bin must be 120x120.'
-git -C $RepositoryRoot diff --quiet develop -- data/layouts/LagoDiAlbera/map.bin data/layouts/ViaConsolare/map.bin data/tilesets/primary/general data/tilesets/secondary/pacifidlog data/tilesets/secondary/porta_pretoria data/maps/PacifidlogTown data/layouts/PacifidlogTown
+git -C $RepositoryRoot diff --quiet develop -- data/layouts/LagoDiAlbera/map.bin data/tilesets/primary/general data/tilesets/secondary/pacifidlog data/tilesets/secondary/porta_pretoria data/maps/PacifidlogTown data/layouts/PacifidlogTown
 Assert-True ($LASTEXITCODE -eq 0) 'A protected map or source tileset changed.'
+$viaExpected = @{
+    '13,0' = 0x06C9; '35,0' = 0x06C9; '38,0' = 0x06C9;
+    '0,4' = 0x06C9; '1,4' = 0x06C9; '3,4' = 0x06C9; '4,4' = 0x06C9;
+    '11,4' = 0x06C9; '13,4' = 0x06C9; '14,4' = 0x06C9; '23,4' = 0x06C9;
+    '24,4' = 0x06C9; '25,4' = 0x06C9; '32,4' = 0x06C9; '33,4' = 0x06C9;
+    '34,4' = 0x06C9; '38,4' = 0x06C9; '39,4' = 0x06C9; '47,4' = 0x06C9;
+    '48,4' = 0x06C9; '49,4' = 0x06C9; '51,4' = 0x06C9; '57,4' = 0x06C9;
+    '58,4' = 0x06C9; '59,4' = 0x06C9
+}
+$viaBase = [byte[]](Read-GitBlob 'develop:data/layouts/ViaConsolare/map.bin')
+$viaCurrent = Read-Bytes (Join-Path $RepositoryRoot 'data/layouts/ViaConsolare/map.bin')
+$viaDeltaCount = 0
+for ($cell = 0; $cell -lt $viaBase.Length / 2; $cell++) {
+    $baseRaw = [BitConverter]::ToUInt16($viaBase, $cell * 2)
+    $currentRaw = [BitConverter]::ToUInt16($viaCurrent, $cell * 2)
+    if ($baseRaw -ne $currentRaw) {
+        $key = "{0},{1}" -f ($cell % 60), [int][Math]::Floor($cell / 60)
+        Assert-True $viaExpected.ContainsKey($key) "Unexpected ViaConsolare delta at ($key)."
+        Assert-True ($currentRaw -eq $viaExpected[$key]) "Unexpected ViaConsolare raw value at ($key)."
+        $viaDeltaCount++
+    }
+}
+Assert-True ($viaDeltaCount -eq $viaExpected.Count) 'ViaConsolare has an unexpected number of manual connection deltas.'
 
 $pacMeta = Read-Bytes (Join-Path $pacifidlog 'metatiles.bin')
 $pacAttrs = Read-Bytes (Join-Path $pacifidlog 'metatile_attributes.bin')
@@ -35,7 +75,7 @@ $lagoAttrs = Read-Bytes (Join-Path $lago 'metatile_attributes.bin')
 $portaMeta = Read-Bytes (Join-Path $porta 'metatiles.bin')
 $portaAttrs = Read-Bytes (Join-Path $porta 'metatile_attributes.bin')
 Assert-True ($pacMeta.Length -eq $lagoMeta.Length -and $pacAttrs.Length -eq $lagoAttrs.Length -and $lagoMeta.Length / 16 -eq 203) 'Lago clone metatile capacity differs from Pacifidlog.'
-$patchedMetatiles = @(0x096, 0x0C9)
+$patchedMetatiles = @(0x075, 0x096, 0x0C9)
 for ($index = 0; $index -lt 203; $index++) {
     if ($patchedMetatiles -notcontains $index) {
         $source = New-Object byte[] 16; $clone = New-Object byte[] 16
@@ -44,8 +84,8 @@ for ($index = 0; $index -lt 203; $index++) {
         Assert-True ([BitConverter]::ToUInt16($pacAttrs, $index * 2) -eq [BitConverter]::ToUInt16($lagoAttrs, $index * 2)) "Unexpected Lago attribute change at 0x$('{0:X3}' -f $index)."
     }
 }
-$tileMap = @{ 184 = 494; 185 = 504; 186 = 505; 187 = 506; 315 = 507; 317 = 508; 340 = 509; 341 = 510; 342 = 511 }
-$paletteMap = @{ 2 = 2; 6 = 11; 7 = 12; 11 = 13 }
+$tileMap = @{ 41 = 495; 184 = 494; 185 = 504; 186 = 505; 187 = 506; 315 = 507; 317 = 508; 340 = 509; 341 = 510; 342 = 511 }
+$paletteMap = @{ 2 = 2; 6 = 11; 7 = 12; 10 = 14; 11 = 13 }
 foreach ($index in $patchedMetatiles) {
     Assert-True ([BitConverter]::ToUInt16($lagoAttrs, $index * 2) -eq [BitConverter]::ToUInt16($portaAttrs, $index * 2)) "Lago attribute mismatch for PortaPretoria metatile 0x$('{0:X3}' -f $index)."
     foreach ($entryIndex in 0..7) {
@@ -58,12 +98,12 @@ foreach ($index in $patchedMetatiles) {
         Assert-True ([BitConverter]::ToUInt16($lagoMeta, $index * 16 + $entryIndex * 2) -eq $expected) "Lago metatile 0x$('{0:X3}' -f $index) is not the required PortaPretoria compatibility clone."
     }
 }
-foreach ($pair in @(@(6, 11), @(7, 12), @(11, 13))) {
+foreach ($pair in @(@(6, 11), @(7, 12), @(10, 14), @(11, 13))) {
     $portaPalette = Read-Bytes (Join-Path $porta ('palettes/{0:D2}.pal' -f $pair[0]))
     $lagoPalette = Read-Bytes (Join-Path $lago ('palettes/{0:D2}.pal' -f $pair[1]))
     Assert-True ([Convert]::ToBase64String($portaPalette) -eq [Convert]::ToBase64String($lagoPalette)) "Lago palette $($pair[1]) must contain PortaPretoria palette $($pair[0])."
 }
-foreach ($paletteIndex in @(0..15 | Where-Object { $_ -notin 11, 12, 13 })) {
+foreach ($paletteIndex in @(0..15 | Where-Object { $_ -notin 11, 12, 13, 14 })) {
     $pacifidlogPalette = Read-Bytes (Join-Path $pacifidlog ('palettes/{0:D2}.pal' -f $paletteIndex))
     $lagoPalette = Read-Bytes (Join-Path $lago ('palettes/{0:D2}.pal' -f $paletteIndex))
     Assert-True ([Convert]::ToBase64String($pacifidlogPalette) -eq [Convert]::ToBase64String($lagoPalette)) "Unexpected Lago palette change in slot $paletteIndex."

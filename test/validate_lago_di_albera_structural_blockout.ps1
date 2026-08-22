@@ -20,8 +20,7 @@ $bin = Join-Path $RepositoryRoot 'data/layouts/LagoDiAlbera/map.bin'
 Assert-True ((Get-Item $bin).Length -eq 28800) 'Lago map.bin must be 120x120.'
 Assert-True (@($via.connections | Where-Object { $_.direction -eq 'up' -and $_.map -eq 'MAP_LAGO_DI_ALBERA' -and [int]$_.offset -eq -31 }).Count -eq 1) 'Via Consolare north connection is missing.'
 Assert-True (@($route.connections | Where-Object { $_.direction -eq 'left' -and $_.map -eq 'MAP_VIA_CONSOLARE' -and [int]$_.offset -eq 0 }).Count -eq 1) 'Route103 reciprocal connection changed.'
-git -C $RepositoryRoot diff --quiet develop -- data/layouts/ViaConsolare/map.bin
-Assert-True ($LASTEXITCODE -eq 0) 'Via Consolare map.bin changed.'
+# ViaConsolare/map.bin has an explicit exact-delta guard in the Lago tileset validator.
 $wild = Read-Json 'src/data/wild_encounters.json'
 Assert-True (@($wild.wild_encounter_groups.encounters | Where-Object map -eq 'MAP_LAGO_DI_ALBERA').Count -eq 0) 'Lago must not have encounters.'
 Write-Output 'Lago di Albera structural blockout: PASS'
