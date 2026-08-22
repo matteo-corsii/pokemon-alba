@@ -83,6 +83,22 @@ static const u16 sLuscincoEggMoveLearnset[] = {
 
 #define sLuscerpEggMoveLearnset sLuscincoEggMoveLearnset
 
+static const u16 sLumellaEggMoveLearnset[] = {
+    MOVE_LEECH_SEED, MOVE_STRENGTH_SAP, MOVE_INGRAIN,
+    MOVE_WORRY_SEED, MOVE_GRASSY_TERRAIN, MOVE_ELECTRIC_TERRAIN,
+    MOVE_UNAVAILABLE,
+};
+
+#define sOmphaluxEggMoveLearnset sLumellaEggMoveLearnset
+
+static const u16 sPaludixEggMoveLearnset[] = {
+    MOVE_AQUA_RING, MOVE_HAZE, MOVE_MUD_SHOT,
+    MOVE_LUNGE, MOVE_FELL_STINGER, MOVE_TOXIC_SPIKES,
+    MOVE_UNAVAILABLE,
+};
+
+#define sSanguilexEggMoveLearnset sPaludixEggMoveLearnset
+
 #if P_FAMILY_BULBASAUR
 static const u16 sBulbasaurEggMoveLearnset[] = {
     MOVE_SKULL_BASH,
