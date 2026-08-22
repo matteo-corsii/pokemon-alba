@@ -18,6 +18,6 @@ $checks=@{
 foreach($n in $checks.Keys){$r=Section $info "[SPECIES_$n] =";foreach($x in $checks[$n]){Assert-True $r.Contains($x) "$n missing $x"}}
 Assert-True $egg.Contains('sLumellaEggMoveLearnset') 'Lumella Egg Moves missing';Assert-True $egg.Contains('#define sOmphaluxEggMoveLearnset sLumellaEggMoveLearnset') 'Omphalux Egg Moves missing'
 foreach($n in 'LUMELLA','OMPHALUX'){Assert-True ($null -ne $learn.$n) "$n teachables missing";Assert-True (@($learn.$n).Count -eq 24) "$n teachable count mismatch"}
-Assert-True (-not ($wild -match 'LUMELLA|OMPHALUX')) 'Lumella/Omphalux must not be in encounters'
+Assert-True (-not ($wild -match 'SPECIES_OMPHALUX')) 'Omphalux must not be in encounters'
 foreach($n in 'lumella','omphalux'){$p="graphics/pokemon/$n";Assert-True ((Get-ChildItem $p -File).Count -eq 5) "$n must have exactly five assets";Assert-True (-not (Get-ChildItem $p -File|Where-Object {$_.Name -match 'zip|preview|concept'})) "$n contains forbidden asset"}
 Write-Host 'Lumella/Omphalux validation passed.' -ForegroundColor Green

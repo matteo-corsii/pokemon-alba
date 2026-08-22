@@ -397,6 +397,14 @@ Tutti i livelli e le frequenze sono **BALANCE PROVISIONAL**.
 
 ### Allenatori candidati
 
+### Implementazione definitiva degli incontri temporali
+
+Il supporto `OW_TIME_OF_DAY_ENCOUNTERS` è attivo. Via Consolare usa quattro
+tabelle terrestri con encounter rate 20 e dodici slot standard: Mattino e
+Giorno sono identici; Crepuscolo sostituisce Luscinco con Lumella; Notte usa
+Lenghelis esclusivamente al 5% (livelli 15-16). Paludix resta al 5% in ogni
+fascia. Non sono definiti incontri d'acqua, pesca, Rock Smash o per la Mansio.
+
 - Camminatore: Ghepio L10 e Crisalvia L10.
 - Ragazza di campagna: Borgotto L11 e Paludix L10.
 - Artista itinerante: Gazzuola L11 e Lumella L11.

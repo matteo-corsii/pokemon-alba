@@ -106,6 +106,6 @@ git -C $RepositoryRoot diff --quiet develop -- data/layouts/ViaConsolare_Mansio/
 Assert-True ($LASTEXITCODE -eq 0) 'Mansio content was modified.'
 
 $viaWild = @($wild.wild_encounter_groups.encounters | Where-Object { $_.map -eq 'MAP_VIA_CONSOLARE' })
-Assert-True ($viaWild.Count -eq 0) 'Via Consolare must not have an encounter table in this blockout.'
+Assert-True ($viaWild.Count -eq 4) 'Via Consolare must have four time-based encounter tables.'
 
 Write-Output 'Via Consolare structural blockout: PASS'
