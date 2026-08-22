@@ -512,8 +512,8 @@ comune: Borgotto 010, Pastufo 011, Miciolo 012 e Felivates 013.
 - **Core concept:** linea terrestre e prevalentemente diurna ispirata a
   luscengola e scinco.
 - **Real-world inspiration:** luscengole, scinchi, rive erbose e muretti.
-- **Evolution structure:** linea canonica a due stadi; evoluzione di lavoro al
-  livello 24, BALANCE PROVISIONAL; il tipo Drago compare solo in Luscerp.
+- **Evolution structure:** linea canonica a due stadi; evoluzione al livello 24;
+  il tipo Drago compare solo in Luscerp.
 - **Primary habitat candidate:** rive erbose e muretti del Lago di Albèra;
   PLACEMENT CANDIDATE.
 - **Secondary habitat candidates:** Luscinco raro su Via Verdi e più comune su
@@ -524,7 +524,8 @@ comune: Borgotto 010, Pastufo 011, Miciolo 012 e Felivates 013.
 - **Narrative importance:** nessun legame narrativo causale con l'anomalia.
 - **Name review:** linea e nomi approvati.
 - **Type review:** tipi approvati per entrambi gli stadi.
-- **Placement review:** frequenze e orari esatti restano TBD.
+- **Placement review:** la linea resta esclusa dalle encounter table di questo
+  batch; frequenze e orari futuri restano TBD.
 - **Open questions:** statistiche, learnset, abilità definitiva e
   distribuzione esatta.
 

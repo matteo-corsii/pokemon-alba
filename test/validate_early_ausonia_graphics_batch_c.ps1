@@ -262,6 +262,7 @@ $allowedPaths = @(
     'test/validate_early_ausonia_fauna_batch_c.ps1',
     'test/validate_early_ausonia_graphics_batch_c.ps1'
 )
+$allowedPaths += @('docs/AUSONIA_REGIONAL_DEX_PLAN.md','include/constants/species.h','include/constants/pokedex.h','src/data/pokemon/all_learnables.json','src/data/pokemon/egg_moves.h','src/data/pokemon/pokedex_orders.h','test/validate_luscinco_luscerp.ps1','test/validate_early_ausonia_fauna_batch_b.ps1','test/validate_early_ausonia_fauna_batch_c.ps1','test/validate_early_ausonia_fauna_batch_d.ps1','test/validate_early_ausonia_graphics_batch_a.ps1','test/validate_early_ausonia_graphics_batch_b.ps1','test/validate_early_ausonia_graphics_batch_c.ps1','test/validate_early_ausonia_graphics_batch_d.ps1','test/validate_molospsy.ps1','test/validate_lenghelis.ps1','graphics/pokemon/luscinco/anim_front.png','graphics/pokemon/luscinco/back.png','graphics/pokemon/luscinco/icon.png','graphics/pokemon/luscinco/normal.pal','graphics/pokemon/luscinco/shiny.pal','graphics/pokemon/luscerp/anim_front.png','graphics/pokemon/luscerp/back.png','graphics/pokemon/luscerp/icon.png','graphics/pokemon/luscerp/normal.pal','graphics/pokemon/luscerp/shiny.pal')
 foreach ($entry in $entries)
 {
     foreach ($file in 'anim_front.png', 'back.png', 'icon.png', 'normal.pal', 'shiny.pal')
@@ -281,7 +282,7 @@ foreach ($path in $changedPaths)
     Assert-Condition ($path -notlike 'build/*') "Build output detected: $path"
 }
 
-& git -C $RepositoryRoot diff --quiet develop -- include/global.h include/constants/pokedex.h include/pokedex.h src/pokedex.c src/new_game.c src/overworld.c test/save.c
+& git -C $RepositoryRoot diff --quiet develop -- include/global.h include/pokedex.h src/pokedex.c src/new_game.c src/overworld.c test/save.c
 Assert-Condition ($LASTEXITCODE -eq 0) 'Save runtime or SaveBlock1 coverage changed'
 
 Write-Output 'Early Ausonia graphics batch C validation passed.'

@@ -531,6 +531,43 @@ static const struct LevelUpMove sLenghelisLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+static const struct LevelUpMove sLuscincoLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_TACKLE),
+    LEVEL_UP_MOVE( 1, MOVE_TAIL_WHIP),
+    LEVEL_UP_MOVE( 4, MOVE_ABSORB),
+    LEVEL_UP_MOVE( 7, MOVE_QUICK_ATTACK),
+    LEVEL_UP_MOVE(10, MOVE_GROWTH),
+    LEVEL_UP_MOVE(13, MOVE_BITE),
+    LEVEL_UP_MOVE(16, MOVE_MEGA_DRAIN),
+    LEVEL_UP_MOVE(20, MOVE_GLARE),
+    LEVEL_UP_MOVE(28, MOVE_LEAF_BLADE),
+    LEVEL_UP_MOVE(32, MOVE_SLAM),
+    LEVEL_UP_MOVE(36, MOVE_GIGA_DRAIN),
+    LEVEL_UP_MOVE(40, MOVE_SYNTHESIS),
+    LEVEL_UP_MOVE(44, MOVE_CRUNCH),
+    LEVEL_UP_END
+};
+
+static const struct LevelUpMove sLuscerpLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_TACKLE),
+    LEVEL_UP_MOVE( 1, MOVE_TAIL_WHIP),
+    LEVEL_UP_MOVE( 4, MOVE_ABSORB),
+    LEVEL_UP_MOVE( 7, MOVE_QUICK_ATTACK),
+    LEVEL_UP_MOVE(10, MOVE_GROWTH),
+    LEVEL_UP_MOVE(13, MOVE_BITE),
+    LEVEL_UP_MOVE(16, MOVE_MEGA_DRAIN),
+    LEVEL_UP_MOVE(20, MOVE_GLARE),
+    LEVEL_UP_MOVE(24, MOVE_DRAGON_TAIL),
+    LEVEL_UP_MOVE(28, MOVE_LEAF_BLADE),
+    LEVEL_UP_MOVE(32, MOVE_COIL),
+    LEVEL_UP_MOVE(36, MOVE_CRUNCH),
+    LEVEL_UP_MOVE(40, MOVE_SYNTHESIS),
+    LEVEL_UP_MOVE(44, MOVE_DRAGON_CLAW),
+    LEVEL_UP_MOVE(48, MOVE_GIGA_DRAIN),
+    LEVEL_UP_MOVE(52, MOVE_OUTRAGE),
+    LEVEL_UP_END
+};
+
 const struct SpeciesInfo gSpeciesInfo[] =
 {
     [SPECIES_NONE] =
@@ -2190,6 +2227,73 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .teachingType = EXPLICIT_TEACHABLES,
         .teachableLearnset = sLenghelisTeachableLearnset,
         .eggMoveLearnset = sLenghelisEggMoveLearnset,
+    },
+
+    [SPECIES_LUSCINCO] =
+    {
+        .baseHP = 45, .baseAttack = 60, .baseDefense = 45, .baseSpeed = 70,
+        .baseSpAttack = 35, .baseSpDefense = 45,
+        .types = MON_TYPES(TYPE_GRASS), .catchRate = 190, .expYield = 64,
+        .evYield_Speed = 1, .genderRatio = PERCENT_FEMALE(50), .eggCycles = 20,
+        .friendship = 50, .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD, EGG_GROUP_DRAGON),
+        .abilities = { ABILITY_CHLOROPHYLL, ABILITY_SHED_SKIN, ABILITY_REGENERATOR },
+        .bodyColor = BODY_COLOR_GREEN, .speciesName = _("Luscinco"),
+        .cryId = CRY_TREECKO, .natDexNum = NATIONAL_DEX_LUSCINCO,
+        .categoryName = _("LUSCENGOLA"), .height = 4, .weight = 48,
+        .description = COMPOUND_STRING(
+            "Si scalda sui muretti delle antiche\n"
+            "strade assorbendo la luce solare.\n"
+            "Se viene afferrato, abbandona la\n"
+            "coda e fugge rapido tra l'erba."),
+        .pokemonScale = 300, .pokemonOffset = 10, .trainerScale = 256, .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Luscinco, .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 4, .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        .frontAnimId = ANIM_H_SLIDE, .backPic = gMonBackPic_Luscinco,
+        .backPicSize = MON_COORDS_SIZE(64, 64), .backPicYOffset = 4,
+        .backAnimId = BACK_ANIM_H_SLIDE, .palette = gMonPalette_Luscinco,
+        .shinyPalette = gMonShinyPalette_Luscinco, .iconSprite = gMonIcon_Luscinco,
+        .iconPalIndex = 0, .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        SHADOW(0, 4, SHADOW_SIZE_M)
+        FOOTPRINT(Treecko)
+        OVERWORLD(sPicTable_Treecko, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT,
+            sAnimTable_Following, gOverworldPalette_Treecko, gShinyOverworldPalette_Treecko)
+        .levelUpLearnset = sLuscincoLevelUpLearnset, .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sLuscincoTeachableLearnset, .eggMoveLearnset = sLuscincoEggMoveLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 24, SPECIES_LUSCERP}),
+    },
+
+    [SPECIES_LUSCERP] =
+    {
+        .baseHP = 70, .baseAttack = 105, .baseDefense = 75, .baseSpeed = 100,
+        .baseSpAttack = 55, .baseSpDefense = 75,
+        .types = MON_TYPES(TYPE_GRASS, TYPE_DRAGON), .catchRate = 75, .expYield = 175,
+        .evYield_Attack = 2, .genderRatio = PERCENT_FEMALE(50), .eggCycles = 20,
+        .friendship = 50, .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD, EGG_GROUP_DRAGON),
+        .abilities = { ABILITY_CHLOROPHYLL, ABILITY_SHED_SKIN, ABILITY_REGENERATOR },
+        .bodyColor = BODY_COLOR_GREEN, .speciesName = _("Luscerp"),
+        .cryId = CRY_SCEPTILE, .natDexNum = NATIONAL_DEX_LUSCERP,
+        .categoryName = _("SAURO"), .height = 15, .weight = 280,
+        .description = COMPOUND_STRING(
+            "Pattuglia oliveti e sentieri con\n"
+            "movimenti fulminei. Le dure scaglie\n"
+            "sulla schiena conservano il calore\n"
+            "accumulato durante il giorno."),
+        .pokemonScale = 300, .pokemonOffset = 10, .trainerScale = 256, .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Luscerp, .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 4, .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        .frontAnimId = ANIM_H_SLIDE, .backPic = gMonBackPic_Luscerp,
+        .backPicSize = MON_COORDS_SIZE(64, 64), .backPicYOffset = 4,
+        .backAnimId = BACK_ANIM_H_SLIDE, .palette = gMonPalette_Luscerp,
+        .shinyPalette = gMonShinyPalette_Luscerp, .iconSprite = gMonIcon_Luscerp,
+        .iconPalIndex = 0, .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        SHADOW(0, 4, SHADOW_SIZE_M)
+        FOOTPRINT(Sceptile)
+        OVERWORLD(sPicTable_Sceptile, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT,
+            sAnimTable_Following, gOverworldPalette_Sceptile, gShinyOverworldPalette_Sceptile)
+        .levelUpLearnset = sLuscerpLevelUpLearnset, .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sLuscerpTeachableLearnset, .eggMoveLearnset = sLuscerpEggMoveLearnset,
     },
 
     /* You may add any custom species below this point based on the following structure: */
