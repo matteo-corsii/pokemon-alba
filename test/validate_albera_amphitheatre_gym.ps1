@@ -62,8 +62,8 @@ foreach ($pair in @(@('TRAINER_ALBERA_DARIO', '855', '624'), @('TRAINER_ALBERA_M
     Assert-True ($opponents -match "#define\s+$($pair[0])\s+$($pair[1])\b") "Invalid Emerald trainer ID for $($pair[0])."
     Assert-True ($opponentsFrlg -match "#define\s+$($pair[0])\s+$($pair[2])\b") "Invalid FRLG trainer ID for $($pair[0])."
 }
-Assert-True ($opponents -match '#define\s+TRAINERS_COUNT_EMERALD\s+862\b') 'Emerald trainer count must include the approved Via dei Cisternoni trainers.'
-Assert-True ($opponentsFrlg -match '#define\s+TRAINERS_COUNT_FRLG\s+631\b') 'FRLG trainer count must include the approved Via dei Cisternoni trainers.'
+Assert-True ($opponents -match '#define\s+TRAINERS_COUNT_EMERALD\s+864\b') 'Emerald trainer count must include the approved Via dei Cisternoni trainers.'
+Assert-True ($opponentsFrlg -match '#define\s+TRAINERS_COUNT_FRLG\s+633\b') 'FRLG trainer count must include the approved Via dei Cisternoni trainers.'
 Assert-True ($opponents -match '#define\s+MAX_TRAINERS_COUNT_EMERALD\s+864\b') 'Emerald trainer capacity changed.'
 Assert-True ($opponentsFrlg -match '#define\s+MAX_TRAINERS_COUNT_FRLG\s+768\b') 'FRLG trainer capacity changed.'
 
@@ -97,7 +97,10 @@ Assert-True (@($gym.object_events | Where-Object { $_.local_id -eq 'LOCALID_ALBE
 Assert-True ($emeraldTrainers -match '(?s)=== TRAINER_LEADER_LIRIO ===.*?Pic: Leader Brawly') 'Lirio Emerald trainer pic must be male.'
 Assert-True ($frlgTrainers -match '(?s)=== TRAINER_LEADER_LIRIO ===.*?Pic: Leader Lt Surge Frlg') 'Lirio FRLG trainer pic must be male.'
 
-foreach ($path in @('src/data/wild_encounters.json', 'src/data/pokemon', 'src/save.c', 'include/constants/species.h')) {
+ $baseWild = (& git -C $RepositoryRoot show 'develop:src/data/wild_encounters.json' | Out-String | ConvertFrom-Json | ConvertTo-Json -Depth 50 -Compress)
+ $currentWild = (Get-Content (Join-Path $RepositoryRoot 'src/data/wild_encounters.json') -Raw | ConvertFrom-Json | ConvertTo-Json -Depth 50 -Compress)
+ Assert-True ($baseWild -eq $currentWild) 'Wild encounter semantics changed outside this validator.'
+foreach ($path in @('src/data/pokemon', 'src/save.c', 'include/constants/species.h')) {
     & git -C $RepositoryRoot diff --quiet develop -- $path
     Assert-True ($LASTEXITCODE -eq 0) "Out-of-scope file changed: $path"
 }

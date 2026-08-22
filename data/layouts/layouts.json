@@ -9396,7 +9396,7 @@
       "width": 120,
       "height": 120,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_PortaPretoria",
+      "secondary_tileset": "gTileset_LagoDiAlbera",
       "border_filepath": "data/layouts/LagoDiAlbera/border.bin",
       "blockdata_filepath": "data/layouts/LagoDiAlbera/map.bin",
       "layout_version": "emerald"

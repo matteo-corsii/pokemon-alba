@@ -15,6 +15,10 @@ const u16 gMetatileAttributes_Petalburg[] = INCBIN_U16("data/tilesets/secondary/
 const u16 gMetatiles_PortaPretoria[] = INCBIN_U16("data/tilesets/secondary/porta_pretoria/metatiles.bin");
 const u16 gMetatileAttributes_PortaPretoria[] = INCBIN_U16("data/tilesets/secondary/porta_pretoria/metatile_attributes.bin");
 
+const u16 gMetatiles_LagoDiAlbera[] = INCBIN_U16("data/tilesets/secondary/lago_di_albera/metatiles.bin");
+const u16 gMetatileAttributes_LagoDiAlbera[] = INCBIN_U16("data/tilesets/secondary/lago_di_albera/metatile_attributes.bin");
+
+
 const u16 gMetatiles_Rustboro[] = INCBIN_U16("data/tilesets/secondary/rustboro/metatiles.bin");
 const u16 gMetatileAttributes_Rustboro[] = INCBIN_U16("data/tilesets/secondary/rustboro/metatile_attributes.bin");
 
