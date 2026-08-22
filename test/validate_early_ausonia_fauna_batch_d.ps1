@@ -28,9 +28,9 @@ $docs = (Get-Content 'docs/AUSONIA_REGIONAL_DEX_PLAN.md' -Raw -Encoding UTF8) -r
 $saveTests = (Get-Content 'test/save.c' -Raw) -replace "`r`n", "`n"
 $learnables = Get-Content 'src/data/pokemon/all_learnables.json' -Raw | ConvertFrom-Json
 
-Assert-Contains $speciesConstants "SPECIES_PEREGRINUS,`n    SPECIES_GAZZUOLA,`n    SPECIES_BRILLAZZA,`n    SPECIES_GAZZOMBRA,`n    SPECIES_MOLOSPSY,`n    SPECIES_CUSTOM_END," 'Species append-only sequence'
-Assert-Contains $dexConstants "NATIONAL_DEX_PEREGRINUS,`n    NATIONAL_DEX_GAZZUOLA,`n    NATIONAL_DEX_BRILLAZZA,`n    NATIONAL_DEX_GAZZOMBRA," 'Pokedex append-only sequence'
-Assert-Contains $dexConstants '#define NATIONAL_DEX_COUNT  NATIONAL_DEX_MOLOSPSY' 'National Dex count'
+Assert-Contains $speciesConstants "SPECIES_PEREGRINUS,`n    SPECIES_GAZZUOLA,`n    SPECIES_BRILLAZZA,`n    SPECIES_GAZZOMBRA,`n    SPECIES_MOLOSPSY,`n    SPECIES_LENGHELIS,`n    SPECIES_CUSTOM_END," 'Species append-only sequence'
+Assert-Contains $dexConstants "NATIONAL_DEX_PEREGRINUS,`n    NATIONAL_DEX_GAZZUOLA,`n    NATIONAL_DEX_BRILLAZZA,`n    NATIONAL_DEX_GAZZOMBRA,`n    NATIONAL_DEX_MOLOSPSY,`n    NATIONAL_DEX_LENGHELIS," 'Pokedex append-only sequence'
+Assert-Contains $dexConstants '#define NATIONAL_DEX_COUNT  NATIONAL_DEX_LENGHELIS' 'National Dex count'
 
 $expected = @{
     GAZZUOLA = @{ Stats=@(45,40,40,60,35,40); Bst=260; Type='MON_TYPES(TYPE_NORMAL, TYPE_FLYING)'; Catch=255; Exp=56; Height=3; Weight=19; Abilities='ABILITY_PICKUP, ABILITY_KEEN_EYE, ABILITY_SUPER_LUCK'; Category='CURIOSA'; Evolution='EVO_LEVEL, 18, SPECIES_BRILLAZZA'; Placeholder='Rookidee'; Dex=1045; Regional=20 }

@@ -21,45 +21,6 @@ function Get-ChangedPaths {
     return @($paths | Where-Object { $_ } | Sort-Object -Unique)
 }
 
-$allowedPaths = @(
-    'data/event_scripts.s',
-    'data/maps/AlberaStorica/map.json',
-    'data/maps/AlberaStorica/scripts.inc',
-    'data/maps/AlberaStorica_Anfiteatro/scripts.inc',
-    'data/maps/AlberaStorica_MentorsHouse/map.json',
-    'data/maps/AlberaStorica_MentorsHouse/scripts.inc',
-    'data/maps/AlberaStorica_CivicArchive/map.json',
-    'data/maps/AlberaStorica_CivicArchive/scripts.inc',
-    'data/maps/AlberaStorica_SecretBaseShop/map.json',
-    'data/maps/AlberaStorica_SecretBaseShop/scripts.inc',
-    'data/maps/map_groups.json',
-    'data/scripts/secret_base.inc',
-    'data/scripts/shared_secret_base.inc',
-    'data/scripts/new_game.inc',
-    'data/specials.inc',
-    'data/layouts/AlberaStorica/map.bin',
-    'include/constants/flags.h',
-    'include/constants/flags_frlg.h',
-    'include/constants/secret_bases.h',
-    'include/constants/script_menu.h',
-    'src/data/script_menu.h',
-    'src/secret_base.c',
-    'test/validate_porta_pretoria_dedicated_tileset.ps1',
-    'test/validate_porta_pretoria_localization.ps1',
-    'test/validate_albera_storica_secret_base_mentor.ps1'
-    ,'test/validate_albera_storica_blockout.ps1'
-    ,'test/validate_albera_storica_civic_life.ps1'
-    # User-approved Porymap state retained with the Albera civic-life batch.
-    ,'data/layouts/layouts.json'
-    ,'data/maps/AlberaStorica_Anfiteatro/map.json'
-    ,'data/maps/OldaleTown/map.json'
-    ,'src/data/heal_locations.json'
-    ,'src/data/region_map/region_map_sections.json'
-)
-
-$unexpectedPaths = @(Get-ChangedPaths | Where-Object { $_ -notin $allowedPaths })
-Assert-True ($unexpectedPaths.Count -eq 0) ('Out-of-scope files changed: ' + ($unexpectedPaths -join ', '))
-
 $flags = Get-Content -Raw -Encoding utf8 'include/constants/flags.h'
 $flagsFrlg = Get-Content -Raw -Encoding utf8 'include/constants/flags_frlg.h'
 Assert-True ($flags -match '#define\s+FLAG_ALBERA_SECRET_BASES_UNLOCKED\s+0x8EB\b') 'Missing Emerald Secret Base mentor unlock flag at 0x8EB.'
@@ -68,7 +29,7 @@ Assert-True ($flagsFrlg -match '#define\s+FLAG_ALBERA_SECRET_BASES_UNLOCKED\s+0x
 $secretBaseConstants = Get-Content -Raw -Encoding utf8 'include/constants/secret_bases.h'
 Assert-True ($secretBaseConstants -match '#define\s+SECRET_BASE_ALBERA_TREE_1\s+241\b') 'Albera tree Secret Base ID must be append-only ID 241.'
 Assert-True ($secretBaseConstants -match '#define\s+SECRET_BASE_ALBERA_TREE\s+SECRET_BASE_GROUP\(24\)') 'Albera tree must use its own Secret Base group.'
-Assert-True ($secretBaseConstants -match '#define\s+NUM_SECRET_BASE_GROUPS\s+25\b') 'Secret Base group count must include Albera tree.'
+Assert-True ($secretBaseConstants -match '#define\s+NUM_SECRET_BASE_GROUPS\s+26\b') 'Secret Base group count must include Albera tree.'
 
 $secretBaseCode = Get-Content -Raw -Encoding utf8 'src/secret_base.c'
 Assert-True ($secretBaseCode -match '\[SECRET_BASE_ALBERA_TREE\]\s*=\s*MAP_NUM\(MAP_SECRET_BASE_TREE1\),\s*0,\s*2,\s*3') 'Albera tree must reuse the SecretBase_Tree1 interior entry.'

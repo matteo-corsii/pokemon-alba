@@ -511,6 +511,26 @@ static const struct LevelUpMove sMolospsyLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+static const struct LevelUpMove sLenghelisLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_ASTONISH),
+    LEVEL_UP_MOVE( 1, MOVE_TAIL_WHIP),
+    LEVEL_UP_MOVE( 4, MOVE_BABY_DOLL_EYES),
+    LEVEL_UP_MOVE( 7, MOVE_FAIRY_WIND),
+    LEVEL_UP_MOVE(10, MOVE_CONFUSE_RAY),
+    LEVEL_UP_MOVE(13, MOVE_QUICK_ATTACK),
+    LEVEL_UP_MOVE(16, MOVE_NIGHT_SHADE),
+    LEVEL_UP_MOVE(20, MOVE_DISARMING_VOICE),
+    LEVEL_UP_MOVE(24, MOVE_WILL_O_WISP),
+    LEVEL_UP_MOVE(28, MOVE_HEX),
+    LEVEL_UP_MOVE(32, MOVE_MOONLIGHT),
+    LEVEL_UP_MOVE(36, MOVE_SWIFT),
+    LEVEL_UP_MOVE(40, MOVE_SHADOW_BALL),
+    LEVEL_UP_MOVE(44, MOVE_DAZZLING_GLEAM),
+    LEVEL_UP_MOVE(48, MOVE_MYSTICAL_FIRE),
+    LEVEL_UP_MOVE(52, MOVE_MOONBLAST),
+    LEVEL_UP_END
+};
+
 const struct SpeciesInfo gSpeciesInfo[] =
 {
     [SPECIES_NONE] =
@@ -2105,6 +2125,71 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .teachingType = EXPLICIT_TEACHABLES,
         .teachableLearnset = sMolospsyTeachableLearnset,
         .eggMoveLearnset = sMolospsyEggMoveLearnset,
+    },
+
+    [SPECIES_LENGHELIS] =
+    {
+        .baseHP        = 65,
+        .baseAttack    = 50,
+        .baseDefense   = 65,
+        .baseSpeed     = 85,
+        .baseSpAttack  = 90,
+        .baseSpDefense = 85,
+        .types = MON_TYPES(TYPE_GHOST, TYPE_FAIRY),
+        .catchRate = 90,
+        .expYield = 145,
+        .evYield_SpAttack = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = 70,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD, EGG_GROUP_AMORPHOUS),
+        .abilities = { ABILITY_ILLUMINATE, ABILITY_FRISK, ABILITY_INFILTRATOR },
+        .bodyColor = BODY_COLOR_PURPLE,
+        .speciesName = _("Lenghelis"),
+        .cryId = CRY_MISDREAVUS,
+        .natDexNum = NATIONAL_DEX_LENGHELIS,
+        .categoryName = _("SPIRITELLO"),
+        .height = 6,
+        .weight = 72,
+        .description = COMPOUND_STRING(
+            "Di notte percorre antiche strade\n"
+            "con piccoli fuochi azzurri.\n"
+            "Confonde chi profana i boschi,\n"
+            "ma guida a casa chi si è perso."),
+        .pokemonScale = 320,
+        .pokemonOffset = 10,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Lenghelis,
+        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 4,
+        .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        .frontAnimId = ANIM_H_JUMPS,
+        .backPic = gMonBackPic_Lenghelis,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 4,
+        .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
+        .palette = gMonPalette_Lenghelis,
+        .shinyPalette = gMonShinyPalette_Lenghelis,
+        .iconSprite = gMonIcon_Lenghelis,
+        .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        SHADOW(0, 4, SHADOW_SIZE_M)
+        FOOTPRINT(Espeon)
+        OVERWORLD(
+            sPicTable_Espeon,
+            SIZE_32x32,
+            SHADOW_SIZE_M,
+            TRACKS_FOOT,
+            sAnimTable_Following,
+            gOverworldPalette_Espeon,
+            gShinyOverworldPalette_Espeon
+        )
+        .levelUpLearnset = sLenghelisLevelUpLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sLenghelisTeachableLearnset,
+        .eggMoveLearnset = sLenghelisEggMoveLearnset,
     },
 
     /* You may add any custom species below this point based on the following structure: */
