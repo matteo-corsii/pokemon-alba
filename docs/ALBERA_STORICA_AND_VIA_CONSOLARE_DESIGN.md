@@ -446,8 +446,8 @@ contenuti narrativi del lago.
 
 ## Implementazione tecnica del tileset del Lago
 
-Il Lago usa direttamente `gTileset_General` con il secondary originale
-`gTileset_Pacifidlog` (Orocea). Questo mantiene disponibili i metatile e le
-palette delle palafitte già usate da Pacifidlog; il ridisegno manuale del Lago
-deve ancora essere effettuato. Non vengono introdotti copie o asset custom del
-Lago, né cambiate le decisioni narrative.
+Il Lago usa `gTileset_General` con `gTileset_LagoDiAlbera`, un clone tecnico di
+`gTileset_Pacifidlog` (Orocea). Il clone conserva Pacifidlog e aggiunge soltanto
+i due metatile PortaPretoria necessari alla fascia di connessione con Via
+Consolare; il ridisegno manuale del Lago deve ancora essere effettuato. Non
+vengono cambiate decisioni narrative.

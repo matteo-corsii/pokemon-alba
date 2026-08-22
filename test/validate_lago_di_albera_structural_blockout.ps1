@@ -13,7 +13,7 @@ Assert-True ($map.map_type -eq 'MAP_TYPE_ROUTE' -and $map.region_map_section -eq
 Assert-True (@($map.object_events).Count -eq 0 -and @($map.warp_events).Count -eq 0 -and @($map.coord_events).Count -eq 0 -and @($map.bg_events).Count -eq 0) 'Lago must not contain events.'
 Assert-True ($map.connections.Count -eq 1 -and $map.connections[0].direction -eq 'down' -and $map.connections[0].map -eq 'MAP_VIA_CONSOLARE' -and [int]$map.connections[0].offset -eq 31) 'Lago reciprocal connection is incorrect.'
 $l = @($layout.layouts | Where-Object id -eq 'LAYOUT_LAGO_DI_ALBERA')
-Assert-True ($l.Count -eq 1 -and [int]$l[0].width -eq 120 -and [int]$l[0].height -eq 120 -and $l[0].primary_tileset -eq 'gTileset_General' -and $l[0].secondary_tileset -eq 'gTileset_Pacifidlog') 'Lago layout is incorrect.'
+Assert-True ($l.Count -eq 1 -and [int]$l[0].width -eq 120 -and [int]$l[0].height -eq 120 -and $l[0].primary_tileset -eq 'gTileset_General' -and $l[0].secondary_tileset -eq 'gTileset_LagoDiAlbera') 'Lago layout is incorrect.'
 Assert-True (@($groups.gMapGroup_TownsAndRoutes | Where-Object { $_ -eq 'LagoDiAlbera' }).Count -eq 1) 'Lago is not registered exactly once.'
 Assert-True (($scripts -split "`n" | Where-Object { $_ -match '^LagoDiAlbera_MapScripts::' }).Count -eq 1) 'Lago scripts symbol is missing or duplicated.'
 $bin = Join-Path $RepositoryRoot 'data/layouts/LagoDiAlbera/map.bin'
