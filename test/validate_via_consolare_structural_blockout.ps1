@@ -23,7 +23,9 @@ $scripts = Get-Content (Join-Path $RepositoryRoot 'data/maps/ViaConsolare/script
 Assert-True ($map.id -eq 'MAP_VIA_CONSOLARE') 'Via Consolare map id is incorrect.'
 Assert-True ($map.layout -eq 'LAYOUT_VIA_CONSOLARE') 'Via Consolare layout id is incorrect.'
 Assert-True ($map.map_type -eq 'MAP_TYPE_ROUTE') 'Via Consolare must be an outdoor route.'
-Assert-True ($map.connections.Count -eq 1 -and $map.connections[0].direction -eq 'right' -and $map.connections[0].map -eq 'MAP_ROUTE103' -and [int]$map.connections[0].offset -eq 0) 'Via Consolare connection to Route103 is incorrect.'
+$routeConnection = @($map.connections | Where-Object { $_.direction -eq 'right' -and $_.map -eq 'MAP_ROUTE103' -and [int]$_.offset -eq 0 })
+$lakeConnection = @($map.connections | Where-Object { $_.direction -eq 'up' -and $_.map -eq 'MAP_LAGO_DI_ALBERA' -and [int]$_.offset -eq -31 })
+Assert-True ($map.connections.Count -eq 2 -and $routeConnection.Count -eq 1 -and $lakeConnection.Count -eq 1) 'Via Consolare connections are incorrect.'
 $leftMansioWarp = @($map.warp_events | Where-Object {
     $_.x -eq 5 -and $_.y -eq 21 -and
     $_.dest_map -eq 'MAP_VIA_CONSOLARE_MANSIO' -and

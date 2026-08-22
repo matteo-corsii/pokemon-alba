@@ -17,6 +17,11 @@
       "map": "MAP_ROUTE103",
       "offset": 0,
       "direction": "right"
+    },
+    {
+      "map": "MAP_LAGO_DI_ALBERA",
+      "offset": -31,
+      "direction": "up"
     }
   ],
   "object_events": [

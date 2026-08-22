@@ -432,3 +432,14 @@ viene proposta alcuna MT aggiuntiva.
   incontri e compatibilità tecnica.
 - Considerare tutte le denominazioni descrittive, le durate e i placement
   provvisori finché non ricevono approvazione e implementazione dedicate.
+# Lago di Albèra — blockout e rete idrica canonica
+
+Il Lago di Albèra è il bacino naturale della stessa rete idrica sotterranea
+che comprende i Cisternoni, le condotte sorgive e l'acquifero profondo di
+Ausonia. L'emissario del lago appartiene a questo sistema; è inoltre
+riservato un futuro collegamento subacqueo con il secondo lago e il suo
+scarico, senza implementarli in questo blockout.
+
+Il blockout strutturale riserva il settore acquatico nord-occidentale per
+questo sviluppo futuro. Non introduce ancora fauna, eventi, città, interni o
+contenuti narrativi del lago.
