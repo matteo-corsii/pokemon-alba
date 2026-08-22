@@ -21,7 +21,9 @@ $internalLayout = @($layouts.layouts | Where-Object { $_.id -eq 'LAYOUT_VIA_CONS
 $scripts = Get-Content (Join-Path $RepositoryRoot 'data/maps/ViaConsolare_Mansio/scripts.inc') -Raw
 
 Assert-True ($external.id -eq 'MAP_VIA_CONSOLARE' -and $external.layout -eq 'LAYOUT_VIA_CONSOLARE') 'Via Consolare identity changed.'
-Assert-True ($external.connections.Count -eq 1 -and $external.connections[0].direction -eq 'right' -and $external.connections[0].map -eq 'MAP_ROUTE103' -and $external.connections[0].offset -eq 0) 'Via Consolare Route103 connection changed.'
+$routeConnection = @($external.connections | Where-Object { $_.direction -eq 'right' -and $_.map -eq 'MAP_ROUTE103' -and [int]$_.offset -eq 0 })
+$lakeConnection = @($external.connections | Where-Object { $_.direction -eq 'up' -and $_.map -eq 'MAP_LAGO_DI_ALBERA' -and [int]$_.offset -eq -31 })
+Assert-True ($external.connections.Count -eq 2 -and $routeConnection.Count -eq 1 -and $lakeConnection.Count -eq 1) 'Via Consolare connections changed.'
 Assert-True (@($external.warp_events).Count -eq 2) 'Via Consolare must have exactly two Mansio entrance warps.'
 Assert-True (@($external.warp_events | Where-Object { $_.x -eq 5 -and $_.y -eq 21 -and $_.dest_map -eq 'MAP_VIA_CONSOLARE_MANSIO' -and $_.dest_warp_id -eq '0' }).Count -eq 1) 'Left Mansio entrance warp is incorrect.'
 Assert-True (@($external.warp_events | Where-Object { $_.x -eq 12 -and $_.y -eq 21 -and $_.dest_map -eq 'MAP_VIA_CONSOLARE_MANSIO' -and $_.dest_warp_id -eq '1' }).Count -eq 1) 'Right Mansio entrance warp is incorrect.'
