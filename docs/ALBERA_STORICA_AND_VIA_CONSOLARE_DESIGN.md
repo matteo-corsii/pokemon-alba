@@ -448,6 +448,8 @@ contenuti narrativi del lago.
 
 Il Lago usa `gTileset_General` con il secondary dedicato
 `gTileset_LagoDiAlbera`. Il secondary mantiene PortaPretoria come base storica
-e aggiunge un piccolo kit statico di palafitte da Pacifidlog/Orocea. Le mappe e
-i tileset sorgenti restano invariati; il ridisegno manuale del Lago inizierà
-solo dopo la validazione di questo tileset.
+e aggiunge un kit statico completo di palafitte da Pacifidlog/Orocea: i
+metatile sorgenti `0x010–0x014`, `0x018–0x01C`, `0x020–0x021`, `0x024`,
+`0x028–0x02A`, `0x02C` e `0x030–0x033` coprono piattaforme, pali, estremità,
+bordi d'acqua e tetti. Le mappe e i tileset sorgenti restano invariati; il
+ridisegno manuale del Lago inizierà solo dopo la validazione di questo tileset.

@@ -42,7 +42,7 @@ const u16 gTilesetPalettes_PortaPretoria[][16] =
     INCGFX_U16("data/tilesets/secondary/porta_pretoria/palettes/15.pal", ".gbapal"),
 };
 
-const u32 gTilesetTiles_LagoDiAlbera[] = INCGFX_U32("data/tilesets/secondary/lago_di_albera/tiles.png", ".4bpp.fastSmol", "-num_tiles 443 -Wnum_tiles");
+const u32 gTilesetTiles_LagoDiAlbera[] = INCGFX_U32("data/tilesets/secondary/lago_di_albera/tiles.png", ".4bpp.fastSmol", "-num_tiles 449 -Wnum_tiles");
 
 const u16 gTilesetPalettes_LagoDiAlbera[][16] =
 {
