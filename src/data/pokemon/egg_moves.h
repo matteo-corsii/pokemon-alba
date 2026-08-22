@@ -66,6 +66,16 @@ static const u16 sMolospsyEggMoveLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
+static const u16 sLenghelisEggMoveLearnset[] = {
+    MOVE_DISABLE,
+    MOVE_WISH,
+    MOVE_YAWN,
+    MOVE_CURSE,
+    MOVE_DESTINY_BOND,
+    MOVE_MISTY_TERRAIN,
+    MOVE_UNAVAILABLE,
+};
+
 #if P_FAMILY_BULBASAUR
 static const u16 sBulbasaurEggMoveLearnset[] = {
     MOVE_SKULL_BASH,

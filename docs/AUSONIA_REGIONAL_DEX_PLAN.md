@@ -693,22 +693,20 @@ comune: Borgotto 010, Pastufo 011, Miciolo 012 e Felivates 013.
 ### Lenghelis
 
 - **Temporary family ID:** `AUS-CONCEPT-LENGHELIS`
-- **Species/stages:** Lenghelis, singolo stadio provvisorio.
-- **Current status:** CANDIDATE, LINE REVIEW, PLACEMENT TBD.
-- **Proposed typing:** Spettro/Folletto.
+- **Species/stages:** Lenghelis, singolo stadio approvato.
+- **Current status:** APPROVED DESIGN; IMPLEMENTED; placement future.
+- **Proposed typing:** Spettro/Folletto (approvato).
 - **Core concept:** Lénghelo del folklore locale.
 - **Real-world inspiration:** folklore del Lénghelo.
-- **Evolution structure:** TBD.
-- **Primary habitat candidate:** bosco o area notturna, possible candidate.
-- **Secondary habitat candidates:** borghi e case antiche, TBD.
-- **Earliest story band candidate:** premature/TBD.
-- **Gameplay role candidate:** incontro notturno basato su disturbo, da
-  definire.
-- **Narrative importance:** possibile episodio folklorico, non approvato.
-- **Name review:** nome candidato, non canonico.
-- **Type review:** combinazione proposta da validare.
-- **Placement review:** PLACEMENT TBD.
-- **Open questions:** linea, frequenza, tono folklorico e habitat.
+- **Evolution structure:** nessuna evoluzione.
+- **Habitat approvato:** Via Consolare e Lago di AlbÃ¨ra, esclusivamente di notte.
+- **Earliest story band candidate:** da definire in sede di encounter design.
+- **Gameplay role candidate:** incontro notturno dell'ecosistema storico/periurbano.
+- **Narrative importance:** ruolo ecologico; nessuna scena narrativa definita in questo batch.
+- **Name review:** nome approvato.
+- **Type review:** combinazione approvata.
+- **Placement review:** habitat approvato; percentuali e distribuzione non ancora definite.
+- **Open questions:** encounter table e frequenza futura.
 
 ### Talpmagnet
 
