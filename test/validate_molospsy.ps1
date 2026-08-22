@@ -31,12 +31,12 @@ $docs = (Get-Content 'docs/AUSONIA_REGIONAL_DEX_PLAN.md' -Raw -Encoding UTF8) -r
 $saveTests = (Get-Content 'test/save.c' -Raw) -replace "`r`n", "`n"
 $learnables = Get-Content 'src/data/pokemon/all_learnables.json' -Raw | ConvertFrom-Json
 
-Assert-Contains $speciesConstants "SPECIES_GAZZOMBRA,`n    SPECIES_MOLOSPSY,`n    SPECIES_LENGHELIS,`n    SPECIES_CUSTOM_END," 'Species append-only sequence'
+Assert-Contains $speciesConstants "SPECIES_GAZZOMBRA,`n    SPECIES_MOLOSPSY,`n    SPECIES_LENGHELIS,`n    SPECIES_LUSCINCO,`n    SPECIES_LUSCERP,`n    SPECIES_CUSTOM_END," 'Species append-only sequence'
 Assert-Contains $speciesConstants 'SPECIES_EGG = SPECIES_CUSTOM_END' 'Species_EGG definition'
 Assert-Contains $speciesConstants 'NUM_SPECIES = SPECIES_EGG' 'NUM_SPECIES definition'
 Assert-Contains $dexConstants "NATIONAL_DEX_GAZZOMBRA,`n    NATIONAL_DEX_MOLOSPSY," 'Pokédex append-only sequence'
-Assert-Contains $dexConstants "NATIONAL_DEX_MOLOSPSY,`n    NATIONAL_DEX_LENGHELIS," 'Lenghelis append-only National Dex sequence'
-Assert-Contains $dexConstants '#define NATIONAL_DEX_COUNT  NATIONAL_DEX_LENGHELIS' 'National Dex count'
+Assert-Contains $dexConstants "NATIONAL_DEX_MOLOSPSY,`n    NATIONAL_DEX_LENGHELIS,`n    NATIONAL_DEX_LUSCINCO,`n    NATIONAL_DEX_LUSCERP," 'Luscinco/Luscerp append-only National Dex sequence'
+Assert-Contains $dexConstants '#define NATIONAL_DEX_COUNT  NATIONAL_DEX_LUSCERP' 'National Dex count'
 
 $record = Get-Section $speciesInfo '[SPECIES_MOLOSPSY] =' "`n    },"
 Assert-True ($speciesInfo.IndexOf('[SPECIES_MOLOSPSY] =') -lt $speciesInfo.IndexOf('/* You may add any custom species below this point based on the following structure: */')) 'Molospsy must remain the last custom species record'
@@ -90,7 +90,7 @@ $learnableNames = @($learnables.PSObject.Properties.Name)
 $molospsyIndex = [Array]::IndexOf($learnableNames, 'MOLOSPSY')
 Assert-True ($molospsyIndex -ge 0) 'Molospsy must remain in all_learnables.json'
 Assert-True (($molospsyIndex + 1) -lt $learnableNames.Count -and $learnableNames[$molospsyIndex + 1] -ceq 'LENGHELIS') 'Lenghelis must follow Molospsy in all_learnables.json'
-Assert-True ($learnableNames[-1] -ceq 'LENGHELIS') 'Lenghelis must be the last custom learnables entry'
+Assert-True ($learnableNames[-1] -ceq 'LUSCERP') 'Luscerp must be the last custom learnables entry'
 
 $eggBlock = Get-Section $eggMoves 'static const u16 sMolospsyEggMoveLearnset[]' '};'
 foreach ($move in @('MOVE_COUNTER','MOVE_DETECT','MOVE_ENDURE','MOVE_HELPING_HAND','MOVE_MIRROR_COAT','MOVE_POWER_UP_PUNCH','MOVE_QUICK_GUARD','MOVE_WIDE_GUARD','MOVE_UNAVAILABLE')) {

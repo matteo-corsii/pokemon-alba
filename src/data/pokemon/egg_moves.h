@@ -76,6 +76,13 @@ static const u16 sLenghelisEggMoveLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
+static const u16 sLuscincoEggMoveLearnset[] = {
+    MOVE_LEECH_SEED, MOVE_DRAGON_BREATH, MOVE_GRASSY_TERRAIN,
+    MOVE_SYNTHESIS, MOVE_CURSE, MOVE_SCALE_SHOT, MOVE_UNAVAILABLE,
+};
+
+#define sLuscerpEggMoveLearnset sLuscincoEggMoveLearnset
+
 #if P_FAMILY_BULBASAUR
 static const u16 sBulbasaurEggMoveLearnset[] = {
     MOVE_SKULL_BASH,
