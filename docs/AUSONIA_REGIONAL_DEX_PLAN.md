@@ -471,7 +471,7 @@ comune: Borgotto 010, Pastufo 011, Miciolo 012 e Felivates 013.
 - **Type review:** tipi approvati per entrambi gli stadi; linea distinta da
   Tritino/Tricrest e Salampolla/Alchimandra.
 - **Placement review:** Paludix resta previsto anche di giorno al 5%; Sanguilex
-  non comparirÃ  selvatico nella prima Via Consolare.
+  non comparirà selvatico nella prima Via Consolare.
 - **Open questions:** abilità, statistiche, learnset, frequenze e
   disponibilità selvatica di Sanguilex.
 

@@ -2356,7 +2356,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
             "Al calare del sole emette una luce\n"
             "tenue tra le radici degli olivi.\n"
             "Le sue spore luminose indicano dove\n"
-            "il terreno conserva piÃ¹ umiditÃ ."),
+            "il terreno conserva più umidità."),
         .pokemonScale = 256, .pokemonOffset = 0, .trainerScale = 256, .trainerOffset = 0,
         .frontPic = gMonFrontPic_Lumella, .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 4, .frontAnimFrames = sAnims_SingleFramePlaceHolder,
@@ -2421,7 +2421,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .categoryName = _("LARVA"), .height = 4, .weight = 32,
         .description = COMPOUND_STRING(
             "Vive nelle canalette dove l'acqua\n"
-            "scorre lentamente. Filtra impuritÃ \n"
+            "scorre lentamente. Filtra impurità\n"
             "con la bocca e avverte le vibrazioni\n"
             "prodotte da chi si avvicina."),
         .pokemonScale = 256, .pokemonOffset = 0, .trainerScale = 256, .trainerOffset = 0,
@@ -2459,7 +2459,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
             "Vola senza produrre alcun rumore.\n"
             "Con il lungo rostro assorbe energia\n"
             "dalle prede e inocula un veleno che\n"
-            "rallenta perfino i PokÃ©mon piÃ¹ agili."),
+            "rallenta perfino i Pokémon più agili."),
         .pokemonScale = 256, .pokemonOffset = 0, .trainerScale = 256, .trainerOffset = 0,
         .frontPic = gMonFrontPic_Sanguilex, .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 4, .frontAnimFrames = sAnims_SingleFramePlaceHolder,
