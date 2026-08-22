@@ -568,6 +568,50 @@ static const struct LevelUpMove sLuscerpLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+static const struct LevelUpMove sLumellaLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_ABSORB), LEVEL_UP_MOVE( 1, MOVE_STUN_SPORE),
+    LEVEL_UP_MOVE( 4, MOVE_ASTONISH), LEVEL_UP_MOVE( 7, MOVE_GROWTH),
+    LEVEL_UP_MOVE(10, MOVE_MEGA_DRAIN), LEVEL_UP_MOVE(13, MOVE_CONFUSE_RAY),
+    LEVEL_UP_MOVE(16, MOVE_SHOCK_WAVE), LEVEL_UP_MOVE(19, MOVE_SLEEP_POWDER),
+    LEVEL_UP_MOVE(26, MOVE_GIGA_DRAIN), LEVEL_UP_MOVE(30, MOVE_MOONLIGHT),
+    LEVEL_UP_MOVE(34, MOVE_ENERGY_BALL), LEVEL_UP_MOVE(38, MOVE_SYNTHESIS),
+    LEVEL_UP_MOVE(42, MOVE_SPORE), LEVEL_UP_END
+};
+
+static const struct LevelUpMove sOmphaluxLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_ABSORB), LEVEL_UP_MOVE( 1, MOVE_STUN_SPORE),
+    LEVEL_UP_MOVE( 4, MOVE_ASTONISH), LEVEL_UP_MOVE( 7, MOVE_GROWTH),
+    LEVEL_UP_MOVE(10, MOVE_MEGA_DRAIN), LEVEL_UP_MOVE(13, MOVE_CONFUSE_RAY),
+    LEVEL_UP_MOVE(16, MOVE_SHOCK_WAVE), LEVEL_UP_MOVE(19, MOVE_SLEEP_POWDER),
+    LEVEL_UP_MOVE(22, MOVE_CHARGE_BEAM), LEVEL_UP_MOVE(26, MOVE_GIGA_DRAIN),
+    LEVEL_UP_MOVE(30, MOVE_THUNDER_WAVE), LEVEL_UP_MOVE(34, MOVE_DISCHARGE),
+    LEVEL_UP_MOVE(38, MOVE_SYNTHESIS), LEVEL_UP_MOVE(42, MOVE_ENERGY_BALL),
+    LEVEL_UP_MOVE(46, MOVE_THUNDERBOLT), LEVEL_UP_MOVE(50, MOVE_SPORE),
+    LEVEL_UP_END
+};
+
+static const struct LevelUpMove sPaludixLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_WATER_GUN), LEVEL_UP_MOVE( 1, MOVE_STRING_SHOT),
+    LEVEL_UP_MOVE( 4, MOVE_INFESTATION), LEVEL_UP_MOVE( 7, MOVE_SUPERSONIC),
+    LEVEL_UP_MOVE(10, MOVE_AQUA_JET), LEVEL_UP_MOVE(13, MOVE_STRUGGLE_BUG),
+    LEVEL_UP_MOVE(16, MOVE_ABSORB), LEVEL_UP_MOVE(22, MOVE_BUBBLE_BEAM),
+    LEVEL_UP_MOVE(26, MOVE_AQUA_RING), LEVEL_UP_MOVE(30, MOVE_BUG_BUZZ),
+    LEVEL_UP_MOVE(34, MOVE_WATER_PULSE), LEVEL_UP_MOVE(38, MOVE_GASTRO_ACID),
+    LEVEL_UP_MOVE(42, MOVE_HYDRO_PUMP), LEVEL_UP_END
+};
+
+static const struct LevelUpMove sSanguilexLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_WATER_GUN), LEVEL_UP_MOVE( 1, MOVE_STRING_SHOT),
+    LEVEL_UP_MOVE( 4, MOVE_INFESTATION), LEVEL_UP_MOVE( 7, MOVE_SUPERSONIC),
+    LEVEL_UP_MOVE(10, MOVE_AQUA_JET), LEVEL_UP_MOVE(13, MOVE_STRUGGLE_BUG),
+    LEVEL_UP_MOVE(16, MOVE_ABSORB), LEVEL_UP_MOVE(18, MOVE_POISON_FANG),
+    LEVEL_UP_MOVE(22, MOVE_BUG_BITE), LEVEL_UP_MOVE(26, MOVE_LEECH_LIFE),
+    LEVEL_UP_MOVE(30, MOVE_AGILITY), LEVEL_UP_MOVE(34, MOVE_CROSS_POISON),
+    LEVEL_UP_MOVE(38, MOVE_U_TURN), LEVEL_UP_MOVE(42, MOVE_TOXIC),
+    LEVEL_UP_MOVE(46, MOVE_LUNGE), LEVEL_UP_MOVE(50, MOVE_GUNK_SHOT),
+    LEVEL_UP_END
+};
+
 const struct SpeciesInfo gSpeciesInfo[] =
 {
     [SPECIES_NONE] =
@@ -2294,6 +2338,142 @@ const struct SpeciesInfo gSpeciesInfo[] =
             sAnimTable_Following, gOverworldPalette_Sceptile, gShinyOverworldPalette_Sceptile)
         .levelUpLearnset = sLuscerpLevelUpLearnset, .teachingType = EXPLICIT_TEACHABLES,
         .teachableLearnset = sLuscerpTeachableLearnset, .eggMoveLearnset = sLuscerpEggMoveLearnset,
+    },
+
+    [SPECIES_LUMELLA] =
+    {
+        .baseHP = 50, .baseAttack = 35, .baseDefense = 55, .baseSpeed = 35,
+        .baseSpAttack = 65, .baseSpDefense = 65,
+        .types = MON_TYPES(TYPE_GRASS), .catchRate = 190, .expYield = 62,
+        .evYield_SpAttack = 1, .genderRatio = PERCENT_FEMALE(50), .eggCycles = 20,
+        .friendship = 50, .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_GRASS, EGG_GROUP_AMORPHOUS),
+        .abilities = { ABILITY_ILLUMINATE, ABILITY_EFFECT_SPORE, ABILITY_RAIN_DISH },
+        .bodyColor = BODY_COLOR_BLUE, .speciesName = _("Lumella"),
+        .cryId = CRY_MORELULL, .natDexNum = NATIONAL_DEX_LUMELLA,
+        .categoryName = _("LUMEFUNGO"), .height = 3, .weight = 21,
+        .description = COMPOUND_STRING(
+            "Al calare del sole emette una luce\n"
+            "tenue tra le radici degli olivi.\n"
+            "Le sue spore luminose indicano dove\n"
+            "il terreno conserva più umidità."),
+        .pokemonScale = 256, .pokemonOffset = 0, .trainerScale = 256, .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Lumella, .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 4, .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE, .backPic = gMonBackPic_Lumella,
+        .backPicSize = MON_COORDS_SIZE(64, 64), .backPicYOffset = 4,
+        .backAnimId = BACK_ANIM_SHRINK_GROW, .palette = gMonPalette_Lumella,
+        .shinyPalette = gMonShinyPalette_Lumella, .iconSprite = gMonIcon_Lumella,
+        .iconPalIndex = 0, .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        SHADOW(0, 4, SHADOW_SIZE_M)
+        FOOTPRINT(Morelull)
+        OVERWORLD(sPicTable_Morelull, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT,
+            sAnimTable_Following, gOverworldPalette_Morelull, gShinyOverworldPalette_Morelull)
+        .levelUpLearnset = sLumellaLevelUpLearnset, .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sLumellaTeachableLearnset, .eggMoveLearnset = sLumellaEggMoveLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 22, SPECIES_OMPHALUX, CONDITIONS({IF_TIME, TIME_NIGHT})}),
+    },
+
+    [SPECIES_OMPHALUX] =
+    {
+        .baseHP = 80, .baseAttack = 45, .baseDefense = 85, .baseSpeed = 60,
+        .baseSpAttack = 115, .baseSpDefense = 100,
+        .types = MON_TYPES(TYPE_GRASS, TYPE_ELECTRIC), .catchRate = 75, .expYield = 170,
+        .evYield_SpAttack = 2, .genderRatio = PERCENT_FEMALE(50), .eggCycles = 20,
+        .friendship = 50, .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_GRASS, EGG_GROUP_AMORPHOUS),
+        .abilities = { ABILITY_ILLUMINATE, ABILITY_EFFECT_SPORE, ABILITY_LIGHTNING_ROD },
+        .bodyColor = BODY_COLOR_BLUE, .speciesName = _("Omphalux"),
+        .cryId = CRY_SHIINOTIC, .natDexNum = NATIONAL_DEX_OMPHALUX,
+        .categoryName = _("BIOLUMINE"), .height = 9, .weight = 185,
+        .description = COMPOUND_STRING(
+            "Accumula energia nei disegni del\n"
+            "cappello e la libera in silenziosi\n"
+            "lampi. Interi oliveti risplendono\n"
+            "quando molti esemplari si radunano."),
+        .pokemonScale = 256, .pokemonOffset = 0, .trainerScale = 256, .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Omphalux, .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 4, .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        .frontAnimId = ANIM_GLOW_BLACK, .backPic = gMonBackPic_Omphalux,
+        .backPicSize = MON_COORDS_SIZE(64, 64), .backPicYOffset = 4,
+        .backAnimId = BACK_ANIM_SHRINK_GROW, .palette = gMonPalette_Omphalux,
+        .shinyPalette = gMonShinyPalette_Omphalux, .iconSprite = gMonIcon_Omphalux,
+        .iconPalIndex = 0, .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        SHADOW(0, 4, SHADOW_SIZE_M)
+        FOOTPRINT(Shiinotic)
+        OVERWORLD(sPicTable_Shiinotic, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT,
+            sAnimTable_Following, gOverworldPalette_Shiinotic, gShinyOverworldPalette_Shiinotic)
+        .levelUpLearnset = sOmphaluxLevelUpLearnset, .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sOmphaluxTeachableLearnset, .eggMoveLearnset = sOmphaluxEggMoveLearnset,
+    },
+
+    [SPECIES_PALUDIX] =
+    {
+        .baseHP = 45, .baseAttack = 35, .baseDefense = 45, .baseSpeed = 65,
+        .baseSpAttack = 55, .baseSpDefense = 50,
+        .types = MON_TYPES(TYPE_BUG, TYPE_WATER), .catchRate = 200, .expYield = 58,
+        .evYield_Speed = 1, .genderRatio = PERCENT_FEMALE(50), .eggCycles = 15,
+        .friendship = 50, .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG, EGG_GROUP_WATER_3),
+        .abilities = { ABILITY_SWIFT_SWIM, ABILITY_HYDRATION, ABILITY_RAIN_DISH },
+        .bodyColor = BODY_COLOR_BLUE, .speciesName = _("Paludix"),
+        .cryId = CRY_SURSKIT, .natDexNum = NATIONAL_DEX_PALUDIX,
+        .categoryName = _("LARVA"), .height = 4, .weight = 32,
+        .description = COMPOUND_STRING(
+            "Vive nelle canalette dove l'acqua\n"
+            "scorre lentamente. Filtra impurità\n"
+            "con la bocca e avverte le vibrazioni\n"
+            "prodotte da chi si avvicina."),
+        .pokemonScale = 256, .pokemonOffset = 0, .trainerScale = 256, .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Paludix, .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 4, .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE, .backPic = gMonBackPic_Paludix,
+        .backPicSize = MON_COORDS_SIZE(64, 64), .backPicYOffset = 4,
+        .backAnimId = BACK_ANIM_H_SLIDE, .palette = gMonPalette_Paludix,
+        .shinyPalette = gMonShinyPalette_Paludix, .iconSprite = gMonIcon_Paludix,
+        .iconPalIndex = 0, .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        SHADOW(0, 4, SHADOW_SIZE_M)
+        FOOTPRINT(Surskit)
+        OVERWORLD(sPicTable_Surskit, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT,
+            sAnimTable_Following, gOverworldPalette_Surskit, gShinyOverworldPalette_Surskit)
+        .levelUpLearnset = sPaludixLevelUpLearnset, .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sPaludixTeachableLearnset, .eggMoveLearnset = sPaludixEggMoveLearnset,
+        .evolutions = EVOLUTION(
+            {EVO_LEVEL, 18, SPECIES_SANGUILEX, CONDITIONS({IF_TIME, TIME_EVENING})},
+            {EVO_LEVEL, 18, SPECIES_SANGUILEX, CONDITIONS({IF_TIME, TIME_NIGHT})}),
+    },
+
+    [SPECIES_SANGUILEX] =
+    {
+        .baseHP = 65, .baseAttack = 90, .baseDefense = 60, .baseSpeed = 120,
+        .baseSpAttack = 70, .baseSpDefense = 65,
+        .types = MON_TYPES(TYPE_BUG, TYPE_POISON), .catchRate = 90, .expYield = 168,
+        .evYield_Speed = 2, .genderRatio = PERCENT_FEMALE(50), .eggCycles = 15,
+        .friendship = 50, .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG, EGG_GROUP_WATER_3),
+        .abilities = { ABILITY_SWARM, ABILITY_INFILTRATOR, ABILITY_POISON_TOUCH },
+        .bodyColor = BODY_COLOR_PURPLE, .speciesName = _("Sanguilex"),
+        .cryId = CRY_VENOMOTH, .natDexNum = NATIONAL_DEX_SANGUILEX,
+        .categoryName = _("ZANZARA"), .height = 11, .weight = 190,
+        .description = COMPOUND_STRING(
+            "Vola senza produrre alcun rumore.\n"
+            "Con il lungo rostro assorbe energia\n"
+            "dalle prede e inocula un veleno che\n"
+            "rallenta perfino i Pokémon più agili."),
+        .pokemonScale = 256, .pokemonOffset = 0, .trainerScale = 256, .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Sanguilex, .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 4, .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        .frontAnimId = ANIM_CIRCLE_C_CLOCKWISE_LONG, .backPic = gMonBackPic_Sanguilex,
+        .backPicSize = MON_COORDS_SIZE(64, 64), .backPicYOffset = 4,
+        .backAnimId = BACK_ANIM_H_SLIDE, .palette = gMonPalette_Sanguilex,
+        .shinyPalette = gMonShinyPalette_Sanguilex, .iconSprite = gMonIcon_Sanguilex,
+        .iconPalIndex = 0, .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        SHADOW(0, 4, SHADOW_SIZE_M)
+        FOOTPRINT(Masquerain)
+        OVERWORLD(sPicTable_Masquerain, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT,
+            sAnimTable_Following, gOverworldPalette_Masquerain, gShinyOverworldPalette_Masquerain)
+        .levelUpLearnset = sSanguilexLevelUpLearnset, .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sSanguilexTeachableLearnset, .eggMoveLearnset = sSanguilexEggMoveLearnset,
     },
 
     /* You may add any custom species below this point based on the following structure: */

@@ -448,16 +448,14 @@ comune: Borgotto 010, Pastufo 011, Miciolo 012 e Felivates 013.
 
 - **Temporary family ID:** `AUS-FAM-MOSQUITO`
 - **Species/stages:** Paludix → Sanguilex.
-- **Current status:** CANONICAL DESIGN; non implementata; PLACEMENT CANDIDATE;
-  evoluzione e parametri tecnici BALANCE PROVISIONAL.
+- **Current status:** IMPLEMENTED; CANONICAL DESIGN; fauna non ancora inserita.
 - **Proposed typing:** Paludix Coleottero/Acqua; Sanguilex
   Coleottero/Veleno. Sanguilex non riceve il tipo Volante.
 - **Core concept:** linea della zanzara a due stadi, dalla larva acquatica dei
   ristagni all'adulto rapido orientato alla puntura.
 - **Real-world inspiration:** Paludix combina *palus/paludis* e *culex*;
   Sanguilex combina *sanguis* e *culex*.
-- **Evolution structure:** evoluzione di lavoro al livello 18, di sera o di
-  notte; livello e requisito temporale sono BALANCE PROVISIONAL.
+- **Evolution structure:** evoluzione al livello 18, di sera o di notte.
 - **Primary habitat candidate:** Paludix raro su Via Consolare e linea
   presente soprattutto nell'arco del Lago di Albèra; PLACEMENT CANDIDATE.
 - **Secondary habitat candidates:** canalette interrotte, pozze temporanee e
@@ -472,8 +470,8 @@ comune: Borgotto 010, Pastufo 011, Miciolo 012 e Felivates 013.
 - **Name review:** linea e nomi approvati.
 - **Type review:** tipi approvati per entrambi gli stadi; linea distinta da
   Tritino/Tricrest e Salampolla/Alchimandra.
-- **Placement review:** incontri, coordinate, tassi e fasce orarie precise
-  restano TBD.
+- **Placement review:** Paludix resta previsto anche di giorno al 5%; Sanguilex
+  non comparirà selvatico nella prima Via Consolare.
 - **Open questions:** abilità, statistiche, learnset, frequenze e
   disponibilità selvatica di Sanguilex.
 
@@ -481,13 +479,12 @@ comune: Borgotto 010, Pastufo 011, Miciolo 012 e Felivates 013.
 
 - **Temporary family ID:** `AUS-CONCEPT-OMPHALUX`
 - **Species/stages:** Lumella → Omphalux.
-- **Current status:** CANONICAL DESIGN; non implementata; PLACEMENT CANDIDATE;
-  evoluzione BALANCE PROVISIONAL.
+- **Current status:** IMPLEMENTED; CANONICAL DESIGN; fauna non ancora inserita.
 - **Proposed typing:** Lumella Erba; Omphalux Erba/Elettro.
 - **Core concept:** linea notturna di funghi bioluminescenti legati agli olivi.
 - **Real-world inspiration:** *Omphalotus*, oliveti e bioluminescenza.
-- **Evolution structure:** linea canonica a due stadi; evoluzione di lavoro al
-  livello 22 durante la notte, BALANCE PROVISIONAL.
+- **Evolution structure:** linea canonica a due stadi; evoluzione al livello 22
+  durante la notte.
 - **Primary habitat candidate:** Via Consolare, oliveti e Lago di Albèra;
   PLACEMENT CANDIDATE.
 - **Secondary habitat candidates:** Lumella rara su Via Verdi; PLACEMENT
@@ -499,7 +496,8 @@ comune: Borgotto 010, Pastufo 011, Miciolo 012 e Felivates 013.
   dell'acqua.
 - **Name review:** linea e nomi approvati.
 - **Type review:** tipi approvati per entrambi gli stadi.
-- **Placement review:** tassi e fasce orarie precise restano TBD.
+- **Placement review:** la linea resta esclusa dalle encounter table di questo
+  batch; distribuzione futura TBD.
 - **Open questions:** statistiche, abilità, learnset e distribuzione esatta.
 
 ### Luscinco → Luscerp
@@ -944,8 +942,8 @@ creare una specie originale per ogni ruolo ecologico o di gameplay.
 | `AUS-FAM-DOG` | Borgotto → Pastufo | 2 | IMPLEMENTED; CANONICAL DESIGN | Normale → Normale/Terra | PLACEMENT CANDIDATE: Albèra Bassa/Via Verdi | incontri e asset originali |
 | `AUS-FAM-CAT` | Miciolo → Felivates | 2 | IMPLEMENTED; CANONICAL DESIGN | Normale → Normale/Psico | PLACEMENT CANDIDATE: Albèra Bassa/Albèra Storica | incontri e asset originali |
 | `AUS-FAM-EARLY-BUG` | Foliarva → Crisalvia → Infiorala | 3 | IMPLEMENTED; CANONICAL DESIGN | Coleottero → Coleottero/Erba → Coleottero/Erba | PLACEMENT CANDIDATE: Via Verdi | incontri e asset originali |
-| `AUS-FAM-MOSQUITO` | Paludix → Sanguilex | 2 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Coleottero/Acqua → Coleottero/Veleno | PLACEMENT CANDIDATE: Via Consolare/Lago di Albèra | evoluzione temporale, abilità e tassi |
-| `AUS-CONCEPT-OMPHALUX` | Lumella → Omphalux | 2 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Erba → Erba/Elettro | PLACEMENT CANDIDATE: Via Verdi rara, Via Consolare/oliveti/lago | evoluzione notturna e distribuzione esatta |
+| `AUS-FAM-MOSQUITO` | Paludix → Sanguilex | 2 | IMPLEMENTED; CANONICAL DESIGN; fauna non ancora inserita | Coleottero/Acqua → Coleottero/Veleno | PLACEMENT CANDIDATE: Via Consolare/Lago di Albèra | fauna futura e distribuzione |
+| `AUS-CONCEPT-OMPHALUX` | Lumella → Omphalux | 2 | IMPLEMENTED; CANONICAL DESIGN; fauna non ancora inserita | Erba → Erba/Elettro | PLACEMENT CANDIDATE: Via Verdi rara, Via Consolare/oliveti/lago | fauna futura e distribuzione |
 | `AUS-CONCEPT-LUSCERP` | Luscinco → Luscerp | 2 | CANONICAL DESIGN; non implementata; BALANCE PROVISIONAL | Erba → Erba/Drago | PLACEMENT CANDIDATE: Via Verdi/Via Consolare/lago | livello, abilità e frequenze |
 | `AUS-CONCEPT-FRAGMAGMA` | Fragmagma | 1+ TBD | CANDIDATE | Folletto/Fuoco | possible candidate: Genzano/Nemi | area e linea |
 | `AUS-CONCEPT-SOLFTRAVER` | Solftraver | 1+ TBD | CANDIDATE | Roccia/Veleno | possible candidate: area minerale | habitat e linea |

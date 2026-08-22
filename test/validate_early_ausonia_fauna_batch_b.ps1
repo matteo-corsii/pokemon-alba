@@ -34,7 +34,7 @@ Assert-Contains $speciesConstants 'SPECIES_EGG = SPECIES_CUSTOM_END' 'SPECIES_EG
 Assert-Contains $speciesConstants 'NUM_SPECIES = SPECIES_EGG' 'NUM_SPECIES definition'
 Assert-Contains $dexConstants "NATIONAL_DEX_FELIVATES,`n    NATIONAL_DEX_FOLIARVA,`n    NATIONAL_DEX_CRISALVIA,`n    NATIONAL_DEX_INFIORALA," 'Pokédex append-only sequence'
 Assert-Contains $dexConstants "NATIONAL_DEX_MOLOSPSY,`n    NATIONAL_DEX_LENGHELIS,`n    NATIONAL_DEX_LUSCINCO,`n    NATIONAL_DEX_LUSCERP," 'Luscinco/Luscerp append-only National Dex sequence'
-Assert-Contains $dexConstants '#define NATIONAL_DEX_COUNT  NATIONAL_DEX_LUSCERP' 'National Dex count'
+Assert-Contains $dexConstants '#define NATIONAL_DEX_COUNT  NATIONAL_DEX_SANGUILEX' 'National Dex count'
 
 $speciesChecks = @{
     FOLIARVA = @(
