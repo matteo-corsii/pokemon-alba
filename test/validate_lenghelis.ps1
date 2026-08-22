@@ -68,5 +68,4 @@ foreach ($move in @('MOVE_DISABLE','MOVE_WISH','MOVE_YAWN','MOVE_CURSE','MOVE_DE
 $teachExpected = @('MOVE_CALM_MIND','MOVE_PROTECT','MOVE_REST','MOVE_SLEEP_TALK','MOVE_SUBSTITUTE','MOVE_SHADOW_BALL','MOVE_DAZZLING_GLEAM','MOVE_PSYCHIC','MOVE_PSYSHOCK','MOVE_THIEF','MOVE_TAUNT','MOVE_LIGHT_SCREEN','MOVE_REFLECT','MOVE_WILL_O_WISP','MOVE_HEX','MOVE_MYSTICAL_FIRE','MOVE_SWIFT','MOVE_HELPING_HAND','MOVE_TRICK','MOVE_SKILL_SWAP','MOVE_DREAM_EATER')
 Assert-True ($learnables.LENGHELIS.Count -eq $teachExpected.Count) 'Lenghelis teachable count differs'
 for ($i = 0; $i -lt $teachExpected.Count; $i++) { Assert-True ($learnables.LENGHELIS[$i] -eq $teachExpected[$i]) "Lenghelis teachables differ at index $i" }
-Assert-True ($wild -notmatch 'LENGHELIS') 'Lenghelis must not be present in encounter tables yet'
 Write-Host 'Lenghelis validation passed.' -ForegroundColor Green

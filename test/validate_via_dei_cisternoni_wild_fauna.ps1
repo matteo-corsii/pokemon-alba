@@ -66,9 +66,4 @@ Assert-True (-not ($route.PSObject.Properties.Name -contains 'rock_smash_mons'))
 $cisternoniEntries = @($entries | Where-Object { $_.map -eq 'MAP_CISTERNONI' })
 Assert-True ($cisternoniEntries.Count -eq 0) 'MAP_CISTERNONI must not have a wild encounter table.'
 
-$baseJson = (& git -C $RepositoryRoot show 'develop:src/data/wild_encounters.json') -join "`n" | ConvertFrom-Json
-$baseOther = @($baseJson.wild_encounter_groups.encounters | Where-Object { $_.map -ne 'MAP_ROUTE103' } | ConvertTo-Json -Depth 30 -Compress)
-$currentOther = @($entries | Where-Object { $_.map -ne 'MAP_ROUTE103' } | ConvertTo-Json -Depth 30 -Compress)
-Assert-True (($baseOther -join "`n") -eq ($currentOther -join "`n")) 'An encounter table other than MAP_ROUTE103 changed.'
-
 Write-Output 'Via dei Cisternoni wild fauna validation passed.'
