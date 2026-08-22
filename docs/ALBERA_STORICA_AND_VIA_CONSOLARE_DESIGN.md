@@ -443,3 +443,11 @@ scarico, senza implementarli in questo blockout.
 Il blockout strutturale riserva il settore acquatico nord-occidentale per
 questo sviluppo futuro. Non introduce ancora fauna, eventi, città, interni o
 contenuti narrativi del lago.
+
+## Implementazione tecnica del tileset del Lago
+
+Il Lago usa `gTileset_General` con il secondary dedicato
+`gTileset_LagoDiAlbera`. Il secondary mantiene PortaPretoria come base storica
+e aggiunge un piccolo kit statico di palafitte da Pacifidlog/Orocea. Le mappe e
+i tileset sorgenti restano invariati; il ridisegno manuale del Lago inizierà
+solo dopo la validazione di questo tileset.
