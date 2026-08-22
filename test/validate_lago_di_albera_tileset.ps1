@@ -51,7 +51,11 @@ $viaExpected = @{
     '24,4' = 0x06C9; '25,4' = 0x06C9; '32,4' = 0x06C9; '33,4' = 0x06C9;
     '34,4' = 0x06C9; '38,4' = 0x06C9; '39,4' = 0x06C9; '47,4' = 0x06C9;
     '48,4' = 0x06C9; '49,4' = 0x06C9; '51,4' = 0x06C9; '57,4' = 0x06C9;
-    '58,4' = 0x06C9; '59,4' = 0x06C9
+    '58,4' = 0x06C9; '59,4' = 0x06C9;
+    '27,2' = 0x310C; '28,2' = 0x310C; '29,2' = 0x310C; '30,2' = 0x310C;
+    '27,3' = 0x310C; '28,3' = 0x310C; '29,3' = 0x310C; '30,3' = 0x310C;
+    '27,4' = 0x310C; '28,4' = 0x310C; '29,4' = 0x310C; '30,4' = 0x310C;
+    '27,5' = 0x310C; '28,5' = 0x310C; '29,5' = 0x310C; '30,5' = 0x310C
 }
 $viaBase = [byte[]](Read-GitBlob 'develop:data/layouts/ViaConsolare/map.bin')
 $viaCurrent = Read-Bytes (Join-Path $RepositoryRoot 'data/layouts/ViaConsolare/map.bin')
@@ -75,7 +79,7 @@ $lagoAttrs = Read-Bytes (Join-Path $lago 'metatile_attributes.bin')
 $portaMeta = Read-Bytes (Join-Path $porta 'metatiles.bin')
 $portaAttrs = Read-Bytes (Join-Path $porta 'metatile_attributes.bin')
 Assert-True ($pacMeta.Length -eq $lagoMeta.Length -and $pacAttrs.Length -eq $lagoAttrs.Length -and $lagoMeta.Length / 16 -eq 203) 'Lago clone metatile capacity differs from Pacifidlog.'
-$patchedMetatiles = @(0x075, 0x096, 0x0C9)
+$patchedMetatiles = @(0x096, 0x0C9)
 for ($index = 0; $index -lt 203; $index++) {
     if ($patchedMetatiles -notcontains $index) {
         $source = New-Object byte[] 16; $clone = New-Object byte[] 16
@@ -84,8 +88,8 @@ for ($index = 0; $index -lt 203; $index++) {
         Assert-True ([BitConverter]::ToUInt16($pacAttrs, $index * 2) -eq [BitConverter]::ToUInt16($lagoAttrs, $index * 2)) "Unexpected Lago attribute change at 0x$('{0:X3}' -f $index)."
     }
 }
-$tileMap = @{ 41 = 495; 184 = 494; 185 = 504; 186 = 505; 187 = 506; 315 = 507; 317 = 508; 340 = 509; 341 = 510; 342 = 511 }
-$paletteMap = @{ 2 = 2; 6 = 11; 7 = 12; 10 = 14; 11 = 13 }
+$tileMap = @{ 184 = 494; 185 = 504; 186 = 505; 187 = 506; 315 = 507; 317 = 508; 340 = 509; 341 = 510; 342 = 511 }
+$paletteMap = @{ 2 = 2; 6 = 11; 7 = 12; 11 = 13 }
 foreach ($index in $patchedMetatiles) {
     Assert-True ([BitConverter]::ToUInt16($lagoAttrs, $index * 2) -eq [BitConverter]::ToUInt16($portaAttrs, $index * 2)) "Lago attribute mismatch for PortaPretoria metatile 0x$('{0:X3}' -f $index)."
     foreach ($entryIndex in 0..7) {
@@ -98,12 +102,12 @@ foreach ($index in $patchedMetatiles) {
         Assert-True ([BitConverter]::ToUInt16($lagoMeta, $index * 16 + $entryIndex * 2) -eq $expected) "Lago metatile 0x$('{0:X3}' -f $index) is not the required PortaPretoria compatibility clone."
     }
 }
-foreach ($pair in @(@(6, 11), @(7, 12), @(10, 14), @(11, 13))) {
+foreach ($pair in @(@(6, 11), @(7, 12), @(11, 13))) {
     $portaPalette = Read-Bytes (Join-Path $porta ('palettes/{0:D2}.pal' -f $pair[0]))
     $lagoPalette = Read-Bytes (Join-Path $lago ('palettes/{0:D2}.pal' -f $pair[1]))
     Assert-True ([Convert]::ToBase64String($portaPalette) -eq [Convert]::ToBase64String($lagoPalette)) "Lago palette $($pair[1]) must contain PortaPretoria palette $($pair[0])."
 }
-foreach ($paletteIndex in @(0..15 | Where-Object { $_ -notin 11, 12, 13, 14 })) {
+foreach ($paletteIndex in @(0..15 | Where-Object { $_ -notin 11, 12, 13 })) {
     $pacifidlogPalette = Read-Bytes (Join-Path $pacifidlog ('palettes/{0:D2}.pal' -f $paletteIndex))
     $lagoPalette = Read-Bytes (Join-Path $lago ('palettes/{0:D2}.pal' -f $paletteIndex))
     Assert-True ([Convert]::ToBase64String($pacifidlogPalette) -eq [Convert]::ToBase64String($lagoPalette)) "Unexpected Lago palette change in slot $paletteIndex."
