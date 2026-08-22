@@ -63,17 +63,6 @@ const struct Tileset gTileset_PortaPretoria =
     .callback = InitTilesetAnim_Petalburg,
 };
 
-const struct Tileset gTileset_LagoDiAlbera =
-{
-    .isCompressed = TRUE,
-    .isSecondary = TRUE,
-    .tiles = gTilesetTiles_LagoDiAlbera,
-    .palettes = gTilesetPalettes_LagoDiAlbera,
-    .metatiles = gMetatiles_LagoDiAlbera,
-    .metatileAttributes = gMetatileAttributes_LagoDiAlbera,
-    .callback = InitTilesetAnim_Petalburg,
-};
-
 const struct Tileset gTileset_Rustboro =
 {
     .isCompressed = TRUE,
