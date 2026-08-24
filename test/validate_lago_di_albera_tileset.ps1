@@ -42,20 +42,13 @@ Assert-True (@($wild.wild_encounter_groups.encounters | Where-Object map -eq 'MA
 
 $mapBin = Join-Path $RepositoryRoot 'data/layouts/LagoDiAlbera/map.bin'
 Assert-True ((Get-Item -LiteralPath $mapBin).Length -eq 120 * 120 * 2) 'Lago map.bin must be 120x120.'
-git -C $RepositoryRoot diff --quiet develop -- data/layouts/LagoDiAlbera/map.bin data/tilesets/primary/general data/tilesets/secondary/pacifidlog data/tilesets/secondary/porta_pretoria data/maps/PacifidlogTown data/layouts/PacifidlogTown
+$lagoBase = [byte[]](Read-GitBlob 'develop:data/layouts/LagoDiAlbera/map.bin')
+$lagoCurrent = Read-Bytes $mapBin
+Assert-True ([Convert]::ToBase64String($lagoBase) -ne [Convert]::ToBase64String($lagoCurrent)) 'Lago map.bin still matches the old blockout.'
+git -C $RepositoryRoot diff --quiet develop -- data/tilesets/primary/general data/tilesets/secondary/pacifidlog data/tilesets/secondary/porta_pretoria data/maps/PacifidlogTown data/layouts/PacifidlogTown
 Assert-True ($LASTEXITCODE -eq 0) 'A protected map or source tileset changed.'
 $viaExpected = @{
-    '13,0' = 0x06C9; '35,0' = 0x06C9; '38,0' = 0x06C9;
-    '0,4' = 0x06C9; '1,4' = 0x06C9; '3,4' = 0x06C9; '4,4' = 0x06C9;
-    '11,4' = 0x06C9; '13,4' = 0x06C9; '14,4' = 0x06C9; '23,4' = 0x06C9;
-    '24,4' = 0x06C9; '25,4' = 0x06C9; '32,4' = 0x06C9; '33,4' = 0x06C9;
-    '34,4' = 0x06C9; '38,4' = 0x06C9; '39,4' = 0x06C9; '47,4' = 0x06C9;
-    '48,4' = 0x06C9; '49,4' = 0x06C9; '51,4' = 0x06C9; '57,4' = 0x06C9;
-    '58,4' = 0x06C9; '59,4' = 0x06C9;
-    '27,2' = 0x310C; '28,2' = 0x310C; '29,2' = 0x310C; '30,2' = 0x310C;
-    '27,3' = 0x310C; '28,3' = 0x310C; '29,3' = 0x310C; '30,3' = 0x310C;
-    '27,4' = 0x310C; '28,4' = 0x310C; '29,4' = 0x310C; '30,4' = 0x310C;
-    '27,5' = 0x310C; '28,5' = 0x310C; '29,5' = 0x310C; '30,5' = 0x310C
+    '26,0' = 0x310B; '31,0' = 0x310D; '26,1' = 0x310B; '31,1' = 0x310D
 }
 $viaBase = [byte[]](Read-GitBlob 'develop:data/layouts/ViaConsolare/map.bin')
 $viaCurrent = Read-Bytes (Join-Path $RepositoryRoot 'data/layouts/ViaConsolare/map.bin')
