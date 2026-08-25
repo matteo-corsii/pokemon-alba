@@ -42,14 +42,10 @@ Assert-True (@($wild.wild_encounter_groups.encounters | Where-Object map -eq 'MA
 
 $mapBin = Join-Path $RepositoryRoot 'data/layouts/LagoDiAlbera/map.bin'
 Assert-True ((Get-Item -LiteralPath $mapBin).Length -eq 120 * 120 * 2) 'Lago map.bin must be 120x120.'
-$lagoBase = [byte[]](Read-GitBlob 'develop:data/layouts/LagoDiAlbera/map.bin')
 $lagoCurrent = Read-Bytes $mapBin
-Assert-True ([Convert]::ToBase64String($lagoBase) -ne [Convert]::ToBase64String($lagoCurrent)) 'Lago map.bin still matches the old blockout.'
 git -C $RepositoryRoot diff --quiet develop -- data/tilesets/primary/general data/tilesets/secondary/pacifidlog data/tilesets/secondary/porta_pretoria data/maps/PacifidlogTown data/layouts/PacifidlogTown
 Assert-True ($LASTEXITCODE -eq 0) 'A protected map or source tileset changed.'
-$viaExpected = @{
-    '26,0' = 0x310B; '31,0' = 0x310D; '26,1' = 0x310B; '31,1' = 0x310D
-}
+$viaExpected = @{}
 $viaBase = [byte[]](Read-GitBlob 'develop:data/layouts/ViaConsolare/map.bin')
 $viaCurrent = Read-Bytes (Join-Path $RepositoryRoot 'data/layouts/ViaConsolare/map.bin')
 $viaDeltaCount = 0

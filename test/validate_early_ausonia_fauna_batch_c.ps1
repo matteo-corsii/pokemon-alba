@@ -45,11 +45,11 @@ $docs = (Get-Content 'docs/AUSONIA_REGIONAL_DEX_PLAN.md' -Raw -Encoding UTF8) -r
 $saveTests = (Get-Content 'test/save.c' -Raw) -replace "`r`n", "`n"
 $learnables = Get-Content 'src/data/pokemon/all_learnables.json' -Raw | ConvertFrom-Json
 
-Assert-Contains $speciesConstants "SPECIES_INFIORALA,`n    SPECIES_GHEPIO,`n    SPECIES_TINUNCOL,`n    SPECIES_PEREGRINUS,`n    SPECIES_GAZZUOLA,`n    SPECIES_BRILLAZZA,`n    SPECIES_GAZZOMBRA,`n    SPECIES_MOLOSPSY,`n    SPECIES_LENGHELIS,`n    SPECIES_LUSCINCO,`n    SPECIES_LUSCERP,`n    SPECIES_LUMELLA,`n    SPECIES_OMPHALUX,`n    SPECIES_PALUDIX,`n    SPECIES_SANGUILEX,`n    SPECIES_CUSTOM_END," 'Species append-only sequence'
+Assert-Contains $speciesConstants "SPECIES_INFIORALA,`n    SPECIES_GHEPIO,`n    SPECIES_TINUNCOL,`n    SPECIES_PEREGRINUS,`n    SPECIES_GAZZUOLA,`n    SPECIES_BRILLAZZA,`n    SPECIES_GAZZOMBRA,`n    SPECIES_MOLOSPSY,`n    SPECIES_LENGHELIS,`n    SPECIES_LUSCINCO,`n    SPECIES_LUSCERP,`n    SPECIES_LUMELLA,`n    SPECIES_OMPHALUX,`n    SPECIES_PALUDIX,`n    SPECIES_SANGUILEX,`n    SPECIES_TRITINO,`n    SPECIES_TRICREST,`n    SPECIES_SALAMPOLLA,`n    SPECIES_ALCHIMANDRA,`n    SPECIES_CUSTOM_END," 'Species append-only sequence'
 Assert-Contains $speciesConstants 'SPECIES_EGG = SPECIES_CUSTOM_END' 'SPECIES_EGG definition'
 Assert-Contains $speciesConstants 'NUM_SPECIES = SPECIES_EGG' 'NUM_SPECIES definition'
 Assert-Contains $dexConstants "NATIONAL_DEX_INFIORALA,`n    NATIONAL_DEX_GHEPIO,`n    NATIONAL_DEX_TINUNCOL,`n    NATIONAL_DEX_PEREGRINUS,`n    NATIONAL_DEX_GAZZUOLA,`n    NATIONAL_DEX_BRILLAZZA,`n    NATIONAL_DEX_GAZZOMBRA,`n    NATIONAL_DEX_MOLOSPSY,`n    NATIONAL_DEX_LENGHELIS,`n    NATIONAL_DEX_LUSCINCO,`n    NATIONAL_DEX_LUSCERP," 'Pokedex append-only sequence'
-Assert-Contains $dexConstants '#define NATIONAL_DEX_COUNT  NATIONAL_DEX_SANGUILEX' 'National Dex count'
+Assert-Contains $dexConstants '#define NATIONAL_DEX_COUNT  NATIONAL_DEX_ALCHIMANDRA' 'National Dex count'
 
 $speciesChecks = @{
     GHEPIO = @(

@@ -52,6 +52,20 @@ $allowedPaths = @(
     "test/validate_porta_pretoria_localization.ps1",
     "test/validate_via_verdi_ambient_npc.ps1"
 )
+$allowedPaths += @(
+    'docs/AUSONIA_REGIONAL_DEX_PLAN.md', 'include/constants/pokedex.h', 'include/constants/species.h',
+    'src/data/graphics/pokemon.h', 'src/data/pokemon/all_learnables.json', 'src/data/pokemon/egg_moves.h',
+    'src/data/pokemon/pokedex_orders.h', 'src/data/pokemon/species_info.h', 'test/species.c',
+    'test/validate_albera_amphitheatre_gym.ps1', 'test/validate_early_ausonia_fauna_batch_b.ps1',
+    'test/validate_early_ausonia_fauna_batch_c.ps1', 'test/validate_early_ausonia_fauna_batch_d.ps1',
+    'test/validate_early_ausonia_graphics_batch_a.ps1', 'test/validate_early_ausonia_graphics_batch_b.ps1',
+    'test/validate_early_ausonia_graphics_batch_c.ps1', 'test/validate_early_ausonia_graphics_batch_d.ps1',
+    'test/validate_lago_di_albera_tileset.ps1', 'test/validate_lenghelis.ps1', 'test/validate_lumella_omphalux.ps1',
+    'test/validate_luscinco_luscerp.ps1', 'test/validate_molospsy.ps1', 'test/validate_paludix_sanguilex.ps1',
+    'test/validate_salampolla_alchimandra.ps1', 'test/validate_tritino_tricrest.ps1',
+    'test/validate_via_verdi_first_investigation.ps1', 'test/validate_cingerm_graphics.ps1'
+)
+$allowedPaths += @(Get-ChildItem 'graphics/pokemon/tritino','graphics/pokemon/tricrest','graphics/pokemon/salampolla','graphics/pokemon/alchimandra' -File | ForEach-Object { $_.FullName.Substring((Get-Location).Path.Length + 1).Replace('\','/') })
 
 $unexpectedPaths = @(Get-ChangedPaths | Where-Object { $_ -notin $allowedPaths })
 Assert-True ($unexpectedPaths.Count -eq 0) ("Out-of-scope files changed: " + ($unexpectedPaths -join ", "))

@@ -196,6 +196,7 @@ $species = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'src/data/pokemon
 $baseSpecies = (& git -C $RepositoryRoot show develop:src/data/pokemon/species_info.h | Out-String)
 Assert-Condition ($LASTEXITCODE -eq 0) 'Could not read develop version of species_info.h'
 
+$allowedPaths += @('test/validate_tritino_tricrest.ps1','test/validate_salampolla_alchimandra.ps1','graphics/pokemon/tritino/anim_front.png','graphics/pokemon/tritino/back.png','graphics/pokemon/tritino/icon.png','graphics/pokemon/tritino/normal.pal','graphics/pokemon/tritino/shiny.pal','graphics/pokemon/tricrest/anim_front.png','graphics/pokemon/tricrest/back.png','graphics/pokemon/tricrest/icon.png','graphics/pokemon/tricrest/normal.pal','graphics/pokemon/tricrest/shiny.pal','graphics/pokemon/salampolla/anim_front.png','graphics/pokemon/salampolla/back.png','graphics/pokemon/salampolla/icon.png','graphics/pokemon/salampolla/normal.pal','graphics/pokemon/salampolla/shiny.pal','graphics/pokemon/alchimandra/anim_front.png','graphics/pokemon/alchimandra/back.png','graphics/pokemon/alchimandra/icon.png','graphics/pokemon/alchimandra/normal.pal','graphics/pokemon/alchimandra/shiny.pal')
 foreach ($entry in $entries)
 {
     $assetRoot = Join-Path $RepositoryRoot "graphics/pokemon/$($entry.Folder)"
@@ -271,6 +272,8 @@ foreach ($entry in $entries)
         $allowedPaths += "graphics/pokemon/$($entry.Folder)/$file"
     }
 }
+$allowedPaths += @('test/validate_tritino_tricrest.ps1','test/validate_salampolla_alchimandra.ps1','graphics/pokemon/tritino/anim_front.png','graphics/pokemon/tritino/back.png','graphics/pokemon/tritino/icon.png','graphics/pokemon/tritino/normal.pal','graphics/pokemon/tritino/shiny.pal','graphics/pokemon/tricrest/anim_front.png','graphics/pokemon/tricrest/back.png','graphics/pokemon/tricrest/icon.png','graphics/pokemon/tricrest/normal.pal','graphics/pokemon/tricrest/shiny.pal','graphics/pokemon/salampolla/anim_front.png','graphics/pokemon/salampolla/back.png','graphics/pokemon/salampolla/icon.png','graphics/pokemon/salampolla/normal.pal','graphics/pokemon/salampolla/shiny.pal','graphics/pokemon/alchimandra/anim_front.png','graphics/pokemon/alchimandra/back.png','graphics/pokemon/alchimandra/icon.png','graphics/pokemon/alchimandra/normal.pal','graphics/pokemon/alchimandra/shiny.pal')
+$allowedPaths += @('test/validate_cingerm_graphics.ps1','test/validate_albera_amphitheatre_gym.ps1','test/validate_albera_bassa_condominiums.ps1','test/validate_albera_bassa_residential_blockout.ps1','test/validate_albera_bassa_school.ps1','test/validate_via_verdi_first_investigation.ps1','test/validate_lago_di_albera_tileset.ps1','test/validate_molospsy.ps1','test/validate_lenghelis.ps1','test/validate_lumella_omphalux.ps1','test/validate_luscinco_luscerp.ps1','test/validate_paludix_sanguilex.ps1','test/validate_early_ausonia_fauna_batch_b.ps1','test/validate_early_ausonia_fauna_batch_c.ps1','test/validate_early_ausonia_fauna_batch_d.ps1')
 $changedPaths = @(
     & git -C $RepositoryRoot diff --name-only develop...HEAD
     & git -C $RepositoryRoot diff --name-only

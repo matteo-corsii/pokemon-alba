@@ -178,7 +178,16 @@ $gameplayFiles = foreach ($path in $gameplayPaths)
         Get-Item -LiteralPath $path
     }
 }
-$references = $gameplayFiles | Select-String -SimpleMatch 'SPECIES_CINGERM'
-Assert-Condition ($null -eq $references) 'Cingerm is referenced by gameplay data and is no longer unobtainable'
+$references = @($gameplayFiles | Select-String -SimpleMatch 'SPECIES_CINGERM')
+$narrativePath = Join-Path $RepositoryRoot 'data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc'
+$unexpectedReferences = @($references | Where-Object { $_.Path -ne $narrativePath })
+Assert-Condition ($unexpectedReferences.Count -eq 0) 'Cingerm has a non-narrative gameplay reference and is no longer unobtainable'
+$allowedNarrativeLines = @(
+    'bufferspeciesname STR_VAR_2, SPECIES_CINGERM',
+    'bufferspeciesname STR_VAR_1, SPECIES_CINGERM'
+)
+$actualNarrativeLines = @($references | Where-Object { $_.Path -eq $narrativePath } | ForEach-Object { $_.Line.Trim() })
+$narrativeLinesMatch = ((($actualNarrativeLines | Sort-Object) -join "`n") -eq (($allowedNarrativeLines | Sort-Object) -join "`n"))
+Assert-Condition $narrativeLinesMatch 'Unexpected Cingerm narrative reference'
 
 Write-Output 'Cingerm graphics validation passed.'
