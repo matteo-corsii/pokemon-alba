@@ -990,3 +990,7 @@ Il catalogo non decide:
 - specie leggendarie o mitiche;
 - coordinate, inserimento negli incontri, squadre o disponibilità nel
   gameplay.
+
+### Cisternide → Calcistern
+
+Linea implementata: Cisternide (Acqua) evolve in Calcistern (Acqua/Roccia) al livello 30. La prima apparizione narrativa di Cisternide nei Cisternoni resta non catturabile; nessuna encounter table viene aggiunta in questo batch.

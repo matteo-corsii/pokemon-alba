@@ -28,7 +28,7 @@ $sharedLabels = [ordered]@{
     'gText_MenuExit' = 'ESCI'
     'gMenuText_Give' = 'DAI'
     'gText_Cancel2' = 'ANNULLA'
-    'gText_PkmnInfo' = 'INFO POKéMON'
+    'gText_PkmnInfo' = 'INFO POKÃƒÂ©MON'
     'gText_PkmnSkills' = 'STATISTICHE'
     'gText_BattleMoves' = 'MOSSE LOTTA'
 }
@@ -82,7 +82,7 @@ foreach ($expected in @(
 }
 
 Assert-True (($moves | Select-String -Pattern 'COMPOUND_STRING\("Fangosberla"\)' -AllMatches).Matches.Count -eq 1) 'Fangosberla deve comparire in un solo record mossa.'
-Assert-True ($species -match '(?s)static const struct LevelUpMove sCingermLevelUpLearnset\[\].*?LEVEL_UP_MOVE\(\s*7, MOVE_MUD_SLAP\)') 'Cingerm non impara più MOVE_MUD_SLAP al livello 7.'
-Assert-True ($starter -match '#define GRASS_STARTER \(IS_FRLG \? SPECIES_BULBASAUR\s+: SPECIES_CINGERM\)') 'Lo starter Erba Emerald non è più Cingerm o lo starter FRLG è cambiato.'
+Assert-True ($species -match '(?s)static const struct LevelUpMove sCingermLevelUpLearnset\[\].*?LEVEL_UP_MOVE\(\s*7, MOVE_MUD_SLAP\)') 'Cingerm non impara piÃƒÂ¹ MOVE_MUD_SLAP al livello 7.'
+Assert-True ($starter -match '#define GRASS_STARTER \(IS_FRLG \? SPECIES_BULBASAUR\s+: SPECIES_CINGERM\)') 'Lo starter Erba Emerald non ÃƒÂ¨ piÃƒÂ¹ Cingerm o lo starter FRLG ÃƒÂ¨ cambiato.'
 
 Write-Output 'Italian pause menu and Mud-Slap localization validation passed.'

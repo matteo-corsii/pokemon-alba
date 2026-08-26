@@ -6468,3 +6468,6 @@ static const u16 sFrigibaxEggMoveLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 #endif //P_FAMILY_FRIGIBAX
+
+static const u16 sCisternideEggMoveLearnset[] = { MOVE_MIRROR_COAT, MOVE_AQUA_RING, MOVE_UNAVAILABLE };
+static const u16 sCalcisternEggMoveLearnset[] = { MOVE_MIRROR_COAT, MOVE_BODY_PRESS, MOVE_UNAVAILABLE };

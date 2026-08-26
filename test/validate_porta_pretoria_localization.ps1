@@ -37,9 +37,9 @@ foreach ($entry in @(
     @($house1, "Prima di proseguire, controlla l'ordine", 'House 1 text missing.'),
     @($house1, 'Il primo POK', 'House 1 battle-order text missing.'),
     @($house2, 'Le pietre di Porta Pretoria conservano', 'House 2 Roman works text missing.'),
-    @($house2, 'Da qui si passa verso Alb', 'House 2 Albèra Storica text missing.'),
-    @($center, 'Molti viaggiatori si fermano qui prima', 'Pokémon Center traveler text missing.'),
-    @($center, 'Da Via Verdi arrivano sempre scarpe', 'Pokémon Center Via Verdi text missing.'),
+    @($house2, 'Da qui si passa verso Alb', 'House 2 AlbÃƒÂ¨ra Storica text missing.'),
+    @($center, 'Molti viaggiatori si fermano qui prima', 'PokÃƒÂ©mon Center traveler text missing.'),
+    @($center, 'Da Via Verdi arrivano sempre scarpe', 'PokÃƒÂ©mon Center Via Verdi text missing.'),
     @($mart, "Tra l'erba di Via Verdi, un ANTIDOTO", 'Mart Antidote text missing.'),
     @($town, 'Ad Alb', 'Secret Base mentor foreshadowing missing.'),
     @($town, 'crearsi un posto tutto loro.', 'Secret Base mentor foreshadowing is incomplete.'),
@@ -73,10 +73,10 @@ Assert-True ((@($route.coord_events | ConvertTo-Json -Depth 10 -Compress) -join 
 Assert-True (($route.connections | ConvertTo-Json -Depth 10 -Compress) -eq ($baseRoute.connections | ConvertTo-Json -Depth 10 -Compress)) 'Route101 connections changed unexpectedly.'
 Assert-True (($route.warp_events | ConvertTo-Json -Depth 10 -Compress) -eq ($baseRoute.warp_events | ConvertTo-Json -Depth 10 -Compress)) 'Route101 warps changed unexpectedly.'
 
-Assert-True ($center.Contains('call Common_EventScript_PkmnCenterNurse')) 'Pokémon Center nurse service changed.'
-Assert-True ($center.Contains('setrespawn HEAL_LOCATION_OLDALE_TOWN')) 'Pokémon Center respawn changed.'
-Assert-True ($center.Contains('CableClub_OnResume')) 'Pokémon Center Wireless handling changed.'
-Assert-True ($center.Contains('FLAG_SYS_POKEDEX_GET')) 'Pokémon Center conditional girl changed.'
+Assert-True ($center.Contains('call Common_EventScript_PkmnCenterNurse')) 'PokÃƒÂ©mon Center nurse service changed.'
+Assert-True ($center.Contains('setrespawn HEAL_LOCATION_OLDALE_TOWN')) 'PokÃƒÂ©mon Center respawn changed.'
+Assert-True ($center.Contains('CableClub_OnResume')) 'PokÃƒÂ©mon Center Wireless handling changed.'
+Assert-True ($center.Contains('FLAG_SYS_POKEDEX_GET')) 'PokÃƒÂ©mon Center conditional girl changed.'
 Assert-True ($mart.Contains('pokemart OldaleTown_Mart_Pokemart_Basic')) 'Mart basic inventory changed.'
 Assert-True ($mart.Contains('pokemart OldaleTown_Mart_Pokemart_Expanded')) 'Mart expanded inventory changed.'
 Assert-True ($mart.Contains('FLAG_ADVENTURE_STARTED')) 'Mart progression handling changed.'

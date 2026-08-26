@@ -18,7 +18,7 @@ $trainerLines = Get-Content -LiteralPath $trainerPath
 Assert-True ($starterSource -match '#define GRASS_STARTER \(IS_FRLG \? SPECIES_BULBASAUR\s+: SPECIES_CINGERM\)') 'Lo slot Erba Emerald non restituisce Cingerm mantenendo Bulbasaur in FRLG.'
 Assert-True ($starterSource -match '#define FIRE_STARTER\s+\(IS_FRLG \? SPECIES_CHARMANDER : SPECIES_SERBRACE\)') 'Lo slot Fuoco Emerald non restituisce Serbrace mantenendo Charmander in FRLG.'
 Assert-True ($starterSource -match '#define WATER_STARTER \(IS_FRLG \? SPECIES_SQUIRTLE\s+: SPECIES_ARDEINO\s+\)') 'Lo slot Acqua Emerald non restituisce Ardeino mantenendo Squirtle in FRLG.'
-Assert-True ($battleSetup -match 'ScriptGiveMon\(starterMon, 5, ITEM_NONE\);') 'La creazione iniziale non usa più il livello 5 standard.'
+Assert-True ($battleSetup -match 'ScriptGiveMon\(starterMon, 5, ITEM_NONE\);') 'La creazione iniziale non usa piÃƒÂ¹ il livello 5 standard.'
 
 $expected = [ordered]@{
     TRAINER_BRENDAN_ROUTE_103_MUDKIP = 'Cingerm:3'
@@ -90,7 +90,7 @@ foreach ($root in $gameplayRoots) {
         $content = Get-Content -LiteralPath $file.FullName -Raw
         Assert-True ($content -notmatch '\bCingerm\b|SPECIES_CINGERM') "Cingerm compare in un incontro, regalo, evento o mappa non consentiti: $($file.FullName)."
         foreach ($species in $forbiddenSpecies) {
-            Assert-True ($content -notmatch "\b$species\b|SPECIES_$($species.ToUpperInvariant())") "$species è ottenibile o referenziato nel gameplay: $($file.FullName)."
+            Assert-True ($content -notmatch "\b$species\b|SPECIES_$($species.ToUpperInvariant())") "$species ÃƒÂ¨ ottenibile o referenziato nel gameplay: $($file.FullName)."
         }
     }
 }

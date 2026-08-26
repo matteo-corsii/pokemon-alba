@@ -24,7 +24,7 @@ $abilities = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'src/data/abili
 Assert-True ($starter -match '#define GRASS_STARTER \(IS_FRLG \? SPECIES_BULBASAUR\s+: SPECIES_CINGERM\)') 'Mapping Erba Emerald/FRLG inatteso.'
 Assert-True ($starter -match '#define FIRE_STARTER\s+\(IS_FRLG \? SPECIES_CHARMANDER : SPECIES_SERBRACE\)') 'Mapping Fuoco Emerald/FRLG inatteso.'
 Assert-True ($starter -match '#define WATER_STARTER \(IS_FRLG \? SPECIES_SQUIRTLE\s+: SPECIES_ARDEINO\s+\)') 'Mapping Acqua Emerald/FRLG inatteso.'
-Assert-Contains $battleSetup 'ScriptGiveMon(starterMon, 5, ITEM_NONE);' 'La creazione standard dello starter al livello 5 è cambiata.'
+Assert-Contains $battleSetup 'ScriptGiveMon(starterMon, 5, ITEM_NONE);' 'La creazione standard dello starter al livello 5 ÃƒÂ¨ cambiata.'
 
 $expected = [ordered]@{
     TRAINER_BRENDAN_ROUTE_103_MUDKIP='Cingerm:3'; TRAINER_BRENDAN_ROUTE_110_MUDKIP='Rovasco:20'; TRAINER_BRENDAN_ROUTE_119_MUDKIP='Rovasco:31'
@@ -70,18 +70,18 @@ foreach ($evolution in @(
     '.evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_CODAIRONE})'
 )) { Assert-Contains $species $evolution "Evoluzione registrata inattesa: $evolution" }
 
-Assert-Contains $species '.frontPic = gMonFrontPic_Cingerm' 'Cingerm non usa più il front sprite originale.'
-Assert-Contains $species '.backPic = gMonBackPic_Cingerm' 'Cingerm non usa più il back sprite originale.'
+Assert-Contains $species '.frontPic = gMonFrontPic_Cingerm' 'Cingerm non usa piÃƒÂ¹ il front sprite originale.'
+Assert-Contains $species '.backPic = gMonBackPic_Cingerm' 'Cingerm non usa piÃƒÂ¹ il back sprite originale.'
 Assert-Contains $species '.frontPic = gMonFrontPic_Serbrace' 'Serbrace non usa il front sprite originale.'
 Assert-Contains $species '.backPic = gMonBackPic_Serbrace' 'Serbrace non usa il back sprite originale.'
 Assert-Contains $species '.frontPic = gMonFrontPic_Ardeino' 'Ardeino non usa il front sprite originale.'
 Assert-Contains $species '.backPic = gMonBackPic_Ardeino' 'Ardeino non usa il back sprite originale.'
 
-foreach ($heading in @('static const u8 sTextAbilityTitle[] = _("ABILITÀ");', 'static const u8 sTextTrainerMemoTitle[] = _("MEMO ALLENATORE");')) {
+foreach ($heading in @('static const u8 sTextAbilityTitle[] = _("ABILITÃƒâ‚¬");', 'static const u8 sTextTrainerMemoTitle[] = _("MEMO ALLENATORE");')) {
     Assert-Contains $summary $heading "Intestazione italiana mancante: $heading"
 }
-Assert-True ($summary -match 'ClearInfoPageHeading\(.+?, 8\)') 'L’intestazione grafica ABILITY non viene neutralizzata in memoria.'
-Assert-True ($summary -match 'ClearInfoPageHeading\(.+?, 13\)') 'L’intestazione grafica TRAINER MEMO non viene neutralizzata in memoria.'
+Assert-True ($summary -match 'ClearInfoPageHeading\(.+?, 8\)') 'LÃ¢â‚¬â„¢intestazione grafica ABILITY non viene neutralizzata in memoria.'
+Assert-True ($summary -match 'ClearInfoPageHeading\(.+?, 13\)') 'LÃ¢â‚¬â„¢intestazione grafica TRAINER MEMO non viene neutralizzata in memoria.'
 
 $natureNames = @('Ardita','Schiva','Audace','Decisa','Birbona','Sicura','Docile','Placida','Scaltra','Fiacca','Timida','Lesta','Seria','Allegra','Ingenua','Modesta','Mite','Quieta','Ritrosa','Ardente','Calma','Gentile','Vivace','Cauta','Furba')
 foreach ($nature in $natureNames) { Assert-Contains $pokemon ".name = COMPOUND_STRING(`"$nature`")" "Natura italiana mancante: $nature" }
@@ -97,7 +97,7 @@ foreach ($italian in @('Natura {DYNAMIC 0}{DYNAMIC 2}', 'incontrato al {LV_2}', 
 
 $abilityTranslations = [ordered]@{ Overgrow='Erbaiuto'; Defiant='Agonismo'; Blaze='Aiutofuoco'; Corrosion='Corrosione'; Torrent='Acquaiuto'; Hydration='Idratazione' }
 foreach ($entry in $abilityTranslations.GetEnumerator()) {
-    Assert-True ($abilities -match "(?s)\[ABILITY_$($entry.Key.ToUpperInvariant())\].*?\.name = _\(`"$($entry.Value)`"\).*?\.description = COMPOUND_STRING\(`"[^`"]+`"\)") "Traduzione abilità mancante o incompleta: $($entry.Key)."
+    Assert-True ($abilities -match "(?s)\[ABILITY_$($entry.Key.ToUpperInvariant())\].*?\.name = _\(`"$($entry.Value)`"\).*?\.description = COMPOUND_STRING\(`"[^`"]+`"\)") "Traduzione abilitÃƒÂ  mancante o incompleta: $($entry.Key)."
 }
 
 $gameplayRoots = @('data/maps', 'data/scripts', 'src/data/wild_encounters.json')

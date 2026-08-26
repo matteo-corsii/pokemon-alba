@@ -31,12 +31,12 @@ $docs = (Get-Content 'docs/AUSONIA_REGIONAL_DEX_PLAN.md' -Raw -Encoding UTF8) -r
 $saveTests = (Get-Content 'test/save.c' -Raw) -replace "`r`n", "`n"
 $learnables = Get-Content 'src/data/pokemon/all_learnables.json' -Raw | ConvertFrom-Json
 
-Assert-Contains $speciesConstants "SPECIES_GAZZOMBRA,`n    SPECIES_MOLOSPSY,`n    SPECIES_LENGHELIS,`n    SPECIES_LUSCINCO,`n    SPECIES_LUSCERP,`n    SPECIES_LUMELLA,`n    SPECIES_OMPHALUX,`n    SPECIES_PALUDIX,`n    SPECIES_SANGUILEX,`n    SPECIES_TRITINO,`n    SPECIES_TRICREST,`n    SPECIES_SALAMPOLLA,`n    SPECIES_ALCHIMANDRA,`n    SPECIES_CUSTOM_END," 'Species append-only sequence'
+Assert-Contains $speciesConstants "SPECIES_GAZZOMBRA,`n    SPECIES_MOLOSPSY,`n    SPECIES_LENGHELIS,`n    SPECIES_LUSCINCO,`n    SPECIES_LUSCERP,`n    SPECIES_LUMELLA,`n    SPECIES_OMPHALUX,`n    SPECIES_PALUDIX,`n    SPECIES_SANGUILEX,`n    SPECIES_TRITINO,`n    SPECIES_TRICREST,`n    SPECIES_SALAMPOLLA,`n    SPECIES_ALCHIMANDRA,`n    SPECIES_CISTERNIDE,`n    SPECIES_CALCISTERN,`n    SPECIES_CUSTOM_END," 'Species append-only sequence'
 Assert-Contains $speciesConstants 'SPECIES_EGG = SPECIES_CUSTOM_END' 'Species_EGG definition'
 Assert-Contains $speciesConstants 'NUM_SPECIES = SPECIES_EGG' 'NUM_SPECIES definition'
-Assert-Contains $dexConstants "NATIONAL_DEX_GAZZOMBRA,`n    NATIONAL_DEX_MOLOSPSY," 'Pokédex append-only sequence'
+Assert-Contains $dexConstants "NATIONAL_DEX_GAZZOMBRA,`n    NATIONAL_DEX_MOLOSPSY," 'PokÃƒÆ’Ã‚Â©dex append-only sequence'
 Assert-Contains $dexConstants "NATIONAL_DEX_MOLOSPSY,`n    NATIONAL_DEX_LENGHELIS,`n    NATIONAL_DEX_LUSCINCO,`n    NATIONAL_DEX_LUSCERP," 'Luscinco/Luscerp append-only National Dex sequence'
-Assert-Contains $dexConstants '#define NATIONAL_DEX_COUNT  NATIONAL_DEX_ALCHIMANDRA' 'National Dex count'
+Assert-Contains $dexConstants '#define NATIONAL_DEX_COUNT  NATIONAL_DEX_CALCISTERN' 'National Dex count'
 
 $record = Get-Section $speciesInfo '[SPECIES_MOLOSPSY] =' "`n    },"
 Assert-True ($speciesInfo.IndexOf('[SPECIES_MOLOSPSY] =') -lt $speciesInfo.IndexOf('/* You may add any custom species below this point based on the following structure: */')) 'Molospsy record is missing or misplaced'
@@ -102,7 +102,7 @@ $weight = Get-Section $orders 'const u16 gPokedexOrder_Weight[]' 'const u16 gPok
 $height = $orders.Substring($orders.IndexOf('const u16 gPokedexOrder_Height[]'))
 foreach ($section in @($alphabetical, $weight, $height)) {
     $count = ([regex]::Matches($section, 'NATIONAL_DEX_MOLOSPSY(?![A-Z0-9_])')).Count
-    Assert-True ($count -eq 1) 'NATIONAL_DEX_MOLOSPSY must occur once in each Pokédex order'
+    Assert-True ($count -eq 1) 'NATIONAL_DEX_MOLOSPSY must occur once in each PokÃƒÆ’Ã‚Â©dex order'
 }
 
 Assert-Contains $docs '### Molospsy' 'Molospsy documentation section'
