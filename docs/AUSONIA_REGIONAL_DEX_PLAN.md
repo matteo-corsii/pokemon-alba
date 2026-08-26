@@ -504,7 +504,7 @@ comune: Borgotto 010, Pastufo 011, Miciolo 012 e Felivates 013.
 
 - **Temporary family ID:** `AUS-CONCEPT-LUSCERP`
 - **Species/stages:** Luscinco → Luscerp.
-- **Current status:** CANONICAL DESIGN; non implementata; PLACEMENT CANDIDATE;
+- **Current status:** IMPLEMENTED; CANONICAL DESIGN; PLACEMENT CANDIDATE;
   evoluzione e abilità BALANCE PROVISIONAL.
 - **Proposed typing:** Luscinco Erba; Luscerp Erba/Drago.
 - **Core concept:** linea terrestre e prevalentemente diurna ispirata a
@@ -570,7 +570,7 @@ comune: Borgotto 010, Pastufo 011, Miciolo 012 e Felivates 013.
 
 - **Temporary family ID:** `AUS-CONCEPT-TRICREST`
 - **Species/stages:** Tritino → Tricrest.
-- **Current status:** CANONICAL DESIGN; non implementata; PLACEMENT CANDIDATE;
+- **Current status:** IMPLEMENTED; CANONICAL DESIGN; PLACEMENT CANDIDATE;
   evoluzione e abilità BALANCE PROVISIONAL.
 - **Proposed typing:** Tritino Acqua; Tricrest Acqua/Drago.
 - **Core concept:** linea lacustre a due stadi ispirata al tritone crestato.
@@ -617,7 +617,7 @@ comune: Borgotto 010, Pastufo 011, Miciolo 012 e Felivates 013.
 - **Temporary family ID:** `AUS-CONCEPT-SALADOCT`
 - **Species/stages:** Salampolla → Alchimandra. Saladoct è un RETIRED WORKING
   NAME e non una specie attiva separata.
-- **Current status:** CANONICAL DESIGN; non implementata; PLACEMENT CANDIDATE;
+- **Current status:** IMPLEMENTED; CANONICAL DESIGN; PLACEMENT CANDIDATE;
   evoluzione BALANCE PROVISIONAL.
 - **Proposed typing:** Salampolla Veleno; Alchimandra Veleno/Folletto.
 - **Core concept:** linea notturna a due stadi della salamandrina alchemica.

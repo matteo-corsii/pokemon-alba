@@ -99,6 +99,20 @@ static const u16 sPaludixEggMoveLearnset[] = {
 
 #define sSanguilexEggMoveLearnset sPaludixEggMoveLearnset
 
+static const u16 sTritinoEggMoveLearnset[] = {
+    MOVE_MIST, MOVE_MIRROR_COAT, MOVE_AQUA_JET, MOVE_DRAGON_BREATH,
+    MOVE_HAZE, MOVE_AQUA_RING, MOVE_UNAVAILABLE,
+};
+
+#define sTricrestEggMoveLearnset sTritinoEggMoveLearnset
+
+static const u16 sSalampollaEggMoveLearnset[] = {
+    MOVE_DISABLE, MOVE_GASTRO_ACID, MOVE_TOXIC_SPIKES, MOVE_VENOM_DRENCH,
+    MOVE_SYNTHESIS, MOVE_WISH, MOVE_UNAVAILABLE,
+};
+
+#define sAlchimandraEggMoveLearnset sSalampollaEggMoveLearnset
+
 #if P_FAMILY_BULBASAUR
 static const u16 sBulbasaurEggMoveLearnset[] = {
     MOVE_SKULL_BASH,

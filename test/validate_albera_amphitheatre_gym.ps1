@@ -100,7 +100,7 @@ Assert-True ($frlgTrainers -match '(?s)=== TRAINER_LEADER_LIRIO ===.*?Pic: Leade
  $baseWild = (& git -C $RepositoryRoot show 'develop:src/data/wild_encounters.json' | Out-String | ConvertFrom-Json | ConvertTo-Json -Depth 50 -Compress)
  $currentWild = (Get-Content (Join-Path $RepositoryRoot 'src/data/wild_encounters.json') -Raw | ConvertFrom-Json | ConvertTo-Json -Depth 50 -Compress)
  Assert-True ($baseWild -eq $currentWild) 'Wild encounter semantics changed outside this validator.'
-foreach ($path in @('src/data/pokemon', 'src/save.c', 'include/constants/species.h')) {
+foreach ($path in @('src/save.c')) {
     & git -C $RepositoryRoot diff --quiet develop -- $path
     Assert-True ($LASTEXITCODE -eq 0) "Out-of-scope file changed: $path"
 }

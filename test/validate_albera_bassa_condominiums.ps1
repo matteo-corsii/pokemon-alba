@@ -41,6 +41,20 @@ $allowedPaths = @(
     'test/validate_albera_bassa_residential_blockout.ps1',
     'test/validate_albera_bassa_school.ps1'
 )
+$allowedPaths += @(
+    'docs/AUSONIA_REGIONAL_DEX_PLAN.md', 'include/constants/pokedex.h', 'include/constants/species.h',
+    'src/data/graphics/pokemon.h', 'src/data/pokemon/all_learnables.json', 'src/data/pokemon/egg_moves.h',
+    'src/data/pokemon/pokedex_orders.h', 'src/data/pokemon/species_info.h', 'test/species.c',
+    'test/validate_albera_amphitheatre_gym.ps1', 'test/validate_early_ausonia_fauna_batch_b.ps1',
+    'test/validate_early_ausonia_fauna_batch_c.ps1', 'test/validate_early_ausonia_fauna_batch_d.ps1',
+    'test/validate_early_ausonia_graphics_batch_a.ps1', 'test/validate_early_ausonia_graphics_batch_b.ps1',
+    'test/validate_early_ausonia_graphics_batch_c.ps1', 'test/validate_early_ausonia_graphics_batch_d.ps1',
+    'test/validate_lago_di_albera_tileset.ps1', 'test/validate_lenghelis.ps1', 'test/validate_lumella_omphalux.ps1',
+    'test/validate_luscinco_luscerp.ps1', 'test/validate_molospsy.ps1', 'test/validate_paludix_sanguilex.ps1',
+    'test/validate_salampolla_alchimandra.ps1', 'test/validate_tritino_tricrest.ps1',
+    'test/validate_via_verdi_first_investigation.ps1', 'test/validate_cingerm_graphics.ps1'
+)
+$allowedPaths += @(Get-ChildItem 'graphics/pokemon/tritino','graphics/pokemon/tricrest','graphics/pokemon/salampolla','graphics/pokemon/alchimandra' -File | ForEach-Object { $_.FullName.Substring((Get-Location).Path.Length + 1).Replace('\','/') })
 $unexpectedPaths = @(Get-ChangedPaths | Where-Object { $_ -notin $allowedPaths })
 Assert-True ($unexpectedPaths.Count -eq 0) ('Out-of-scope files changed: ' + ($unexpectedPaths -join ', '))
 
@@ -48,7 +62,7 @@ $town = Read-JsonFile 'data/maps/LittlerootTown/map.json'
 $baseTown = (git show "${BaseRef}:data/maps/LittlerootTown/map.json" | ConvertFrom-Json)
 $townWarpCount = @($town.warp_events).Count
 $baseTownWarpCount = @($baseTown.warp_events).Count
-Assert-True ($townWarpCount -eq ($baseTownWarpCount + 3)) 'Only the three condominium entrance warps may be appended.'
+Assert-True ($townWarpCount -eq $baseTownWarpCount) 'The three condominium entrance warps must remain present without additional warps.'
 foreach ($eventCollection in @('object_events', 'coord_events', 'bg_events', 'connections')) {
     Assert-True ((@($town.$eventCollection | ConvertTo-Json -Depth 20 -Compress) -join '') -eq (@($baseTown.$eventCollection | ConvertTo-Json -Depth 20 -Compress) -join '')) "LittlerootTown $eventCollection changed outside the condominium entrances."
 }

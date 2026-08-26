@@ -531,6 +531,48 @@ static const struct LevelUpMove sLenghelisLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+static const struct LevelUpMove sTritinoLevelUpLearnset[] = {
+    LEVEL_UP_MOVE(1, MOVE_WATER_GUN), LEVEL_UP_MOVE(1, MOVE_TAIL_WHIP),
+    LEVEL_UP_MOVE(4, MOVE_SUPERSONIC), LEVEL_UP_MOVE(7, MOVE_WATER_PULSE),
+    LEVEL_UP_MOVE(10, MOVE_CONFUSION), LEVEL_UP_MOVE(13, MOVE_BUBBLE_BEAM),
+    LEVEL_UP_MOVE(16, MOVE_AQUA_RING), LEVEL_UP_MOVE(20, MOVE_DRAGON_BREATH),
+    LEVEL_UP_MOVE(24, MOVE_PSYBEAM), LEVEL_UP_MOVE(28, MOVE_SURF),
+    LEVEL_UP_MOVE(32, MOVE_DRAGON_PULSE), LEVEL_UP_MOVE(36, MOVE_HYDRO_PUMP),
+    LEVEL_UP_END
+};
+
+static const struct LevelUpMove sTricrestLevelUpLearnset[] = {
+    LEVEL_UP_MOVE(1, MOVE_WATER_GUN), LEVEL_UP_MOVE(1, MOVE_TAIL_WHIP),
+    LEVEL_UP_MOVE(1, MOVE_SUPERSONIC), LEVEL_UP_MOVE(1, MOVE_WATER_PULSE),
+    LEVEL_UP_MOVE(10, MOVE_CONFUSION), LEVEL_UP_MOVE(13, MOVE_BUBBLE_BEAM),
+    LEVEL_UP_MOVE(16, MOVE_AQUA_RING), LEVEL_UP_MOVE(20, MOVE_DRAGON_BREATH),
+    LEVEL_UP_MOVE(24, MOVE_PSYBEAM), LEVEL_UP_MOVE(28, MOVE_SURF),
+    LEVEL_UP_MOVE(32, MOVE_DRAGON_PULSE), LEVEL_UP_MOVE(36, MOVE_ICE_BEAM),
+    LEVEL_UP_MOVE(42, MOVE_HYDRO_PUMP), LEVEL_UP_MOVE(48, MOVE_OUTRAGE),
+    LEVEL_UP_END
+};
+
+static const struct LevelUpMove sSalampollaLevelUpLearnset[] = {
+    LEVEL_UP_MOVE(1, MOVE_POISON_STING), LEVEL_UP_MOVE(1, MOVE_GROWL),
+    LEVEL_UP_MOVE(4, MOVE_ABSORB), LEVEL_UP_MOVE(7, MOVE_ACID),
+    LEVEL_UP_MOVE(10, MOVE_STUN_SPORE), LEVEL_UP_MOVE(13, MOVE_VENOSHOCK),
+    LEVEL_UP_MOVE(16, MOVE_CONFUSE_RAY), LEVEL_UP_MOVE(20, MOVE_GIGA_DRAIN),
+    LEVEL_UP_MOVE(24, MOVE_TOXIC), LEVEL_UP_MOVE(28, MOVE_MOONLIGHT),
+    LEVEL_UP_MOVE(32, MOVE_SLUDGE_BOMB), LEVEL_UP_MOVE(36, MOVE_HEAL_BELL),
+    LEVEL_UP_END
+};
+
+static const struct LevelUpMove sAlchimandraLevelUpLearnset[] = {
+    LEVEL_UP_MOVE(1, MOVE_POISON_STING), LEVEL_UP_MOVE(1, MOVE_GROWL),
+    LEVEL_UP_MOVE(1, MOVE_ABSORB), LEVEL_UP_MOVE(1, MOVE_ACID),
+    LEVEL_UP_MOVE(10, MOVE_STUN_SPORE), LEVEL_UP_MOVE(13, MOVE_VENOSHOCK),
+    LEVEL_UP_MOVE(16, MOVE_CONFUSE_RAY), LEVEL_UP_MOVE(20, MOVE_GIGA_DRAIN),
+    LEVEL_UP_MOVE(24, MOVE_TOXIC), LEVEL_UP_MOVE(28, MOVE_MOONLIGHT),
+    LEVEL_UP_MOVE(32, MOVE_DAZZLING_GLEAM), LEVEL_UP_MOVE(36, MOVE_SLUDGE_WAVE),
+    LEVEL_UP_MOVE(42, MOVE_HEAL_BELL), LEVEL_UP_MOVE(48, MOVE_TOXIC_SPIKES),
+    LEVEL_UP_END
+};
+
 static const struct LevelUpMove sLuscincoLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_TACKLE),
     LEVEL_UP_MOVE( 1, MOVE_TAIL_WHIP),
@@ -2474,6 +2516,132 @@ const struct SpeciesInfo gSpeciesInfo[] =
             sAnimTable_Following, gOverworldPalette_Masquerain, gShinyOverworldPalette_Masquerain)
         .levelUpLearnset = sSanguilexLevelUpLearnset, .teachingType = EXPLICIT_TEACHABLES,
         .teachableLearnset = sSanguilexTeachableLearnset, .eggMoveLearnset = sSanguilexEggMoveLearnset,
+    },
+
+    [SPECIES_TRITINO] =
+    {
+        .baseHP = 45, .baseAttack = 40, .baseDefense = 45, .baseSpeed = 55,
+        .baseSpAttack = 70, .baseSpDefense = 55,
+        .types = MON_TYPES(TYPE_WATER), .catchRate = 190, .expYield = 64,
+        .evYield_SpAttack = 1, .genderRatio = PERCENT_FEMALE(50), .eggCycles = 20,
+        .friendship = 50, .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_1, EGG_GROUP_DRAGON),
+        .abilities = { ABILITY_SWIFT_SWIM, ABILITY_WATER_ABSORB, ABILITY_STORM_DRAIN },
+        .bodyColor = BODY_COLOR_BLUE, .speciesName = _("Tritino"),
+        .cryId = CRY_TENTACOOL, .natDexNum = NATIONAL_DEX_TRITINO,
+        .categoryName = _("TRITONE"), .height = 4, .weight = 38,
+        .description = COMPOUND_STRING(
+            "Vive sulle rive del Lago di Albèra e\n"
+            "percepisce ogni variazione di pressione\n"
+            "nell'acqua prima che il flusso cambi."),
+        .pokemonScale = 256, .pokemonOffset = 0, .trainerScale = 256, .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Tritino, .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 4, .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        .backPic = gMonBackPic_Tritino, .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 4, .palette = gMonPalette_Tritino,
+        .shinyPalette = gMonShinyPalette_Tritino, .iconSprite = gMonIcon_Tritino,
+        .iconPalIndex = 0, .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        SHADOW(0, 4, SHADOW_SIZE_M)
+        FOOTPRINT(Tentacool)
+        OVERWORLD(sPicTable_Tentacool, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT,
+            sAnimTable_Following, gOverworldPalette_Tentacool, gShinyOverworldPalette_Tentacool)
+        .levelUpLearnset = sTritinoLevelUpLearnset, .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sTritinoTeachableLearnset, .eggMoveLearnset = sTritinoEggMoveLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 27, SPECIES_TRICREST}),
+    },
+
+    [SPECIES_TRICREST] =
+    {
+        .baseHP = 75, .baseAttack = 60, .baseDefense = 75, .baseSpeed = 85,
+        .baseSpAttack = 110, .baseSpDefense = 95,
+        .types = MON_TYPES(TYPE_WATER, TYPE_DRAGON), .catchRate = 45, .expYield = 170,
+        .evYield_SpAttack = 2, .genderRatio = PERCENT_FEMALE(50), .eggCycles = 20,
+        .friendship = 50, .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_1, EGG_GROUP_DRAGON),
+        .abilities = { ABILITY_SWIFT_SWIM, ABILITY_WATER_ABSORB, ABILITY_STORM_DRAIN },
+        .bodyColor = BODY_COLOR_BLUE, .speciesName = _("Tricrest"),
+        .cryId = CRY_DRATINI, .natDexNum = NATIONAL_DEX_TRICREST,
+        .categoryName = _("CRESTA"), .height = 12, .weight = 185,
+        .description = COMPOUND_STRING(
+            "Usa la cresta per avvertire correnti e\n"
+            "vibrazioni profonde che attraversano\n"
+            "il lago e i suoi condotti."),
+        .pokemonScale = 256, .pokemonOffset = 0, .trainerScale = 256, .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Tricrest, .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 4, .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        .backPic = gMonBackPic_Tricrest, .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 4, .palette = gMonPalette_Tricrest,
+        .shinyPalette = gMonShinyPalette_Tricrest, .iconSprite = gMonIcon_Tricrest,
+        .iconPalIndex = 0, .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        SHADOW(0, 4, SHADOW_SIZE_M)
+        FOOTPRINT(Tentacool)
+        OVERWORLD(sPicTable_Tentacool, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT,
+            sAnimTable_Following, gOverworldPalette_Tentacool, gShinyOverworldPalette_Tentacool)
+        .levelUpLearnset = sTricrestLevelUpLearnset, .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sTricrestTeachableLearnset, .eggMoveLearnset = sTricrestEggMoveLearnset,
+    },
+
+    [SPECIES_SALAMPOLLA] =
+    {
+        .baseHP = 40, .baseAttack = 35, .baseDefense = 40, .baseSpeed = 75,
+        .baseSpAttack = 70, .baseSpDefense = 50,
+        .types = MON_TYPES(TYPE_POISON), .catchRate = 190, .expYield = 64,
+        .evYield_Speed = 1, .genderRatio = PERCENT_FEMALE(50), .eggCycles = 20,
+        .friendship = 50, .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD, EGG_GROUP_AMORPHOUS),
+        .abilities = { ABILITY_POISON_POINT, ABILITY_COMPOUND_EYES, ABILITY_CORROSION },
+        .bodyColor = BODY_COLOR_PURPLE, .speciesName = _("Salampolla"),
+        .cryId = CRY_SALANDIT, .natDexNum = NATIONAL_DEX_SALAMPOLLA,
+        .categoryName = _("ALCHEMICA"), .height = 3, .weight = 18,
+        .description = COMPOUND_STRING(
+            "Raccoglie sostanze da funghi, erbe e\n"
+            "acqua stagnante per preparare secrezioni\n"
+            "dal profumo pungente."),
+        .pokemonScale = 256, .pokemonOffset = 0, .trainerScale = 256, .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Salampolla, .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 4, .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        .backPic = gMonBackPic_Salampolla, .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 4, .palette = gMonPalette_Salampolla,
+        .shinyPalette = gMonShinyPalette_Salampolla, .iconSprite = gMonIcon_Salampolla,
+        .iconPalIndex = 0, .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        SHADOW(0, 4, SHADOW_SIZE_M)
+        FOOTPRINT(Salandit)
+        OVERWORLD(sPicTable_Salandit, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT,
+            sAnimTable_Following, gOverworldPalette_Salandit, gShinyOverworldPalette_Salandit)
+        .levelUpLearnset = sSalampollaLevelUpLearnset, .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sSalampollaTeachableLearnset, .eggMoveLearnset = sSalampollaEggMoveLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 28, SPECIES_ALCHIMANDRA, CONDITIONS({IF_TIME, TIME_NIGHT})}),
+    },
+
+    [SPECIES_ALCHIMANDRA] =
+    {
+        .baseHP = 65, .baseAttack = 50, .baseDefense = 60, .baseSpeed = 110,
+        .baseSpAttack = 105, .baseSpDefense = 80,
+        .types = MON_TYPES(TYPE_POISON, TYPE_FAIRY), .catchRate = 45, .expYield = 160,
+        .evYield_Speed = 2, .genderRatio = PERCENT_FEMALE(50), .eggCycles = 20,
+        .friendship = 50, .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD, EGG_GROUP_AMORPHOUS),
+        .abilities = { ABILITY_POISON_POINT, ABILITY_COMPOUND_EYES, ABILITY_CORROSION },
+        .bodyColor = BODY_COLOR_PURPLE, .speciesName = _("Alchimandra"),
+        .cryId = CRY_SALANDIT, .natDexNum = NATIONAL_DEX_ALCHIMANDRA,
+        .categoryName = _("ALCHIMICA"), .height = 8, .weight = 82,
+        .description = COMPOUND_STRING(
+            "Combina secrezioni e sostanze vegetali\n"
+            "per produrre veleni e rimedi di grande\n"
+            "efficacia."),
+        .pokemonScale = 256, .pokemonOffset = 0, .trainerScale = 256, .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Alchimandra, .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 4, .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        .backPic = gMonBackPic_Alchimandra, .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 4, .palette = gMonPalette_Alchimandra,
+        .shinyPalette = gMonShinyPalette_Alchimandra, .iconSprite = gMonIcon_Alchimandra,
+        .iconPalIndex = 0, .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        SHADOW(0, 4, SHADOW_SIZE_M)
+        FOOTPRINT(Salandit)
+        OVERWORLD(sPicTable_Salandit, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT,
+            sAnimTable_Following, gOverworldPalette_Salandit, gShinyOverworldPalette_Salandit)
+        .levelUpLearnset = sAlchimandraLevelUpLearnset, .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sAlchimandraTeachableLearnset, .eggMoveLearnset = sAlchimandraEggMoveLearnset,
     },
 
     /* You may add any custom species below this point based on the following structure: */

@@ -27670,6 +27670,27 @@ const u8 gMonIcon_Gazzombra[] = INCGFX_U8("graphics/pokemon/gazzombra/icon.png",
 #endif //OW_POKEMON_OBJECT_EVENTS
 #endif //P_FAMILY_PECHARUNT
 
+const u32 gMonFrontPic_Tritino[] = INCGFX_U32("graphics/pokemon/tritino/anim_front.png", ".4bpp.smol");
+const u16 gMonPalette_Tritino[] = INCGFX_U16("graphics/pokemon/tritino/normal.pal", ".gbapal");
+const u32 gMonBackPic_Tritino[] = INCGFX_U32("graphics/pokemon/tritino/back.png", ".4bpp.smol");
+const u16 gMonShinyPalette_Tritino[] = INCGFX_U16("graphics/pokemon/tritino/shiny.pal", ".gbapal");
+const u8 gMonIcon_Tritino[] = INCGFX_U8("graphics/pokemon/tritino/icon.png", ".4bpp");
+const u32 gMonFrontPic_Tricrest[] = INCGFX_U32("graphics/pokemon/tricrest/anim_front.png", ".4bpp.smol");
+const u16 gMonPalette_Tricrest[] = INCGFX_U16("graphics/pokemon/tricrest/normal.pal", ".gbapal");
+const u32 gMonBackPic_Tricrest[] = INCGFX_U32("graphics/pokemon/tricrest/back.png", ".4bpp.smol");
+const u16 gMonShinyPalette_Tricrest[] = INCGFX_U16("graphics/pokemon/tricrest/shiny.pal", ".gbapal");
+const u8 gMonIcon_Tricrest[] = INCGFX_U8("graphics/pokemon/tricrest/icon.png", ".4bpp");
+const u32 gMonFrontPic_Salampolla[] = INCGFX_U32("graphics/pokemon/salampolla/anim_front.png", ".4bpp.smol");
+const u16 gMonPalette_Salampolla[] = INCGFX_U16("graphics/pokemon/salampolla/normal.pal", ".gbapal");
+const u32 gMonBackPic_Salampolla[] = INCGFX_U32("graphics/pokemon/salampolla/back.png", ".4bpp.smol");
+const u16 gMonShinyPalette_Salampolla[] = INCGFX_U16("graphics/pokemon/salampolla/shiny.pal", ".gbapal");
+const u8 gMonIcon_Salampolla[] = INCGFX_U8("graphics/pokemon/salampolla/icon.png", ".4bpp");
+const u32 gMonFrontPic_Alchimandra[] = INCGFX_U32("graphics/pokemon/alchimandra/anim_front.png", ".4bpp.smol");
+const u16 gMonPalette_Alchimandra[] = INCGFX_U16("graphics/pokemon/alchimandra/normal.pal", ".gbapal");
+const u32 gMonBackPic_Alchimandra[] = INCGFX_U32("graphics/pokemon/alchimandra/back.png", ".4bpp.smol");
+const u16 gMonShinyPalette_Alchimandra[] = INCGFX_U16("graphics/pokemon/alchimandra/shiny.pal", ".gbapal");
+const u8 gMonIcon_Alchimandra[] = INCGFX_U8("graphics/pokemon/alchimandra/icon.png", ".4bpp");
+
     const u32 gMonFrontPic_Egg[] = INCGFX_U32("graphics/pokemon/egg/anim_front.png", ".4bpp.smol");
     const u16 gMonPalette_Egg[] = INCGFX_U16("graphics/pokemon/egg/normal.pal", ".gbapal");
     const u8 gMonIcon_Egg[] = INCGFX_U8("graphics/pokemon/egg/icon.png", ".4bpp");
