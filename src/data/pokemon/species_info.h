@@ -2721,7 +2721,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .friendship = 70, .growthRate = GROWTH_MEDIUM_FAST, .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_2),
         .abilities = { ABILITY_SWIFT_SWIM, ABILITY_WATER_VEIL, ABILITY_HYDRATION }, .bodyColor = BODY_COLOR_GREEN,
         .speciesName = _("Carpulus"), .cryId = CRY_MAGIKARP, .natDexNum = NATIONAL_DEX_CARPULUS, .categoryName = _("SCAGLIA"), .height = 6, .weight = 120,
-        .description = COMPOUND_STRING("Vive in piccoli branchi presso rive e pontili.\nLe scaglie circolari riflettono la luce e permettono\nagli esemplari di non perdersi nell'acqua torbida."),
+        .description = COMPOUND_STRING("Vive in branchi presso rive e pontili. Le scaglie\ncircolari riflettono la luce, così non si perde\nnell'acqua torbida."),
         .pokemonScale = 256, .frontPic = gMonFrontPic_Carpulus, .frontPicSize = MON_COORDS_SIZE(64,64), .frontPicYOffset = 4,
         .frontAnimFrames = sAnims_SingleFramePlaceHolder, .backPic = gMonBackPic_Carpulus, .backPicSize = MON_COORDS_SIZE(64,64), .backPicYOffset = 4,
         .palette = gMonPalette_Carpulus, .shinyPalette = gMonShinyPalette_Carpulus, .iconSprite = gMonIcon_Carpulus, .iconPalIndex = 0,
