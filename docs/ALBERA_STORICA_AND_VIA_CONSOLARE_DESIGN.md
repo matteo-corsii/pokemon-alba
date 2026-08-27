@@ -451,3 +451,22 @@ Il Lago usa `gTileset_General` con `gTileset_LagoDiAlbera`, un clone tecnico di
 i due metatile PortaPretoria necessari alla fascia di connessione con Via
 Consolare; il ridisegno manuale del Lago deve ancora essere effettuato. Non
 vengono cambiate decisioni narrative.
+
+## Implementazione definitiva della fauna del Lago di Albèra
+
+Il Lago usa quattro tabelle terrestri temporali con encounter rate 20.
+Mattino e giorno condividono Ghepio, Crisalvia, Luscinco, Lumella, Salampolla
+e Paludix. Al crepuscolo compare Gazzuola; di notte Gazzuola sostituisce
+Ghepio e Lenghelis occupa gli slot all'1%+1%.
+
+La Canna Buona usa Carpulus 60%, Tritino 20% e Lucinus 20% ai livelli 14–17.
+Surf, disponibile nella fase post-Palestra, usa Carpulus 60%, Tritino 30%,
+Lucinus 9% e Naufragus 1% ai livelli 16–19. Il Super Amo predispone Carpulus
+40%, Lucinus 40%, Tritino 15% e Naufragus 5% ai livelli 18–22. La Vecchia
+Canna non viene consegnata nella progressione e i suoi slot tecnici contengono
+soltanto Carpulus.
+
+Cisternide, Calcistern, Tricrest e la linea di Ardeino non compaiono nelle
+encounter table del Lago. Cisternide resta riservato al futuro dungeon
+dell'Emissario.
+
