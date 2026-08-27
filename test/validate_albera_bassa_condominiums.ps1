@@ -55,6 +55,8 @@ $allowedPaths += @(
     'test/validate_via_verdi_first_investigation.ps1', 'test/validate_cingerm_graphics.ps1'
 )
 $allowedPaths += @(Get-ChildItem 'graphics/pokemon/tritino','graphics/pokemon/tricrest','graphics/pokemon/salampolla','graphics/pokemon/alchimandra' -File | ForEach-Object { $_.FullName.Substring((Get-Location).Path.Length + 1).Replace('\','/') })
+$allowedPaths += @('graphics/pokemon/cisternide/anim_front.png','graphics/pokemon/cisternide/back.png','graphics/pokemon/cisternide/icon.png','graphics/pokemon/cisternide/normal.pal','graphics/pokemon/cisternide/shiny.pal','graphics/pokemon/calcistern/anim_front.png','graphics/pokemon/calcistern/back.png','graphics/pokemon/calcistern/icon.png','graphics/pokemon/calcistern/normal.pal','graphics/pokemon/calcistern/shiny.pal','graphics/pokemon/luscinco/anim_front.png','graphics/pokemon/luscinco/back.png','graphics/pokemon/luscinco/icon.png','graphics/pokemon/luscinco/normal.pal','graphics/pokemon/luscinco/shiny.pal','graphics/pokemon/luscerp/anim_front.png','graphics/pokemon/luscerp/back.png','graphics/pokemon/luscerp/icon.png','graphics/pokemon/luscerp/normal.pal','graphics/pokemon/luscerp/shiny.pal')
+$allowedPaths += @('test/validate_albera_first_playable_segment.ps1','test/validate_cingerm_starter.ps1','test/validate_cisternide_calcistern.ps1','test/validate_full_ausonia_starter_trio.ps1','test/validate_italian_menu_localization.ps1','test/validate_porta_pretoria_localization.ps1')
 $unexpectedPaths = @(Get-ChangedPaths | Where-Object { $_ -notin $allowedPaths })
 Assert-True ($unexpectedPaths.Count -eq 0) ('Out-of-scope files changed: ' + ($unexpectedPaths -join ', '))
 

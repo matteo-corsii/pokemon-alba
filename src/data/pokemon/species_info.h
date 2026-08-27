@@ -573,6 +573,21 @@ static const struct LevelUpMove sAlchimandraLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+static const struct LevelUpMove sCisternideLevelUpLearnset[] = {
+    LEVEL_UP_MOVE(1, MOVE_WATER_GUN), LEVEL_UP_MOVE(1, MOVE_WITHDRAW),
+    LEVEL_UP_MOVE(5, MOVE_HARDEN), LEVEL_UP_MOVE(9, MOVE_WATER_PULSE),
+    LEVEL_UP_MOVE(13, MOVE_AQUA_RING), LEVEL_UP_MOVE(17, MOVE_ANCIENT_POWER),
+    LEVEL_UP_MOVE(21, MOVE_BRINE), LEVEL_UP_MOVE(25, MOVE_PROTECT),
+    LEVEL_UP_MOVE(29, MOVE_SURF), LEVEL_UP_MOVE(33, MOVE_POWER_GEM), LEVEL_UP_END
+};
+static const struct LevelUpMove sCalcisternLevelUpLearnset[] = {
+    LEVEL_UP_MOVE(1, MOVE_WATER_GUN), LEVEL_UP_MOVE(1, MOVE_WITHDRAW),
+    LEVEL_UP_MOVE(1, MOVE_HARDEN), LEVEL_UP_MOVE(1, MOVE_WATER_PULSE),
+    LEVEL_UP_MOVE(30, MOVE_ANCIENT_POWER), LEVEL_UP_MOVE(34, MOVE_AQUA_RING),
+    LEVEL_UP_MOVE(38, MOVE_BRINE), LEVEL_UP_MOVE(42, MOVE_POWER_GEM),
+    LEVEL_UP_MOVE(46, MOVE_PROTECT), LEVEL_UP_MOVE(50, MOVE_SURF), LEVEL_UP_END
+};
+
 static const struct LevelUpMove sLuscincoLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_TACKLE),
     LEVEL_UP_MOVE( 1, MOVE_TAIL_WHIP),
@@ -2642,6 +2657,57 @@ const struct SpeciesInfo gSpeciesInfo[] =
             sAnimTable_Following, gOverworldPalette_Salandit, gShinyOverworldPalette_Salandit)
         .levelUpLearnset = sAlchimandraLevelUpLearnset, .teachingType = EXPLICIT_TEACHABLES,
         .teachableLearnset = sAlchimandraTeachableLearnset, .eggMoveLearnset = sAlchimandraEggMoveLearnset,
+    },
+
+    [SPECIES_CISTERNIDE] =
+    {
+        .baseHP = 55, .baseAttack = 35, .baseDefense = 65, .baseSpeed = 20,
+        .baseSpAttack = 50, .baseSpDefense = 75,
+        .types = MON_TYPES(TYPE_WATER), .catchRate = 190, .expYield = 64,
+        .evYield_SpDefense = 1, .genderRatio = PERCENT_FEMALE(50), .eggCycles = 20,
+        .friendship = 50, .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_3, EGG_GROUP_MINERAL),
+        .abilities = { ABILITY_WATER_ABSORB, ABILITY_PRESSURE, ABILITY_STORM_DRAIN },
+        .bodyColor = BODY_COLOR_BLUE, .speciesName = _("Cisternide"),
+        .cryId = CRY_TENTACOOL, .natDexNum = NATIONAL_DEX_CISTERNIDE,
+        .categoryName = _("CONDOTTO"), .height = 5, .weight = 80,
+        .description = COMPOUND_STRING("Percepisce pressione e vibrazioni nei\ncondotti e attraversa grate strette."),
+        .pokemonScale = 256, .pokemonOffset = 0, .trainerScale = 256, .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Cisternide, .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 4, .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        .backPic = gMonBackPic_Cisternide, .backPicSize = MON_COORDS_SIZE(64, 64), .backPicYOffset = 4,
+        .palette = gMonPalette_Cisternide, .shinyPalette = gMonShinyPalette_Cisternide, .iconSprite = gMonIcon_Cisternide,
+        .iconPalIndex = 0, .pokemonJumpType = PKMN_JUMP_TYPE_NONE, SHADOW(0, 4, SHADOW_SIZE_M)
+        FOOTPRINT(Anorith)
+        OVERWORLD(sPicTable_Anorith, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, sAnimTable_Following, gOverworldPalette_Anorith, gShinyOverworldPalette_Anorith)
+        .levelUpLearnset = sCisternideLevelUpLearnset, .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sCisternideTeachableLearnset, .eggMoveLearnset = sCisternideEggMoveLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_CALCISTERN}),
+    },
+
+    [SPECIES_CALCISTERN] =
+    {
+        .baseHP = 90, .baseAttack = 55, .baseDefense = 105, .baseSpeed = 35,
+        .baseSpAttack = 80, .baseSpDefense = 125,
+        .types = MON_TYPES(TYPE_WATER, TYPE_ROCK), .catchRate = 45, .expYield = 160,
+        .evYield_SpDefense = 2, .genderRatio = PERCENT_FEMALE(50), .eggCycles = 20,
+        .friendship = 50, .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_3, EGG_GROUP_MINERAL),
+        .abilities = { ABILITY_WATER_ABSORB, ABILITY_PRESSURE, ABILITY_SOLID_ROCK },
+        .bodyColor = BODY_COLOR_GRAY, .speciesName = _("Calcistern"),
+        .cryId = CRY_REGIROCK, .natDexNum = NATIONAL_DEX_CALCISTERN,
+        .categoryName = _("CALCARE"), .height = 14, .weight = 420,
+        .description = COMPOUND_STRING("Accumula calcare nel carapace e regola\nla pressione delle camere piu antiche."),
+        .pokemonScale = 256, .pokemonOffset = 0, .trainerScale = 256, .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Calcistern, .frontPicSize = MON_COORDS_SIZE(64, 64), .frontPicYOffset = 4,
+        .frontAnimFrames = sAnims_SingleFramePlaceHolder, .backPic = gMonBackPic_Calcistern,
+        .backPicSize = MON_COORDS_SIZE(64, 64), .backPicYOffset = 4, .palette = gMonPalette_Calcistern,
+        .shinyPalette = gMonShinyPalette_Calcistern, .iconSprite = gMonIcon_Calcistern, .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE, SHADOW(0, 4, SHADOW_SIZE_L)
+        FOOTPRINT(Crustle)
+        OVERWORLD(sPicTable_Crustle, SIZE_32x32, SHADOW_SIZE_L, TRACKS_FOOT, sAnimTable_Following, gOverworldPalette_Crustle, gShinyOverworldPalette_Crustle)
+        .levelUpLearnset = sCalcisternLevelUpLearnset, .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sCalcisternTeachableLearnset, .eggMoveLearnset = sCalcisternEggMoveLearnset,
     },
 
     /* You may add any custom species below this point based on the following structure: */

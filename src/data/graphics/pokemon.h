@@ -27690,6 +27690,16 @@ const u16 gMonPalette_Alchimandra[] = INCGFX_U16("graphics/pokemon/alchimandra/n
 const u32 gMonBackPic_Alchimandra[] = INCGFX_U32("graphics/pokemon/alchimandra/back.png", ".4bpp.smol");
 const u16 gMonShinyPalette_Alchimandra[] = INCGFX_U16("graphics/pokemon/alchimandra/shiny.pal", ".gbapal");
 const u8 gMonIcon_Alchimandra[] = INCGFX_U8("graphics/pokemon/alchimandra/icon.png", ".4bpp");
+const u32 gMonFrontPic_Cisternide[] = INCGFX_U32("graphics/pokemon/cisternide/anim_front.png", ".4bpp.smol");
+const u16 gMonPalette_Cisternide[] = INCGFX_U16("graphics/pokemon/cisternide/normal.pal", ".gbapal");
+const u32 gMonBackPic_Cisternide[] = INCGFX_U32("graphics/pokemon/cisternide/back.png", ".4bpp.smol");
+const u16 gMonShinyPalette_Cisternide[] = INCGFX_U16("graphics/pokemon/cisternide/shiny.pal", ".gbapal");
+const u8 gMonIcon_Cisternide[] = INCGFX_U8("graphics/pokemon/cisternide/icon.png", ".4bpp");
+const u32 gMonFrontPic_Calcistern[] = INCGFX_U32("graphics/pokemon/calcistern/anim_front.png", ".4bpp.smol");
+const u16 gMonPalette_Calcistern[] = INCGFX_U16("graphics/pokemon/calcistern/normal.pal", ".gbapal");
+const u32 gMonBackPic_Calcistern[] = INCGFX_U32("graphics/pokemon/calcistern/back.png", ".4bpp.smol");
+const u16 gMonShinyPalette_Calcistern[] = INCGFX_U16("graphics/pokemon/calcistern/shiny.pal", ".gbapal");
+const u8 gMonIcon_Calcistern[] = INCGFX_U8("graphics/pokemon/calcistern/icon.png", ".4bpp");
 
     const u32 gMonFrontPic_Egg[] = INCGFX_U32("graphics/pokemon/egg/anim_front.png", ".4bpp.smol");
     const u16 gMonPalette_Egg[] = INCGFX_U16("graphics/pokemon/egg/normal.pal", ".gbapal");

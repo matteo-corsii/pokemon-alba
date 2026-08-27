@@ -48,7 +48,7 @@ foreach ($flag in @('FLAG_HIDE_ALBERA_LAB_NICO', 'FLAG_HIDE_ALBERA_LAB_LIA')) {
     Assert-Contains $newGame "setflag $flag" "Il reset di nuova partita non nasconde $flag."
     Assert-Contains $house "clearflag $flag" "La convocazione domestica non mostra $flag."
 }
-Assert-Contains $house 'setflag FLAG_ALBERA_HOME_ANOMALY_SEEN' 'L’anomalia domestica non viene registrata.'
+Assert-Contains $house 'setflag FLAG_ALBERA_HOME_ANOMALY_SEEN' 'LÃ¢â‚¬â„¢anomalia domestica non viene registrata.'
 Assert-Contains $house 'setvar VAR_ALBERA_OPENING_STATE, 1' 'Lo stato narrativo non parte dalla casa.'
 Assert-True ($house -match 'setvar VAR_ALBERA_OPENING_STATE, 1\s+setvar VAR_LITTLEROOT_RIVAL_STATE, 3') 'Il flusso canonico non disattiva lo stato legacy che avvia il vecchio evento del campetto.'
 foreach ($italianText in @('pressione della rete', 'LABORATORIO DEL CRATERE', 'rumore profondo')) {
@@ -72,7 +72,7 @@ $openingTriggers = @($labMap.coord_events | Where-Object {
 })
 Assert-True ($openingTriggers.Count -eq 6) 'La linea di trigger del laboratorio deve coprire sei celle.'
 Assert-True ((@($openingTriggers.x | Sort-Object) -join ',') -eq '4,5,6,7,8,9') 'Coordinate dei trigger del laboratorio inattese.'
-Assert-True (-not $lab.Contains('map_script_2 VAR_ALBERA_OPENING_STATE, 1')) 'L’apertura non deve partire dalla porta tramite map script.'
+Assert-True (-not $lab.Contains('map_script_2 VAR_ALBERA_OPENING_STATE, 1')) 'LÃ¢â‚¬â„¢apertura non deve partire dalla porta tramite map script.'
 foreach ($token in @(
     'LittlerootTown_ProfessorBirchsLab_EventScript_AlberaOpeningTrigger',
     'LittlerootTown_ProfessorBirchsLab_EventScript_StageAlberaOpening',
@@ -80,7 +80,7 @@ foreach ($token in @(
     'applymovement LOCALID_PLAYER, Common_Movement_FaceLeft'
 )) { Assert-Contains $lab $token "Regia correttiva del laboratorio mancante: $token." }
 
-Assert-Contains $battleSetup 'if (VarGet(VAR_ALBERA_OPENING_STATE) == 2)' 'La modalità laboratorio dello selector starter manca.'
+Assert-Contains $battleSetup 'if (VarGet(VAR_ALBERA_OPENING_STATE) == 2)' 'La modalitÃƒÂ  laboratorio dello selector starter manca.'
 Assert-Contains $battleSetup 'CB2_ReturnToFieldContinueScriptPlayMapMusic' 'Lo selector non ritorna allo script del laboratorio.'
 Assert-Contains $lab 'special ChooseStarter' 'La scelta starter non avviene nel laboratorio.'
 Assert-True (-not $lab.Contains('setvar VAR_0x8004, TRUE')) 'Lo selector non deve dipendere da una variabile temporanea condivisa.'
@@ -97,13 +97,13 @@ foreach ($mapping in $mappings) {
 Assert-True (-not $lab.Contains('trainerbattle_earlyrival TRAINER_MAY_ROUTE_103')) 'Lia non deve combattere in questa milestone.'
 Assert-Contains $lab 'trainerbattle_earlyrival TRAINER_BRENDAN_ROUTE_103_TREECKO, RIVAL_BATTLE_HEAL_AFTER' 'La battaglia di Nico non usa il flusso nativo senza whiteout.'
 Assert-Contains $lab 'goto_if_eq VAR_RESULT, B_OUTCOME_LOST' 'Il flusso non distingue la breve battuta dopo la sconfitta.'
-Assert-Contains $lab 'setflag FLAG_ALBERA_NICO_BATTLE_COMPLETED' 'La battaglia di Nico non è resa non ripetibile.'
+Assert-Contains $lab 'setflag FLAG_ALBERA_NICO_BATTLE_COMPLETED' 'La battaglia di Nico non ÃƒÂ¨ resa non ripetibile.'
 Assert-Contains $lab 'special HealPlayerParty' 'La squadra non viene ripristinata dopo la lotta amichevole.'
 Assert-Contains $battleSetup '(GetRivalBattleFlags() & RIVAL_BATTLE_TUTORIAL) == RIVAL_BATTLE_TUTORIAL' 'Il solo flag di cura continua ad attivare il tutorial della prima battaglia.'
-Assert-Contains $battleSetup 'GetRivalBattleFlags() & RIVAL_BATTLE_HEAL_AFTER' 'La cura dopo la sconfitta non è più attiva.'
+Assert-Contains $battleSetup 'GetRivalBattleFlags() & RIVAL_BATTLE_HEAL_AFTER' 'La cura dopo la sconfitta non ÃƒÂ¨ piÃƒÂ¹ attiva.'
 Assert-Contains $battleMessage '[STRINGID_PLAYERUSEDITEM]                       = COMPOUND_STRING("Hai usato {B_LAST_ITEM}!")' 'Messaggio di uso della Pozione non tradotto.'
 Assert-Contains $battleMessage '[STRINGID_ITEMRESTOREDSPECIESHEALTH]            = COMPOUND_STRING("{B_BUFF1} recupera PS.")' 'Messaggio di recupero PS non tradotto.'
-Assert-Contains $battleMessage '[STRINGID_TRAINER1MON1COMEBACK]                 = COMPOUND_STRING("{B_TRAINER1_NAME}: {B_OPPONENT_MON1_NAME},\nritorna!")' 'Messaggio di richiamo del Pokémon non tradotto.'
+Assert-Contains $battleMessage '[STRINGID_TRAINER1MON1COMEBACK]                 = COMPOUND_STRING("{B_TRAINER1_NAME}: {B_OPPONENT_MON1_NAME},\nritorna!")' 'Messaggio di richiamo del PokÃƒÂ©mon non tradotto.'
 
 $legacyCampettoTriggers = @($liaHouseMap.coord_events | Where-Object {
     $_.type -eq 'trigger' -and
@@ -191,7 +191,7 @@ foreach ($required in @(
     'setvar VAR_ALBERA_OPENING_STATE, 5'
 )) { Assert-Contains $lab $required "Passaggio narrativo mancante: $required." }
 
-Assert-Contains $town 'goto_if_unset FLAG_ALBERA_WATER_RESEARCH_STARTED, LittlerootTown_EventScript_BlockRouteUntilLabAssignment' 'L’uscita non dipende dall’incarico di Lauro.'
+Assert-Contains $town 'goto_if_unset FLAG_ALBERA_WATER_RESEARCH_STARTED, LittlerootTown_EventScript_BlockRouteUntilLabAssignment' 'LÃ¢â‚¬â„¢uscita non dipende dallÃ¢â‚¬â„¢incarico di Lauro.'
 Assert-Contains $town 'LittlerootTown_Text_RouteClosedForMeasurements' 'Il blocco cittadino non ha una motivazione diegetica.'
 Assert-Contains $town 'goto_if_ge VAR_ALBERA_OPENING_STATE, 1, LittlerootTown_EventScript_CampettoDeferred' 'Il vecchio evento obbligatorio del campetto resta raggiungibile nel flusso canonico.'
 Assert-Contains $route101 'call_if_eq VAR_ALBERA_OPENING_STATE, 5, Route101_EventScript_SetAlberaCheckpoint' 'Il checkpoint di Route 101 non viene registrato.'
@@ -201,4 +201,4 @@ foreach ($forbidden in @('DEBUG', 'CHEAT', 'WARP DI TEST', 'SPECIES_PLACEHOLDER'
     Assert-True (-not $lab.Contains($forbidden)) "Contenuto di debug o placeholder rilevato: $forbidden."
 }
 
-Write-Output 'Albèra first playable segment validation passed.'
+Write-Output 'AlbÃƒÂ¨ra first playable segment validation passed.'
