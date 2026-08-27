@@ -994,3 +994,9 @@ Il catalogo non decide:
 ### Cisternide → Calcistern
 
 Linea implementata: Cisternide (Acqua) evolve in Calcistern (Acqua/Roccia) al livello 30. La prima apparizione narrativa di Cisternide nei Cisternoni resta non catturabile; nessuna encounter table viene aggiunta in questo batch.
+
+### Carpulus, Lucinus e Naufragus
+
+Tre specie acquatiche a stadio singolo per il futuro Lago di Albèra. Carpulus
+è una specie comune di rive e pontili; Lucinus è un incontro raro legato ai
+canneti; Naufragus resta raro ad Albèra e più comune al Lago di Nemora.

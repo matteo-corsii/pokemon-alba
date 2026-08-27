@@ -6471,3 +6471,6 @@ static const u16 sFrigibaxEggMoveLearnset[] = {
 
 static const u16 sCisternideEggMoveLearnset[] = { MOVE_MIRROR_COAT, MOVE_AQUA_RING, MOVE_UNAVAILABLE };
 static const u16 sCalcisternEggMoveLearnset[] = { MOVE_MIRROR_COAT, MOVE_BODY_PRESS, MOVE_UNAVAILABLE };
+static const u16 sCarpulusEggMoveLearnset[] = { MOVE_AQUA_JET, MOVE_FLAIL, MOVE_BOUNCE, MOVE_MUDDY_WATER, MOVE_AQUA_RING, MOVE_UNAVAILABLE };
+static const u16 sLucinusEggMoveLearnset[] = { MOVE_ICE_FANG, MOVE_THUNDER_FANG, MOVE_PSYCHIC_FANGS, MOVE_POISON_FANG, MOVE_AQUA_TAIL, MOVE_UNAVAILABLE };
+static const u16 sNaufragusEggMoveLearnset[] = { MOVE_CURSE, MOVE_WIDE_GUARD, MOVE_METAL_BURST, MOVE_AQUA_RING, MOVE_BLOCK, MOVE_UNAVAILABLE };

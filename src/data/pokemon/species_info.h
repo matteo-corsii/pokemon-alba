@@ -669,6 +669,10 @@ static const struct LevelUpMove sSanguilexLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+static const struct LevelUpMove sCarpulusLevelUpLearnset[] = {{1, MOVE_TACKLE}, {1, MOVE_TAIL_WHIP}, {4, MOVE_WATER_GUN}, {7, MOVE_FLAIL}, {10, MOVE_AQUA_JET}, {13, MOVE_HARDEN}, {16, MOVE_BITE}, {20, MOVE_AQUA_RING}, {24, MOVE_TAKE_DOWN}, {28, MOVE_WATER_PULSE}, {32, MOVE_AGILITY}, {36, MOVE_AQUA_TAIL}, {40, MOVE_DOUBLE_EDGE}, {44, MOVE_HYDRO_PUMP}};
+static const struct LevelUpMove sLucinusLevelUpLearnset[] = {{1, MOVE_TACKLE}, {1, MOVE_LEER}, {4, MOVE_BITE}, {8, MOVE_AQUA_JET}, {12, MOVE_FOCUS_ENERGY}, {16, MOVE_ICE_FANG}, {20, MOVE_ASSURANCE}, {24, MOVE_WATER_PULSE}, {28, MOVE_CRUNCH}, {32, MOVE_AGILITY}, {36, MOVE_LIQUIDATION}, {40, MOVE_NIGHT_SLASH}, {44, MOVE_PSYCHIC_FANGS}, {48, MOVE_HYDRO_PUMP}};
+static const struct LevelUpMove sNaufragusLevelUpLearnset[] = {{1, MOVE_TACKLE}, {1, MOVE_HARDEN}, {5, MOVE_WATER_GUN}, {9, MOVE_METAL_CLAW}, {13, MOVE_PROTECT}, {17, MOVE_AQUA_JET}, {21, MOVE_IRON_DEFENSE}, {25, MOVE_BRINE}, {29, MOVE_ANCIENT_POWER}, {33, MOVE_AQUA_TAIL}, {37, MOVE_IRON_HEAD}, {41, MOVE_HEAVY_SLAM}, {45, MOVE_RAIN_DANCE}, {49, MOVE_HYDRO_PUMP}, {53, MOVE_GYRO_BALL}};
+
 const struct SpeciesInfo gSpeciesInfo[] =
 {
     [SPECIES_NONE] =
@@ -2708,6 +2712,45 @@ const struct SpeciesInfo gSpeciesInfo[] =
         OVERWORLD(sPicTable_Crustle, SIZE_32x32, SHADOW_SIZE_L, TRACKS_FOOT, sAnimTable_Following, gOverworldPalette_Crustle, gShinyOverworldPalette_Crustle)
         .levelUpLearnset = sCalcisternLevelUpLearnset, .teachingType = EXPLICIT_TEACHABLES,
         .teachableLearnset = sCalcisternTeachableLearnset, .eggMoveLearnset = sCalcisternEggMoveLearnset,
+    },
+
+    [SPECIES_CARPULUS] =
+    {
+        .baseHP = 55, .baseAttack = 55, .baseDefense = 55, .baseSpeed = 55, .baseSpAttack = 50, .baseSpDefense = 60,
+        .types = MON_TYPES(TYPE_WATER), .catchRate = 190, .expYield = 64, .evYield_Speed = 1, .genderRatio = PERCENT_FEMALE(50), .eggCycles = 20,
+        .friendship = 70, .growthRate = GROWTH_MEDIUM_FAST, .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_2),
+        .abilities = { ABILITY_SWIFT_SWIM, ABILITY_WATER_VEIL, ABILITY_HYDRATION }, .bodyColor = BODY_COLOR_GREEN,
+        .speciesName = _("Carpulus"), .cryId = CRY_MAGIKARP, .natDexNum = NATIONAL_DEX_CARPULUS, .categoryName = _("SCAGLIA"), .height = 6, .weight = 120,
+        .description = COMPOUND_STRING("Vive in piccoli branchi presso rive e\npontili. Le scaglie riflettono la luce."),
+        .pokemonScale = 256, .frontPic = gMonFrontPic_Carpulus, .frontPicSize = MON_COORDS_SIZE(64,64), .frontPicYOffset = 4,
+        .frontAnimFrames = sAnims_SingleFramePlaceHolder, .backPic = gMonBackPic_Carpulus, .backPicSize = MON_COORDS_SIZE(64,64), .backPicYOffset = 4,
+        .palette = gMonPalette_Carpulus, .shinyPalette = gMonShinyPalette_Carpulus, .iconSprite = gMonIcon_Carpulus, .iconPalIndex = 0,
+        FOOTPRINT(Magikarp) OVERWORLD(sPicTable_Magikarp, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, sAnimTable_Following, gOverworldPalette_Magikarp, gShinyOverworldPalette_Magikarp)
+        .levelUpLearnset = sCarpulusLevelUpLearnset, .teachingType = EXPLICIT_TEACHABLES, .teachableLearnset = sCarpulusTeachableLearnset, .eggMoveLearnset = sCarpulusEggMoveLearnset,
+    },
+    [SPECIES_LUCINUS] =
+    {
+        .baseHP = 60, .baseAttack = 90, .baseDefense = 60, .baseSpeed = 95, .baseSpAttack = 45, .baseSpDefense = 70,
+        .types = MON_TYPES(TYPE_WATER, TYPE_DARK), .catchRate = 90, .expYield = 120, .evYield_Attack = 2, .genderRatio = PERCENT_FEMALE(50), .eggCycles = 25,
+        .friendship = 70, .growthRate = GROWTH_MEDIUM_FAST, .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_2), .abilities = { ABILITY_STRONG_JAW, ABILITY_SWIFT_SWIM, ABILITY_SNIPER },
+        .bodyColor = BODY_COLOR_GREEN, .speciesName = _("Lucinus"), .cryId = CRY_CARVANHA, .natDexNum = NATIONAL_DEX_LUCINUS, .categoryName = _("AGGUATO"), .height = 14, .weight = 340,
+        .description = COMPOUND_STRING("Rimane immobile fra i canneti. Scatta prima\nche l'acqua possa incresparsi."), .pokemonScale = 256,
+        .frontPic = gMonFrontPic_Lucinus, .frontPicSize = MON_COORDS_SIZE(64,64), .frontPicYOffset = 4, .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        .backPic = gMonBackPic_Lucinus, .backPicSize = MON_COORDS_SIZE(64,64), .backPicYOffset = 4, .palette = gMonPalette_Lucinus, .shinyPalette = gMonShinyPalette_Lucinus, .iconSprite = gMonIcon_Lucinus, .iconPalIndex = 0,
+        FOOTPRINT(Carvanha) OVERWORLD(sPicTable_Carvanha, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, sAnimTable_Following, gOverworldPalette_Carvanha, gShinyOverworldPalette_Carvanha)
+        .levelUpLearnset = sLucinusLevelUpLearnset, .teachingType = EXPLICIT_TEACHABLES, .teachableLearnset = sLucinusTeachableLearnset, .eggMoveLearnset = sLucinusEggMoveLearnset,
+    },
+    [SPECIES_NAUFRAGUS] =
+    {
+        .baseHP = 80, .baseAttack = 95, .baseDefense = 120, .baseSpeed = 35, .baseSpAttack = 55, .baseSpDefense = 90,
+        .types = MON_TYPES(TYPE_WATER, TYPE_STEEL), .catchRate = 45, .expYield = 160, .evYield_Defense = 2, .genderRatio = PERCENT_FEMALE(50), .eggCycles = 30,
+        .friendship = 70, .growthRate = GROWTH_SLOW, .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_2, EGG_GROUP_MINERAL), .abilities = { ABILITY_BATTLE_ARMOR, ABILITY_STURDY, ABILITY_HEAVY_METAL },
+        .bodyColor = BODY_COLOR_BROWN, .speciesName = _("Naufragus"), .cryId = CRY_SKARMORY, .natDexNum = NATIONAL_DEX_NAUFRAGUS, .categoryName = _("RELITTO"), .height = 18, .weight = 1350,
+        .description = COMPOUND_STRING("Antiche leggende narrano di navi senza equipaggio.\nIn realta sono Naufragus."), .pokemonScale = 256,
+        .frontPic = gMonFrontPic_Naufragus, .frontPicSize = MON_COORDS_SIZE(64,64), .frontPicYOffset = 4, .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        .backPic = gMonBackPic_Naufragus, .backPicSize = MON_COORDS_SIZE(64,64), .backPicYOffset = 4, .palette = gMonPalette_Naufragus, .shinyPalette = gMonShinyPalette_Naufragus, .iconSprite = gMonIcon_Naufragus, .iconPalIndex = 0,
+        FOOTPRINT(Skarmory) OVERWORLD(sPicTable_Skarmory, SIZE_32x32, SHADOW_SIZE_L, TRACKS_FOOT, sAnimTable_Following, gOverworldPalette_Skarmory, gShinyOverworldPalette_Skarmory)
+        .levelUpLearnset = sNaufragusLevelUpLearnset, .teachingType = EXPLICIT_TEACHABLES, .teachableLearnset = sNaufragusTeachableLearnset, .eggMoveLearnset = sNaufragusEggMoveLearnset,
     },
 
     /* You may add any custom species below this point based on the following structure: */
