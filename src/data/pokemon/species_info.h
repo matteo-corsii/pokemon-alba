@@ -2740,7 +2740,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .types = MON_TYPES(TYPE_WATER, TYPE_DARK), .catchRate = 90, .expYield = 120, .evYield_Attack = 2, .genderRatio = PERCENT_FEMALE(50), .eggCycles = 25,
         .friendship = 70, .growthRate = GROWTH_MEDIUM_FAST, .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_2), .abilities = { ABILITY_STRONG_JAW, ABILITY_SWIFT_SWIM, ABILITY_SNIPER },
         .bodyColor = BODY_COLOR_GREEN, .speciesName = _("Lucinus"), .cryId = CRY_CARVANHA, .natDexNum = NATIONAL_DEX_LUCINUS, .categoryName = _("AGGUATO"), .height = 14, .weight = 340,
-        .description = COMPOUND_STRING("Rimane immobile fra i canneti lasciando emergere\nsoltanto il muso. Quando individua una preda, scatta\nprima che l'acqua possa incresparsi."), .pokemonScale = 256,
+        .description = COMPOUND_STRING(
+            "Si nasconde fra i canneti.\n"
+            "Scatta sulla preda senza increspare\n"
+            "l'acqua."), .pokemonScale = 256,
         .frontPic = gMonFrontPic_Lucinus, .frontPicSize = MON_COORDS_SIZE(64,64), .frontPicYOffset = 4, .frontAnimFrames = sAnims_SingleFramePlaceHolder,
         .backPic = gMonBackPic_Lucinus, .backPicSize = MON_COORDS_SIZE(64,64), .backPicYOffset = 4, .palette = gMonPalette_Lucinus, .shinyPalette = gMonShinyPalette_Lucinus, .iconSprite = gMonIcon_Lucinus, .iconPalIndex = 0,
         FOOTPRINT(Carvanha) OVERWORLD(sPicTable_Carvanha, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, sAnimTable_Following, gOverworldPalette_Carvanha, gShinyOverworldPalette_Carvanha)
@@ -2755,7 +2758,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .types = MON_TYPES(TYPE_WATER, TYPE_STEEL), .catchRate = 45, .expYield = 160, .evYield_Defense = 2, .genderRatio = PERCENT_FEMALE(50), .eggCycles = 30,
         .friendship = 70, .growthRate = GROWTH_SLOW, .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_2, EGG_GROUP_MINERAL), .abilities = { ABILITY_BATTLE_ARMOR, ABILITY_STURDY, ABILITY_HEAVY_METAL },
         .bodyColor = BODY_COLOR_BROWN, .speciesName = _("Naufragus"), .cryId = CRY_SKARMORY, .natDexNum = NATIONAL_DEX_NAUFRAGUS, .categoryName = _("RELITTO"), .height = 18, .weight = 1350,
-        .description = COMPOUND_STRING("Antiche leggende narrano di navi romane che solcano\ni laghi senza equipaggio. In realtà sono Naufragus,\nle cui placche dorsali ne imitano le prue."), .pokemonScale = 256,
+        .description = COMPOUND_STRING(
+            "Le placche sembrano prue romane.\n"
+            "Nei laghi, le leggende lo scambiano\n"
+            "per una nave senza equipaggio."), .pokemonScale = 256,
         .frontPic = gMonFrontPic_Naufragus, .frontPicSize = MON_COORDS_SIZE(64,64), .frontPicYOffset = 4, .frontAnimFrames = sAnims_SingleFramePlaceHolder,
         .backPic = gMonBackPic_Naufragus, .backPicSize = MON_COORDS_SIZE(64,64), .backPicYOffset = 4, .palette = gMonPalette_Naufragus, .shinyPalette = gMonShinyPalette_Naufragus, .iconSprite = gMonIcon_Naufragus, .iconPalIndex = 0,
         FOOTPRINT(Skarmory) OVERWORLD(sPicTable_Skarmory, SIZE_32x32, SHADOW_SIZE_L, TRACKS_FOOT, sAnimTable_Following, gOverworldPalette_Skarmory, gShinyOverworldPalette_Skarmory)
