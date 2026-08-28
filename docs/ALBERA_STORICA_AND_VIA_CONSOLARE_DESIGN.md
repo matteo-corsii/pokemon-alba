@@ -470,3 +470,27 @@ Cisternide, Calcistern, Tricrest e la linea di Ardeino non compaiono nelle
 encounter table del Lago. Cisternide resta riservato al futuro dungeon
 dell'Emissario.
 
+## Implementazione definitiva degli NPC ambientali del Lago
+
+Il Lago contiene dodici NPC ambientali non Allenatori: Custode del Lago,
+Pescatore, Guardaboschi, Archeologa, Anziano escursionista, Carpentiere,
+Abitante delle palafitte, Bagnante, Ciclista, Aspirante Sfidante, Tecnico
+idraulico e Viandante diretto al Borgo. Le coordinate e gli orientamenti sono
+vincolati dal validator dedicato.
+
+Il Pescatore si trova a (30,86), guarda a destra e consegna una sola volta la
+Canna Buona usando il flag globale FLAG_RECEIVED_GOOD_ROD. Non viene
+consegnata la Vecchia Canna. Gli altri NPC sono esclusivamente ambientali e
+non introducono lotte, ricompense o progressione.
+
+Sono presenti sei cartelli esterni: Casa del Maestro dei rifugi a (10,109),
+Negozio di biciclette a (115,71), Palestra delle Macine di tipo Acqua a
+(66,74), Entrata dell'Emissario a (77,3) e Bottega dei Rifugi a (110,110) e Salita verso Borgo di Castello a (103,46).
+In questo batch i sei punti non ricevono warp o interni funzionali.
+
+Coordinate definitive degli NPC: Custode (58,104), Pescatore (30,86),
+Guardaboschi (17,61), Archeologa (7,34), Anziano (35,12), Carpentiere
+(81,73), Abitante delle palafitte (90,66), Bagnante (74,88), Ciclista
+(113,73), Aspirante Sfidante (65,75), Tecnico idraulico (86,8) e Viandante
+(117,44).
+
