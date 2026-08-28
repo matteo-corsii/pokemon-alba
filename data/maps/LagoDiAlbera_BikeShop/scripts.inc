@@ -14,18 +14,14 @@ LagoDiAlbera_BikeShop_EventScript_Owner::
 	end
 LagoDiAlbera_BikeShop_EventScript_Mach::
 	giveitem ITEM_MACH_BIKE
-	goto_if_eq VAR_RESULT, FALSE, LagoDiAlbera_BikeShop_EventScript_Full
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_LAGO_BIKE
 	release
 	end
 LagoDiAlbera_BikeShop_EventScript_Acro::
 	giveitem ITEM_ACRO_BIKE
-	goto_if_eq VAR_RESULT, FALSE, LagoDiAlbera_BikeShop_EventScript_Full
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_LAGO_BIKE
-	release
-	end
-LagoDiAlbera_BikeShop_EventScript_Full::
-	msgbox gText_BagFull, MSGBOX_DEFAULT
 	release
 	end
 LagoDiAlbera_BikeShop_EventScript_Switch::

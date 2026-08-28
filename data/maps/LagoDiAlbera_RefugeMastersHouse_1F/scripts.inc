@@ -24,13 +24,9 @@ LagoDiAlbera_RefugeMastersHouse_1F_EventScript_AssistantStart::
 	end
 LagoDiAlbera_RefugeMastersHouse_1F_EventScript_AssistantReward::
 	giveitem ITEM_AMULET_COIN
-	goto_if_eq VAR_RESULT, FALSE, LagoDiAlbera_RefugeMastersHouse_1F_EventScript_AssistantBagFull
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_LAGO_REFUGE_AMULET_COIN_RECEIVED
 	msgbox LagoDiAlbera_RefugeMastersHouse_1F_Text_AssistantReward, MSGBOX_DEFAULT
-	release
-	end
-LagoDiAlbera_RefugeMastersHouse_1F_EventScript_AssistantBagFull::
-	msgbox gText_BagFull, MSGBOX_DEFAULT
 	release
 	end
 LagoDiAlbera_RefugeMastersHouse_1F_EventScript_AssistantDone::
