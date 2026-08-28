@@ -265,6 +265,11 @@ void CheckPlayerHasSecretBase(void)
         gSpecialVar_Result = FALSE;
 }
 
+void Special_GetPlayerSecretBaseId(void)
+{
+    gSpecialVar_Result = gSaveBlock1Ptr->secretBases[0].secretBaseId;
+}
+
 static u8 GetSecretBaseTypeInFrontOfPlayer_(void)
 {
     s16 x, y;

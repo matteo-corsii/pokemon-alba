@@ -88,6 +88,17 @@ NORD / ROUTE 101
 
 ## Elementi da ridisegnare in seguito
 
+### Interni civili del Lago di Albèra
+
+Il Lago dispone di quattro interni autonomi: Casa del Maestro su due piani,
+Negozio di biciclette e Bottega dei Rifugi. Il Maestro e l'aiutante gestiscono
+il registro e la prima missione, con i rifugi alle coordinate nord/sud (ID 84 e
+85) e il Monetamuleto come ricompensa unica. Il negozio offre gratuitamente la
+scelta fra Mach e Acro Bike e consente il cambio successivo; la Bottega propone
+gli arredi Camp Chair, Camp Desk, Hard Chair, Comfort Chair, Glitter Mat, Spin
+Mat, Pretty Flowers e Red Plant. Gli ingressi esterni sono Casa (6,109),
+Negozio (113,67) e Bottega (111,108). Il Bagnante resta in acqua a (74,88).
+
 - Aspetto definitivo di scuola, campetto e arredo urbano.
 - Interni della scuola e degli altri nuovi edifici.
 - Connessioni verso centro storico e Lago di Albèra.

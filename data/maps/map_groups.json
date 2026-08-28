@@ -159,7 +159,11 @@
     "AlberaStorica_MentorsHouse",
     "AlberaStorica_CivicArchive",
     "AlberaStorica_SecretBaseShop",
-    "ViaConsolare_Mansio"
+    "ViaConsolare_Mansio",
+    "LagoDiAlbera_RefugeMastersHouse_1F",
+    "LagoDiAlbera_RefugeMastersHouse_2F",
+    "LagoDiAlbera_BikeShop",
+    "LagoDiAlbera_RefugeShop"
   ],
   "gMapGroup_IndoorDewford": [
     "DewfordTown_House1",

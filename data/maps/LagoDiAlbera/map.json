@@ -120,10 +120,10 @@
     },
     {
       "local_id": "LOCALID_LAGO_DI_ALBERA_BAGNANTE",
-      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F_LAND",
+        "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F",
       "x": 74,
       "y": 88,
-      "elevation": 3,
+        "elevation": 1,
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,
       "movement_range_y": 0,
@@ -189,7 +189,29 @@
       "flag": "0"
     }
   ],
-  "warp_events": [],
+  "warp_events": [
+    {
+      "x": 6,
+      "y": 109,
+      "elevation": 0,
+      "dest_map": "MAP_LAGO_DI_ALBERA_REFUGE_MASTERS_HOUSE_1F",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 113,
+      "y": 67,
+      "elevation": 0,
+      "dest_map": "MAP_LAGO_DI_ALBERA_BIKE_SHOP",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 111,
+      "y": 108,
+      "elevation": 0,
+      "dest_map": "MAP_LAGO_DI_ALBERA_REFUGE_SHOP",
+      "dest_warp_id": "0"
+    }
+  ],
   "coord_events": [],
   "bg_events": [
     {
@@ -239,6 +261,20 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "LagoDiAlbera_EventScript_SalitaBorgo"
+    },
+    {
+      "type": "secret_base",
+      "x": 5,
+      "y": 82,
+      "elevation": 3,
+      "secret_base_id": "SECRET_BASE_LAGO_DI_ALBERA_ROCK_NORTH"
+    },
+    {
+      "type": "secret_base",
+      "x": 11,
+      "y": 116,
+      "elevation": 3,
+      "secret_base_id": "SECRET_BASE_LAGO_DI_ALBERA_ROCK_SOUTH"
     }
   ],
   "region": "REGION_HOENN"

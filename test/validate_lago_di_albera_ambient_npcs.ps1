@@ -14,7 +14,7 @@ $expectedObjects = @(
     @('LOCALID_LAGO_DI_ALBERA_ANZIANO','OBJ_EVENT_GFX_EXPERT_M',35,12,'MOVEMENT_TYPE_FACE_RIGHT','LagoDiAlbera_EventScript_Anziano'),
     @('LOCALID_LAGO_DI_ALBERA_CARPENTIERE','OBJ_EVENT_GFX_MAN_4',81,73,'MOVEMENT_TYPE_FACE_LEFT','LagoDiAlbera_EventScript_Carpentiere'),
     @('LOCALID_LAGO_DI_ALBERA_ABITANTE_PALAFITTE','OBJ_EVENT_GFX_WOMAN_1',90,66,'MOVEMENT_TYPE_FACE_DOWN','LagoDiAlbera_EventScript_AbitantePalafitte'),
-    @('LOCALID_LAGO_DI_ALBERA_BAGNANTE','OBJ_EVENT_GFX_SWIMMER_F_LAND',74,88,'MOVEMENT_TYPE_FACE_LEFT','LagoDiAlbera_EventScript_Bagnante'),
+    @('LOCALID_LAGO_DI_ALBERA_BAGNANTE','OBJ_EVENT_GFX_SWIMMER_F',74,88,'MOVEMENT_TYPE_FACE_LEFT','LagoDiAlbera_EventScript_Bagnante'),
     @('LOCALID_LAGO_DI_ALBERA_CICLISTA','OBJ_EVENT_GFX_CYCLING_TRIATHLETE_M',113,73,'MOVEMENT_TYPE_FACE_LEFT','LagoDiAlbera_EventScript_Ciclista'),
     @('LOCALID_LAGO_DI_ALBERA_ASPIRANTE','OBJ_EVENT_GFX_YOUNGSTER',65,75,'MOVEMENT_TYPE_FACE_RIGHT','LagoDiAlbera_EventScript_Aspirante'),
     @('LOCALID_LAGO_DI_ALBERA_TECNICO','OBJ_EVENT_GFX_SCIENTIST_2',86,8,'MOVEMENT_TYPE_FACE_DOWN','LagoDiAlbera_EventScript_Tecnico'),
@@ -26,7 +26,8 @@ foreach ($expected in $expectedObjects) {
     Assert-True ($event.Count -eq 1) "$($expected[0]) missing or duplicated."
     $event = $event[0]
     Assert-True ($event.graphics_id -eq $expected[1] -and [int]$event.x -eq $expected[2] -and [int]$event.y -eq $expected[3] -and $event.movement_type -eq $expected[4] -and $event.script -eq $expected[5]) "$($expected[0]) properties changed."
-    Assert-True ([int]$event.elevation -eq 3 -and $event.flag -eq '0' -and $event.trainer_type -eq 'TRAINER_TYPE_NONE') "$($expected[0]) must remain an unconditional ambient NPC."
+    $expectedElevation = if ($expected[0] -eq 'LOCALID_LAGO_DI_ALBERA_BAGNANTE') { 1 } else { 3 }
+    Assert-True ([int]$event.elevation -eq $expectedElevation -and $event.flag -eq '0' -and $event.trainer_type -eq 'TRAINER_TYPE_NONE') "$($expected[0]) must remain an unconditional ambient NPC."
 }
 
 $expectedSigns = @(
@@ -37,12 +38,15 @@ $expectedSigns = @(
     @(110,110,'LagoDiAlbera_EventScript_BottegaRifugi'),
     @(103,46,'LagoDiAlbera_EventScript_SalitaBorgo')
 )
-Assert-True (@($map.bg_events).Count -eq 6) 'Lago must contain exactly six approved signs.'
+Assert-True (@($map.bg_events).Count -eq 8) 'Lago must contain exactly eight approved background events.'
+Assert-True (@($map.bg_events | Where-Object type -eq 'sign').Count -eq 6) 'Lago must retain exactly six approved signs.'
 foreach ($expected in $expectedSigns) {
     $event = @($map.bg_events | Where-Object { [int]$_.x -eq $expected[0] -and [int]$_.y -eq $expected[1] -and $_.script -eq $expected[2] })
     Assert-True ($event.Count -eq 1 -and $event[0].type -eq 'sign') "Approved Lago sign missing at ($($expected[0]),$($expected[1]))."
 }
-Assert-True (@($map.warp_events).Count -eq 0 -and @($map.coord_events).Count -eq 0) 'NPC batch must not add warps or coordinate events.'
+Assert-True (@($map.bg_events | Where-Object { $_.type -eq 'secret_base' -and [int]$_.x -eq 5 -and [int]$_.y -eq 82 -and $_.secret_base_id -eq 'SECRET_BASE_LAGO_DI_ALBERA_ROCK_NORTH' }).Count -eq 1) 'North Secret Base event is missing.'
+Assert-True (@($map.bg_events | Where-Object { $_.type -eq 'secret_base' -and [int]$_.x -eq 11 -and [int]$_.y -eq 116 -and $_.secret_base_id -eq 'SECRET_BASE_LAGO_DI_ALBERA_ROCK_SOUTH' }).Count -eq 1) 'South Secret Base event is missing.'
+Assert-True (@($map.warp_events).Count -eq 3 -and @($map.coord_events).Count -eq 0) 'Lago warp or coordinate event counts are incorrect.'
 
 Assert-True ($scripts -match '(?s)LagoDiAlbera_EventScript_Pescatore::.*?goto_if_set FLAG_RECEIVED_GOOD_ROD.*?giveitem ITEM_GOOD_ROD.*?setflag FLAG_RECEIVED_GOOD_ROD') 'Fisherman must give the Good Rod exactly once.'
 Assert-True ([regex]::Matches($scripts,'giveitem ITEM_GOOD_ROD').Count -eq 1) 'Good Rod reward must exist exactly once.'
@@ -55,8 +59,9 @@ $bytes = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/layouts/LagoDi
 Assert-True ($bytes.Length -eq 120 * 120 * 2) 'Unexpected Lago layout size.'
 foreach ($expected in $expectedObjects) {
     $x = [int]$expected[2]; $y = [int]$expected[3]
+    $expectedElevation = if ($expected[0] -eq 'LOCALID_LAGO_DI_ALBERA_BAGNANTE') { 1 } else { 3 }
     $raw = [BitConverter]::ToUInt16($bytes, 2 * (($y * 120) + $x))
     Assert-True ((($raw -shr 10) -band 3) -eq 0) "$($expected[0]) is placed on a blocked tile."
-    Assert-True ((($raw -shr 12) -band 0xF) -eq 3) "$($expected[0]) must be placed at elevation 3."
+    Assert-True ((($raw -shr 12) -band 0xF) -eq $expectedElevation) "$($expected[0]) has an unexpected tile elevation."
 }
 Write-Output 'Lago di Albera ambient NPC validation passed.'

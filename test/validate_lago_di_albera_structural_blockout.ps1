@@ -10,7 +10,7 @@ $via = Read-Json 'data/maps/ViaConsolare/map.json'
 $route = Read-Json 'data/maps/Route103/map.json'
 Assert-True ($map.id -eq 'MAP_LAGO_DI_ALBERA' -and $map.layout -eq 'LAYOUT_LAGO_DI_ALBERA') 'Lago map identity is incorrect.'
 Assert-True ($map.map_type -eq 'MAP_TYPE_ROUTE' -and $map.region_map_section -eq 'MAPSEC_ALBERA_STORICA') 'Lago map type or region is incorrect.'
-Assert-True (@($map.object_events).Count -eq 12 -and @($map.warp_events).Count -eq 0 -and @($map.coord_events).Count -eq 0 -and @($map.bg_events).Count -eq 6) 'Lago ambient event counts are incorrect.'
+Assert-True (@($map.object_events).Count -eq 12 -and @($map.warp_events).Count -eq 3 -and @($map.coord_events).Count -eq 0 -and @($map.bg_events).Count -eq 8) 'Lago ambient event counts are incorrect.'
 Assert-True ($map.connections.Count -eq 1 -and $map.connections[0].direction -eq 'down' -and $map.connections[0].map -eq 'MAP_VIA_CONSOLARE' -and [int]$map.connections[0].offset -eq 31) 'Lago reciprocal connection is incorrect.'
 $l = @($layout.layouts | Where-Object id -eq 'LAYOUT_LAGO_DI_ALBERA')
 Assert-True ($l.Count -eq 1 -and [int]$l[0].width -eq 120 -and [int]$l[0].height -eq 120 -and $l[0].primary_tileset -eq 'gTileset_General' -and $l[0].secondary_tileset -eq 'gTileset_LagoDiAlbera') 'Lago layout is incorrect.'
