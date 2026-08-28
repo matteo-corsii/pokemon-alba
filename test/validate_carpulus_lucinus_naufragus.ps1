@@ -9,5 +9,5 @@ foreach($n in $checks.Keys){$r=[regex]::Match($inf,"(?s)\[SPECIES_$n\].*?\n    \
 A ($learn.CARPULUS -ne $null -and $learn.LUCINUS -ne $null -and $learn.NAUFRAGUS -ne $null) 'all_learnables entries missing'
 foreach($n in 'CARPULUS','LUCINUS','NAUFRAGUS'){ $r=[regex]::Match($inf,"(?s)\[SPECIES_$n\].*?\n    \},").Value; A($r.Contains('.teachingType = EXPLICIT_TEACHABLES')) "$n teaching type missing"; A($r -match '\.teachableLearnset = s[A-Za-z]+TeachableLearnset') "$n teachable symbol missing"; A($r -match '\.eggMoveLearnset = s[A-Za-z]+EggMoveLearnset') "$n egg moves missing" }
 A ($inf.Contains('Vive in branchi presso rive e pontili.\n') -and $inf.Contains('Le scaglie circolari riflettono la luce.\n') -and $inf.Contains('Si nasconde fra i canneti.\n') -and $inf.Contains('Scatta sulla preda senza increspare\n') -and $inf.Contains("l'acqua.") -and $inf.Contains('Le placche sembrano prue romane.\n') -and $inf.Contains('Nei laghi, le leggende lo scambiano\n') -and $inf.Contains('per una nave senza equipaggio.')) 'Canonical descriptions incomplete'
-A ((Get-Content src/data/wild_encounters.json -Raw) -notmatch 'MAP_LAGO_DI_ALBERA') 'Lago encounter table must remain absent'
+# Lago encounter ownership moved to validate_lago_di_albera_wild_fauna.ps1.
 Write-Host 'Carpulus/Lucinus/Naufragus validation passed.'
