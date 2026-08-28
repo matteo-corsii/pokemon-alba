@@ -12,7 +12,7 @@ A (@($maps['1F'].warp_events | Where-Object { $_.x -eq 9 -and $_.y -eq 39 -and $
 A (@($maps['4F'].coord_events | Where-Object { $_.x -eq 9 -and $_.y -eq 2 -and $_.script -eq 'LagoDiAlbera_WaterGym_4F_EventScript_Slide' }).Count -eq 1) 'Slide trigger'
 A (@($maps['1F'].warp_events | Where-Object { $_.x -eq 17 -and $_.y -eq 31 }).Count -eq 0) 'No slide return warp'
 
-$expected = @(@{Map='1F';Id='LOCALID_LAGO_WATER_GYM_TRAINER_1';X=7;Y=21;Gfx='OBJ_EVENT_GFX_FISHERMAN';Trainer='TRAINER_TYPE_NORMAL'}, @{Map='2F';Id='LOCALID_LAGO_WATER_GYM_TRAINER_2';X=13;Y=17;Gfx='OBJ_EVENT_GFX_SWIMMER_F';Trainer='TRAINER_TYPE_NORMAL'}, @{Map='3F';Id='LOCALID_LAGO_WATER_GYM_TRAINER_3';X=6;Y=16;Gfx='OBJ_EVENT_GFX_SAILOR';Trainer='TRAINER_TYPE_NORMAL'}, @{Map='4F';Id='LOCALID_LAGO_WATER_GYM_LEADER';X=9;Y=5;Gfx='OBJ_EVENT_GFX_MISTY';Trainer='TRAINER_TYPE_NONE'})
+$expected = @(@{Map='1F';Id='LOCALID_LAGO_WATER_GYM_TRAINER_1';X=7;Y=21;Gfx='OBJ_EVENT_GFX_FISHERMAN';Trainer='TRAINER_TYPE_NORMAL'}, @{Map='2F';Id='LOCALID_LAGO_WATER_GYM_TRAINER_2';X=13;Y=17;Gfx='OBJ_EVENT_GFX_SWIMMER_F_LAND';Trainer='TRAINER_TYPE_NORMAL'}, @{Map='3F';Id='LOCALID_LAGO_WATER_GYM_TRAINER_3';X=6;Y=16;Gfx='OBJ_EVENT_GFX_SAILOR';Trainer='TRAINER_TYPE_NORMAL'}, @{Map='4F';Id='LOCALID_LAGO_WATER_GYM_LEADER';X=9;Y=5;Gfx='OBJ_EVENT_GFX_MISTY';Trainer='TRAINER_TYPE_NONE'})
 foreach ($entry in $expected) { $event = @($maps[$entry.Map].object_events | Where-Object { $_.local_id -eq $entry.Id }); A ($event.Count -eq 1) "NPC $($entry.Id)"; A ($event[0].x -eq $entry.X -and $event[0].y -eq $entry.Y -and $event[0].graphics_id -eq $entry.Gfx -and $event[0].trainer_type -eq $entry.Trainer) "NPC data $($entry.Id)" }
 
 $scripts = @('1F','2F','3F','4F' | ForEach-Object { T "data/maps/LagoDiAlbera_WaterGym_${_}/scripts.inc" }) -join "`n"
@@ -23,4 +23,12 @@ A (@($lake.object_events | Where-Object { $_.local_id -eq 'LOCALID_LAGO_DI_ALBER
 A (@($lake.coord_events | Where-Object { $_.x -eq 71 -and $_.y -eq 75 -and $_.script -eq 'LagoDiAlbera_EventScript_LauroSurfScene' }).Count -eq 1) 'Lauro scene trigger'
 $fieldMove = T 'src/field_move.c'; A ($fieldMove -match 'IsFieldMoveUnlocked_Surf\(void\)[\s\S]*?FLAG_BADGE02_GET') 'Surf uses badge 2'
 foreach ($party in 'src/data/trainers.party','src/data/trainers_frlg.party') { $data = T $party; foreach ($trainer in 'TRAINER_LAGO_WATER_GYM_REMO','TRAINER_LAGO_WATER_GYM_DALIA','TRAINER_LAGO_WATER_GYM_NEREO','TRAINER_LAGO_WATER_GYM_MARINA') { A ($data.Contains("=== $trainer ===")) "$party missing $trainer" } }
+$emeraldOpponents = T 'include/constants/opponents.h'
+foreach ($entry in @(@('TRAINER_LAGO_WATER_GYM_REMO',568),@('TRAINER_LAGO_WATER_GYM_DALIA',851),@('TRAINER_LAGO_WATER_GYM_NEREO',852),@('TRAINER_LAGO_WATER_GYM_MARINA',854))) { A ($emeraldOpponents -match "(?m)^#define\s+$($entry[0])\s+$($entry[1])$") "Emerald reused trainer ID $($entry[0])" }
+A ($emeraldOpponents -match '(?m)^#define\s+TRAINERS_COUNT_EMERALD\s+864$') 'Emerald trainer count preserves the save layout'
+A ($emeraldOpponents -match '(?m)^#define\s+MAX_TRAINERS_COUNT_EMERALD\s+864$') 'Emerald max trainer count preserves the save layout'
+$frlgOpponents = T 'include/constants/opponents_frlg.h'
+foreach ($entry in @(@('TRAINER_LAGO_WATER_GYM_REMO',633),@('TRAINER_LAGO_WATER_GYM_DALIA',634),@('TRAINER_LAGO_WATER_GYM_NEREO',635),@('TRAINER_LAGO_WATER_GYM_MARINA',636))) { A ($frlgOpponents -match "(?m)^#define\s+$($entry[0])\s+$($entry[1])$") "FRLG trainer ID $($entry[0])" }
+A ($frlgOpponents -match '(?m)^#define\s+TRAINERS_COUNT_FRLG\s+637$') 'FRLG trainer count'
+A ($frlgOpponents -match '(?m)^#define\s+MAX_TRAINERS_COUNT_FRLG\s+768$') 'FRLG max trainer count'
 Write-Output 'Lago di Albera Water Gym validation passed.'

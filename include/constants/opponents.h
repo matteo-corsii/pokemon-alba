@@ -572,7 +572,6 @@
 #define TRAINER_CATHERINE_5                 565
 #define TRAINER_JULIO                       566
 #define TRAINER_GRUNT_SEAFLOOR_CAVERN_5     567
-#define TRAINER_GRUNT_UNUSED                568
 #define TRAINER_GRUNT_MT_PYRE_4             569
 #define TRAINER_GRUNT_JAGGED_PASS           570
 #define TRAINER_MARC                        571
@@ -855,10 +854,7 @@
 #define TRAINER_MARIELA                     848
 #define TRAINER_ALVARO                      849
 #define TRAINER_EVERETT                     850
-#define TRAINER_RED                         851
-#define TRAINER_LEAF                        852
 #define TRAINER_BRENDAN_PLACEHOLDER         853
-#define TRAINER_MAY_PLACEHOLDER             854
 #if !IS_FRLG
 #define TRAINER_ALBERA_DARIO                 855
 #define TRAINER_ALBERA_MARA                  856
@@ -869,18 +865,18 @@
 #define TRAINER_CISTERNONI_AUREA_RECRUIT      861
 #define TRAINER_VIA_CONSOLARE_LIVIO           862
 #define TRAINER_VIA_CONSOLARE_ELIO            863
-#define TRAINER_LAGO_WATER_GYM_REMO           864
-#define TRAINER_LAGO_WATER_GYM_DALIA          865
-#define TRAINER_LAGO_WATER_GYM_NEREO          866
-#define TRAINER_LAGO_WATER_GYM_MARINA         867
+#define TRAINER_LAGO_WATER_GYM_REMO           568
+#define TRAINER_LAGO_WATER_GYM_DALIA          851
+#define TRAINER_LAGO_WATER_GYM_NEREO          852
+#define TRAINER_LAGO_WATER_GYM_MARINA         854
 #endif
 
 // NOTE: Because each Trainer uses a flag to determine when they are defeated, there is only space for 9 additional trainers before trainer flag space overflows
 //       More space can be made by shifting flags around in constants/flags.h or changing how trainer flags are handled
 //       MAX_TRAINERS_COUNT can be increased but will take up additional saveblock space
 
-#define TRAINERS_COUNT_EMERALD     868
-#define MAX_TRAINERS_COUNT_EMERALD 868
+#define TRAINERS_COUNT_EMERALD     864
+#define MAX_TRAINERS_COUNT_EMERALD 864
 
 #if IS_FRLG
 #define TRAINERS_COUNT                      TRAINERS_COUNT_FRLG
