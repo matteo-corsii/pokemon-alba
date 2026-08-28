@@ -78,6 +78,7 @@
 #define FLAG_LAGO_REFUGE_FIRST_MISSION_STARTED 0x8F9
 #define FLAG_LAGO_REFUGE_AMULET_COIN_RECEIVED 0x8FA
 #define FLAG_RECEIVED_LAGO_BIKE 0x8FB
+#define FLAG_HIDE_LAGO_DI_ALBERA_LAURO_SURF 0x8FC
 #define FLAG_HIDE_ALBERA_LAB_NICO 0x24 // Nico's dedicated Albèra lab object
 #define FLAG_HIDE_ALBERA_LAB_LIA 0x25 // Lia's dedicated Albèra lab object
 #define FLAG_HIDE_ROUTE101_RESEARCH_PARTY 0x26 // Via Verdi investigation party objects

@@ -17022,3 +17022,111 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 Crisalvia
 Level: 15
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_LAGO_WATER_GYM_REMO ===
+Name: REMO
+Class: Fisherman
+Pic: Fisherman
+Gender: Male
+Music: Hiker
+Double Battle: No
+AI: Check Bad Move
+
+Carpulus
+Level: 18
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Water Gun
+- Aqua Jet
+- Bite
+- Harden
+
+Paludix
+Level: 18
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Water Gun
+- Aqua Jet
+- Struggle Bug
+- Absorb
+
+=== TRAINER_LAGO_WATER_GYM_DALIA ===
+Name: DALIA
+Class: Swimmer F
+Pic: Swimmer F
+Gender: Female
+Music: Swimmer
+Double Battle: No
+AI: Check Bad Move
+
+Salampolla
+Level: 19
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Acid
+- Venoshock
+- Stun Spore
+- Confuse Ray
+
+Tritino
+Level: 19
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Water Gun
+- Water Pulse
+- Confusion
+- Aqua Ring
+
+=== TRAINER_LAGO_WATER_GYM_NEREO ===
+Name: NEREO
+Class: Sailor
+Pic: Sailor
+Gender: Male
+Music: Hiker
+Double Battle: No
+AI: Check Bad Move
+
+Lumella
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Mega Drain
+- Shock Wave
+- Confuse Ray
+- Sleep Powder
+
+Lucinus
+Level: 20
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Bite
+- Aqua Jet
+- Ice Fang
+- Assurance
+
+=== TRAINER_LAGO_WATER_GYM_MARINA ===
+Name: MARINA
+Class: Leader
+Pic: Leader Juan
+Gender: Female
+Music: Female
+Double Battle: No
+AI: Check Bad Move
+
+Carpulus
+Level: 21
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Water Gun
+- Aqua Jet
+- Bite
+- Aqua Ring
+
+Lucinus
+Level: 22
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Bite
+- Aqua Jet
+- Ice Fang
+- Assurance
+
+Naufragus
+Level: 24
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Water Gun
+- Metal Claw
+- Protect
+- Aqua Jet

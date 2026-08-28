@@ -187,6 +187,20 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "LagoDiAlbera_EventScript_Viandante",
       "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_LAGO_DI_ALBERA_LAURO_SURF",
+      "graphics_id": "OBJ_EVENT_GFX_PROF_BIRCH",
+      "x": 70,
+      "y": 75,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "LagoDiAlbera_EventScript_LauroSurf",
+      "flag": "FLAG_HIDE_LAGO_DI_ALBERA_LAURO_SURF"
     }
   ],
   "warp_events": [
@@ -219,7 +233,17 @@
       "dest_warp_id": "0"
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 71,
+      "y": 75,
+      "elevation": 3,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "LagoDiAlbera_EventScript_LauroSurfScene"
+    }
+  ],
   "bg_events": [
     {
       "type": "sign",

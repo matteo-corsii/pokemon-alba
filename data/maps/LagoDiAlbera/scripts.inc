@@ -1,5 +1,12 @@
 LagoDiAlbera_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, LagoDiAlbera_OnTransition
 	.byte 0
+
+LagoDiAlbera_OnTransition::
+	goto_if_set FLAG_BADGE02_GET, LagoDiAlbera_EventScript_EndTransition
+	setflag FLAG_HIDE_LAGO_DI_ALBERA_LAURO_SURF
+LagoDiAlbera_EventScript_EndTransition::
+	end
 
 LagoDiAlbera_EventScript_Custode::
 	msgbox LagoDiAlbera_Text_Custode, MSGBOX_NPC
@@ -84,6 +91,43 @@ LagoDiAlbera_EventScript_BottegaRifugi::
 
 LagoDiAlbera_EventScript_SalitaBorgo::
 	msgbox LagoDiAlbera_Text_SalitaBorgo, MSGBOX_SIGN
+	end
+
+LagoDiAlbera_EventScript_LauroSurf::
+	lock
+	faceplayer
+	goto_if_set FLAG_RECEIVED_HM_SURF, LagoDiAlbera_EventScript_LauroSurfAfter
+	msgbox LagoDiAlbera_Text_LauroWaits, MSGBOX_DEFAULT
+	release
+	end
+
+LagoDiAlbera_EventScript_LauroSurfAfter::
+	msgbox LagoDiAlbera_Text_LauroAfter, MSGBOX_DEFAULT
+	release
+	end
+
+LagoDiAlbera_EventScript_LauroSurfScene::
+	lockall
+	goto_if_unset FLAG_BADGE02_GET, LagoDiAlbera_EventScript_LauroSurfSceneEnd
+	goto_if_set FLAG_RECEIVED_HM_SURF, LagoDiAlbera_EventScript_LauroSurfSceneEnd
+	turnobject LOCALID_PLAYER, DIR_WEST
+	turnobject LOCALID_LAGO_DI_ALBERA_LAURO_SURF, DIR_EAST
+	msgbox LagoDiAlbera_Text_LauroSurfIntro, MSGBOX_DEFAULT
+	giveitem ITEM_HM_SURF
+	goto_if_eq VAR_RESULT, FALSE, LagoDiAlbera_EventScript_LauroSurfBagFull
+	setflag FLAG_RECEIVED_HM_SURF
+	setflag FLAG_HIDE_LAGO_DI_ALBERA_LAURO_SURF
+	msgbox LagoDiAlbera_Text_LauroSurfGiven, MSGBOX_DEFAULT
+	releaseall
+	end
+
+LagoDiAlbera_EventScript_LauroSurfBagFull::
+	msgbox LagoDiAlbera_Text_LauroSurfBagFull, MSGBOX_DEFAULT
+	releaseall
+	end
+
+LagoDiAlbera_EventScript_LauroSurfSceneEnd::
+	releaseall
 	end
 
 LagoDiAlbera_Text_Custode:
@@ -183,3 +227,27 @@ LagoDiAlbera_Text_BottegaRifugi:
 LagoDiAlbera_Text_SalitaBorgo:
 	.string "SALITA VERSO BORGO DI CASTELLO\n"
 	.string "{RIGHT_ARROW}$"
+
+LagoDiAlbera_Text_LauroWaits:
+	.string "PROF. LAURO: Prima conquista la\n"
+	.string "MEDAGLIA MACINA, poi parleremo.$"
+
+LagoDiAlbera_Text_LauroAfter:
+	.string "PROF. LAURO: SURF ti permettera di\n"
+	.string "esplorare il lago con prudenza.$"
+
+LagoDiAlbera_Text_LauroSurfIntro:
+	.string "PROF. LAURO: La MEDAGLIA MACINA\n"
+	.string "abilita SURF fuori dalla lotta.\p"
+	.string "Con SURF esplorerai nuove parti\n"
+	.string "del LAGO DI ALBERA.\p"
+	.string "L'EMISSARIO resta ancora chiuso:\n"
+	.string "la pressione non e stabile.$"
+
+LagoDiAlbera_Text_LauroSurfGiven:
+	.string "PROF. LAURO: Usa SURF con attenzione\n"
+	.string "e ascolta sempre l'acqua.$"
+
+LagoDiAlbera_Text_LauroSurfBagFull:
+	.string "PROF. LAURO: Non hai spazio per SURF.\n"
+	.string "Sistema la BORSA e torna qui.$"
