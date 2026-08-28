@@ -1,0 +1,6 @@
+param([string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path)
+$ErrorActionPreference='Stop'; function J($p){Get-Content (Join-Path $RepositoryRoot $p)-Raw|ConvertFrom-Json}; function A($c,$m){if(-not $c){throw $m}}
+$names='1F','2F','3F','4F'; $all=@(); foreach($n in $names){$m=J "data/maps/LagoDiAlbera_WaterGym_${n}/map.json"; A ($m.id -eq "MAP_LAGO_DI_ALBERA_WATER_GYM_${n}") "map id $n"; A ($m.layout -eq "LAYOUT_LAGO_DI_ALBERA_WATER_GYM_${n}") "layout $n"; A (@($m.object_events).Count -le 2) "events $n"; $all += $m}
+$lake=J 'data/maps/LagoDiAlbera/map.json'; A (@($lake.warp_events).Count -eq 4) 'Lake warps'; A (@($lake.warp_events|? dest_map -eq 'MAP_LAGO_DI_ALBERA_WATER_GYM_1F').Count -eq 1) 'Gym entrance'
+$g1=$all[0]; A (@($g1.warp_events|? dest_map -eq 'MAP_LAGO_DI_ALBERA').Count -eq 1) 'Gym exit'; A (@($all[3].coord_events|? script -eq 'LagoDiAlbera_WaterGym_4F_EventScript_Slide').Count -eq 1) 'Slide trigger'; A (@($all[0].warp_events|? { [int]$_.x -eq 17 -and [int]$_.y -eq 31 }).Count -eq 0) 'Slide return warp'; A (@($all.object_events|? trainer_type -ne 'TRAINER_TYPE_NONE').Count -eq 0) 'Trainer battle present'
+Write-Output 'Lago di Albera Water Gym scaffold validation passed.'

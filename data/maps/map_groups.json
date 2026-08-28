@@ -163,7 +163,11 @@
     "LagoDiAlbera_RefugeMastersHouse_1F",
     "LagoDiAlbera_RefugeMastersHouse_2F",
     "LagoDiAlbera_BikeShop",
-    "LagoDiAlbera_RefugeShop"
+    "LagoDiAlbera_RefugeShop",
+    "LagoDiAlbera_WaterGym_1F",
+    "LagoDiAlbera_WaterGym_2F",
+    "LagoDiAlbera_WaterGym_3F",
+    "LagoDiAlbera_WaterGym_4F"
   ],
   "gMapGroup_IndoorDewford": [
     "DewfordTown_House1",
