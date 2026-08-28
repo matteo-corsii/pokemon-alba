@@ -9400,6 +9400,50 @@
       "border_filepath": "data/layouts/LagoDiAlbera/border.bin",
       "blockdata_filepath": "data/layouts/LagoDiAlbera/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LAGO_DI_ALBERA_REFUGE_MASTERS_HOUSE_1F",
+      "name": "LagoDiAlbera_RefugeMastersHouse_1F_Layout",
+      "width": 21,
+      "height": 15,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_Facility",
+      "border_filepath": "data/layouts/LagoDiAlbera_RefugeMastersHouse_1F/border.bin",
+      "blockdata_filepath": "data/layouts/LagoDiAlbera_RefugeMastersHouse_1F/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LAGO_DI_ALBERA_REFUGE_MASTERS_HOUSE_2F",
+      "name": "LagoDiAlbera_RefugeMastersHouse_2F_Layout",
+      "width": 17,
+      "height": 15,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Facility",
+      "border_filepath": "data/layouts/LagoDiAlbera_RefugeMastersHouse_2F/border.bin",
+      "blockdata_filepath": "data/layouts/LagoDiAlbera_RefugeMastersHouse_2F/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LAGO_DI_ALBERA_BIKE_SHOP",
+      "name": "LagoDiAlbera_BikeShop_Layout",
+      "width": 12,
+      "height": 9,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_BikeShop",
+      "border_filepath": "data/layouts/LagoDiAlbera_BikeShop/border.bin",
+      "blockdata_filepath": "data/layouts/LagoDiAlbera_BikeShop/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LAGO_DI_ALBERA_REFUGE_SHOP",
+      "name": "LagoDiAlbera_RefugeShop_Layout",
+      "width": 8,
+      "height": 6,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/LagoDiAlbera_RefugeShop/border.bin",
+      "blockdata_filepath": "data/layouts/LagoDiAlbera_RefugeShop/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

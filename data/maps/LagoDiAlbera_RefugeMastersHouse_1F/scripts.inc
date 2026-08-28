@@ -1,0 +1,79 @@
+LagoDiAlbera_RefugeMastersHouse_1F_MapScripts::
+	.byte 0
+
+LagoDiAlbera_RefugeMastersHouse_1F_EventScript_Assistant::
+	lock
+	faceplayer
+	goto_if_unset FLAG_LAGO_REFUGE_MASTER_EXPLAINED_STONE_BASES, LagoDiAlbera_RefugeMastersHouse_1F_EventScript_AssistantBefore
+	goto_if_set FLAG_LAGO_REFUGE_AMULET_COIN_RECEIVED, LagoDiAlbera_RefugeMastersHouse_1F_EventScript_AssistantDone
+	goto_if_unset FLAG_LAGO_REFUGE_FIRST_MISSION_STARTED, LagoDiAlbera_RefugeMastersHouse_1F_EventScript_AssistantStart
+	special Special_GetPlayerSecretBaseId
+	goto_if_eq VAR_RESULT, 84, LagoDiAlbera_RefugeMastersHouse_1F_EventScript_AssistantReward
+	goto_if_eq VAR_RESULT, 85, LagoDiAlbera_RefugeMastersHouse_1F_EventScript_AssistantReward
+	msgbox LagoDiAlbera_RefugeMastersHouse_1F_Text_AssistantSearch, MSGBOX_DEFAULT
+	release
+	end
+LagoDiAlbera_RefugeMastersHouse_1F_EventScript_AssistantBefore::
+	msgbox LagoDiAlbera_RefugeMastersHouse_1F_Text_AssistantBefore, MSGBOX_DEFAULT
+	release
+	end
+LagoDiAlbera_RefugeMastersHouse_1F_EventScript_AssistantStart::
+	msgbox LagoDiAlbera_RefugeMastersHouse_1F_Text_AssistantStart, MSGBOX_DEFAULT
+	setflag FLAG_LAGO_REFUGE_FIRST_MISSION_STARTED
+	release
+	end
+LagoDiAlbera_RefugeMastersHouse_1F_EventScript_AssistantReward::
+	giveitem ITEM_AMULET_COIN
+	goto_if_eq VAR_RESULT, FALSE, LagoDiAlbera_RefugeMastersHouse_1F_EventScript_AssistantBagFull
+	setflag FLAG_LAGO_REFUGE_AMULET_COIN_RECEIVED
+	msgbox LagoDiAlbera_RefugeMastersHouse_1F_Text_AssistantReward, MSGBOX_DEFAULT
+	release
+	end
+LagoDiAlbera_RefugeMastersHouse_1F_EventScript_AssistantBagFull::
+	msgbox gText_BagFull, MSGBOX_DEFAULT
+	release
+	end
+LagoDiAlbera_RefugeMastersHouse_1F_EventScript_AssistantDone::
+	msgbox LagoDiAlbera_RefugeMastersHouse_1F_Text_AssistantDone, MSGBOX_NPC
+	end
+LagoDiAlbera_RefugeMastersHouse_1F_EventScript_MissionRegister::
+	goto_if_unset FLAG_LAGO_REFUGE_MASTER_EXPLAINED_STONE_BASES, LagoDiAlbera_RefugeMastersHouse_1F_EventScript_RegisterNone
+	goto_if_unset FLAG_LAGO_REFUGE_FIRST_MISSION_STARTED, LagoDiAlbera_RefugeMastersHouse_1F_EventScript_RegisterAssistant
+	goto_if_set FLAG_LAGO_REFUGE_AMULET_COIN_RECEIVED, LagoDiAlbera_RefugeMastersHouse_1F_EventScript_RegisterDone
+	special Special_GetPlayerSecretBaseId
+	goto_if_eq VAR_RESULT, 84, LagoDiAlbera_RefugeMastersHouse_1F_EventScript_RegisterReady
+	goto_if_eq VAR_RESULT, 85, LagoDiAlbera_RefugeMastersHouse_1F_EventScript_RegisterReady
+	msgbox LagoDiAlbera_RefugeMastersHouse_1F_Text_AssistantSearch, MSGBOX_SIGN
+	end
+LagoDiAlbera_RefugeMastersHouse_1F_EventScript_RegisterNone::
+	msgbox LagoDiAlbera_RefugeMastersHouse_1F_Text_Register, MSGBOX_SIGN
+	end
+LagoDiAlbera_RefugeMastersHouse_1F_EventScript_RegisterAssistant::
+	msgbox LagoDiAlbera_RefugeMastersHouse_1F_Text_RegisterAssistant, MSGBOX_SIGN
+	end
+LagoDiAlbera_RefugeMastersHouse_1F_EventScript_RegisterReady::
+	msgbox LagoDiAlbera_RefugeMastersHouse_1F_Text_RegisterReady, MSGBOX_SIGN
+	end
+LagoDiAlbera_RefugeMastersHouse_1F_EventScript_RegisterDone::
+	msgbox LagoDiAlbera_RefugeMastersHouse_1F_Text_RegisterDone, MSGBOX_SIGN
+	end
+LagoDiAlbera_RefugeMastersHouse_1F_Text_Assistant:
+	.string "Il Maestro conosce ogni tipo di rifugio.\nQuando avra finito di spiegarti, torna\la parlare con me.$"
+LagoDiAlbera_RefugeMastersHouse_1F_Text_Register:
+	.string "REGISTRO DEGLI INCARICHI\nNessun incarico e stato ancora registrato.$"
+LagoDiAlbera_RefugeMastersHouse_1F_Text_AssistantBefore:
+	.string "Il Maestro e al piano superiore.\nParla prima con lui.$"
+LagoDiAlbera_RefugeMastersHouse_1F_Text_AssistantStart:
+	.string "Cerca un ingresso sotto il nido dei Ghepio\no sotto la Casa del Maestro.$"
+LagoDiAlbera_RefugeMastersHouse_1F_Text_AssistantSearch:
+	.string "Scegli uno dei due punti indicati e crea\nil tuo rifugio. Poi torna da me.$"
+LagoDiAlbera_RefugeMastersHouse_1F_Text_AssistantReward:
+	.string "Incarico completato. Tieni questa\nMONETAMULETO.$"
+LagoDiAlbera_RefugeMastersHouse_1F_Text_AssistantDone:
+	.string "Il tuo rifugio e un ottimo inizio.$"
+LagoDiAlbera_RefugeMastersHouse_1F_Text_RegisterAssistant:
+	.string "Parla con l'aiutante per ricevere\nun incarico.$"
+LagoDiAlbera_RefugeMastersHouse_1F_Text_RegisterReady:
+	.string "Hai trovato il luogo giusto.\nTorna dall'aiutante.$"
+LagoDiAlbera_RefugeMastersHouse_1F_Text_RegisterDone:
+	.string "Incarico completato. Ricompensa consegnata.$"
