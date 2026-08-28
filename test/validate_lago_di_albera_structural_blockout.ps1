@@ -10,7 +10,7 @@ $via = Read-Json 'data/maps/ViaConsolare/map.json'
 $route = Read-Json 'data/maps/Route103/map.json'
 Assert-True ($map.id -eq 'MAP_LAGO_DI_ALBERA' -and $map.layout -eq 'LAYOUT_LAGO_DI_ALBERA') 'Lago map identity is incorrect.'
 Assert-True ($map.map_type -eq 'MAP_TYPE_ROUTE' -and $map.region_map_section -eq 'MAPSEC_ALBERA_STORICA') 'Lago map type or region is incorrect.'
-Assert-True (@($map.object_events).Count -eq 0 -and @($map.warp_events).Count -eq 0 -and @($map.coord_events).Count -eq 0 -and @($map.bg_events).Count -eq 0) 'Lago must not contain events.'
+Assert-True (@($map.object_events).Count -eq 12 -and @($map.warp_events).Count -eq 0 -and @($map.coord_events).Count -eq 0 -and @($map.bg_events).Count -eq 5) 'Lago ambient event counts are incorrect.'
 Assert-True ($map.connections.Count -eq 1 -and $map.connections[0].direction -eq 'down' -and $map.connections[0].map -eq 'MAP_VIA_CONSOLARE' -and [int]$map.connections[0].offset -eq 31) 'Lago reciprocal connection is incorrect.'
 $l = @($layout.layouts | Where-Object id -eq 'LAYOUT_LAGO_DI_ALBERA')
 Assert-True ($l.Count -eq 1 -and [int]$l[0].width -eq 120 -and [int]$l[0].height -eq 120 -and $l[0].primary_tileset -eq 'gTileset_General' -and $l[0].secondary_tileset -eq 'gTileset_LagoDiAlbera') 'Lago layout is incorrect.'
@@ -30,5 +30,5 @@ Assert-True (@($via.connections | Where-Object { $_.direction -eq 'up' -and $_.m
 Assert-True (@($route.connections | Where-Object { $_.direction -eq 'left' -and $_.map -eq 'MAP_VIA_CONSOLARE' -and [int]$_.offset -eq 0 }).Count -eq 1) 'Route103 reciprocal connection changed.'
 # ViaConsolare/map.bin has an explicit exact-delta guard in the Lago tileset validator.
 $wild = Read-Json 'src/data/wild_encounters.json'
-Assert-True (@($wild.wild_encounter_groups.encounters | Where-Object map -eq 'MAP_LAGO_DI_ALBERA').Count -eq 0) 'Lago must not have encounters.'
+Assert-True (@($wild.wild_encounter_groups.encounters | Where-Object map -eq 'MAP_LAGO_DI_ALBERA').Count -eq 4) 'Lago must retain four time-of-day encounter tables.'
 Write-Output 'Lago di Albera structural blockout: PASS'

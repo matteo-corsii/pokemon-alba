@@ -35,10 +35,10 @@ Assert-True ($layout.Count -eq 1 -and $layout[0].primary_tileset -eq 'gTileset_G
 Assert-True (Test-Path -LiteralPath $lago) 'Lago clone directory is missing.'
 Assert-True ($graphics.Contains('gTilesetTiles_LagoDiAlbera') -and $graphics.Contains('-num_tiles 512') -and $metatilesHeader.Contains('gMetatiles_LagoDiAlbera') -and $headers.Contains('gTileset_LagoDiAlbera') -and $headers.Contains('.callback = InitTilesetAnim_Pacifidlog') -and $includes.Contains('gTileset_LagoDiAlbera')) 'Lago clone registration is incomplete.'
 Assert-True ([int]$layout[0].width -eq 120 -and [int]$layout[0].height -eq 120) 'Lago dimensions changed.'
-Assert-True (@($map.object_events).Count -eq 0 -and @($map.warp_events).Count -eq 0 -and @($map.coord_events).Count -eq 0 -and @($map.bg_events).Count -eq 0) 'Lago must not contain events.'
+Assert-True (@($map.object_events).Count -eq 12 -and @($map.warp_events).Count -eq 0 -and @($map.coord_events).Count -eq 0 -and @($map.bg_events).Count -eq 5) 'Lago ambient event counts are incorrect.'
 Assert-True (@($map.connections | Where-Object { $_.direction -eq 'down' -and $_.map -eq 'MAP_VIA_CONSOLARE' -and [int]$_.offset -eq 31 }).Count -eq 1) 'Lago south connection changed.'
 $wild = Read-Json 'src/data/wild_encounters.json'
-Assert-True (@($wild.wild_encounter_groups.encounters | Where-Object map -eq 'MAP_LAGO_DI_ALBERA').Count -eq 0) 'Lago must not have encounters.'
+Assert-True (@($wild.wild_encounter_groups.encounters | Where-Object map -eq 'MAP_LAGO_DI_ALBERA').Count -eq 4) 'Lago must retain four time-of-day encounter tables.'
 
 $mapBin = Join-Path $RepositoryRoot 'data/layouts/LagoDiAlbera/map.bin'
 Assert-True ((Get-Item -LiteralPath $mapBin).Length -eq 120 * 120 * 2) 'Lago map.bin must be 120x120.'
