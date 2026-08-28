@@ -869,14 +869,18 @@
 #define TRAINER_CISTERNONI_AUREA_RECRUIT      861
 #define TRAINER_VIA_CONSOLARE_LIVIO           862
 #define TRAINER_VIA_CONSOLARE_ELIO            863
+#define TRAINER_LAGO_WATER_GYM_REMO           864
+#define TRAINER_LAGO_WATER_GYM_DALIA          865
+#define TRAINER_LAGO_WATER_GYM_NEREO          866
+#define TRAINER_LAGO_WATER_GYM_MARINA         867
 #endif
 
 // NOTE: Because each Trainer uses a flag to determine when they are defeated, there is only space for 9 additional trainers before trainer flag space overflows
 //       More space can be made by shifting flags around in constants/flags.h or changing how trainer flags are handled
 //       MAX_TRAINERS_COUNT can be increased but will take up additional saveblock space
 
-#define TRAINERS_COUNT_EMERALD     864
-#define MAX_TRAINERS_COUNT_EMERALD 864
+#define TRAINERS_COUNT_EMERALD     868
+#define MAX_TRAINERS_COUNT_EMERALD 868
 
 #if IS_FRLG
 #define TRAINERS_COUNT                      TRAINERS_COUNT_FRLG
