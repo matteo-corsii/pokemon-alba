@@ -82,6 +82,10 @@ LagoDiAlbera_EventScript_BottegaRifugi::
 	msgbox LagoDiAlbera_Text_BottegaRifugi, MSGBOX_SIGN
 	end
 
+LagoDiAlbera_EventScript_SalitaBorgo::
+	msgbox LagoDiAlbera_Text_SalitaBorgo, MSGBOX_SIGN
+	end
+
 LagoDiAlbera_Text_Custode:
 	.string "Benvenuto al LAGO DI ALBERA.\n"
 	.string "Il sentiero gira attorno al bacino.\p"
@@ -175,3 +179,7 @@ LagoDiAlbera_Text_Emissario:
 
 LagoDiAlbera_Text_BottegaRifugi:
 	.string "BOTTEGA DEI RIFUGI$"
+
+LagoDiAlbera_Text_SalitaBorgo:
+	.string "SALITA VERSO BORGO DI CASTELLO\n"
+	.string "{RIGHT_ARROW}$"

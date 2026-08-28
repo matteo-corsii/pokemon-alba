@@ -23,8 +23,8 @@
     {
       "local_id": "LOCALID_LAGO_DI_ALBERA_CUSTODE",
       "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
-      "x": 14,
-      "y": 108,
+      "x": 58,
+      "y": 104,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
@@ -51,8 +51,8 @@
     {
       "local_id": "LOCALID_LAGO_DI_ALBERA_GUARDABOSCHI",
       "graphics_id": "OBJ_EVENT_GFX_HIKER",
-      "x": 34,
-      "y": 38,
+      "x": 17,
+      "y": 61,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -65,8 +65,8 @@
     {
       "local_id": "LOCALID_LAGO_DI_ALBERA_ARCHEOLOGA",
       "graphics_id": "OBJ_EVENT_GFX_SCIENTIST_1",
-      "x": 43,
-      "y": 47,
+      "x": 7,
+      "y": 34,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,
@@ -79,8 +79,8 @@
     {
       "local_id": "LOCALID_LAGO_DI_ALBERA_ANZIANO",
       "graphics_id": "OBJ_EVENT_GFX_EXPERT_M",
-      "x": 52,
-      "y": 31,
+      "x": 35,
+      "y": 12,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
@@ -93,8 +93,8 @@
     {
       "local_id": "LOCALID_LAGO_DI_ALBERA_CARPENTIERE",
       "graphics_id": "OBJ_EVENT_GFX_MAN_4",
-      "x": 69,
-      "y": 72,
+      "x": 81,
+      "y": 73,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,
@@ -107,8 +107,8 @@
     {
       "local_id": "LOCALID_LAGO_DI_ALBERA_ABITANTE_PALAFITTE",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_1",
-      "x": 76,
-      "y": 67,
+      "x": 90,
+      "y": 66,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -121,8 +121,8 @@
     {
       "local_id": "LOCALID_LAGO_DI_ALBERA_BAGNANTE",
       "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F_LAND",
-      "x": 101,
-      "y": 80,
+      "x": 74,
+      "y": 88,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,
@@ -149,8 +149,8 @@
     {
       "local_id": "LOCALID_LAGO_DI_ALBERA_ASPIRANTE",
       "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
-      "x": 63,
-      "y": 78,
+      "x": 65,
+      "y": 75,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
@@ -163,8 +163,8 @@
     {
       "local_id": "LOCALID_LAGO_DI_ALBERA_TECNICO",
       "graphics_id": "OBJ_EVENT_GFX_SCIENTIST_2",
-      "x": 78,
-      "y": 7,
+      "x": 86,
+      "y": 8,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -177,8 +177,8 @@
     {
       "local_id": "LOCALID_LAGO_DI_ALBERA_VIANDANTE",
       "graphics_id": "OBJ_EVENT_GFX_MAN_5",
-      "x": 91,
-      "y": 24,
+      "x": 117,
+      "y": 44,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,
@@ -231,6 +231,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "LagoDiAlbera_EventScript_BottegaRifugi"
+    },
+    {
+      "type": "sign",
+      "x": 103,
+      "y": 46,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "LagoDiAlbera_EventScript_SalitaBorgo"
     }
   ],
   "region": "REGION_HOENN"

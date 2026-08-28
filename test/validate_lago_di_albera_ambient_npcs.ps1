@@ -7,18 +7,18 @@ $map = Read-Json 'data/maps/LagoDiAlbera/map.json'
 $scripts = Get-Content (Join-Path $RepositoryRoot 'data/maps/LagoDiAlbera/scripts.inc') -Raw -Encoding utf8
 
 $expectedObjects = @(
-    @('LOCALID_LAGO_DI_ALBERA_CUSTODE','OBJ_EVENT_GFX_GENTLEMAN',14,108,'MOVEMENT_TYPE_FACE_RIGHT','LagoDiAlbera_EventScript_Custode'),
+    @('LOCALID_LAGO_DI_ALBERA_CUSTODE','OBJ_EVENT_GFX_GENTLEMAN',58,104,'MOVEMENT_TYPE_FACE_RIGHT','LagoDiAlbera_EventScript_Custode'),
     @('LOCALID_LAGO_DI_ALBERA_PESCATORE','OBJ_EVENT_GFX_FISHERMAN',30,86,'MOVEMENT_TYPE_FACE_RIGHT','LagoDiAlbera_EventScript_Pescatore'),
-    @('LOCALID_LAGO_DI_ALBERA_GUARDABOSCHI','OBJ_EVENT_GFX_HIKER',34,38,'MOVEMENT_TYPE_FACE_DOWN','LagoDiAlbera_EventScript_Guardaboschi'),
-    @('LOCALID_LAGO_DI_ALBERA_ARCHEOLOGA','OBJ_EVENT_GFX_SCIENTIST_1',43,47,'MOVEMENT_TYPE_FACE_LEFT','LagoDiAlbera_EventScript_Archeologa'),
-    @('LOCALID_LAGO_DI_ALBERA_ANZIANO','OBJ_EVENT_GFX_EXPERT_M',52,31,'MOVEMENT_TYPE_FACE_RIGHT','LagoDiAlbera_EventScript_Anziano'),
-    @('LOCALID_LAGO_DI_ALBERA_CARPENTIERE','OBJ_EVENT_GFX_MAN_4',69,72,'MOVEMENT_TYPE_FACE_LEFT','LagoDiAlbera_EventScript_Carpentiere'),
-    @('LOCALID_LAGO_DI_ALBERA_ABITANTE_PALAFITTE','OBJ_EVENT_GFX_WOMAN_1',76,67,'MOVEMENT_TYPE_FACE_DOWN','LagoDiAlbera_EventScript_AbitantePalafitte'),
-    @('LOCALID_LAGO_DI_ALBERA_BAGNANTE','OBJ_EVENT_GFX_SWIMMER_F_LAND',101,80,'MOVEMENT_TYPE_FACE_LEFT','LagoDiAlbera_EventScript_Bagnante'),
+    @('LOCALID_LAGO_DI_ALBERA_GUARDABOSCHI','OBJ_EVENT_GFX_HIKER',17,61,'MOVEMENT_TYPE_FACE_DOWN','LagoDiAlbera_EventScript_Guardaboschi'),
+    @('LOCALID_LAGO_DI_ALBERA_ARCHEOLOGA','OBJ_EVENT_GFX_SCIENTIST_1',7,34,'MOVEMENT_TYPE_FACE_LEFT','LagoDiAlbera_EventScript_Archeologa'),
+    @('LOCALID_LAGO_DI_ALBERA_ANZIANO','OBJ_EVENT_GFX_EXPERT_M',35,12,'MOVEMENT_TYPE_FACE_RIGHT','LagoDiAlbera_EventScript_Anziano'),
+    @('LOCALID_LAGO_DI_ALBERA_CARPENTIERE','OBJ_EVENT_GFX_MAN_4',81,73,'MOVEMENT_TYPE_FACE_LEFT','LagoDiAlbera_EventScript_Carpentiere'),
+    @('LOCALID_LAGO_DI_ALBERA_ABITANTE_PALAFITTE','OBJ_EVENT_GFX_WOMAN_1',90,66,'MOVEMENT_TYPE_FACE_DOWN','LagoDiAlbera_EventScript_AbitantePalafitte'),
+    @('LOCALID_LAGO_DI_ALBERA_BAGNANTE','OBJ_EVENT_GFX_SWIMMER_F_LAND',74,88,'MOVEMENT_TYPE_FACE_LEFT','LagoDiAlbera_EventScript_Bagnante'),
     @('LOCALID_LAGO_DI_ALBERA_CICLISTA','OBJ_EVENT_GFX_CYCLING_TRIATHLETE_M',113,73,'MOVEMENT_TYPE_FACE_LEFT','LagoDiAlbera_EventScript_Ciclista'),
-    @('LOCALID_LAGO_DI_ALBERA_ASPIRANTE','OBJ_EVENT_GFX_YOUNGSTER',63,78,'MOVEMENT_TYPE_FACE_RIGHT','LagoDiAlbera_EventScript_Aspirante'),
-    @('LOCALID_LAGO_DI_ALBERA_TECNICO','OBJ_EVENT_GFX_SCIENTIST_2',78,7,'MOVEMENT_TYPE_FACE_DOWN','LagoDiAlbera_EventScript_Tecnico'),
-    @('LOCALID_LAGO_DI_ALBERA_VIANDANTE','OBJ_EVENT_GFX_MAN_5',91,24,'MOVEMENT_TYPE_FACE_LEFT','LagoDiAlbera_EventScript_Viandante')
+    @('LOCALID_LAGO_DI_ALBERA_ASPIRANTE','OBJ_EVENT_GFX_YOUNGSTER',65,75,'MOVEMENT_TYPE_FACE_RIGHT','LagoDiAlbera_EventScript_Aspirante'),
+    @('LOCALID_LAGO_DI_ALBERA_TECNICO','OBJ_EVENT_GFX_SCIENTIST_2',86,8,'MOVEMENT_TYPE_FACE_DOWN','LagoDiAlbera_EventScript_Tecnico'),
+    @('LOCALID_LAGO_DI_ALBERA_VIANDANTE','OBJ_EVENT_GFX_MAN_5',117,44,'MOVEMENT_TYPE_FACE_LEFT','LagoDiAlbera_EventScript_Viandante')
 )
 Assert-True (@($map.object_events).Count -eq 12) 'Lago must contain exactly twelve ambient NPCs.'
 foreach ($expected in $expectedObjects) {
@@ -34,9 +34,10 @@ $expectedSigns = @(
     @(115,71,'LagoDiAlbera_EventScript_NegozioBiciclette'),
     @(66,74,'LagoDiAlbera_EventScript_Palestra'),
     @(77,3,'LagoDiAlbera_EventScript_Emissario'),
-    @(110,110,'LagoDiAlbera_EventScript_BottegaRifugi')
+    @(110,110,'LagoDiAlbera_EventScript_BottegaRifugi'),
+    @(103,46,'LagoDiAlbera_EventScript_SalitaBorgo')
 )
-Assert-True (@($map.bg_events).Count -eq 5) 'Lago must contain exactly five approved signs.'
+Assert-True (@($map.bg_events).Count -eq 6) 'Lago must contain exactly six approved signs.'
 foreach ($expected in $expectedSigns) {
     $event = @($map.bg_events | Where-Object { [int]$_.x -eq $expected[0] -and [int]$_.y -eq $expected[1] -and $_.script -eq $expected[2] })
     Assert-True ($event.Count -eq 1 -and $event[0].type -eq 'sign') "Approved Lago sign missing at ($($expected[0]),$($expected[1]))."
@@ -46,7 +47,7 @@ Assert-True (@($map.warp_events).Count -eq 0 -and @($map.coord_events).Count -eq
 Assert-True ($scripts -match '(?s)LagoDiAlbera_EventScript_Pescatore::.*?goto_if_set FLAG_RECEIVED_GOOD_ROD.*?giveitem ITEM_GOOD_ROD.*?setflag FLAG_RECEIVED_GOOD_ROD') 'Fisherman must give the Good Rod exactly once.'
 Assert-True ([regex]::Matches($scripts,'giveitem ITEM_GOOD_ROD').Count -eq 1) 'Good Rod reward must exist exactly once.'
 Assert-True ($scripts -notmatch 'trainerbattle|ITEM_HM_SURF|FLAG_BADGE|MAP_LAGO_DI_ALBERA_REFUGE_SHOP') 'NPC batch introduced battle, Surf, Badge, or shop progression.'
-foreach ($token in @('Casa del Maestro dei rifugi','Negozio di biciclette','PALESTRA DELLE MACINE','Entrata dell''EMISSARIO','BOTTEGA DEI RIFUGI','rete dei CISTERNONI')) {
+foreach ($token in @('Casa del Maestro dei rifugi','Negozio di biciclette','PALESTRA DELLE MACINE','Entrata dell''EMISSARIO','BOTTEGA DEI RIFUGI','SALITA VERSO BORGO DI CASTELLO','rete dei CISTERNONI')) {
     Assert-True ($scripts.Contains($token)) "Missing canonical Lago text: $token"
 }
 
