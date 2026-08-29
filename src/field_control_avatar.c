@@ -941,10 +941,6 @@ static void StorePlayerStateAndSetupWarp(struct MapPosition *position, s32 warpE
 static bool8 TryArrowWarp(struct MapPosition *position, u16 metatileBehavior, enum Direction direction)
 {
     s32 warpEventId = GetWarpEventAtMapPosition(&gMapHeader, position);
-    bool8 isMansioExit = (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_VIA_CONSOLARE_MANSIO)
-                       && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_VIA_CONSOLARE_MANSIO)
-                       && position->y - MAP_OFFSET == 15
-                       && (position->x - MAP_OFFSET == 5 || position->x - MAP_OFFSET == 17));
     u32 delay;
 
     if (warpEventId == WARP_ID_NONE)
@@ -954,11 +950,6 @@ static bool8 TryArrowWarp(struct MapPosition *position, u16 metatileBehavior, en
     {
         StorePlayerStateAndSetupWarp(position, warpEventId);
         DoWarp();
-        if (isMansioExit)
-        {
-            WarpIntoMap();
-            SetMainCallback2(CB2_LoadMap);
-        }
         return TRUE;
     }
     else if (IsDirectionalStairWarpMetatileBehavior(metatileBehavior, direction) == TRUE)
