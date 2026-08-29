@@ -75,14 +75,14 @@
     {
       "x": 5,
       "y": 15,
-      "elevation": 3,
+      "elevation": 0,
       "dest_map": "MAP_VIA_CONSOLARE",
       "dest_warp_id": "0"
     },
     {
       "x": 17,
       "y": 15,
-      "elevation": 3,
+      "elevation": 0,
       "dest_map": "MAP_VIA_CONSOLARE",
       "dest_warp_id": "1"
     }
