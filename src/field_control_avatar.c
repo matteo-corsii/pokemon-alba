@@ -956,8 +956,6 @@ static bool8 TryArrowWarp(struct MapPosition *position, u16 metatileBehavior, en
 
     if (IsArrowWarpMetatileBehavior(metatileBehavior, direction) == TRUE)
     {
-        if (isMansioExit)
-            PlaySE(SE_PIN);
         StorePlayerStateAndSetupWarp(position, warpEventId);
         DoWarp();
         return TRUE;
