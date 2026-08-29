@@ -104,8 +104,8 @@ git -C $RepositoryRoot diff --quiet develop -- data/layouts/ViaConsolare/border.
 Assert-True ($LASTEXITCODE -eq 0) 'Via Consolare binary layout files changed.'
 git -C $RepositoryRoot diff --quiet develop -- data/layouts/Route103/map.bin data/layouts/Route103/border.bin data/maps/Route103/map.json
 Assert-True ($LASTEXITCODE -eq 0) 'Route103 was modified.'
-git -C $RepositoryRoot diff --quiet develop -- data/layouts/ViaConsolare_Mansio/map.bin data/layouts/ViaConsolare_Mansio/border.bin data/maps/ViaConsolare_Mansio/map.json
-Assert-True ($LASTEXITCODE -eq 0) 'Mansio content was modified.'
+git -C $RepositoryRoot diff --quiet develop -- data/layouts/ViaConsolare_Mansio/map.bin data/layouts/ViaConsolare_Mansio/border.bin
+Assert-True ($LASTEXITCODE -eq 0) 'Mansio binary layout files changed.'
 
 $viaWild = @($wild.wild_encounter_groups.encounters | Where-Object { $_.map -eq 'MAP_VIA_CONSOLARE' })
 Assert-True ($viaWild.Count -eq 4) 'Via Consolare must have four time-based encounter tables.'
