@@ -529,35 +529,13 @@ static bool32 WaitForWeatherFadeIn(void)
 
 void DoWarp(void)
 {
-    bool8 isMansioExit = (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_VIA_CONSOLARE_MANSIO)
-                       && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_VIA_CONSOLARE_MANSIO));
-    u8 taskId;
-
     LockPlayerFieldControls();
     TryFadeOutOldMapMusic();
     WarpFadeOutScreen();
     PlayRainStoppingSoundEffect();
     PlaySE(SE_EXIT);
     gFieldCallback = FieldCB_DefaultWarpExit;
-    taskId = CreateTask(Task_WarpAndLoadMap, 10);
-    if (isMansioExit)
-    {
-        // Temporary Mansio diagnostic stored in VAR_RESULT:
-        // bit 0 task created, 1 state 0, 2 state 1, 3 palette ready,
-        // 4 BGM ready, 5 state 2, 6 WarpIntoMap returned,
-        // 7 SetMainCallback2 returned, 15 CreateTask failed.
-        gSpecialVar_Result = 0;
-        if (taskId == TASK_NONE)
-        {
-            gSpecialVar_Result = (1 << 15);
-            PlaySE(SE_FAILURE);
-        }
-        else
-        {
-            gSpecialVar_Result |= (1 << 0);
-            gTasks[taskId].data[2] = TRUE;
-        }
-    }
+    CreateTask(Task_WarpAndLoadMap, 10);
 }
 
 void DoDiveWarp(void)
@@ -716,63 +694,30 @@ void ReturnFromLinkRoom(void)
 void Task_WarpAndLoadMap(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    bool8 isMansioDiagnostic = task->data[2];
 
     switch (task->tState)
     {
     case 0:
-        if (isMansioDiagnostic)
-            gSpecialVar_Result |= (1 << 1);
         FreezeObjectEvents();
         LockPlayerFieldControls();
         EndORASDowsing();
         task->tState++;
         break;
     case 1:
-        if (isMansioDiagnostic)
-            gSpecialVar_Result |= (1 << 2);
         if (!PaletteFadeActive())
         {
-            if (isMansioDiagnostic)
-                gSpecialVar_Result |= (1 << 3);
             if (task->data[1] == 0)
             {
                 ClearMirageTowerPulseBlendEffect();
                 task->data[1] = 1;
             }
             if (BGMusicStopped())
-            {
-                if (isMansioDiagnostic)
-                {
-                    gSpecialVar_Result |= (1 << 4);
-                    PlaySE(SE_DING_DONG);
-                }
                 task->tState++;
-            }
-            else if (isMansioDiagnostic && task->data[3] == 0)
-            {
-                task->data[3] = 1;
-                PlaySE(SE_PC_OFF);
-            }
-        }
-        else if (isMansioDiagnostic && task->data[4] == 0)
-        {
-            task->data[4] = 1;
-            PlaySE(SE_BOO);
         }
         break;
     case 2:
-        if (isMansioDiagnostic)
-            gSpecialVar_Result |= (1 << 5);
         WarpIntoMap();
-        if (isMansioDiagnostic)
-            gSpecialVar_Result |= (1 << 6);
         SetMainCallback2(CB2_LoadMap);
-        if (isMansioDiagnostic)
-        {
-            gSpecialVar_Result |= (1 << 7);
-            PlaySE(SE_DOOR);
-        }
         DestroyTask(taskId);
         break;
     }
