@@ -58,12 +58,12 @@ Assert-True ($internalLayout[0].primary_tileset -eq 'gTileset_Building' -and $in
 Assert-True (@($groups.gMapGroup_IndoorOldale | Where-Object { $_ -eq 'ViaConsolare_Mansio' }).Count -eq 1) 'Mansio is not registered in the indoor map group.'
 Assert-True ((Get-Item (Join-Path $RepositoryRoot 'data/layouts/ViaConsolare_Mansio/map.bin')).Length -eq (24 * 16 * 2)) 'Mansio map.bin size is incorrect.'
 $mansioBin = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/layouts/ViaConsolare_Mansio/map.bin'))
-$genericAttrs = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/tilesets/secondary/generic_building/metatile_attributes.bin'))
-foreach ($exit in @(@(5, 15, 0x0208), @(17, 15, 0x0209))) {
+$buildingAttrs = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/tilesets/primary/building/metatile_attributes.bin'))
+foreach ($exit in @(@(5, 15, 0x0006), @(17, 15, 0x0007))) {
     $offset = (($exit[1] * 24) + $exit[0]) * 2
     $raw = [BitConverter]::ToUInt16($mansioBin, $offset)
-    Assert-True ($raw -eq $exit[2] -and (($raw -shr 10) -band 3) -eq 0 -and (($raw -shr 12) -band 3) -eq 0) "Mansio exit raw block is not the Condominium reference at $($exit[0]),$($exit[1])."
-    $attribute = [BitConverter]::ToUInt16($genericAttrs, (($raw -band 0x3FF) - 0x200) * 2)
+    Assert-True ($raw -eq $exit[2] -and (($raw -shr 10) -band 3) -eq 0 -and (($raw -shr 12) -band 3) -eq 0) "Mansio exit raw block is not the proven School reference at $($exit[0]),$($exit[1])."
+    $attribute = [BitConverter]::ToUInt16($buildingAttrs, ($raw -band 0x3FF) * 2)
     Assert-True (($attribute -band 0xFF) -eq 101) "Mansio exit behavior is not MB_SOUTH_ARROW_WARP at $($exit[0]),$($exit[1])."
 }
 # ViaConsolare/map.bin has an explicit exact-delta guard in the Lago tileset validator.
