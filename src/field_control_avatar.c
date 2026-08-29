@@ -948,16 +948,17 @@ static bool8 TryArrowWarp(struct MapPosition *position, u16 metatileBehavior, en
     u32 delay;
 
     if (warpEventId == WARP_ID_NONE)
-    {
-        if (isMansioExit)
-            PlaySE(SE_FAILURE);
         return FALSE;
-    }
 
     if (IsArrowWarpMetatileBehavior(metatileBehavior, direction) == TRUE)
     {
         StorePlayerStateAndSetupWarp(position, warpEventId);
         DoWarp();
+        if (isMansioExit)
+        {
+            WarpIntoMap();
+            SetMainCallback2(CB2_LoadMap);
+        }
         return TRUE;
     }
     else if (IsDirectionalStairWarpMetatileBehavior(metatileBehavior, direction) == TRUE)
@@ -973,8 +974,6 @@ static bool8 TryArrowWarp(struct MapPosition *position, u16 metatileBehavior, en
         DoStairWarp(metatileBehavior, delay);
         return TRUE;
     }
-    if (isMansioExit)
-        PlaySE(SE_BOO);
     return FALSE;
 }
 

@@ -529,27 +529,13 @@ static bool32 WaitForWeatherFadeIn(void)
 
 void DoWarp(void)
 {
-    bool8 isMansioExit = (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_VIA_CONSOLARE_MANSIO)
-                       && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_VIA_CONSOLARE_MANSIO));
-    bool8 paletteWasActive = gPaletteFade.active;
-    u8 taskId;
-
     LockPlayerFieldControls();
     TryFadeOutOldMapMusic();
     WarpFadeOutScreen();
     PlayRainStoppingSoundEffect();
-    if (!isMansioExit)
-        PlaySE(SE_EXIT);
-    else if (paletteWasActive)
-        PlaySE(SE_FAILURE);
-    else if (!gPaletteFade.active)
-        PlaySE(SE_BOO);
-    else
-        PlaySE(SE_DING_DONG);
+    PlaySE(SE_EXIT);
     gFieldCallback = FieldCB_DefaultWarpExit;
-    taskId = CreateTask(Task_WarpAndLoadMap, 10);
-    if (isMansioExit && taskId == TASK_NONE)
-        PlaySE(SE_PC_OFF);
+    CreateTask(Task_WarpAndLoadMap, 10);
 }
 
 void DoDiveWarp(void)
