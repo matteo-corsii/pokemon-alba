@@ -81,7 +81,11 @@ for ($index = 0; $index -lt 203; $index++) {
         Assert-True ([BitConverter]::ToUInt16($pacAttrs, $index * 2) -eq [BitConverter]::ToUInt16($lagoAttrs, $index * 2)) "Unexpected Lago attribute change at 0x$('{0:X3}' -f $index)."
     }
 }
-$tileMap = @{ 184 = 494; 185 = 504; 186 = 505; 187 = 506; 315 = 507; 317 = 508; 340 = 509; 341 = 510; 342 = 511 }
+$tileMap = @{ 184 = 384; 185 = 385; 186 = 386; 187 = 387; 315 = 388; 317 = 389; 340 = 390; 341 = 391; 342 = 392 }
+$fieldDoor = Get-Content (Join-Path $RepositoryRoot 'src/field_door.c') -Raw
+Assert-True ($fieldDoor.Contains('#define DOOR_TILE_START_SIZE2 (NUM_TILES_TOTAL - 16)')) 'Door animation reserved tile range changed.'
+Assert-True (@($tileMap.Values | Where-Object { $_ -ge 496 }).Count -eq 0) 'Imported Lago tiles must not overlap door animation slots 496-511.'
+Assert-True (@($tileMap.Values | Where-Object { ($_ -ge 464 -and $_ -le 493) -or ($_ -ge 496 -and $_ -le 503) }).Count -eq 0) 'Imported Lago tiles must not overlap Pacifidlog animation slots.'
 $paletteMap = @{ 2 = 2; 6 = 11; 7 = 12; 11 = 13 }
 foreach ($index in $patchedMetatiles) {
     Assert-True ([BitConverter]::ToUInt16($lagoAttrs, $index * 2) -eq [BitConverter]::ToUInt16($portaAttrs, $index * 2)) "Lago attribute mismatch for PortaPretoria metatile 0x$('{0:X3}' -f $index)."
