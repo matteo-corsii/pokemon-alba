@@ -68,6 +68,10 @@ $lagoAttrs = Read-Bytes (Join-Path $lago 'metatile_attributes.bin')
 $portaMeta = Read-Bytes (Join-Path $porta 'metatiles.bin')
 $portaAttrs = Read-Bytes (Join-Path $porta 'metatile_attributes.bin')
 Assert-True ($pacMeta.Length -eq $lagoMeta.Length -and $pacAttrs.Length -eq $lagoAttrs.Length -and $lagoMeta.Length / 16 -eq 203) 'Lago clone metatile capacity differs from Pacifidlog.'
+for ($entry = 0; $entry -lt $lagoMeta.Length / 2; $entry++) {
+    $palette = ([BitConverter]::ToUInt16($lagoMeta, $entry * 2) -shr 12) -band 0xF
+    Assert-True ($palette -lt 13) "Lago metatile entry $entry references unloaded palette $palette."
+}
 $patchedMetatiles = @(0x096, 0x0C9)
 for ($index = 0; $index -lt 203; $index++) {
     if ($patchedMetatiles -notcontains $index) {
@@ -87,7 +91,9 @@ foreach ($index in $patchedMetatiles) {
         $sourcePalette = ($sourceEntry -shr 12) -band 0xF
         Assert-True ($paletteMap.ContainsKey($sourcePalette)) "Unexpected PortaPretoria palette $sourcePalette."
         if ($sourceTile -ge 512) { Assert-True ($tileMap.ContainsKey($sourceTile - 512)) "Unexpected PortaPretoria secondary tile $($sourceTile - 512)."; $sourceTile = 512 + $tileMap[$sourceTile - 512] }
-        $expected = ($sourceEntry -band 0x0C00) -bor $sourceTile -bor ($paletteMap[$sourcePalette] -shl 12)
+        $expectedPalette = $paletteMap[$sourcePalette]
+        if ($index -eq 0x0C9 -and $entryIndex -lt 4) { $expectedPalette = 12 }
+        $expected = ($sourceEntry -band 0x0C00) -bor $sourceTile -bor ($expectedPalette -shl 12)
         Assert-True ([BitConverter]::ToUInt16($lagoMeta, $index * 16 + $entryIndex * 2) -eq $expected) "Lago metatile 0x$('{0:X3}' -f $index) is not the required PortaPretoria compatibility clone."
     }
 }
