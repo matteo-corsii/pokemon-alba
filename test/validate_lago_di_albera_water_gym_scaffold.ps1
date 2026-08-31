@@ -12,11 +12,12 @@ A (@($maps['1F'].warp_events | Where-Object { $_.x -eq 9 -and $_.y -eq 39 -and $
 A (@($maps['4F'].coord_events | Where-Object { $_.x -eq 9 -and $_.y -eq 2 -and $_.script -eq 'LagoDiAlbera_WaterGym_4F_EventScript_Slide' }).Count -eq 1) 'Slide trigger'
 A (@($maps['1F'].warp_events | Where-Object { $_.x -eq 17 -and $_.y -eq 31 }).Count -eq 0) 'No slide return warp'
 
-$expected = @(@{Map='1F';Id='LOCALID_LAGO_WATER_GYM_TRAINER_1';X=7;Y=21;Gfx='OBJ_EVENT_GFX_FISHERMAN';Trainer='TRAINER_TYPE_NORMAL'}, @{Map='2F';Id='LOCALID_LAGO_WATER_GYM_TRAINER_2';X=13;Y=17;Gfx='OBJ_EVENT_GFX_SWIMMER_F';Trainer='TRAINER_TYPE_NORMAL'}, @{Map='3F';Id='LOCALID_LAGO_WATER_GYM_TRAINER_3';X=6;Y=16;Gfx='OBJ_EVENT_GFX_SAILOR';Trainer='TRAINER_TYPE_NORMAL'}, @{Map='4F';Id='LOCALID_LAGO_WATER_GYM_LEADER';X=9;Y=5;Gfx='OBJ_EVENT_GFX_MISTY';Trainer='TRAINER_TYPE_NONE'})
+$expected = @(@{Map='1F';Id='LOCALID_LAGO_WATER_GYM_TRAINER_1';X=7;Y=21;Gfx='OBJ_EVENT_GFX_FISHERMAN';Trainer='TRAINER_TYPE_NORMAL'}, @{Map='2F';Id='LOCALID_LAGO_WATER_GYM_TRAINER_2';X=13;Y=17;Gfx='OBJ_EVENT_GFX_SWIMMER_F';Trainer='TRAINER_TYPE_NORMAL'}, @{Map='3F';Id='LOCALID_LAGO_WATER_GYM_TRAINER_3';X=6;Y=16;Gfx='OBJ_EVENT_GFX_SAILOR';Trainer='TRAINER_TYPE_NORMAL'}, @{Map='4F';Id='LOCALID_LAGO_WATER_GYM_LEADER';X=9;Y=5;Gfx='OBJ_EVENT_GFX_WINONA';Trainer='TRAINER_TYPE_NONE'})
 foreach ($entry in $expected) { $event = @($maps[$entry.Map].object_events | Where-Object { $_.local_id -eq $entry.Id }); A ($event.Count -eq 1) "NPC $($entry.Id)"; A ($event[0].x -eq $entry.X -and $event[0].y -eq $entry.Y -and $event[0].graphics_id -eq $entry.Gfx -and $event[0].trainer_type -eq $entry.Trainer) "NPC data $($entry.Id)" }
 $graphicsPointers = T 'src/data/object_events/object_event_graphics_info_pointers.h'
 $commonGraphicsPointers = ($graphicsPointers -split '(?m)^#if IS_FRLG\s*$', 2)[0]
 A ($commonGraphicsPointers -match '(?m)^\s*\[OBJ_EVENT_GFX_SWIMMER_F\]\s*=') 'Dalia sprite must be registered for Emerald.'
+A ($commonGraphicsPointers -match '(?m)^\s*\[OBJ_EVENT_GFX_WINONA\]\s*=') 'Marina sprite must be registered for Emerald.'
 A (-not ($commonGraphicsPointers -match '(?m)^\s*\[OBJ_EVENT_GFX_SWIMMER_F_LAND\]\s*=')) 'FRLG-only Dalia sprite leaked into the common graphics table.'
 
 $scripts = @('1F','2F','3F','4F' | ForEach-Object { T "data/maps/LagoDiAlbera_WaterGym_${_}/scripts.inc" }) -join "`n"
