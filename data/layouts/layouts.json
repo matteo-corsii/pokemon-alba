@@ -9374,7 +9374,7 @@
       "width": 60,
       "height": 30,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_PortaPretoria",
+      "secondary_tileset": "gTileset_ViaConsolare",
       "border_filepath": "data/layouts/ViaConsolare/border.bin",
       "blockdata_filepath": "data/layouts/ViaConsolare/map.bin",
       "layout_version": "emerald"

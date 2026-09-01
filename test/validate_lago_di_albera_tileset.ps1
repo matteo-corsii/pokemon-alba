@@ -25,7 +25,10 @@ function Read-GitBlob([string]$spec) {
 $lago = Join-Path $RepositoryRoot 'data/tilesets/secondary/lago_di_albera'
 $pacifidlog = Join-Path $RepositoryRoot 'data/tilesets/secondary/pacifidlog'
 $porta = Join-Path $RepositoryRoot 'data/tilesets/secondary/porta_pretoria'
-$layout = @((Read-Json 'data/layouts/layouts.json').layouts | Where-Object id -eq 'LAYOUT_LAGO_DI_ALBERA')
+$via = Join-Path $RepositoryRoot 'data/tilesets/secondary/via_consolare'
+$layouts = (Read-Json 'data/layouts/layouts.json').layouts
+$layout = @($layouts | Where-Object id -eq 'LAYOUT_LAGO_DI_ALBERA')
+$viaLayout = @($layouts | Where-Object id -eq 'LAYOUT_VIA_CONSOLARE')
 $map = Read-Json 'data/maps/LagoDiAlbera/map.json'
 $graphics = Get-Content (Join-Path $RepositoryRoot 'src/data/tilesets/graphics.h') -Raw
 $metatilesHeader = Get-Content (Join-Path $RepositoryRoot 'src/data/tilesets/metatiles.h') -Raw
@@ -35,6 +38,9 @@ $includes = Get-Content (Join-Path $RepositoryRoot 'include/tilesets.h') -Raw
 Assert-True ($layout.Count -eq 1 -and $layout[0].primary_tileset -eq 'gTileset_General' -and $layout[0].secondary_tileset -eq 'gTileset_LagoDiAlbera') 'Lago must use General + LagoDiAlbera.'
 Assert-True (Test-Path -LiteralPath $lago) 'Lago clone directory is missing.'
 Assert-True ($graphics.Contains('gTilesetTiles_LagoDiAlbera') -and $graphics.Contains('-num_tiles 512') -and $metatilesHeader.Contains('gMetatiles_LagoDiAlbera') -and $headers.Contains('gTileset_LagoDiAlbera') -and $headers.Contains('.callback = InitTilesetAnim_Pacifidlog') -and $includes.Contains('gTileset_LagoDiAlbera')) 'Lago clone registration is incomplete.'
+Assert-True ($viaLayout.Count -eq 1 -and $viaLayout[0].primary_tileset -eq 'gTileset_General' -and $viaLayout[0].secondary_tileset -eq 'gTileset_ViaConsolare') 'Via must use its connection-compatible secondary tileset.'
+Assert-True (Test-Path -LiteralPath $via) 'Via connection-compatible tileset directory is missing.'
+Assert-True ($graphics.Contains('gTilesetTiles_ViaConsolare[] = INCGFX_U32("data/tilesets/secondary/via_consolare/tiles.png", ".4bpp.fastSmol", "-num_tiles 409 -Wnum_tiles")') -and $metatilesHeader.Contains('gMetatiles_ViaConsolare') -and $headers.Contains('const struct Tileset gTileset_ViaConsolare') -and $includes.Contains('gTileset_ViaConsolare')) 'Via connection-compatible tileset registration is incomplete.'
 Assert-True ([int]$layout[0].width -eq 120 -and [int]$layout[0].height -eq 120) 'Lago dimensions changed.'
 Assert-True (@($map.object_events).Count -eq 13 -and @($map.warp_events).Count -eq 4 -and @($map.coord_events).Count -eq 1 -and @($map.bg_events).Count -eq 8) 'Lago event counts are incorrect.'
 Assert-True (@($map.connections | Where-Object { $_.direction -eq 'down' -and $_.map -eq 'MAP_VIA_CONSOLARE' -and [int]$_.offset -eq 31 }).Count -eq 1) 'Lago south connection changed.'
@@ -82,7 +88,11 @@ $lagoMeta = Read-Bytes (Join-Path $lago 'metatiles.bin')
 $lagoAttrs = Read-Bytes (Join-Path $lago 'metatile_attributes.bin')
 $portaMeta = Read-Bytes (Join-Path $porta 'metatiles.bin')
 $portaAttrs = Read-Bytes (Join-Path $porta 'metatile_attributes.bin')
+$viaMeta = Read-Bytes (Join-Path $via 'metatiles.bin')
+$viaAttrs = Read-Bytes (Join-Path $via 'metatile_attributes.bin')
 Assert-True ($pacMeta.Length -eq $lagoMeta.Length -and $pacAttrs.Length -eq $lagoAttrs.Length -and $lagoMeta.Length / 16 -eq 203) 'Lago clone metatile capacity differs from Pacifidlog.'
+Assert-True ($viaMeta.Length -eq $portaMeta.Length -and $viaAttrs.Length -eq $portaAttrs.Length -and $viaMeta.Length / 16 -eq 317) 'Via clone capacity differs from PortaPretoria.'
+Assert-True ([Convert]::ToBase64String($viaAttrs) -eq [Convert]::ToBase64String($portaAttrs)) 'Via clone must preserve every PortaPretoria metatile attribute.'
 for ($entry = 0; $entry -lt $lagoMeta.Length / 2; $entry++) {
     $palette = ([BitConverter]::ToUInt16($lagoMeta, $entry * 2) -shr 12) -band 0xF
     Assert-True ($palette -lt 13) "Lago metatile entry $entry references unloaded palette $palette."
@@ -101,8 +111,34 @@ for ($index = 0; $index -lt 203; $index++) {
 }
 Assert-True ([BitConverter]::ToUInt16($lagoAttrs, 0x099 * 2) -eq 0x0065) 'Lago metatile 0x299 must use MB_SOUTH_ARROW_WARP on layer 0.'
 $tileMap = @{ 184 = 384; 185 = 385; 186 = 386; 187 = 387; 315 = 388; 317 = 389; 340 = 390; 341 = 391; 342 = 392 }
+$viaRelocatedTiles = @{ 384 = 405; 385 = 406; 388 = 407; 389 = 408 }
+$viaCompatibilityMetatiles = @{ 0x096 = 0x096; 0x0C9 = 0x0C9; 0x102 = 0x0C9 }
+foreach ($index in 0..316) {
+    foreach ($entryIndex in 0..7) {
+        $actual = [BitConverter]::ToUInt16($viaMeta, $index * 16 + $entryIndex * 2)
+        if ($viaCompatibilityMetatiles.ContainsKey($index)) {
+            $expected = [BitConverter]::ToUInt16($lagoMeta, $viaCompatibilityMetatiles[$index] * 16 + $entryIndex * 2)
+        } else {
+            $expected = [BitConverter]::ToUInt16($portaMeta, $index * 16 + $entryIndex * 2)
+            $sourceTile = $expected -band 0x3FF
+            if ($sourceTile -ge 512 -and $viaRelocatedTiles.ContainsKey($sourceTile - 512)) {
+                $expected = ($expected -band 0xFC00) -bor (512 + $viaRelocatedTiles[$sourceTile - 512])
+            }
+        }
+        Assert-True ($actual -eq $expected) "Unexpected Via compatibility metatile change at 0x$('{0:X3}' -f $index), entry $entryIndex."
+    }
+}
+foreach ($index in 0x096, 0x0C9) {
+    $viaBlock = New-Object byte[] 16; $lagoBlock = New-Object byte[] 16
+    [Array]::Copy($viaMeta, $index * 16, $viaBlock, 0, 16); [Array]::Copy($lagoMeta, $index * 16, $lagoBlock, 0, 16)
+    Assert-True ([Convert]::ToBase64String($viaBlock) -eq [Convert]::ToBase64String($lagoBlock)) "Via/Lago transition metatile 0x$('{0:X3}' -f ($index + 0x200)) is not slot-identical."
+}
+$portaWall = New-Object byte[] 16; $portaWallAlias = New-Object byte[] 16
+[Array]::Copy($portaMeta, 0x0C9 * 16, $portaWall, 0, 16); [Array]::Copy($portaMeta, 0x102 * 16, $portaWallAlias, 0, 16)
+Assert-True ([Convert]::ToBase64String($portaWall) -eq [Convert]::ToBase64String($portaWallAlias)) 'PortaPretoria wall aliases unexpectedly differ.'
 $fieldDoor = Get-Content (Join-Path $RepositoryRoot 'src/field_door.c') -Raw
 Assert-True ($fieldDoor.Contains('#define DOOR_TILE_START_SIZE2 (NUM_TILES_TOTAL - 16)')) 'Door animation reserved tile range changed.'
+Assert-True ($fieldDoor.Contains('{METATILE_Petalburg_Door_Oldale,                        &gTileset_ViaConsolare')) 'Via must retain the normal Oldale door animation.'
 Assert-True (@($tileMap.Values | Where-Object { $_ -ge 496 }).Count -eq 0) 'Imported Lago tiles must not overlap door animation slots 496-511.'
 Assert-True (@($tileMap.Values | Where-Object { ($_ -ge 464 -and $_ -le 493) -or ($_ -ge 496 -and $_ -le 503) }).Count -eq 0) 'Imported Lago tiles must not overlap Pacifidlog animation slots.'
 $paletteMap = @{ 2 = 2; 6 = 11; 7 = 12; 11 = 12 }
@@ -138,12 +174,33 @@ foreach ($paletteIndex in @(0..15 | Where-Object { $_ -notin 11, 12, 13 })) {
     $lagoPalette = Read-Bytes (Join-Path $lago ('palettes/{0:D2}.pal' -f $paletteIndex))
     Assert-True ([Convert]::ToBase64String($pacifidlogPalette) -eq [Convert]::ToBase64String($lagoPalette)) "Unexpected Lago palette change in slot $paletteIndex."
 }
+$viaPaletteBlock = [regex]::Match($graphics, '(?ms)const u16 gTilesetPalettes_ViaConsolare\[\]\[16\]\s*=\s*\{(?<body>.*?)\};')
+Assert-True ($viaPaletteBlock.Success) 'Via palette table is missing.'
+$viaPalettePaths = @([regex]::Matches($viaPaletteBlock.Groups['body'].Value, 'INCGFX_U16\("([^"]+)"') | ForEach-Object { $_.Groups[1].Value })
+$expectedViaPalettePaths = @(0..10 | ForEach-Object { 'data/tilesets/secondary/porta_pretoria/palettes/{0:D2}.pal' -f $_ })
+$expectedViaPalettePaths += 'data/tilesets/secondary/lago_di_albera/palettes/11.pal', 'data/tilesets/secondary/lago_di_albera/palettes/12.pal'
+$expectedViaPalettePaths += @(13..15 | ForEach-Object { 'data/tilesets/secondary/porta_pretoria/palettes/{0:D2}.pal' -f $_ })
+Assert-True ($viaPalettePaths.Count -eq 16) 'Via palette table must contain exactly 16 palettes.'
+foreach ($paletteIndex in 0..15) { Assert-True ($viaPalettePaths[$paletteIndex] -eq $expectedViaPalettePaths[$paletteIndex]) "Unexpected Via palette source in slot $paletteIndex." }
+$viaHeaderBlock = [regex]::Match($headers, '(?ms)const struct Tileset gTileset_ViaConsolare\s*=\s*\{(?<body>.*?)\};')
+Assert-True ($viaHeaderBlock.Success -and $viaHeaderBlock.Groups['body'].Value.Contains('.callback = InitTilesetAnim_Petalburg')) 'Via must preserve the PortaPretoria animation callback.'
 Add-Type -AssemblyName System.Drawing
 $pacifidlogTiles = [System.Drawing.Bitmap]::FromFile((Join-Path $pacifidlog 'tiles.png'))
 $portaTiles = [System.Drawing.Bitmap]::FromFile((Join-Path $porta 'tiles.png'))
 $lagoTiles = [System.Drawing.Bitmap]::FromFile((Join-Path $lago 'tiles.png'))
+$viaTiles = [System.Drawing.Bitmap]::FromFile((Join-Path $via 'tiles.png'))
 try {
     Assert-True ($pacifidlogTiles.Width -eq 128 -and $pacifidlogTiles.Height -eq 256 -and $lagoTiles.Width -eq 128 -and $lagoTiles.Height -eq 256) 'Lago tile sheet dimensions are incorrect.'
+    Assert-True ($portaTiles.Width -eq 128 -and $portaTiles.Height -eq 208 -and $viaTiles.Width -eq 128 -and $viaTiles.Height -eq 208) 'Via tile sheet dimensions are incorrect.'
+    $viaDestinationToSource = @{ 405 = 384; 406 = 385; 407 = 388; 408 = 389 }
+    foreach ($tile in 0..408) {
+        if ($tile -ge 384 -and $tile -le 392) { $sourceTiles = $lagoTiles; $sourceTile = $tile }
+        elseif ($viaDestinationToSource.ContainsKey($tile)) { $sourceTiles = $portaTiles; $sourceTile = $viaDestinationToSource[$tile] }
+        else { $sourceTiles = $portaTiles; $sourceTile = $tile }
+        $sourceX = ($sourceTile % 16) * 8; $sourceY = [int][Math]::Floor($sourceTile / 16) * 8
+        $destinationX = ($tile % 16) * 8; $destinationY = [int][Math]::Floor($tile / 16) * 8
+        foreach ($x in 0..7) { foreach ($y in 0..7) { Assert-True ($sourceTiles.GetPixel($sourceX + $x, $sourceY + $y).ToArgb() -eq $viaTiles.GetPixel($destinationX + $x, $destinationY + $y).ToArgb()) "Unexpected Via tile pixels at slot $tile." } }
+    }
     foreach ($tile in 0..511) {
         if ($tileMap.Values -notcontains $tile) {
             $tileX = ($tile % 16) * 8
@@ -179,5 +236,6 @@ try {
     $pacifidlogTiles.Dispose()
     $portaTiles.Dispose()
     $lagoTiles.Dispose()
+    $viaTiles.Dispose()
 }
 Write-Output 'Lago di Albera connection tileset validation: PASS'

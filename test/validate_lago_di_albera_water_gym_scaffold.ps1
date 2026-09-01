@@ -48,11 +48,11 @@ foreach ($y in 24..30) {
     }
 }
 
-$expected = @(@{Map='1F';Id='LOCALID_LAGO_WATER_GYM_TRAINER_1';X=7;Y=21;Gfx='OBJ_EVENT_GFX_FISHERMAN';Trainer='TRAINER_TYPE_NORMAL'}, @{Map='2F';Id='LOCALID_LAGO_WATER_GYM_TRAINER_2';X=13;Y=17;Gfx='OBJ_EVENT_GFX_SWIMMER_F';Trainer='TRAINER_TYPE_NORMAL'}, @{Map='3F';Id='LOCALID_LAGO_WATER_GYM_TRAINER_3';X=6;Y=16;Gfx='OBJ_EVENT_GFX_SAILOR';Trainer='TRAINER_TYPE_NORMAL'}, @{Map='4F';Id='LOCALID_LAGO_WATER_GYM_LEADER';X=9;Y=5;Gfx='OBJ_EVENT_GFX_WINONA';Trainer='TRAINER_TYPE_NONE'})
+$expected = @(@{Map='1F';Id='LOCALID_LAGO_WATER_GYM_TRAINER_1';X=7;Y=21;Gfx='OBJ_EVENT_GFX_FISHERMAN';Trainer='TRAINER_TYPE_NORMAL'}, @{Map='2F';Id='LOCALID_LAGO_WATER_GYM_TRAINER_2';X=13;Y=17;Gfx='OBJ_EVENT_GFX_RUNNING_TRIATHLETE_F';Trainer='TRAINER_TYPE_NORMAL'}, @{Map='3F';Id='LOCALID_LAGO_WATER_GYM_TRAINER_3';X=6;Y=16;Gfx='OBJ_EVENT_GFX_SAILOR';Trainer='TRAINER_TYPE_NORMAL'}, @{Map='4F';Id='LOCALID_LAGO_WATER_GYM_LEADER';X=9;Y=5;Gfx='OBJ_EVENT_GFX_WINONA';Trainer='TRAINER_TYPE_NONE'})
 foreach ($entry in $expected) { $event = @($maps[$entry.Map].object_events | Where-Object { $_.local_id -eq $entry.Id }); A ($event.Count -eq 1) "NPC $($entry.Id)"; A ($event[0].x -eq $entry.X -and $event[0].y -eq $entry.Y -and $event[0].graphics_id -eq $entry.Gfx -and $event[0].trainer_type -eq $entry.Trainer) "NPC data $($entry.Id)" }
 $graphicsPointers = T 'src/data/object_events/object_event_graphics_info_pointers.h'
 $commonGraphicsPointers = ($graphicsPointers -split '(?m)^#if IS_FRLG\s*$', 2)[0]
-A ($commonGraphicsPointers -match '(?m)^\s*\[OBJ_EVENT_GFX_SWIMMER_F\]\s*=') 'Dalia sprite must be registered for Emerald.'
+A ($commonGraphicsPointers -match '(?m)^\s*\[OBJ_EVENT_GFX_RUNNING_TRIATHLETE_F\]\s*=') 'Dalia full-body sprite must be registered for Emerald.'
 A ($commonGraphicsPointers -match '(?m)^\s*\[OBJ_EVENT_GFX_WINONA\]\s*=') 'Marina sprite must be registered for Emerald.'
 A (-not ($commonGraphicsPointers -match '(?m)^\s*\[OBJ_EVENT_GFX_SWIMMER_F_LAND\]\s*=')) 'FRLG-only Dalia sprite leaked into the common graphics table.'
 
@@ -64,6 +64,10 @@ A (@($lake.object_events | Where-Object { $_.local_id -eq 'LOCALID_LAGO_DI_ALBER
 A (@($lake.coord_events | Where-Object { $_.x -eq 71 -and $_.y -eq 75 -and $_.script -eq 'LagoDiAlbera_EventScript_LauroSurfScene' }).Count -eq 1) 'Lauro scene trigger'
 $fieldMove = T 'src/field_move.c'; A ($fieldMove -match 'IsFieldMoveUnlocked_Surf\(void\)[\s\S]*?FLAG_BADGE02_GET') 'Surf uses badge 2'
 foreach ($party in 'src/data/trainers.party','src/data/trainers_frlg.party') { $data = T $party; foreach ($trainer in 'TRAINER_LAGO_WATER_GYM_REMO','TRAINER_LAGO_WATER_GYM_DALIA','TRAINER_LAGO_WATER_GYM_NEREO','TRAINER_LAGO_WATER_GYM_MARINA') { A ($data.Contains("=== $trainer ===")) "$party missing $trainer" } }
+$emeraldMarina = [regex]::Match((T 'src/data/trainers.party'), '(?ms)^=== TRAINER_LAGO_WATER_GYM_MARINA ===\r?\n.*?(?=^=== |\z)').Value
+$frlgMarina = [regex]::Match((T 'src/data/trainers_frlg.party'), '(?ms)^=== TRAINER_LAGO_WATER_GYM_MARINA ===\r?\n.*?(?=^=== |\z)').Value
+A ($emeraldMarina -match '(?m)^Pic: Leader Winona\r?$') 'Marina must use Winona battle graphics in Emerald.'
+A ($frlgMarina -match '(?m)^Pic: Leader Misty Frlg\r?$') 'Marina must use Misty battle graphics in FRLG.'
 $emeraldOpponents = T 'include/constants/opponents.h'
 foreach ($entry in @(@('TRAINER_LAGO_WATER_GYM_REMO',568),@('TRAINER_LAGO_WATER_GYM_DALIA',851),@('TRAINER_LAGO_WATER_GYM_NEREO',852),@('TRAINER_LAGO_WATER_GYM_MARINA',854))) { A ($emeraldOpponents -match "(?m)^#define\s+$($entry[0])\s+$($entry[1])$") "Emerald reused trainer ID $($entry[0])" }
 A ($emeraldOpponents -match '(?m)^#define\s+TRAINERS_COUNT_EMERALD\s+864$') 'Emerald trainer count preserves the save layout'

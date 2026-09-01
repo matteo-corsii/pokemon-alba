@@ -93,7 +93,7 @@ Assert-True (@($route.bg_events | Where-Object { $_.secret_base_id -eq 'SECRET_B
 
 $layout = @($layouts.layouts | Where-Object { $_.id -eq 'LAYOUT_VIA_CONSOLARE' })
 Assert-True ($layout.Count -eq 1 -and [int]$layout[0].width -eq 60 -and [int]$layout[0].height -eq 30) 'Via Consolare layout dimensions are incorrect.'
-Assert-True ($layout[0].primary_tileset -eq 'gTileset_General' -and $layout[0].secondary_tileset -eq 'gTileset_PortaPretoria') 'Via Consolare tilesets are incorrect.'
+Assert-True ($layout[0].primary_tileset -eq 'gTileset_General' -and $layout[0].secondary_tileset -eq 'gTileset_ViaConsolare') 'Via Consolare tilesets are incorrect.'
 
 $group = @($groups.gMapGroup_TownsAndRoutes | Where-Object { $_ -eq 'ViaConsolare' })
 Assert-True ($group.Count -eq 1) 'ViaConsolare is not registered exactly once in map groups.'
