@@ -9488,6 +9488,17 @@
       "border_filepath": "data/layouts/LagoDiAlbera_WaterGym_4F/border.bin",
       "blockdata_filepath": "data/layouts/LagoDiAlbera_WaterGym_4F/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_EMISSARIO",
+      "name": "Emissario_Layout",
+      "width": 32,
+      "height": 30,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cisternoni",
+      "border_filepath": "data/layouts/Emissario/border.bin",
+      "blockdata_filepath": "data/layouts/Emissario/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

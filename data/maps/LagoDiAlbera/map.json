@@ -231,6 +231,13 @@
       "elevation": 0,
       "dest_map": "MAP_LAGO_DI_ALBERA_WATER_GYM_1F",
       "dest_warp_id": "0"
+    },
+    {
+      "x": 81,
+      "y": 3,
+      "elevation": 3,
+      "dest_map": "MAP_EMISSARIO",
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [
