@@ -23,17 +23,17 @@ Assert-True ($map.map_type -eq 'MAP_TYPE_UNDERGROUND' -and $map.region_map_secti
 Assert-True (-not $map.allow_cycling -and $map.allow_escaping -and $map.allow_running -and -not $map.show_map_name) 'Emissario traversal settings are incorrect.'
 Assert-True ($null -eq $map.connections) 'The structural blockout must not have map connections.'
 Assert-True (@($map.object_events).Count -eq 0 -and @($map.coord_events).Count -eq 0 -and @($map.bg_events).Count -eq 0) 'The structural blockout must not contain narrative events.'
-Assert-True (@($map.warp_events).Count -eq 1) 'Emissario must contain exactly one return warp.'
+Assert-True (@($map.warp_events).Count -eq 2) 'Emissario must contain exactly two adjacent return warps.'
 
-$exit = @($map.warp_events | Where-Object {
-    [int]$_.x -eq 15 -and [int]$_.y -eq 29 -and [int]$_.elevation -eq 3 -and
+$exits = @($map.warp_events | Where-Object {
+    ([int]$_.x -in 15, 16) -and [int]$_.y -eq 29 -and [int]$_.elevation -eq 3 -and
     $_.dest_map -eq 'MAP_LAGO_DI_ALBERA' -and [int]$_.dest_warp_id -eq 4
 })
 $entrance = @($lago.warp_events | Where-Object {
     [int]$_.x -eq 81 -and [int]$_.y -eq 3 -and [int]$_.elevation -eq 3 -and
     $_.dest_map -eq 'MAP_EMISSARIO' -and [int]$_.dest_warp_id -eq 0
 })
-Assert-True ($exit.Count -eq 1 -and $entrance.Count -eq 1) 'Lago and Emissario do not have the approved reciprocal warp pair.'
+Assert-True ($exits.Count -eq 2 -and @($exits | Where-Object { [int]$_.x -eq 15 }).Count -eq 1 -and @($exits | Where-Object { [int]$_.x -eq 16 }).Count -eq 1 -and $entrance.Count -eq 1) 'Lago and Emissario do not have the approved reciprocal warp arrangement.'
 Assert-True (@($lago.warp_events).Count -eq 5) 'Lago must contain the four existing warps plus the Emissario entrance.'
 
 $layout = @($layouts.layouts | Where-Object { $_.id -eq 'LAYOUT_EMISSARIO' })
@@ -51,13 +51,14 @@ $borderBytes = [IO.File]::ReadAllBytes($borderPath)
 Assert-True ($mapBytes.Length -eq 32 * 30 * 2) 'Emissario map.bin must be 32x30.'
 Assert-True ($borderBytes.Length -eq 8) 'Emissario border.bin must contain four metatiles.'
 
-$approvedRaw = @(0x0491, 0x32C3, 0x1170, 0x10A1, 0x3024)
+$approvedRaw = @(0x0491, 0x0696, 0x32C3, 0x1170, 0x10A1, 0x3024)
 $expectedCounts = @{}
 $expectedCounts[[int]0x0491] = 360
-$expectedCounts[[int]0x32C3] = 375
+$expectedCounts[[int]0x0696] = 14
+$expectedCounts[[int]0x32C3] = 360
 $expectedCounts[[int]0x1170] = 218
 $expectedCounts[[int]0x10A1] = 6
-$expectedCounts[[int]0x3024] = 1
+$expectedCounts[[int]0x3024] = 2
 $actualCounts = @{}
 foreach ($raw in $approvedRaw) { $actualCounts[[int]$raw] = 0 }
 
@@ -92,8 +93,8 @@ function Read-Raw([byte[]]$Bytes, [int]$Width, [int]$X, [int]$Y) {
     [BitConverter]::ToUInt16($Bytes, 2 * (($Y * $Width) + $X))
 }
 
-Assert-True ((Read-Raw $mapBytes 32 15 29) -eq 0x3024) 'The south return tile must use the normal MB_SOUTH_ARROW_WARP metatile on the southernmost map row.'
-Assert-True ((Read-Raw $mapBytes 32 15 28) -eq 0x32C3) 'The return warp must have a walkable interior approach immediately to the north.'
+Assert-True ((Read-Raw $mapBytes 32 15 29) -eq 0x3024 -and (Read-Raw $mapBytes 32 16 29) -eq 0x3024) 'Both south return tiles must use the normal MB_SOUTH_ARROW_WARP metatile on the southernmost map row.'
+Assert-True ((Read-Raw $mapBytes 32 15 28) -eq 0x32C3 -and (Read-Raw $mapBytes 32 16 28) -eq 0x32C3) 'Both return warps must have a walkable interior approach immediately to the north.'
 Assert-True ((Read-Raw $mapBytes 32 15 0) -eq 0x1170) 'The northern water outlet is missing.'
 Assert-True ((Read-Raw $mapBytes 32 15 13) -eq 0x1170) 'The central Surf basin is missing.'
 Assert-True ((Read-Raw $mapBytes 32 15 6) -eq 0x10A1 -and (Read-Raw $mapBytes 32 16 8) -eq 0x10A1) 'The future-depth visual marker is incomplete.'

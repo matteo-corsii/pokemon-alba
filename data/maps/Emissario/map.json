@@ -21,6 +21,13 @@
       "elevation": 3,
       "dest_map": "MAP_LAGO_DI_ALBERA",
       "dest_warp_id": "4"
+    },
+    {
+      "x": 16,
+      "y": 29,
+      "elevation": 3,
+      "dest_map": "MAP_LAGO_DI_ALBERA",
+      "dest_warp_id": "4"
     }
   ],
   "coord_events": [],
