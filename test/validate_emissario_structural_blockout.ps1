@@ -16,6 +16,7 @@ $layouts = Read-Json 'data/layouts/layouts.json'
 $groups = Read-Json 'data/maps/map_groups.json'
 $wild = Read-Json 'src/data/wild_encounters.json'
 $scripts = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'data/maps/Emissario/scripts.inc') -Raw -Encoding utf8
+$eventScripts = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'data/event_scripts.s') -Raw -Encoding utf8
 
 Assert-True ($map.id -eq 'MAP_EMISSARIO' -and $map.name -eq 'Emissario' -and $map.layout -eq 'LAYOUT_EMISSARIO') 'Emissario identity is incorrect.'
 Assert-True ($map.map_type -eq 'MAP_TYPE_UNDERGROUND' -and $map.region_map_section -eq 'MAPSEC_ALBERA_STORICA') 'Emissario map type or region is incorrect.'
@@ -106,6 +107,7 @@ $lagoAttributes = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/tiles
 Assert-True ([BitConverter]::ToUInt16($lagoAttributes, 0x091 * 2) -eq 0x1060) 'The Lago entrance must retain MB_NON_ANIMATED_DOOR.'
 
 Assert-True ($scripts -match '(?m)^Emissario_MapScripts::\s*$' -and $scripts -match '(?m)^\s*\.byte 0\s*$') 'Emissario must retain an empty map-script table in the structural batch.'
+Assert-True ($eventScripts.Contains('.include "data/maps/Emissario/scripts.inc"')) 'Emissario scripts must be linked into the Emerald event-script aggregate.'
 Assert-True ($scripts -notmatch 'trainerbattle|Aurea|Eco|Dive|setdivewarp') 'Narrative, battle, and Dive scripts are outside the structural blockout.'
 Assert-True (@($wild.wild_encounter_groups.encounters | Where-Object { $_.map -eq 'MAP_EMISSARIO' }).Count -eq 0) 'Emissario must not have wild encounters in this version.'
 
