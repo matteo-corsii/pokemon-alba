@@ -39,8 +39,18 @@ $rightMansioWarp = @($map.warp_events | Where-Object {
 Assert-True (@($map.warp_events).Count -eq 2) 'Via Consolare must contain exactly two Mansio warps.'
 Assert-True ($leftMansioWarp.Count -eq 1) 'Via Consolare left Mansio warp is incorrect.'
 Assert-True ($rightMansioWarp.Count -eq 1) 'Via Consolare right Mansio warp is incorrect.'
-Assert-True (@($map.object_events).Count -eq 7) 'Via Consolare must contain exactly seven object events.'
-Assert-True (@($map.coord_events).Count -eq 0) 'Via Consolare must not contain coordinate events.'
+Assert-True (@($map.object_events).Count -eq 9) 'Via Consolare must contain exactly nine object events.'
+$leadObjects = @($map.object_events | Where-Object { $_.local_id -in 'LOCALID_VIA_CONSOLARE_LIA_EMISSARIO', 'LOCALID_VIA_CONSOLARE_NICO_EMISSARIO' })
+Assert-True ($leadObjects.Count -eq 2) 'Via Consolare must contain Lia and Nico for the Emissario lead scene.'
+Assert-True (@($leadObjects | Where-Object { $_.local_id -eq 'LOCALID_VIA_CONSOLARE_LIA_EMISSARIO' -and $_.x -eq 27 -and $_.y -eq 7 -and $_.elevation -eq 3 -and $_.movement_type -eq 'MOVEMENT_TYPE_FACE_RIGHT' -and $_.flag -eq 'FLAG_HIDE_VIA_CONSOLARE_LIA' }).Count -eq 1) 'Via Consolare Lia placement is incorrect.'
+Assert-True (@($leadObjects | Where-Object { $_.local_id -eq 'LOCALID_VIA_CONSOLARE_NICO_EMISSARIO' -and $_.x -eq 27 -and $_.y -eq 8 -and $_.elevation -eq 3 -and $_.movement_type -eq 'MOVEMENT_TYPE_FACE_RIGHT' -and $_.flag -eq 'FLAG_HIDE_VIA_CONSOLARE_NICO' }).Count -eq 1) 'Via Consolare Nico placement is incorrect.'
+$leadTriggers = @($map.coord_events | Where-Object { $_.script -eq 'ViaConsolare_EventScript_StartEmissarioLead' })
+Assert-True (@($map.coord_events).Count -eq 6 -and $leadTriggers.Count -eq 6) 'Via Consolare must contain exactly the six Emissario lead triggers.'
+foreach ($y in 7, 8) {
+    foreach ($x in 28, 29, 30) {
+        Assert-True (@($leadTriggers | Where-Object { $_.x -eq $x -and $_.y -eq $y -and $_.elevation -eq 3 }).Count -eq 1) "Missing Via Consolare Emissario trigger at ($x,$y)."
+    }
+}
 Assert-True (@($map.bg_events).Count -eq 12) 'Via Consolare must contain exactly twelve background events.'
 $expectedObjects = @(
     @{ x = 30; y = 5; movement = 'MOVEMENT_TYPE_FACE_DOWN'; trainer = 'TRAINER_TYPE_NONE'; script = 'ViaConsolare_EventScript_Custode' },
@@ -93,7 +103,7 @@ Assert-True (@($route.bg_events | Where-Object { $_.secret_base_id -eq 'SECRET_B
 
 $layout = @($layouts.layouts | Where-Object { $_.id -eq 'LAYOUT_VIA_CONSOLARE' })
 Assert-True ($layout.Count -eq 1 -and [int]$layout[0].width -eq 60 -and [int]$layout[0].height -eq 30) 'Via Consolare layout dimensions are incorrect.'
-Assert-True ($layout[0].primary_tileset -eq 'gTileset_General' -and $layout[0].secondary_tileset -eq 'gTileset_PortaPretoria') 'Via Consolare tilesets are incorrect.'
+Assert-True ($layout[0].primary_tileset -eq 'gTileset_General' -and $layout[0].secondary_tileset -eq 'gTileset_ViaConsolare') 'Via Consolare tilesets are incorrect.'
 
 $group = @($groups.gMapGroup_TownsAndRoutes | Where-Object { $_ -eq 'ViaConsolare' })
 Assert-True ($group.Count -eq 1) 'ViaConsolare is not registered exactly once in map groups.'
@@ -104,8 +114,8 @@ git -C $RepositoryRoot diff --quiet develop -- data/layouts/ViaConsolare/border.
 Assert-True ($LASTEXITCODE -eq 0) 'Via Consolare binary layout files changed.'
 git -C $RepositoryRoot diff --quiet develop -- data/layouts/Route103/map.bin data/layouts/Route103/border.bin data/maps/Route103/map.json
 Assert-True ($LASTEXITCODE -eq 0) 'Route103 was modified.'
-git -C $RepositoryRoot diff --quiet develop -- data/layouts/ViaConsolare_Mansio/map.bin data/layouts/ViaConsolare_Mansio/border.bin data/maps/ViaConsolare_Mansio/map.json
-Assert-True ($LASTEXITCODE -eq 0) 'Mansio content was modified.'
+# The Mansio exit tiles intentionally use the Condominium's south-warp blocks;
+# their exact raw values and behaviors are checked by validate_mansio_consolare_structural_blockout.ps1.
 
 $viaWild = @($wild.wild_encounter_groups.encounters | Where-Object { $_.map -eq 'MAP_VIA_CONSOLARE' })
 Assert-True ($viaWild.Count -eq 4) 'Via Consolare must have four time-based encounter tables.'

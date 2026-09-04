@@ -20,7 +20,7 @@ $expectedObjects = @(
     @('LOCALID_LAGO_DI_ALBERA_TECNICO','OBJ_EVENT_GFX_SCIENTIST_2',86,8,'MOVEMENT_TYPE_FACE_DOWN','LagoDiAlbera_EventScript_Tecnico'),
     @('LOCALID_LAGO_DI_ALBERA_VIANDANTE','OBJ_EVENT_GFX_MAN_5',117,44,'MOVEMENT_TYPE_FACE_LEFT','LagoDiAlbera_EventScript_Viandante')
 )
-Assert-True (@($map.object_events).Count -eq 12) 'Lago must contain exactly twelve ambient NPCs.'
+Assert-True (@($map.object_events).Count -eq 15) 'Lago must contain exactly twelve ambient NPCs, Lauro, Lia and Nico.'
 foreach ($expected in $expectedObjects) {
     $event = @($map.object_events | Where-Object local_id -eq $expected[0])
     Assert-True ($event.Count -eq 1) "$($expected[0]) missing or duplicated."
@@ -46,11 +46,22 @@ foreach ($expected in $expectedSigns) {
 }
 Assert-True (@($map.bg_events | Where-Object { $_.type -eq 'secret_base' -and [int]$_.x -eq 5 -and [int]$_.y -eq 82 -and $_.secret_base_id -eq 'SECRET_BASE_LAGO_DI_ALBERA_ROCK_NORTH' }).Count -eq 1) 'North Secret Base event is missing.'
 Assert-True (@($map.bg_events | Where-Object { $_.type -eq 'secret_base' -and [int]$_.x -eq 11 -and [int]$_.y -eq 116 -and $_.secret_base_id -eq 'SECRET_BASE_LAGO_DI_ALBERA_ROCK_SOUTH' }).Count -eq 1) 'South Secret Base event is missing.'
-Assert-True (@($map.warp_events).Count -eq 3 -and @($map.coord_events).Count -eq 0) 'Lago warp or coordinate event counts are incorrect.'
+Assert-True (@($map.warp_events).Count -eq 5 -and @($map.coord_events).Count -eq 7) 'Lago warp or coordinate event counts are incorrect.'
+Assert-True (@($map.warp_events | Where-Object { [int]$_.x -eq 81 -and [int]$_.y -eq 3 -and [int]$_.elevation -eq 3 -and $_.dest_map -eq 'MAP_EMISSARIO' -and [int]$_.dest_warp_id -eq 0 }).Count -eq 1) 'Lago Emissario entrance warp is incorrect.'
+Assert-True (@($map.object_events | Where-Object { $_.local_id -eq 'LOCALID_LAGO_DI_ALBERA_LAURO_SURF' -and $_.graphics_id -eq 'OBJ_EVENT_GFX_PROF_BIRCH' -and [int]$_.x -eq 70 -and [int]$_.y -eq 75 -and $_.flag -eq 'FLAG_HIDE_LAGO_DI_ALBERA_LAURO_SURF' }).Count -eq 1) 'Lauro Surf scene NPC is incorrect.'
+Assert-True (@($map.coord_events | Where-Object { [int]$_.x -eq 71 -and [int]$_.y -eq 75 -and $_.script -eq 'LagoDiAlbera_EventScript_LauroSurfScene' }).Count -eq 1) 'Lauro Surf scene trigger is incorrect.'
+$emissarioParty = @($map.object_events | Where-Object { $_.local_id -in 'LOCALID_LAGO_DI_ALBERA_LIA_EMISSARIO', 'LOCALID_LAGO_DI_ALBERA_NICO_EMISSARIO' })
+Assert-True (@($emissarioParty | Where-Object { $_.local_id -eq 'LOCALID_LAGO_DI_ALBERA_LIA_EMISSARIO' -and $_.x -eq 74 -and $_.y -eq 3 -and $_.elevation -eq 3 -and $_.movement_type -eq 'MOVEMENT_TYPE_FACE_DOWN' -and $_.flag -eq 'FLAG_HIDE_LAGO_DI_ALBERA_LIA_EMISSARIO' }).Count -eq 1) 'Lia at the Emissario entrance is incorrect.'
+Assert-True (@($emissarioParty | Where-Object { $_.local_id -eq 'LOCALID_LAGO_DI_ALBERA_NICO_EMISSARIO' -and $_.x -eq 75 -and $_.y -eq 3 -and $_.elevation -eq 3 -and $_.movement_type -eq 'MOVEMENT_TYPE_FACE_DOWN' -and $_.flag -eq 'FLAG_HIDE_LAGO_DI_ALBERA_NICO_EMISSARIO' }).Count -eq 1) 'Nico at the Emissario entrance is incorrect.'
+$reunionTriggers = @($map.coord_events | Where-Object script -eq 'LagoDiAlbera_EventScript_StartEmissarioReunion')
+Assert-True ($reunionTriggers.Count -eq 6) 'Lago must contain exactly six Emissario reunion triggers.'
+foreach ($x in 74, 75, 76, 77, 80, 81) {
+    Assert-True (@($reunionTriggers | Where-Object { $_.x -eq $x -and $_.y -eq 4 -and $_.elevation -eq 3 }).Count -eq 1) "Missing Lago Emissario reunion trigger at ($x,4)."
+}
 
 Assert-True ($scripts -match '(?s)LagoDiAlbera_EventScript_Pescatore::.*?goto_if_set FLAG_RECEIVED_GOOD_ROD.*?giveitem ITEM_GOOD_ROD.*?setflag FLAG_RECEIVED_GOOD_ROD') 'Fisherman must give the Good Rod exactly once.'
 Assert-True ([regex]::Matches($scripts,'giveitem ITEM_GOOD_ROD').Count -eq 1) 'Good Rod reward must exist exactly once.'
-Assert-True ($scripts -notmatch 'trainerbattle|ITEM_HM_SURF|FLAG_BADGE|MAP_LAGO_DI_ALBERA_REFUGE_SHOP') 'NPC batch introduced battle, Surf, Badge, or shop progression.'
+Assert-True ($scripts -notmatch 'trainerbattle|MAP_LAGO_DI_ALBERA_REFUGE_SHOP') 'Ambient Lago scripts must not introduce battles or shop progression.'
 foreach ($token in @('Casa del Maestro dei rifugi','Negozio di biciclette','PALESTRA DELLE MACINE','Entrata dell''EMISSARIO','BOTTEGA DEI RIFUGI','SALITA VERSO BORGO DI CASTELLO','rete dei CISTERNONI')) {
     Assert-True ($scripts.Contains($token)) "Missing canonical Lago text: $token"
 }

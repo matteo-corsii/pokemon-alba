@@ -9374,7 +9374,7 @@
       "width": 60,
       "height": 30,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_PortaPretoria",
+      "secondary_tileset": "gTileset_ViaConsolare",
       "border_filepath": "data/layouts/ViaConsolare/border.bin",
       "blockdata_filepath": "data/layouts/ViaConsolare/map.bin",
       "layout_version": "emerald"
@@ -9443,6 +9443,61 @@
       "secondary_tileset": "gTileset_GenericBuilding",
       "border_filepath": "data/layouts/LagoDiAlbera_RefugeShop/border.bin",
       "blockdata_filepath": "data/layouts/LagoDiAlbera_RefugeShop/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LAGO_DI_ALBERA_WATER_GYM_1F",
+      "name": "LagoDiAlbera_WaterGym_1F_Layout",
+      "width": 20,
+      "height": 40,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_LagoDiAlbera",
+      "border_filepath": "data/layouts/LagoDiAlbera_WaterGym_1F/border.bin",
+      "blockdata_filepath": "data/layouts/LagoDiAlbera_WaterGym_1F/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LAGO_DI_ALBERA_WATER_GYM_2F",
+      "name": "LagoDiAlbera_WaterGym_2F_Layout",
+      "width": 20,
+      "height": 40,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_LagoDiAlbera",
+      "border_filepath": "data/layouts/LagoDiAlbera_WaterGym_2F/border.bin",
+      "blockdata_filepath": "data/layouts/LagoDiAlbera_WaterGym_2F/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LAGO_DI_ALBERA_WATER_GYM_3F",
+      "name": "LagoDiAlbera_WaterGym_3F_Layout",
+      "width": 20,
+      "height": 40,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_LagoDiAlbera",
+      "border_filepath": "data/layouts/LagoDiAlbera_WaterGym_3F/border.bin",
+      "blockdata_filepath": "data/layouts/LagoDiAlbera_WaterGym_3F/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LAGO_DI_ALBERA_WATER_GYM_4F",
+      "name": "LagoDiAlbera_WaterGym_4F_Layout",
+      "width": 20,
+      "height": 40,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_LagoDiAlbera",
+      "border_filepath": "data/layouts/LagoDiAlbera_WaterGym_4F/border.bin",
+      "blockdata_filepath": "data/layouts/LagoDiAlbera_WaterGym_4F/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_EMISSARIO",
+      "name": "Emissario_Layout",
+      "width": 32,
+      "height": 30,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cisternoni",
+      "border_filepath": "data/layouts/Emissario/border.bin",
+      "blockdata_filepath": "data/layouts/Emissario/map.bin",
       "layout_version": "emerald"
     }
   ]
