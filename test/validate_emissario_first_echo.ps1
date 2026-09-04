@@ -86,7 +86,7 @@ Assert-True ($battleCommands -match '(?s)animId == B_ANIM_FIRST_ECHO\).*?BtlCont
 
 Assert-True ($battleSetup -match '(?s)ScriptGiveMon\(starterMon, 5, ITEM_NONE\);\s*FirstEcho_RegisterStarterIdentity\(starterMon\);') 'Starter PID registration is not wired to starter delivery.'
 Assert-True ($emissarioScripts -match '(?s)Emissario_OnTransition_Show::\s*special TryMigrateOriginalStarterIdentity') 'Conservative starter migration must run before the Emissario scene.'
-Assert-True ($firstEcho -match '(?s)TryMigrateOriginalStarterIdentity.*?gPlayerParty.*?TOTAL_BOXES_COUNT.*?gPokemonStoragePtr.*?daycare.*?candidates == 1') 'Starter migration must search party, Boxes and Day Care and accept one candidate only.'
+Assert-True ($firstEcho -match '(?s)TryMigrateOriginalStarterIdentity.*?gParties\[B_TRAINER_PLAYER\].*?TOTAL_BOXES_COUNT.*?gPokemonStoragePtr.*?daycare.*?candidates == 1') 'Starter migration must search party, Boxes and Day Care and accept one candidate only.'
 Assert-True ($firstEcho -match '(?s)IsStarterCandidate.*?MON_DATA_OT_ID.*?GetPlayerIDAsU32\(\).*?MON_DATA_MET_LEVEL.*?!= 5') 'Starter migration must require the player OT and encounter level 5.'
 Assert-True ($specials -match 'def_special Special_GetFirstEchoActiveMonResult' -and $emissarioScripts -match 'special Special_GetFirstEchoActiveMonResult') 'The post-battle scene must read the runtime first-Echo recipient result.'
 Assert-True ($emissarioScripts -match '(?s)trainerbattle_no_intro TRAINER_EMISSARIO_AUREA_RECRUIT.*?Emissario_EventScript_AureaDefeated::.*?setflag FLAG_EMISSARIO_AUREA_ENCOUNTER_COMPLETE.*?setflag FLAG_FIRST_ECHO_SEEN') 'Narrative completion and first-Echo flags must be set only after battle victory.'

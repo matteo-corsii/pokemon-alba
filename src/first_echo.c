@@ -96,9 +96,9 @@ static bool32 IsOriginalStarterPartyMon(u8 partyIndex)
     if (!FlagGet(FLAG_ORIGINAL_STARTER_ID_REGISTERED) || partyIndex >= PARTY_SIZE)
         return FALSE;
 
-    return GetMonData(&gPlayerParty[partyIndex], MON_DATA_SANITY_HAS_SPECIES, NULL)
-        && !GetMonData(&gPlayerParty[partyIndex], MON_DATA_SANITY_IS_EGG, NULL)
-        && GetMonData(&gPlayerParty[partyIndex], MON_DATA_PERSONALITY, NULL) == GetStoredStarterPersonality();
+    return GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_SANITY_HAS_SPECIES, NULL)
+        && !GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_SANITY_IS_EGG, NULL)
+        && GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_PERSONALITY, NULL) == GetStoredStarterPersonality();
 }
 
 void FirstEcho_RegisterStarterIdentity(enum Species species)
@@ -108,11 +108,11 @@ void FirstEcho_RegisterStarterIdentity(enum Species species)
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL) == species
-         && GetMonData(&gPlayerParty[i], MON_DATA_LEVEL, NULL) == 5
-         && GetMonData(&gPlayerParty[i], MON_DATA_OT_ID, NULL) == GetPlayerIDAsU32())
+        if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES, NULL) == species
+         && GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_LEVEL, NULL) == 5
+         && GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_OT_ID, NULL) == GetPlayerIDAsU32())
         {
-            personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY, NULL);
+            personality = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_PERSONALITY, NULL);
             StoreStarterPersonality(personality);
             return;
         }
@@ -136,7 +136,7 @@ void TryMigrateOriginalStarterIdentity(void)
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        struct BoxPokemon *boxMon = &gPlayerParty[i].box;
+        struct BoxPokemon *boxMon = &gParties[B_TRAINER_PLAYER][i].box;
         if (IsStarterCandidate(boxMon, &personality))
             candidates++;
     }
@@ -188,7 +188,7 @@ bool32 FirstEcho_ShouldOfferStarterSwitch(void)
     {
         if (playerPartyIndex != gBattlerPartyIndexes[playerBattler]
          && IsOriginalStarterPartyMon(playerPartyIndex)
-         && GetMonData(&gPlayerParty[playerPartyIndex], MON_DATA_HP, NULL) != 0)
+         && GetMonData(&gParties[B_TRAINER_PLAYER][playerPartyIndex], MON_DATA_HP, NULL) != 0)
         {
             PREPARE_MON_NICK_BUFFER(gBattleTextBuff1, playerBattler, playerPartyIndex)
             return TRUE;
@@ -224,7 +224,7 @@ bool32 FirstEcho_TryActivateOnSwitchIn(void)
         gBattlerAttacker = playerBattler;
         PREPARE_MON_NICK_BUFFER(gBattleTextBuff1, playerBattler, gBattlerPartyIndexes[playerBattler])
         sFirstEchoActiveMonWasOriginalStarter = IsOriginalStarterPartyMon(gBattlerPartyIndexes[playerBattler]);
-        GetMonData(&gPlayerParty[gBattlerPartyIndexes[playerBattler]], MON_DATA_NICKNAME, sFirstEchoActiveMonNickname);
+        GetMonData(&gParties[B_TRAINER_PLAYER][gBattlerPartyIndexes[playerBattler]], MON_DATA_NICKNAME, sFirstEchoActiveMonNickname);
         BattleScriptCall(BattleScript_FirstEchoActivates);
         return TRUE;
     }
