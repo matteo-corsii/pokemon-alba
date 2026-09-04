@@ -3,6 +3,19 @@ LagoDiAlbera_MapScripts::
 	.byte 0
 
 LagoDiAlbera_OnTransition::
+	goto_if_set FLAG_EMISSARIO_AUREA_ENCOUNTER_COMPLETE, LagoDiAlbera_OnTransition_HideEmissarioParty
+	goto_if_unset FLAG_VIA_CONSOLARE_EMISSARIO_LEAD_COMPLETE, LagoDiAlbera_OnTransition_HideEmissarioParty
+	goto_if_set FLAG_RECEIVED_HM_SURF, LagoDiAlbera_OnTransition_ShowEmissarioParty
+	clearflag FLAG_HIDE_LAGO_DI_ALBERA_LIA_EMISSARIO
+	setflag FLAG_HIDE_LAGO_DI_ALBERA_NICO_EMISSARIO
+	goto LagoDiAlbera_EventScript_EndTransition
+LagoDiAlbera_OnTransition_ShowEmissarioParty::
+	clearflag FLAG_HIDE_LAGO_DI_ALBERA_LIA_EMISSARIO
+	clearflag FLAG_HIDE_LAGO_DI_ALBERA_NICO_EMISSARIO
+	goto LagoDiAlbera_EventScript_EndTransition
+LagoDiAlbera_OnTransition_HideEmissarioParty::
+	setflag FLAG_HIDE_LAGO_DI_ALBERA_LIA_EMISSARIO
+	setflag FLAG_HIDE_LAGO_DI_ALBERA_NICO_EMISSARIO
 	goto_if_set FLAG_BADGE02_GET, LagoDiAlbera_EventScript_EndTransition
 	setflag FLAG_HIDE_LAGO_DI_ALBERA_LAURO_SURF
 LagoDiAlbera_EventScript_EndTransition::
@@ -62,7 +75,38 @@ LagoDiAlbera_EventScript_Aspirante::
 	end
 
 LagoDiAlbera_EventScript_Tecnico::
+	goto_if_set FLAG_RECEIVED_HM_SURF, LagoDiAlbera_EventScript_TecnicoAfterSurf
 	msgbox LagoDiAlbera_Text_Tecnico, MSGBOX_NPC
+	end
+
+LagoDiAlbera_EventScript_TecnicoAfterSurf::
+	msgbox LagoDiAlbera_Text_TecnicoAfterSurf, MSGBOX_NPC
+	end
+
+LagoDiAlbera_EventScript_LiaEmissario::
+	goto_if_set FLAG_RECEIVED_HM_SURF, LagoDiAlbera_EventScript_LiaEmissarioAfterSurf
+	msgbox LagoDiAlbera_Text_LiaEmissarioBeforeGym, MSGBOX_NPC
+	end
+
+LagoDiAlbera_EventScript_LiaEmissarioAfterSurf::
+	msgbox LagoDiAlbera_Text_LiaEmissarioAfterSurf, MSGBOX_NPC
+	end
+
+LagoDiAlbera_EventScript_NicoEmissario::
+	msgbox LagoDiAlbera_Text_NicoEmissarioAfterSurf, MSGBOX_NPC
+	end
+
+LagoDiAlbera_EventScript_StartEmissarioReunion::
+	lockall
+	goto_if_set FLAG_EMISSARIO_AUREA_ENCOUNTER_COMPLETE, LagoDiAlbera_EventScript_EndEmissarioReunion
+	goto_if_unset FLAG_RECEIVED_HM_SURF, LagoDiAlbera_EventScript_EndEmissarioReunion
+	msgbox LagoDiAlbera_Text_EmissarioReunion, MSGBOX_DEFAULT
+	setflag FLAG_HIDE_LAGO_DI_ALBERA_LIA_EMISSARIO
+	setflag FLAG_HIDE_LAGO_DI_ALBERA_NICO_EMISSARIO
+	removeobject LOCALID_LAGO_DI_ALBERA_LIA_EMISSARIO
+	removeobject LOCALID_LAGO_DI_ALBERA_NICO_EMISSARIO
+LagoDiAlbera_EventScript_EndEmissarioReunion::
+	releaseall
 	end
 
 LagoDiAlbera_EventScript_Viandante::
@@ -202,6 +246,11 @@ LagoDiAlbera_Text_Tecnico:
 	.string "La pressione e ancora instabile.\n"
 	.string "Per ora l'accesso resta chiuso.$"
 
+LagoDiAlbera_Text_TecnicoAfterSurf:
+	.string "La pressione e tornata stabile.\n"
+	.string "LIA e NICO stanno gia studiando\n"
+	.string "l'EMISSARIO.$"
+
 LagoDiAlbera_Text_Viandante:
 	.string "Questa salita porta al\n"
 	.string "BORGO DI CASTELLO.\p"
@@ -241,8 +290,9 @@ LagoDiAlbera_Text_LauroSurfIntro:
 	.string "abilita SURF fuori dalla lotta.\p"
 	.string "Con SURF esplorerai nuove parti\n"
 	.string "del LAGO DI ALBERA.\p"
-	.string "L'EMISSARIO resta ancora chiuso:\n"
-	.string "la pressione non e stabile.$"
+	.string "LIA ti aspetta all'EMISSARIO.\n"
+	.string "Le sue misure possono chiarire\n"
+	.string "cosa cerca il TEAM AUREA.$"
 
 LagoDiAlbera_Text_LauroSurfGiven:
 	.string "PROF. LAURO: Usa SURF con attenzione\n"
@@ -251,3 +301,22 @@ LagoDiAlbera_Text_LauroSurfGiven:
 LagoDiAlbera_Text_LauroSurfBagFull:
 	.string "PROF. LAURO: Non hai spazio per SURF.\n"
 	.string "Sistema la BORSA e torna qui.$"
+
+LagoDiAlbera_Text_LiaEmissarioBeforeGym:
+	.string "LIA: L'EMISSARIO non e ancora\n"
+	.string "sicuro. Prima conquista la MEDAGLIA\n"
+	.string "MACINA e torna dal PROF. LAURO.$"
+
+LagoDiAlbera_Text_LiaEmissarioAfterSurf:
+	.string "LIA: La pressione e stabile.\n"
+	.string "NICO e io siamo pronti a entrare.$"
+
+LagoDiAlbera_Text_NicoEmissarioAfterSurf:
+	.string "NICO: La PALESTRA mi ha insegnato\n"
+	.string "a non sottovalutare l'acqua.\n"
+	.string "Vediamo cosa nasconde l'EMISSARIO.$"
+
+LagoDiAlbera_Text_EmissarioReunion:
+	.string "LIA: Ci siamo. Entreremo per primi\n"
+	.string "e controlleremo il condotto.\p"
+	.string "NICO: Seguici quando sei pronto.$"

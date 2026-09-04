@@ -73,6 +73,7 @@
 #include "data/battle_move_effects.h"
 #include "test/battle.h"
 #include "follower_npc.h"
+#include "first_echo.h"
 #include "load_save.h"
 
 // Helper for accessing command arguments and advancing gBattlescriptCurrInstr.
@@ -4852,7 +4853,8 @@ static void PlayAnimation(enum BattlerId battler, u8 animId, const u16 *argPtr, 
      || animId == B_ANIM_ULTRA_BURST
      || animId == B_ANIM_TERA_CHARGE
      || animId == B_ANIM_TERA_ACTIVATE
-     || animId == B_ANIM_FORM_CHANGE_INSTANT)
+     || animId == B_ANIM_FORM_CHANGE_INSTANT
+     || animId == B_ANIM_FIRST_ECHO)
     {
         BtlController_EmitBattleAnimation(battler, B_COMM_TO_CONTROLLER, animId, *argPtr);
         MarkBattlerForControllerExec(battler);
@@ -10939,6 +10941,22 @@ static void Cmd_callnative(void)
 
 // Callnative Funcs
 
+void BS_TryPrepareFirstEchoSwitch(void)
+{
+    NATIVE_ARGS();
+
+    gBattleScripting.unused_0x1a = FirstEcho_ShouldOfferStarterSwitch();
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_ApplyFirstEchoBoost(void)
+{
+    NATIVE_ARGS();
+
+    FirstEcho_ApplyBoost();
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
 void SaveBattlerTarget(enum BattlerId battler)
 {
     assertf(gBattleStruct->savedTargetCount < ARRAY_COUNT(gBattleStruct->savedBattlerTarget), "Too many savedBattlerTargets")
@@ -13997,4 +14015,3 @@ void BS_RestoreStatChangeQueue(void)
     ClearOtherStatChangeValues(gBattlerAttacker);
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
-

@@ -74,6 +74,6 @@ A ($emeraldOpponents -match '(?m)^#define\s+TRAINERS_COUNT_EMERALD\s+864$') 'Eme
 A ($emeraldOpponents -match '(?m)^#define\s+MAX_TRAINERS_COUNT_EMERALD\s+864$') 'Emerald max trainer count preserves the save layout'
 $frlgOpponents = T 'include/constants/opponents_frlg.h'
 foreach ($entry in @(@('TRAINER_LAGO_WATER_GYM_REMO',633),@('TRAINER_LAGO_WATER_GYM_DALIA',634),@('TRAINER_LAGO_WATER_GYM_NEREO',635),@('TRAINER_LAGO_WATER_GYM_MARINA',636))) { A ($frlgOpponents -match "(?m)^#define\s+$($entry[0])\s+$($entry[1])$") "FRLG trainer ID $($entry[0])" }
-A ($frlgOpponents -match '(?m)^#define\s+TRAINERS_COUNT_FRLG\s+637$') 'FRLG trainer count'
+A ($frlgOpponents -match '(?m)^#define\s+TRAINERS_COUNT_FRLG\s+638$') 'FRLG trainer count'
 A ($frlgOpponents -match '(?m)^#define\s+MAX_TRAINERS_COUNT_FRLG\s+768$') 'FRLG max trainer count'
 Write-Output 'Lago di Albera Water Gym validation passed.'

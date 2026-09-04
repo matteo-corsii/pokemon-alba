@@ -39,8 +39,18 @@ $rightMansioWarp = @($map.warp_events | Where-Object {
 Assert-True (@($map.warp_events).Count -eq 2) 'Via Consolare must contain exactly two Mansio warps.'
 Assert-True ($leftMansioWarp.Count -eq 1) 'Via Consolare left Mansio warp is incorrect.'
 Assert-True ($rightMansioWarp.Count -eq 1) 'Via Consolare right Mansio warp is incorrect.'
-Assert-True (@($map.object_events).Count -eq 7) 'Via Consolare must contain exactly seven object events.'
-Assert-True (@($map.coord_events).Count -eq 0) 'Via Consolare must not contain coordinate events.'
+Assert-True (@($map.object_events).Count -eq 9) 'Via Consolare must contain exactly nine object events.'
+$leadObjects = @($map.object_events | Where-Object { $_.local_id -in 'LOCALID_VIA_CONSOLARE_LIA_EMISSARIO', 'LOCALID_VIA_CONSOLARE_NICO_EMISSARIO' })
+Assert-True ($leadObjects.Count -eq 2) 'Via Consolare must contain Lia and Nico for the Emissario lead scene.'
+Assert-True (@($leadObjects | Where-Object { $_.local_id -eq 'LOCALID_VIA_CONSOLARE_LIA_EMISSARIO' -and $_.x -eq 27 -and $_.y -eq 7 -and $_.elevation -eq 3 -and $_.movement_type -eq 'MOVEMENT_TYPE_FACE_RIGHT' -and $_.flag -eq 'FLAG_HIDE_VIA_CONSOLARE_LIA' }).Count -eq 1) 'Via Consolare Lia placement is incorrect.'
+Assert-True (@($leadObjects | Where-Object { $_.local_id -eq 'LOCALID_VIA_CONSOLARE_NICO_EMISSARIO' -and $_.x -eq 27 -and $_.y -eq 8 -and $_.elevation -eq 3 -and $_.movement_type -eq 'MOVEMENT_TYPE_FACE_RIGHT' -and $_.flag -eq 'FLAG_HIDE_VIA_CONSOLARE_NICO' }).Count -eq 1) 'Via Consolare Nico placement is incorrect.'
+$leadTriggers = @($map.coord_events | Where-Object { $_.script -eq 'ViaConsolare_EventScript_StartEmissarioLead' })
+Assert-True (@($map.coord_events).Count -eq 6 -and $leadTriggers.Count -eq 6) 'Via Consolare must contain exactly the six Emissario lead triggers.'
+foreach ($y in 7, 8) {
+    foreach ($x in 28, 29, 30) {
+        Assert-True (@($leadTriggers | Where-Object { $_.x -eq $x -and $_.y -eq $y -and $_.elevation -eq 3 }).Count -eq 1) "Missing Via Consolare Emissario trigger at ($x,$y)."
+    }
+}
 Assert-True (@($map.bg_events).Count -eq 12) 'Via Consolare must contain exactly twelve background events.'
 $expectedObjects = @(
     @{ x = 30; y = 5; movement = 'MOVEMENT_TYPE_FACE_DOWN'; trainer = 'TRAINER_TYPE_NONE'; script = 'ViaConsolare_EventScript_Custode' },

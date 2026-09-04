@@ -28920,6 +28920,19 @@ gBattleAnimGeneral_StatsChange::
 	waitforvisualfinish
 	end
 
+gBattleAnimGeneral_FirstEcho::
+	monbg ANIM_ATTACKER
+	simple_palette_blend unused_subpriority_offset=0, selector=F_PAL_BG | F_PAL_BATTLERS, delay=2, initial_blend_y=0, target_blend_y=8, color=RGB(0, 6, 12)
+	playsewithpan SE_M_REFLECT, SOUND_PAN_ATTACKER
+	create_surf_wave palette=ANIM_SURF_PAL_SURF
+	delay 24
+	waitforvisualfinish
+	simple_palette_blend unused_subpriority_offset=0, selector=F_PAL_BG | F_PAL_BATTLERS, delay=2, initial_blend_y=8, target_blend_y=0, color=RGB(0, 6, 12)
+	waitforvisualfinish
+	clearmonbg ANIM_ATTACKER
+	blendoff
+	end
+
 gBattleAnimGeneral_SubstituteFade::
 	monbg ANIM_ATTACKER
 	createvisualtask AnimTask_SubstituteFadeToInvisible, 5

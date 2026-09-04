@@ -22,7 +22,7 @@ Assert-True ($map.id -eq 'MAP_EMISSARIO' -and $map.name -eq 'Emissario' -and $ma
 Assert-True ($map.map_type -eq 'MAP_TYPE_UNDERGROUND' -and $map.region_map_section -eq 'MAPSEC_ALBERA_STORICA') 'Emissario map type or region is incorrect.'
 Assert-True (-not $map.allow_cycling -and $map.allow_escaping -and $map.allow_running -and -not $map.show_map_name) 'Emissario traversal settings are incorrect.'
 Assert-True ($null -eq $map.connections) 'The structural blockout must not have map connections.'
-Assert-True (@($map.object_events).Count -eq 0 -and @($map.coord_events).Count -eq 0 -and @($map.bg_events).Count -eq 0) 'The structural blockout must not contain narrative events.'
+Assert-True (@($map.object_events).Count -eq 3 -and @($map.coord_events).Count -eq 0 -and @($map.bg_events).Count -eq 0) 'Emissario must contain only the approved Lia, Nico, and Aurea scene objects.'
 Assert-True (@($map.warp_events).Count -eq 2) 'Emissario must contain exactly two adjacent return warps.'
 
 $exits = @($map.warp_events | Where-Object {
@@ -107,9 +107,9 @@ Assert-True ($lagoDoor -eq 0x3291) 'The existing Lago Emissario door tile at (81
 $lagoAttributes = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/tilesets/secondary/lago_di_albera/metatile_attributes.bin'))
 Assert-True ([BitConverter]::ToUInt16($lagoAttributes, 0x091 * 2) -eq 0x1060) 'The Lago entrance must retain MB_NON_ANIMATED_DOOR.'
 
-Assert-True ($scripts -match '(?m)^Emissario_MapScripts::\s*$' -and $scripts -match '(?m)^\s*\.byte 0\s*$') 'Emissario must retain an empty map-script table in the structural batch.'
+Assert-True ($scripts -match '(?m)^Emissario_MapScripts::\s*$' -and $scripts -match 'Emissario_OnTransition') 'Emissario map scripts must retain the approved scene visibility gate.'
 Assert-True ($eventScripts.Contains('.include "data/maps/Emissario/scripts.inc"')) 'Emissario scripts must be linked into the Emerald event-script aggregate.'
-Assert-True ($scripts -notmatch 'trainerbattle|Aurea|Eco|Dive|setdivewarp') 'Narrative, battle, and Dive scripts are outside the structural blockout.'
+Assert-True ($scripts -match 'trainerbattle_no_intro TRAINER_EMISSARIO_AUREA_RECRUIT' -and $scripts -notmatch 'setdivewarp') 'Emissario must use the approved narrative battle without adding Dive logic.'
 Assert-True (@($wild.wild_encounter_groups.encounters | Where-Object { $_.map -eq 'MAP_EMISSARIO' }).Count -eq 0) 'Emissario must not have wild encounters in this version.'
 
 Write-Output 'Emissario structural blockout validation passed.'

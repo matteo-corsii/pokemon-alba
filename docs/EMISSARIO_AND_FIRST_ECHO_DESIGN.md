@@ -53,9 +53,10 @@ della Forma Riflesso, non la sua attivazione.
 8. Nico, Lia e il giocatore entrano insieme nella camera.
 9. La seconda recluta del Team Aurea affronta il giocatore. Quando manda in
    campo Cisternide avviene il primo Eco.
-10. Dopo la lotta, il condotto verso nord introduce il futuro collegamento
-    subacqueo al Lago di Nemi e indirizza la ricerca verso il bosco e gli
-    antichi resti del Romitorio.
+10. Dopo la lotta, Lia e Nico indirizzano il giocatore al **Borgo di Castello**,
+    dove i registri più antichi possono chiarire le letture. Il condotto verso
+    nord e il futuro collegamento sommerso al Lago di Nemi restano canonici,
+    ma non sono l'obiettivo immediato.
 
 L'evento dell'Emissario è quindi **post-Palestra**, anche se Lia può raggiungere
 l'ingresso prima che il giocatore ottenga la Medaglia.
@@ -270,10 +271,11 @@ candidati sono:
 - Salampolla: Paralizzante, Velenoshock, Stordiraggio e Gigassorbimento;
 - Cisternide: Acquanello, Forzantica, Acquadisale e Protezione.
 
-L'implementazione deve assegnare un ID Allenatore univoco e append-only in
-Emerald e FRLG. La classe e la grafica della recluta possono restare
-segnaposto coerenti con la prima recluta fino all'approvazione dello sprite
-definitivo.
+L'implementazione riusa in Emerald lo slot inattivo `853`, in precedenza
+`TRAINER_BRENDAN_PLACEHOLDER`, perché il catalogo Emerald ha già raggiunto la
+capacità compatibile con i trainer flag. In FRLG aggiunge invece in coda
+`TRAINER_EMISSARIO_AUREA_RECRUIT = 637`: `MAX_TRAINERS_COUNT_FRLG` resta 768 e
+la capacità già riservata non modifica il layout del salvataggio.
 
 ## 6. Regole del primo Eco
 
@@ -398,7 +400,7 @@ codice non viene implementato e validato anche nelle costanti FRLG.
 
 ## 8. Stato persistente e compatibilità narrativa
 
-Simboli proposti:
+Simboli assegnati:
 
 | Simbolo | Slot candidato | Quando viene impostato |
 | --- | ---: | --- |
@@ -433,23 +435,21 @@ recupero non altera i salvataggi che hanno già visto la scena completa.
 
 ## 9. Integrazione tecnica verificata
 
-L'audit individua questi punti d'inserimento. Mappa, layout e warp indicati qui
-sono presenti nel blockout; gli elementi narrativi restano per il futuro batch:
+Il batch integra i punti seguenti senza modificare layout, warp o fauna:
 
 ### Mappe e progressione
 
 - `data/maps/ViaConsolare`: scena di separazione presso l'uscita nord;
-- `data/maps/LagoDiAlbera`: warp implementato; Lia pre-Palestra,
-  ricongiungimento e dialogo aggiornato di Lauro ancora da implementare;
-- `data/maps/Emissario`: camera e ritorno al Lago implementati; scena Aurea
-  ancora da implementare;
+- `data/maps/LagoDiAlbera`: Lia pre-Palestra, ricongiungimento post-Palestra e
+  dialoghi coerenti con l'apertura dell'Emissario;
+- `data/maps/Emissario`: Lia, Nico, seconda recluta Aurea e scena conclusiva
+  verso Borgo di Castello;
 - `data/maps/map_groups.json`: append in `gMapGroup_Dungeons`;
 - `data/layouts/layouts.json`: nuovo `LAYOUT_EMISSARIO`;
 - `data/wild_encounters.json`: nessuna nuova tabella per la camera.
 
-I validator attuali del Lago controllano quantità esatte di eventi e warp:
-devono essere aggiornati deliberatamente insieme alla nuova connessione, non
-aggirati.
+I validator del Lago mantengono i conteggi esatti di eventi e warp e includono
+esplicitamente le nuove presenze narrative.
 
 ### Battaglia
 
@@ -463,15 +463,17 @@ Il flusso vanilla pertinente è `BattleScript_FaintedMonTryChoose` in
 5. manda in campo il nuovo avversario;
 6. applica eventi ed effetti di entrata.
 
-Un `callnative` prima del controllo Fissa può riconoscere l'evento e deviare al
-breve preludio dello starter, quindi rientrare nella domanda esistente. Un
-secondo `callnative`, dopo che entrambi i cambi sono risolti, attiva Eco e
-buff sul Pokémon effettivamente in campo. Non serve un nuovo opcode.
+Un `callnative` prima del controllo Fissa riconosce l'evento e devia al breve
+preludio dello starter, quindi rientra nella domanda esistente. L'hook comune
+degli eventi d'ingresso rileva poi l'entrata effettiva di Cisternide, attiva
+l'Eco sul Pokémon realmente in campo e applica l'effetto configurato. Questo
+copre anche ingressi forzati senza proporre cambi fuori sequenza e non richiede
+un nuovo opcode.
 
 Una variabile runtime in `BattleStruct` impedisce ripetizioni nello stesso
 tentativo senza cambiare il formato del salvataggio.
 
-L'animazione generale richiede:
+L'animazione generale usa:
 
 - un nuovo ID in `include/constants/battle_anim.h`;
 - registrazione nella tabella `sBattleAnims_General` di `src/battle_anim.c`;
@@ -482,13 +484,14 @@ L'animazione generale richiede:
 
 ### Allenatore e testi
 
-- aggiunta append-only dell'ID in `opponents.h` e `opponents_frlg.h`;
+- riuso dello slot Emerald inattivo `853` e append FR/LG `637`, entro le
+  rispettive capacità già allocate;
 - blocco party parallelo in `trainers.party` e `trainers_frlg.party`;
 - trainer slide `TRAINER_SLIDE_LAST_SWITCHIN` facoltativa per «Ora ascolta»;
 - nickname dinamico preparato con i buffer mon già disponibili nelle stringhe
   di lotta.
 
-## 10. Piano di validazione del futuro batch
+## 10. Validazione del batch
 
 ### Validator strutturale dedicato
 
@@ -501,7 +504,7 @@ Il blockout usa `test/validate_emissario_structural_blockout.ps1` per verificare
 - assenza di mappa subacquea, comportamento Dive e incontri selvatici;
 - assenza deliberata di oggetti, trigger e script narrativi.
 
-Il futuro `test/validate_emissario_first_echo.ps1` dovrà verificare almeno:
+`test/validate_emissario_first_echo.ps1` verifica almeno:
 
 - oggetti, flag e gate post-Palestra;
 - seconda recluta con Salampolla 23 e Cisternide 25 ultimo;
@@ -514,7 +517,8 @@ eventi, warp o dialoghi interessati.
 
 ### Test della logica di lotta
 
-Il futuro file di test deve coprire:
+Il test runtime dedicato copre l'incremento diretto e il limite degli stadi.
+Il validator strutturale copre inoltre:
 
 - modalità Cambio e modalità Fissa;
 - starter attivo, vivo in panchina, esausto, depositato e assente;
@@ -529,8 +533,8 @@ Il futuro file di test deve coprire:
 - sconfitta e nuovo tentativo;
 - migrazione univoca e caso ambiguo di un vecchio salvataggio.
 
-I prompt interattivi e il timing visivo richiedono comunque playtest manuale
-oltre ai test automatici.
+I prompt interattivi, gli ingressi forzati e il timing visivo richiedono
+comunque playtest manuale oltre ai test automatici.
 
 ### Controlli finali
 

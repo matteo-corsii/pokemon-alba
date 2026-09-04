@@ -16813,16 +16813,21 @@ Wobbuffet
 Level: 41
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
-=== TRAINER_BRENDAN_PLACEHOLDER ===
-Name: NICO
-Class: RS Protag
-Pic: RS Brendan
-Gender: Male
-Music: Male
+=== TRAINER_EMISSARIO_AUREA_RECRUIT ===
+Name: AUREA
+Class: Team Aqua
+Pic: Aqua Grunt F
+Gender: Female
+Music: Female
 Double Battle: No
+AI: Check Bad Move
 
-Groudon
-Level: 5
+Salampolla
+Level: 23
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Cisternide
+Level: 25
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_ALBERA_DARIO ===
