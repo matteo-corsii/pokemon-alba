@@ -167,7 +167,14 @@
     "LagoDiAlbera_WaterGym_1F",
     "LagoDiAlbera_WaterGym_2F",
     "LagoDiAlbera_WaterGym_3F",
-    "LagoDiAlbera_WaterGym_4F"
+    "LagoDiAlbera_WaterGym_4F",
+    "LagoDiAlbera_PokemonCenterWest",
+    "LagoDiAlbera_PokemonCenterEast",
+    "LagoDiAlbera_Mart",
+    "LagoDiAlbera_StiltHouse1",
+    "LagoDiAlbera_StiltHouse2",
+    "LagoDiAlbera_EastHouse1",
+    "LagoDiAlbera_EastHouse2"
   ],
   "gMapGroup_IndoorDewford": [
     "DewfordTown_House1",
