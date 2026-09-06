@@ -41,8 +41,11 @@ foreach ($expectation in @(
     Assert-True ($null -ne $obj -and $obj.x -eq $expectation.x -and $obj.y -eq $expectation.y -and $obj.elevation -eq 3 -and $obj.flag -eq $expectation.flag) "Invalid Emissario placement: $($expectation.id)."
 }
 Assert-True (@($via.coord_events).Count -eq 0) 'Via Consolare must not use automatic Emissario lead triggers.'
-Assert-True (($lago.coord_events | Where-Object script -eq 'LagoDiAlbera_EventScript_StartEmissarioReunion').Count -eq 6) 'Lago must retain exactly six reunion triggers.'
-Assert-True (($lago.coord_events | Where-Object { $_.script -eq 'LagoDiAlbera_EventScript_StartEmissarioReunion' -and $_.x -in 78,79 }).Count -eq 0) 'Lago reunion triggers must not use x=78 or x=79.'
+Assert-True (($lago.coord_events | Where-Object script -eq 'LagoDiAlbera_EventScript_StartEmissarioReunion').Count -eq 0) 'Lago must not use automatic Emissario reunion triggers.'
+Assert-True (@($lago.object_events | Where-Object { $_.local_id -eq 'LOCALID_LAGO_DI_ALBERA_LIA_EMISSARIO' -and $_.script -eq 'LagoDiAlbera_EventScript_LiaEmissario' }).Count -eq 1) 'Lia must retain her Emissario interaction.'
+Assert-True (@($lago.object_events | Where-Object { $_.local_id -eq 'LOCALID_LAGO_DI_ALBERA_NICO_EMISSARIO' -and $_.script -eq 'LagoDiAlbera_EventScript_NicoEmissario' }).Count -eq 1) 'Nico must retain his Emissario interaction.'
+Assert-True ($lagoScripts -match '(?s)LagoDiAlbera_EventScript_LiaEmissario::.*?goto_if_set FLAG_RECEIVED_HM_SURF, LagoDiAlbera_EventScript_StartEmissarioReunion.*?LagoDiAlbera_Text_LiaEmissarioBeforeGym') 'Post-Surf Lia interaction must start the shared reunion while preserving the pre-Surf text.'
+Assert-True ($lagoScripts -match '(?s)LagoDiAlbera_EventScript_NicoEmissario::\s*goto LagoDiAlbera_EventScript_StartEmissarioReunion') 'Post-Surf Nico interaction must start the shared reunion.'
 Assert-True ($emissarioScripts -match 'trainerbattle_no_intro TRAINER_EMISSARIO_AUREA_RECRUIT') 'Emissario must use the narrative trainer battle flow.'
 Assert-True ($emissarioScripts -match 'setflag FLAG_EMISSARIO_AUREA_ENCOUNTER_COMPLETE') 'Emissario completion flag is missing.'
 Assert-True ($emissarioScripts -match 'BORGO DI CASTELLO') 'The post-battle direction must be Borgo di Castello.'

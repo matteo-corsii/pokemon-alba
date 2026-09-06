@@ -277,60 +277,6 @@
       "var": "VAR_TEMP_0",
       "var_value": "0",
       "script": "LagoDiAlbera_EventScript_LauroSurfScene"
-    },
-    {
-      "type": "trigger",
-      "x": 74,
-      "y": 4,
-      "elevation": 3,
-      "var": "VAR_TEMP_1",
-      "var_value": "0",
-      "script": "LagoDiAlbera_EventScript_StartEmissarioReunion"
-    },
-    {
-      "type": "trigger",
-      "x": 75,
-      "y": 4,
-      "elevation": 3,
-      "var": "VAR_TEMP_1",
-      "var_value": "0",
-      "script": "LagoDiAlbera_EventScript_StartEmissarioReunion"
-    },
-    {
-      "type": "trigger",
-      "x": 76,
-      "y": 4,
-      "elevation": 3,
-      "var": "VAR_TEMP_1",
-      "var_value": "0",
-      "script": "LagoDiAlbera_EventScript_StartEmissarioReunion"
-    },
-    {
-      "type": "trigger",
-      "x": 77,
-      "y": 4,
-      "elevation": 3,
-      "var": "VAR_TEMP_1",
-      "var_value": "0",
-      "script": "LagoDiAlbera_EventScript_StartEmissarioReunion"
-    },
-    {
-      "type": "trigger",
-      "x": 80,
-      "y": 4,
-      "elevation": 3,
-      "var": "VAR_TEMP_1",
-      "var_value": "0",
-      "script": "LagoDiAlbera_EventScript_StartEmissarioReunion"
-    },
-    {
-      "type": "trigger",
-      "x": 81,
-      "y": 4,
-      "elevation": 3,
-      "var": "VAR_TEMP_1",
-      "var_value": "0",
-      "script": "LagoDiAlbera_EventScript_StartEmissarioReunion"
     }
   ],
   "bg_events": [

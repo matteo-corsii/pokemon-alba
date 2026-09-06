@@ -84,7 +84,7 @@ LagoDiAlbera_EventScript_TecnicoAfterSurf::
 	end
 
 LagoDiAlbera_EventScript_LiaEmissario::
-	goto_if_set FLAG_RECEIVED_HM_SURF, LagoDiAlbera_EventScript_LiaEmissarioAfterSurf
+	goto_if_set FLAG_RECEIVED_HM_SURF, LagoDiAlbera_EventScript_StartEmissarioReunion
 	msgbox LagoDiAlbera_Text_LiaEmissarioBeforeGym, MSGBOX_NPC
 	end
 
@@ -93,8 +93,7 @@ LagoDiAlbera_EventScript_LiaEmissarioAfterSurf::
 	end
 
 LagoDiAlbera_EventScript_NicoEmissario::
-	msgbox LagoDiAlbera_Text_NicoEmissarioAfterSurf, MSGBOX_NPC
-	end
+	goto LagoDiAlbera_EventScript_StartEmissarioReunion
 
 LagoDiAlbera_EventScript_StartEmissarioReunion::
 	lockall
