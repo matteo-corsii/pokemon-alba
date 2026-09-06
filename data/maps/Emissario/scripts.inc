@@ -61,10 +61,14 @@ Emissario_EventScript_End::
 
 Emissario_Text_Lia:
 	.string "LIA: Le pareti deviano il suono.\n"
-	.string "Qualcuno ha lavorato qui di recente.$"
+	.string "Qualcuno ha lavorato qui di recente.\n"
+	.string "E non siamo soli: c'e un'altra persona\n"
+	.string "nella stanza. Dobbiamo stare attenti.$"
 Emissario_Text_Nico:
 	.string "NICO: Restiamo vicini. Questo posto\n"
-	.string "non e vuoto come sembra.$"
+	.string "non e vuoto come sembra.\n"
+	.string "Quella persona ci osserva, ma non so\n"
+	.string "chi sia ne che cosa voglia.$"
 Emissario_Text_AureaIntro:
 	.string "AUREA: Siete arrivati troppo presto.\n"
 	.string "Il TEAM AUREA non vi lascera\n"

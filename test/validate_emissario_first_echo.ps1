@@ -40,7 +40,7 @@ foreach ($expectation in @(
     $obj = $emissario.object_events | Where-Object local_id -eq $expectation.id
     Assert-True ($null -ne $obj -and $obj.x -eq $expectation.x -and $obj.y -eq $expectation.y -and $obj.elevation -eq 3 -and $obj.flag -eq $expectation.flag) "Invalid Emissario placement: $($expectation.id)."
 }
-Assert-True (($via.coord_events | Where-Object script -eq 'ViaConsolare_EventScript_StartEmissarioLead').Count -eq 6) 'Via Consolare must retain all six Emissario lead triggers.'
+Assert-True (@($via.coord_events).Count -eq 0) 'Via Consolare must not use automatic Emissario lead triggers.'
 Assert-True (($lago.coord_events | Where-Object script -eq 'LagoDiAlbera_EventScript_StartEmissarioReunion').Count -eq 6) 'Lago must retain exactly six reunion triggers.'
 Assert-True (($lago.coord_events | Where-Object { $_.script -eq 'LagoDiAlbera_EventScript_StartEmissarioReunion' -and $_.x -in 78,79 }).Count -eq 0) 'Lago reunion triggers must not use x=78 or x=79.'
 Assert-True ($emissarioScripts -match 'trainerbattle_no_intro TRAINER_EMISSARIO_AUREA_RECRUIT') 'Emissario must use the narrative trainer battle flow.'

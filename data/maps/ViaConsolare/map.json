@@ -106,7 +106,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "ViaConsolare_EventScript_LiaEmissario",
+      "script": "ViaConsolare_EventScript_StartEmissarioLead",
       "flag": "FLAG_HIDE_VIA_CONSOLARE_LIA"
     },
     {
@@ -120,7 +120,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "ViaConsolare_EventScript_NicoEmissario",
+      "script": "ViaConsolare_EventScript_StartEmissarioLead",
       "flag": "FLAG_HIDE_VIA_CONSOLARE_NICO"
     },
     {
@@ -166,14 +166,7 @@
       "dest_warp_id": "1"
     }
   ],
-  "coord_events": [
-    {"type":"trigger","x":28,"y":7,"elevation":3,"var":"VAR_TEMP_0","var_value":"0","script":"ViaConsolare_EventScript_StartEmissarioLead"},
-    {"type":"trigger","x":29,"y":7,"elevation":3,"var":"VAR_TEMP_0","var_value":"0","script":"ViaConsolare_EventScript_StartEmissarioLead"},
-    {"type":"trigger","x":30,"y":7,"elevation":3,"var":"VAR_TEMP_0","var_value":"0","script":"ViaConsolare_EventScript_StartEmissarioLead"},
-    {"type":"trigger","x":28,"y":8,"elevation":3,"var":"VAR_TEMP_0","var_value":"0","script":"ViaConsolare_EventScript_StartEmissarioLead"},
-    {"type":"trigger","x":29,"y":8,"elevation":3,"var":"VAR_TEMP_0","var_value":"0","script":"ViaConsolare_EventScript_StartEmissarioLead"},
-    {"type":"trigger","x":30,"y":8,"elevation":3,"var":"VAR_TEMP_0","var_value":"0","script":"ViaConsolare_EventScript_StartEmissarioLead"}
-  ],
+  "coord_events": [],
   "bg_events": [
     {
       "type": "sign",
