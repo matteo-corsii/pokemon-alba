@@ -5,6 +5,8 @@ function Read-Json([string]$Path) { Get-Content (Join-Path $RepositoryRoot $Path
 
 $map = Read-Json 'data/maps/LagoDiAlbera/map.json'
 $scripts = Get-Content (Join-Path $RepositoryRoot 'data/maps/LagoDiAlbera/scripts.inc') -Raw -Encoding utf8
+$transition = [regex]::Match($scripts, '(?s)LagoDiAlbera_OnTransition::(.*?)LagoDiAlbera_OnTransition_ShowEmissarioParty::').Value
+Assert-True ($transition -match 'goto_if_set FLAG_RECEIVED_HM_SURF, LagoDiAlbera_OnTransition_ShowEmissarioParty' -and $transition.IndexOf('goto_if_set FLAG_RECEIVED_HM_SURF') -lt $transition.IndexOf('goto_if_unset FLAG_VIA_CONSOLARE_EMISSARIO_LEAD_COMPLETE')) 'Lago must show Lia and Nico after Surf before the reunion scene.'
 
 $expectedObjects = @(
     @('LOCALID_LAGO_DI_ALBERA_CUSTODE','OBJ_EVENT_GFX_GENTLEMAN',58,104,'MOVEMENT_TYPE_FACE_RIGHT','LagoDiAlbera_EventScript_Custode'),
