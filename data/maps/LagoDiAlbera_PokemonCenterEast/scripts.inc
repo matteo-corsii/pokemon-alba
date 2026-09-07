@@ -1,4 +1,5 @@
 LagoDiAlbera_PokemonCenterEast_MapScripts::
+	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
 LagoDiAlbera_PokemonCenterEast_EventScript_Nurse::
