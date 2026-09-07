@@ -9,6 +9,10 @@
 #include "script.h"
 #include "field_name_box.h"
 #include "palette.h"
+#include "sound.h"
+#include "constants/map_types.h"
+#include "constants/region_map_sections.h"
+#include "constants/songs.h"
 
 // Temporary, audio-only instrumentation for Lago interior field messages.
 #define LAGO_FIELD_MESSAGE_DIAGNOSTIC 1
