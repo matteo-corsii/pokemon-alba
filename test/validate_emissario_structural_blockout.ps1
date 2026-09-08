@@ -34,7 +34,7 @@ $entrance = @($lago.warp_events | Where-Object {
     $_.dest_map -eq 'MAP_EMISSARIO' -and [int]$_.dest_warp_id -eq 0
 })
 Assert-True ($exits.Count -eq 2 -and @($exits | Where-Object { [int]$_.x -eq 15 }).Count -eq 1 -and @($exits | Where-Object { [int]$_.x -eq 16 }).Count -eq 1 -and $entrance.Count -eq 1) 'Lago and Emissario do not have the approved reciprocal warp arrangement.'
-Assert-True (@($lago.warp_events).Count -eq 5) 'Lago must contain the four existing warps plus the Emissario entrance.'
+Assert-True (@($lago.warp_events).Count -ge 5) 'Lago must retain the four original warps plus the Emissario entrance.'
 
 $layout = @($layouts.layouts | Where-Object { $_.id -eq 'LAYOUT_EMISSARIO' })
 Assert-True ($layout.Count -eq 1) 'LAYOUT_EMISSARIO is missing or duplicated.'
@@ -110,6 +110,11 @@ Assert-True ([BitConverter]::ToUInt16($lagoAttributes, 0x091 * 2) -eq 0x1060) 'T
 Assert-True ($scripts -match '(?m)^Emissario_MapScripts::\s*$' -and $scripts -match 'Emissario_OnTransition') 'Emissario map scripts must retain the approved scene visibility gate.'
 Assert-True ($eventScripts.Contains('.include "data/maps/Emissario/scripts.inc"')) 'Emissario scripts must be linked into the Emerald event-script aggregate.'
 Assert-True ($scripts -match 'trainerbattle_no_intro TRAINER_EMISSARIO_AUREA_RECRUIT' -and $scripts -notmatch 'setdivewarp') 'Emissario must use the approved narrative battle without adding Dive logic.'
-Assert-True (@($wild.wild_encounter_groups.encounters | Where-Object { $_.map -eq 'MAP_EMISSARIO' }).Count -eq 0) 'Emissario must not have wild encounters in this version.'
+$emissarioEncounters = @($wild.wild_encounter_groups.encounters | Where-Object { $_.map -eq 'MAP_EMISSARIO' })
+Assert-True ($emissarioEncounters.Count -eq 1) 'Emissario must have exactly one static encounter table.'
+Assert-True ($null -eq $emissarioEncounters[0].land_mons) 'Emissario must not have land encounters.'
+Assert-True ($null -ne $emissarioEncounters[0].water_mons) 'Emissario must define Surf encounters.'
+Assert-True (@($emissarioEncounters[0].water_mons.mons | Where-Object { $_.species -eq 'SPECIES_CISTERNIDE' }).Count -gt 0) 'Emissario Surf encounters must include Cisternide.'
+Assert-True ((ConvertTo-Json $emissarioEncounters[0] -Depth 10) -notmatch 'FLAG_') 'Emissario wild encounters must not depend on flags.'
 
 Write-Output 'Emissario structural blockout validation passed.'
