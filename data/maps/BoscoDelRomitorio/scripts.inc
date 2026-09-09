@@ -107,6 +107,31 @@ BoscoDelRomitorio_EventScript_Hermit::
 	release
 	end
 
+BoscoDelRomitorio_EventScript_Guardaboschi::
+	trainerbattle_single TRAINER_MIKE_1, BoscoDelRomitorio_Text_GuardaboschiIntro, BoscoDelRomitorio_Text_GuardaboschiDefeat
+	msgbox BoscoDelRomitorio_Text_GuardaboschiPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+BoscoDelRomitorio_EventScript_Esploratrice::
+	trainerbattle_single TRAINER_CINDY_2, BoscoDelRomitorio_Text_EsploratriceIntro, BoscoDelRomitorio_Text_EsploratriceDefeat
+	msgbox BoscoDelRomitorio_Text_EsploratricePostBattle, MSGBOX_AUTOCLOSE
+	end
+
+BoscoDelRomitorio_EventScript_Sorgenti::
+	trainerbattle_single TRAINER_ANDREW, BoscoDelRomitorio_Text_SorgentiIntro, BoscoDelRomitorio_Text_SorgentiDefeat
+	msgbox BoscoDelRomitorio_Text_SorgentiPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+BoscoDelRomitorio_EventScript_Cercarocce::
+	trainerbattle_single TRAINER_LUCAS_2, BoscoDelRomitorio_Text_CercarocceIntro, BoscoDelRomitorio_Text_CercarocceDefeat
+	msgbox BoscoDelRomitorio_Text_CercaroccePostBattle, MSGBOX_AUTOCLOSE
+	end
+
+BoscoDelRomitorio_EventScript_CustodeRovine::
+	trainerbattle_single TRAINER_RHETT, BoscoDelRomitorio_Text_CustodeRovineIntro, BoscoDelRomitorio_Text_CustodeRovineDefeat
+	msgbox BoscoDelRomitorio_Text_CustodeRovinePostBattle, MSGBOX_AUTOCLOSE
+	end
+
 BoscoDelRomitorio_Text_EntranceSign:
 	.string "BOSCO DEL ROMITORIO\n"
 	.string "Il ROMITORIO si trova a nord.$"
@@ -122,3 +147,56 @@ BoscoDelRomitorio_Text_Hermit:
 	.string "Nel ROMITORIO si possono ancora\n"
 	.string "vedere i resti della torre\n"
 	.string "campanaria.$"
+
+BoscoDelRomitorio_Text_GuardaboschiIntro:
+	.string "Conosco ogni sentiero di questo bosco.\n"
+	.string "Vediamo se sai seguirne le tracce.$"
+
+BoscoDelRomitorio_Text_GuardaboschiDefeat:
+	.string "Hai superato la prova del sentiero.$"
+
+BoscoDelRomitorio_Text_GuardaboschiPostBattle:
+	.string "Continua a osservare gli alberi e il\n"
+	.string "terreno.$"
+
+BoscoDelRomitorio_Text_EsploratriceIntro:
+	.string "Sto esplorando ogni angolo del bosco.\n"
+	.string "Non mi fermero proprio adesso.$"
+
+BoscoDelRomitorio_Text_EsploratriceDefeat:
+	.string "La tua esplorazione e piu attenta.$"
+
+BoscoDelRomitorio_Text_EsploratricePostBattle:
+	.string "Segnero questo sentiero sulla mappa.$"
+
+BoscoDelRomitorio_Text_SorgentiIntro:
+	.string "Le sorgenti nascoste sono la mia\n"
+	.string "passione. Mostrami la tua squadra.$"
+
+BoscoDelRomitorio_Text_SorgentiDefeat:
+	.string "L'acqua ha cambiato ancora il percorso.$"
+
+BoscoDelRomitorio_Text_SorgentiPostBattle:
+	.string "Segui il rumore dell'acqua tra gli\n"
+	.string "alberi.$"
+
+BoscoDelRomitorio_Text_CercarocceIntro:
+	.string "Queste rocce conservano tracce\n"
+	.string "preziose. Non intralciarmi.$"
+
+BoscoDelRomitorio_Text_CercarocceDefeat:
+	.string "Hai trovato la strada migliore.$"
+
+BoscoDelRomitorio_Text_CercaroccePostBattle:
+	.string "Cerchero piu a fondo tra queste rocce.$"
+
+BoscoDelRomitorio_Text_CustodeRovineIntro:
+	.string "Custodisco questi ruderi da molto\n"
+	.string "tempo. Fatti avanti.$"
+
+BoscoDelRomitorio_Text_CustodeRovineDefeat:
+	.string "Le rovine hanno visto una bella lotta.$"
+
+BoscoDelRomitorio_Text_CustodeRovinePostBattle:
+	.string "Ora puoi proseguire tra i resti\n"
+	.string "antichi.$"
