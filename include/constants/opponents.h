@@ -854,7 +854,7 @@
 #define TRAINER_MARIELA                     848
 #define TRAINER_ALVARO                      849
 #define TRAINER_EVERETT                     850
-#if !IS_FRLG
+#if !IS_FRLG && !defined(FIRERED) && !defined(LEAFGREEN)
 #define TRAINER_EMISSARIO_AUREA_RECRUIT      853
 #define TRAINER_ALBERA_DARIO                 855
 #define TRAINER_ALBERA_MARA                  856

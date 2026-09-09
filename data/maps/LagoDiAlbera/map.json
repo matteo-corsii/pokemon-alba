@@ -315,6 +315,20 @@
       "elevation": 0,
       "dest_map": "MAP_LAGO_DI_ALBERA_EAST_HOUSE_2",
       "dest_warp_id": "0"
+    },
+    {
+      "x": 4,
+      "y": 2,
+      "elevation": 3,
+      "dest_map": "MAP_BOSCO_DEL_ROMITORIO",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 5,
+      "y": 2,
+      "elevation": 3,
+      "dest_map": "MAP_BOSCO_DEL_ROMITORIO",
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [

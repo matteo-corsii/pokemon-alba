@@ -9567,6 +9567,17 @@
       "layout_version": "emerald"
     },
     {
+      "id": "LAYOUT_BOSCO_DEL_ROMITORIO",
+      "name": "BoscoDelRomitorio_Layout",
+      "width": 64,
+      "height": 64,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_LagoDiAlbera",
+      "border_filepath": "data/layouts/BoscoDelRomitorio/border.bin",
+      "blockdata_filepath": "data/layouts/BoscoDelRomitorio/map.bin",
+      "layout_version": "emerald"
+    },
+    {
       "id": "LAYOUT_EMISSARIO",
       "name": "Emissario_Layout",
       "width": 32,

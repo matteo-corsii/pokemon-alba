@@ -174,6 +174,7 @@ gStdScripts_End::
 	.include "data/maps/LagoDiAlbera_EastHouse1/scripts.inc"
 	.include "data/maps/LagoDiAlbera_EastHouse2/scripts.inc"
 	.include "data/maps/Emissario/scripts.inc"
+	.include "data/maps/BoscoDelRomitorio/scripts.inc"
 	.include "data/maps/Route104/scripts.inc"
 	.include "data/maps/Route105/scripts.inc"
 	.include "data/maps/Route106/scripts.inc"
