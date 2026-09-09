@@ -1291,6 +1291,42 @@ static const struct SpriteFrameImage sPicTable_PikachuOld[] = {
     overworld_frame(gObjectEventPic_PikachuOld, 2, 2, 2),
 };
 
+static const struct SpriteFrameImage sPicTable_Cingerm[] = {
+    overworld_frame(gObjectEventPic_Cingerm, 2, 2, 0),
+    overworld_frame(gObjectEventPic_Cingerm, 2, 2, 1),
+    overworld_frame(gObjectEventPic_Cingerm, 2, 2, 2),
+    overworld_frame(gObjectEventPic_Cingerm, 2, 2, 0),
+    overworld_frame(gObjectEventPic_Cingerm, 2, 2, 0),
+    overworld_frame(gObjectEventPic_Cingerm, 2, 2, 1),
+    overworld_frame(gObjectEventPic_Cingerm, 2, 2, 1),
+    overworld_frame(gObjectEventPic_Cingerm, 2, 2, 2),
+    overworld_frame(gObjectEventPic_Cingerm, 2, 2, 2),
+};
+
+static const struct SpriteFrameImage sPicTable_Ardeino[] = {
+    overworld_frame(gObjectEventPic_Ardeino, 4, 4, 0),
+    overworld_frame(gObjectEventPic_Ardeino, 4, 4, 1),
+    overworld_frame(gObjectEventPic_Ardeino, 4, 4, 2),
+    overworld_frame(gObjectEventPic_Ardeino, 4, 4, 0),
+    overworld_frame(gObjectEventPic_Ardeino, 4, 4, 0),
+    overworld_frame(gObjectEventPic_Ardeino, 4, 4, 1),
+    overworld_frame(gObjectEventPic_Ardeino, 4, 4, 1),
+    overworld_frame(gObjectEventPic_Ardeino, 4, 4, 2),
+    overworld_frame(gObjectEventPic_Ardeino, 4, 4, 2),
+};
+
+static const struct SpriteFrameImage sPicTable_Serbrace[] = {
+    overworld_frame(gObjectEventPic_Serbrace, 4, 4, 0),
+    overworld_frame(gObjectEventPic_Serbrace, 4, 4, 1),
+    overworld_frame(gObjectEventPic_Serbrace, 4, 4, 2),
+    overworld_frame(gObjectEventPic_Serbrace, 4, 4, 0),
+    overworld_frame(gObjectEventPic_Serbrace, 4, 4, 0),
+    overworld_frame(gObjectEventPic_Serbrace, 4, 4, 1),
+    overworld_frame(gObjectEventPic_Serbrace, 4, 4, 1),
+    overworld_frame(gObjectEventPic_Serbrace, 4, 4, 2),
+    overworld_frame(gObjectEventPic_Serbrace, 4, 4, 2),
+};
+
 static const struct SpriteFrameImage sPicTable_ZigzagoonOld[] = {
     overworld_frame(gObjectEventPic_ZigzagoonOld, 2, 2, 0),
     overworld_frame(gObjectEventPic_ZigzagoonOld, 2, 2, 1),
