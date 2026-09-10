@@ -636,10 +636,12 @@
 #define TRAINER_CISTERNONI_AUREA_RECRUIT             630
 #define TRAINER_VIA_CONSOLARE_LIVIO                  631
 #define TRAINER_VIA_CONSOLARE_ELIO                   632
+#if defined(FIRERED) || defined(LEAFGREEN)
 #define TRAINER_LAGO_WATER_GYM_REMO                 633
 #define TRAINER_LAGO_WATER_GYM_DALIA                634
 #define TRAINER_LAGO_WATER_GYM_NEREO                635
 #define TRAINER_LAGO_WATER_GYM_MARINA               636
+#endif
 #define TRAINER_EMISSARIO_AUREA_RECRUIT              637
 
 // NOTE: Because each Trainer uses a flag to determine when they are defeated, there is
