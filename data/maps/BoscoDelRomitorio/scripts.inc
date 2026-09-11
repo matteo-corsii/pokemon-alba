@@ -93,11 +93,11 @@ BoscoDelRomitorio_EventScript_SerbraceAvailable::
 	end
 
 BoscoDelRomitorio_EventScript_EntranceSign::
-	msgbox BoscoDelRomitorio_Text_EntranceSign, MSGBOX_DEFAULT
+	msgbox BoscoDelRomitorio_Text_EntranceSign, MSGBOX_SIGN
 	end
 
 BoscoDelRomitorio_EventScript_RetreatSign::
-	msgbox BoscoDelRomitorio_Text_RetreatSign, MSGBOX_DEFAULT
+	msgbox BoscoDelRomitorio_Text_RetreatSign, MSGBOX_SIGN
 	end
 
 BoscoDelRomitorio_EventScript_Hermit::

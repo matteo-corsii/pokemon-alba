@@ -13,8 +13,8 @@ function Assert-True([bool]$condition, [string]$message) {
 }
 
 Assert-True ($map.id -eq 'MAP_BOSCO_DEL_ROMITORIO') 'map id'
-Assert-True (@($map.warp_events | Where-Object { $_.x -eq 31 -and $_.y -eq 63 -and $_.dest_map -eq 'MAP_LAGO_DI_ALBERA' -and $_.dest_warp_id -eq 12 }).Count -eq 1) 'west warp'
-Assert-True (@($map.warp_events | Where-Object { $_.x -eq 32 -and $_.y -eq 63 -and $_.dest_map -eq 'MAP_LAGO_DI_ALBERA' -and $_.dest_warp_id -eq 13 }).Count -eq 1) 'east warp'
+Assert-True (@($map.warp_events | Where-Object { $_.x -eq 31 -and $_.y -eq 62 -and $_.dest_map -eq 'MAP_LAGO_DI_ALBERA' -and $_.dest_warp_id -eq 12 }).Count -eq 1) 'west warp'
+Assert-True (@($map.warp_events | Where-Object { $_.x -eq 32 -and $_.y -eq 62 -and $_.dest_map -eq 'MAP_LAGO_DI_ALBERA' -and $_.dest_warp_id -eq 13 }).Count -eq 1) 'east warp'
 
 $encounters = @(
     @{ id = 'LOCALID_BOSCO_DEL_ROMITORIO_CINGERM'; gfx = 'OBJ_EVENT_GFX_CINGERM'; x = 14; y = 24; script = 'BoscoDelRomitorio_EventScript_Cingerm'; flag = 'FLAG_HIDE_BOSCO_DEL_ROMITORIO_CINGERM' },
@@ -63,6 +63,8 @@ Assert-True (@($map.bg_events | Where-Object { $_.x -eq 33 -and $_.y -eq 56 }).C
 Assert-True (@($map.bg_events | Where-Object { $_.x -eq 40 -and $_.y -eq 10 }).Count -eq 1) 'retreat sign'
 Assert-True ($scripts -match 'VAR_STARTER_MON' -and $scripts -match 'FLAG_HIDE_BOSCO_DEL_ROMITORIO') 'starter visibility logic'
 Assert-True ($scripts -notmatch 'wild_encounters') 'no fauna changes in scripts'
+Assert-True ($scripts -match 'BoscoDelRomitorio_EventScript_EntranceSign::\r?\n\s*msgbox BoscoDelRomitorio_Text_EntranceSign, MSGBOX_SIGN') 'entrance sign message mode'
+Assert-True ($scripts -match 'BoscoDelRomitorio_EventScript_RetreatSign::\r?\n\s*msgbox BoscoDelRomitorio_Text_RetreatSign, MSGBOX_SIGN') 'retreat sign message mode'
 
 $wildPath = Join-Path $root 'src/data/wild_encounters.json'
 $wildJson = Get-Content -Raw $wildPath | ConvertFrom-Json
