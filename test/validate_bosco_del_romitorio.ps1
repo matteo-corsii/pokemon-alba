@@ -63,4 +63,49 @@ Assert-True (@($map.bg_events | Where-Object { $_.x -eq 33 -and $_.y -eq 56 }).C
 Assert-True (@($map.bg_events | Where-Object { $_.x -eq 40 -and $_.y -eq 10 }).Count -eq 1) 'retreat sign'
 Assert-True ($scripts -match 'VAR_STARTER_MON' -and $scripts -match 'FLAG_HIDE_BOSCO_DEL_ROMITORIO') 'starter visibility logic'
 Assert-True ($scripts -notmatch 'wild_encounters') 'no fauna changes in scripts'
+
+$wildPath = Join-Path $root 'src/data/wild_encounters.json'
+$wildJson = Get-Content -Raw $wildPath | ConvertFrom-Json
+$wildEntries = @($wildJson.wild_encounter_groups[0].encounters | Where-Object { $_.map -eq 'MAP_BOSCO_DEL_ROMITORIO' })
+Assert-True ($wildEntries.Count -eq 4) 'Bosco has four time-of-day encounter entries'
+Assert-True ((@($wildEntries.base_label) -join ',') -eq 'gBoscoDelRomitorio_Morning,gBoscoDelRomitorio_Day,gBoscoDelRomitorio_Evening,gBoscoDelRomitorio_Night') 'Bosco time labels'
+
+$dayExpected = @(
+    @{ species = 'SPECIES_MICIOLO'; min = 18; max = 20 }, @{ species = 'SPECIES_PALUDIX'; min = 19; max = 21 },
+    @{ species = 'SPECIES_MICIOLO'; min = 18; max = 20 }, @{ species = 'SPECIES_MOLOSPSY'; min = 20; max = 22 },
+    @{ species = 'SPECIES_MOLOSPSY'; min = 20; max = 22 }, @{ species = 'SPECIES_LUMELLA'; min = 19; max = 21 },
+    @{ species = 'SPECIES_MICIOLO'; min = 18; max = 20 }, @{ species = 'SPECIES_PALUDIX'; min = 19; max = 21 },
+    @{ species = 'SPECIES_LUMELLA'; min = 19; max = 21 }, @{ species = 'SPECIES_LUMELLA'; min = 19; max = 21 },
+    @{ species = 'SPECIES_LUMELLA'; min = 19; max = 21 }, @{ species = 'SPECIES_LUMELLA'; min = 19; max = 21 }
+)
+$nightExpected = @(
+    @{ species = 'SPECIES_LENGHELIS'; min = 20; max = 22 }, @{ species = 'SPECIES_MOLOSPSY'; min = 20; max = 22 },
+    @{ species = 'SPECIES_LENGHELIS'; min = 20; max = 22 }, @{ species = 'SPECIES_PALUDIX'; min = 19; max = 21 },
+    @{ species = 'SPECIES_PALUDIX'; min = 19; max = 21 }, @{ species = 'SPECIES_MICIOLO'; min = 18; max = 20 },
+    @{ species = 'SPECIES_MICIOLO'; min = 18; max = 20 }, @{ species = 'SPECIES_LUMELLA'; min = 19; max = 21 },
+    @{ species = 'SPECIES_LUMELLA'; min = 19; max = 21 }, @{ species = 'SPECIES_LUMELLA'; min = 19; max = 21 },
+    @{ species = 'SPECIES_LUMELLA'; min = 19; max = 21 }, @{ species = 'SPECIES_LUMELLA'; min = 19; max = 21 }
+)
+function Assert-Land([object]$entry, [object[]]$expected, [string]$label) {
+    Assert-True ($entry.land_mons.encounter_rate -eq 20 -and @($entry.land_mons.mons).Count -eq 12) "$label land rate/slots"
+    for ($i = 0; $i -lt $expected.Count; $i++) {
+        $m = $entry.land_mons.mons[$i]; $e = $expected[$i]
+        Assert-True ($m.species -eq $e.species -and $m.min_level -eq $e.min -and $m.max_level -eq $e.max) "$label land slot $i"
+    }
+}
+$morning = $wildEntries | Where-Object base_label -eq 'gBoscoDelRomitorio_Morning'
+$day = $wildEntries | Where-Object base_label -eq 'gBoscoDelRomitorio_Day'
+$evening = $wildEntries | Where-Object base_label -eq 'gBoscoDelRomitorio_Evening'
+$night = $wildEntries | Where-Object base_label -eq 'gBoscoDelRomitorio_Night'
+Assert-Land $morning $dayExpected 'Morning'; Assert-Land $day $dayExpected 'Day'; Assert-Land $evening $dayExpected 'Evening'; Assert-Land $night $nightExpected 'Night'
+Assert-True (@($day.land_mons.mons + $evening.land_mons.mons | Where-Object species -eq 'SPECIES_LENGHELIS').Count -eq 0) 'Lenghelis night only'
+
+Assert-True ($morning.water_mons.encounter_rate -eq 10) 'Bosco Surf rate'
+$waterExpected = @('SPECIES_CARPULUS','SPECIES_LUCINUS','SPECIES_TRITINO','SPECIES_TRITINO','SPECIES_TRITINO')
+for ($i = 0; $i -lt 5; $i++) { Assert-True ($morning.water_mons.mons[$i].species -eq $waterExpected[$i]) "Surf slot $i" }
+Assert-True ($morning.fishing_mons.encounter_rate -eq 10) 'Bosco fishing rate'
+$fishingExpected = @('SPECIES_CARPULUS','SPECIES_LUCINUS','SPECIES_CARPULUS','SPECIES_LUCINUS','SPECIES_TRITINO','SPECIES_LUCINUS','SPECIES_TRITINO','SPECIES_TRITINO','SPECIES_CARPULUS','SPECIES_CARPULUS')
+for ($i = 0; $i -lt 10; $i++) { Assert-True ($morning.fishing_mons.mons[$i].species -eq $fishingExpected[$i]) "Fishing slot $i" }
+$randomSpecies = @($morning.land_mons.mons + $morning.water_mons.mons + $morning.fishing_mons.mons).species
+foreach ($starter in @('SPECIES_CINGERM','SPECIES_ARDEINO','SPECIES_SERBRACE')) { Assert-True ($randomSpecies -notcontains $starter) "$starter random encounter exclusion" }
 Write-Output 'PASS: BoscoDelRomitorio starter encounters, items, signs and NPC'
