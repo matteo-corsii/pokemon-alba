@@ -100,6 +100,14 @@ BoscoDelRomitorio_EventScript_RetreatSign::
 	msgbox BoscoDelRomitorio_Text_RetreatSign, MSGBOX_SIGN
 	end
 
+BoscoDelRomitorio_EventScript_ExitWest::
+	warp MAP_LAGO_DI_ALBERA, 4, 2
+	end
+
+BoscoDelRomitorio_EventScript_ExitEast::
+	warp MAP_LAGO_DI_ALBERA, 5, 2
+	end
+
 BoscoDelRomitorio_EventScript_Hermit::
 	lock
 	faceplayer

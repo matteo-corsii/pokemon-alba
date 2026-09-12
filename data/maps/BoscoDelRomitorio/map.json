@@ -213,7 +213,26 @@
       "dest_warp_id": "13"
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 31,
+      "y": 62,
+      "elevation": 3,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "BoscoDelRomitorio_EventScript_ExitWest"
+    },
+    {
+      "type": "trigger",
+      "x": 32,
+      "y": 62,
+      "elevation": 3,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "BoscoDelRomitorio_EventScript_ExitEast"
+    }
+  ],
   "bg_events": [
     {
       "type": "sign",
