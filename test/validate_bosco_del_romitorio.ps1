@@ -15,6 +15,8 @@ function Assert-True([bool]$condition, [string]$message) {
 Assert-True ($map.id -eq 'MAP_BOSCO_DEL_ROMITORIO') 'map id'
 Assert-True (@($map.warp_events | Where-Object { $_.x -eq 31 -and $_.y -eq 62 -and $_.dest_map -eq 'MAP_LAGO_DI_ALBERA' -and $_.dest_warp_id -eq 12 }).Count -eq 1) 'west warp'
 Assert-True (@($map.warp_events | Where-Object { $_.x -eq 32 -and $_.y -eq 62 -and $_.dest_map -eq 'MAP_LAGO_DI_ALBERA' -and $_.dest_warp_id -eq 13 }).Count -eq 1) 'east warp'
+Assert-True (@($map.warp_events | Where-Object { $_.x -eq 31 -and $_.y -eq 62 -and $_.elevation -eq 0 }).Count -eq 1) 'west warp elevation'
+Assert-True (@($map.warp_events | Where-Object { $_.x -eq 32 -and $_.y -eq 62 -and $_.elevation -eq 0 }).Count -eq 1) 'east warp elevation'
 
 $encounters = @(
     @{ id = 'LOCALID_BOSCO_DEL_ROMITORIO_CINGERM'; gfx = 'OBJ_EVENT_GFX_CINGERM'; x = 14; y = 24; script = 'BoscoDelRomitorio_EventScript_Cingerm'; flag = 'FLAG_HIDE_BOSCO_DEL_ROMITORIO_CINGERM' },
