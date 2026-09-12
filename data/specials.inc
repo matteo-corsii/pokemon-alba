@@ -26,6 +26,7 @@ gSpecials::
 	def_special SetPlayerSecretBase
 	def_special CheckPlayerHasSecretBase
 	def_special Special_GetPlayerSecretBaseId
+	def_special Special_GetFirstEchoActiveMonResult
 	def_special EnterSecretBase
 	def_special ClearAndLeaveSecretBase
 	def_special MoveOutOfSecretBase
@@ -641,3 +642,4 @@ gSpecials::
 	def_special StickerManGetBragFlags
 	def_special CheckAddCoins
 	def_special ToggleSecretBaseEntranceMetatile
+	def_special TryMigrateOriginalStarterIdentity

@@ -37129,6 +37129,144 @@
               }
             ]
           }
+        },
+        {
+          "map": "MAP_BOSCO_DEL_ROMITORIO",
+          "base_label": "gBoscoDelRomitorio_Morning",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              { "min_level": 18, "max_level": 20, "species": "SPECIES_MICIOLO" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_PALUDIX" },
+              { "min_level": 18, "max_level": 20, "species": "SPECIES_MICIOLO" },
+              { "min_level": 20, "max_level": 22, "species": "SPECIES_MOLOSPSY" },
+              { "min_level": 20, "max_level": 22, "species": "SPECIES_MOLOSPSY" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_LUMELLA" },
+              { "min_level": 18, "max_level": 20, "species": "SPECIES_MICIOLO" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_PALUDIX" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_LUMELLA" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_LUMELLA" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_LUMELLA" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_LUMELLA" }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_CARPULUS" },
+              { "min_level": 20, "max_level": 22, "species": "SPECIES_LUCINUS" },
+              { "min_level": 21, "max_level": 23, "species": "SPECIES_TRITINO" },
+              { "min_level": 21, "max_level": 23, "species": "SPECIES_TRITINO" },
+              { "min_level": 21, "max_level": 23, "species": "SPECIES_TRITINO" }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              { "min_level": 15, "max_level": 18, "species": "SPECIES_CARPULUS" },
+              { "min_level": 17, "max_level": 19, "species": "SPECIES_LUCINUS" },
+              { "min_level": 18, "max_level": 20, "species": "SPECIES_CARPULUS" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_LUCINUS" },
+              { "min_level": 20, "max_level": 22, "species": "SPECIES_TRITINO" },
+              { "min_level": 21, "max_level": 23, "species": "SPECIES_LUCINUS" },
+              { "min_level": 22, "max_level": 24, "species": "SPECIES_TRITINO" },
+              { "min_level": 22, "max_level": 24, "species": "SPECIES_TRITINO" },
+              { "min_level": 20, "max_level": 22, "species": "SPECIES_CARPULUS" },
+              { "min_level": 20, "max_level": 22, "species": "SPECIES_CARPULUS" }
+            ]
+          }
+        },
+        {
+          "map": "MAP_BOSCO_DEL_ROMITORIO",
+          "base_label": "gBoscoDelRomitorio_Day",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              { "min_level": 18, "max_level": 20, "species": "SPECIES_MICIOLO" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_PALUDIX" },
+              { "min_level": 18, "max_level": 20, "species": "SPECIES_MICIOLO" },
+              { "min_level": 20, "max_level": 22, "species": "SPECIES_MOLOSPSY" },
+              { "min_level": 20, "max_level": 22, "species": "SPECIES_MOLOSPSY" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_LUMELLA" },
+              { "min_level": 18, "max_level": 20, "species": "SPECIES_MICIOLO" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_PALUDIX" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_LUMELLA" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_LUMELLA" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_LUMELLA" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_LUMELLA" }
+            ]
+          }
+        },
+        {
+          "map": "MAP_BOSCO_DEL_ROMITORIO",
+          "base_label": "gBoscoDelRomitorio_Evening",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              { "min_level": 18, "max_level": 20, "species": "SPECIES_MICIOLO" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_PALUDIX" },
+              { "min_level": 18, "max_level": 20, "species": "SPECIES_MICIOLO" },
+              { "min_level": 20, "max_level": 22, "species": "SPECIES_MOLOSPSY" },
+              { "min_level": 20, "max_level": 22, "species": "SPECIES_MOLOSPSY" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_LUMELLA" },
+              { "min_level": 18, "max_level": 20, "species": "SPECIES_MICIOLO" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_PALUDIX" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_LUMELLA" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_LUMELLA" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_LUMELLA" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_LUMELLA" }
+            ]
+          }
+        },
+        {
+          "map": "MAP_BOSCO_DEL_ROMITORIO",
+          "base_label": "gBoscoDelRomitorio_Night",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              { "min_level": 20, "max_level": 22, "species": "SPECIES_LENGHELIS" },
+              { "min_level": 20, "max_level": 22, "species": "SPECIES_MOLOSPSY" },
+              { "min_level": 20, "max_level": 22, "species": "SPECIES_LENGHELIS" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_PALUDIX" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_PALUDIX" },
+              { "min_level": 18, "max_level": 20, "species": "SPECIES_MICIOLO" },
+              { "min_level": 18, "max_level": 20, "species": "SPECIES_MICIOLO" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_LUMELLA" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_LUMELLA" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_LUMELLA" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_LUMELLA" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_LUMELLA" }
+            ]
+          }
+        },
+        {
+          "map": "MAP_EMISSARIO",
+          "base_label": "gEmissario",
+          "water_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              { "min_level": 21, "max_level": 24, "species": "SPECIES_CISTERNIDE" },
+              { "min_level": 20, "max_level": 22, "species": "SPECIES_CARPULUS" },
+              { "min_level": 20, "max_level": 22, "species": "SPECIES_LUCINUS" },
+              { "min_level": 21, "max_level": 23, "species": "SPECIES_LUCINUS" },
+              { "min_level": 22, "max_level": 24, "species": "SPECIES_LUCINUS" }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              { "min_level": 18, "max_level": 20, "species": "SPECIES_CARPULUS" },
+              { "min_level": 18, "max_level": 20, "species": "SPECIES_LUCINUS" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_CARPULUS" },
+              { "min_level": 19, "max_level": 22, "species": "SPECIES_LUCINUS" },
+              { "min_level": 20, "max_level": 22, "species": "SPECIES_NAUFRAGUS" },
+              { "min_level": 20, "max_level": 23, "species": "SPECIES_CARPULUS" },
+              { "min_level": 21, "max_level": 23, "species": "SPECIES_LUCINUS" },
+              { "min_level": 21, "max_level": 24, "species": "SPECIES_NAUFRAGUS" },
+              { "min_level": 22, "max_level": 24, "species": "SPECIES_CISTERNIDE" },
+              { "min_level": 23, "max_level": 25, "species": "SPECIES_CISTERNIDE" }
+            ]
+          }
         }
       ]
     },

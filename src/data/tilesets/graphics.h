@@ -42,6 +42,28 @@ const u16 gTilesetPalettes_PortaPretoria[][16] =
     INCGFX_U16("data/tilesets/secondary/porta_pretoria/palettes/15.pal", ".gbapal"),
 };
 
+const u32 gTilesetTiles_ViaConsolare[] = INCGFX_U32("data/tilesets/secondary/via_consolare/tiles.png", ".4bpp.fastSmol", "-num_tiles 409 -Wnum_tiles");
+
+const u16 gTilesetPalettes_ViaConsolare[][16] =
+{
+    INCGFX_U16("data/tilesets/secondary/porta_pretoria/palettes/00.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/porta_pretoria/palettes/01.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/porta_pretoria/palettes/02.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/porta_pretoria/palettes/03.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/porta_pretoria/palettes/04.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/porta_pretoria/palettes/05.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/porta_pretoria/palettes/06.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/porta_pretoria/palettes/07.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/porta_pretoria/palettes/08.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/porta_pretoria/palettes/09.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/porta_pretoria/palettes/10.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/lago_di_albera/palettes/11.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/lago_di_albera/palettes/12.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/porta_pretoria/palettes/13.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/porta_pretoria/palettes/14.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/porta_pretoria/palettes/15.pal", ".gbapal"),
+};
+
 const u32 gTilesetTiles_LagoDiAlbera[] = INCGFX_U32("data/tilesets/secondary/lago_di_albera/tiles.png", ".4bpp.fastSmol", "-num_tiles 512 -Wnum_tiles");
 
 const u16 gTilesetPalettes_LagoDiAlbera[][16] =

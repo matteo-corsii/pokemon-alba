@@ -9374,7 +9374,7 @@
       "width": 60,
       "height": 30,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_PortaPretoria",
+      "secondary_tileset": "gTileset_ViaConsolare",
       "border_filepath": "data/layouts/ViaConsolare/border.bin",
       "blockdata_filepath": "data/layouts/ViaConsolare/map.bin",
       "layout_version": "emerald"
@@ -9443,6 +9443,149 @@
       "secondary_tileset": "gTileset_GenericBuilding",
       "border_filepath": "data/layouts/LagoDiAlbera_RefugeShop/border.bin",
       "blockdata_filepath": "data/layouts/LagoDiAlbera_RefugeShop/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LAGO_DI_ALBERA_WATER_GYM_1F",
+      "name": "LagoDiAlbera_WaterGym_1F_Layout",
+      "width": 20,
+      "height": 40,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_LagoDiAlbera",
+      "border_filepath": "data/layouts/LagoDiAlbera_WaterGym_1F/border.bin",
+      "blockdata_filepath": "data/layouts/LagoDiAlbera_WaterGym_1F/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LAGO_DI_ALBERA_WATER_GYM_2F",
+      "name": "LagoDiAlbera_WaterGym_2F_Layout",
+      "width": 20,
+      "height": 40,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_LagoDiAlbera",
+      "border_filepath": "data/layouts/LagoDiAlbera_WaterGym_2F/border.bin",
+      "blockdata_filepath": "data/layouts/LagoDiAlbera_WaterGym_2F/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LAGO_DI_ALBERA_WATER_GYM_3F",
+      "name": "LagoDiAlbera_WaterGym_3F_Layout",
+      "width": 20,
+      "height": 40,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_LagoDiAlbera",
+      "border_filepath": "data/layouts/LagoDiAlbera_WaterGym_3F/border.bin",
+      "blockdata_filepath": "data/layouts/LagoDiAlbera_WaterGym_3F/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LAGO_DI_ALBERA_WATER_GYM_4F",
+      "name": "LagoDiAlbera_WaterGym_4F_Layout",
+      "width": 20,
+      "height": 40,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_LagoDiAlbera",
+      "border_filepath": "data/layouts/LagoDiAlbera_WaterGym_4F/border.bin",
+      "blockdata_filepath": "data/layouts/LagoDiAlbera_WaterGym_4F/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LAGO_DI_ALBERA_POKEMON_CENTER_WEST",
+      "name": "LagoDiAlbera_PokemonCenterWest_Layout",
+      "width": 14,
+      "height": 9,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_PokemonCenter",
+      "border_filepath": "data/layouts/LagoDiAlbera_PokemonCenterWest/border.bin",
+      "blockdata_filepath": "data/layouts/LagoDiAlbera_PokemonCenterWest/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LAGO_DI_ALBERA_POKEMON_CENTER_EAST",
+      "name": "LagoDiAlbera_PokemonCenterEast_Layout",
+      "width": 14,
+      "height": 9,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_PokemonCenter",
+      "border_filepath": "data/layouts/LagoDiAlbera_PokemonCenterEast/border.bin",
+      "blockdata_filepath": "data/layouts/LagoDiAlbera_PokemonCenterEast/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LAGO_DI_ALBERA_MART",
+      "name": "LagoDiAlbera_Mart_Layout",
+      "width": 11,
+      "height": 8,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_Shop",
+      "border_filepath": "data/layouts/LagoDiAlbera_Mart/border.bin",
+      "blockdata_filepath": "data/layouts/LagoDiAlbera_Mart/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LAGO_DI_ALBERA_STILT_HOUSE_1",
+      "name": "LagoDiAlbera_StiltHouse1_Layout",
+      "width": 10,
+      "height": 9,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/LagoDiAlbera_StiltHouse1/border.bin",
+      "blockdata_filepath": "data/layouts/LagoDiAlbera_StiltHouse1/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LAGO_DI_ALBERA_STILT_HOUSE_2",
+      "name": "LagoDiAlbera_StiltHouse2_Layout",
+      "width": 10,
+      "height": 9,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/LagoDiAlbera_StiltHouse2/border.bin",
+      "blockdata_filepath": "data/layouts/LagoDiAlbera_StiltHouse2/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LAGO_DI_ALBERA_EAST_HOUSE_1",
+      "name": "LagoDiAlbera_EastHouse1_Layout",
+      "width": 10,
+      "height": 9,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/LagoDiAlbera_EastHouse1/border.bin",
+      "blockdata_filepath": "data/layouts/LagoDiAlbera_EastHouse1/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LAGO_DI_ALBERA_EAST_HOUSE_2",
+      "name": "LagoDiAlbera_EastHouse2_Layout",
+      "width": 10,
+      "height": 9,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/LagoDiAlbera_EastHouse2/border.bin",
+      "blockdata_filepath": "data/layouts/LagoDiAlbera_EastHouse2/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_BOSCO_DEL_ROMITORIO",
+      "name": "BoscoDelRomitorio_Layout",
+      "width": 64,
+      "height": 64,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_LagoDiAlbera",
+      "border_filepath": "data/layouts/BoscoDelRomitorio/border.bin",
+      "blockdata_filepath": "data/layouts/BoscoDelRomitorio/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_EMISSARIO",
+      "name": "Emissario_Layout",
+      "width": 32,
+      "height": 30,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cisternoni",
+      "border_filepath": "data/layouts/Emissario/border.bin",
+      "blockdata_filepath": "data/layouts/Emissario/map.bin",
       "layout_version": "emerald"
     }
   ]
