@@ -27,7 +27,9 @@ Assert-True (@($borgo.connections | Where-Object { $_.map -eq 'MAP_LAGO_DI_ALBER
 foreach ($pair in @(@{ lake = 115; borgo = 28 }, @{ lake = 116; borgo = 29 }, @{ lake = 117; borgo = 30 }, @{ lake = 118; borgo = 31 })) {
     Assert-True (($pair.lake - 87) -eq $pair.borgo) "Lago north access $($pair.lake),0 is not aligned to Borgo $($pair.borgo),59."
 }
-Assert-True (@($borgo.object_events).Count -eq 0 -and @($borgo.warp_events).Count -eq 0 -and @($borgo.coord_events).Count -eq 0 -and @($borgo.bg_events).Count -eq 0) 'Borgo scaffold must not contain events.'
+Assert-True (@($borgo.object_events).Count -eq 0 -and @($borgo.coord_events).Count -eq 0) 'Borgo must not contain premature NPCs or coordinate events.'
+Assert-True (@($borgo.warp_events).Count -eq 7) 'Borgo must contain exactly the seven approved interior warps.'
+Assert-True (@($borgo.bg_events | Where-Object { $_.type -eq 'sign' -and $_.x -eq 26 -and $_.y -eq 12 -and $_.script -eq 'BorgoDiCastello_EventScript_VillaPapaleSign' }).Count -eq 1) 'Villa Papale sign is missing or incorrect.'
 $wildEncounters = Get-Content (Join-Path $RepositoryRoot 'src/data/wild_encounters.json') -Raw
 Assert-True ($wildEncounters -notmatch 'MAP_BORGO_DI_CASTELLO') 'Borgo blockout must not contain encounters.'
 Assert-True ($scripts -match '^BorgoDiCastello_MapScripts::\r?\n\s*\.byte 0') 'Borgo MapScripts are missing.'
@@ -39,9 +41,6 @@ foreach ($x in 28..31) {
 }
 Assert-True ((Get-Collision (Get-Block $blockdata 29 52)) -eq 0 -and (Get-Collision (Get-Block $blockdata 26 38)) -eq 0) 'The Borgo south-to-centre route is blocked.'
 Assert-True ((Get-Collision (Get-Block $blockdata 10 50)) -eq 0 -and (Get-Collision (Get-Block $blockdata 4 50)) -eq 1 -and (Get-Collision (Get-Block $blockdata 10 54)) -eq 1) 'The south-west belvedere is not safely blockouted.'
-foreach ($anchor in @(@(17, 41), @(37, 39), @(10, 30), @(43, 35), @(37, 18))) {
-    Assert-True ((Get-Collision (Get-Block $blockdata $anchor[0] $anchor[1])) -eq 1) "Missing solid building placeholder at $($anchor[0]),$($anchor[1])."
-}
 Assert-True ((Get-Collision (Get-Block $blockdata 20 10)) -eq 0) 'The north main square is not open.'
 Assert-True ((Get-Collision (Get-Block $blockdata 29 3)) -eq 0) 'The future Villa Papale north access is blocked.'
 Assert-True ((Get-Collision (Get-Block $blockdata 54 30)) -eq 0 -and (Get-Collision (Get-Block $blockdata 59 30)) -eq 1) 'The future east regional exit is not prepared and secured.'

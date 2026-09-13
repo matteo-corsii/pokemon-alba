@@ -9598,6 +9598,83 @@
       "border_filepath": "data/layouts/BorgoDiCastello/border.bin",
       "blockdata_filepath": "data/layouts/BorgoDiCastello/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_BORGO_DI_CASTELLO_POKEMON_CENTER",
+      "name": "BorgoDiCastello_PokemonCenter_Layout",
+      "width": 14,
+      "height": 9,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_PokemonCenter",
+      "border_filepath": "data/layouts/BorgoDiCastello_PokemonCenter/border.bin",
+      "blockdata_filepath": "data/layouts/BorgoDiCastello_PokemonCenter/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_BORGO_DI_CASTELLO_MART",
+      "name": "BorgoDiCastello_Mart_Layout",
+      "width": 11,
+      "height": 8,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_Shop",
+      "border_filepath": "data/layouts/BorgoDiCastello_Mart/border.bin",
+      "blockdata_filepath": "data/layouts/BorgoDiCastello_Mart/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_BORGO_DI_CASTELLO_HOUSE1",
+      "name": "BorgoDiCastello_House1_Layout",
+      "width": 10,
+      "height": 9,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/BorgoDiCastello_House1/border.bin",
+      "blockdata_filepath": "data/layouts/BorgoDiCastello_House1/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_BORGO_DI_CASTELLO_HOUSE2",
+      "name": "BorgoDiCastello_House2_Layout",
+      "width": 10,
+      "height": 9,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/BorgoDiCastello_House2/border.bin",
+      "blockdata_filepath": "data/layouts/BorgoDiCastello_House2/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_BORGO_DI_CASTELLO_HOUSE3",
+      "name": "BorgoDiCastello_House3_Layout",
+      "width": 10,
+      "height": 9,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/BorgoDiCastello_House3/border.bin",
+      "blockdata_filepath": "data/layouts/BorgoDiCastello_House3/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_BORGO_DI_CASTELLO_HOUSE4",
+      "name": "BorgoDiCastello_House4_Layout",
+      "width": 10,
+      "height": 9,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/BorgoDiCastello_House4/border.bin",
+      "blockdata_filepath": "data/layouts/BorgoDiCastello_House4/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_BORGO_DI_CASTELLO_RISTORANTE_BELVEDERE",
+      "name": "BorgoDiCastello_RistoranteBelvedere_Layout",
+      "width": 15,
+      "height": 10,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_SeashoreHouse",
+      "border_filepath": "data/layouts/BorgoDiCastello_RistoranteBelvedere/border.bin",
+      "blockdata_filepath": "data/layouts/BorgoDiCastello_RistoranteBelvedere/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

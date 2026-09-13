@@ -175,7 +175,14 @@
     "LagoDiAlbera_StiltHouse1",
     "LagoDiAlbera_StiltHouse2",
     "LagoDiAlbera_EastHouse1",
-    "LagoDiAlbera_EastHouse2"
+    "LagoDiAlbera_EastHouse2",
+    "BorgoDiCastello_PokemonCenter",
+    "BorgoDiCastello_Mart",
+    "BorgoDiCastello_House1",
+    "BorgoDiCastello_House2",
+    "BorgoDiCastello_House3",
+    "BorgoDiCastello_House4",
+    "BorgoDiCastello_RistoranteBelvedere"
   ],
   "gMapGroup_IndoorDewford": [
     "DewfordTown_House1",
