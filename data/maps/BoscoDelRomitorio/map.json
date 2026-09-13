@@ -200,14 +200,14 @@
   "warp_events": [
     {
       "x": 31,
-      "y": 62,
+      "y": 63,
       "elevation": 0,
       "dest_map": "MAP_LAGO_DI_ALBERA",
       "dest_warp_id": "12"
     },
     {
       "x": 32,
-      "y": 62,
+      "y": 63,
       "elevation": 0,
       "dest_map": "MAP_LAGO_DI_ALBERA",
       "dest_warp_id": "13"
@@ -217,7 +217,7 @@
     {
       "type": "trigger",
       "x": 31,
-      "y": 62,
+      "y": 63,
       "elevation": 3,
       "var": "VAR_TEMP_1",
       "var_value": "0",
@@ -226,7 +226,7 @@
     {
       "type": "trigger",
       "x": 32,
-      "y": 62,
+      "y": 63,
       "elevation": 3,
       "var": "VAR_TEMP_1",
       "var_value": "0",
