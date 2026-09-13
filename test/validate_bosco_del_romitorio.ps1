@@ -20,8 +20,8 @@ Assert-True (@($map.warp_events | Where-Object { $_.x -eq 32 -and $_.y -eq 62 -a
 Assert-True (@($map.coord_events | Where-Object { $_.x -eq 31 -and $_.y -eq 62 -and $_.script -eq 'BoscoDelRomitorio_EventScript_ExitWest' }).Count -eq 1) 'west exit coord event'
 Assert-True (@($map.coord_events | Where-Object { $_.x -eq 32 -and $_.y -eq 62 -and $_.script -eq 'BoscoDelRomitorio_EventScript_ExitEast' }).Count -eq 1) 'east exit coord event'
 $scripts = Get-Content -Raw $scriptsPath
-Assert-True ($scripts -match 'BoscoDelRomitorio_EventScript_ExitWest::\r?\n\s*warp MAP_LAGO_DI_ALBERA, 4, 2\r?\n\s*end') 'west exit script'
-Assert-True ($scripts -match 'BoscoDelRomitorio_EventScript_ExitEast::\r?\n\s*warp MAP_LAGO_DI_ALBERA, 5, 2\r?\n\s*end') 'east exit script'
+Assert-True ($scripts -match 'BoscoDelRomitorio_EventScript_ExitWest::\r?\n\s*warp MAP_LAGO_DI_ALBERA, 4, 2\r?\n\s*waitstate') 'west exit script'
+Assert-True ($scripts -match 'BoscoDelRomitorio_EventScript_ExitEast::\r?\n\s*warp MAP_LAGO_DI_ALBERA, 5, 2\r?\n\s*waitstate') 'east exit script'
 
 $encounters = @(
     @{ id = 'LOCALID_BOSCO_DEL_ROMITORIO_CINGERM'; gfx = 'OBJ_EVENT_GFX_CINGERM'; x = 14; y = 24; script = 'BoscoDelRomitorio_EventScript_Cingerm'; flag = 'FLAG_HIDE_BOSCO_DEL_ROMITORIO_CINGERM' },

@@ -102,11 +102,11 @@ BoscoDelRomitorio_EventScript_RetreatSign::
 
 BoscoDelRomitorio_EventScript_ExitWest::
 	warp MAP_LAGO_DI_ALBERA, 4, 2
-	end
+	waitstate
 
 BoscoDelRomitorio_EventScript_ExitEast::
 	warp MAP_LAGO_DI_ALBERA, 5, 2
-	end
+	waitstate
 
 BoscoDelRomitorio_EventScript_Hermit::
 	lock
