@@ -9675,6 +9675,17 @@
       "border_filepath": "data/layouts/BorgoDiCastello_RistoranteBelvedere/border.bin",
       "blockdata_filepath": "data/layouts/BorgoDiCastello_RistoranteBelvedere/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_VILLA_PAPALE_GIARDINI",
+      "name": "VillaPapaleGiardini_Layout",
+      "width": 60,
+      "height": 60,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Sootopolis",
+      "border_filepath": "data/layouts/VillaPapaleGiardini/border.bin",
+      "blockdata_filepath": "data/layouts/VillaPapaleGiardini/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }
