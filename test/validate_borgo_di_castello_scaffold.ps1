@@ -27,7 +27,8 @@ Assert-True (@($borgo.connections | Where-Object { $_.map -eq 'MAP_LAGO_DI_ALBER
 foreach ($pair in @(@{ lake = 115; borgo = 28 }, @{ lake = 116; borgo = 29 }, @{ lake = 117; borgo = 30 }, @{ lake = 118; borgo = 31 })) {
     Assert-True (($pair.lake - 87) -eq $pair.borgo) "Lago north access $($pair.lake),0 is not aligned to Borgo $($pair.borgo),59."
 }
-Assert-True (@($borgo.object_events).Count -eq 0 -and @($borgo.coord_events).Count -eq 0) 'Borgo must not contain premature NPCs or coordinate events.'
+Assert-True (@($borgo.object_events).Count -eq 8 -and @($borgo.coord_events).Count -eq 0) 'Borgo must contain exactly eight ambient NPCs and no coordinate events.'
+Assert-True (@($borgo.object_events | Where-Object { $_.trainer_type -ne 'TRAINER_TYPE_NONE' -or $_.flag -ne '0' }).Count -eq 0) 'Borgo ambient NPCs must not be trainers or use persistence flags.'
 Assert-True (@($borgo.warp_events).Count -eq 7) 'Borgo must contain exactly the seven approved interior warps.'
 Assert-True (@($borgo.bg_events | Where-Object { $_.type -eq 'sign' -and $_.x -eq 26 -and $_.y -eq 12 -and $_.script -eq 'BorgoDiCastello_EventScript_VillaPapaleSign' }).Count -eq 1) 'Villa Papale sign is missing or incorrect.'
 $wildEncounters = Get-Content (Join-Path $RepositoryRoot 'src/data/wild_encounters.json') -Raw

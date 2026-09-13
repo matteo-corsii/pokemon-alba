@@ -9,3 +9,11 @@ BorgoDiCastello_PokemonCenter_EventScript_Nurse::
 	waitbuttonpress
 	release
 	end
+
+BorgoDiCastello_PokemonCenter_EventScript_Viaggiatore::
+	msgbox BorgoDiCastello_PokemonCenter_Text_Viaggiatore, MSGBOX_NPC
+	end
+
+BorgoDiCastello_PokemonCenter_Text_Viaggiatore:
+	.string "Camminare su e giu per questi\n"
+	.string "vicoli stanca piu del previsto!$"

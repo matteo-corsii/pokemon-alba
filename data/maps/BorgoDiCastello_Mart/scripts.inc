@@ -19,3 +19,11 @@ BorgoDiCastello_Mart_Pokemart:
 	.2byte ITEM_PARALYZE_HEAL
 	.2byte ITEM_AWAKENING
 	pokemartlistend
+
+BorgoDiCastello_Mart_EventScript_Cliente::
+	msgbox BorgoDiCastello_Mart_Text_Cliente, MSGBOX_NPC
+	end
+
+BorgoDiCastello_Mart_Text_Cliente:
+	.string "Quando viaggio verso Laricia\n"
+	.string "faccio sempre scorta qui.$"
