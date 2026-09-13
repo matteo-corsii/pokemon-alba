@@ -9587,6 +9587,17 @@
       "border_filepath": "data/layouts/Emissario/border.bin",
       "blockdata_filepath": "data/layouts/Emissario/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_BORGO_DI_CASTELLO",
+      "name": "BorgoDiCastello_Layout",
+      "width": 60,
+      "height": 60,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Sootopolis",
+      "border_filepath": "data/layouts/BorgoDiCastello/border.bin",
+      "blockdata_filepath": "data/layouts/BorgoDiCastello/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

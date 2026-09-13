@@ -158,6 +158,7 @@ gStdScripts_End::
 	.include "data/maps/ViaConsolare/scripts.inc"
 	.include "data/maps/ViaConsolare_Mansio/scripts.inc"
 	.include "data/maps/LagoDiAlbera/scripts.inc"
+	.include "data/maps/BorgoDiCastello/scripts.inc"
 	.include "data/maps/LagoDiAlbera_RefugeMastersHouse_1F/scripts.inc"
 	.include "data/maps/LagoDiAlbera_RefugeMastersHouse_2F/scripts.inc"
 	.include "data/maps/LagoDiAlbera_BikeShop/scripts.inc"

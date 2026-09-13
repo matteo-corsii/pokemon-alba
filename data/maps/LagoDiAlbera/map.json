@@ -17,6 +17,11 @@
       "map": "MAP_VIA_CONSOLARE",
       "offset": 31,
       "direction": "down"
+    },
+    {
+      "map": "MAP_BORGO_DI_CASTELLO",
+      "offset": 87,
+      "direction": "up"
     }
   ],
   "object_events": [

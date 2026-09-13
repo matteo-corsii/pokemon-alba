@@ -26,7 +26,7 @@ $expectedNpcCounts = @{
     LagoDiAlbera_EastHouse2 = 2
 }
 
-A (@($outer.warp_events).Count -eq 12) 'Lago must retain five existing warps and add exactly seven interior warps.'
+A (@($outer.warp_events).Count -eq 14) 'Lago must retain the two Bosco warps, five existing warps, and seven interior warps.'
 foreach ($s in $specs) {
     $map = J "data/maps/$($s.Name)/map.json"
     $layout = @($layouts | Where-Object id -eq $s.Layout)
