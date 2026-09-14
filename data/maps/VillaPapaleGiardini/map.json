@@ -23,8 +23,8 @@
     {
       "local_id": "LOCALID_VILLA_PAPALE_GIARDINI_CUSTODE",
       "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
-      "x": 24,
-      "y": 10,
+      "x": 20,
+      "y": 15,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
@@ -37,8 +37,8 @@
     {
       "local_id": "LOCALID_VILLA_PAPALE_GIARDINI_GIARDINIERE",
       "graphics_id": "OBJ_EVENT_GFX_MAN_3",
-      "x": 14,
-      "y": 20,
+      "x": 11,
+      "y": 17,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -51,7 +51,7 @@
     {
       "local_id": "LOCALID_VILLA_PAPALE_GIARDINI_MANUTENTORE",
       "graphics_id": "OBJ_EVENT_GFX_MAN_3",
-      "x": 43,
+      "x": 41,
       "y": 33,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
@@ -65,8 +65,8 @@
     {
       "local_id": "LOCALID_VILLA_PAPALE_GIARDINI_STUDIOSA",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_1",
-      "x": 34,
-      "y": 15,
+      "x": 36,
+      "y": 14,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -93,7 +93,7 @@
     {
       "local_id": "LOCALID_VILLA_PAPALE_GIARDINI_TRAINER_MANUTENTORE",
       "graphics_id": "OBJ_EVENT_GFX_CAMPER",
-      "x": 48,
+      "x": 47,
       "y": 34,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",

@@ -27,12 +27,12 @@ $generalAttributes = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/ti
 $sootopolisAttributes = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/tilesets/secondary/sootopolis/metatile_attributes.bin'))
 
 $gardenExpected = @(
-    @{ id = 'LOCALID_VILLA_PAPALE_GIARDINI_CUSTODE'; gfx = 'OBJ_EVENT_GFX_GENTLEMAN'; x = 24; y = 10; trainer = $false; script = 'VillaPapaleGiardini_EventScript_Custode' },
-    @{ id = 'LOCALID_VILLA_PAPALE_GIARDINI_GIARDINIERE'; gfx = 'OBJ_EVENT_GFX_MAN_3'; x = 14; y = 20; trainer = $false; script = 'VillaPapaleGiardini_EventScript_Giardiniere' },
-    @{ id = 'LOCALID_VILLA_PAPALE_GIARDINI_MANUTENTORE'; gfx = 'OBJ_EVENT_GFX_MAN_3'; x = 43; y = 33; trainer = $false; script = 'VillaPapaleGiardini_EventScript_Manutentore' },
-    @{ id = 'LOCALID_VILLA_PAPALE_GIARDINI_STUDIOSA'; gfx = 'OBJ_EVENT_GFX_WOMAN_1'; x = 34; y = 15; trainer = $false; script = 'VillaPapaleGiardini_EventScript_Studiosa' },
+    @{ id = 'LOCALID_VILLA_PAPALE_GIARDINI_CUSTODE'; gfx = 'OBJ_EVENT_GFX_GENTLEMAN'; x = 20; y = 15; trainer = $false; script = 'VillaPapaleGiardini_EventScript_Custode' },
+    @{ id = 'LOCALID_VILLA_PAPALE_GIARDINI_GIARDINIERE'; gfx = 'OBJ_EVENT_GFX_MAN_3'; x = 11; y = 17; trainer = $false; script = 'VillaPapaleGiardini_EventScript_Giardiniere' },
+    @{ id = 'LOCALID_VILLA_PAPALE_GIARDINI_MANUTENTORE'; gfx = 'OBJ_EVENT_GFX_MAN_3'; x = 41; y = 33; trainer = $false; script = 'VillaPapaleGiardini_EventScript_Manutentore' },
+    @{ id = 'LOCALID_VILLA_PAPALE_GIARDINI_STUDIOSA'; gfx = 'OBJ_EVENT_GFX_WOMAN_1'; x = 36; y = 14; trainer = $false; script = 'VillaPapaleGiardini_EventScript_Studiosa' },
     @{ id = 'LOCALID_VILLA_PAPALE_GIARDINI_TRAINER_GIARDINIERE'; gfx = 'OBJ_EVENT_GFX_WOMAN_1'; x = 13; y = 33; trainer = $true; script = 'VillaPapaleGiardini_EventScript_TrainerGiardiniere' },
-    @{ id = 'LOCALID_VILLA_PAPALE_GIARDINI_TRAINER_MANUTENTORE'; gfx = 'OBJ_EVENT_GFX_CAMPER'; x = 48; y = 34; trainer = $true; script = 'VillaPapaleGiardini_EventScript_TrainerManutentore' },
+    @{ id = 'LOCALID_VILLA_PAPALE_GIARDINI_TRAINER_MANUTENTORE'; gfx = 'OBJ_EVENT_GFX_CAMPER'; x = 47; y = 34; trainer = $true; script = 'VillaPapaleGiardini_EventScript_TrainerManutentore' },
     @{ id = 'LOCALID_VILLA_PAPALE_GIARDINI_TRAINER_APPRENDISTA'; gfx = 'OBJ_EVENT_GFX_BUG_CATCHER'; x = 42; y = 50; trainer = $true; script = 'VillaPapaleGiardini_EventScript_TrainerApprendista' }
 )
 
@@ -49,9 +49,9 @@ foreach ($expected in $gardenExpected) {
 }
 
 $interiorExpected = @(
-    @{ id = 'LOCALID_VILLA_PAPALE_INTERNO_FUNZIONARIO'; gfx = 'OBJ_EVENT_GFX_GENTLEMAN'; x = 10; y = 22; script = 'VillaPapaleInterno_EventScript_Funzionario' },
-    @{ id = 'LOCALID_VILLA_PAPALE_INTERNO_STUDIOSO'; gfx = 'OBJ_EVENT_GFX_SCIENTIST'; x = 5; y = 15; script = 'VillaPapaleInterno_EventScript_Studioso' },
-    @{ id = 'LOCALID_VILLA_PAPALE_INTERNO_ASSISTENTE'; gfx = 'OBJ_EVENT_GFX_WOMAN_1'; x = 25; y = 4; script = 'VillaPapaleInterno_EventScript_Assistente' }
+    @{ id = 'LOCALID_VILLA_PAPALE_INTERNO_FUNZIONARIO'; gfx = 'OBJ_EVENT_GFX_GENTLEMAN'; x = 15; y = 18; script = 'VillaPapaleInterno_EventScript_Funzionario' },
+    @{ id = 'LOCALID_VILLA_PAPALE_INTERNO_STUDIOSO'; gfx = 'OBJ_EVENT_GFX_SCIENTIST'; x = 5; y = 16; script = 'VillaPapaleInterno_EventScript_Studioso' },
+    @{ id = 'LOCALID_VILLA_PAPALE_INTERNO_ASSISTENTE'; gfx = 'OBJ_EVENT_GFX_WOMAN_1'; x = 20; y = 5; script = 'VillaPapaleInterno_EventScript_Assistente' }
 )
 Assert-True (@($interior.object_events).Count -eq 3) 'Villa interior must contain exactly three ambient NPCs.'
 foreach ($expected in $interiorExpected) {
