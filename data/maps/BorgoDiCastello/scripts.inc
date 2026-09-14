@@ -1,5 +1,49 @@
 BorgoDiCastello_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, BorgoDiCastello_OnTransition
 	.byte 0
+
+BorgoDiCastello_OnTransition::
+	goto_if_set FLAG_BORGO_NICO_LIA_INTRO_DONE, BorgoDiCastello_OnTransition_HideIntroParty
+	goto_if_unset FLAG_EMISSARIO_AUREA_ENCOUNTER_COMPLETE, BorgoDiCastello_OnTransition_HideIntroParty
+	clearflag FLAG_HIDE_BORGO_DI_CASTELLO_NICO_LIA
+	setvar VAR_TEMP_0, 0
+	end
+
+BorgoDiCastello_OnTransition_HideIntroParty::
+	setflag FLAG_HIDE_BORGO_DI_CASTELLO_NICO_LIA
+	setvar VAR_TEMP_0, 1
+	end
+
+BorgoDiCastello_EventScript_StartNicoLiaIntro::
+	lockall
+	goto_if_set FLAG_BORGO_NICO_LIA_INTRO_DONE, BorgoDiCastello_EventScript_EndNicoLiaIntro
+	goto_if_unset FLAG_EMISSARIO_AUREA_ENCOUNTER_COMPLETE, BorgoDiCastello_EventScript_EndNicoLiaIntro
+	msgbox BorgoDiCastello_Text_NicoLiaIntroNicoGreeting, MSGBOX_DEFAULT
+	msgbox BorgoDiCastello_Text_NicoLiaIntroLiaMaps, MSGBOX_DEFAULT
+	msgbox BorgoDiCastello_Text_NicoLiaIntroNicoFalde, MSGBOX_DEFAULT
+	msgbox BorgoDiCastello_Text_NicoLiaIntroLiaEmissario, MSGBOX_DEFAULT
+	msgbox BorgoDiCastello_Text_NicoLiaIntroNicoDocuments, MSGBOX_DEFAULT
+	msgbox BorgoDiCastello_Text_NicoLiaIntroNicoVilla, MSGBOX_DEFAULT
+	setflag FLAG_BORGO_NICO_LIA_INTRO_DONE
+	setvar VAR_TEMP_0, 1
+	applymovement LOCALID_BORGO_DI_CASTELLO_LIA_INTRO, BorgoDiCastello_Movement_LiaLeavesNorth
+	waitmovement 0
+	applymovement LOCALID_BORGO_DI_CASTELLO_NICO_INTRO, BorgoDiCastello_Movement_NicoLeavesNorth
+	waitmovement 0
+	setflag FLAG_HIDE_BORGO_DI_CASTELLO_NICO_LIA
+	removeobject LOCALID_BORGO_DI_CASTELLO_LIA_INTRO
+	removeobject LOCALID_BORGO_DI_CASTELLO_NICO_INTRO
+BorgoDiCastello_EventScript_EndNicoLiaIntro::
+	releaseall
+	end
+
+BorgoDiCastello_Movement_LiaLeavesNorth:
+	walk_up
+	step_end
+
+BorgoDiCastello_Movement_NicoLeavesNorth:
+	walk_up
+	step_end
 
 BorgoDiCastello_EventScript_VillaPapaleSign::
 	msgbox BorgoDiCastello_Text_VillaPapaleSign, MSGBOX_SIGN
@@ -85,3 +129,30 @@ BorgoDiCastello_Text_AbitanteFontana:
 	.string "d'incontro di tutto il borgo.\p"
 	.string "Prima o poi qui passa sempre\n"
 	.string "qualcuno che conosci.$"
+
+BorgoDiCastello_Text_NicoLiaIntroNicoGreeting:
+	.string "NICO: Eccoti.\n"
+	.string "Abbiamo chiesto in giro.$"
+
+BorgoDiCastello_Text_NicoLiaIntroLiaMaps:
+	.string "LIA: Alla Villa conservano\n"
+	.string "vecchie mappe.\p"
+	.string "E documenti sul\n"
+	.string "territorio.$"
+
+BorgoDiCastello_Text_NicoLiaIntroNicoFalde:
+	.string "NICO: Per capire le falde,\n"
+	.string "partiamo da quei documenti.$"
+
+BorgoDiCastello_Text_NicoLiaIntroLiaEmissario:
+	.string "LIA: Magari ci aiuteranno\n"
+	.string "con l'Emissario...$"
+
+BorgoDiCastello_Text_NicoLiaIntroNicoDocuments:
+	.string "NICO: Una cosa alla volta.\p"
+	.string "Prima leggiamo\n"
+	.string "quei documenti.$"
+
+BorgoDiCastello_Text_NicoLiaIntroNicoVilla:
+	.string "NICO: Ci troviamo\n"
+	.string "alla Villa.$"

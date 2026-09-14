@@ -5,7 +5,7 @@ function Read-Json([string]$path) { Get-Content (Join-Path $RepositoryRoot $path
 function Assert-True([bool]$condition, [string]$message) { if (-not $condition) { throw $message } }
 
 $borgo = Read-Json 'data/maps/BorgoDiCastello/map.json'
-$external = @($borgo.object_events)
+$external = @($borgo.object_events | Where-Object { $_.flag -eq '0' })
 $expected = @(
     @('LOCALID_BORGO_DI_CASTELLO_ANZIANO_BELVEDERE', 'OBJ_EVENT_GFX_EXPERT_M', 10, 50, 'MOVEMENT_TYPE_FACE_RIGHT'),
     @('LOCALID_BORGO_DI_CASTELLO_TURISTA_BELVEDERE', 'OBJ_EVENT_GFX_MAN_3', 16, 52, 'MOVEMENT_TYPE_FACE_LEFT'),
@@ -43,7 +43,10 @@ foreach ($name in $interiorCounts.Keys) {
 }
 
 $scriptPaths = @('data/maps/BorgoDiCastello/scripts.inc') + @($interiorCounts.Keys | ForEach-Object { "data/maps/$_/scripts.inc" })
-$scriptText = ($scriptPaths | ForEach-Object { Get-Content (Join-Path $RepositoryRoot $_) -Raw }) -join "`n"
+$borgoAmbientScripts = Get-Content (Join-Path $RepositoryRoot 'data/maps/BorgoDiCastello/scripts.inc') -Raw
+$borgoAmbientScripts = $borgoAmbientScripts -replace '(?s)BorgoDiCastello_EventScript_StartNicoLiaIntro::.*?BorgoDiCastello_EventScript_VillaPapaleSign::', 'BorgoDiCastello_EventScript_VillaPapaleSign::'
+$borgoAmbientScripts = $borgoAmbientScripts -replace '(?s)BorgoDiCastello_Text_NicoLiaIntroNicoGreeting:.*\z', ''
+$scriptText = ($borgoAmbientScripts, @($interiorCounts.Keys | ForEach-Object { Get-Content (Join-Path $RepositoryRoot "data/maps/$_/scripts.inc") -Raw })) -join "`n"
 foreach ($forbidden in @('Nico', 'Lia', 'Aurea', 'Eco', 'Riflesso', 'falde')) {
     Assert-True ($scriptText -cnotmatch $forbidden) "Forbidden narrative reference: $forbidden."
 }
