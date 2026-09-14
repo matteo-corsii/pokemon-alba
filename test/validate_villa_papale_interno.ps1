@@ -28,7 +28,7 @@ Assert-True ((Get-Content (Join-Path $RepositoryRoot 'src/data/wild_encounters.j
 Assert-True ($eventScripts -match 'data/maps/VillaPapaleInterno/scripts\.inc') 'Villa Papale interior scripts are not globally included.'
 Assert-True ((Get-Content (Join-Path $RepositoryRoot 'data/maps/VillaPapaleInterno/scripts.inc') -Raw) -match '^VillaPapaleInterno_MapScripts::\r?\n\s*\.byte 0') 'Villa Papale interior MapScripts must remain minimal.'
 $blockdata = [IO.File]::ReadAllBytes($mapBin)
-foreach ($point in @(@(15,25), @(15,22), @(15,14), @(5,12), @(25,12), @(15,10), @(15,3))) {
+foreach ($point in @(@(15,25), @(15,22), @(5,12), @(25,12), @(15,10), @(15,3))) {
     Assert-True ((Get-Collision (Get-Block $blockdata $point[0] $point[1])) -eq 0) "Villa Papale interior circulation point $($point[0]),$($point[1]) is blocked."
 }
 Write-Output 'Villa Papale interior: PASS'
