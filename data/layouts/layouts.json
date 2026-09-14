@@ -9686,6 +9686,17 @@
       "border_filepath": "data/layouts/VillaPapaleGiardini/border.bin",
       "blockdata_filepath": "data/layouts/VillaPapaleGiardini/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_VILLA_PAPALE_INTERNO",
+      "name": "VillaPapaleInterno_Layout",
+      "width": 32,
+      "height": 26,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_LilycoveMuseum",
+      "border_filepath": "data/layouts/VillaPapaleInterno/border.bin",
+      "blockdata_filepath": "data/layouts/VillaPapaleInterno/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

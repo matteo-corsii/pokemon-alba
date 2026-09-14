@@ -25,7 +25,8 @@ Assert-True ((Test-Path $borderBin) -and ((Get-Item $borderBin).Length -eq 8)) '
 Assert-True (@($groups.gMapGroup_TownsAndRoutes | Where-Object { $_ -eq 'VillaPapaleGiardini' }).Count -eq 1) 'Villa Papale map group registration is incorrect.'
 Assert-True (@($borgo.connections | Where-Object { $_.map -eq 'MAP_VILLA_PAPALE_GIARDINI' -and $_.direction -eq 'up' -and [int]$_.offset -eq 0 }).Count -eq 1) 'Borgo to Villa connection is incorrect.'
 Assert-True (@($villa.connections | Where-Object { $_.map -eq 'MAP_BORGO_DI_CASTELLO' -and $_.direction -eq 'down' -and [int]$_.offset -eq 0 }).Count -eq 1) 'Villa to Borgo connection is incorrect.'
-Assert-True (@($villa.object_events).Count -eq 0 -and @($villa.warp_events).Count -eq 0 -and @($villa.coord_events).Count -eq 0 -and @($villa.bg_events).Count -eq 0) 'Villa scaffold must not have events yet.'
+Assert-True (@($villa.object_events).Count -eq 0 -and @($villa.coord_events).Count -eq 0 -and @($villa.bg_events).Count -eq 0) 'Villa gardens must not have NPCs or scripted events yet.'
+Assert-True (@($villa.warp_events | Where-Object { [int]$_.x -eq 29 -and [int]$_.y -eq 9 -and [int]$_.elevation -eq 0 -and $_.dest_map -eq 'MAP_VILLA_PAPALE_INTERNO' -and [int]$_.dest_warp_id -eq 0 }).Count -eq 1 -and @($villa.warp_events).Count -eq 1) 'Villa gardens must contain only the canonical interior entrance warp.'
 Assert-True ($eventScripts -match 'data/maps/VillaPapaleGiardini/scripts\.inc') 'Villa Papale scripts are not globally included.'
 Assert-True ((Get-Content (Join-Path $RepositoryRoot 'data/maps/VillaPapaleGiardini/scripts.inc') -Raw) -match '^VillaPapaleGiardini_MapScripts::\r?\n\s*\.byte 0') 'Villa Papale MapScripts are not minimal.'
 Assert-True ((Get-Content (Join-Path $RepositoryRoot 'src/data/wild_encounters.json') -Raw) -notmatch 'MAP_VILLA_PAPALE_GIARDINI') 'Villa scaffold must not have encounters.'
@@ -63,5 +64,5 @@ $doorId = Get-MetatileId $doorBlock
 $doorAttrsId = if ($doorId -lt 0x200) { $doorId } else { $doorId - 0x200 }
 $doorBehavior = Get-Behavior $(if ($doorId -lt 0x200) { $generalAttributes } else { $sootopolisAttributes }) $doorAttrsId
 Assert-True ($doorBehavior -eq 0x69) 'Villa entrance must retain the verified south-arrow warp behavior.'
-Assert-True (@(Get-ChildItem (Join-Path $RepositoryRoot 'data/maps') -Directory | Where-Object { $_.Name -like 'VillaPapale*' }).Count -eq 1) 'Villa scaffold must not add an interior map.'
+Assert-True (@(Get-ChildItem (Join-Path $RepositoryRoot 'data/maps') -Directory | Where-Object { $_.Name -like 'VillaPapale*' -and $_.Name -notin @('VillaPapaleGiardini', 'VillaPapaleInterno') }).Count -eq 0) 'Villa map directories must contain only the gardens and the canonical interior.'
 Write-Output 'Villa Papale Giardini scaffold: PASS'

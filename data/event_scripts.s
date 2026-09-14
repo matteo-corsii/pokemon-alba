@@ -160,6 +160,7 @@ gStdScripts_End::
 	.include "data/maps/LagoDiAlbera/scripts.inc"
 	.include "data/maps/BorgoDiCastello/scripts.inc"
 	.include "data/maps/VillaPapaleGiardini/scripts.inc"
+	.include "data/maps/VillaPapaleInterno/scripts.inc"
 	.include "data/maps/BorgoDiCastello_PokemonCenter/scripts.inc"
 	.include "data/maps/BorgoDiCastello_Mart/scripts.inc"
 	.include "data/maps/BorgoDiCastello_House1/scripts.inc"
