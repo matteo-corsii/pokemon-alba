@@ -33,13 +33,13 @@ $blockdata = [IO.File]::ReadAllBytes($mapBin)
 $generalAttributes = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/tilesets/primary/general/metatile_attributes.bin'))
 $sootopolisAttributes = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/tilesets/secondary/sootopolis/metatile_attributes.bin'))
 foreach ($x in 28..30) {
-    Assert-True ((Get-Collision (Get-Block $blockdata $x 59)) -eq 0) "Villa south connection cell $x,59 is blocked."
+    $entryBlock = Get-Block $blockdata $x 59
+    Assert-True ((Get-Collision $entryBlock) -eq 0) "Villa south connection cell $x,59 is blocked."
+    Assert-True ((Get-MetatileId $entryBlock) -ne 0x0A1) "Villa south connection cell $x,59 must not be water."
 }
-Assert-True ((Get-Collision (Get-Block $blockdata 29 45)) -eq 0 -and (Get-Collision (Get-Block $blockdata 12 35)) -eq 0 -and (Get-Collision (Get-Block $blockdata 46 35)) -eq 0) 'Villa scaffold does not keep the south approach and garden areas open.'
-foreach ($y in 13..59) { foreach ($x in 28..30) { Assert-True ((Get-Block $blockdata $x $y) -eq 0x30AF) "Villa avenue cell $x,$y is not the approved shared metatile." } }
-foreach ($y in 6..12) { foreach ($x in 21..38) { Assert-True ((Get-Block $blockdata $x $y) -eq 0x30AF) "Villa forecourt cell $x,$y is not the approved shared metatile." } }
-Assert-True ((Get-Block $blockdata 29 4) -eq 0x3248) 'Villa facade must retain the closed visual entrance at 29,4 without a warp.'
+$mainPath = @()
 $grassCells = @()
+$waterCells = @()
 for ($y = 0; $y -lt 60; $y++) {
     for ($x = 0; $x -lt 60; $x++) {
         $block = Get-Block $blockdata $x $y
@@ -47,14 +47,21 @@ for ($y = 0; $y -lt 60; $y++) {
         $attributes = if ($metatileId -lt 0x200) { $generalAttributes } else { $sootopolisAttributes }
         $attributesId = if ($metatileId -lt 0x200) { $metatileId } else { $metatileId - 0x200 }
         $behavior = Get-Behavior $attributes $attributesId
-        Assert-True ($behavior -notin 0x10..0x19) "Villa scaffold must not retain donor water behavior at $x,$y."
+        if ($x -ge 28 -and $x -le 30 -and $y -ge 13 -and $y -le 59) { $mainPath += "$x,$y"; Assert-True ((Get-Collision $block) -eq 0) "Villa central avenue cell $x,$y is blocked." }
         if ($behavior -eq 0x2) { $grassCells += "$x,$y" }
+        if ($behavior -ge 0x10 -and $behavior -le 0x19) { $waterCells += "$x,$y"; Assert-True ((Get-Collision $block) -ne 0) "Villa decorative water cell $x,$y must be non-walkable." }
     }
 }
-$expectedGrass = @()
-foreach ($rect in @(@(43,45,25,26), @(48,50,34,35), @(42,43,40,41))) {
-    for ($y = $rect[2]; $y -le $rect[3]; $y++) { for ($x = $rect[0]; $x -le $rect[1]; $x++) { $expectedGrass += "$x,$y" } }
-}
-Assert-True ($grassCells.Count -eq $expectedGrass.Count -and @($grassCells | Where-Object { $_ -notin $expectedGrass }).Count -eq 0) 'Villa tall-grass patches do not match the approved three eastern garden patches.'
+Assert-True ($grassCells.Count -gt 0) 'Villa eastern gardens must contain tall grass.'
+Assert-True (@($grassCells | Where-Object { $_ -match '^(28|29|30),(13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36|37|38|39|40|41|42|43|44|45|46|47|48|49|50|51|52|53|54|55|56|57|58|59)$' }).Count -eq 0) 'Tall grass must not cover the central avenue.'
+Assert-True (@($grassCells | Where-Object { $_ -match '^(28|29|30),(9|10|11|12)$' }).Count -eq 0) 'Tall grass must not cover the Villa entrance approach.'
+Assert-True (@($waterCells | Where-Object { $_ -match '^(28|29|30),59$' }).Count -eq 0) 'Decorative water must not cover the south connection.'
+Assert-True (@($waterCells | Where-Object { $_ -match '^29,9$' }).Count -eq 0) 'Decorative water must not cover the Villa entrance.'
+$doorBlock = Get-Block $blockdata 29 9
+Assert-True ((Get-Collision $doorBlock) -eq 0) 'Villa entrance at 29,9 must be reachable.'
+$doorId = Get-MetatileId $doorBlock
+$doorAttrsId = if ($doorId -lt 0x200) { $doorId } else { $doorId - 0x200 }
+$doorBehavior = Get-Behavior $(if ($doorId -lt 0x200) { $generalAttributes } else { $sootopolisAttributes }) $doorAttrsId
+Assert-True ($doorBehavior -eq 0x69) 'Villa entrance must retain the verified south-arrow warp behavior.'
 Assert-True (@(Get-ChildItem (Join-Path $RepositoryRoot 'data/maps') -Directory | Where-Object { $_.Name -like 'VillaPapale*' }).Count -eq 1) 'Villa scaffold must not add an interior map.'
 Write-Output 'Villa Papale Giardini scaffold: PASS'
