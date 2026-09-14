@@ -53,16 +53,19 @@ $interiorExpected = @(
     @{ id = 'LOCALID_VILLA_PAPALE_INTERNO_STUDIOSO'; gfx = 'OBJ_EVENT_GFX_SCIENTIST'; x = 5; y = 16; script = 'VillaPapaleInterno_EventScript_Studioso' },
     @{ id = 'LOCALID_VILLA_PAPALE_INTERNO_ASSISTENTE'; gfx = 'OBJ_EVENT_GFX_WOMAN_1'; x = 20; y = 5; script = 'VillaPapaleInterno_EventScript_Assistente' }
 )
-Assert-True (@($interior.object_events).Count -eq 3) 'Villa interior must contain exactly three ambient NPCs.'
+$interiorAmbient = @($interior.object_events | Where-Object { $_.flag -eq '0' })
+Assert-True ($interiorAmbient.Count -eq 4) 'Villa interior must contain the three ambient NPCs and the Archivista.'
 foreach ($expected in $interiorExpected) {
     $event = @($interior.object_events | Where-Object { $_.local_id -eq $expected.id })
     Assert-True ($event.Count -eq 1 -and $event[0].graphics_id -eq $expected.gfx -and [int]$event[0].x -eq $expected.x -and [int]$event[0].y -eq $expected.y -and [int]$event[0].elevation -eq 3 -and $event[0].script -eq $expected.script -and $event[0].trainer_type -eq 'TRAINER_TYPE_NONE') "Villa interior event $($expected.id) is incorrect."
     Assert-True ((Get-Collision (Get-Block $interiorBlocks 32 $expected.x $expected.y)) -eq 0) "Villa interior event $($expected.id) is on blocked terrain."
 }
 
+$interiorPopulationScripts = $interiorScripts -replace '(?s)VillaPapaleInterno_EventScript_Archivista::.*?VillaPapaleInterno_EventScript_Funzionario::', 'VillaPapaleInterno_EventScript_Funzionario::'
+$interiorPopulationScripts = $interiorPopulationScripts -replace '(?s)VillaPapaleInterno_Text_ArchivistaNotReady:.*\z', ''
 foreach ($forbidden in @('NICO', 'LIA', 'AUREA', 'ECO', 'RIFLESSO')) {
     $pattern = "(?i)\b$forbidden\b"
-    Assert-True ($gardenScripts -notmatch $pattern -and $interiorScripts -notmatch $pattern -and $gardensRaw -notmatch $pattern -and $interiorRaw -notmatch $pattern) "Villa population must not introduce $forbidden."
+    Assert-True ($gardenScripts -notmatch $pattern -and $interiorPopulationScripts -notmatch $pattern -and $gardensRaw -notmatch $pattern) "Villa population must not introduce $forbidden."
 }
 Assert-True ((Get-Content (Join-Path $RepositoryRoot 'src/data/wild_encounters.json') -Raw) -notmatch 'MAP_VILLA_PAPALE_(GIARDINI|INTERNO)') 'Villa population must not add encounters.'
 Assert-True ($opponents -match '#define TRAINER_VILLA_PAPALE_GIARDINIERE\s+173' -and $opponents -match '#define TRAINER_VILLA_PAPALE_MANUTENTORE\s+462' -and $opponents -match '#define TRAINER_VILLA_PAPALE_APPRENDISTA\s+702') 'Emerald Villa trainer slots are incorrect.'

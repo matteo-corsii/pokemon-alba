@@ -26,7 +26,7 @@ Assert-True (@($interior.warp_events | Where-Object { [int]$_.x -eq 15 -and [int
 Assert-True (@($interior.coord_events).Count -eq 0 -and @($interior.bg_events).Count -eq 0) 'Villa Papale interior must not contain coord or background events.'
 Assert-True ((Get-Content (Join-Path $RepositoryRoot 'src/data/wild_encounters.json') -Raw) -notmatch 'MAP_VILLA_PAPALE_INTERNO') 'Villa Papale interior must not have encounters.'
 Assert-True ($eventScripts -match 'data/maps/VillaPapaleInterno/scripts\.inc') 'Villa Papale interior scripts are not globally included.'
-Assert-True ((Get-Content (Join-Path $RepositoryRoot 'data/maps/VillaPapaleInterno/scripts.inc') -Raw) -match '^VillaPapaleInterno_MapScripts::\r?\n\s*\.byte 0') 'Villa Papale interior MapScripts must remain minimal.'
+Assert-True ((Get-Content (Join-Path $RepositoryRoot 'data/maps/VillaPapaleInterno/scripts.inc') -Raw) -match 'map_script MAP_SCRIPT_ON_TRANSITION, VillaPapaleInterno_OnTransition') 'Villa Papale interior archive visibility MapScript is missing.'
 $blockdata = [IO.File]::ReadAllBytes($mapBin)
 foreach ($point in @(@(15,25), @(15,22), @(5,12), @(25,12), @(15,10), @(15,3))) {
     Assert-True ((Get-Collision (Get-Block $blockdata $point[0] $point[1])) -eq 0) "Villa Papale interior circulation point $($point[0]),$($point[1]) is blocked."
