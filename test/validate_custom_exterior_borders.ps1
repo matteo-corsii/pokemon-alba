@@ -23,7 +23,8 @@ $targets = @(
     @{ Directory = 'BoscoDelRomitorio'; MapFile = 'data/maps/BoscoDelRomitorio/map.json'; MapId = 'MAP_BOSCO_DEL_ROMITORIO'; Layout = 'LAYOUT_BOSCO_DEL_ROMITORIO'; Secondary = 'gTileset_LagoDiAlbera' },
     @{ Directory = 'ViaConsolare'; MapFile = 'data/maps/ViaConsolare/map.json'; MapId = 'MAP_VIA_CONSOLARE'; Layout = 'LAYOUT_VIA_CONSOLARE'; Secondary = 'gTileset_ViaConsolare' },
     @{ Directory = 'BorgoDiCastello'; MapFile = 'data/maps/BorgoDiCastello/map.json'; MapId = 'MAP_BORGO_DI_CASTELLO'; Layout = 'LAYOUT_BORGO_DI_CASTELLO'; Secondary = 'gTileset_Sootopolis' },
-    @{ Directory = 'Route103'; MapFile = 'data/maps/Route103/map.json'; MapId = 'MAP_ROUTE103'; Layout = 'LAYOUT_ROUTE103'; Secondary = 'gTileset_PortaPretoria' }
+    @{ Directory = 'Route103'; MapFile = 'data/maps/Route103/map.json'; MapId = 'MAP_ROUTE103'; Layout = 'LAYOUT_ROUTE103'; Secondary = 'gTileset_PortaPretoria' },
+    @{ Directory = 'VillaPapaleGiardini'; MapFile = 'data/maps/VillaPapaleGiardini/map.json'; MapId = 'MAP_VILLA_PAPALE_GIARDINI'; Layout = 'LAYOUT_VILLA_PAPALE_GIARDINI'; Secondary = 'gTileset_Sootopolis' }
 )
 
 foreach ($target in $targets) {
@@ -45,6 +46,7 @@ $bosco = Read-Json 'data/maps/BoscoDelRomitorio/map.json'
 $via = Read-Json 'data/maps/ViaConsolare/map.json'
 $borgo = Read-Json 'data/maps/BorgoDiCastello/map.json'
 $route103 = Read-Json 'data/maps/Route103/map.json'
+$villa = Read-Json 'data/maps/VillaPapaleGiardini/map.json'
 Assert-Connection $lago 'down' 'MAP_VIA_CONSOLARE' 31
 Assert-Connection $lago 'up' 'MAP_BORGO_DI_CASTELLO' 87
 Assert-True ($null -eq $bosco.connections -or @($bosco.connections | Where-Object { $null -ne $_ }).Count -eq 0) 'Bosco del Romitorio must not gain map connections.'
@@ -54,6 +56,7 @@ Assert-Connection $borgo 'down' 'MAP_LAGO_DI_ALBERA' -87
 Assert-Connection $borgo 'up' 'MAP_VILLA_PAPALE_GIARDINI' 0
 Assert-Connection $route103 'down' 'MAP_OLDALE_TOWN' 0
 Assert-Connection $route103 'left' 'MAP_VIA_CONSOLARE' 0
+Assert-Connection $villa 'down' 'MAP_BORGO_DI_CASTELLO' 0
 
 $protectedMapBins = @($targets | ForEach-Object { "data/layouts/$($_.Directory)/map.bin" })
 $changedMapBins = @(git -C $RepositoryRoot diff --name-only -- $protectedMapBins)
