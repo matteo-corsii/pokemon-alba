@@ -9697,6 +9697,17 @@
       "border_filepath": "data/layouts/VillaPapaleInterno/border.bin",
       "blockdata_filepath": "data/layouts/VillaPapaleInterno/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_STRADA_BORGO_CISTERNONI",
+      "name": "StradaBorgoCisternoni_Layout",
+      "width": 36,
+      "height": 44,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_PortaPretoria",
+      "border_filepath": "data/layouts/StradaBorgoCisternoni/border.bin",
+      "blockdata_filepath": "data/layouts/StradaBorgoCisternoni/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

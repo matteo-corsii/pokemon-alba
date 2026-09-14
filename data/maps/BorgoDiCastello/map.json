@@ -22,6 +22,11 @@
       "map": "MAP_VILLA_PAPALE_GIARDINI",
       "offset": 0,
       "direction": "up"
+    },
+    {
+      "map": "MAP_STRADA_BORGO_CISTERNONI",
+      "offset": 50,
+      "direction": "right"
     }
   ],
   "object_events": [
