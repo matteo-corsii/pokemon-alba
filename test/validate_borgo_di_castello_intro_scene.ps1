@@ -19,8 +19,8 @@ Assert-True ($flagsFrlg -match '(?m)^#define FLAG_HIDE_BORGO_DI_CASTELLO_NICO_LI
 Assert-True ($flagsFrlg -match '(?m)^#define FLAG_BORGO_NICO_LIA_INTRO_DONE\s+0x910$') 'FRLG completion flag is incorrect.'
 
 $expectedObjects = @(
-    @{ id = 'LOCALID_BORGO_DI_CASTELLO_LIA_INTRO'; gfx = 'OBJ_EVENT_GFX_MAY_NORMAL'; x = 25; y = 55; facing = 'MOVEMENT_TYPE_FACE_RIGHT' },
-    @{ id = 'LOCALID_BORGO_DI_CASTELLO_NICO_INTRO'; gfx = 'OBJ_EVENT_GFX_BRENDAN_NORMAL'; x = 34; y = 55; facing = 'MOVEMENT_TYPE_FACE_LEFT' }
+    @{ id = 'LOCALID_BORGO_DI_CASTELLO_LIA_INTRO'; gfx = 'OBJ_EVENT_GFX_MAY_NORMAL'; x = 28; y = 55; facing = 'MOVEMENT_TYPE_FACE_RIGHT' },
+    @{ id = 'LOCALID_BORGO_DI_CASTELLO_NICO_INTRO'; gfx = 'OBJ_EVENT_GFX_BRENDAN_NORMAL'; x = 31; y = 55; facing = 'MOVEMENT_TYPE_FACE_LEFT' }
 )
 foreach ($expected in $expectedObjects) {
     $event = @($map.object_events | Where-Object { $_.local_id -eq $expected.id })

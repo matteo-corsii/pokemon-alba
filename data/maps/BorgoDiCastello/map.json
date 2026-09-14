@@ -140,7 +140,7 @@
     {
       "local_id": "LOCALID_BORGO_DI_CASTELLO_LIA_INTRO",
       "graphics_id": "OBJ_EVENT_GFX_MAY_NORMAL",
-      "x": 25,
+      "x": 28,
       "y": 55,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
@@ -154,7 +154,7 @@
     {
       "local_id": "LOCALID_BORGO_DI_CASTELLO_NICO_INTRO",
       "graphics_id": "OBJ_EVENT_GFX_BRENDAN_NORMAL",
-      "x": 34,
+      "x": 31,
       "y": 55,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
