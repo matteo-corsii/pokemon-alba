@@ -100,13 +100,11 @@ foreach ($x in 16..19) {
 # Reserve the approved future house footprint without adding events or warps.
 Assert-True ((Get-Collision (Read-Block $stradaBlocks 36 8 29)) -eq 0) 'Future house doorway 8,29 must remain walkable.'
 
-Assert-True (@($strada.object_events).Count -eq 2 -and @($strada.coord_events).Count -eq 9 -and @($strada.bg_events).Count -eq 0) 'Strada may contain only the approved Nico/Lia scene events.'
+Assert-True (@($strada.object_events).Count -eq 6 -and @($strada.coord_events).Count -eq 9 -and @($strada.bg_events).Count -eq 2) 'Strada population event counts are incorrect.'
 $houseWarp = @($strada.warp_events | Where-Object { [int]$_.x -eq 8 -and [int]$_.y -eq 29 -and [int]$_.elevation -eq 0 -and $_.dest_map -eq 'MAP_STRADA_BORGO_CISTERNONI_CASA' -and [int]$_.dest_warp_id -eq 0 })
 Assert-True ($houseWarp.Count -eq 1 -and @($strada.warp_events).Count -eq 1) 'Strada may contain only the approved Itemfinder-house warp.'
 $stradaScripts = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'data/maps/StradaBorgoCisternoni/scripts.inc') -Raw
 Assert-True ($stradaScripts.Contains('map_script MAP_SCRIPT_ON_TRANSITION, StradaBorgoCisternoni_OnTransition')) 'Strada must retain the approved Nico/Lia transition gate.'
-$wild = Read-Json 'src/data/wild_encounters.json'
-Assert-True (@($wild.wild_encounter_groups | ForEach-Object { $_.encounters } | Where-Object { $_.map -eq 'MAP_STRADA_BORGO_CISTERNONI' }).Count -eq 0) 'Strada must not have encounters.'
 git -C $RepositoryRoot diff --quiet -- data/layouts/BorgoDiCastello/map.bin
 Assert-True ($LASTEXITCODE -eq 0) 'Borgo map.bin must remain unchanged.'
 

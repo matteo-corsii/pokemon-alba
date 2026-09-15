@@ -27,7 +27,7 @@ $expectedNpcs = @(
     @{ id = 'LOCALID_STRADA_BORGO_CISTERNONI_NICO'; gfx = 'OBJ_EVENT_GFX_BRENDAN_NORMAL'; x = 23; y = 21 },
     @{ id = 'LOCALID_STRADA_BORGO_CISTERNONI_LIA'; gfx = 'OBJ_EVENT_GFX_MAY_NORMAL'; x = 26; y = 21 }
 )
-Assert-True (@($strada.object_events).Count -eq 2) 'Strada must contain only Nico and Lia for this scene.'
+Assert-True (@($strada.object_events).Count -eq 6) 'Strada must retain Nico, Lia, and the three ambient NPCs plus the visible item.'
 foreach ($expected in $expectedNpcs) {
     $npc = @($strada.object_events | Where-Object { $_.local_id -eq $expected.id })
     Assert-True ($npc.Count -eq 1) "Missing scene NPC $($expected.id)."
@@ -43,7 +43,7 @@ foreach ($x in $triggerXs) {
     Assert-True ($trigger.Count -eq 1) "Missing or incorrect scene trigger $x,23."
 }
 Assert-True (@($strada.warp_events | Where-Object { [int]$_.x -eq 8 -and [int]$_.y -eq 29 }).Count -eq 1) 'The Itemfinder-house warp must remain unchanged.'
-Assert-True (@($strada.bg_events).Count -eq 0) 'Scene must not add signs or hidden items.'
+Assert-True (@($strada.bg_events).Count -eq 2) 'Route population must retain exactly its two hidden items.'
 
 $blocks = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/layouts/StradaBorgoCisternoni/map.bin'))
 $walkable = @{}
@@ -109,8 +109,6 @@ $lariciaIndex = $scripts.IndexOf('verso Laricia.')
 Assert-True ($cisternoniIndex -ge 0 -and $routeIndex -gt $cisternoniIndex -and $lariciaIndex -gt $routeIndex) 'Scene must direct the player to Cisternoni before Laricia.'
 foreach ($forbidden in @('Ponte di Laricia', 'Valle di Laricia', 'ECO', 'RIFLESSO', 'AUREA')) { Assert-True ($sceneOnly -notmatch "(?i)$forbidden") "Scene contains forbidden premature lore: $forbidden" }
 
-$wild = Read-Json 'src/data/wild_encounters.json'
-Assert-True (@($wild.wild_encounter_groups | ForEach-Object { $_.encounters } | Where-Object { $_.map -eq 'MAP_STRADA_BORGO_CISTERNONI' }).Count -eq 0) 'Scene must not add encounters.'
 git -C $RepositoryRoot diff --quiet -- data/layouts/StradaBorgoCisternoni/map.bin data/layouts/BorgoDiCastello/map.bin data/layouts/Route103/map.bin data/maps/StradaBorgoCisternoni_Casa
 Assert-True ($LASTEXITCODE -eq 0) 'Scene must not modify map.bin files or the Itemfinder house.'
 Write-Output 'Strada Borgo-Cisternoni Nico/Lia scene: PASS'

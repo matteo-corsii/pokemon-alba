@@ -46,6 +46,18 @@ StradaBorgoCisternoni_Movement_LiaLeavesSouth:
 	walk_down
 	step_end
 
+StradaBorgoCisternoni_EventScript_UphillResident::
+	msgbox StradaBorgoCisternoni_Text_UphillResident, MSGBOX_NPC
+	end
+
+StradaBorgoCisternoni_EventScript_WallMaintainer::
+	msgbox StradaBorgoCisternoni_Text_WallMaintainer, MSGBOX_NPC
+	end
+
+StradaBorgoCisternoni_EventScript_CisternoniWalker::
+	msgbox StradaBorgoCisternoni_Text_CisternoniWalker, MSGBOX_NPC
+	end
+
 StradaBorgoCisternoni_Text_NicoDirection:
 	.string "NICO: Le carte indicano\n"
 	.string "questa direzione.$"
@@ -73,3 +85,15 @@ StradaBorgoCisternoni_Text_NicoRoute:
 	.string "alla Via dei Cisternoni.\p"
 	.string "Da li proseguiamo\n"
 	.string "verso Laricia.$"
+
+StradaBorgoCisternoni_Text_UphillResident:
+	.string "Da qui la strada sale\n"
+	.string "fino a Borgo.$"
+
+StradaBorgoCisternoni_Text_WallMaintainer:
+	.string "Questi muretti sono vecchi,\n"
+	.string "ma reggono ancora bene.$"
+
+StradaBorgoCisternoni_Text_CisternoniWalker:
+	.string "Piu in basso trovi\n"
+	.string "la Via dei Cisternoni.$"
