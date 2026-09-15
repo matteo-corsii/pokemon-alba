@@ -58,21 +58,47 @@ foreach ($x in 16..19) {
 }
 foreach ($y in 14..17) { Assert-True ((Read-Block $routeBlocks 80 79 $y) -eq 0x310C) "Route103 future east opening 79,$y is not preserved." }
 
-$routeBase = Read-GitBlob 'HEAD:data/layouts/Route103/map.bin'
-$allowed = @{}
-foreach ($x in 16..19) { $allowed["$x,0"] = 0x310C }
-foreach ($y in 14..17) { $allowed["79,$y"] = 0x310C }
-$deltaCount = 0
-for ($cell = 0; $cell -lt ($routeBlocks.Length / 2); $cell++) {
-    $before = [BitConverter]::ToUInt16($routeBase, $cell * 2)
-    $after = [BitConverter]::ToUInt16($routeBlocks, $cell * 2)
-    if ($before -ne $after) {
-        $key = "{0},{1}" -f ($cell % 80), [int][Math]::Floor($cell / 80)
-        Assert-True ($allowed.ContainsKey($key) -and $after -eq $allowed[$key]) "Unexpected Route103 map.bin delta at $key."
-        $deltaCount++
+git -C $RepositoryRoot diff --quiet -- data/layouts/Route103/map.bin
+Assert-True ($LASTEXITCODE -eq 0) 'Route103 map.bin must remain unchanged.'
+
+# The refined route remains continuously walkable from the four-cell Borgo
+# connection to every cell of the four-cell Route 103 connection.
+$walkable = @{}
+for ($y = 0; $y -lt 44; $y++) {
+    for ($x = 0; $x -lt 36; $x++) {
+        $raw = Read-Block $stradaBlocks 36 $x $y
+        if ((Get-Collision $raw) -eq 0) { $walkable["$x,$y"] = $true }
     }
 }
-Assert-True ($deltaCount -eq $allowed.Count) 'Route103 map.bin must contain exactly the two approved openings.'
+$queue = New-Object 'System.Collections.Generic.Queue[string]'
+$seen = @{}
+foreach ($y in 0..3) {
+    $key = "0,$y"
+    Assert-True $walkable.ContainsKey($key) "Strada west entry $key is blocked."
+    $seen[$key] = $true
+    $queue.Enqueue($key)
+}
+while ($queue.Count -gt 0) {
+    $key = $queue.Dequeue()
+    $parts = $key.Split(',')
+    $x = [int]$parts[0]
+    $y = [int]$parts[1]
+    foreach ($delta in @(@(1,0), @(-1,0), @(0,1), @(0,-1))) {
+        $nextX = $x + $delta[0]
+        $nextY = $y + $delta[1]
+        $next = "$nextX,$nextY"
+        if ($walkable.ContainsKey($next) -and -not $seen.ContainsKey($next)) {
+            $seen[$next] = $true
+            $queue.Enqueue($next)
+        }
+    }
+}
+foreach ($x in 16..19) {
+    Assert-True $seen.ContainsKey("$x,43") "Strada south connection $x,43 is not reachable from Borgo."
+}
+
+# Reserve the approved future house footprint without adding events or warps.
+Assert-True ((Get-Collision (Read-Block $stradaBlocks 36 8 29)) -eq 0) 'Future house doorway 8,29 must remain walkable.'
 
 Assert-True (@($strada.object_events).Count -eq 0 -and @($strada.warp_events).Count -eq 0 -and @($strada.coord_events).Count -eq 0 -and @($strada.bg_events).Count -eq 0) 'Strada must remain free of NPCs, warps and scripted events.'
 Assert-True ((Get-Content -LiteralPath (Join-Path $RepositoryRoot 'data/maps/StradaBorgoCisternoni/scripts.inc') -Raw).Trim() -eq "StradaBorgoCisternoni_MapScripts::`n`t.byte 0") 'Strada scripts must remain minimal.'
