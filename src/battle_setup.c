@@ -1,4 +1,5 @@
 #include "global.h"
+#include "first_echo.h"
 #include "battle.h"
 #include "load_save.h"
 #include "battle_setup.h"
@@ -965,6 +966,7 @@ static void CB2_GiveStarter(void)
     *GetVarPointer(VAR_STARTER_MON) = gSpecialVar_Result;
     starterMon = GetStarterPokemon(gSpecialVar_Result);
     ScriptGiveMon(starterMon, 5, ITEM_NONE);
+    FirstEcho_RegisterStarterIdentity(starterMon);
     ResetTasks();
 
     // Pokémon Alba selects its starter safely inside Lauro's laboratory.

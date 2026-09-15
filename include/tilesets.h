@@ -14,6 +14,7 @@ extern const struct Tileset gTileset_GenericBuilding1;
 extern const struct Tileset gTileset_General;
 extern const struct Tileset gTileset_Petalburg;
 extern const struct Tileset gTileset_PortaPretoria;
+extern const struct Tileset gTileset_ViaConsolare;
 extern const struct Tileset gTileset_LagoDiAlbera;
 extern const struct Tileset gTileset_Rustboro;
 extern const struct Tileset gTileset_Fallarbor;
