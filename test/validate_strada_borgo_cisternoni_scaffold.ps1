@@ -100,7 +100,9 @@ foreach ($x in 16..19) {
 # Reserve the approved future house footprint without adding events or warps.
 Assert-True ((Get-Collision (Read-Block $stradaBlocks 36 8 29)) -eq 0) 'Future house doorway 8,29 must remain walkable.'
 
-Assert-True (@($strada.object_events).Count -eq 0 -and @($strada.warp_events).Count -eq 0 -and @($strada.coord_events).Count -eq 0 -and @($strada.bg_events).Count -eq 0) 'Strada must remain free of NPCs, warps and scripted events.'
+Assert-True (@($strada.object_events).Count -eq 0 -and @($strada.coord_events).Count -eq 0 -and @($strada.bg_events).Count -eq 0) 'Strada must remain free of NPCs and scripted events.'
+$houseWarp = @($strada.warp_events | Where-Object { [int]$_.x -eq 8 -and [int]$_.y -eq 29 -and [int]$_.elevation -eq 0 -and $_.dest_map -eq 'MAP_STRADA_BORGO_CISTERNONI_CASA' -and [int]$_.dest_warp_id -eq 0 })
+Assert-True ($houseWarp.Count -eq 1 -and @($strada.warp_events).Count -eq 1) 'Strada may contain only the approved Itemfinder-house warp.'
 Assert-True ((Get-Content -LiteralPath (Join-Path $RepositoryRoot 'data/maps/StradaBorgoCisternoni/scripts.inc') -Raw).Trim() -eq "StradaBorgoCisternoni_MapScripts::`n`t.byte 0") 'Strada scripts must remain minimal.'
 $wild = Read-Json 'src/data/wild_encounters.json'
 Assert-True (@($wild.wild_encounter_groups | ForEach-Object { $_.encounters } | Where-Object { $_.map -eq 'MAP_STRADA_BORGO_CISTERNONI' }).Count -eq 0) 'Strada must not have encounters.'
