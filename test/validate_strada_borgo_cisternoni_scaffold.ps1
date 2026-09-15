@@ -43,7 +43,7 @@ Assert-True (@($borgo.connections | Where-Object { $_.direction -eq 'right' -and
 Assert-True (@($strada.connections | Where-Object { $_.direction -eq 'left' -and $_.map -eq 'MAP_BORGO_DI_CASTELLO' -and [int]$_.offset -eq -50 }).Count -eq 1) 'Strada west connection is incorrect.'
 Assert-True (@($strada.connections | Where-Object { $_.direction -eq 'down' -and $_.map -eq 'MAP_ROUTE103' -and [int]$_.offset -eq 0 }).Count -eq 1) 'Strada south connection is incorrect.'
 Assert-True (@($route103.connections | Where-Object { $_.direction -eq 'up' -and $_.map -eq 'MAP_STRADA_BORGO_CISTERNONI' -and [int]$_.offset -eq 0 }).Count -eq 1) 'Route103 north connection is incorrect.'
-Assert-True (@($route103.connections | Where-Object { $_.direction -eq 'right' }).Count -eq 0) 'Route103 must not yet connect to Ponte di Laricia.'
+Assert-True (@($route103.connections | Where-Object { $_.direction -eq 'right' -and $_.map -eq 'MAP_PONTE_VALLE_LARICIA' -and [int]$_.offset -eq 0 }).Count -eq 1) 'Route103 east connection to Ponte/Valle Laricia is incorrect.'
 
 $stradaBlocks = [IO.File]::ReadAllBytes($mapBinPath)
 $borgoBlocks = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/layouts/BorgoDiCastello/map.bin'))

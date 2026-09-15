@@ -25,7 +25,8 @@ $targets = @(
     @{ Directory = 'BorgoDiCastello'; MapFile = 'data/maps/BorgoDiCastello/map.json'; MapId = 'MAP_BORGO_DI_CASTELLO'; Layout = 'LAYOUT_BORGO_DI_CASTELLO'; Secondary = 'gTileset_Sootopolis' },
     @{ Directory = 'Route103'; MapFile = 'data/maps/Route103/map.json'; MapId = 'MAP_ROUTE103'; Layout = 'LAYOUT_ROUTE103'; Secondary = 'gTileset_PortaPretoria' },
     @{ Directory = 'VillaPapaleGiardini'; MapFile = 'data/maps/VillaPapaleGiardini/map.json'; MapId = 'MAP_VILLA_PAPALE_GIARDINI'; Layout = 'LAYOUT_VILLA_PAPALE_GIARDINI'; Secondary = 'gTileset_Sootopolis' },
-    @{ Directory = 'StradaBorgoCisternoni'; MapFile = 'data/maps/StradaBorgoCisternoni/map.json'; MapId = 'MAP_STRADA_BORGO_CISTERNONI'; Layout = 'LAYOUT_STRADA_BORGO_CISTERNONI'; Secondary = 'gTileset_PortaPretoria' }
+    @{ Directory = 'StradaBorgoCisternoni'; MapFile = 'data/maps/StradaBorgoCisternoni/map.json'; MapId = 'MAP_STRADA_BORGO_CISTERNONI'; Layout = 'LAYOUT_STRADA_BORGO_CISTERNONI'; Secondary = 'gTileset_PortaPretoria' },
+    @{ Directory = 'PonteValleLaricia'; MapFile = 'data/maps/PonteValleLaricia/map.json'; MapId = 'MAP_PONTE_VALLE_LARICIA'; Layout = 'LAYOUT_PONTE_VALLE_LARICIA'; Secondary = 'gTileset_PortaPretoria' }
 )
 
 foreach ($target in $targets) {
@@ -49,6 +50,7 @@ $borgo = Read-Json 'data/maps/BorgoDiCastello/map.json'
 $route103 = Read-Json 'data/maps/Route103/map.json'
 $villa = Read-Json 'data/maps/VillaPapaleGiardini/map.json'
 $strada = Read-Json 'data/maps/StradaBorgoCisternoni/map.json'
+$ponteValle = Read-Json 'data/maps/PonteValleLaricia/map.json'
 Assert-Connection $lago 'down' 'MAP_VIA_CONSOLARE' 31
 Assert-Connection $lago 'up' 'MAP_BORGO_DI_CASTELLO' 87
 Assert-True ($null -eq $bosco.connections -or @($bosco.connections | Where-Object { $null -ne $_ }).Count -eq 0) 'Bosco del Romitorio must not gain map connections.'
@@ -60,10 +62,12 @@ Assert-Connection $borgo 'right' 'MAP_STRADA_BORGO_CISTERNONI' 50
 Assert-Connection $route103 'down' 'MAP_OLDALE_TOWN' 0
 Assert-Connection $route103 'left' 'MAP_VIA_CONSOLARE' 0
 Assert-Connection $route103 'up' 'MAP_STRADA_BORGO_CISTERNONI' 0
+Assert-Connection $route103 'right' 'MAP_PONTE_VALLE_LARICIA' 0
 Assert-Connection $villa 'down' 'MAP_BORGO_DI_CASTELLO' 0
 Assert-Connection $strada 'left' 'MAP_BORGO_DI_CASTELLO' -50
 Assert-Connection $strada 'down' 'MAP_ROUTE103' 0
-Assert-True (@($lago.connections).Count -eq 2 -and @($via.connections).Count -eq 2 -and @($borgo.connections).Count -eq 3 -and @($route103.connections).Count -eq 3 -and @($villa.connections).Count -eq 1 -and @($strada.connections).Count -eq 2) 'Custom exterior connection counts changed unexpectedly.'
+Assert-Connection $ponteValle 'left' 'MAP_ROUTE103' 0
+Assert-True (@($lago.connections).Count -eq 2 -and @($via.connections).Count -eq 2 -and @($borgo.connections).Count -eq 3 -and @($route103.connections).Count -eq 4 -and @($villa.connections).Count -eq 1 -and @($strada.connections).Count -eq 2 -and @($ponteValle.connections).Count -eq 1) 'Custom exterior connection counts changed unexpectedly.'
 
 git -C $RepositoryRoot diff --quiet -- data/layouts/BorgoDiCastello/map.bin
 Assert-True ($LASTEXITCODE -eq 0) 'Borgo map.bin must remain unchanged.'

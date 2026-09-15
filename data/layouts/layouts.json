@@ -9719,6 +9719,17 @@
       "border_filepath": "data/layouts/StradaBorgoCisternoni_Casa/border.bin",
       "blockdata_filepath": "data/layouts/StradaBorgoCisternoni_Casa/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_PONTE_VALLE_LARICIA",
+      "name": "PonteValleLaricia_Layout",
+      "width": 64,
+      "height": 64,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_PortaPretoria",
+      "border_filepath": "data/layouts/PonteValleLaricia/border.bin",
+      "blockdata_filepath": "data/layouts/PonteValleLaricia/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }
