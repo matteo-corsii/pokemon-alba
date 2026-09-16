@@ -9,7 +9,7 @@ StradaBorgoCisternoni_Casa_EventScript_Rilevatore::
 	msgbox StradaBorgoCisternoni_Casa_Text_Intro, MSGBOX_DEFAULT
 	checkitemspace ITEM_ITEMFINDER
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	giveitem_msg StradaBorgoCisternoni_Casa_Text_ReceivedItemfinder, ITEM_ITEMFINDER, 1, MUS_OBTAIN_KEY_ITEM
+	giveitem_msg StradaBorgoCisternoni_Casa_Text_ReceivedItemfinder, ITEM_ITEMFINDER, 1, MUS_RG_OBTAIN_KEY_ITEM
 	msgbox StradaBorgoCisternoni_Casa_Text_PostItemfinder, MSGBOX_DEFAULT
 	release
 	end
