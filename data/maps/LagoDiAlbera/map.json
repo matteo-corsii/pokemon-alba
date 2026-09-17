@@ -3,7 +3,7 @@
   "name": "LagoDiAlbera",
   "layout": "LAYOUT_LAGO_DI_ALBERA",
   "music": "MUS_ROUTE101",
-  "region_map_section": "MAPSEC_ALBERA_STORICA",
+  "region_map_section": "MAPSEC_LAGO_DI_ALBERA",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
   "map_type": "MAP_TYPE_ROUTE",

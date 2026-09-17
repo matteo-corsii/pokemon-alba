@@ -16,7 +16,7 @@ $eventScripts = Get-Content (Join-Path $RepositoryRoot 'data/event_scripts.s') -
 
 $layout = @($layouts.layouts | Where-Object { $_.id -eq 'LAYOUT_BORGO_DI_CASTELLO' })
 Assert-True ($borgo.id -eq 'MAP_BORGO_DI_CASTELLO' -and $borgo.layout -eq 'LAYOUT_BORGO_DI_CASTELLO') 'Borgo map identity is incorrect.'
-Assert-True ($borgo.map_type -eq 'MAP_TYPE_TOWN' -and $borgo.region_map_section -eq 'MAPSEC_ALBERA_STORICA') 'Borgo map metadata is incorrect.'
+Assert-True ($borgo.map_type -eq 'MAP_TYPE_TOWN' -and $borgo.region_map_section -eq 'MAPSEC_BORGO_DI_CASTELLO') 'Borgo map metadata is incorrect.'
 Assert-True ($layout.Count -eq 1 -and [int]$layout[0].width -eq 60 -and [int]$layout[0].height -eq 60 -and $layout[0].primary_tileset -eq 'gTileset_General' -and $layout[0].secondary_tileset -eq 'gTileset_Sootopolis') 'Borgo layout is incorrect.'
 Assert-True ((Get-Item (Join-Path $RepositoryRoot $layout[0].blockdata_filepath)).Length -eq 7200) 'Borgo map.bin size is incorrect.'
 Assert-True ((Test-Path (Join-Path $RepositoryRoot $layout[0].border_filepath))) 'Borgo border.bin is missing.'

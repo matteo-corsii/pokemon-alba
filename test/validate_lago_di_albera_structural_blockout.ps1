@@ -9,7 +9,7 @@ $scripts = Get-Content (Join-Path $RepositoryRoot 'data/maps/LagoDiAlbera/script
 $via = Read-Json 'data/maps/ViaConsolare/map.json'
 $route = Read-Json 'data/maps/Route103/map.json'
 Assert-True ($map.id -eq 'MAP_LAGO_DI_ALBERA' -and $map.layout -eq 'LAYOUT_LAGO_DI_ALBERA') 'Lago map identity is incorrect.'
-Assert-True ($map.map_type -eq 'MAP_TYPE_ROUTE' -and $map.region_map_section -eq 'MAPSEC_ALBERA_STORICA') 'Lago map type or region is incorrect.'
+Assert-True ($map.map_type -eq 'MAP_TYPE_ROUTE' -and $map.region_map_section -eq 'MAPSEC_LAGO_DI_ALBERA') 'Lago map type or region is incorrect.'
 Assert-True (@($map.object_events).Count -eq 15 -and @($map.warp_events).Count -eq 14 -and @($map.coord_events).Count -eq 1 -and @($map.bg_events).Count -eq 8) 'Lago event counts are incorrect.'
 Assert-True (@($map.warp_events | Where-Object { [int]$_.x -eq 81 -and [int]$_.y -eq 3 -and [int]$_.elevation -eq 3 -and $_.dest_map -eq 'MAP_EMISSARIO' -and [int]$_.dest_warp_id -eq 0 }).Count -eq 1) 'Lago Emissario entrance warp is incorrect.'
 Assert-True (@($map.connections | Where-Object { $_.direction -eq 'down' -and $_.map -eq 'MAP_VIA_CONSOLARE' -and [int]$_.offset -eq 31 }).Count -eq 1) 'Lago Via Consolare connection is incorrect.'

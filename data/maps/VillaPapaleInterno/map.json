@@ -3,7 +3,7 @@
   "name": "VillaPapaleInterno",
   "layout": "LAYOUT_VILLA_PAPALE_INTERNO",
   "music": "MUS_LILYCOVE_MUSEUM",
-  "region_map_section": "MAPSEC_ALBERA_STORICA",
+  "region_map_section": "MAPSEC_VILLA_PAPALE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_INDOOR",

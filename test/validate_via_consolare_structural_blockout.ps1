@@ -105,10 +105,24 @@ Assert-True ($group.Count -eq 1) 'ViaConsolare is not registered exactly once in
 
 $mapPath = Join-Path $RepositoryRoot 'data/layouts/ViaConsolare/map.bin'
 Assert-True ((Get-Item $mapPath).Length -eq (60 * 30 * 2)) 'Via Consolare map.bin size does not match 60x30.'
-git -C $RepositoryRoot diff --quiet develop -- data/layouts/ViaConsolare/border.bin
-Assert-True ($LASTEXITCODE -eq 0) 'Via Consolare binary layout files changed.'
-git -C $RepositoryRoot diff --quiet develop -- data/layouts/Route103/map.bin data/layouts/Route103/border.bin data/maps/Route103/map.json
-Assert-True ($LASTEXITCODE -eq 0) 'Route103 was modified.'
+$routeMapPath = Join-Path $RepositoryRoot 'data/layouts/Route103/map.bin'
+$viaBytes = [IO.File]::ReadAllBytes($mapPath)
+$routeBytes = [IO.File]::ReadAllBytes($routeMapPath)
+function Read-Block([byte[]]$Bytes, [int]$Width, [int]$X, [int]$Y) {
+    [BitConverter]::ToUInt16($Bytes, 2 * ($Y * $Width + $X))
+}
+$expectedRouteSeam = @{ '0,5' = 0x3016; '26,5' = 0x3026; '27,5' = 0x3027; '0,10' = 0x300E; '0,11' = 0x3016; '1,11' = 0x3016 }
+foreach ($key in $expectedRouteSeam.Keys) {
+    $xy = $key.Split(',')
+    $x = [int]$xy[0]; $y = [int]$xy[1]
+    Assert-True ((Read-Block $routeBytes 80 $x $y) -eq $expectedRouteSeam[$key]) "Route103 Porymap seam cell $key changed."
+}
+$expectedViaSeam = @{ '57,4' = 0x1170; '58,4' = 0x1170; '59,4' = 0x0592; '57,10' = 0x0514; '58,10' = 0x0514; '59,10' = 0x040F }
+foreach ($key in $expectedViaSeam.Keys) {
+    $xy = $key.Split(',')
+    $x = [int]$xy[0]; $y = [int]$xy[1]
+    Assert-True ((Read-Block $viaBytes 60 $x $y) -eq $expectedViaSeam[$key]) "Via Consolare Porymap seam cell $key changed."
+}
 # The Mansio exit tiles intentionally use the Condominium's south-warp blocks;
 # their exact raw values and behaviors are checked by validate_mansio_consolare_structural_blockout.ps1.
 

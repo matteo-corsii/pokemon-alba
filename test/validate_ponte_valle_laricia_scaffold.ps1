@@ -59,6 +59,7 @@ $route103 = Read-Json 'data/maps/Route103/map.json'
 $layout = @($layouts | Where-Object { $_.id -eq 'LAYOUT_PONTE_VALLE_LARICIA' })
 
 Assert-True ($map.id -eq 'MAP_PONTE_VALLE_LARICIA' -and $map.name -eq 'PonteValleLaricia' -and $map.layout -eq 'LAYOUT_PONTE_VALLE_LARICIA') 'Ponte/Valle map identity is incorrect.'
+Assert-True ($map.region_map_section -eq 'MAPSEC_PONTE_VALLE_LARICIA') 'Ponte/Valle map section is incorrect.'
 Assert-True ($layout.Count -eq 1 -and [int]$layout[0].width -eq 64 -and [int]$layout[0].height -eq 64) 'Ponte/Valle must have one 64x64 layout.'
 Assert-True ($layout[0].primary_tileset -eq 'gTileset_General' -and $layout[0].secondary_tileset -eq 'gTileset_PortaPretoria') 'Ponte/Valle tilesets are incorrect.'
 Assert-True (@($groups.gMapGroup_TownsAndRoutes | Where-Object { $_ -eq 'PonteValleLaricia' }).Count -eq 1) 'Ponte/Valle must be registered once in TownsAndRoutes.'

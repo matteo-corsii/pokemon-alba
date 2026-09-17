@@ -3,7 +3,7 @@
   "name": "ViaConsolare",
   "layout": "LAYOUT_VIA_CONSOLARE",
   "music": "MUS_ROUTE101",
-  "region_map_section": "MAPSEC_ALBERA_STORICA",
+  "region_map_section": "MAPSEC_VIA_CONSOLARE",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
   "map_type": "MAP_TYPE_ROUTE",

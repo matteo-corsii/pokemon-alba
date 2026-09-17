@@ -16,7 +16,7 @@ $eventScripts = Get-Content (Join-Path $RepositoryRoot 'data/event_scripts.s') -
 $layout = @($layouts.layouts | Where-Object { $_.id -eq 'LAYOUT_VILLA_PAPALE_GIARDINI' })
 
 Assert-True ($villa.id -eq 'MAP_VILLA_PAPALE_GIARDINI' -and $villa.layout -eq 'LAYOUT_VILLA_PAPALE_GIARDINI') 'Villa Papale map identity is incorrect.'
-Assert-True ($villa.map_type -eq 'MAP_TYPE_TOWN' -and $villa.region_map_section -eq 'MAPSEC_ALBERA_STORICA') 'Villa Papale metadata is incorrect.'
+Assert-True ($villa.map_type -eq 'MAP_TYPE_TOWN' -and $villa.region_map_section -eq 'MAPSEC_VILLA_PAPALE') 'Villa Papale metadata is incorrect.'
 Assert-True ($layout.Count -eq 1 -and [int]$layout[0].width -eq 60 -and [int]$layout[0].height -eq 60 -and $layout[0].primary_tileset -eq 'gTileset_General' -and $layout[0].secondary_tileset -eq 'gTileset_Sootopolis') 'Villa Papale layout or tilesets are incorrect.'
 $mapBin = Join-Path $RepositoryRoot $layout[0].blockdata_filepath
 $borderBin = Join-Path $RepositoryRoot $layout[0].border_filepath

@@ -3,7 +3,7 @@
   "name": "StradaBorgoCisternoni",
   "layout": "LAYOUT_STRADA_BORGO_CISTERNONI",
   "music": "MUS_ROUTE101",
-  "region_map_section": "MAPSEC_ALBERA_STORICA",
+  "region_map_section": "MAPSEC_GALLERIE_DI_SOPRA",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
   "map_type": "MAP_TYPE_ROUTE",

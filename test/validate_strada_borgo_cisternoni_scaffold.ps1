@@ -30,7 +30,7 @@ $route103 = Read-Json 'data/maps/Route103/map.json'
 $layout = @($layouts | Where-Object { $_.id -eq 'LAYOUT_STRADA_BORGO_CISTERNONI' })
 
 Assert-True ($strada.id -eq 'MAP_STRADA_BORGO_CISTERNONI' -and $strada.layout -eq 'LAYOUT_STRADA_BORGO_CISTERNONI') 'Strada map identity is incorrect.'
-Assert-True ($strada.region_map_section -eq 'MAPSEC_ALBERA_STORICA' -and $strada.map_type -eq 'MAP_TYPE_ROUTE') 'Strada map section or type is incorrect.'
+Assert-True ($strada.region_map_section -eq 'MAPSEC_GALLERIE_DI_SOPRA' -and $strada.map_type -eq 'MAP_TYPE_ROUTE') 'Strada map section or type is incorrect.'
 Assert-True ($layout.Count -eq 1 -and [int]$layout[0].width -eq 36 -and [int]$layout[0].height -eq 44 -and $layout[0].primary_tileset -eq 'gTileset_General' -and $layout[0].secondary_tileset -eq 'gTileset_PortaPretoria') 'Strada layout or tilesets are incorrect.'
 $mapBinPath = Join-Path $RepositoryRoot $layout[0].blockdata_filepath
 $borderPath = Join-Path $RepositoryRoot $layout[0].border_filepath
