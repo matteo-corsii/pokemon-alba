@@ -80,7 +80,7 @@ $portaPretoriaImage = [System.Drawing.Bitmap]::FromFile((Join-Path $portaPretori
 $lariciaImage = [System.Drawing.Bitmap]::FromFile((Join-Path $lariciaTilesetRoot 'tiles.png'))
 $sourceTileCount = [int](($portaPretoriaImage.Width * $portaPretoriaImage.Height) / 64)
 $lariciaTileCount = [int](($lariciaImage.Width * $lariciaImage.Height) / 64)
-Assert-True ($lariciaTileCount -ge 347) 'Laricia tiles.png does not contain the registered 347 tiles.'
+Assert-True ($lariciaTileCount -eq 336) 'Laricia tiles.png must contain exactly the registered 336 tiles.'
 $paletteMap = @{ 0 = 0; 2 = 2; 6 = 12; 7 = 13; 11 = 14 }
 foreach ($slot in 0..15) {
     $lariciaPalette = [IO.File]::ReadAllBytes((Join-Path $lariciaTilesetRoot ('palettes/{0:D2}.pal' -f $slot)))
@@ -110,7 +110,7 @@ foreach ($id in $requiredBridgeMetatiles) {
         if ($sourceTile -lt 0x200) {
             Assert-True ($targetTile -eq $sourceTile) "Laricia primary tile reference differs for 0x$('{0:X3}' -f $id), component $component."
         } else {
-            Assert-True ($targetTile -ge 0x200 -and ($targetTile - 0x200) -lt $lariciaTileCount) "Laricia tile for 0x$('{0:X3}' -f $id), component $component is not a valid secondary tile."
+            Assert-True ($targetTile -ge 0x200 -and ($targetTile - 0x200) -lt $lariciaTileCount) "Laricia tile for 0x$('{0:X3}' -f $id), component $component is not a valid secondary tile in Porymap's 336-tile surface."
             Assert-True (($sourceTile - 0x200) -lt $sourceTileCount) "PortaPretoria source tile for 0x$('{0:X3}' -f $id), component $component is out of range."
             Assert-True ([Linq.Enumerable]::SequenceEqual([byte[]](Copy-IndexedTile $portaPretoriaImage ($sourceTile - 0x200)), [byte[]](Copy-IndexedTile $lariciaImage ($targetTile - 0x200)))) "Laricia graphics differ from PortaPretoria for 0x$('{0:X3}' -f $id), component $component."
         }

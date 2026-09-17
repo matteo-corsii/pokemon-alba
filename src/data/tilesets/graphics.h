@@ -350,7 +350,7 @@ const u16 gTilesetPalettes_Sootopolis[][16] =
     INCGFX_U16("data/tilesets/secondary/sootopolis/palettes/15.pal", ".gbapal"),
 };
 
-const u32 gTilesetTiles_Laricia[] = INCGFX_U32("data/tilesets/secondary/laricia/tiles.png", ".4bpp.fastSmol", "-num_tiles 347 -Wnum_tiles");
+const u32 gTilesetTiles_Laricia[] = INCGFX_U32("data/tilesets/secondary/laricia/tiles.png", ".4bpp.fastSmol", "-num_tiles 336 -Wnum_tiles");
 
 const u16 gTilesetPalettes_Laricia[][16] =
 {
