@@ -9730,6 +9730,17 @@
       "border_filepath": "data/layouts/PonteValleLaricia/border.bin",
       "blockdata_filepath": "data/layouts/PonteValleLaricia/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LARICIA",
+      "name": "Laricia_Layout",
+      "width": 64,
+      "height": 64,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Sootopolis",
+      "border_filepath": "data/layouts/Laricia/border.bin",
+      "blockdata_filepath": "data/layouts/Laricia/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

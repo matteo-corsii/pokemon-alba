@@ -17,6 +17,11 @@
       "map": "MAP_ROUTE103",
       "offset": 0,
       "direction": "left"
+    },
+    {
+      "map": "MAP_LARICIA",
+      "offset": 0,
+      "direction": "right"
     }
   ],
   "object_events": [],

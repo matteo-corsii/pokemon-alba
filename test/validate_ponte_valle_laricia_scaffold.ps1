@@ -56,6 +56,7 @@ $layouts = (Read-Json 'data/layouts/layouts.json').layouts
 $groups = Read-Json 'data/maps/map_groups.json'
 $map = Read-Json 'data/maps/PonteValleLaricia/map.json'
 $route103 = Read-Json 'data/maps/Route103/map.json'
+$laricia = Read-Json 'data/maps/Laricia/map.json'
 $layout = @($layouts | Where-Object { $_.id -eq 'LAYOUT_PONTE_VALLE_LARICIA' })
 
 Assert-True ($map.id -eq 'MAP_PONTE_VALLE_LARICIA' -and $map.name -eq 'PonteValleLaricia' -and $map.layout -eq 'LAYOUT_PONTE_VALLE_LARICIA') 'Ponte/Valle map identity is incorrect.'
@@ -73,7 +74,9 @@ Assert-True ($blocks.Length -eq 64 * 64 * 2) 'Ponte/Valle map.bin size is incorr
 
 $left = @($map.connections | Where-Object { $_.direction -eq 'left' -and $_.map -eq 'MAP_ROUTE103' -and [int]$_.offset -eq 0 })
 $right = @($route103.connections | Where-Object { $_.direction -eq 'right' -and $_.map -eq 'MAP_PONTE_VALLE_LARICIA' -and [int]$_.offset -eq 0 })
-Assert-True ($left.Count -eq 1 -and $right.Count -eq 1 -and @($map.connections).Count -eq 1) 'Route103 connection must be reciprocal and be the only active Ponte/Valle connection.'
+$lariciaConnection = @($map.connections | Where-Object { $_.direction -eq 'right' -and $_.map -eq 'MAP_LARICIA' -and [int]$_.offset -eq 0 })
+$lariciaReturn = @($laricia.connections | Where-Object { $_.direction -eq 'left' -and $_.map -eq 'MAP_PONTE_VALLE_LARICIA' -and [int]$_.offset -eq 0 })
+Assert-True ($left.Count -eq 1 -and $right.Count -eq 1 -and $lariciaConnection.Count -eq 1 -and $lariciaReturn.Count -eq 1 -and @($map.connections).Count -eq 2) 'Ponte/Valle connections must be reciprocal with Route103 and Laricia.'
 
 $routeBlocks = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/layouts/Route103/map.bin'))
 foreach ($y in 14..17) {
@@ -94,6 +97,13 @@ Assert-True (Test-Reachable $blocks 64 64 $lowerStarts @('44,36')) 'Lower valley
 Assert-True (Test-Reachable $blocks 64 64 $lowerStarts @('43,59')) 'Lower valley cannot reach the agricultural house approach.'
 Assert-True (Test-Reachable $blocks 64 64 $lowerStarts @('51,27')) 'Lower valley cannot reach the secret-passage approach.'
 Assert-True (Test-Reachable $blocks 64 64 @('58,10') @('58,5')) 'The local upper secret-passage area cannot reach the future Emissario entrance.'
+
+foreach ($y in @(14..17) + @(38..41)) {
+    foreach ($x in 56..63) {
+        $raw = Read-Block $blocks 64 $x $y
+        Assert-True (($raw -band 0x03FF) -lt 0x200) "Ponte shared-edge strip $x,$y must use a primary General metatile."
+    }
+}
 
 Assert-True (@($map.object_events).Count -eq 0 -and @($map.warp_events).Count -eq 0 -and @($map.coord_events).Count -eq 0 -and @($map.bg_events).Count -eq 0) 'Ponte/Valle scaffold must not contain gameplay events.'
 $wild = Read-Json 'src/data/wild_encounters.json'

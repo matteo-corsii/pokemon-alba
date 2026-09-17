@@ -14,6 +14,7 @@ $expectedSections = @{
     MAPSEC_VILLA_PAPALE = 'VILLA PAPALE'
     MAPSEC_GALLERIE_DI_SOPRA = 'GALLERIE DI SOPRA'
     MAPSEC_PONTE_VALLE_LARICIA = 'PONTE/VALLE LARICIA'
+    MAPSEC_LARICIA = 'LARICIA'
 }
 
 foreach ($id in $expectedSections.Keys) {
@@ -31,6 +32,7 @@ $assignments = @{
     'data/maps/StradaBorgoCisternoni/map.json' = 'MAPSEC_GALLERIE_DI_SOPRA'
     'data/maps/Route103/map.json' = 'MAPSEC_ROUTE_103'
     'data/maps/PonteValleLaricia/map.json' = 'MAPSEC_PONTE_VALLE_LARICIA'
+    'data/maps/Laricia/map.json' = 'MAPSEC_LARICIA'
 }
 foreach ($path in $assignments.Keys) {
     Assert-True ((Read-Json $path).region_map_section -eq $assignments[$path]) "$path has the wrong map section."

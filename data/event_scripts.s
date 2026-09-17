@@ -162,6 +162,7 @@ gStdScripts_End::
 	.include "data/maps/StradaBorgoCisternoni/scripts.inc"
 	.include "data/maps/StradaBorgoCisternoni_Casa/scripts.inc"
 	.include "data/maps/PonteValleLaricia/scripts.inc"
+	.include "data/maps/Laricia/scripts.inc"
 	.include "data/maps/VillaPapaleGiardini/scripts.inc"
 	.include "data/maps/VillaPapaleInterno/scripts.inc"
 	.include "data/maps/BorgoDiCastello_PokemonCenter/scripts.inc"
