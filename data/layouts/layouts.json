@@ -9737,7 +9737,7 @@
       "width": 64,
       "height": 64,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Sootopolis",
+      "secondary_tileset": "gTileset_Laricia",
       "border_filepath": "data/layouts/Laricia/border.bin",
       "blockdata_filepath": "data/layouts/Laricia/map.bin",
       "layout_version": "emerald"

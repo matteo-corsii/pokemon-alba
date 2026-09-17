@@ -24,6 +24,7 @@ extern const struct Tileset gTileset_Dewford;
 extern const struct Tileset gTileset_Lilycove;
 extern const struct Tileset gTileset_Mossdeep;
 extern const struct Tileset gTileset_Sootopolis;
+extern const struct Tileset gTileset_Laricia;
 extern const struct Tileset gTileset_EverGrande;
 extern const struct Tileset gTileset_Pacifidlog;
 extern const struct Tileset gTileset_PetalburgGym;

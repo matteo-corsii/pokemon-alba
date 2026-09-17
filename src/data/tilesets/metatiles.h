@@ -58,6 +58,9 @@ const u16 gMetatileAttributes_Pacifidlog[] = INCBIN_U16("data/tilesets/secondary
 const u16 gMetatiles_Sootopolis[] = INCBIN_U16("data/tilesets/secondary/sootopolis/metatiles.bin");
 const u16 gMetatileAttributes_Sootopolis[] = INCBIN_U16("data/tilesets/secondary/sootopolis/metatile_attributes.bin");
 
+const u16 gMetatiles_Laricia[] = INCBIN_U16("data/tilesets/secondary/laricia/metatiles.bin");
+const u16 gMetatileAttributes_Laricia[] = INCBIN_U16("data/tilesets/secondary/laricia/metatile_attributes.bin");
+
 const u16 gMetatiles_BattleFrontierOutsideWest[] = INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_west/metatiles.bin");
 const u16 gMetatileAttributes_BattleFrontierOutsideWest[] = INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_west/metatile_attributes.bin");
 

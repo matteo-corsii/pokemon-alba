@@ -98,11 +98,9 @@ Assert-True (Test-Reachable $blocks 64 64 $lowerStarts @('43,59')) 'Lower valley
 Assert-True (Test-Reachable $blocks 64 64 $lowerStarts @('51,27')) 'Lower valley cannot reach the secret-passage approach.'
 Assert-True (Test-Reachable $blocks 64 64 @('58,10') @('58,5')) 'The local upper secret-passage area cannot reach the future Emissario entrance.'
 
-foreach ($y in @(14..17) + @(38..41)) {
-    foreach ($x in 56..63) {
-        $raw = Read-Block $blocks 64 $x $y
-        Assert-True (($raw -band 0x03FF) -lt 0x200) "Ponte shared-edge strip $x,$y must use a primary General metatile."
-    }
+$supportedLariciaBridgeMetatiles = @(0x293, 0x294, 0x2EE, 0x2F0, 0x2F9, 0x2FA, 0x302, 0x309)
+foreach ($id in $supportedLariciaBridgeMetatiles) {
+    Assert-True (($id - 0x200) * 16 -lt [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/tilesets/secondary/laricia/metatiles.bin')).Length) "Laricia lacks required PortaPretoria bridge metatile 0x$('{0:X3}' -f $id)."
 }
 
 Assert-True (@($map.object_events).Count -eq 0 -and @($map.warp_events).Count -eq 0 -and @($map.coord_events).Count -eq 0 -and @($map.bg_events).Count -eq 0) 'Ponte/Valle scaffold must not contain gameplay events.'

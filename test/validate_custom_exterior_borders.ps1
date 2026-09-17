@@ -27,7 +27,7 @@ $targets = @(
     @{ Directory = 'VillaPapaleGiardini'; MapFile = 'data/maps/VillaPapaleGiardini/map.json'; MapId = 'MAP_VILLA_PAPALE_GIARDINI'; Layout = 'LAYOUT_VILLA_PAPALE_GIARDINI'; Secondary = 'gTileset_Sootopolis' },
     @{ Directory = 'StradaBorgoCisternoni'; MapFile = 'data/maps/StradaBorgoCisternoni/map.json'; MapId = 'MAP_STRADA_BORGO_CISTERNONI'; Layout = 'LAYOUT_STRADA_BORGO_CISTERNONI'; Secondary = 'gTileset_PortaPretoria' },
     @{ Directory = 'PonteValleLaricia'; MapFile = 'data/maps/PonteValleLaricia/map.json'; MapId = 'MAP_PONTE_VALLE_LARICIA'; Layout = 'LAYOUT_PONTE_VALLE_LARICIA'; Secondary = 'gTileset_PortaPretoria' },
-    @{ Directory = 'Laricia'; MapFile = 'data/maps/Laricia/map.json'; MapId = 'MAP_LARICIA'; Layout = 'LAYOUT_LARICIA'; Secondary = 'gTileset_Sootopolis' }
+    @{ Directory = 'Laricia'; MapFile = 'data/maps/Laricia/map.json'; MapId = 'MAP_LARICIA'; Layout = 'LAYOUT_LARICIA'; Secondary = 'gTileset_Laricia' }
 )
 
 foreach ($target in $targets) {
