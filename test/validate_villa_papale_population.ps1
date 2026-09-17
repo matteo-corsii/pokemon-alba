@@ -67,11 +67,44 @@ foreach ($forbidden in @('NICO', 'LIA', 'AUREA', 'ECO', 'RIFLESSO')) {
     $pattern = "(?i)\b$forbidden\b"
     Assert-True ($gardenScripts -notmatch $pattern -and $interiorPopulationScripts -notmatch $pattern -and $gardensRaw -notmatch $pattern) "Villa population must not introduce $forbidden."
 }
-Assert-True ((Get-Content (Join-Path $RepositoryRoot 'src/data/wild_encounters.json') -Raw) -notmatch 'MAP_VILLA_PAPALE_(GIARDINI|INTERNO)') 'Villa population must not add encounters.'
+$wild = Read-Json 'src/data/wild_encounters.json'
+$villaEncounters = @($wild.wild_encounter_groups | ForEach-Object { $_.encounters } | Where-Object { $_.map -eq 'MAP_VILLA_PAPALE_GIARDINI' })
+$villaRates = @(20, 20, 10, 10, 10, 10, 5, 5, 4, 4, 1, 1)
+$villaSpecies = @('SPECIES_MICIOLO', 'SPECIES_GAZZUOLA', 'SPECIES_MICIOLO', 'SPECIES_BRILLAZZA', 'SPECIES_CRISALVIA', 'SPECIES_CRISALVIA', 'SPECIES_GAZZUOLA', 'SPECIES_BRILLAZZA', 'SPECIES_FELIVATES', 'SPECIES_FELIVATES', 'SPECIES_FELIVATES', 'SPECIES_FELIVATES')
+$villaLevels = @(@(16,18), @(16,18), @(16,18), @(18,20), @(17,19), @(17,19), @(16,18), @(18,20), @(19,21), @(19,21), @(19,21), @(19,21))
+Assert-True ($villaEncounters.Count -eq 4) 'Villa gardens must have exactly four identical time-of-day land encounter tables.'
+foreach ($label in @('gVillaPapaleGiardini_Morning', 'gVillaPapaleGiardini_Day', 'gVillaPapaleGiardini_Evening', 'gVillaPapaleGiardini_Night')) {
+    $table = @($villaEncounters | Where-Object { $_.base_label -eq $label })
+    Assert-True ($table.Count -eq 1 -and [int]$table[0].land_mons.encounter_rate -eq 20 -and @($table[0].land_mons.mons).Count -eq 12) "Villa encounter table $label is incomplete."
+    for ($index = 0; $index -lt 12; $index++) {
+        $mon = $table[0].land_mons.mons[$index]
+        Assert-True ($mon.species -eq $villaSpecies[$index] -and [int]$mon.min_level -eq $villaLevels[$index][0] -and [int]$mon.max_level -eq $villaLevels[$index][1]) "Villa encounter slot $index in $label is incorrect."
+    }
+    Assert-True (-not (@($table[0].land_mons.mons | Where-Object { $_.species -eq 'SPECIES_INFIORALA' }).Count)) "Villa encounter table $label must not contain Infiorala."
+}
+foreach ($expected in @{ 'SPECIES_MICIOLO' = 30; 'SPECIES_GAZZUOLA' = 25; 'SPECIES_CRISALVIA' = 20; 'SPECIES_BRILLAZZA' = 15; 'SPECIES_FELIVATES' = 10 }.GetEnumerator()) {
+    $total = 0
+    for ($index = 0; $index -lt 12; $index++) { if ($villaSpecies[$index] -eq $expected.Key) { $total += $villaRates[$index] } }
+    Assert-True ($total -eq $expected.Value) "Villa encounter rate for $($expected.Key) is incorrect."
+}
+Assert-True (@($wild.wild_encounter_groups | ForEach-Object { $_.encounters } | Where-Object { $_.map -eq 'MAP_VILLA_PAPALE_INTERNO' }).Count -eq 0) 'Villa interior must not add encounters.'
 Assert-True ($opponents -match '#define TRAINER_VILLA_PAPALE_GIARDINIERE\s+173' -and $opponents -match '#define TRAINER_VILLA_PAPALE_MANUTENTORE\s+462' -and $opponents -match '#define TRAINER_VILLA_PAPALE_APPRENDISTA\s+702') 'Emerald Villa trainer slots are incorrect.'
 Assert-True ($opponentsFrlg -match '#define TRAINER_VILLA_PAPALE_GIARDINIERE\s+638' -and $opponentsFrlg -match '#define TRAINER_VILLA_PAPALE_MANUTENTORE\s+639' -and $opponentsFrlg -match '#define TRAINER_VILLA_PAPALE_APPRENDISTA\s+640' -and $opponentsFrlg -match '#define TRAINERS_COUNT_FRLG\s+641') 'FRLG Villa trainer slots are incorrect.'
 foreach ($trainer in @('TRAINER_VILLA_PAPALE_GIARDINIERE', 'TRAINER_VILLA_PAPALE_MANUTENTORE', 'TRAINER_VILLA_PAPALE_APPRENDISTA')) {
     Assert-True ($emeraldParties -match "=== $trainer ===" -and $frlgParties -match "=== $trainer ===") "Villa trainer $trainer must have parties for Emerald and FRLG."
+}
+$expectedParties = @{
+    'TRAINER_VILLA_PAPALE_GIARDINIERE' = @('Crisalvia', 'Felivates')
+    'TRAINER_VILLA_PAPALE_MANUTENTORE' = @('Pastufo', 'Molospsy')
+    'TRAINER_VILLA_PAPALE_APPRENDISTA' = @('Miciolo', 'Brillazza', 'Luscinco')
+}
+foreach ($trainer in $expectedParties.Keys) {
+    foreach ($partyText in @($emeraldParties, $frlgParties)) {
+        $record = [regex]::Match($partyText, "(?ms)=== $trainer ===(.*?)(?=^=== |\z)").Groups[1].Value
+        $actualSpecies = @([regex]::Matches($record, '(?m)^([A-Za-z]+)\r?$') | ForEach-Object { $_.Groups[1].Value } | Where-Object { $_ -notin @('Name', 'Class', 'Pic', 'Gender', 'Music', 'Double', 'AI', 'Level', 'IVs') })
+        $actualLevels = @([regex]::Matches($record, '(?m)^Level: (\d+)\r?$') | ForEach-Object { [int]$_.Groups[1].Value })
+        Assert-True (($actualSpecies -join ',') -eq ($expectedParties[$trainer] -join ',') -and $actualLevels.Count -eq $expectedParties[$trainer].Count -and @($actualLevels | Where-Object { $_ -ne 23 }).Count -eq 0) "Villa trainer $trainer party is not canonical in Emerald/FRLG."
+    }
 }
 $changedBinaries = & git -C $RepositoryRoot diff --name-only -- data/layouts/VillaPapaleGiardini/map.bin data/layouts/VillaPapaleInterno/map.bin data/layouts/BorgoDiCastello/map.bin data/layouts/LagoDiAlbera/map.bin
 Assert-True (@($changedBinaries).Count -eq 0) 'Villa population must not modify map.bin files.'

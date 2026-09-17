@@ -29,7 +29,9 @@ Assert-True (@($villa.coord_events).Count -eq 0 -and @($villa.bg_events).Count -
 Assert-True (@($villa.warp_events | Where-Object { [int]$_.x -eq 29 -and [int]$_.y -eq 9 -and [int]$_.elevation -eq 0 -and $_.dest_map -eq 'MAP_VILLA_PAPALE_INTERNO' -and [int]$_.dest_warp_id -eq 0 }).Count -eq 1 -and @($villa.warp_events).Count -eq 1) 'Villa gardens must contain only the canonical interior entrance warp.'
 Assert-True ($eventScripts -match 'data/maps/VillaPapaleGiardini/scripts\.inc') 'Villa Papale scripts are not globally included.'
 Assert-True ((Get-Content (Join-Path $RepositoryRoot 'data/maps/VillaPapaleGiardini/scripts.inc') -Raw) -match '^VillaPapaleGiardini_MapScripts::\r?\n\s*\.byte 0') 'Villa Papale MapScripts are not minimal.'
-Assert-True ((Get-Content (Join-Path $RepositoryRoot 'src/data/wild_encounters.json') -Raw) -notmatch 'MAP_VILLA_PAPALE_GIARDINI') 'Villa scaffold must not have encounters.'
+$wild = Read-Json 'src/data/wild_encounters.json'
+$villaEncounterTables = @($wild.wild_encounter_groups | ForEach-Object { $_.encounters } | Where-Object { $_.map -eq 'MAP_VILLA_PAPALE_GIARDINI' })
+Assert-True ($villaEncounterTables.Count -eq 4) 'Villa gardens must provide one encounter table for each time of day.'
 $blockdata = [IO.File]::ReadAllBytes($mapBin)
 $generalAttributes = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/tilesets/primary/general/metatile_attributes.bin'))
 $sootopolisAttributes = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/tilesets/secondary/sootopolis/metatile_attributes.bin'))

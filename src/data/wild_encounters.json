@@ -37351,6 +37351,90 @@
               { "min_level": 24, "max_level": 25, "species": "SPECIES_CRISALVIA" }
             ]
           }
+        },
+        {
+          "map": "MAP_VILLA_PAPALE_GIARDINI",
+          "base_label": "gVillaPapaleGiardini_Morning",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              { "min_level": 16, "max_level": 18, "species": "SPECIES_MICIOLO" },
+              { "min_level": 16, "max_level": 18, "species": "SPECIES_GAZZUOLA" },
+              { "min_level": 16, "max_level": 18, "species": "SPECIES_MICIOLO" },
+              { "min_level": 18, "max_level": 20, "species": "SPECIES_BRILLAZZA" },
+              { "min_level": 17, "max_level": 19, "species": "SPECIES_CRISALVIA" },
+              { "min_level": 17, "max_level": 19, "species": "SPECIES_CRISALVIA" },
+              { "min_level": 16, "max_level": 18, "species": "SPECIES_GAZZUOLA" },
+              { "min_level": 18, "max_level": 20, "species": "SPECIES_BRILLAZZA" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_FELIVATES" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_FELIVATES" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_FELIVATES" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_FELIVATES" }
+            ]
+          }
+        },
+        {
+          "map": "MAP_VILLA_PAPALE_GIARDINI",
+          "base_label": "gVillaPapaleGiardini_Day",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              { "min_level": 16, "max_level": 18, "species": "SPECIES_MICIOLO" },
+              { "min_level": 16, "max_level": 18, "species": "SPECIES_GAZZUOLA" },
+              { "min_level": 16, "max_level": 18, "species": "SPECIES_MICIOLO" },
+              { "min_level": 18, "max_level": 20, "species": "SPECIES_BRILLAZZA" },
+              { "min_level": 17, "max_level": 19, "species": "SPECIES_CRISALVIA" },
+              { "min_level": 17, "max_level": 19, "species": "SPECIES_CRISALVIA" },
+              { "min_level": 16, "max_level": 18, "species": "SPECIES_GAZZUOLA" },
+              { "min_level": 18, "max_level": 20, "species": "SPECIES_BRILLAZZA" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_FELIVATES" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_FELIVATES" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_FELIVATES" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_FELIVATES" }
+            ]
+          }
+        },
+        {
+          "map": "MAP_VILLA_PAPALE_GIARDINI",
+          "base_label": "gVillaPapaleGiardini_Evening",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              { "min_level": 16, "max_level": 18, "species": "SPECIES_MICIOLO" },
+              { "min_level": 16, "max_level": 18, "species": "SPECIES_GAZZUOLA" },
+              { "min_level": 16, "max_level": 18, "species": "SPECIES_MICIOLO" },
+              { "min_level": 18, "max_level": 20, "species": "SPECIES_BRILLAZZA" },
+              { "min_level": 17, "max_level": 19, "species": "SPECIES_CRISALVIA" },
+              { "min_level": 17, "max_level": 19, "species": "SPECIES_CRISALVIA" },
+              { "min_level": 16, "max_level": 18, "species": "SPECIES_GAZZUOLA" },
+              { "min_level": 18, "max_level": 20, "species": "SPECIES_BRILLAZZA" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_FELIVATES" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_FELIVATES" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_FELIVATES" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_FELIVATES" }
+            ]
+          }
+        },
+        {
+          "map": "MAP_VILLA_PAPALE_GIARDINI",
+          "base_label": "gVillaPapaleGiardini_Night",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              { "min_level": 16, "max_level": 18, "species": "SPECIES_MICIOLO" },
+              { "min_level": 16, "max_level": 18, "species": "SPECIES_GAZZUOLA" },
+              { "min_level": 16, "max_level": 18, "species": "SPECIES_MICIOLO" },
+              { "min_level": 18, "max_level": 20, "species": "SPECIES_BRILLAZZA" },
+              { "min_level": 17, "max_level": 19, "species": "SPECIES_CRISALVIA" },
+              { "min_level": 17, "max_level": 19, "species": "SPECIES_CRISALVIA" },
+              { "min_level": 16, "max_level": 18, "species": "SPECIES_GAZZUOLA" },
+              { "min_level": 18, "max_level": 20, "species": "SPECIES_BRILLAZZA" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_FELIVATES" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_FELIVATES" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_FELIVATES" },
+              { "min_level": 19, "max_level": 21, "species": "SPECIES_FELIVATES" }
+            ]
+          }
         }
       ]
     },
