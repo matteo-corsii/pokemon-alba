@@ -238,7 +238,7 @@ $trucks = @($map.object_events | Where-Object { $_.graphics_id -eq 'OBJ_EVENT_GF
 Assert-True ($trucks.Count -eq 2) 'Laricia must contain exactly two Sagra trucks.'
 foreach ($truck in $trucks) { Assert-True ([int]$truck.x -ge 46 -and [int]$truck.x -le 48 -and [int]$truck.y -ge 13 -and [int]$truck.y -le 18) 'Laricia Sagra truck is outside the approved manual area.' }
 Assert-True (@($map.bg_events).Count -eq 0) 'Laricia must not retain the removed Galloro/Genzalia sign event.'
-Assert-True (@($map.warp_events).Count -eq 0 -and @($map.coord_events).Count -eq 0) 'Laricia scaffold must not add warps or coord events.'
+Assert-True (@($map.warp_events).Count -eq 8 -and @($map.coord_events).Count -eq 0) 'Laricia must contain the eight civilian interior warps and no coord events.'
 Assert-True (@($map.object_events).Count -eq 3 -and @($map.object_events | Where-Object { $_.trainer_type -ne 'TRAINER_TYPE_NONE' }).Count -eq 0) 'Laricia must contain only the non-trainer Sagra setup objects.'
 Assert-True (@($map.object_events | Where-Object { $_.graphics_id -eq 'OBJ_EVENT_GFX_TRUCK' }).Count -eq 2) 'Laricia Sagra must visibly use two existing truck object graphics.'
 $wild = Read-Json 'src/data/wild_encounters.json'

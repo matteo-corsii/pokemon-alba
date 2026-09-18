@@ -9741,6 +9741,30 @@
       "border_filepath": "data/layouts/Laricia/border.bin",
       "blockdata_filepath": "data/layouts/Laricia/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LARICIA_POKEMON_CENTER", "name": "Laricia_PokemonCenter_Layout", "width": 14, "height": 9, "primary_tileset": "gTileset_Building", "secondary_tileset": "gTileset_PokemonCenter", "border_filepath": "data/layouts/Laricia_PokemonCenter/border.bin", "blockdata_filepath": "data/layouts/Laricia_PokemonCenter/map.bin", "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LARICIA_MART", "name": "Laricia_Mart_Layout", "width": 11, "height": 8, "primary_tileset": "gTileset_Building", "secondary_tileset": "gTileset_Shop", "border_filepath": "data/layouts/Laricia_Mart/border.bin", "blockdata_filepath": "data/layouts/Laricia_Mart/map.bin", "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LARICIA_FRASCHETTA_PIAZZA", "name": "Laricia_FraschettaPiazza_Layout", "width": 17, "height": 9, "primary_tileset": "gTileset_Building", "secondary_tileset": "gTileset_GenericBuilding", "border_filepath": "data/layouts/Laricia_FraschettaPiazza/border.bin", "blockdata_filepath": "data/layouts/Laricia_FraschettaPiazza/map.bin", "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LARICIA_FRASCHETTA_VICOLI", "name": "Laricia_FraschettaVicoli_Layout", "width": 13, "height": 8, "primary_tileset": "gTileset_Building", "secondary_tileset": "gTileset_GenericBuilding", "border_filepath": "data/layouts/Laricia_FraschettaVicoli/border.bin", "blockdata_filepath": "data/layouts/Laricia_FraschettaVicoli/map.bin", "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LARICIA_HOUSE1", "name": "Laricia_House1_Layout", "width": 10, "height": 9, "primary_tileset": "gTileset_Building", "secondary_tileset": "gTileset_GenericBuilding", "border_filepath": "data/layouts/Laricia_House1/border.bin", "blockdata_filepath": "data/layouts/Laricia_House1/map.bin", "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LARICIA_HOUSE2", "name": "Laricia_House2_Layout", "width": 10, "height": 9, "primary_tileset": "gTileset_Building", "secondary_tileset": "gTileset_GenericBuilding", "border_filepath": "data/layouts/Laricia_House2/border.bin", "blockdata_filepath": "data/layouts/Laricia_House2/map.bin", "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LARICIA_HOUSE3", "name": "Laricia_House3_Layout", "width": 10, "height": 9, "primary_tileset": "gTileset_Building", "secondary_tileset": "gTileset_GenericBuilding", "border_filepath": "data/layouts/Laricia_House3/border.bin", "blockdata_filepath": "data/layouts/Laricia_House3/map.bin", "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LARICIA_HOUSE4", "name": "Laricia_House4_Layout", "width": 10, "height": 9, "primary_tileset": "gTileset_Building", "secondary_tileset": "gTileset_GenericBuilding", "border_filepath": "data/layouts/Laricia_House4/border.bin", "blockdata_filepath": "data/layouts/Laricia_House4/map.bin", "layout_version": "emerald"
     }
   ]
 }

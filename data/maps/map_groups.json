@@ -188,7 +188,15 @@
     "BorgoDiCastello_House4",
     "BorgoDiCastello_RistoranteBelvedere",
     "VillaPapaleInterno",
-    "StradaBorgoCisternoni_Casa"
+    "StradaBorgoCisternoni_Casa",
+    "Laricia_PokemonCenter",
+    "Laricia_Mart",
+    "Laricia_FraschettaPiazza",
+    "Laricia_FraschettaVicoli",
+    "Laricia_House1",
+    "Laricia_House2",
+    "Laricia_House3",
+    "Laricia_House4"
   ],
   "gMapGroup_IndoorDewford": [
     "DewfordTown_House1",
