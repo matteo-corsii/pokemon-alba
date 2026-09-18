@@ -89,7 +89,14 @@ Assert-True ($blocks.Length -eq 64*64*2) 'Laricia map.bin size is incorrect.'
 foreach ($y in @(14..17) + @(38..41)) {
     Assert-True (Is-Walkable (Read-Block $blocks 64 0 $y)) "Laricia west entry 0,$y is not walkable."
     Assert-True (Is-Walkable (Read-Block $ponteBlocks 64 63 $y)) "Ponte east entry 63,$y is not walkable."
-    foreach ($x in 0..7) { Assert-True (((Read-Block $blocks 64 $x $y) -band 0x03FF) -lt 0x200) "Laricia shared-edge strip $x,$y must use a primary General metatile." }
+    foreach ($x in 0..7) {
+        $edgeBlock = (Read-Block $blocks 64 $x $y) -band 0x03FF
+        if ($edgeBlock -ge 0x200) {
+            Assert-True ((($edgeBlock - 0x200) * 16 + 16) -le (0x10A * 16)) "Laricia shared-edge strip $x,$y references an unavailable Laricia metatile."
+        } else {
+            Assert-True (($edgeBlock * 16 + 16) -le $generalMetatiles.Length) "Laricia shared-edge strip $x,$y references an unavailable General metatile."
+        }
+    }
 }
 $requiredBridgeMetatiles = @(0x293, 0x294, 0x2EE, 0x2F0, 0x2F9, 0x2FA, 0x302, 0x309)
 $sootopolisRoot = Join-Path $RepositoryRoot 'data/tilesets/secondary/sootopolis'
@@ -216,16 +223,26 @@ Assert-True ([BitConverter]::ToUInt16($lariciaAttributes, (0x309 - 0x200) * 2) -
 foreach ($y in 0..63) { if ($y -notin @(14..17) + @(38..41)) { Assert-True (-not (Is-Walkable (Read-Block $blocks 64 0 $y))) "Laricia west edge has an unintended opening at 0,$y." } }
 $upper = @(14..17 | ForEach-Object { "0,$_" }); $lower = @(38..41 | ForEach-Object { "0,$_" })
 Assert-True (Test-Reachable $blocks 64 64 $upper @('30,22')) 'Upper bridge entry cannot reach Laricia piazza.'
-Assert-True (Test-Reachable $blocks 64 64 @('30,22') @('30,8')) 'Piazza cannot reach Via dell Uccelliera.'
-Assert-True (Test-Reachable $blocks 64 64 @('30,22') @('16,47')) 'Piazza cannot reach the lower alleys and Fraschetta 3 approach.'
 Assert-True (Test-Reachable $blocks 64 64 @('30,22') $lower) 'Piazza cannot reach the lower Valle exit.'
 Assert-True (Test-Reachable $blocks 64 64 @('30,22') @('51,24')) 'Piazza cannot reach the east road/Sagra approach.'
 Assert-True (-not (Test-Reachable $blocks 64 64 @('30,22') @('63,24'))) 'The Sagra block is bypassable to Laricia east edge.'
+foreach ($entrance in @('32,10', '12,37', '18,47', '12,25', '45,46', '48,25', '49,37', '18,56', '44,56')) {
+    Assert-True (Test-Reachable $blocks 64 64 @('30,22') @($entrance)) "Canonical Laricia entrance $entrance is unreachable."
+}
+foreach ($x in 49..51) { Assert-True (Is-Walkable (Read-Block $blocks 64 $x 0)) "Future Via dell Uccelliera opening $x,0 is not walkable." }
+Assert-True (Test-Reachable $blocks 64 64 @('30,22') @('49,0', '50,0', '51,0')) 'Piazza cannot reach Via dell Uccelliera opening.'
+foreach ($y in 13..17) { Assert-True (-not (Is-Walkable (Read-Block $blocks 64 62 $y))) "Future Galloro approach at 62,$y was unexpectedly opened." }
+$sagra = @($map.object_events | Where-Object { $_.local_id -eq 'LOCALID_LARICIA_SAGRA_ADDETTO' })
+Assert-True ($sagra.Count -eq 1 -and [int]$sagra[0].x -eq 45 -and [int]$sagra[0].y -eq 16 -and $sagra[0].script -eq 'Laricia_EventScript_SagraBlocker' -and $sagra[0].trainer_type -eq 'TRAINER_TYPE_NONE') 'Laricia Sagra attendant placement is incorrect.'
+$trucks = @($map.object_events | Where-Object { $_.graphics_id -eq 'OBJ_EVENT_GFX_TRUCK' })
+Assert-True ($trucks.Count -eq 2) 'Laricia must contain exactly two Sagra trucks.'
+foreach ($truck in $trucks) { Assert-True ([int]$truck.x -ge 46 -and [int]$truck.x -le 48 -and [int]$truck.y -ge 13 -and [int]$truck.y -le 18) 'Laricia Sagra truck is outside the approved manual area.' }
+Assert-True (@($map.bg_events).Count -eq 0) 'Laricia must not retain the removed Galloro/Genzalia sign event.'
 Assert-True (@($map.warp_events).Count -eq 0 -and @($map.coord_events).Count -eq 0) 'Laricia scaffold must not add warps or coord events.'
 Assert-True (@($map.object_events).Count -eq 3 -and @($map.object_events | Where-Object { $_.trainer_type -ne 'TRAINER_TYPE_NONE' }).Count -eq 0) 'Laricia must contain only the non-trainer Sagra setup objects.'
 Assert-True (@($map.object_events | Where-Object { $_.graphics_id -eq 'OBJ_EVENT_GFX_TRUCK' }).Count -eq 2) 'Laricia Sagra must visibly use two existing truck object graphics.'
 $wild = Read-Json 'src/data/wild_encounters.json'
 Assert-True (@($wild.wild_encounter_groups | ForEach-Object { $_.encounters } | Where-Object { $_.map -eq 'MAP_LARICIA' }).Count -eq 0) 'Laricia scaffold must not add encounters.'
 $scripts = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'data/maps/Laricia/scripts.inc') -Raw
-Assert-True ($scripts.Contains('Sagra') -and $scripts.Contains('Porchetta') -and $scripts.Contains('GALLORO / GENZALIA')) 'Laricia Sagra blocker or eastern direction text is missing.'
+Assert-True ($scripts.Contains('Sagra') -and $scripts.Contains('Porchetta')) 'Laricia Sagra blocker text is missing.'
 Write-Output 'Laricia scaffold: PASS'
