@@ -92,18 +92,22 @@ $lowerTargets = @()
 foreach ($x in 0..63) { foreach ($y in 35..63) { if (Is-Walkable (Read-Block $blocks 64 $x $y)) { $lowerTargets += "$x,$y" } } }
 Assert-True (Test-Reachable $blocks 64 64 $upperStarts $upperTargets) 'Upper bridge route is not continuous from the western entry to the high eastern access.'
 Assert-True (-not (Test-Reachable $blocks 64 64 $upperStarts $lowerTargets)) 'Upper bridge route has a direct collision/elevation-compatible path to the lower valley.'
-Assert-True (Test-Reachable $blocks 64 64 $lowerStarts @('20,39')) 'Lower valley cannot reach Casale 1 approach.'
-Assert-True (Test-Reachable $blocks 64 64 $lowerStarts @('44,36')) 'Lower valley cannot reach Casale 2 approach.'
-Assert-True (Test-Reachable $blocks 64 64 $lowerStarts @('43,59')) 'Lower valley cannot reach the agricultural house approach.'
-Assert-True (Test-Reachable $blocks 64 64 $lowerStarts @('51,27')) 'Lower valley cannot reach the secret-passage approach.'
-Assert-True (Test-Reachable $blocks 64 64 @('58,10') @('58,5')) 'The local upper secret-passage area cannot reach the future Emissario entrance.'
+Assert-True (Test-Reachable $blocks 64 64 $lowerStarts @('20,38')) 'Lower valley cannot reach Casale 1 entrance.'
+Assert-True (Test-Reachable $blocks 64 64 $lowerStarts @('44,35')) 'Lower valley cannot reach Casale 2 entrance.'
+Assert-True (Test-Reachable $blocks 64 64 $lowerStarts @('43,58')) 'Lower valley cannot reach the agricultural house entrance.'
+Assert-True (Test-Reachable $blocks 64 64 $lowerStarts @('51,26')) 'Lower valley cannot reach the under-bridge entrance.'
+Assert-True (Test-Reachable $blocks 64 64 @('51,8') @('58,5')) 'The upper under-bridge area cannot reach the future Emissario entrance.'
 
 $supportedLariciaBridgeMetatiles = @(0x293, 0x294, 0x2EE, 0x2F0, 0x2F9, 0x2FA, 0x302, 0x309)
 foreach ($id in $supportedLariciaBridgeMetatiles) {
     Assert-True (($id - 0x200) * 16 -lt [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/tilesets/secondary/laricia/metatiles.bin')).Length) "Laricia lacks required PortaPretoria bridge metatile 0x$('{0:X3}' -f $id)."
 }
 
-Assert-True (@($map.object_events).Count -eq 0 -and @($map.warp_events).Count -eq 0 -and @($map.coord_events).Count -eq 0 -and @($map.bg_events).Count -eq 0) 'Ponte/Valle scaffold must not contain gameplay events.'
+Assert-True (@($map.object_events).Count -eq 6 -and @($map.warp_events).Count -eq 2 -and @($map.coord_events).Count -eq 0 -and @($map.bg_events).Count -eq 0) 'Ponte/Valle must contain only the approved civilian and under-bridge events.'
+$underBridgeWarps = @($map.warp_events | Where-Object { $_.dest_map -eq 'MAP_PONTE_VALLE_LARICIA' })
+Assert-True ($underBridgeWarps.Count -eq 2) 'Ponte/Valle must contain exactly two local under-bridge warps.'
+Assert-True (@($underBridgeWarps | Where-Object { [int]$_.x -eq 51 -and [int]$_.y -eq 26 -and [int]$_.elevation -eq 3 -and $_.dest_warp_id -eq '1' }).Count -eq 1) 'Valle under-bridge warp must be 51,26 -> warp 1.'
+Assert-True (@($underBridgeWarps | Where-Object { [int]$_.x -eq 51 -and [int]$_.y -eq 8 -and [int]$_.elevation -eq 3 -and $_.dest_warp_id -eq '0' }).Count -eq 1) 'Upper under-bridge warp must be 51,8 -> warp 0.'
 $wild = Read-Json 'src/data/wild_encounters.json'
 Assert-True (@($wild.wild_encounter_groups | ForEach-Object { $_.encounters } | Where-Object { $_.map -eq 'MAP_PONTE_VALLE_LARICIA' }).Count -eq 0) 'Ponte/Valle scaffold must not contain encounters.'
 $scripts = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'data/event_scripts.s') -Raw
