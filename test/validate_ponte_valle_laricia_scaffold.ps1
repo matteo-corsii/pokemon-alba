@@ -103,11 +103,12 @@ foreach ($id in $supportedLariciaBridgeMetatiles) {
     Assert-True (($id - 0x200) * 16 -lt [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/tilesets/secondary/laricia/metatiles.bin')).Length) "Laricia lacks required PortaPretoria bridge metatile 0x$('{0:X3}' -f $id)."
 }
 
-Assert-True (@($map.object_events).Count -eq 6 -and @($map.warp_events).Count -eq 2 -and @($map.coord_events).Count -eq 0 -and @($map.bg_events).Count -eq 0) 'Ponte/Valle must contain only the approved civilian and under-bridge events.'
+Assert-True (@($map.object_events).Count -eq 28 -and @($map.warp_events).Count -eq 5 -and @($map.coord_events).Count -eq 0 -and @($map.bg_events).Count -eq 0) 'Ponte/Valle event inventory is incorrect.'
 $underBridgeWarps = @($map.warp_events | Where-Object { $_.dest_map -eq 'MAP_PONTE_VALLE_LARICIA' })
 Assert-True ($underBridgeWarps.Count -eq 2) 'Ponte/Valle must contain exactly two local under-bridge warps.'
 Assert-True (@($underBridgeWarps | Where-Object { [int]$_.x -eq 51 -and [int]$_.y -eq 26 -and [int]$_.elevation -eq 3 -and $_.dest_warp_id -eq '1' }).Count -eq 1) 'Valle under-bridge warp must be 51,26 -> warp 1.'
 Assert-True (@($underBridgeWarps | Where-Object { [int]$_.x -eq 51 -and [int]$_.y -eq 8 -and [int]$_.elevation -eq 3 -and $_.dest_warp_id -eq '0' }).Count -eq 1) 'Upper under-bridge warp must be 51,8 -> warp 0.'
+Assert-True (@($map.warp_events | Where-Object { [int]$_.x -eq 58 -and [int]$_.y -eq 5 }).Count -eq 0) 'Future Nemora entrance must remain unused.'
 $wild = Read-Json 'src/data/wild_encounters.json'
 Assert-True (@($wild.wild_encounter_groups | ForEach-Object { $_.encounters } | Where-Object { $_.map -eq 'MAP_PONTE_VALLE_LARICIA' }).Count -eq 0) 'Ponte/Valle scaffold must not contain encounters.'
 $scripts = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'data/event_scripts.s') -Raw
