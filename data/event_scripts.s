@@ -171,6 +171,7 @@ gStdScripts_End::
 	.include "data/maps/Laricia_House2/scripts.inc"
 	.include "data/maps/Laricia_House3/scripts.inc"
 	.include "data/maps/Laricia_House4/scripts.inc"
+	.include "data/maps/Laricia_House5/scripts.inc"
 	.include "data/maps/VillaPapaleGiardini/scripts.inc"
 	.include "data/maps/VillaPapaleInterno/scripts.inc"
 	.include "data/maps/BorgoDiCastello_PokemonCenter/scripts.inc"

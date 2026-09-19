@@ -11,15 +11,16 @@ $specs = @(
     @{ Name='Laricia_House1'; Map='MAP_LARICIA_HOUSE1'; Layout='LAYOUT_LARICIA_HOUSE1'; X=48; Y=25; Secondary='gTileset_GenericBuilding'; W=10; H=9 },
     @{ Name='Laricia_House2'; Map='MAP_LARICIA_HOUSE2'; Layout='LAYOUT_LARICIA_HOUSE2'; X=49; Y=37; Secondary='gTileset_GenericBuilding'; W=10; H=9 },
     @{ Name='Laricia_House3'; Map='MAP_LARICIA_HOUSE3'; Layout='LAYOUT_LARICIA_HOUSE3'; X=18; Y=56; Secondary='gTileset_GenericBuilding'; W=10; H=9 },
-    @{ Name='Laricia_House4'; Map='MAP_LARICIA_HOUSE4'; Layout='LAYOUT_LARICIA_HOUSE4'; X=44; Y=56; Secondary='gTileset_GenericBuilding'; W=10; H=9 }
+    @{ Name='Laricia_House4'; Map='MAP_LARICIA_HOUSE4'; Layout='LAYOUT_LARICIA_HOUSE4'; X=44; Y=56; Secondary='gTileset_GenericBuilding'; W=10; H=9 },
+    @{ Name='Laricia_House5'; Map='MAP_LARICIA_HOUSE5'; Layout='LAYOUT_LARICIA_HOUSE5'; X=32; Y=46; Secondary='gTileset_GenericBuilding'; W=10; H=9 }
 )
 $layouts = (Read-Json 'data/layouts/layouts.json').layouts
 $groups = Read-Json 'data/maps/map_groups.json'
 $outside = Read-Json 'data/maps/Laricia/map.json'
-Assert-True (@($outside.warp_events).Count -eq 8) 'Laricia must have exactly the eight civilian interior warps.'
+Assert-True (@($outside.warp_events).Count -eq 9) 'Laricia must have exactly the nine civilian interior warps.'
 Assert-True (@($outside.warp_events | Where-Object { [int]$_.x -eq 32 -and [int]$_.y -eq 10 }).Count -eq 0) 'Palazzo Chigi must not have a warp.'
-Assert-True (@($layouts | Where-Object { $_.id -in $specs.Layout }).Count -eq 8) 'Laricia interior layout IDs must be unique and registered.'
-Assert-True (@($groups.gMapGroup_IndoorOldale | Where-Object { $_ -in $specs.Name }).Count -eq 8) 'Laricia interiors must be appended once to IndoorOldale.'
+Assert-True (@($layouts | Where-Object { $_.id -in $specs.Layout }).Count -eq 9) 'Laricia interior layout IDs must be unique and registered.'
+Assert-True (@($groups.gMapGroup_IndoorOldale | Where-Object { $_ -in $specs.Name }).Count -eq 9) 'Laricia interiors must be appended once to IndoorOldale.'
 foreach ($s in $specs) {
     $map = Read-Json ("data/maps/{0}/map.json" -f $s.Name)
     $layout = @($layouts | Where-Object { $_.id -eq $s.Layout })
