@@ -7,6 +7,7 @@
 #include "battle_switch_in.h"
 #include "battle_controllers.h"
 #include "config_changes.h"
+#include "first_echo.h"
 #include "constants/battle.h"
 #include "constants/moves.h"
 
@@ -17,6 +18,9 @@ static bool32 SecondEventBlockEvents(struct BattleCalcValues *calcValues);
 bool32 DoSwitchInEvents(void)
 {
     enum BattlerId battler;
+
+    if (FirstEcho_TryActivateOnSwitchIn())
+        return TRUE;
 
     struct BattleCalcValues calcValues = {0};
     for (battler = 0; battler < gBattlersCount; battler++)

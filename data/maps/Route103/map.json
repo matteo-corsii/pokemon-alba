@@ -22,6 +22,16 @@
       "map": "MAP_VIA_CONSOLARE",
       "offset": 0,
       "direction": "left"
+    },
+    {
+      "map": "MAP_STRADA_BORGO_CISTERNONI",
+      "offset": 0,
+      "direction": "up"
+    },
+    {
+      "map": "MAP_PONTE_VALLE_LARICIA",
+      "offset": 0,
+      "direction": "right"
     }
   ],
   "object_events": [
