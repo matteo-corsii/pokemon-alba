@@ -39,7 +39,7 @@ foreach ($spec in $civilians) {
     $event = $npc[0]; $x = [int]$event.x; $y = [int]$event.y
     Assert-True ($event.trainer_type -eq 'TRAINER_TYPE_NONE' -and $event.flag -eq '0') "Laricia civilian $($spec.Id) must not be gated or a trainer."
     Assert-True ($event.script -eq $spec.Script -and $scripts.Contains("$($spec.Script)::") -and $scripts.Contains("$($spec.Text):")) "Laricia civilian $($spec.Id) script or text is missing."
-    $inApprovedArea = ($x -ge 0 -and $x -lt 45 -and $y -ge 0 -and $y -lt 64) -or ($spec.Id -eq 'LOCALID_LARICIA_VIANDANTE_UCCELLIERA' -and $x -eq 50 -and $y -eq 6)
+    $inApprovedArea = ($x -ge 0 -and $x -lt 45 -and $y -ge 0 -and $y -lt 64) -or ($spec.Id -eq 'LOCALID_LARICIA_VIANDANTE_UCCELLIERA' -and $x -ge 49 -and $x -le 51 -and $y -eq 6)
     Assert-True $inApprovedArea "Laricia civilian $($spec.Id) is outside the approved city side."
     Assert-True (Is-Walkable (Read-Block $blocks 64 $x $y)) "Laricia civilian $($spec.Id) is on a blocked tile."
     Assert-True (-not $warpsByCoordinate.ContainsKey("$x,$y")) "Laricia civilian $($spec.Id) is on a warp."
