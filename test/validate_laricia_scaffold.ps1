@@ -224,7 +224,7 @@ foreach ($y in 0..63) { if ($y -notin @(14..17) + @(38..41)) { Assert-True (-not
 $upper = @(14..17 | ForEach-Object { "0,$_" }); $lower = @(38..41 | ForEach-Object { "0,$_" })
 Assert-True (Test-Reachable $blocks 64 64 $upper @('30,22')) 'Upper bridge entry cannot reach Laricia piazza.'
 Assert-True (Test-Reachable $blocks 64 64 @('30,22') $lower) 'Piazza cannot reach the lower Valle exit.'
-Assert-True (Test-Reachable $blocks 64 64 @('30,22') @('51,24')) 'Piazza cannot reach the east road/Sagra approach.'
+Assert-True (Test-Reachable $blocks 64 64 @('30,22') @('42,17')) 'Piazza cannot reach the city side of the Sagra block.'
 Assert-True (-not (Test-Reachable $blocks 64 64 @('30,22') @('63,24'))) 'The Sagra block is bypassable to Laricia east edge.'
 foreach ($entrance in @('32,10', '12,37', '18,47', '12,25', '45,46', '48,25', '49,37', '18,56', '44,56')) {
     Assert-True (Test-Reachable $blocks 64 64 @('30,22') @($entrance)) "Canonical Laricia entrance $entrance is unreachable."
@@ -239,7 +239,7 @@ Assert-True ($trucks.Count -eq 2) 'Laricia must contain exactly two Sagra trucks
 foreach ($truck in $trucks) { Assert-True ([int]$truck.x -ge 46 -and [int]$truck.x -le 48 -and [int]$truck.y -ge 13 -and [int]$truck.y -le 18) 'Laricia Sagra truck is outside the approved manual area.' }
 Assert-True (@($map.bg_events).Count -eq 0) 'Laricia must not retain the removed Galloro/Genzalia sign event.'
 Assert-True (@($map.warp_events).Count -eq 9 -and @($map.coord_events).Count -eq 0) 'Laricia must contain the nine civilian interior warps and no coord events.'
-Assert-True (@($map.object_events).Count -eq 3 -and @($map.object_events | Where-Object { $_.trainer_type -ne 'TRAINER_TYPE_NONE' }).Count -eq 0) 'Laricia must contain only the non-trainer Sagra setup objects.'
+Assert-True (@($map.object_events).Count -eq 12 -and @($map.object_events | Where-Object { $_.trainer_type -ne 'TRAINER_TYPE_NONE' }).Count -eq 0) 'Laricia must contain the approved non-trainer Sagra and civilian population.'
 Assert-True (@($map.object_events | Where-Object { $_.graphics_id -eq 'OBJ_EVENT_GFX_TRUCK' }).Count -eq 2) 'Laricia Sagra must visibly use two existing truck object graphics.'
 $wild = Read-Json 'src/data/wild_encounters.json'
 Assert-True (@($wild.wild_encounter_groups | ForEach-Object { $_.encounters } | Where-Object { $_.map -eq 'MAP_LARICIA' }).Count -eq 0) 'Laricia scaffold must not add encounters.'
