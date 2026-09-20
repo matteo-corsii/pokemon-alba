@@ -2869,7 +2869,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonScale = 256, .frontPic = gMonFrontPic_Vitemosto, .frontPicSize = MON_COORDS_SIZE(64, 64), .frontPicYOffset = 4, .frontAnimFrames = sAnims_SingleFramePlaceHolder,
         .backPic = gMonBackPic_Vitemosto, .backPicSize = MON_COORDS_SIZE(64, 64), .backPicYOffset = 4, .palette = gMonPalette_Vitemosto, .shinyPalette = gMonShinyPalette_Vitemosto, .iconSprite = gMonIcon_Vitemosto, .iconPalIndex = 0,
         FOOTPRINT(Smoliv) OVERWORLD(sPicTable_Smoliv, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, sAnimTable_Following, gOverworldPalette_Smoliv, gShinyOverworldPalette_Smoliv)
-        .levelUpLearnset = sVitemostoLevelUpLearnset, .teachingType = EXPLICIT_TEACHABLES, .teachableLearnset = sVitemostoTeachableLearnset, .eggMoveLearnset = sVitemostoEggMoveLearnset,
+        .levelUpLearnset = sVitemostoLevelUpLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sVitemostoTeachableLearnset,
+        .eggMoveLearnset = sVitemostoEggMoveLearnset,
     },
 
     [SPECIES_PORCHIGNIS] =
@@ -2882,7 +2885,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonScale = 320, .frontPic = gMonFrontPic_Porchignis, .frontPicSize = MON_COORDS_SIZE(64, 64), .frontPicYOffset = 4, .frontAnimFrames = sAnims_SingleFramePlaceHolder,
         .backPic = gMonBackPic_Porchignis, .backPicSize = MON_COORDS_SIZE(64, 64), .backPicYOffset = 4, .palette = gMonPalette_Porchignis, .shinyPalette = gMonShinyPalette_Porchignis, .iconSprite = gMonIcon_Porchignis, .iconPalIndex = 0,
         FOOTPRINT(Tepig) OVERWORLD(sPicTable_Tepig, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, sAnimTable_Following, gOverworldPalette_Tepig, gShinyOverworldPalette_Tepig)
-        .levelUpLearnset = sPorchignisLevelUpLearnset, .teachingType = EXPLICIT_TEACHABLES, .teachableLearnset = sPorchignisTeachableLearnset, .eggMoveLearnset = sPorchignisEggMoveLearnset, .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_BRONZOVERRO}),
+        .levelUpLearnset = sPorchignisLevelUpLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sPorchignisTeachableLearnset,
+        .eggMoveLearnset = sPorchignisEggMoveLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_BRONZOVERRO}),
     },
 
     [SPECIES_BRONZOVERRO] =
@@ -2895,7 +2902,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonScale = 256, .frontPic = gMonFrontPic_Bronzoverro, .frontPicSize = MON_COORDS_SIZE(64, 64), .frontPicYOffset = 4, .frontAnimFrames = sAnims_SingleFramePlaceHolder,
         .backPic = gMonBackPic_Bronzoverro, .backPicSize = MON_COORDS_SIZE(64, 64), .backPicYOffset = 4, .palette = gMonPalette_Bronzoverro, .shinyPalette = gMonShinyPalette_Bronzoverro, .iconSprite = gMonIcon_Bronzoverro, .iconPalIndex = 0,
         FOOTPRINT(Emboar) OVERWORLD(sPicTable_Emboar, SIZE_32x32, SHADOW_SIZE_L, TRACKS_FOOT, sAnimTable_Following, gOverworldPalette_Emboar, gShinyOverworldPalette_Emboar)
-        .levelUpLearnset = sBronzoverroLevelUpLearnset, .teachingType = EXPLICIT_TEACHABLES, .teachableLearnset = sBronzoverroTeachableLearnset, .eggMoveLearnset = sBronzoverroEggMoveLearnset,
+        .levelUpLearnset = sBronzoverroLevelUpLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sBronzoverroTeachableLearnset,
+        .eggMoveLearnset = sBronzoverroEggMoveLearnset,
     },
 
     [SPECIES_FRASCHIETTO] =
@@ -2908,7 +2918,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonScale = 320, .frontPic = gMonFrontPic_Fraschietto, .frontPicSize = MON_COORDS_SIZE(64, 64), .frontPicYOffset = 4, .frontAnimFrames = sAnims_SingleFramePlaceHolder,
         .backPic = gMonBackPic_Fraschietto, .backPicSize = MON_COORDS_SIZE(64, 64), .backPicYOffset = 4, .palette = gMonPalette_Fraschietto, .shinyPalette = gMonShinyPalette_Fraschietto, .iconSprite = gMonIcon_Fraschietto, .iconPalIndex = 0,
         FOOTPRINT(Makuhita) OVERWORLD(sPicTable_Makuhita, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, sAnimTable_Following, gOverworldPalette_Makuhita, gShinyOverworldPalette_Makuhita)
-        .levelUpLearnset = sFraschiettoLevelUpLearnset, .teachingType = EXPLICIT_TEACHABLES, .teachableLearnset = sFraschiettoTeachableLearnset, .eggMoveLearnset = sFraschiettoEggMoveLearnset, .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_FRASCOTTO}),
+        .levelUpLearnset = sFraschiettoLevelUpLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sFraschiettoTeachableLearnset,
+        .eggMoveLearnset = sFraschiettoEggMoveLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_FRASCOTTO}),
     },
 
     [SPECIES_FRASCOTTO] =
@@ -2921,7 +2935,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonScale = 256, .frontPic = gMonFrontPic_Frascotto, .frontPicSize = MON_COORDS_SIZE(64, 64), .frontPicYOffset = 4, .frontAnimFrames = sAnims_SingleFramePlaceHolder,
         .backPic = gMonBackPic_Frascotto, .backPicSize = MON_COORDS_SIZE(64, 64), .backPicYOffset = 4, .palette = gMonPalette_Frascotto, .shinyPalette = gMonShinyPalette_Frascotto, .iconSprite = gMonIcon_Frascotto, .iconPalIndex = 0,
         FOOTPRINT(Hariyama) OVERWORLD(sPicTable_Hariyama, SIZE_32x32, SHADOW_SIZE_L, TRACKS_FOOT, sAnimTable_Following, gOverworldPalette_Hariyama, gShinyOverworldPalette_Hariyama)
-        .levelUpLearnset = sFrascottoLevelUpLearnset, .teachingType = EXPLICIT_TEACHABLES, .teachableLearnset = sFrascottoTeachableLearnset, .eggMoveLearnset = sFrascottoEggMoveLearnset,
+        .levelUpLearnset = sFrascottoLevelUpLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sFrascottoTeachableLearnset,
+        .eggMoveLearnset = sFrascottoEggMoveLearnset,
     },
 
     /* You may add any custom species below this point based on the following structure: */
