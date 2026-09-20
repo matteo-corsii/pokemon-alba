@@ -21,6 +21,19 @@ $graphics = Get-Content -Raw $graphicsPath
 $eggs = Get-Content -Raw $eggPath
 $learnables = Get-Content -Raw $learnablesPath | ConvertFrom-Json
 $wild = Get-Content -Raw $wildPath
+$wildData = $wild | ConvertFrom-Json
+$valleEntries = @($wildData.wild_encounter_groups | ForEach-Object { $_.encounters } | Where-Object { $null -ne $_ -and $_.PSObject.Properties.Name -contains 'map' -and $_.map -eq 'MAP_PONTE_VALLE_LARICIA' })
+$valleJson = $valleEntries | ConvertTo-Json -Depth 20
+$nativeWild = @('SPECIES_VITEMOSTO', 'SPECIES_PORCHIGNIS', 'SPECIES_FRASCHIETTO')
+$nonWildEvolutions = @('SPECIES_BRONZOVERRO', 'SPECIES_FRASCOTTO')
+foreach ($native in $nativeWild) {
+    Assert-True ($valleJson -match "\b$native\b") "$native must appear in Valle di Laricia encounters"
+    $otherEntries = @($wildData.wild_encounter_groups | ForEach-Object { $_.encounters } | Where-Object { $null -ne $_ -and $_.PSObject.Properties.Name -contains 'map' -and $_.map -ne 'MAP_PONTE_VALLE_LARICIA' } | ConvertTo-Json -Depth 20)
+    Assert-True (-not ($otherEntries -match "\b$native\b")) "$native is only authorized in Valle di Laricia encounters"
+}
+foreach ($evolved in $nonWildEvolutions) {
+    Assert-True (-not ($valleJson -match "\b$evolved\b")) "$evolved must not appear in Valle di Laricia encounters"
+}
 
 $expected = @{
     VITEMOSTO   = @{ Stats = @(75,55,70,80,100,65); Types = 'TYPE_GRASS, TYPE_FIRE'; Evo = $null }
@@ -51,7 +64,6 @@ foreach ($name in $expected.Keys) {
         Assert-True (Test-Path (Join-Path $root "graphics/pokemon/$($name.ToLower())/$asset")) "$name graphics asset missing: $asset"
     }
     Assert-True ($eggs -match "s$($name.Substring(0,1) + $name.Substring(1).ToLower())EggMoveLearnset") "$name egg-move registration is missing"
-    Assert-True (-not ($wild -match "\b$constant\b")) "$name must not yet appear in wild encounters"
     Assert-True (-not ((Get-ChildItem (Join-Path $root 'src/data') -Recurse -File | Where-Object { $_.Name -match 'trainer' } | Get-Content -Raw) -match "\b$constant\b")) "$name must not yet appear in trainer data"
 }
 

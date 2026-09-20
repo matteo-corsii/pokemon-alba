@@ -110,7 +110,7 @@ Assert-True (@($underBridgeWarps | Where-Object { [int]$_.x -eq 51 -and [int]$_.
 Assert-True (@($underBridgeWarps | Where-Object { [int]$_.x -eq 51 -and [int]$_.y -eq 8 -and [int]$_.elevation -eq 3 -and $_.dest_warp_id -eq '0' }).Count -eq 1) 'Upper under-bridge warp must be 51,8 -> warp 0.'
 Assert-True (@($map.warp_events | Where-Object { [int]$_.x -eq 58 -and [int]$_.y -eq 5 }).Count -eq 0) 'Future Nemora entrance must remain unused.'
 $wild = Read-Json 'src/data/wild_encounters.json'
-Assert-True (@($wild.wild_encounter_groups | ForEach-Object { $_.encounters } | Where-Object { $_.map -eq 'MAP_PONTE_VALLE_LARICIA' }).Count -eq 0) 'Ponte/Valle scaffold must not contain encounters.'
+Assert-True (@($wild.wild_encounter_groups | ForEach-Object { $_.encounters } | Where-Object { $_.map -eq 'MAP_PONTE_VALLE_LARICIA' }).Count -eq 4) 'Ponte/Valle must contain four time-of-day wild encounter tables.'
 $scripts = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'data/event_scripts.s') -Raw
 Assert-True ($scripts.Contains('.include "data/maps/PonteValleLaricia/scripts.inc"')) 'Ponte/Valle scripts are not included.'
 

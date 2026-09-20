@@ -57,6 +57,6 @@ foreach ($tree in $berryTrees) {
     Assert-True (($raw -band 0x3FF) -eq 0x10C -and (Elevation $raw) -eq 3) 'Berry Tree must remain on approved soil.'
 }
 $wild = Read-Json 'src/data/wild_encounters.json'
-Assert-True (@($wild.wild_encounter_groups | ForEach-Object { $_.encounters } | Where-Object { $_.map -eq 'MAP_PONTE_VALLE_LARICIA' }).Count -eq 0) 'Valle must not contain wild encounters.'
+Assert-True (@($wild.wild_encounter_groups | ForEach-Object { $_.encounters } | Where-Object { $_.map -eq 'MAP_PONTE_VALLE_LARICIA' }).Count -eq 4) 'Valle must contain four time-of-day wild encounter tables.'
 Assert-True (-not ($scripts -match 'trainerbattle|giveitem|setflag|setvar|special|cutscene')) 'Valle civilian scripts must not contain gameplay commands.'
 Write-Output 'Valle Laricia population: PASS'

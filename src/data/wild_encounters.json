@@ -37353,6 +37353,90 @@
           }
         },
         {
+          "map": "MAP_PONTE_VALLE_LARICIA",
+          "base_label": "gPonteValleLaricia_Morning",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              { "min_level": 23, "max_level": 25, "species": "SPECIES_VITEMOSTO" },
+              { "min_level": 24, "max_level": 26, "species": "SPECIES_VITEMOSTO" },
+              { "min_level": 24, "max_level": 25, "species": "SPECIES_CRISALVIA" },
+              { "min_level": 24, "max_level": 25, "species": "SPECIES_PASTUFO" },
+              { "min_level": 25, "max_level": 26, "species": "SPECIES_CRISALVIA" },
+              { "min_level": 25, "max_level": 26, "species": "SPECIES_PASTUFO" },
+              { "min_level": 25, "max_level": 26, "species": "SPECIES_PORCHIGNIS" },
+              { "min_level": 26, "max_level": 27, "species": "SPECIES_PORCHIGNIS" },
+              { "min_level": 25, "max_level": 26, "species": "SPECIES_FRASCHIETTO" },
+              { "min_level": 26, "max_level": 27, "species": "SPECIES_FRASCHIETTO" },
+              { "min_level": 27, "max_level": 28, "species": "SPECIES_FRASCHIETTO" },
+              { "min_level": 27, "max_level": 28, "species": "SPECIES_FRASCHIETTO" }
+            ]
+          }
+        },
+        {
+          "map": "MAP_PONTE_VALLE_LARICIA",
+          "base_label": "gPonteValleLaricia_Day",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              { "min_level": 23, "max_level": 25, "species": "SPECIES_VITEMOSTO" },
+              { "min_level": 24, "max_level": 26, "species": "SPECIES_VITEMOSTO" },
+              { "min_level": 24, "max_level": 25, "species": "SPECIES_CRISALVIA" },
+              { "min_level": 24, "max_level": 25, "species": "SPECIES_PASTUFO" },
+              { "min_level": 25, "max_level": 26, "species": "SPECIES_CRISALVIA" },
+              { "min_level": 25, "max_level": 26, "species": "SPECIES_PASTUFO" },
+              { "min_level": 25, "max_level": 26, "species": "SPECIES_PORCHIGNIS" },
+              { "min_level": 26, "max_level": 27, "species": "SPECIES_PORCHIGNIS" },
+              { "min_level": 25, "max_level": 26, "species": "SPECIES_FRASCHIETTO" },
+              { "min_level": 26, "max_level": 27, "species": "SPECIES_FRASCHIETTO" },
+              { "min_level": 27, "max_level": 28, "species": "SPECIES_FRASCHIETTO" },
+              { "min_level": 27, "max_level": 28, "species": "SPECIES_FRASCHIETTO" }
+            ]
+          }
+        },
+        {
+          "map": "MAP_PONTE_VALLE_LARICIA",
+          "base_label": "gPonteValleLaricia_Evening",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              { "min_level": 23, "max_level": 25, "species": "SPECIES_VITEMOSTO" },
+              { "min_level": 24, "max_level": 26, "species": "SPECIES_VITEMOSTO" },
+              { "min_level": 24, "max_level": 25, "species": "SPECIES_CRISALVIA" },
+              { "min_level": 24, "max_level": 25, "species": "SPECIES_PASTUFO" },
+              { "min_level": 25, "max_level": 26, "species": "SPECIES_CRISALVIA" },
+              { "min_level": 25, "max_level": 26, "species": "SPECIES_PASTUFO" },
+              { "min_level": 25, "max_level": 26, "species": "SPECIES_PORCHIGNIS" },
+              { "min_level": 26, "max_level": 27, "species": "SPECIES_PORCHIGNIS" },
+              { "min_level": 25, "max_level": 26, "species": "SPECIES_FRASCHIETTO" },
+              { "min_level": 26, "max_level": 27, "species": "SPECIES_FRASCHIETTO" },
+              { "min_level": 27, "max_level": 28, "species": "SPECIES_FRASCHIETTO" },
+              { "min_level": 27, "max_level": 28, "species": "SPECIES_FRASCHIETTO" }
+            ]
+          }
+        },
+        {
+          "map": "MAP_PONTE_VALLE_LARICIA",
+          "base_label": "gPonteValleLaricia_Night",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              { "min_level": 23, "max_level": 25, "species": "SPECIES_VITEMOSTO" },
+              { "min_level": 24, "max_level": 26, "species": "SPECIES_VITEMOSTO" },
+              { "min_level": 24, "max_level": 25, "species": "SPECIES_CRISALVIA" },
+              { "min_level": 24, "max_level": 25, "species": "SPECIES_PASTUFO" },
+              { "min_level": 25, "max_level": 26, "species": "SPECIES_CRISALVIA" },
+              { "min_level": 25, "max_level": 26, "species": "SPECIES_PASTUFO" },
+              { "min_level": 25, "max_level": 26, "species": "SPECIES_PORCHIGNIS" },
+              { "min_level": 26, "max_level": 27, "species": "SPECIES_PORCHIGNIS" },
+              { "min_level": 25, "max_level": 26, "species": "SPECIES_FRASCHIETTO" },
+              { "min_level": 26, "max_level": 28, "species": "SPECIES_FRASCHIETTO" },
+              { "min_level": 26, "max_level": 27, "species": "SPECIES_OMPHALUX" },
+              { "min_level": 27, "max_level": 28, "species": "SPECIES_OMPHALUX" }
+            ]
+          }
+        },
+        {
           "map": "MAP_VILLA_PAPALE_GIARDINI",
           "base_label": "gVillaPapaleGiardini_Morning",
           "land_mons": {
