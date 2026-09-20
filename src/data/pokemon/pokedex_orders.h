@@ -1107,6 +1107,12 @@ const u16 gPokedexOrder_Alphabetical[] =
     NATIONAL_DEX_ZUBAT,
     NATIONAL_DEX_ZWEILOUS,
     NATIONAL_DEX_ZYGARDE,
+    // Pokemon Alba: Laricia native species.
+    NATIONAL_DEX_VITEMOSTO,
+    NATIONAL_DEX_PORCHIGNIS,
+    NATIONAL_DEX_BRONZOVERRO,
+    NATIONAL_DEX_FRASCHIETTO,
+    NATIONAL_DEX_FRASCOTTO,
 };
 
 const u16 gPokedexOrder_Weight[] =
@@ -3027,6 +3033,12 @@ const u16 gPokedexOrder_Weight[] =
     // 2204.4 lbs / 999.9 kg
     NATIONAL_DEX_COSMOEM,
     NATIONAL_DEX_CELESTEELA,
+    // Pokemon Alba: Laricia native species.
+    NATIONAL_DEX_VITEMOSTO,
+    NATIONAL_DEX_PORCHIGNIS,
+    NATIONAL_DEX_BRONZOVERRO,
+    NATIONAL_DEX_FRASCHIETTO,
+    NATIONAL_DEX_FRASCOTTO,
 };
 
 const u16 gPokedexOrder_Height[] =
@@ -4424,4 +4436,10 @@ const u16 gPokedexOrder_Height[] =
     NATIONAL_DEX_ETERNATUS,
     // 328'01" / 100m
     //NATIONAL_DEX_ETERNATUS_ETERNAMAX,
+    // Pokemon Alba: Laricia native species.
+    NATIONAL_DEX_VITEMOSTO,
+    NATIONAL_DEX_PORCHIGNIS,
+    NATIONAL_DEX_BRONZOVERRO,
+    NATIONAL_DEX_FRASCHIETTO,
+    NATIONAL_DEX_FRASCOTTO,
 };
