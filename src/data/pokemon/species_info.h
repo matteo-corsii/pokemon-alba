@@ -1250,7 +1250,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
             gShinyOverworldPalette_Ducklett
         )
         .levelUpLearnset = sArdeinoLevelUpLearnset,
-        .teachableLearnset = sNoneTeachableLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sArdeinoTeachableLearnset,
         .eggMoveLearnset = sNoneEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_VELAIRONE}),
     },
@@ -1318,7 +1319,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
             gShinyOverworldPalette_Swanna
         )
         .levelUpLearnset = sVelaironeLevelUpLearnset,
-        .teachableLearnset = sNoneTeachableLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sVelaironeTeachableLearnset,
         .eggMoveLearnset = sNoneEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_CODAIRONE}),
     },
@@ -1384,7 +1386,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
             gShinyOverworldPalette_Bombirdier
         )
         .levelUpLearnset = sCodaironeLevelUpLearnset,
-        .teachableLearnset = sNoneTeachableLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sCodaironeTeachableLearnset,
         .eggMoveLearnset = sNoneEggMoveLearnset,
     },
 
