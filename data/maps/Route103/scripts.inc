@@ -3,6 +3,7 @@ Route103_MapScripts::
 	.byte 0
 
 Route103_OnLoad:
+	call Route103_EventScript_UpdatePonteLariciaBarrier
 	goto_if_unset FLAG_BADGE01_GET, Route103_OnLoad_HideParty
 	goto_if_set FLAG_CISTERNONI_AUREA_ENCOUNTER_COMPLETE, Route103_OnLoad_ShowNico
 	goto_if_set FLAG_CISTERNONI_LIA_READY, Route103_OnLoad_HideParty
@@ -19,6 +20,21 @@ Route103_OnLoad_HideParty:
 	setflag FLAG_HIDE_ROUTE103_LIA
 	setflag FLAG_HIDE_ROUTE103_NICO
 	end
+
+Route103_EventScript_UpdatePonteLariciaBarrier::
+	goto_if_set FLAG_BADGE02_GET, Route103_EventScript_OpenPonteLariciaBarrier
+	setmetatile 78, 14, METATILE_Petalburg_PretoriaArch_PillarLeft, TRUE
+	setmetatile 78, 15, METATILE_Petalburg_PretoriaArch_PillarLeft, TRUE
+	setmetatile 78, 16, METATILE_Petalburg_PretoriaArch_PillarLeft, TRUE
+	setmetatile 78, 17, METATILE_Petalburg_PretoriaArch_PillarLeft, TRUE
+	return
+
+Route103_EventScript_OpenPonteLariciaBarrier::
+	setmetatile 78, 14, 0x10C, FALSE
+	setmetatile 78, 15, 0x10C, FALSE
+	setmetatile 78, 16, 0x10C, FALSE
+	setmetatile 78, 17, 0x10C, FALSE
+	return
 
 Route103_EventScript_LiaBeforeCisternoni::
 	lockall

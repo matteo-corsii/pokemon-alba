@@ -49,18 +49,31 @@ foreach ($expected in $expectedObjects) {
 }
 Assert-True (@($internal.object_events | Where-Object { $_.x -eq 5 -and $_.y -eq 15 -or $_.x -eq 17 -and $_.y -eq 15 }).Count -eq 0) 'Mansio NPC overlaps an exit warp.'
 Assert-True (@($internal.warp_events).Count -eq 2) 'Mansio must have exactly two exit warps.'
-Assert-True (@($internal.warp_events | Where-Object { $_.x -eq 5 -and $_.y -eq 15 -and $_.dest_map -eq 'MAP_VIA_CONSOLARE' -and $_.dest_warp_id -eq '0' }).Count -eq 1) 'Mansio left exit warp is incorrect.'
-Assert-True (@($internal.warp_events | Where-Object { $_.x -eq 17 -and $_.y -eq 15 -and $_.dest_map -eq 'MAP_VIA_CONSOLARE' -and $_.dest_warp_id -eq '1' }).Count -eq 1) 'Mansio right exit warp is incorrect.'
+Assert-True (@($internal.warp_events | Where-Object { $_.x -eq 5 -and $_.y -eq 15 -and $_.elevation -eq 0 -and $_.dest_map -eq 'MAP_VIA_CONSOLARE' -and $_.dest_warp_id -eq '0' }).Count -eq 1) 'Mansio left exit warp is incorrect.'
+Assert-True (@($internal.warp_events | Where-Object { $_.x -eq 17 -and $_.y -eq 15 -and $_.elevation -eq 0 -and $_.dest_map -eq 'MAP_VIA_CONSOLARE' -and $_.dest_warp_id -eq '1' }).Count -eq 1) 'Mansio right exit warp is incorrect.'
 
 Assert-True ($externalLayout.Count -eq 1 -and $externalLayout[0].width -eq 60 -and $externalLayout[0].height -eq 30) 'External Via Consolare dimensions changed.'
 Assert-True ($internalLayout.Count -eq 1 -and $internalLayout[0].width -eq 24 -and $internalLayout[0].height -eq 16) 'Mansio dimensions must be 24x16.'
 Assert-True ($internalLayout[0].primary_tileset -eq 'gTileset_Building' -and $internalLayout[0].secondary_tileset -eq 'gTileset_GenericBuilding') 'Mansio tilesets are incorrect.'
 Assert-True (@($groups.gMapGroup_IndoorOldale | Where-Object { $_ -eq 'ViaConsolare_Mansio' }).Count -eq 1) 'Mansio is not registered in the indoor map group.'
 Assert-True ((Get-Item (Join-Path $RepositoryRoot 'data/layouts/ViaConsolare_Mansio/map.bin')).Length -eq (24 * 16 * 2)) 'Mansio map.bin size is incorrect.'
+$mansioBin = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/layouts/ViaConsolare_Mansio/map.bin'))
+$buildingAttrs = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/tilesets/primary/building/metatile_attributes.bin'))
+foreach ($exit in @(@(5, 15, 0x0006), @(17, 15, 0x0007))) {
+    $offset = (($exit[1] * 24) + $exit[0]) * 2
+    $raw = [BitConverter]::ToUInt16($mansioBin, $offset)
+    Assert-True ($raw -eq $exit[2] -and (($raw -shr 10) -band 3) -eq 0 -and (($raw -shr 12) -band 3) -eq 0) "Mansio exit raw block is not the proven School reference at $($exit[0]),$($exit[1])."
+    $attribute = [BitConverter]::ToUInt16($buildingAttrs, ($raw -band 0x3FF) * 2)
+    Assert-True (($attribute -band 0xFF) -eq 101) "Mansio exit behavior is not MB_SOUTH_ARROW_WARP at $($exit[0]),$($exit[1])."
+}
 # ViaConsolare/map.bin has an explicit exact-delta guard in the Lago tileset validator.
 Assert-True ($scripts.Contains('msgbox ViaConsolare_Mansio_Text_OsteIntro, MSGBOX_YESNO')) 'Oste must offer a Yes/No rest choice.'
 Assert-True ($scripts.Contains('case YES, ViaConsolare_Mansio_EventScript_OsteHeal') -and $scripts.Contains('special HealPlayerParty')) 'Oste Yes branch must heal the party.'
 Assert-True ($scripts.Contains('case NO, ViaConsolare_Mansio_EventScript_OsteDecline')) 'Oste No branch is missing.'
+Assert-True ($scripts -match '(?s)ViaConsolare_Mansio_EventScript_Oste::\s*lock\s*faceplayer') 'Oste interaction must lock and face the player.'
+Assert-True ($scripts -match '(?s)ViaConsolare_Mansio_EventScript_OsteHeal::.*?msgbox ViaConsolare_Mansio_Text_OsteAfter, MSGBOX_DEFAULT\s*release\s*end') 'Oste heal branch must release after closing its message.'
+Assert-True ($scripts -match '(?s)ViaConsolare_Mansio_EventScript_OsteDecline::.*?msgbox ViaConsolare_Mansio_Text_OsteDecline, MSGBOX_DEFAULT\s*release\s*end') 'Oste decline branch must release after closing its message.'
+Assert-True (@($internal.object_events | Where-Object { $_.local_id -eq 'LOCALID_MANSIO_OSTE' -and $_.graphics_id -eq 'OBJ_EVENT_GFX_WOMAN_1' }).Count -eq 1) 'Oste must use the approved female sprite.'
 Assert-True (-not $scripts.Contains('trainerbattle') -and -not $scripts.Contains('giveitem')) 'Mansio content must not add battles or items.'
 
 Write-Output 'Mansio Consolare structural blockout: PASS'

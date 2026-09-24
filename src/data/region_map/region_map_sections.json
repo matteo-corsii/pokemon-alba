@@ -1634,6 +1634,62 @@
       "y": 9,
       "width": 1,
       "height": 1
+    },
+    {
+      "id": "MAPSEC_VIA_CONSOLARE",
+      "name": "VIA CONSOLARE",
+      "x": 5,
+      "y": 9,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_LAGO_DI_ALBERA",
+      "name": "LAGO DI ALBÈRA",
+      "x": 5,
+      "y": 9,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_BORGO_DI_CASTELLO",
+      "name": "BORGO DI CASTELLO",
+      "x": 5,
+      "y": 9,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_VILLA_PAPALE",
+      "name": "VILLA PAPALE",
+      "x": 5,
+      "y": 9,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_GALLERIE_DI_SOPRA",
+      "name": "GALLERIE DI SOPRA",
+      "x": 5,
+      "y": 9,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_PONTE_VALLE_LARICIA",
+      "name": "PONTE/VALLE LARICIA",
+      "x": 5,
+      "y": 9,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_LARICIA",
+      "name": "LARICIA",
+      "x": 5,
+      "y": 9,
+      "width": 1,
+      "height": 1
     }
   ]
 }

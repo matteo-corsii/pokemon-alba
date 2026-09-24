@@ -227,6 +227,9 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Dusclops;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnionRoomAttendant;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Sudowoodo;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Mew;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Cingerm;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Ardeino;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Serbrace;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Red;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Leaf;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Deoxys;
@@ -645,6 +648,10 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_OW_MON] =                   &gObjectEventGraphicsInfo_Follower,
     [OBJ_EVENT_GFX_LIGHT_SPRITE] =             &gObjectEventGraphicsInfo_BallLight,
     [OBJ_EVENT_GFX_APRICORN_TREE] =            &gObjectEventGraphicsInfo_ApricornTree,
+    [OBJ_EVENT_GFX_CINGERM]                = &gObjectEventGraphicsInfo_Cingerm,
+    [OBJ_EVENT_GFX_ARDEINO]                = &gObjectEventGraphicsInfo_Ardeino,
+    [OBJ_EVENT_GFX_SERBRACE]               = &gObjectEventGraphicsInfo_Serbrace,
+
 #if IS_FRLG
     [OBJ_EVENT_GFX_RED_NORMAL] =               &gObjectEventGraphicsInfo_RedNormal,
     [OBJ_EVENT_GFX_RED_BIKE] =                 &gObjectEventGraphicsInfo_RedBike,

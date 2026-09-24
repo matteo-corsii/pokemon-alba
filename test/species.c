@@ -285,7 +285,12 @@ TEST("Ausonia starter IDs are append-only and distinct")
     EXPECT_EQ(SPECIES_CARPULUS, SPECIES_CALCISTERN + 1);
     EXPECT_EQ(SPECIES_LUCINUS, SPECIES_CARPULUS + 1);
     EXPECT_EQ(SPECIES_NAUFRAGUS, SPECIES_LUCINUS + 1);
-    EXPECT_EQ(SPECIES_EGG, SPECIES_NAUFRAGUS + 1);
+    EXPECT_EQ(SPECIES_VITEMOSTO, SPECIES_NAUFRAGUS + 1);
+    EXPECT_EQ(SPECIES_PORCHIGNIS, SPECIES_VITEMOSTO + 1);
+    EXPECT_EQ(SPECIES_BRONZOVERRO, SPECIES_PORCHIGNIS + 1);
+    EXPECT_EQ(SPECIES_FRASCHIETTO, SPECIES_BRONZOVERRO + 1);
+    EXPECT_EQ(SPECIES_FRASCOTTO, SPECIES_FRASCHIETTO + 1);
+    EXPECT_EQ(SPECIES_EGG, SPECIES_FRASCOTTO + 1);
     EXPECT_EQ(NUM_SPECIES, SPECIES_EGG);
 
     EXPECT_EQ(NATIONAL_DEX_PECHARUNT, 1025);
@@ -328,7 +333,12 @@ TEST("Ausonia starter IDs are append-only and distinct")
     EXPECT_EQ(NATIONAL_DEX_CARPULUS, NATIONAL_DEX_CALCISTERN + 1);
     EXPECT_EQ(NATIONAL_DEX_LUCINUS, NATIONAL_DEX_CARPULUS + 1);
     EXPECT_EQ(NATIONAL_DEX_NAUFRAGUS, NATIONAL_DEX_LUCINUS + 1);
-    EXPECT_EQ(NATIONAL_DEX_COUNT, NATIONAL_DEX_NAUFRAGUS);
+    EXPECT_EQ(NATIONAL_DEX_VITEMOSTO, NATIONAL_DEX_NAUFRAGUS + 1);
+    EXPECT_EQ(NATIONAL_DEX_PORCHIGNIS, NATIONAL_DEX_VITEMOSTO + 1);
+    EXPECT_EQ(NATIONAL_DEX_BRONZOVERRO, NATIONAL_DEX_PORCHIGNIS + 1);
+    EXPECT_EQ(NATIONAL_DEX_FRASCHIETTO, NATIONAL_DEX_BRONZOVERRO + 1);
+    EXPECT_EQ(NATIONAL_DEX_FRASCOTTO, NATIONAL_DEX_FRASCHIETTO + 1);
+    EXPECT_EQ(NATIONAL_DEX_COUNT, NATIONAL_DEX_FRASCOTTO);
 
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_CINGERM), COMPOUND_STRING("Cingerm")), 0);
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_ROVASCO), COMPOUND_STRING("Rovasco")), 0);
@@ -369,6 +379,11 @@ TEST("Ausonia starter IDs are append-only and distinct")
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_CARPULUS), COMPOUND_STRING("Carpulus")), 0);
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_LUCINUS), COMPOUND_STRING("Lucinus")), 0);
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_NAUFRAGUS), COMPOUND_STRING("Naufragus")), 0);
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_VITEMOSTO), COMPOUND_STRING("Vitemosto")), 0);
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_PORCHIGNIS), COMPOUND_STRING("Porchignis")), 0);
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_BRONZOVERRO), COMPOUND_STRING("Bronzoverro")), 0);
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_FRASCHIETTO), COMPOUND_STRING("Fraschietto")), 0);
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_FRASCOTTO), COMPOUND_STRING("Frascotto")), 0);
 }
 
 TEST("Ausonia Grass starter base data matches the approved prototype")
@@ -1017,7 +1032,9 @@ TEST("Ausonia Water starter graphics and Pokédex data are valid")
         EXPECT_EQ(info->height, heights[i]);
         EXPECT_EQ(info->weight, weights[i]);
         EXPECT_NE(StringCompare(info->description, gFallbackPokedexText), 0);
-        EXPECT_EQ(info->teachableLearnset[0], MOVE_UNAVAILABLE);
+        EXPECT_EQ(MoveListCount(info->teachableLearnset), 2);
+        EXPECT(MoveListContains(info->teachableLearnset, MOVE_SURF));
+        EXPECT(MoveListContains(info->teachableLearnset, MOVE_FLY));
         EXPECT_EQ(info->eggMoveLearnset[0], MOVE_UNAVAILABLE);
     }
 
