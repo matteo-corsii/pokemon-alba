@@ -25,9 +25,9 @@ StradaBorgoCisternoni_EventScript_StartNicoLiaScene::
 	msgbox StradaBorgoCisternoni_Text_LiaGo, MSGBOX_DEFAULT
 	msgbox StradaBorgoCisternoni_Text_NicoRoute, MSGBOX_DEFAULT
 	applymovement LOCALID_STRADA_BORGO_CISTERNONI_NICO, StradaBorgoCisternoni_Movement_NicoLeavesWest
-	waitmovement 0
+	waitmovement LOCALID_STRADA_BORGO_CISTERNONI_NICO
 	applymovement LOCALID_STRADA_BORGO_CISTERNONI_LIA, StradaBorgoCisternoni_Movement_LiaLeavesSouth
-	waitmovement 0
+	waitmovement LOCALID_STRADA_BORGO_CISTERNONI_LIA
 	setflag FLAG_STRADA_BORGO_CISTERNONI_NICO_LIA_DONE
 	setvar VAR_TEMP_0, 1
 	setflag FLAG_HIDE_STRADA_BORGO_CISTERNONI_NICO_LIA
