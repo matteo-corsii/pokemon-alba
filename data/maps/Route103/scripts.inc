@@ -5,6 +5,7 @@ Route103_MapScripts::
 Route103_OnLoad:
 	call Route103_EventScript_UpdatePonteLariciaBarrier
 	goto_if_unset FLAG_BADGE01_GET, Route103_OnLoad_HideParty
+	goto_if_set FLAG_CISTERNONI_NICO_POST_AUREA_TALKED, Route103_OnLoad_HideParty
 	goto_if_set FLAG_CISTERNONI_AUREA_ENCOUNTER_COMPLETE, Route103_OnLoad_ShowNico
 	goto_if_set FLAG_CISTERNONI_LIA_READY, Route103_OnLoad_HideParty
 	clearflag FLAG_HIDE_ROUTE103_LIA
@@ -57,6 +58,8 @@ Route103_EventScript_NicoAfterCisternoni::
 	goto_if_set FLAG_CISTERNONI_NICO_POST_AUREA_TALKED, Route103_EventScript_NicoReminder
 	msgbox Route103_Text_NicoAfterCisternoni, MSGBOX_DEFAULT
 	setflag FLAG_CISTERNONI_NICO_POST_AUREA_TALKED
+	setflag FLAG_HIDE_ROUTE103_NICO
+	removeobject LOCALID_ROUTE103_NICO
 	releaseall
 	end
 
