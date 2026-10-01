@@ -39,9 +39,7 @@ StradaBorgoCisternoni_EventScript_EndNicoLiaScene::
 	end
 
 StradaBorgoCisternoni_Movement_NicoLeavesWest:
-	walk_left
-	walk_left
-	walk_left
+	walk_down
 	step_end
 
 StradaBorgoCisternoni_Movement_LiaLeavesSouth:
