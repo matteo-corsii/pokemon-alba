@@ -43,9 +43,9 @@ enum QuestLogState
     QUEST_LOG_STATE_COMPLETED,
 };
 
-static EWRAM_DATA u8 sQuestLogWindowId = WINDOW_NONE;
-static EWRAM_DATA u8 sQuestLogTaskId = TASK_NONE;
-static EWRAM_DATA u8 sQuestLogListTaskId = TASK_NONE;
+static u8 sQuestLogWindowId = WINDOW_NONE;
+static u8 sQuestLogTaskId = TASK_NONE;
+static u8 sQuestLogListTaskId = TASK_NONE;
 static EWRAM_DATA u8 sQuestLogPage = QUEST_LOG_PAGE_CATEGORIES;
 static EWRAM_DATA u8 sQuestLogCategory = QUEST_LOG_CATEGORY_STORY;
 static EWRAM_DATA u16 sQuestLogGroupId = 0;
