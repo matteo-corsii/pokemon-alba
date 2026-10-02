@@ -2,6 +2,7 @@
 #include "quest_log.h"
 #include "quest_log_internal.h"
 #include "event_data.h"
+#include "battle_setup.h"
 #include "bg.h"
 #include "gpu_regs.h"
 #include "list_menu.h"
@@ -280,6 +281,8 @@ static bool8 QuestLog_EvaluateClause(const struct QuestLogConditionClause *claus
     case QUEST_LOG_CONDITION_PLAYER_SECRET_BASE_ID:
         return gSaveBlock1Ptr->secretBases[0].secretBaseId == clause->value
             || gSaveBlock1Ptr->secretBases[0].secretBaseId == clause->secondValue;
+    case QUEST_LOG_CONDITION_TRAINER_DEFEATED:
+        return HasTrainerBeenFought(clause->subject);
     case QUEST_LOG_CONDITION_UNTRACKED:
     default:
         return FALSE;

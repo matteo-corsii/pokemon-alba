@@ -1,6 +1,7 @@
 #include "global.h"
 #include "quest_log_internal.h"
 #include "constants/flags.h"
+#include "constants/opponents.h"
 #include "constants/vars.h"
 
 enum QuestLogQuestId
@@ -13,11 +14,13 @@ enum QuestLogQuestId
     QUEST_LOG_ID_LARICIA_RECORDS,
     QUEST_LOG_ID_NICO_TURN,
     QUEST_LOG_ID_FIRST_SHELTER,
+    QUEST_LOG_ID_MACINA_BADGE = 9,
 };
 
 #define FLAG_IS_SET(flag) { QUEST_LOG_CONDITION_FLAG_SET, flag, 0, 0 }
 #define VAR_IS(var, value_) { QUEST_LOG_CONDITION_VAR_EQUALS, var, value_, 0 }
 #define VAR_AT_LEAST(var, value_) { QUEST_LOG_CONDITION_VAR_GREATER_EQUAL, var, value_, 0 }
+#define TRAINER_IS_DEFEATED(trainerId) { QUEST_LOG_CONDITION_TRAINER_DEFEATED, trainerId, 0, 0 }
 #define UNTRACKED { QUEST_LOG_CONDITION_UNTRACKED, 0, 0, 0 }
 #define CONDITION(name, ...) \
     static const struct QuestLogConditionClause name##Clauses[] = { __VA_ARGS__ }; \
@@ -43,6 +46,9 @@ CONDITION(sGymLirio, FLAG_IS_SET(FLAG_BADGE01_GET), VAR_IS(VAR_ALBERA_GYM_STATE,
 
 CONDITION(sCisternsDiscovered, FLAG_IS_SET(FLAG_CISTERNONI_LIA_READY));
 CONDITION(sCisternsComplete, FLAG_IS_SET(FLAG_CISTERNONI_AUREA_ENCOUNTER_COMPLETE));
+
+CONDITION(sMacinaDiscovered, FLAG_IS_SET(FLAG_CISTERNONI_AUREA_ENCOUNTER_COMPLETE));
+CONDITION(sMacinaCompleted, TRAINER_IS_DEFEATED(TRAINER_LAGO_WATER_GYM_MARINA), FLAG_IS_SET(FLAG_BADGE02_GET));
 
 CONDITION(sEchoDiscovered, FLAG_IS_SET(FLAG_CISTERNONI_AUREA_ENCOUNTER_COMPLETE));
 CONDITION(sEchoLeadDone, FLAG_IS_SET(FLAG_VIA_CONSOLARE_EMISSARIO_LEAD_COMPLETE));
@@ -70,14 +76,14 @@ CONDITION(sShelterReward, FLAG_IS_SET(FLAG_LAGO_REFUGE_AMULET_COIN_RECEIVED));
 static const struct QuestLogStep sLauroSteps[] =
 {
     { COMPOUND_STRING("Raggiungi il Laboratorio del\nCratere."), &sLauroReachedLab },
-    { COMPOUND_STRING("Scegli il tuo primo Pokemon."), &sLauroStarterChosen },
+    { COMPOUND_STRING("Scegli il tuo primo Pokémon."), &sLauroStarterChosen },
     { COMPOUND_STRING("Affronta Nico."), &sLauroNicoBattle },
-    { COMPOUND_STRING("Esci da Albèra e raggiungi\nRoute 101."), &sLauroReachedRoute101 },
+    { COMPOUND_STRING("Esci da Albèra e raggiungi\nVia Verdi."), &sLauroReachedRoute101 },
 };
 
 static const struct QuestLogStep sSourcesSteps[] =
 {
-    { COMPOUND_STRING("Esamina i segnali lungo Route 101."), &sSourcesFirstSourceChecked },
+    { COMPOUND_STRING("Esamina i segnali lungo Via Verdi."), &sSourcesFirstSourceChecked },
     { COMPOUND_STRING("Controlla il comportamento dei\nPokémon."), &sSourcesLiaAtCanal },
     { COMPOUND_STRING("Raggiungi l'antico canale."), &sSourcesReported },
     { COMPOUND_STRING("Riferisci l'esito dell'indagine."), &sSourcesReported },
@@ -97,6 +103,11 @@ static const struct QuestLogStep sCisternsSteps[] =
     { COMPOUND_STRING("Raggiungi i Cisternoni."), &sCisternsComplete },
     { COMPOUND_STRING("Scopri chi sta seguendo\nl'indagine."), &sCisternsComplete },
     { COMPOUND_STRING("Affronta la recluta del Team\nAurea."), &sCisternsComplete },
+};
+
+static const struct QuestLogStep sMacinaSteps[] =
+{
+    { COMPOUND_STRING("Sconfiggi Marina e ottieni la\nMedaglia Macina."), &sMacinaCompleted },
 };
 
 static const struct QuestLogStep sEchoSteps[] =
@@ -149,9 +160,10 @@ const u8 gQuestLogGroupCount = ARRAY_COUNT(gQuestLogGroups);
 const struct QuestLogQuest gQuestLogQuests[] =
 {
     { QUEST_LOG_ID_LAURO_CALL, QUEST_LOG_CATEGORY_STORY, QUEST_GROUP_STORY_ARC_1, 10, COMPOUND_STRING("LA CHIAMATA DI LAURO"), COMPOUND_STRING("Lauro ti attende dopo una\nanomalia nella pressione\ndell'acqua."), &sLauroDiscovered, &sLauroCompleted, sLauroSteps, ARRAY_COUNT(sLauroSteps) },
-    { QUEST_LOG_ID_ROUTE101_SOURCES, QUEST_LOG_CATEGORY_STORY, QUEST_GROUP_STORY_ARC_1, 20, COMPOUND_STRING("LE SORGENTI DI ROUTE 101"), COMPOUND_STRING("Indaga sulle variazioni\ndell'acqua segnalate da Lia."), &sSourcesDiscovered, &sSourcesReported, sSourcesSteps, ARRAY_COUNT(sSourcesSteps) },
+    { QUEST_LOG_ID_ROUTE101_SOURCES, QUEST_LOG_CATEGORY_STORY, QUEST_GROUP_STORY_ARC_1, 20, COMPOUND_STRING("LE SORGENTI DI VIA VERDI"), COMPOUND_STRING("Indaga sulle variazioni\ndell'acqua segnalate da Lia."), &sSourcesDiscovered, &sSourcesReported, sSourcesSteps, ARRAY_COUNT(sSourcesSteps) },
     { QUEST_LOG_ID_AMPHITHEATRE, QUEST_LOG_CATEGORY_STORY, QUEST_GROUP_STORY_ARC_1, 30, COMPOUND_STRING("LA PROVA DELL'ANFITEATRO"), COMPOUND_STRING("Supera le prove musicali e\nsfida il Capopalestra Lirio."), &sGymDiscovered, &sGymLirio, sGymSteps, ARRAY_COUNT(sGymSteps) },
     { QUEST_LOG_ID_CISTERNS, QUEST_LOG_CATEGORY_STORY, QUEST_GROUP_STORY_ARC_1, 40, COMPOUND_STRING("LE MISURE DEI CISTERNONI"), COMPOUND_STRING("Lia confronta le misure delle\nvasche con quelle di Via Verdi."), &sCisternsDiscovered, &sCisternsComplete, sCisternsSteps, ARRAY_COUNT(sCisternsSteps) },
+    { QUEST_LOG_ID_MACINA_BADGE, QUEST_LOG_CATEGORY_STORY, QUEST_GROUP_STORY_ARC_1, 45, COMPOUND_STRING("LA MEDAGLIA MACINA"), COMPOUND_STRING("Affronta Marina alla Palestra\ndelle Macine."), &sMacinaDiscovered, &sMacinaCompleted, sMacinaSteps, ARRAY_COUNT(sMacinaSteps) },
     { QUEST_LOG_ID_FIRST_ECHO, QUEST_LOG_CATEGORY_STORY, QUEST_GROUP_STORY_ARC_1, 50, COMPOUND_STRING("IL PRIMO ECO"), COMPOUND_STRING("Segui l'indagine di Lia e Nico\nfino all'Emissario."), &sEchoDiscovered, &sEchoSeen, sEchoSteps, ARRAY_COUNT(sEchoSteps) },
     { QUEST_LOG_ID_LARICIA_RECORDS, QUEST_LOG_CATEGORY_STORY, QUEST_GROUP_STORY_ARC_1, 60, COMPOUND_STRING("LE CARTE DI LARICIA"), COMPOUND_STRING("Consulta i documenti antichi\nalla Villa Papale."), &sRecordsDiscovered, NULL, sRecordsSteps, ARRAY_COUNT(sRecordsSteps) },
     { QUEST_LOG_ID_NICO_TURN, QUEST_LOG_CATEGORY_SIDE, QUEST_GROUP_SIDE_GENERAL, 10, COMPOUND_STRING("IL TURNO DI NICO"), COMPOUND_STRING("Dopo la Medaglia, Nico vuole\nmisurarsi con Lirio."), &sNicoDiscovered, &sNicoComplete, sNicoSteps, ARRAY_COUNT(sNicoSteps) },
