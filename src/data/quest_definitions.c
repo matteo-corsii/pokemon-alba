@@ -69,93 +69,93 @@ CONDITION(sShelterReward, FLAG_IS_SET(FLAG_LAGO_REFUGE_AMULET_COIN_RECEIVED));
 
 static const struct QuestLogStep sLauroSteps[] =
 {
-    { _("Raggiungi il Laboratorio del\nCratere."), &sLauroReachedLab },
-    { _("Scegli il tuo primo Pokemon."), &sLauroStarterChosen },
-    { _("Affronta Nico."), &sLauroNicoBattle },
-    { _("Esci da Albèra e raggiungi\nRoute 101."), &sLauroReachedRoute101 },
+    { COMPOUND_STRING("Raggiungi il Laboratorio del\nCratere."), &sLauroReachedLab },
+    { COMPOUND_STRING("Scegli il tuo primo Pokemon."), &sLauroStarterChosen },
+    { COMPOUND_STRING("Affronta Nico."), &sLauroNicoBattle },
+    { COMPOUND_STRING("Esci da Albèra e raggiungi\nRoute 101."), &sLauroReachedRoute101 },
 };
 
 static const struct QuestLogStep sSourcesSteps[] =
 {
-    { _("Esamina i segnali lungo Route 101."), &sSourcesFirstSourceChecked },
-    { _("Controlla il comportamento dei\nPokémon."), &sSourcesLiaAtCanal },
-    { _("Raggiungi l'antico canale."), &sSourcesReported },
-    { _("Riferisci l'esito dell'indagine."), &sSourcesReported },
+    { COMPOUND_STRING("Esamina i segnali lungo Route 101."), &sSourcesFirstSourceChecked },
+    { COMPOUND_STRING("Controlla il comportamento dei\nPokémon."), &sSourcesLiaAtCanal },
+    { COMPOUND_STRING("Raggiungi l'antico canale."), &sSourcesReported },
+    { COMPOUND_STRING("Riferisci l'esito dell'indagine."), &sSourcesReported },
 };
 
 static const struct QuestLogStep sGymSteps[] =
 {
-    { _("Scopri la sequenza delle strofe."), &sGymStanzaOneComplete },
-    { _("Completa la prima strofa e supera\nDario."), &sGymStanzaOne },
-    { _("Completa la seconda strofa e supera\nMara."), &sGymStanzaTwo },
-    { _("Completa la terza strofa e supera\nElio."), &sGymStanzaThree },
-    { _("Sconfiggi Lirio."), &sGymLirio },
+    { COMPOUND_STRING("Scopri la sequenza delle strofe."), &sGymStanzaOneComplete },
+    { COMPOUND_STRING("Completa la prima strofa e supera\nDario."), &sGymStanzaOne },
+    { COMPOUND_STRING("Completa la seconda strofa e supera\nMara."), &sGymStanzaTwo },
+    { COMPOUND_STRING("Completa la terza strofa e supera\nElio."), &sGymStanzaThree },
+    { COMPOUND_STRING("Sconfiggi Lirio."), &sGymLirio },
 };
 
 static const struct QuestLogStep sCisternsSteps[] =
 {
-    { _("Raggiungi i Cisternoni."), &sCisternsComplete },
-    { _("Scopri chi sta seguendo\nl'indagine."), &sCisternsComplete },
-    { _("Affronta la recluta del Team\nAurea."), &sCisternsComplete },
+    { COMPOUND_STRING("Raggiungi i Cisternoni."), &sCisternsComplete },
+    { COMPOUND_STRING("Scopri chi sta seguendo\nl'indagine."), &sCisternsComplete },
+    { COMPOUND_STRING("Affronta la recluta del Team\nAurea."), &sCisternsComplete },
 };
 
 static const struct QuestLogStep sEchoSteps[] =
 {
-    { _("Raggiungi Nico e Lia sulla Via\nConsolare."), &sEchoLeadDone },
-    { _("Segui la pista fino\nall'Emissario."), &sEchoLeadDone },
-    { _("Affronta la recluta Aurea."), &sEchoEncounterComplete },
-    { _("Hai assistito al primo Eco;\nraggiungi Borgo di Castello."), &sEchoSeen },
+    { COMPOUND_STRING("Raggiungi Nico e Lia sulla Via\nConsolare."), &sEchoLeadDone },
+    { COMPOUND_STRING("Segui la pista fino\nall'Emissario."), &sEchoLeadDone },
+    { COMPOUND_STRING("Affronta la recluta Aurea."), &sEchoEncounterComplete },
+    { COMPOUND_STRING("Hai assistito al primo Eco;\nraggiungi Borgo di Castello."), &sEchoSeen },
 };
 
 static const struct QuestLogStep sRecordsSteps[] =
 {
-    { _("Raggiungi Nico e Lia a Borgo\ndi Castello."), &sRecordsBorgo },
-    { _("Consulta l'archivio della Villa\nPapale."), &sRecordsVilla },
-    { _("Segui la strada verso Laricia."), &sRecordsRoad },
-    { _("Raggiungi Laricia."), &sRecordsLariciaUntracked },
+    { COMPOUND_STRING("Raggiungi Nico e Lia a Borgo\ndi Castello."), &sRecordsBorgo },
+    { COMPOUND_STRING("Consulta l'archivio della Villa\nPapale."), &sRecordsVilla },
+    { COMPOUND_STRING("Segui la strada verso Laricia."), &sRecordsRoad },
+    { COMPOUND_STRING("Raggiungi Laricia."), &sRecordsLariciaUntracked },
 };
 
 static const struct QuestLogStep sNicoSteps[] =
 {
-    { _("Parla con Nico ad Albera Storica."), &sNicoComplete },
+    { COMPOUND_STRING("Parla con Nico ad Albera Storica."), &sNicoComplete },
 };
 
 static const struct QuestLogStep sShelterSteps[] =
 {
-    { _("Parla con il Maestro dei Rifugi."), &sShelterDiscovered },
-    { _("Parla con l'aiutante per ricevere\nl'incarico."), &sShelterMissionStarted },
-    { _("Crea un rifugio sotto il nido dei\nGhepio o sotto la Casa del Maestro."), &sShelterFound },
-    { _("Ritira la ricompensa\ndall'aiutante."), &sShelterReward },
+    { COMPOUND_STRING("Parla con il Maestro dei Rifugi."), &sShelterDiscovered },
+    { COMPOUND_STRING("Parla con l'aiutante per ricevere\nl'incarico."), &sShelterMissionStarted },
+    { COMPOUND_STRING("Crea un rifugio sotto il nido dei\nGhepio o sotto la Casa del Maestro."), &sShelterFound },
+    { COMPOUND_STRING("Ritira la ricompensa\ndall'aiutante."), &sShelterReward },
 };
 
 const u8 *const gQuestLogCategoryNames[QUEST_LOG_CATEGORY_COUNT] =
 {
-    [QUEST_LOG_CATEGORY_STORY] = _("STORIA"),
-    [QUEST_LOG_CATEGORY_SIDE] = _("SECONDARIE"),
-    [QUEST_LOG_CATEGORY_JOBS] = _("INCARICHI"),
+    [QUEST_LOG_CATEGORY_STORY] = COMPOUND_STRING("STORIA"),
+    [QUEST_LOG_CATEGORY_SIDE] = COMPOUND_STRING("SECONDARIE"),
+    [QUEST_LOG_CATEGORY_JOBS] = COMPOUND_STRING("INCARICHI"),
 };
 
 const struct QuestLogGroup gQuestLogGroups[] =
 {
-    { QUEST_GROUP_STORY_ARC_1, QUEST_LOG_CATEGORY_STORY, 1, QUEST_LOG_GROUP_COMPLETION_NONE, _("ARCO I") },
-    { QUEST_GROUP_SIDE_GENERAL, QUEST_LOG_CATEGORY_SIDE, 1, QUEST_LOG_GROUP_COMPLETION_ALL_VISIBLE_QUESTS, _("GENERALE") },
-    { QUEST_GROUP_SIDE_SHELTERS, QUEST_LOG_CATEGORY_SIDE, 2, QUEST_LOG_GROUP_COMPLETION_ALL_VISIBLE_QUESTS, _("RIFUGI") },
-    { QUEST_GROUP_JOBS_GENERAL, QUEST_LOG_CATEGORY_JOBS, 1, QUEST_LOG_GROUP_COMPLETION_ALL_VISIBLE_QUESTS, _("GENERALE") },
-    { QUEST_GROUP_JOBS_SHELTERS, QUEST_LOG_CATEGORY_JOBS, 2, QUEST_LOG_GROUP_COMPLETION_ALL_VISIBLE_QUESTS, _("RIFUGI") },
+    { QUEST_GROUP_STORY_ARC_1, QUEST_LOG_CATEGORY_STORY, 1, QUEST_LOG_GROUP_COMPLETION_NONE, COMPOUND_STRING("ARCO I") },
+    { QUEST_GROUP_SIDE_GENERAL, QUEST_LOG_CATEGORY_SIDE, 1, QUEST_LOG_GROUP_COMPLETION_ALL_VISIBLE_QUESTS, COMPOUND_STRING("GENERALE") },
+    { QUEST_GROUP_SIDE_SHELTERS, QUEST_LOG_CATEGORY_SIDE, 2, QUEST_LOG_GROUP_COMPLETION_ALL_VISIBLE_QUESTS, COMPOUND_STRING("RIFUGI") },
+    { QUEST_GROUP_JOBS_GENERAL, QUEST_LOG_CATEGORY_JOBS, 1, QUEST_LOG_GROUP_COMPLETION_ALL_VISIBLE_QUESTS, COMPOUND_STRING("GENERALE") },
+    { QUEST_GROUP_JOBS_SHELTERS, QUEST_LOG_CATEGORY_JOBS, 2, QUEST_LOG_GROUP_COMPLETION_ALL_VISIBLE_QUESTS, COMPOUND_STRING("RIFUGI") },
 };
 
 const u8 gQuestLogGroupCount = ARRAY_COUNT(gQuestLogGroups);
 
 const struct QuestLogQuest gQuestLogQuests[] =
 {
-    { QUEST_LOG_ID_LAURO_CALL, QUEST_LOG_CATEGORY_STORY, QUEST_GROUP_STORY_ARC_1, 10, _("LA CHIAMATA DI LAURO"), _("Lauro ti attende dopo una\nanomalia nella pressione\ndell'acqua."), &sLauroDiscovered, &sLauroCompleted, sLauroSteps, ARRAY_COUNT(sLauroSteps) },
-    { QUEST_LOG_ID_ROUTE101_SOURCES, QUEST_LOG_CATEGORY_STORY, QUEST_GROUP_STORY_ARC_1, 20, _("LE SORGENTI DI ROUTE 101"), _("Indaga sulle variazioni\ndell'acqua segnalate da Lia."), &sSourcesDiscovered, &sSourcesReported, sSourcesSteps, ARRAY_COUNT(sSourcesSteps) },
-    { QUEST_LOG_ID_AMPHITHEATRE, QUEST_LOG_CATEGORY_STORY, QUEST_GROUP_STORY_ARC_1, 30, _("LA PROVA DELL'ANFITEATRO"), _("Supera le prove musicali e\nsfida il Capopalestra Lirio."), &sGymDiscovered, &sGymLirio, sGymSteps, ARRAY_COUNT(sGymSteps) },
-    { QUEST_LOG_ID_CISTERNS, QUEST_LOG_CATEGORY_STORY, QUEST_GROUP_STORY_ARC_1, 40, _("LE MISURE DEI CISTERNONI"), _("Lia confronta le misure delle\nvasche con quelle di Via Verdi."), &sCisternsDiscovered, &sCisternsComplete, sCisternsSteps, ARRAY_COUNT(sCisternsSteps) },
-    { QUEST_LOG_ID_FIRST_ECHO, QUEST_LOG_CATEGORY_STORY, QUEST_GROUP_STORY_ARC_1, 50, _("IL PRIMO ECO"), _("Segui l'indagine di Lia e Nico\nfino all'Emissario."), &sEchoDiscovered, &sEchoSeen, sEchoSteps, ARRAY_COUNT(sEchoSteps) },
-    { QUEST_LOG_ID_LARICIA_RECORDS, QUEST_LOG_CATEGORY_STORY, QUEST_GROUP_STORY_ARC_1, 60, _("LE CARTE DI LARICIA"), _("Consulta i documenti antichi\nalla Villa Papale."), &sRecordsDiscovered, NULL, sRecordsSteps, ARRAY_COUNT(sRecordsSteps) },
-    { QUEST_LOG_ID_NICO_TURN, QUEST_LOG_CATEGORY_SIDE, QUEST_GROUP_SIDE_GENERAL, 10, _("IL TURNO DI NICO"), _("Dopo la Medaglia, Nico vuole\nmisurarsi con Lirio."), &sNicoDiscovered, &sNicoComplete, sNicoSteps, ARRAY_COUNT(sNicoSteps) },
-    { QUEST_LOG_ID_FIRST_SHELTER, QUEST_LOG_CATEGORY_JOBS, QUEST_GROUP_JOBS_SHELTERS, 10, _("UN POSTO TUTTO TUO"), _("Costruisci il tuo primo rifugio\nnel luogo indicato."), &sShelterDiscovered, &sShelterReward, sShelterSteps, ARRAY_COUNT(sShelterSteps) },
+    { QUEST_LOG_ID_LAURO_CALL, QUEST_LOG_CATEGORY_STORY, QUEST_GROUP_STORY_ARC_1, 10, COMPOUND_STRING("LA CHIAMATA DI LAURO"), COMPOUND_STRING("Lauro ti attende dopo una\nanomalia nella pressione\ndell'acqua."), &sLauroDiscovered, &sLauroCompleted, sLauroSteps, ARRAY_COUNT(sLauroSteps) },
+    { QUEST_LOG_ID_ROUTE101_SOURCES, QUEST_LOG_CATEGORY_STORY, QUEST_GROUP_STORY_ARC_1, 20, COMPOUND_STRING("LE SORGENTI DI ROUTE 101"), COMPOUND_STRING("Indaga sulle variazioni\ndell'acqua segnalate da Lia."), &sSourcesDiscovered, &sSourcesReported, sSourcesSteps, ARRAY_COUNT(sSourcesSteps) },
+    { QUEST_LOG_ID_AMPHITHEATRE, QUEST_LOG_CATEGORY_STORY, QUEST_GROUP_STORY_ARC_1, 30, COMPOUND_STRING("LA PROVA DELL'ANFITEATRO"), COMPOUND_STRING("Supera le prove musicali e\nsfida il Capopalestra Lirio."), &sGymDiscovered, &sGymLirio, sGymSteps, ARRAY_COUNT(sGymSteps) },
+    { QUEST_LOG_ID_CISTERNS, QUEST_LOG_CATEGORY_STORY, QUEST_GROUP_STORY_ARC_1, 40, COMPOUND_STRING("LE MISURE DEI CISTERNONI"), COMPOUND_STRING("Lia confronta le misure delle\nvasche con quelle di Via Verdi."), &sCisternsDiscovered, &sCisternsComplete, sCisternsSteps, ARRAY_COUNT(sCisternsSteps) },
+    { QUEST_LOG_ID_FIRST_ECHO, QUEST_LOG_CATEGORY_STORY, QUEST_GROUP_STORY_ARC_1, 50, COMPOUND_STRING("IL PRIMO ECO"), COMPOUND_STRING("Segui l'indagine di Lia e Nico\nfino all'Emissario."), &sEchoDiscovered, &sEchoSeen, sEchoSteps, ARRAY_COUNT(sEchoSteps) },
+    { QUEST_LOG_ID_LARICIA_RECORDS, QUEST_LOG_CATEGORY_STORY, QUEST_GROUP_STORY_ARC_1, 60, COMPOUND_STRING("LE CARTE DI LARICIA"), COMPOUND_STRING("Consulta i documenti antichi\nalla Villa Papale."), &sRecordsDiscovered, NULL, sRecordsSteps, ARRAY_COUNT(sRecordsSteps) },
+    { QUEST_LOG_ID_NICO_TURN, QUEST_LOG_CATEGORY_SIDE, QUEST_GROUP_SIDE_GENERAL, 10, COMPOUND_STRING("IL TURNO DI NICO"), COMPOUND_STRING("Dopo la Medaglia, Nico vuole\nmisurarsi con Lirio."), &sNicoDiscovered, &sNicoComplete, sNicoSteps, ARRAY_COUNT(sNicoSteps) },
+    { QUEST_LOG_ID_FIRST_SHELTER, QUEST_LOG_CATEGORY_JOBS, QUEST_GROUP_JOBS_SHELTERS, 10, COMPOUND_STRING("UN POSTO TUTTO TUO"), COMPOUND_STRING("Costruisci il tuo primo rifugio\nnel luogo indicato."), &sShelterDiscovered, &sShelterReward, sShelterSteps, ARRAY_COUNT(sShelterSteps) },
 };
 
 const u8 gQuestLogQuestCount = ARRAY_COUNT(gQuestLogQuests);
