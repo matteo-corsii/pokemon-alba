@@ -43,9 +43,9 @@ enum QuestLogState
     QUEST_LOG_STATE_COMPLETED,
 };
 
-static u8 sQuestLogWindowId = WINDOW_NONE;
-static u8 sQuestLogTaskId = TASK_NONE;
-static u8 sQuestLogListTaskId = TASK_NONE;
+static EWRAM_DATA u8 sQuestLogWindowId;
+static EWRAM_DATA u8 sQuestLogTaskId;
+static EWRAM_DATA u8 sQuestLogListTaskId;
 static EWRAM_DATA u8 sQuestLogPage = QUEST_LOG_PAGE_CATEGORIES;
 static EWRAM_DATA u8 sQuestLogCategory = QUEST_LOG_CATEGORY_STORY;
 static EWRAM_DATA u16 sQuestLogGroupId = 0;
@@ -95,6 +95,10 @@ bool8 QuestLog_StartMenuCallback(void)
 {
     if (gPaletteFade.active)
         return FALSE;
+
+    sQuestLogWindowId = WINDOW_NONE;
+    sQuestLogTaskId = TASK_NONE;
+    sQuestLogListTaskId = TASK_NONE;
 
     RemoveStartMenuWindow();
     CleanupOverworldWindowsAndTilemaps();
