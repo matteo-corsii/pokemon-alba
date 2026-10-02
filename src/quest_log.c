@@ -2,11 +2,14 @@
 #include "quest_log.h"
 #include "quest_log_internal.h"
 #include "event_data.h"
+#include "bg.h"
+#include "gpu_regs.h"
 #include "list_menu.h"
 #include "main.h"
 #include "menu.h"
 #include "overworld.h"
 #include "palette.h"
+#include "scanline_effect.h"
 #include "sound.h"
 #include "start_menu.h"
 #include "string_util.h"
@@ -21,7 +24,7 @@
 #define QUEST_LOG_WINDOW_TOP 1
 #define QUEST_LOG_WINDOW_WIDTH 28
 #define QUEST_LOG_WINDOW_HEIGHT 18
-#define QUEST_LOG_WINDOW_BASE_BLOCK 0x200
+#define QUEST_LOG_WINDOW_BASE_BLOCK 0
 #define QUEST_LOG_MAX_LIST_ITEMS 8
 #define QUEST_LOG_MAX_QUESTS 64
 #define QUEST_LOG_MAX_GROUPS 64
@@ -64,6 +67,24 @@ static const struct ListMenuItem sQuestLogCategories[] =
     { NULL, LIST_CANCEL },
 };
 
+static const struct BgTemplate sQuestLogBgTemplates[] =
+{
+    {
+        .bg = 0,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 31,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0,
+    },
+};
+
+static const struct WindowTemplate sQuestLogInitWindowTemplates[] =
+{
+    DUMMY_WIN_TEMPLATE,
+};
+
 static const struct WindowTemplate sQuestLogWindowTemplate =
 {
     .bg = 0,
@@ -76,6 +97,10 @@ static const struct WindowTemplate sQuestLogWindowTemplate =
 };
 
 static void Task_QuestLog(u8 taskId);
+static void CB2_InitQuestLog(void);
+static void CB2_QuestLog(void);
+static void VBlankCB_QuestLog(void);
+static void QuestLog_InitDisplay(void);
 static void QuestLog_ShowCategories(void);
 static void QuestLog_ShowGroups(void);
 static void QuestLog_ShowQuestList(void);
@@ -108,11 +133,67 @@ bool8 QuestLog_StartMenuCallback(void)
     sQuestLogGroupId = 0;
     sQuestLogQuestIndex = 0;
     sQuestLogListTaskId = TASK_NONE;
+    SetMainCallback2(CB2_InitQuestLog);
+    return TRUE;
+}
+
+static void CB2_InitQuestLog(void)
+{
+    QuestLog_InitDisplay();
+
     sQuestLogWindowId = AddWindow(&sQuestLogWindowTemplate);
+    if (sQuestLogWindowId == WINDOW_NONE)
+    {
+        SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
+        return;
+    }
+
     sQuestLogTaskId = CreateTask(Task_QuestLog, 0x50);
     QuestLog_ShowCategories();
+    ShowBg(0);
     BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
-    return TRUE;
+    SetVBlankCallback(VBlankCB_QuestLog);
+    SetMainCallback2(CB2_QuestLog);
+}
+
+static void QuestLog_InitDisplay(void)
+{
+    SetVBlankCallback(NULL);
+    SetHBlankCallback(NULL);
+    SetGpuReg(REG_OFFSET_DISPCNT, 0);
+    SetGpuReg(REG_OFFSET_BG0CNT, 0);
+    SetGpuReg(REG_OFFSET_BG1CNT, 0);
+    SetGpuReg(REG_OFFSET_BG2CNT, 0);
+    SetGpuReg(REG_OFFSET_BG3CNT, 0);
+    SetGpuReg(REG_OFFSET_BG0HOFS, 0);
+    SetGpuReg(REG_OFFSET_BG0VOFS, 0);
+    SetGpuReg(REG_OFFSET_BLDCNT, 0);
+    SetGpuReg(REG_OFFSET_BLDALPHA, 0);
+    SetGpuReg(REG_OFFSET_BLDY, 0);
+    ResetTasks();
+    ScanlineEffect_Stop();
+    ResetBgsAndClearDma3BusyFlags(0);
+    InitBgsFromTemplates(0, sQuestLogBgTemplates, ARRAY_COUNT(sQuestLogBgTemplates));
+    ChangeBgX(0, 0, BG_COORD_SET);
+    ChangeBgY(0, 0, BG_COORD_SET);
+    ClearScheduledBgCopiesToVram();
+    InitWindows(sQuestLogInitWindowTemplates);
+    DeactivateAllTextPrinters();
+    LoadMessageBoxAndBorderGfx();
+    Menu_LoadStdPalAt(BG_PLTT_ID(15));
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0);
+}
+
+static void CB2_QuestLog(void)
+{
+    RunTasks();
+    UpdatePaletteFade();
+    DoScheduledBgTilemapCopiesToVram();
+}
+
+static void VBlankCB_QuestLog(void)
+{
+    TransferPlttBuffer();
 }
 
 static u8 QuestLog_GetState(const struct QuestLogQuest *quest)
