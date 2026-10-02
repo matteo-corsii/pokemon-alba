@@ -317,7 +317,7 @@ static void QuestLog_ShowGroups(void)
         u8 state = QuestLog_GetGroupState(group);
 
         if (state == QUEST_LOG_STATE_COMPLETED)
-            StringCopy(sQuestLogGroupNames[j], _("[OK] "));
+            StringCopy(sQuestLogGroupNames[j], _("OK   "));
         else
             StringCopy(sQuestLogGroupNames[j], _("     "));
         StringAppend(sQuestLogGroupNames[j], group->title);
@@ -373,7 +373,7 @@ static void QuestLog_ShowQuestList(void)
         const struct QuestLogQuest *quest = visibleQuests[i];
 
         if (QuestLog_GetState(quest) == QUEST_LOG_STATE_COMPLETED)
-            StringCopy(sQuestLogListNames[i], _("[OK] "));
+            StringCopy(sQuestLogListNames[i], _("OK   "));
         else
             StringCopy(sQuestLogListNames[i], _("     "));
         StringAppend(sQuestLogListNames[i], quest->title);
