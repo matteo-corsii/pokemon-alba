@@ -135,16 +135,27 @@ const u8 *const gQuestLogCategoryNames[QUEST_LOG_CATEGORY_COUNT] =
     [QUEST_LOG_CATEGORY_JOBS] = _("INCARICHI"),
 };
 
+const struct QuestLogGroup gQuestLogGroups[] =
+{
+    { QUEST_GROUP_STORY_ARC_1, QUEST_LOG_CATEGORY_STORY, 1, QUEST_LOG_GROUP_COMPLETION_NONE, _("ARCO I") },
+    { QUEST_GROUP_SIDE_GENERAL, QUEST_LOG_CATEGORY_SIDE, 1, QUEST_LOG_GROUP_COMPLETION_ALL_VISIBLE_QUESTS, _("GENERALE") },
+    { QUEST_GROUP_SIDE_SHELTERS, QUEST_LOG_CATEGORY_SIDE, 2, QUEST_LOG_GROUP_COMPLETION_ALL_VISIBLE_QUESTS, _("RIFUGI") },
+    { QUEST_GROUP_JOBS_GENERAL, QUEST_LOG_CATEGORY_JOBS, 1, QUEST_LOG_GROUP_COMPLETION_ALL_VISIBLE_QUESTS, _("GENERALE") },
+    { QUEST_GROUP_JOBS_SHELTERS, QUEST_LOG_CATEGORY_JOBS, 2, QUEST_LOG_GROUP_COMPLETION_ALL_VISIBLE_QUESTS, _("RIFUGI") },
+};
+
+const u8 gQuestLogGroupCount = ARRAY_COUNT(gQuestLogGroups);
+
 const struct QuestLogQuest gQuestLogQuests[] =
 {
-    { QUEST_LOG_ID_LAURO_CALL, QUEST_LOG_CATEGORY_STORY, _("LA CHIAMATA DI LAURO"), _("Lauro ti attende dopo una\nanomalia nella pressione\ndell'acqua."), &sLauroDiscovered, &sLauroCompleted, sLauroSteps, ARRAY_COUNT(sLauroSteps) },
-    { QUEST_LOG_ID_ROUTE101_SOURCES, QUEST_LOG_CATEGORY_STORY, _("LE SORGENTI DI ROUTE 101"), _("Indaga sulle variazioni\ndell'acqua segnalate da Lia."), &sSourcesDiscovered, &sSourcesReported, sSourcesSteps, ARRAY_COUNT(sSourcesSteps) },
-    { QUEST_LOG_ID_AMPHITHEATRE, QUEST_LOG_CATEGORY_STORY, _("LA PROVA DELL'ANFITEATRO"), _("Supera le prove musicali e\nsfida il Capopalestra Lirio."), &sGymDiscovered, &sGymLirio, sGymSteps, ARRAY_COUNT(sGymSteps) },
-    { QUEST_LOG_ID_CISTERNS, QUEST_LOG_CATEGORY_STORY, _("LE MISURE DEI CISTERNONI"), _("Lia confronta le misure delle\nvasche con quelle di Via Verdi."), &sCisternsDiscovered, &sCisternsComplete, sCisternsSteps, ARRAY_COUNT(sCisternsSteps) },
-    { QUEST_LOG_ID_FIRST_ECHO, QUEST_LOG_CATEGORY_STORY, _("IL PRIMO ECO"), _("Segui l'indagine di Lia e Nico\nfino all'Emissario."), &sEchoDiscovered, &sEchoSeen, sEchoSteps, ARRAY_COUNT(sEchoSteps) },
-    { QUEST_LOG_ID_LARICIA_RECORDS, QUEST_LOG_CATEGORY_STORY, _("LE CARTE DI LARICIA"), _("Consulta i documenti antichi\nalla Villa Papale."), &sRecordsDiscovered, NULL, sRecordsSteps, ARRAY_COUNT(sRecordsSteps) },
-    { QUEST_LOG_ID_NICO_TURN, QUEST_LOG_CATEGORY_SIDE, _("IL TURNO DI NICO"), _("Dopo la Medaglia, Nico vuole\nmisurarsi con Lirio."), &sNicoDiscovered, &sNicoComplete, sNicoSteps, ARRAY_COUNT(sNicoSteps) },
-    { QUEST_LOG_ID_FIRST_SHELTER, QUEST_LOG_CATEGORY_JOBS, _("UN POSTO TUTTO TUO"), _("Costruisci il tuo primo rifugio\nnel luogo indicato."), &sShelterDiscovered, &sShelterReward, sShelterSteps, ARRAY_COUNT(sShelterSteps) },
+    { QUEST_LOG_ID_LAURO_CALL, QUEST_LOG_CATEGORY_STORY, QUEST_GROUP_STORY_ARC_1, 10, _("LA CHIAMATA DI LAURO"), _("Lauro ti attende dopo una\nanomalia nella pressione\ndell'acqua."), &sLauroDiscovered, &sLauroCompleted, sLauroSteps, ARRAY_COUNT(sLauroSteps) },
+    { QUEST_LOG_ID_ROUTE101_SOURCES, QUEST_LOG_CATEGORY_STORY, QUEST_GROUP_STORY_ARC_1, 20, _("LE SORGENTI DI ROUTE 101"), _("Indaga sulle variazioni\ndell'acqua segnalate da Lia."), &sSourcesDiscovered, &sSourcesReported, sSourcesSteps, ARRAY_COUNT(sSourcesSteps) },
+    { QUEST_LOG_ID_AMPHITHEATRE, QUEST_LOG_CATEGORY_STORY, QUEST_GROUP_STORY_ARC_1, 30, _("LA PROVA DELL'ANFITEATRO"), _("Supera le prove musicali e\nsfida il Capopalestra Lirio."), &sGymDiscovered, &sGymLirio, sGymSteps, ARRAY_COUNT(sGymSteps) },
+    { QUEST_LOG_ID_CISTERNS, QUEST_LOG_CATEGORY_STORY, QUEST_GROUP_STORY_ARC_1, 40, _("LE MISURE DEI CISTERNONI"), _("Lia confronta le misure delle\nvasche con quelle di Via Verdi."), &sCisternsDiscovered, &sCisternsComplete, sCisternsSteps, ARRAY_COUNT(sCisternsSteps) },
+    { QUEST_LOG_ID_FIRST_ECHO, QUEST_LOG_CATEGORY_STORY, QUEST_GROUP_STORY_ARC_1, 50, _("IL PRIMO ECO"), _("Segui l'indagine di Lia e Nico\nfino all'Emissario."), &sEchoDiscovered, &sEchoSeen, sEchoSteps, ARRAY_COUNT(sEchoSteps) },
+    { QUEST_LOG_ID_LARICIA_RECORDS, QUEST_LOG_CATEGORY_STORY, QUEST_GROUP_STORY_ARC_1, 60, _("LE CARTE DI LARICIA"), _("Consulta i documenti antichi\nalla Villa Papale."), &sRecordsDiscovered, NULL, sRecordsSteps, ARRAY_COUNT(sRecordsSteps) },
+    { QUEST_LOG_ID_NICO_TURN, QUEST_LOG_CATEGORY_SIDE, QUEST_GROUP_SIDE_GENERAL, 10, _("IL TURNO DI NICO"), _("Dopo la Medaglia, Nico vuole\nmisurarsi con Lirio."), &sNicoDiscovered, &sNicoComplete, sNicoSteps, ARRAY_COUNT(sNicoSteps) },
+    { QUEST_LOG_ID_FIRST_SHELTER, QUEST_LOG_CATEGORY_JOBS, QUEST_GROUP_JOBS_SHELTERS, 10, _("UN POSTO TUTTO TUO"), _("Costruisci il tuo primo rifugio\nnel luogo indicato."), &sShelterDiscovered, &sShelterReward, sShelterSteps, ARRAY_COUNT(sShelterSteps) },
 };
 
 const u8 gQuestLogQuestCount = ARRAY_COUNT(gQuestLogQuests);
