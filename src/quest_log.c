@@ -22,8 +22,6 @@
 
 #define QUEST_LOG_WINDOW_LEFT 1
 #define QUEST_LOG_WINDOW_TOP 1
-#define QUEST_LOG_WINDOW_WIDTH 28
-#define QUEST_LOG_WINDOW_HEIGHT 18
 #define QUEST_LOG_WINDOW_BASE_BLOCK 0
 #define QUEST_LOG_MAX_LIST_ITEMS 8
 #define QUEST_LOG_MAX_QUESTS 64
@@ -90,8 +88,8 @@ static const struct WindowTemplate sQuestLogWindowTemplate =
     .bg = 0,
     .tilemapLeft = QUEST_LOG_WINDOW_LEFT,
     .tilemapTop = QUEST_LOG_WINDOW_TOP,
-    .width = QUEST_LOG_WINDOW_WIDTH,
-    .height = QUEST_LOG_WINDOW_HEIGHT,
+    .width = QUEST_LOG_WINDOW_WIDTH_TILES,
+    .height = QUEST_LOG_WINDOW_HEIGHT_TILES,
     .paletteNum = 15,
     .baseBlock = QUEST_LOG_WINDOW_BASE_BLOCK,
 };
@@ -485,28 +483,15 @@ static void QuestLog_ShowQuestList(void)
 static void QuestLog_ShowQuestDetail(void)
 {
     const struct QuestLogQuest *quest = &gQuestLogQuests[sQuestLogQuestIndex];
-    u8 state = QuestLog_GetState(quest);
 
     sQuestLogPage = QUEST_LOG_PAGE_DETAIL;
     QuestLog_RemoveList();
     DrawStdWindowFrame(sQuestLogWindowId, FALSE);
-    AddTextPrinterParameterized(sQuestLogWindowId, FONT_NORMAL, quest->title, 8, 5, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(sQuestLogWindowId, FONT_SMALL, COMPOUND_STRING("CATEGORIA:"), 8, 25, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(sQuestLogWindowId, FONT_SMALL, gQuestLogCategoryNames[quest->category], 84, 25, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(sQuestLogWindowId, FONT_SMALL, COMPOUND_STRING("STATO:"), 8, 35, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(sQuestLogWindowId, FONT_SMALL, state == QUEST_LOG_STATE_COMPLETED ? COMPOUND_STRING("COMPLETATA") : COMPOUND_STRING("ATTIVA"), 52, 35, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(sQuestLogWindowId, FONT_SMALL, COMPOUND_STRING("DESCRIZIONE"), 8, 53, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(sQuestLogWindowId, FONT_SMALL, quest->description, 8, 63, TEXT_SKIP_DRAW, NULL);
-    if (state == QUEST_LOG_STATE_ACTIVE)
-    {
-        AddTextPrinterParameterized(sQuestLogWindowId, FONT_SMALL, COMPOUND_STRING("OBIETTIVO ATTUALE"), 8, 99, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(sQuestLogWindowId, FONT_SMALL, QuestLog_GetCurrentObjective(quest), 8, 109, TEXT_SKIP_DRAW, NULL);
-    }
-    else
-    {
-        AddTextPrinterParameterized(sQuestLogWindowId, FONT_SMALL, COMPOUND_STRING("COMPLETATA"), 8, 109, TEXT_SKIP_DRAW, NULL);
-    }
-    AddTextPrinterParameterized(sQuestLogWindowId, FONT_SMALL, COMPOUND_STRING("B: INDIETRO"), 8, 129, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(sQuestLogWindowId, FONT_NORMAL, quest->title, 8, QUEST_LOG_DETAIL_TITLE_Y, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(sQuestLogWindowId, FONT_SMALL, quest->description, 8, QUEST_LOG_DETAIL_DESCRIPTION_Y, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(sQuestLogWindowId, FONT_SMALL, COMPOUND_STRING("OBIETTIVO"), 8, QUEST_LOG_DETAIL_OBJECTIVE_LABEL_Y, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(sQuestLogWindowId, FONT_SMALL, QuestLog_GetCurrentObjective(quest), 8, QUEST_LOG_DETAIL_OBJECTIVE_Y, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(sQuestLogWindowId, FONT_SMALL, COMPOUND_STRING("B: INDIETRO"), 8, QUEST_LOG_DETAIL_BACK_Y, TEXT_SKIP_DRAW, NULL);
     CopyWindowToVram(sQuestLogWindowId, COPYWIN_FULL);
 }
 
