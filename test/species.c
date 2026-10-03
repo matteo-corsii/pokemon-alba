@@ -390,6 +390,26 @@ TEST("Ausonia starter IDs are append-only and distinct")
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_FRASCOTTO), COMPOUND_STRING("Frascotto")), 0);
 }
 
+TEST("Ausonia Regional Dex uses the canonical data table")
+{
+    EXPECT_EQ(AUSONIA_DEX_COUNT, 46);
+    EXPECT_EQ(SpeciesToAusoniaPokedexNum(SPECIES_CINGERM), 1);
+    EXPECT_EQ(SpeciesToAusoniaPokedexNum(SPECIES_SELVAZANNA), 3);
+    EXPECT_EQ(SpeciesToAusoniaPokedexNum(SPECIES_ARDEINO), 7);
+    EXPECT_EQ(SpeciesToAusoniaPokedexNum(SPECIES_BORGOTTO), 10);
+    EXPECT_EQ(SpeciesToAusoniaPokedexNum(SPECIES_CARPULETUM), 36);
+    EXPECT_EQ(SpeciesToAusoniaPokedexNum(SPECIES_LUTELLUS), 38);
+    EXPECT_EQ(SpeciesToAusoniaPokedexNum(SPECIES_FRASCOTTO), 46);
+    EXPECT_EQ(SpeciesToAusoniaPokedexNum(SPECIES_PIKACHU), 0);
+
+    EXPECT_EQ(AusoniaToNationalOrder(0), NATIONAL_DEX_NONE);
+    EXPECT_EQ(AusoniaToNationalOrder(1), NATIONAL_DEX_CINGERM);
+    EXPECT_EQ(AusoniaToNationalOrder(36), NATIONAL_DEX_CARPULETUM);
+    EXPECT_EQ(AusoniaToNationalOrder(38), NATIONAL_DEX_LUTELLUS);
+    EXPECT_EQ(AusoniaToNationalOrder(46), NATIONAL_DEX_FRASCOTTO);
+    EXPECT_EQ(AusoniaToNationalOrder(AUSONIA_DEX_COUNT + 1), NATIONAL_DEX_NONE);
+}
+
 TEST("Ausonia Grass starter base data matches the approved prototype")
 {
     const struct SpeciesInfo *cingerm = &gSpeciesInfo[SPECIES_CINGERM];
