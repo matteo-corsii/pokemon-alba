@@ -63,6 +63,17 @@ const struct Tileset gTileset_PortaPretoria =
     .callback = InitTilesetAnim_Petalburg,
 };
 
+const struct Tileset gTileset_ViaConsolare =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_ViaConsolare,
+    .palettes = gTilesetPalettes_ViaConsolare,
+    .metatiles = gMetatiles_ViaConsolare,
+    .metatileAttributes = gMetatileAttributes_ViaConsolare,
+    .callback = InitTilesetAnim_Petalburg,
+};
+
 const struct Tileset gTileset_LagoDiAlbera =
 {
     .isCompressed = TRUE,
@@ -203,6 +214,17 @@ const struct Tileset gTileset_Sootopolis =
     .palettes = gTilesetPalettes_Sootopolis,
     .metatiles = gMetatiles_Sootopolis,
     .metatileAttributes = gMetatileAttributes_Sootopolis,
+    .callback = InitTilesetAnim_Sootopolis,
+};
+
+const struct Tileset gTileset_Laricia =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_Laricia,
+    .palettes = gTilesetPalettes_Laricia,
+    .metatiles = gMetatiles_Laricia,
+    .metatileAttributes = gMetatileAttributes_Laricia,
     .callback = InitTilesetAnim_Sootopolis,
 };
 

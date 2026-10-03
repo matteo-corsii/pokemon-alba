@@ -254,10 +254,6 @@ LittlerootTown_ProfessorBirchsLab_EventScript_CompleteAlberaOpening::
 	goto_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_NoRoomForViaVerdiPokeBalls
 	giveitem ITEM_POKE_BALL, 10
 	goto_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_NoRoomForViaVerdiPokeBalls
-	playfanfare MUS_OBTAIN_ITEM
-	message LittlerootTown_ProfessorBirchsLab_Text_ReceivedViaVerdiPokeBalls
-	waitmessage
-	waitfanfare
 	setvar VAR_ALBERA_VIA_VERDI_STATE, 1
 	#ifdef EMERALD
 	clearflag FLAG_HIDE_ROUTE101_RESEARCH_PARTY
@@ -1014,8 +1010,6 @@ LittlerootTown_ProfessorBirchsLab_Text_ExplainResearchPokedex:
 	.string "Usalo anche come riferimento per le\n"
 	.string "osservazioni sull'ambiente.$"
 
-LittlerootTown_ProfessorBirchsLab_Text_ReceivedViaVerdiPokeBalls:
-	.string "{PLAYER} riceve 10 POKé BALL!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_NoRoomForViaVerdiPokeBalls:
 	.string "PROF. LAURO: Non hai spazio per le\n"

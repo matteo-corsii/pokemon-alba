@@ -1,0 +1,260 @@
+{
+  "id": "MAP_LARICIA",
+  "name": "Laricia",
+  "layout": "LAYOUT_LARICIA",
+  "music": "MUS_OLDALE",
+  "region_map_section": "MAPSEC_LARICIA",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_TOWN",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [
+    {
+      "map": "MAP_PONTE_VALLE_LARICIA",
+      "offset": 0,
+      "direction": "left"
+    }
+  ],
+  "object_events": [
+    {
+      "local_id": "LOCALID_LARICIA_SAGRA_ADDETTO",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_2",
+      "x": 45,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Laricia_EventScript_SagraBlocker",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_LARICIA_SAGRA_CAMION_1",
+      "graphics_id": "OBJ_EVENT_GFX_TRUCK",
+      "x": 47,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Laricia_EventScript_SagraBlocker",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_LARICIA_SAGRA_CAMION_2",
+      "graphics_id": "OBJ_EVENT_GFX_TRUCK",
+      "x": 47,
+      "y": 18,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Laricia_EventScript_SagraBlocker",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_LARICIA_ANZIANO_PIAZZA",
+      "graphics_id": "OBJ_EVENT_GFX_EXPERT_M",
+      "x": 28,
+      "y": 21,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Laricia_EventScript_AnzianoPiazza",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_LARICIA_VISITATORE_PALAZZO",
+      "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
+      "x": 30,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Laricia_EventScript_VisitatorePalazzo",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_LARICIA_CLIENTE_FRASCHETTA",
+      "graphics_id": "OBJ_EVENT_GFX_BEAUTY",
+      "x": 16,
+      "y": 26,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Laricia_EventScript_ClienteFraschetta",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_LARICIA_RAGAZZO_CENTRO",
+      "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
+      "x": 14,
+      "y": 39,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Laricia_EventScript_RagazzoCentro",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_LARICIA_ABITANTE_MART",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_5",
+      "x": 22,
+      "y": 47,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Laricia_EventScript_AbitanteMart",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_LARICIA_RESIDENTE_VICOLI",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
+      "x": 38,
+      "y": 45,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Laricia_EventScript_ResidenteVicoli",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_LARICIA_CONTADINO_VALLE",
+      "graphics_id": "OBJ_EVENT_GFX_HIKER",
+      "x": 6,
+      "y": 40,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Laricia_EventScript_ContadinoValle",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_LARICIA_VIANDANTE_UCCELLIERA",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_3",
+      "x": 49,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Laricia_EventScript_ViandanteUccelliera",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_LARICIA_VISITATORE_SAGRA",
+      "graphics_id": "OBJ_EVENT_GFX_POKEFAN_M",
+      "x": 42,
+      "y": 17,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Laricia_EventScript_VisitatoreSagra",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 12,
+      "y": 37,
+      "elevation": 0,
+      "dest_map": "MAP_LARICIA_POKEMON_CENTER",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 18,
+      "y": 47,
+      "elevation": 0,
+      "dest_map": "MAP_LARICIA_MART",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 12,
+      "y": 25,
+      "elevation": 0,
+      "dest_map": "MAP_LARICIA_FRASCHETTA_PIAZZA",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 45,
+      "y": 46,
+      "elevation": 0,
+      "dest_map": "MAP_LARICIA_FRASCHETTA_VICOLI",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 48,
+      "y": 25,
+      "elevation": 0,
+      "dest_map": "MAP_LARICIA_HOUSE1",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 49,
+      "y": 37,
+      "elevation": 0,
+      "dest_map": "MAP_LARICIA_HOUSE2",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 18,
+      "y": 56,
+      "elevation": 0,
+      "dest_map": "MAP_LARICIA_HOUSE3",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 44,
+      "y": 56,
+      "elevation": 0,
+      "dest_map": "MAP_LARICIA_HOUSE4",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 32,
+      "y": 46,
+      "elevation": 0,
+      "dest_map": "MAP_LARICIA_HOUSE5",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [],
+  "region": "REGION_HOENN"
+}

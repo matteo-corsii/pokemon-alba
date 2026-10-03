@@ -137,7 +137,12 @@
     "AlberaStorica",
     "AlberaStorica_Anfiteatro",
     "ViaConsolare",
-    "LagoDiAlbera"
+    "LagoDiAlbera",
+    "BorgoDiCastello",
+    "StradaBorgoCisternoni",
+    "VillaPapaleGiardini",
+    "PonteValleLaricia",
+    "Laricia"
   ],
   "gMapGroup_IndoorLittleroot": [
     "LittlerootTown_BrendansHouse_1F",
@@ -163,7 +168,39 @@
     "LagoDiAlbera_RefugeMastersHouse_1F",
     "LagoDiAlbera_RefugeMastersHouse_2F",
     "LagoDiAlbera_BikeShop",
-    "LagoDiAlbera_RefugeShop"
+    "LagoDiAlbera_RefugeShop",
+    "LagoDiAlbera_WaterGym_1F",
+    "LagoDiAlbera_WaterGym_2F",
+    "LagoDiAlbera_WaterGym_3F",
+    "LagoDiAlbera_WaterGym_4F",
+    "LagoDiAlbera_PokemonCenterWest",
+    "LagoDiAlbera_PokemonCenterEast",
+    "LagoDiAlbera_Mart",
+    "LagoDiAlbera_StiltHouse1",
+    "LagoDiAlbera_StiltHouse2",
+    "LagoDiAlbera_EastHouse1",
+    "LagoDiAlbera_EastHouse2",
+    "BorgoDiCastello_PokemonCenter",
+    "BorgoDiCastello_Mart",
+    "BorgoDiCastello_House1",
+    "BorgoDiCastello_House2",
+    "BorgoDiCastello_House3",
+    "BorgoDiCastello_House4",
+    "BorgoDiCastello_RistoranteBelvedere",
+    "VillaPapaleInterno",
+    "StradaBorgoCisternoni_Casa",
+    "Laricia_PokemonCenter",
+    "Laricia_Mart",
+    "Laricia_FraschettaPiazza",
+    "Laricia_FraschettaVicoli",
+    "Laricia_House1",
+    "Laricia_House2",
+    "Laricia_House3",
+    "Laricia_House4",
+    "Laricia_House5",
+    "ValleLaricia_Casale1",
+    "ValleLaricia_Casale2",
+    "ValleLaricia_CasettaAgricola"
   ],
   "gMapGroup_IndoorDewford": [
     "DewfordTown_House1",
@@ -487,7 +524,8 @@
     "TerraCave_Entrance",
     "TerraCave_End",
     "AlteringCave",
-    "MeteorFalls_StevensCave"
+    "MeteorFalls_StevensCave",
+    "Emissario"
   ],
   "gMapGroup_IndoorDynamic": [
     "SecretBase_RedCave1",
@@ -641,7 +679,8 @@
     "NavelRock_Down10",
     "NavelRock_Down11",
     "NavelRock_Bottom",
-    "TrainerHill_Elevator"
+    "TrainerHill_Elevator",
+    "BoscoDelRomitorio"
   ],
   "gMapGroup_IndoorRoute104Prototype": [
     "Route104_Prototype",

@@ -177,7 +177,6 @@
 #define TRAINER_FRANKLIN                    170
 #define TRAINER_KEVIN                       171
 #define TRAINER_JACK                        172
-#define TRAINER_DUDLEY                      173
 #define TRAINER_CHAD                        174
 #define TRAINER_TONY_2                      175
 #define TRAINER_TONY_3                      176
@@ -466,7 +465,6 @@
 #define TRAINER_SIENNA                      459
 #define TRAINER_DEBRA                       460
 #define TRAINER_LINDA                       461
-#define TRAINER_KAYLEE                      462
 #define TRAINER_LAUREL                      463
 #define TRAINER_CARLEE                      464
 #define TRAINER_JENNY_2                     465
@@ -572,7 +570,6 @@
 #define TRAINER_CATHERINE_5                 565
 #define TRAINER_JULIO                       566
 #define TRAINER_GRUNT_SEAFLOOR_CAVERN_5     567
-#define TRAINER_GRUNT_UNUSED                568
 #define TRAINER_GRUNT_MT_PYRE_4             569
 #define TRAINER_GRUNT_JAGGED_PASS           570
 #define TRAINER_MARC                        571
@@ -706,7 +703,6 @@
 #define TRAINER_KALEB                       699
 #define TRAINER_JOSEPH                      700
 #define TRAINER_ALYSSA                      701
-#define TRAINER_MARCOS                      702
 #define TRAINER_RHETT                       703
 #define TRAINER_TYRON                       704
 #define TRAINER_CELINA                      705
@@ -855,11 +851,11 @@
 #define TRAINER_MARIELA                     848
 #define TRAINER_ALVARO                      849
 #define TRAINER_EVERETT                     850
-#define TRAINER_RED                         851
-#define TRAINER_LEAF                        852
-#define TRAINER_BRENDAN_PLACEHOLDER         853
-#define TRAINER_MAY_PLACEHOLDER             854
-#if !IS_FRLG
+#if !IS_FRLG && !defined(FIRERED) && !defined(LEAFGREEN)
+#define TRAINER_VILLA_PAPALE_GIARDINIERE     173
+#define TRAINER_VILLA_PAPALE_MANUTENTORE     462
+#define TRAINER_VILLA_PAPALE_APPRENDISTA     702
+#define TRAINER_EMISSARIO_AUREA_RECRUIT      853
 #define TRAINER_ALBERA_DARIO                 855
 #define TRAINER_ALBERA_MARA                  856
 #define TRAINER_ALBERA_ELIO                  857
@@ -869,6 +865,10 @@
 #define TRAINER_CISTERNONI_AUREA_RECRUIT      861
 #define TRAINER_VIA_CONSOLARE_LIVIO           862
 #define TRAINER_VIA_CONSOLARE_ELIO            863
+#define TRAINER_LAGO_WATER_GYM_REMO           568
+#define TRAINER_LAGO_WATER_GYM_DALIA          851
+#define TRAINER_LAGO_WATER_GYM_NEREO          852
+#define TRAINER_LAGO_WATER_GYM_MARINA         854
 #endif
 
 // NOTE: Because each Trainer uses a flag to determine when they are defeated, there is only space for 9 additional trainers before trainer flag space overflows
