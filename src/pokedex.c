@@ -32,6 +32,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "config/pokedex_plus_hgss.h"
+#include "data/pokemon/ausonia_pokedex.h"
 
 enum
 {
@@ -225,37 +226,6 @@ static bool8 AusoniaDexEntryComesAfter(u8 order, u16 leftDexNum, u16 rightDexNum
     return FALSE;
 }
 
-static void CreateAusoniaSortedList(u8 order)
-{
-    u16 i;
-    u16 count = 0;
-
-    for (i = 0; i < AUSONIA_DEX_COUNT; i++)
-    {
-        u16 dexNum = gAusoniaPokedexOrder[i];
-        u16 insertAt;
-        bool8 visible = order == ORDER_ALPHABETICAL
-            ? GetSetPokedexFlag(dexNum, FLAG_GET_SEEN)
-            : GetSetPokedexFlag(dexNum, FLAG_GET_CAUGHT);
-
-        if (!visible)
-            continue;
-
-        insertAt = count;
-        while (insertAt > 0 && AusoniaDexEntryComesAfter(order, sPokedexView->pokedexList[insertAt - 1].dexNum, dexNum))
-        {
-            sPokedexView->pokedexList[insertAt] = sPokedexView->pokedexList[insertAt - 1];
-            insertAt--;
-        }
-        sPokedexView->pokedexList[insertAt].dexNum = dexNum;
-        sPokedexView->pokedexList[insertAt].seen = GetSetPokedexFlag(dexNum, FLAG_GET_SEEN);
-        sPokedexView->pokedexList[insertAt].owned = GetSetPokedexFlag(dexNum, FLAG_GET_CAUGHT);
-        count++;
-    }
-
-    sPokedexView->pokemonListCount = count;
-}
-
 struct SearchOptionText
 {
     const u8 *description;
@@ -335,6 +305,37 @@ struct PokedexView
     u8 unkArr3[8]; // Cleared, never read
 };
 
+static void CreateAusoniaSortedList(u8 order)
+{
+    u16 i;
+    u16 count = 0;
+
+    for (i = 0; i < AUSONIA_DEX_COUNT; i++)
+    {
+        u16 dexNum = gAusoniaPokedexOrder[i];
+        u16 insertAt;
+        bool8 visible = order == ORDER_ALPHABETICAL
+            ? GetSetPokedexFlag(dexNum, FLAG_GET_SEEN)
+            : GetSetPokedexFlag(dexNum, FLAG_GET_CAUGHT);
+
+        if (!visible)
+            continue;
+
+        insertAt = count;
+        while (insertAt > 0 && AusoniaDexEntryComesAfter(order, sPokedexView->pokedexList[insertAt - 1].dexNum, dexNum))
+        {
+            sPokedexView->pokedexList[insertAt] = sPokedexView->pokedexList[insertAt - 1];
+            insertAt--;
+        }
+        sPokedexView->pokedexList[insertAt].dexNum = dexNum;
+        sPokedexView->pokedexList[insertAt].seen = GetSetPokedexFlag(dexNum, FLAG_GET_SEEN);
+        sPokedexView->pokedexList[insertAt].owned = GetSetPokedexFlag(dexNum, FLAG_GET_CAUGHT);
+        count++;
+    }
+
+    sPokedexView->pokemonListCount = count;
+}
+
 // this file's functions
 static void CB2_Pokedex(void);
 static void Task_OpenPokedexMainPage(u8);
@@ -357,6 +358,7 @@ static bool8 LoadPokedexListPage(u8);
 static void LoadPokedexBgPalette(bool8);
 static void FreeWindowAndBgBuffers(void);
 static void CreatePokedexList(u8, u8);
+static void CreateAusoniaSortedList(u8);
 static void CreateMonDexNum(u16, u8, u8, u16);
 static void CreateCaughtBall(u16, u8, u8, u16);
 static u8 CreateMonName(u16, u8, u8);
@@ -457,7 +459,6 @@ static void ClearSearchParameterBoxText(void);
 
 // const rom data
 #include "data/pokemon/pokedex_orders.h"
-#include "data/pokemon/ausonia_pokedex.h"
 
 static const struct OamData sOamData_ScrollBar =
 {
