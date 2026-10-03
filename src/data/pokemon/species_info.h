@@ -2821,6 +2821,29 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .teachingType = EXPLICIT_TEACHABLES,
         .teachableLearnset = sCarpulusTeachableLearnset,
         .eggMoveLearnset = sCarpulusEggMoveLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_CARPULETUM}),
+    },
+    [SPECIES_CARPULETUM] =
+    {
+        .baseHP = 90, .baseAttack = 105, .baseDefense = 100, .baseSpAttack = 65, .baseSpDefense = 85, .baseSpeed = 65,
+        .types = MON_TYPES(TYPE_WATER, TYPE_GROUND), .catchRate = 190, .expYield = 64, .evYield_Speed = 1,
+        .genderRatio = PERCENT_FEMALE(50), .eggCycles = 20, .friendship = 70, .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_2),
+        .abilities = { ABILITY_SWIFT_SWIM, ABILITY_WATER_VEIL, ABILITY_HYDRATION }, .bodyColor = BODY_COLOR_GREEN,
+        .speciesName = _("Carpuletum"), .cryId = CRY_MAGIKARP, .natDexNum = NATIONAL_DEX_CARPULETUM,
+        .categoryName = _("SCAGLIA"), .height = 6, .weight = 120,
+        .description = COMPOUND_STRING(
+            "Vive in branchi presso rive e pontili.\n"
+            "Le scaglie circolari riflettono la luce.\n"
+            "Così si orienta nell'acqua torbida."),
+        .pokemonScale = 256, .frontPic = gMonFrontPic_Carpuletum, .frontPicSize = MON_COORDS_SIZE(64,64), .frontPicYOffset = 4,
+        .frontAnimFrames = sAnims_SingleFramePlaceHolder, .backPic = gMonBackPic_Carpuletum, .backPicSize = MON_COORDS_SIZE(64,64), .backPicYOffset = 4,
+        .palette = gMonPalette_Carpuletum, .shinyPalette = gMonShinyPalette_Carpuletum, .iconSprite = gMonIcon_Carpuletum, .iconPalIndex = 0,
+        FOOTPRINT(Magikarp) OVERWORLD(sPicTable_Magikarp, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, sAnimTable_Following, gOverworldPalette_Magikarp, gShinyOverworldPalette_Magikarp)
+        .levelUpLearnset = sCarpulusLevelUpLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sCarpulusTeachableLearnset,
+        .eggMoveLearnset = sCarpulusEggMoveLearnset,
     },
     [SPECIES_LUCINUS] =
     {
@@ -2834,6 +2857,29 @@ const struct SpeciesInfo gSpeciesInfo[] =
             "l'acqua."), .pokemonScale = 256,
         .frontPic = gMonFrontPic_Lucinus, .frontPicSize = MON_COORDS_SIZE(64,64), .frontPicYOffset = 4, .frontAnimFrames = sAnims_SingleFramePlaceHolder,
         .backPic = gMonBackPic_Lucinus, .backPicSize = MON_COORDS_SIZE(64,64), .backPicYOffset = 4, .palette = gMonPalette_Lucinus, .shinyPalette = gMonShinyPalette_Lucinus, .iconSprite = gMonIcon_Lucinus, .iconPalIndex = 0,
+        FOOTPRINT(Carvanha) OVERWORLD(sPicTable_Carvanha, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, sAnimTable_Following, gOverworldPalette_Carvanha, gShinyOverworldPalette_Carvanha)
+        .levelUpLearnset = sLucinusLevelUpLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sLucinusTeachableLearnset,
+        .eggMoveLearnset = sLucinusEggMoveLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 32, SPECIES_LUTELLUS}),
+    },
+    [SPECIES_LUTELLUS] =
+    {
+        .baseHP = 75, .baseAttack = 125, .baseDefense = 70, .baseSpAttack = 105, .baseSpDefense = 55, .baseSpeed = 100,
+        .types = MON_TYPES(TYPE_WATER, TYPE_DARK), .catchRate = 90, .expYield = 120, .evYield_Attack = 2,
+        .genderRatio = PERCENT_FEMALE(50), .eggCycles = 25, .friendship = 70, .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_2),
+        .abilities = { ABILITY_STRONG_JAW, ABILITY_SWIFT_SWIM, ABILITY_SNIPER }, .bodyColor = BODY_COLOR_GREEN,
+        .speciesName = _("Lutellus"), .cryId = CRY_CARVANHA, .natDexNum = NATIONAL_DEX_LUTELLUS,
+        .categoryName = _("AGGUATO"), .height = 14, .weight = 340,
+        .description = COMPOUND_STRING(
+            "Si nasconde fra i canneti.\n"
+            "Scatta sulla preda senza increspare\n"
+            "l'acqua."), .pokemonScale = 256,
+        .frontPic = gMonFrontPic_Lutellus, .frontPicSize = MON_COORDS_SIZE(64,64), .frontPicYOffset = 4,
+        .frontAnimFrames = sAnims_SingleFramePlaceHolder, .backPic = gMonBackPic_Lutellus, .backPicSize = MON_COORDS_SIZE(64,64), .backPicYOffset = 4,
+        .palette = gMonPalette_Lutellus, .shinyPalette = gMonShinyPalette_Lutellus, .iconSprite = gMonIcon_Lutellus, .iconPalIndex = 0,
         FOOTPRINT(Carvanha) OVERWORLD(sPicTable_Carvanha, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, sAnimTable_Following, gOverworldPalette_Carvanha, gShinyOverworldPalette_Carvanha)
         .levelUpLearnset = sLucinusLevelUpLearnset,
         .teachingType = EXPLICIT_TEACHABLES,
