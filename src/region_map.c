@@ -123,6 +123,9 @@ static const u32 sRegionMapCursorLargeGfxLZ[] = INCGFX_U32("graphics/pokenav/reg
 static const u16 sRegionMapBg_Pal[] = INCGFX_U16("graphics/pokenav/region_map/map.pal", ".gbapal");
 static const u32 sRegionMapBg_GfxLZ[] = INCGFX_U32("graphics/pokenav/region_map/map.png", ".8bpp.smol", "-num_tiles 233 -Wnum_tiles");
 static const u32 sRegionMapBg_TilemapLZ[] = INCGFX_U32("graphics/pokenav/region_map/map.bin", ".smolTM");
+static const u16 sRegionMapAusonia_Pal[] = INCGFX_U16("graphics/pokenav/region_map/map_ausonia.pal", ".gbapal");
+static const u32 sRegionMapAusonia_Gfx[] = INCGFX_U32("graphics/pokenav/region_map/map_ausonia.png", ".8bpp.smol", "-num_tiles 224 -Wnum_tiles");
+static const u32 sRegionMapAusonia_Tilemap[] = INCGFX_U32("graphics/pokenav/region_map/map_ausonia.bin", ".smolTM");
 static const u16 sRegionMapPlayerIcon_BrendanPal[] = INCGFX_U16("graphics/pokenav/region_map/brendan_icon.png", ".gbapal");
 static const u8 sRegionMapPlayerIcon_BrendanGfx[] = INCGFX_U8("graphics/pokenav/region_map/brendan_icon.png", ".4bpp");
 static const u16 sRegionMapPlayerIcon_MayPal[] = INCGFX_U16("graphics/pokenav/region_map/may_icon.png", ".gbapal");
@@ -378,17 +381,15 @@ const struct RegionMapInfo gRegionMapInfos[] =
         .regionMapGfx = sRegionMapSevii67_Gfx,
         .regionMapTilemap = sRegionMapSevii67_Tilemap,
     },
-    // Temporary technical scaffold: Ausonia reuses the vanilla map assets
-    // until dedicated Region Map graphics are delivered.
     [REGION_MAP_AUSONIA] =
     {
         .dexMapPalette = sPokedexAreaMap_Pal,
         .dexMapGfx = sPokedexAreaMap_Gfx,
         .dexMapTilemap = sPokedexAreaMap_Tilemap,
         .dexMapPaletteSize = sizeof(sPokedexAreaMap_Pal),
-        .regionMapPalette = sRegionMapBg_Pal,
-        .regionMapGfx = sRegionMapBg_GfxLZ,
-        .regionMapTilemap = sRegionMapBg_TilemapLZ,
+        .regionMapPalette = sRegionMapAusonia_Pal,
+        .regionMapGfx = sRegionMapAusonia_Gfx,
+        .regionMapTilemap = sRegionMapAusonia_Tilemap,
     },
 };
 
