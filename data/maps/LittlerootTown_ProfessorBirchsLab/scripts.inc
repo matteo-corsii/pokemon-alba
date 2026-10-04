@@ -819,6 +819,13 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex::
 	special SetUnlockedPokedexFlags
 	setflag FLAG_RECEIVED_POKEDEX_FROM_BIRCH
 	setvar VAR_CABLE_CLUB_TUTORIAL_STATE, 1
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_ReceivedPokenav, MSGBOX_DEFAULT
+	setflag FLAG_SYS_POKENAV_GET
+	setflag FLAG_RECEIVED_POKENAV
+	setflag FLAG_HAS_MATCH_CALL
+	setflag FLAG_ADDED_MATCH_CALL_TO_POKENAV
+	setflag FLAG_ENABLE_PROF_BIRCH_MATCH_CALL
+	setvar VAR_REGISTER_BIRCH_STATE, 2
 	return
 
 LittlerootTown_ProfessorBirchsLab_EventScript_PokemonAwait::
@@ -1417,3 +1424,8 @@ LittlerootTown_ProfessorBirchsLab_Text_ScottAboardSSTidalCall:
 	.string "we meet. I'll be waiting!\p"
 	.string "… … … … … …\n"
 	.string "… … … … … Click!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_ReceivedPokenav:
+	.string "PROF. LAURO: E questo è il POKéNAV.\p"
+	.string "Puoi consultare la mappa e restare\n"
+	.string "in contatto con il laboratorio.$"
