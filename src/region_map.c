@@ -126,6 +126,7 @@ static const u32 sRegionMapBg_TilemapLZ[] = INCGFX_U32("graphics/pokenav/region_
 static const u16 sRegionMapAusonia_Pal[] = INCGFX_U16("graphics/pokenav/region_map/map_ausonia.pal", ".gbapal");
 static const u32 sRegionMapAusonia_Gfx[] = INCGFX_U32("graphics/pokenav/region_map/map_ausonia.png", ".8bpp.smol", "-num_tiles 224 -Wnum_tiles");
 static const u32 sRegionMapAusonia_Tilemap[] = INCGFX_U32("graphics/pokenav/region_map/map_ausonia.bin", ".smolTM");
+static void *sRegionMapAusoniaGfxBuffer;
 static const u16 sRegionMapPlayerIcon_BrendanPal[] = INCGFX_U16("graphics/pokenav/region_map/brendan_icon.png", ".gbapal");
 static const u8 sRegionMapPlayerIcon_BrendanGfx[] = INCGFX_U8("graphics/pokenav/region_map/brendan_icon.png", ".4bpp");
 static const u16 sRegionMapPlayerIcon_MayPal[] = INCGFX_U16("graphics/pokenav/region_map/may_icon.png", ".gbapal");
@@ -749,6 +750,30 @@ void ShowRegionMapForPokedexAreaScreen(struct RegionMap *regionMap)
     sRegionMap->playerIconSpritePosY = sRegionMap->cursorPosY;
 }
 
+static void LoadAusoniaRegionMapGfx(void)
+{
+    u32 size;
+    u32 i;
+    u8 *gfx = malloc_and_decompress(sRegionMapAusonia_Gfx, &size);
+
+    if (gfx == NULL)
+        return;
+
+    // The shared 8bpp region-map renderer keeps its map palette in bank 7.
+    // The Ausonia PNG uses palette indices 0-46, so move those indices to the
+    // same bank before copying the tile data to VRAM.
+    for (i = 0; i < size; i++)
+        gfx[i] += BG_PLTT_ID(7);
+
+    if (LoadBgTiles(sRegionMap->bgNum, gfx, size, 0) == 0xFFFF)
+    {
+        Free(gfx);
+        return;
+    }
+
+    sRegionMapAusoniaGfxBuffer = gfx;
+}
+
 bool8 LoadRegionMapGfx(void)
 {
     enum RegionMapType regionMapType;
@@ -757,7 +782,12 @@ bool8 LoadRegionMapGfx(void)
     case 0:
         regionMapType = GetRegionMapType(gMapHeader.regionMapSectionId);
         if (sRegionMap->bgManaged)
-            DecompressAndCopyTileDataToVram(sRegionMap->bgNum, gRegionMapInfos[regionMapType].regionMapGfx, 0, 0, 0);
+        {
+            if (regionMapType == REGION_MAP_AUSONIA)
+                LoadAusoniaRegionMapGfx();
+            else
+                DecompressAndCopyTileDataToVram(sRegionMap->bgNum, gRegionMapInfos[regionMapType].regionMapGfx, 0, 0, 0);
+        }
         else
             DecompressDataWithHeaderVram(gRegionMapInfos[regionMapType].regionMapGfx, (u16 *)BG_CHAR_ADDR(2));
         break;
@@ -766,7 +796,14 @@ bool8 LoadRegionMapGfx(void)
         if (sRegionMap->bgManaged)
         {
             if (!FreeTempTileDataBuffersIfPossible())
+            {
+                if (sRegionMapAusoniaGfxBuffer != NULL)
+                {
+                    Free(sRegionMapAusoniaGfxBuffer);
+                    sRegionMapAusoniaGfxBuffer = NULL;
+                }
                 DecompressAndCopyTileDataToVram(sRegionMap->bgNum, gRegionMapInfos[regionMapType].regionMapTilemap, 0, 0, 1);
+            }
         }
         else
         {
