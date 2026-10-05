@@ -38,15 +38,21 @@ Assert-True ($paletteCount -le 48) "Ausonia palette exceeds the 48-color BG budg
 
 $tilemap = [IO.File]::ReadAllBytes($binPath)
 Assert-True ($tilemap.Length -eq 4096) "Ausonia tilemap must be 4096 bytes, got $($tilemap.Length)."
+$physicalTileCount = 224
+$maxHardwareTile = ($physicalTileCount - 1) * 2
 $maxTile = 0
+$oddHardwareIndices = 0
 for ($i = 0; $i -lt $tilemap.Length; $i += 2) {
     $entry = $tilemap[$i] + ($tilemap[$i + 1] * 256)
-    $tile = $entry -band 0x03ff
-    if ($tile -gt $maxTile) { $maxTile = $tile }
-    Assert-True ($tile -le 223) "Ausonia tilemap references tile $tile, above the supplied 224-tile asset."
-    Assert-True (($entry -band 0xfc00) -eq 0) "Ausonia tilemap entry $($i / 2) uses unsupported flip/palette bits."
+    $hardwareTile = $entry -band 0x03ff
+    if ($hardwareTile -gt $maxTile) { $maxTile = $hardwareTile }
+    if ($hardwareTile % 2 -ne 0) { $oddHardwareIndices++ }
+    Assert-True ($hardwareTile -le $maxHardwareTile) "Ausonia tilemap references hardware tile $hardwareTile, above the 224-tile 8bpp asset."
+    Assert-True ($hardwareTile % 2 -eq 0) "Ausonia tilemap entry $($i / 2) uses an odd 8bpp hardware tile index."
+    Assert-True (($entry -band 0xf000) -eq 0) "Ausonia tilemap entry $($i / 2) uses unsupported palette bits in 8bpp mode."
 }
-Assert-True ($maxTile -le 223) "Ausonia tilemap maximum tile index is $maxTile."
+Assert-True ($oddHardwareIndices -eq 0) "Ausonia tilemap contains $oddHardwareIndices odd hardware tile indices."
+Assert-True ($maxTile -le $maxHardwareTile) "Ausonia tilemap maximum hardware tile index is $maxTile."
 
 $source = Get-Content $sourcePath -Raw
 Assert-True ($source -match 'sRegionMapAusonia_Pal') 'Ausonia palette symbol is missing.'
@@ -56,4 +62,4 @@ Assert-True ($source -match '-num_tiles 224 -Wnum_tiles') 'Ausonia graphics conv
 Assert-True ($source -match '(?s)\[REGION_MAP_AUSONIA\].*?\.regionMapPalette\s*=\s*sRegionMapAusonia_Pal.*?\.regionMapGfx\s*=\s*sRegionMapAusonia_Gfx.*?\.regionMapTilemap\s*=\s*sRegionMapAusonia_Tilemap') 'REGION_MAP_AUSONIA is not routed to its dedicated assets.'
 Assert-True ($source -match '(?s)\[REGION_MAP_HOENN\].*?\.regionMapPalette\s*=\s*sRegionMapBg_Pal.*?\.regionMapGfx\s*=\s*sRegionMapBg_GfxLZ.*?\.regionMapTilemap\s*=\s*sRegionMapBg_TilemapLZ') 'Hoenn Region Map routing changed unexpectedly.'
 
-Write-Output "Ausonia Region Map asset: PASS (palette=$paletteCount, maxTile=$maxTile)"
+Write-Output "Ausonia Region Map asset: PASS (palette=$paletteCount, physicalTiles=$physicalTileCount, maxHardwareTile=$maxTile)"
