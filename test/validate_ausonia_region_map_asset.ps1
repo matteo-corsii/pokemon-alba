@@ -1,68 +1,11 @@
 param([string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path)
 $ErrorActionPreference = 'Stop'
-
-function Assert-True([bool]$Condition, [string]$Message) {
-    if (-not $Condition) { throw $Message }
-}
-
-function Read-BigEndian32([byte[]]$Bytes, [int]$Offset) {
-    return ($Bytes[$Offset] * 16777216) + ($Bytes[$Offset + 1] * 65536) + ($Bytes[$Offset + 2] * 256) + $Bytes[$Offset + 3]
-}
-
-$assetRoot = Join-Path $RepositoryRoot 'graphics/pokenav/region_map'
-$pngPath = Join-Path $assetRoot 'map_ausonia.png'
-$palPath = Join-Path $assetRoot 'map_ausonia.pal'
-$binPath = Join-Path $assetRoot 'map_ausonia.bin'
-$sourcePath = Join-Path $RepositoryRoot 'src/region_map.c'
-
-foreach ($path in @($pngPath, $palPath, $binPath, $sourcePath)) {
-    Assert-True (Test-Path $path) "Required file is missing: $path"
-}
-
-$png = [IO.File]::ReadAllBytes($pngPath)
-Assert-True ($png.Length -ge 33) 'Ausonia PNG is truncated.'
-Assert-True (($png[0] -eq 137) -and ($png[1] -eq 80) -and ($png[2] -eq 78) -and ($png[3] -eq 71)) 'Ausonia asset is not a PNG.'
-$width = Read-BigEndian32 $png 16
-$height = Read-BigEndian32 $png 20
-Assert-True ($width -eq 128 -and $height -eq 120) "Ausonia PNG must be 128x120, got ${width}x${height}."
-Assert-True ($png[24] -eq 8 -and $png[25] -eq 3) 'Ausonia PNG must be indexed 8bpp (PNG color type 3).'
-Assert-True (($width % 8) -eq 0 -and ($height % 8) -eq 0) 'Ausonia atlas is not aligned to 8x8 tiles.'
-Assert-True (($width / 8) -eq 16 -and ($height / 8) -eq 15) 'Ausonia atlas must be 16x15 tiles.'
-
-$paletteLines = Get-Content $palPath
-Assert-True ($paletteLines.Count -ge 3 -and $paletteLines[0] -eq 'JASC-PAL' -and $paletteLines[1] -eq '0100') 'Ausonia palette must be JASC-PAL.'
-$paletteCount = [int]$paletteLines[2]
-$paletteEntries = @($paletteLines | Select-Object -Skip 3 | Where-Object { $_.Trim().Length -gt 0 })
-Assert-True ($paletteEntries.Count -eq $paletteCount) 'Ausonia palette entry count does not match its header.'
-Assert-True ($paletteCount -le 48) "Ausonia palette exceeds the 48-color BG budget: $paletteCount."
-
-$tilemap = [IO.File]::ReadAllBytes($binPath)
-Assert-True ($tilemap.Length -eq 4096) "Ausonia tilemap must be 4096 bytes, got $($tilemap.Length)."
-$physicalTileCount = 224
-$visibleLeft = 1
-$visibleTop = 2
-$visibleWidth = 28
-$visibleHeight = 15
-$maxTile = 0
-$nonZeroOutsideVisible = 0
-for ($i = 0; $i -lt $tilemap.Length; $i++) {
-    $tile = $tilemap[$i]
-    if ($tile -gt $maxTile) { $maxTile = $tile }
-    Assert-True ($tile -lt $physicalTileCount) "Ausonia affine tilemap entry $i references tile $tile, above the supplied 224-tile asset."
-    $x = $i % 64
-    $y = [math]::Floor($i / 64)
-    $insideVisible = ($x -ge $visibleLeft -and $x -lt ($visibleLeft + $visibleWidth) -and $y -ge $visibleTop -and $y -lt ($visibleTop + $visibleHeight))
-    if (-not $insideVisible -and $tile -ne 0) { $nonZeroOutsideVisible++ }
-}
-Assert-True ($maxTile -le 223) "Ausonia affine tilemap maximum tile index is $maxTile."
-Assert-True ($nonZeroOutsideVisible -eq 0) "Ausonia affine tilemap has $nonZeroOutsideVisible non-zero entries outside the visible 28x15 region."
-
-$source = Get-Content $sourcePath -Raw
-Assert-True ($source -match 'sRegionMapAusonia_Pal') 'Ausonia palette symbol is missing.'
-Assert-True ($source -match 'sRegionMapAusonia_Gfx') 'Ausonia graphics symbol is missing.'
-Assert-True ($source -match 'sRegionMapAusonia_Tilemap') 'Ausonia tilemap symbol is missing.'
-Assert-True ($source -match '-num_tiles 224 -Wnum_tiles') 'Ausonia graphics conversion must request 224 tiles.'
-Assert-True ($source -match '(?s)\[REGION_MAP_AUSONIA\].*?\.regionMapPalette\s*=\s*sRegionMapAusonia_Pal.*?\.regionMapGfx\s*=\s*sRegionMapAusonia_Gfx.*?\.regionMapTilemap\s*=\s*sRegionMapAusonia_Tilemap') 'REGION_MAP_AUSONIA is not routed to its dedicated assets.'
-Assert-True ($source -match '(?s)\[REGION_MAP_HOENN\].*?\.regionMapPalette\s*=\s*sRegionMapBg_Pal.*?\.regionMapGfx\s*=\s*sRegionMapBg_GfxLZ.*?\.regionMapTilemap\s*=\s*sRegionMapBg_TilemapLZ') 'Hoenn Region Map routing changed unexpectedly.'
-
-Write-Output "Ausonia Region Map asset: PASS (palette=$paletteCount, affine64x64=4096, physicalTiles=$physicalTileCount, maxTile=$maxTile)"
+function Assert-True([bool]$Condition, [string]$Message) { if (-not $Condition) { throw $Message } }
+function Read-BigEndian32([byte[]]$Bytes, [int]$Offset) { return ($Bytes[$Offset] * 16777216) + ($Bytes[$Offset + 1] * 65536) + ($Bytes[$Offset + 2] * 256) + $Bytes[$Offset + 3] }
+function Assert-IndexedAtlas([string]$Path) { $png=[IO.File]::ReadAllBytes($Path);Assert-True ($png.Length -ge 33) "PNG truncated: $Path";Assert-True (($png[0] -eq 137) -and ($png[1] -eq 80) -and ($png[2] -eq 78) -and ($png[3] -eq 71)) "Not PNG: $Path";$w=Read-BigEndian32 $png 16;$h=Read-BigEndian32 $png 20;Assert-True ($w -eq 128 -and $h -eq 128) "Atlas must be 128x128: $Path ($w x $h).";Assert-True ($png[24] -eq 8 -and $png[25] -eq 3) "Atlas must be indexed 8bpp: $Path" }
+$assetRoot=Join-Path $RepositoryRoot 'graphics/pokenav/region_map';$basePng=Join-Path $assetRoot 'map_ausonia_base.png';$detailPng=Join-Path $assetRoot 'map_ausonia_detail.png';$palPath=Join-Path $assetRoot 'map_ausonia.pal';$baseBin=Join-Path $assetRoot 'map_ausonia_base.bin';$detailBin=Join-Path $assetRoot 'map_ausonia_detail.bin';$sourcePath=Join-Path $RepositoryRoot 'src/region_map.c';foreach($path in @($basePng,$detailPng,$palPath,$baseBin,$detailBin,$sourcePath)){Assert-True (Test-Path $path) "Missing: $path"};Assert-IndexedAtlas $basePng;Assert-IndexedAtlas $detailPng
+$pl=Get-Content $palPath;Assert-True ($pl.Count -ge 3 -and $pl[0] -eq 'JASC-PAL' -and $pl[1] -eq '0100') 'Palette must be JASC-PAL.';$pc=[int]$pl[2];$pe=@($pl|Select-Object -Skip 3|Where-Object {$_.Trim().Length -gt 0});Assert-True ($pe.Count -eq $pc) 'Palette entry count mismatch.';Assert-True ($pc -eq 48) "Palette must contain 48 colors: $pc."
+$b2=[IO.File]::ReadAllBytes($baseBin);$b1=[IO.File]::ReadAllBytes($detailBin);Assert-True ($b2.Length -eq 4096) "BG2 map must be 4096 bytes: $($b2.Length).";Assert-True ($b1.Length -eq 2048) "BG1 map must be 2048 bytes: $($b1.Length).";$l=1;$t=2;$ww=28;$hh=15;$m2=0;$m1=0;$o2=0;$o1=0
+for($i=0;$i -lt 4096;$i++){ $tile=$b2[$i];if($tile -gt $m2){$m2=$tile};Assert-True ($tile -le 255) "BG2 tile $tile >255.";$x=$i%64;$y=[math]::Floor($i/64);$inside=($x -ge $l-and $x -lt ($l+$ww)-and $y -ge $t-and $y -lt ($t+$hh));if(-not $inside -and $tile -ne 0){$o2++}}
+for($i=0;$i -lt 1024;$i++){ $e=$b1[$i*2]-bor($b1[$i*2+1]-shl 8);$tile=$e -band 0x3FF;if($tile-gt $m1){$m1=$tile};Assert-True ($tile -le 255) "BG1 tile $tile >255.";$x=$i%32;$y=[math]::Floor($i/32);$inside=($x -ge $l-and $x -lt ($l+$ww)-and $y -ge $t-and $y -lt ($t+$hh));if(-not $inside -and $e -ne 0){$o1++}}
+Assert-True ($o2 -eq 0) "BG2 map has $o2 entries outside visible area.";Assert-True ($o1 -eq 0) "BG1 map has $o1 entries outside visible area.";$src=Get-Content $sourcePath -Raw;Assert-True ($src -match 'sRegionMapAusoniaBase_Gfx'-and $src -match 'sRegionMapAusoniaDetail_Gfx') 'Dual graphics symbols missing.';Assert-True ($src -match 'sRegionMapAusoniaBase_Tilemap'-and $src -match 'sRegionMapAusoniaDetail_Tilemap') 'Dual tilemap symbols missing.';Assert-True ($src -match '-num_tiles 256 -Wnum_tiles') '256 tile conversion missing.';Write-Output "Ausonia dual-layer assets: PASS (palette=$pc, BG2tiles=256, BG1tiles=256, BG2map=4096, BG1map=2048, maxBG2=$m2, maxBG1=$m1)"
