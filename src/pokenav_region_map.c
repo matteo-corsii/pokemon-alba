@@ -159,7 +159,7 @@ static const struct WindowTemplate sAusoniaMapSecInfoWindowTemplate =
     .tilemapLeft = 17,
     .tilemapTop = 4,
     .width = 12,
-    .height = 5,
+    .height = 3,
     .paletteNum = 1,
     .baseBlock = 0xA1
 };
@@ -598,9 +598,13 @@ static u16 GetCityZoomBlankTile(void)
     return IsAusoniaRegionMap() ? 0x1097 : 0x1041;
 }
 
+static u8 GetRegionMapInfoWindowFont(const u8 *name)
+{
+    return IsAusoniaRegionMap() ? GetFontIdToFit(name, FONT_NARROW, 0, 12 * 8) : FONT_NARROW;
+}
 static u8 GetRegionMapInfoWindowHeight(void)
 {
-    return IsAusoniaRegionMap() ? 5 : 13;
+    return IsAusoniaRegionMap() ? 3 : 13;
 }
 
 static bool32 TryFreeTempTileDataBuffers(void)
@@ -616,7 +620,7 @@ static void UpdateMapSecInfoWindow(struct Pokenav_RegionMapGfx *state)
     case MAPSECTYPE_CITY_CANFLY:
         FillWindowPixelBuffer(state->infoWindowId, PIXEL_FILL(1));
         PutWindowRectTilemap(state->infoWindowId, 0, 0, 12, 2);
-        AddTextPrinterParameterized(state->infoWindowId, FONT_NARROW, regionMap->mapSecName, 0, 1, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(state->infoWindowId, GetRegionMapInfoWindowFont(regionMap->mapSecName), regionMap->mapSecName, 0, 1, TEXT_SKIP_DRAW, NULL);
         DrawCityMap(state, regionMap->mapSecId, regionMap->posWithinMapSec);
         CopyWindowToVram(state->infoWindowId, COPYWIN_FULL);
         SetCityZoomTextInvisibility(FALSE);
@@ -624,7 +628,7 @@ static void UpdateMapSecInfoWindow(struct Pokenav_RegionMapGfx *state)
     case MAPSECTYPE_CITY_CANTFLY:
         FillWindowPixelBuffer(state->infoWindowId, PIXEL_FILL(1));
         PutWindowRectTilemap(state->infoWindowId, 0, 0, 12, 2);
-        AddTextPrinterParameterized(state->infoWindowId, FONT_NARROW, regionMap->mapSecName, 0, 1, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(state->infoWindowId, GetRegionMapInfoWindowFont(regionMap->mapSecName), regionMap->mapSecName, 0, 1, TEXT_SKIP_DRAW, NULL);
         FillBgTilemapBufferRect(GetRegionMapUiBg(), GetCityZoomBlankTile(), 17, 6, 12, GetRegionMapInfoWindowHeight() - 2, 17);
         CopyWindowToVram(state->infoWindowId, COPYWIN_FULL);
         SetCityZoomTextInvisibility(TRUE);
@@ -633,8 +637,9 @@ static void UpdateMapSecInfoWindow(struct Pokenav_RegionMapGfx *state)
     case MAPSECTYPE_BATTLE_FRONTIER:
         FillWindowPixelBuffer(state->infoWindowId, PIXEL_FILL(1));
         PutWindowTilemap(state->infoWindowId);
-        AddTextPrinterParameterized(state->infoWindowId, FONT_NARROW, regionMap->mapSecName, 0, 1, TEXT_SKIP_DRAW, NULL);
-        PrintLandmarkNames(state, regionMap->mapSecId, regionMap->posWithinMapSec);
+        AddTextPrinterParameterized(state->infoWindowId, GetRegionMapInfoWindowFont(regionMap->mapSecName), regionMap->mapSecName, 0, 1, TEXT_SKIP_DRAW, NULL);
+        if (!IsAusoniaRegionMap())
+            PrintLandmarkNames(state, regionMap->mapSecId, regionMap->posWithinMapSec);
         CopyWindowToVram(state->infoWindowId, COPYWIN_FULL);
         SetCityZoomTextInvisibility(TRUE);
         break;
