@@ -1647,15 +1647,15 @@
       "id": "MAPSEC_LAGO_DI_ALBERA",
       "name": "LAGO DI ALBÈRA",
       "x": 12,
-      "y": 7,
+      "y": 6,
       "width": 1,
       "height": 1
     },
     {
       "id": "MAPSEC_BORGO_DI_CASTELLO",
       "name": "BORGO DI CASTELLO",
-      "x": 9,
-      "y": 5,
+      "x": 10,
+      "y": 6,
       "width": 1,
       "height": 1
     },
