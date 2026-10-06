@@ -87,6 +87,7 @@ static u8 MoveRegionMapCursor_Full(void);
 static u8 ProcessRegionMapInput_Zoomed(void);
 static u8 MoveRegionMapCursor_Zoomed(void);
 static void CalcZoomScrollParams(s16 scrollX, s16 scrollY, s16 c, s16 d, u16 e, u16 f, u8 rotation);
+static u16 GetRegionMapFullViewCoord(u16 coord, u16 minimum);
 static mapsec_u16_t GetMapSecIdAt(u16 x, u16 y);
 static void RegionMap_SetBG2XAndBG2Y(s16 x, s16 y);
 static void InitMapBasedOnPlayerLocation(void);
@@ -1251,6 +1252,12 @@ enum RegionMapType GetRegionMapType(u32 mapSecId)
     }
 }
 
+static u16 GetRegionMapFullViewCoord(u16 coord, u16 minimum)
+{
+    if (GetRegionMapType(gMapHeader.regionMapSectionId) == REGION_MAP_AUSONIA)
+        return coord - minimum;
+    return coord;
+}
 static mapsec_u16_t GetMapSecIdAt(u16 x, u16 y)
 {
     if (y < MAPCURSOR_Y_MIN || y > MAPCURSOR_Y_MAX || x < MAPCURSOR_X_MIN || x > MAPCURSOR_X_MAX)
@@ -1773,8 +1780,8 @@ void CreateRegionMapCursor(u16 tileTag, u16 paletteTag)
         else
         {
             sRegionMap->cursorSprite->oam.size = SPRITE_SIZE(16x16);
-            sRegionMap->cursorSprite->x = 8 * sRegionMap->cursorPosX + 4;
-            sRegionMap->cursorSprite->y = 8 * sRegionMap->cursorPosY + 4;
+            sRegionMap->cursorSprite->x = 8 * GetRegionMapFullViewCoord(sRegionMap->cursorPosX, MAPCURSOR_X_MIN) + 4;
+            sRegionMap->cursorSprite->y = 8 * GetRegionMapFullViewCoord(sRegionMap->cursorPosY, MAPCURSOR_Y_MIN) + 4;
         }
         sRegionMap->cursorSprite->data[1] = 2;
         sRegionMap->cursorSprite->data[2] = OBJ_PLTT_ID(IndexOfSpritePaletteTag(paletteTag)) + 1;
@@ -1837,8 +1844,8 @@ void CreateRegionMapPlayerIcon(u16 tileTag, u16 paletteTag)
         sRegionMap->playerIconSprite->oam.priority = 1;
     if (!sRegionMap->zoomed)
     {
-        sRegionMap->playerIconSprite->x = sRegionMap->playerIconSpritePosX * 8 + 4;
-        sRegionMap->playerIconSprite->y = sRegionMap->playerIconSpritePosY * 8 + 4;
+        sRegionMap->playerIconSprite->x = GetRegionMapFullViewCoord(sRegionMap->playerIconSpritePosX, MAPCURSOR_X_MIN) * 8 + 4;
+        sRegionMap->playerIconSprite->y = GetRegionMapFullViewCoord(sRegionMap->playerIconSpritePosY, MAPCURSOR_Y_MIN) * 8 + 4;
         sRegionMap->playerIconSprite->callback = SpriteCB_PlayerIconMapFull;
     }
     else
@@ -1871,8 +1878,8 @@ static void UnhideRegionMapPlayerIcon(void)
         }
         else
         {
-            sRegionMap->playerIconSprite->x = sRegionMap->playerIconSpritePosX * 8 + 4;
-            sRegionMap->playerIconSprite->y = sRegionMap->playerIconSpritePosY * 8 + 4;
+            sRegionMap->playerIconSprite->x = GetRegionMapFullViewCoord(sRegionMap->playerIconSpritePosX, MAPCURSOR_X_MIN) * 8 + 4;
+            sRegionMap->playerIconSprite->y = GetRegionMapFullViewCoord(sRegionMap->playerIconSpritePosY, MAPCURSOR_Y_MIN) * 8 + 4;
             sRegionMap->playerIconSprite->x2 = 0;
             sRegionMap->playerIconSprite->y2 = 0;
             sRegionMap->playerIconSprite->callback = SpriteCB_PlayerIconMapFull;
