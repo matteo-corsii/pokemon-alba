@@ -844,10 +844,7 @@ bool8 LoadRegionMapGfx(void)
     case 6:
         if (sRegionMap->zoomed == FALSE)
         {
-            if (GetRegionMapType(gMapHeader.regionMapSectionId) == REGION_MAP_AUSONIA)
-                CalcZoomScrollParams(8, 16, 0, 0, 0x100, 0x100, 0);
-            else
-                CalcZoomScrollParams(0, 0, 0, 0, 0x100, 0x100, 0);
+            CalcZoomScrollParams(0, 0, 0, 0, 0x100, 0x100, 0);
         }
         else
         {
