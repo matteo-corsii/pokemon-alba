@@ -17,11 +17,38 @@ $expected = @{
     MAPSEC_PONTE_VALLE_LARICIA = @(12, 10, 'PONTE/VALLE LARICIA')
     MAPSEC_LARICIA = @(14, 11, 'LARICIA')
 }
+$layoutText = Get-Content (Join-Path $RepositoryRoot 'src/data/region_map/region_map_layout_ausonia.h') -Raw
+$layoutMatch = [regex]::Match($layoutText, '(?s)sRegionMap_AusoniaSectionLayout\[MAP_HEIGHT\]\[MAP_WIDTH\]\s*=\s*\{(.*?)\};')
+Assert-True $layoutMatch.Success 'Ausonia section lookup matrix is missing.'
+$rows = @([regex]::Matches($layoutMatch.Groups[1].Value, '\{([^{}]*)\}') | ForEach-Object { ,(@($_.Groups[1].Value -split ',' | ForEach-Object { $_.Trim() })) })
+Assert-True ($rows.Count -eq 15) "Ausonia section lookup must contain 15 rows, found $($rows.Count)."
+for ($y = 0; $y -lt $rows.Count; $y++) {
+    Assert-True ($rows[$y].Count -eq 28) "Ausonia section lookup row $y must contain 28 columns, found $($rows[$y].Count)."
+}
 foreach ($id in $expected.Keys) {
     $entry = @($sections.map_sections | Where-Object id -eq $id)
     Assert-True ($entry.Count -eq 1) "$id must have exactly one section entry."
     Assert-True ([int]$entry[0].x -eq $expected[$id][0] -and [int]$entry[0].y -eq $expected[$id][1]) "$id has incorrect coordinates."
     Assert-True ($entry[0].name -eq $expected[$id][2]) "$id has incorrect user-facing name."
+    $x = [int]$entry[0].x
+    $y = [int]$entry[0].y
+    Assert-True ($rows[$y][$x] -eq $id) "$id JSON coordinate ($x,$y) resolves to $($rows[$y][$x]) instead of $id."
+}
+$lookupSeen = @{}
+for ($y = 0; $y -lt $rows.Count; $y++) {
+    for ($x = 0; $x -lt $rows[$y].Count; $x++) {
+        $id = $rows[$y][$x]
+        if ($id -eq 'MAPSEC_NONE') { continue }
+        Assert-True $expected.ContainsKey($id) "Unexpected Ausonia lookup section $id at ($x,$y)."
+        $entry = @($sections.map_sections | Where-Object id -eq $id)
+        Assert-True ($entry.Count -eq 1) "$id must have exactly one JSON section entry."
+        Assert-True ([int]$entry[0].x -eq $x -and [int]$entry[0].y -eq $y) "$id is obsolete or misplaced at ($x,$y); JSON declares ($($entry[0].x),$($entry[0].y))."
+        Assert-True (-not $lookupSeen.ContainsKey($id)) "$id appears in multiple lookup cells."
+        $lookupSeen[$id] = "$x,$y"
+    }
+}
+foreach ($id in $expected.Keys) {
+    Assert-True $lookupSeen.ContainsKey($id) "$id is missing from the Ausonia section lookup."
 }
 $seen = @{}
 foreach ($entry in $sections.map_sections | Where-Object { $expected.ContainsKey($_.id) }) {
