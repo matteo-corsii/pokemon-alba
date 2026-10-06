@@ -1630,15 +1630,15 @@
     {
       "id": "MAPSEC_ALBERA_STORICA",
       "name": "ALBÈRA STORICA",
-      "x": 7,
-      "y": 10,
+      "x": 9,
+      "y": 9,
       "width": 1,
       "height": 1
     },
     {
       "id": "MAPSEC_VIA_CONSOLARE",
       "name": "VIA CONSOLARE",
-      "x": 9,
+      "x": 10,
       "y": 9,
       "width": 1,
       "height": 1
@@ -1646,39 +1646,39 @@
     {
       "id": "MAPSEC_LAGO_DI_ALBERA",
       "name": "LAGO DI ALBÈRA",
-      "x": 9,
-      "y": 8,
+      "x": 12,
+      "y": 7,
       "width": 1,
       "height": 1
     },
     {
       "id": "MAPSEC_BORGO_DI_CASTELLO",
       "name": "BORGO DI CASTELLO",
-      "x": 8,
-      "y": 7,
+      "x": 9,
+      "y": 5,
       "width": 1,
       "height": 1
     },
     {
       "id": "MAPSEC_VILLA_PAPALE",
       "name": "VILLA PAPALE",
-      "x": 8,
-      "y": 6,
+      "x": 10,
+      "y": 5,
       "width": 1,
       "height": 1
     },
     {
       "id": "MAPSEC_GALLERIE_DI_SOPRA",
       "name": "GALLERIE DI SOPRA",
-      "x": 8,
-      "y": 8,
+      "x": 11,
+      "y": 7,
       "width": 1,
       "height": 1
     },
     {
       "id": "MAPSEC_PONTE_VALLE_LARICIA",
       "name": "PONTE/VALLE LARICIA",
-      "x": 10,
+      "x": 12,
       "y": 10,
       "width": 1,
       "height": 1
@@ -1686,31 +1686,31 @@
     {
       "id": "MAPSEC_LARICIA",
       "name": "LARICIA",
-      "x": 12,
-      "y": 10,
+      "x": 14,
+      "y": 11,
       "width": 1,
       "height": 1
     },
     {
       "id": "MAPSEC_AUSONIA_ALBERA_BASSA",
       "name": "ALBÈRA BASSA",
-      "x": 8,
-      "y": 12,
+      "x": 9,
+      "y": 11,
       "width": 1,
       "height": 1
     },
     {
       "id": "MAPSEC_AUSONIA_VIA_VERDI",
       "name": "VIA VERDI",
-      "x": 8,
-      "y": 11,
+      "x": 9,
+      "y": 10,
       "width": 1,
       "height": 1
     },
     {
       "id": "MAPSEC_AUSONIA_PORTA_PRETORIA",
       "name": "PORTA PRETORIA",
-      "x": 8,
+      "x": 10,
       "y": 10,
       "width": 1,
       "height": 1
@@ -1718,8 +1718,8 @@
     {
       "id": "MAPSEC_AUSONIA_VIA_CISTERNONI",
       "name": "VIA DEI CISTERNONI",
-      "x": 9,
-      "y": 10,
+      "x": 12,
+      "y": 9,
       "width": 1,
       "height": 1
     }
