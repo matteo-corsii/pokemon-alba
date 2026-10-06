@@ -866,7 +866,8 @@ bool8 LoadRegionMapGfx(void)
             SetBgAttribute(sRegionMap->bgNum, BG_ATTR_SCREENSIZE, 2);
             SetBgAttribute(sRegionMap->bgNum, BG_ATTR_CHARBASEINDEX, sRegionMap->charBaseIdx);
             SetBgAttribute(sRegionMap->bgNum, BG_ATTR_MAPBASEINDEX, sRegionMap->mapBaseIdx);
-            SetBgAttribute(sRegionMap->bgNum, BG_ATTR_WRAPAROUND, 1);
+            SetBgAttribute(sRegionMap->bgNum, BG_ATTR_WRAPAROUND,
+                GetRegionMapType(gMapHeader.regionMapSectionId) == REGION_MAP_AUSONIA ? 0 : 1);
             SetBgAttribute(sRegionMap->bgNum, BG_ATTR_PALETTEMODE, 1);
         }
         sRegionMap->initStep++;
@@ -1829,6 +1830,8 @@ void CreateRegionMapPlayerIcon(u16 tileTag, u16 paletteTag)
     LoadSpritePalette(&palette);
     spriteId = CreateSprite(&template, 0, 0, 1);
     sRegionMap->playerIconSprite = &gSprites[spriteId];
+    if (GetRegionMapType(gMapHeader.regionMapSectionId) == REGION_MAP_AUSONIA)
+        sRegionMap->playerIconSprite->oam.priority = 1;
     if (!sRegionMap->zoomed)
     {
         sRegionMap->playerIconSprite->x = sRegionMap->playerIconSpritePosX * 8 + 4;
