@@ -17,6 +17,9 @@ $expected = @{
     MAPSEC_PONTE_VALLE_LARICIA = @(12, 10, 'PONTE/VALLE LARICIA')
     MAPSEC_LARICIA = @(14, 11, 'LARICIA')
 }
+$expected['MAPSEC_LAGO_DI_ALBERA'][0] = 11
+$expected['MAPSEC_BORGO_DI_CASTELLO'][0] = 12
+$expected['MAPSEC_VILLA_PAPALE'][0] = 11
 $layoutText = Get-Content (Join-Path $RepositoryRoot 'src/data/region_map/region_map_layout_ausonia.h') -Raw
 $layoutMatch = [regex]::Match($layoutText, '(?s)sRegionMap_AusoniaSectionLayout\[MAP_HEIGHT\]\[MAP_WIDTH\]\s*=\s*\{(.*?)\};')
 Assert-True $layoutMatch.Success 'Ausonia section lookup matrix is missing.'
