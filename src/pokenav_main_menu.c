@@ -43,7 +43,7 @@ static void LoadLeftHeaderGfxForSubMenu(u32);
 static void LoadLeftHeaderGfxForMenu(u32);
 static bool32 IsAusoniaMapHeader(u32);
 static void DrawAusoniaMapHeader(u8 *);
-static void SetLeftHeaderPixel(u8 *, u32, u32, u8);
+static void SetLeftHeaderPixel(u8 *, u32, u32, u32, u8);
 static void HideLeftHeaderSubmenuSprites(bool32);
 static void HideLeftHeaderSprites(bool32);
 static void ShowLeftHeaderSprites(u32, bool32);
@@ -714,7 +714,7 @@ static void DrawAusoniaMapHeader(u8 *buffer)
     for (frame = 0; frame < 3; frame++)
         for (y = 1; y < 31; y++)
             for (x = 1; x < 63; x++)
-                SetLeftHeaderPixel(buffer, frame, y * 64 + x, 8);
+                SetLeftHeaderPixel(buffer, frame, x, y, 8);
 
     x = 4;
     for (glyph = 0; sText[glyph] != '\0'; glyph++)
@@ -736,16 +736,16 @@ static void DrawAusoniaMapHeader(u8 *buffer)
             for (column = 0; column < 3; column++)
                 if (sGlyphs[row][y * 3 + column] == '1')
                     for (frame = 0; frame < 2; frame++)
-                        SetLeftHeaderPixel(buffer, 0, (11 + y * 2 + frame) * 64 + x + column, 1);
+                        SetLeftHeaderPixel(buffer, 0, x + column, 11 + y * 2 + frame, 1);
         x += 4;
     }
 }
 
-static void SetLeftHeaderPixel(u8 *buffer, u32 frame, u32 pixel, u8 color)
+static void SetLeftHeaderPixel(u8 *buffer, u32 frame, u32 x, u32 y, u8 color)
 {
-    u32 tile = pixel / 8 + (frame * 32);
-    u32 offset = tile * 32 + (pixel % 8) / 2;
-    if (pixel % 2 == 0)
+    u32 tile = (y / 8) * 8 + (x / 8) + (frame * 32);
+    u32 offset = tile * 32 + (y % 8) * 4 + (x % 8) / 2;
+    if (x % 2 == 0)
         buffer[offset] = (buffer[offset] & 0xF0) | color;
     else
         buffer[offset] = (buffer[offset] & 0x0F) | (color << 4);
