@@ -1084,6 +1084,40 @@ const u16 gTilesetPalettes_GenericBuilding[][16] =
     INCGFX_U16("data/tilesets/secondary/generic_building/palettes/15.pal", ".gbapal"),
 };
 
+const u32 gTilesetTiles_LariciaGymPrimary[] = INCGFX_U32("data/tilesets/primary/laricia_gym/tiles.png", ".4bpp.smol", "-num_tiles 502 -Wnum_tiles");
+
+const u16 gTilesetPalettes_LariciaGymPrimary[][16] =
+{
+    INCGFX_U16("data/tilesets/primary/laricia_gym/palettes/00.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/primary/laricia_gym/palettes/01.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/primary/laricia_gym/palettes/02.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/primary/laricia_gym/palettes/03.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/primary/laricia_gym/palettes/04.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/primary/laricia_gym/palettes/05.pal", ".gbapal"),
+};
+
+const u32 gTilesetTiles_LariciaGym[] = INCGFX_U32("data/tilesets/secondary/laricia_gym/tiles.png", ".4bpp.fastSmol", "-num_tiles 512 -Wnum_tiles");
+
+const u16 gTilesetPalettes_LariciaGym[][16] =
+{
+    INCGFX_U16("data/tilesets/secondary/laricia_gym/palettes/00.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/laricia_gym/palettes/01.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/laricia_gym/palettes/02.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/laricia_gym/palettes/03.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/laricia_gym/palettes/04.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/laricia_gym/palettes/05.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/laricia_gym/palettes/06.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/laricia_gym/palettes/07.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/laricia_gym/palettes/08.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/laricia_gym/palettes/09.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/laricia_gym/palettes/10.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/laricia_gym/palettes/11.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/laricia_gym/palettes/12.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/laricia_gym/palettes/13.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/laricia_gym/palettes/14.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/laricia_gym/palettes/15.pal", ".gbapal"),
+};
+
 const u32 gTilesetTiles_MauvilleGameCorner[] = INCGFX_U32("data/tilesets/secondary/mauville_game_corner/tiles.png", ".4bpp.fastSmol", "-num_tiles 469 -Wnum_tiles");
 
 const u16 gTilesetPalettes_MauvilleGameCorner[][16] =

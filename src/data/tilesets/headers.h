@@ -602,6 +602,28 @@ const struct Tileset gTileset_GenericBuilding =
     .callback = NULL,
 };
 
+const struct Tileset gTileset_LariciaGymPrimary =
+{
+    .isCompressed = TRUE,
+    .isSecondary = FALSE,
+    .tiles = gTilesetTiles_LariciaGymPrimary,
+    .palettes = gTilesetPalettes_LariciaGymPrimary,
+    .metatiles = gMetatiles_LariciaGymPrimary,
+    .metatileAttributes = gMetatileAttributes_LariciaGymPrimary,
+    .callback = InitTilesetAnim_Building,
+};
+
+const struct Tileset gTileset_LariciaGym =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_LariciaGym,
+    .palettes = gTilesetPalettes_LariciaGym,
+    .metatiles = gMetatiles_LariciaGym,
+    .metatileAttributes = gMetatileAttributes_LariciaGym,
+    .callback = InitTilesetAnim_LariciaGym,
+};
+
 const struct Tileset gTileset_MauvilleGameCorner =
 {
     .isCompressed = TRUE,

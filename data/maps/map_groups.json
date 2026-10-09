@@ -3,6 +3,7 @@
     "gMapGroup_TownsAndRoutes",
     "gMapGroup_IndoorLittleroot",
     "gMapGroup_IndoorOldale",
+    "gMapGroup_IndoorLariciaGym",
     "gMapGroup_IndoorDewford",
     "gMapGroup_IndoorLavaridge",
     "gMapGroup_IndoorFallarbor",
@@ -201,6 +202,13 @@
     "ValleLaricia_Casale1",
     "ValleLaricia_Casale2",
     "ValleLaricia_CasettaAgricola"
+  ],
+  "gMapGroup_IndoorLariciaGym": [
+    "Laricia_Gym_Lobby",
+    "Laricia_Gym_TrainerRoom1",
+    "Laricia_Gym_TrainerRoom2",
+    "Laricia_Gym_TrainerRoom3",
+    "Laricia_Gym_LeaderRoom"
   ],
   "gMapGroup_IndoorDewford": [
     "DewfordTown_House1",

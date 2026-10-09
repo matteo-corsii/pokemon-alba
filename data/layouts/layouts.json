@@ -9873,6 +9873,61 @@
       "border_filepath": "data/layouts/ValleLaricia_CasettaAgricola/border.bin",
       "blockdata_filepath": "data/layouts/ValleLaricia_CasettaAgricola/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LARICIA_GYM_LOBBY",
+      "name": "Laricia_Gym_Lobby_Layout",
+      "width": 27,
+      "height": 16,
+      "primary_tileset": "gTileset_LariciaGymPrimary",
+      "secondary_tileset": "gTileset_LariciaGym",
+      "border_filepath": "data/layouts/Laricia_Gym_Lobby/border.bin",
+      "blockdata_filepath": "data/layouts/Laricia_Gym_Lobby/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LARICIA_GYM_TRAINER_ROOM1",
+      "name": "Laricia_Gym_TrainerRoom1_Layout",
+      "width": 18,
+      "height": 14,
+      "primary_tileset": "gTileset_LariciaGymPrimary",
+      "secondary_tileset": "gTileset_LariciaGym",
+      "border_filepath": "data/layouts/Laricia_Gym_TrainerRoom1/border.bin",
+      "blockdata_filepath": "data/layouts/Laricia_Gym_TrainerRoom1/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LARICIA_GYM_TRAINER_ROOM2",
+      "name": "Laricia_Gym_TrainerRoom2_Layout",
+      "width": 18,
+      "height": 14,
+      "primary_tileset": "gTileset_LariciaGymPrimary",
+      "secondary_tileset": "gTileset_LariciaGym",
+      "border_filepath": "data/layouts/Laricia_Gym_TrainerRoom2/border.bin",
+      "blockdata_filepath": "data/layouts/Laricia_Gym_TrainerRoom2/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LARICIA_GYM_TRAINER_ROOM3",
+      "name": "Laricia_Gym_TrainerRoom3_Layout",
+      "width": 18,
+      "height": 14,
+      "primary_tileset": "gTileset_LariciaGymPrimary",
+      "secondary_tileset": "gTileset_LariciaGym",
+      "border_filepath": "data/layouts/Laricia_Gym_TrainerRoom3/border.bin",
+      "blockdata_filepath": "data/layouts/Laricia_Gym_TrainerRoom3/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LARICIA_GYM_LEADER_ROOM",
+      "name": "Laricia_Gym_LeaderRoom_Layout",
+      "width": 22,
+      "height": 18,
+      "primary_tileset": "gTileset_LariciaGymPrimary",
+      "secondary_tileset": "gTileset_LariciaGym",
+      "border_filepath": "data/layouts/Laricia_Gym_LeaderRoom/border.bin",
+      "blockdata_filepath": "data/layouts/Laricia_Gym_LeaderRoom/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }
