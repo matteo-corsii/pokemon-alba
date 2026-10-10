@@ -16,13 +16,13 @@ Laricia_Gym_TrainerRoom2_EventScript_UpdateTorch::
 	setmetatile 9, 2, METATILE_LariciaGym_TorchTopOff, TRUE
 	setmetatile 9, 3, METATILE_LariciaGym_TorchCenterOff, TRUE
 	setmetatile 9, 4, METATILE_LariciaGym_TorchBase, TRUE
-	drawwholemapview
+	special DrawWholeMapView
 	return
 Laricia_Gym_TrainerRoom2_EventScript_TorchOn::
 	setmetatile 9, 2, METATILE_LariciaGym_TorchTopOn, TRUE
 	setmetatile 9, 3, METATILE_LariciaGym_TorchCenterOn, TRUE
 	setmetatile 9, 4, METATILE_LariciaGym_TorchBase, TRUE
-	drawwholemapview
+	special DrawWholeMapView
 	return
 
 Laricia_Gym_TrainerRoom2_EventScript_Trainer::
