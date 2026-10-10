@@ -33,3 +33,26 @@ Laricia_Gym_Lobby_EventScript_LeaderDoorClosed::
 	setmetatile 14, 2, METATILE_LariciaGym_LeaderDoorClosed5, TRUE
 	drawwholemapview
 	return
+
+Laricia_Gym_Lobby_EventScript_Butler::
+	msgbox Laricia_Gym_Lobby_Text_Butler, MSGBOX_DEFAULT
+	end
+
+Laricia_Gym_Lobby_Text_Butler:
+	.string "Benvenuto nella dimora di Augusto,\n"
+	.string "Capopalestra di Laricia.\p"
+	.string "Queste sale custodiscono da lungo tempo\n"
+	.string "la memoria della citta.\p"
+	.string "Qui il fuoco non e soltanto forza.\n"
+	.string "E calore, lavoro... e continuita.\p"
+	.string "Prima di poter incontrare Augusto,\n"
+	.string "dovrai attraversare le quattro sale.\p"
+	.string "In ognuna troverai uno dei suoi Allenatori.\n"
+	.string "Puoi affrontarli nell'ordine che preferisci.\p"
+	.string "Ogni vittoria riaccendera\n"
+	.string "uno dei quattro focolari della Palestra.\p"
+	.string "Quando tutte e quattro le fiamme\n"
+	.string "saranno tornate a brillare...\p"
+	.string "la sala di Augusto si aprira.\p"
+	.string "Non avere fretta.\n"
+	.string "Il fuoco rivela molto di chi sa governarlo.$"
