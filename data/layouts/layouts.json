@@ -9919,6 +9919,17 @@
       "layout_version": "emerald"
     },
     {
+      "id": "LAYOUT_LARICIA_GYM_TRAINER_ROOM4",
+      "name": "Laricia_Gym_TrainerRoom4_Layout",
+      "width": 18,
+      "height": 14,
+      "primary_tileset": "gTileset_LariciaGymPrimary",
+      "secondary_tileset": "gTileset_LariciaGym",
+      "border_filepath": "data/layouts/Laricia_Gym_TrainerRoom4/border.bin",
+      "blockdata_filepath": "data/layouts/Laricia_Gym_TrainerRoom4/map.bin",
+      "layout_version": "emerald"
+    },
+    {
       "id": "LAYOUT_LARICIA_GYM_LEADER_ROOM",
       "name": "Laricia_Gym_LeaderRoom_Layout",
       "width": 22,
