@@ -163,12 +163,14 @@ gStdScripts_End::
 	.include "data/maps/StradaBorgoCisternoni_Casa/scripts.inc"
 	.include "data/maps/PonteValleLaricia/scripts.inc"
 	.include "data/maps/Laricia/scripts.inc"
+#if !IS_FRLG
 	.include "data/maps/Laricia_Gym_Lobby/scripts.inc"
 	.include "data/maps/Laricia_Gym_TrainerRoom1/scripts.inc"
 	.include "data/maps/Laricia_Gym_TrainerRoom2/scripts.inc"
 	.include "data/maps/Laricia_Gym_TrainerRoom3/scripts.inc"
 	.include "data/maps/Laricia_Gym_TrainerRoom4/scripts.inc"
 	.include "data/maps/Laricia_Gym_LeaderRoom/scripts.inc"
+#endif
 	.include "data/maps/Laricia_PokemonCenter/scripts.inc"
 	.include "data/maps/Laricia_Mart/scripts.inc"
 	.include "data/maps/Laricia_FraschettaPiazza/scripts.inc"

@@ -1006,7 +1006,7 @@ struct WonderNews
 struct WonderCard
 {
     u16 flagId; // Event flag (sReceivedGiftFlags) + WONDER_CARD_FLAG_OFFSET
-    enum Species iconSpecies;
+    u16 iconSpecies;
     u32 idNumber;
     u8 type:2; // CARD_TYPE_*
     u8 bgType:4;
@@ -1025,7 +1025,7 @@ struct WonderCardMetadata
     u16 battlesWon;
     u16 battlesLost;
     u16 numTrades;
-    enum Species iconSpecies;
+    u16 iconSpecies;
     u16 stampData[2][MAX_STAMP_CARD_STAMPS]; // First element is STAMP_SPECIES, second is STAMP_ID
 };
 
