@@ -17105,3 +17105,136 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 - Metal Claw
 - Protect
 - Aqua Jet
+
+=== TRAINER_LARICIA_GYM_TRAINER_1 ===
+Name: FIAMMISTA
+Class: Hiker
+Pic: Hiker
+Gender: Male
+Music: Hiker
+Double Battle: No
+AI: Check Bad Move
+
+Porchignis
+Level: 27
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Fire Fang
+- Headbutt
+- Rollout
+- Flame Charge
+
+Fraschietto
+Level: 27
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Bulk Up
+- Force Palm
+- Fake Out
+- Helping Hand
+
+=== TRAINER_LARICIA_GYM_TRAINER_2 ===
+Name: FIAMMISTA
+Class: Black Belt
+Pic: Black Belt
+Gender: Male
+Music: Hiker
+Double Battle: No
+AI: Check Bad Move
+
+Vitemosto
+Level: 27
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Mega Drain
+- Incinerate
+- Sunny Day
+- Razor Leaf
+
+Fraschietto
+Level: 27
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Bulk Up
+- Force Palm
+- Fake Out
+- Helping Hand
+
+=== TRAINER_LARICIA_GYM_TRAINER_3 ===
+Name: FIAMMISTA
+Class: Expert M
+Pic: Expert M
+Gender: Male
+Music: Hiker
+Double Battle: No
+AI: Check Bad Move
+
+Porchignis
+Level: 27
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Fire Fang
+- Headbutt
+- Rollout
+- Flame Charge
+
+Vitemosto
+Level: 27
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Mega Drain
+- Incinerate
+- Sunny Day
+- Razor Leaf
+
+=== TRAINER_LARICIA_GYM_TRAINER_4 ===
+Name: FIAMMISTA
+Class: Gentleman
+Pic: Gentleman
+Gender: Male
+Music: Hiker
+Double Battle: No
+AI: Check Bad Move
+
+Vitemosto
+Level: 27
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Mega Drain
+- Incinerate
+- Sunny Day
+- Razor Leaf
+
+Porchignis
+Level: 27
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Fire Fang
+- Headbutt
+- Rollout
+- Flame Charge
+
+=== TRAINER_AUGUSTO ===
+Name: AUGUSTO
+Class: Leader
+Pic: Gentleman
+Gender: Male
+Music: Gym
+Double Battle: No
+AI: Check Bad Move
+
+Vitemosto
+Level: 29
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Flame Charge
+- Mega Drain
+- Incinerate
+- Sunny Day
+
+Bronzoverro
+Level: 30
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Iron Head
+- Fire Fang
+- Headbutt
+- Rollout
+
+Frascotto
+Level: 31
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Fire Punch
+- Bulk Up
+- Force Palm
+- Fake Out
