@@ -9888,7 +9888,7 @@
     {
       "id": "LAYOUT_LARICIA_GYM_TRAINER_ROOM1",
       "name": "Laricia_Gym_TrainerRoom1_Layout",
-      "width": 18,
+      "width": 19,
       "height": 14,
       "primary_tileset": "gTileset_LariciaGymPrimary",
       "secondary_tileset": "gTileset_LariciaGym",
@@ -9899,7 +9899,7 @@
     {
       "id": "LAYOUT_LARICIA_GYM_TRAINER_ROOM2",
       "name": "Laricia_Gym_TrainerRoom2_Layout",
-      "width": 18,
+      "width": 19,
       "height": 14,
       "primary_tileset": "gTileset_LariciaGymPrimary",
       "secondary_tileset": "gTileset_LariciaGym",
@@ -9910,7 +9910,7 @@
     {
       "id": "LAYOUT_LARICIA_GYM_TRAINER_ROOM3",
       "name": "Laricia_Gym_TrainerRoom3_Layout",
-      "width": 18,
+      "width": 19,
       "height": 14,
       "primary_tileset": "gTileset_LariciaGymPrimary",
       "secondary_tileset": "gTileset_LariciaGym",
@@ -9921,7 +9921,7 @@
     {
       "id": "LAYOUT_LARICIA_GYM_TRAINER_ROOM4",
       "name": "Laricia_Gym_TrainerRoom4_Layout",
-      "width": 18,
+      "width": 19,
       "height": 14,
       "primary_tileset": "gTileset_LariciaGymPrimary",
       "secondary_tileset": "gTileset_LariciaGym",
@@ -9932,7 +9932,7 @@
     {
       "id": "LAYOUT_LARICIA_GYM_LEADER_ROOM",
       "name": "Laricia_Gym_LeaderRoom_Layout",
-      "width": 22,
+      "width": 23,
       "height": 18,
       "primary_tileset": "gTileset_LariciaGymPrimary",
       "secondary_tileset": "gTileset_LariciaGym",
