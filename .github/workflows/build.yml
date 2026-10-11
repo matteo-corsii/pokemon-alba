@@ -213,7 +213,7 @@ jobs:
             -Werror -Wall -Wno-pointer-to-int-cast \
             -Wno-strict-aliasing -Wno-attribute-alias \
             -Woverride-init -Wnonnull -Wenum-conversion \
-            -c test/save_layout_diag.c -o /tmp/save_layout_diag.o
+            -c ci/save_layout_diag.c -o /tmp/save_layout_diag.o
           echo "SaveBlock1 ARM layout (symbol size = evaluated sizeof/offsetof):"
           arm-none-eabi-nm -S --defined-only /tmp/save_layout_diag.o | sort
 
