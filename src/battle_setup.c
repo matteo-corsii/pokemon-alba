@@ -1022,14 +1022,34 @@ static void TryUpdateGymLeaderRematchFromTrainer(void)
         UpdateGymLeaderRematch();
 }
 
+u16 GetTrainerFlagId(u16 trainerId)
+{
+#if !IS_FRLG
+    switch (trainerId)
+    {
+    case TRAINER_LARICIA_GYM_TRAINER_1:
+        return FLAG_TRAINER_LARICIA_GYM_TRAINER_1;
+    case TRAINER_LARICIA_GYM_TRAINER_2:
+        return FLAG_TRAINER_LARICIA_GYM_TRAINER_2;
+    case TRAINER_LARICIA_GYM_TRAINER_3:
+        return FLAG_TRAINER_LARICIA_GYM_TRAINER_3;
+    case TRAINER_LARICIA_GYM_TRAINER_4:
+        return FLAG_TRAINER_LARICIA_GYM_TRAINER_4;
+    case TRAINER_AUGUSTO:
+        return FLAG_TRAINER_AUGUSTO;
+    }
+#endif
+    return TRAINER_FLAGS_START + trainerId;
+}
+
 static u16 GetTrainerAFlag(void)
 {
-    return TRAINER_FLAGS_START + TRAINER_BATTLE_PARAM.opponentA;
+    return GetTrainerFlagId(TRAINER_BATTLE_PARAM.opponentA);
 }
 
 static u16 GetTrainerBFlag(void)
 {
-    return TRAINER_FLAGS_START + TRAINER_BATTLE_PARAM.opponentB;
+    return GetTrainerFlagId(TRAINER_BATTLE_PARAM.opponentB);
 }
 
 static bool32 IsPlayerDefeated(u32 battleOutcome)
@@ -1240,7 +1260,7 @@ void SetUpTwoTrainersBattle(void)
 bool32 GetTrainerFlagFromScriptPointer(const u8 *data)
 {
     TrainerBattleParameter *temp = (TrainerBattleParameter*)(data + OPCODE_OFFSET);
-    return FlagGet(TRAINER_FLAGS_START + temp->params.opponentA);
+    return FlagGet(GetTrainerFlagId(temp->params.opponentA));
 }
 
 bool32 GetRematchFromScriptPointer(const u8 *data)
@@ -1302,17 +1322,17 @@ static void UNUSED SetBattledTrainerFlag(void)
 
 bool8 HasTrainerBeenFought(u16 trainerId)
 {
-    return FlagGet(TRAINER_FLAGS_START + trainerId);
+    return FlagGet(GetTrainerFlagId(trainerId));
 }
 
 void SetTrainerFlag(u16 trainerId)
 {
-    FlagSet(TRAINER_FLAGS_START + trainerId);
+    FlagSet(GetTrainerFlagId(trainerId));
 }
 
 void ClearTrainerFlag(u16 trainerId)
 {
-    FlagClear(TRAINER_FLAGS_START + trainerId);
+    FlagClear(GetTrainerFlagId(trainerId));
 }
 
 void BattleSetup_StartTrainerBattle(void)

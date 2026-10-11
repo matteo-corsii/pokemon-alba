@@ -76,6 +76,7 @@ void ConfigureTwoTrainersBattle(u8 trainerObjEventId, const u8 *trainerScript);
 void SetUpTwoTrainersBattle(void);
 bool32 GetTrainerFlagFromScriptPointer(const u8 *data);
 bool32 GetRematchFromScriptPointer(const u8 *data);
+u16 GetTrainerFlagId(u16 trainerId);
 void SetTrainerFacingDirection(void);
 u8 GetTrainerBattleMode(void);
 bool8 GetTrainerFlag(void);
