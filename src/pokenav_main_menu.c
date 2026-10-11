@@ -12,6 +12,8 @@
 #include "gpu_regs.h"
 #include "menu.h"
 #include "dma3.h"
+#include "overworld.h"
+#include "region_map.h"
 
 struct Pokenav_MainMenu
 {
@@ -39,6 +41,9 @@ struct CompressedSpriteSheetNoSize
 static void CleanupPokenavMainMenuResources(void);
 static void LoadLeftHeaderGfxForSubMenu(u32);
 static void LoadLeftHeaderGfxForMenu(u32);
+static bool32 IsAusoniaMapHeader(u32);
+static void DrawAusoniaMapHeader(u8 *);
+static void SetLeftHeaderPixel(u8 *, u32, u32, u32, u8);
 static void HideLeftHeaderSubmenuSprites(bool32);
 static void HideLeftHeaderSprites(bool32);
 static void ShowLeftHeaderSprites(u32, bool32);
@@ -88,6 +93,7 @@ static const struct WindowTemplate sHelpBarWindowTemplate[] =
 static const u8 *const sHelpBarTexts[HELPBAR_COUNT] =
 {
     [HELPBAR_NONE]                  = COMPOUND_STRING("{CLEAR 0x80}"),
+    [HELPBAR_MAP_AUSONIA]           = COMPOUND_STRING("{B_BUTTON}CANCEL"),
     [HELPBAR_MAP_ZOOMED_OUT]        = COMPOUND_STRING("{A_BUTTON}ZOOM {B_BUTTON}CANCEL"),
     [HELPBAR_MAP_ZOOMED_IN]         = COMPOUND_STRING("{A_BUTTON}FULL {B_BUTTON}CANCEL"),
     [HELPBAR_MAP_ZOOMED_OUT_CANFLY] = COMPOUND_STRING("{A_BUTTON}ZOOM {B_BUTTON}CANCEL {R_BUTTON}FLY"),
@@ -666,6 +672,7 @@ void UpdateRegionMapRightHeaderTiles(u32 menuGfxId)
 static void LoadLeftHeaderGfxForMenu(u32 menuGfxId)
 {
     struct Pokenav_MainMenu *menu;
+    const u32 *gfx;
     u32 size, tag;
 
     if (menuGfxId >= POKENAV_GFX_SUBMENUS_START)
@@ -673,9 +680,12 @@ static void LoadLeftHeaderGfxForMenu(u32 menuGfxId)
 
     menu = GetSubstructPtr(POKENAV_SUBSTRUCT_MAIN_MENU);
     tag = sMenuLeftHeaderSpriteSheets[menuGfxId].tag;
-    size = GetDecompressedDataSize(sMenuLeftHeaderSpriteSheets[menuGfxId].data);
+    gfx = sMenuLeftHeaderSpriteSheets[menuGfxId].data;
     LoadPalette(&gPokenavLeftHeader_Pal[tag * 16], OBJ_PLTT_ID(IndexOfSpritePaletteTag(1)), PLTT_SIZE_4BPP);
-    DecompressDataWithHeaderWram(sMenuLeftHeaderSpriteSheets[menuGfxId].data, menu->leftHeaderMenuBuffer);
+    DecompressDataWithHeaderWram(gfx, menu->leftHeaderMenuBuffer);
+    if (IsAusoniaMapHeader(menuGfxId))
+        DrawAusoniaMapHeader(menu->leftHeaderMenuBuffer);
+    size = GetDecompressedDataSize(gfx);
     RequestDma3Copy(menu->leftHeaderMenuBuffer, (void *)OBJ_VRAM0 + (GetSpriteTileStartByTag(2) * 32), size, 1);
     menu->leftHeaderSprites[1]->oam.tileNum = GetSpriteTileStartByTag(2) + sMenuLeftHeaderSpriteSheets[menuGfxId].size;
 
@@ -683,6 +693,62 @@ static void LoadLeftHeaderGfxForMenu(u32 menuGfxId)
         menu->leftHeaderSprites[1]->x2 = 56;
     else
         menu->leftHeaderSprites[1]->x2 = 64;
+}
+
+static bool32 IsAusoniaMapHeader(u32 menuGfxId)
+{
+    return (menuGfxId == POKENAV_GFX_MAP_MENU_ZOOMED_OUT || menuGfxId == POKENAV_GFX_MAP_MENU_ZOOMED_IN)
+        && GetRegionMapType(GetCurrentRegionMapSectionId()) == REGION_MAP_AUSONIA;
+}
+
+static void DrawAusoniaMapHeader(u8 *buffer)
+{
+    static const char *const sGlyphs[] = {
+        "010101111101101", "101101101101111", "111100111001111", "111101101101111",
+        "101111111111101", "111010010010111", "110101110101101", "111100110100111",
+        "111100101101111",
+    };
+    static const char sText[] = "AUSONIA REGION";
+    u32 frame, x, y, glyph, row, column;
+
+    for (frame = 0; frame < 3; frame++)
+        for (y = 1; y < 31; y++)
+            for (x = 1; x < 63; x++)
+                SetLeftHeaderPixel(buffer, frame, x, y, 8);
+
+    x = 4;
+    for (glyph = 0; sText[glyph] != '\0'; glyph++)
+    {
+        if (sText[glyph] == ' ')
+        {
+            x += 4;
+            continue;
+        }
+        row = (sText[glyph] == 'A') ? 0
+            : (sText[glyph] == 'U') ? 1
+            : (sText[glyph] == 'S') ? 2
+            : (sText[glyph] == 'O') ? 3
+            : (sText[glyph] == 'N') ? 4
+            : (sText[glyph] == 'I') ? 5
+            : (sText[glyph] == 'R') ? 6
+            : (sText[glyph] == 'E') ? 7 : 8;
+        for (y = 0; y < 5; y++)
+            for (column = 0; column < 3; column++)
+                if (sGlyphs[row][y * 3 + column] == '1')
+                    for (frame = 0; frame < 2; frame++)
+                        SetLeftHeaderPixel(buffer, 0, x + column, 11 + y * 2 + frame, 1);
+        x += 4;
+    }
+}
+
+static void SetLeftHeaderPixel(u8 *buffer, u32 frame, u32 x, u32 y, u8 color)
+{
+    u32 tile = (y / 8) * 8 + (x / 8) + (frame * 32);
+    u32 offset = tile * 32 + (y % 8) * 4 + (x % 8) / 2;
+    if (x % 2 == 0)
+        buffer[offset] = (buffer[offset] & 0xF0) | color;
+    else
+        buffer[offset] = (buffer[offset] & 0x0F) | (color << 4);
 }
 
 static void LoadLeftHeaderGfxForSubMenu(u32 menuGfxId)

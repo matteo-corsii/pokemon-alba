@@ -15,6 +15,9 @@ const u16 gMetatileAttributes_Petalburg[] = INCBIN_U16("data/tilesets/secondary/
 const u16 gMetatiles_PortaPretoria[] = INCBIN_U16("data/tilesets/secondary/porta_pretoria/metatiles.bin");
 const u16 gMetatileAttributes_PortaPretoria[] = INCBIN_U16("data/tilesets/secondary/porta_pretoria/metatile_attributes.bin");
 
+const u16 gMetatiles_ViaConsolare[] = INCBIN_U16("data/tilesets/secondary/via_consolare/metatiles.bin");
+const u16 gMetatileAttributes_ViaConsolare[] = INCBIN_U16("data/tilesets/secondary/via_consolare/metatile_attributes.bin");
+
 const u16 gMetatiles_LagoDiAlbera[] = INCBIN_U16("data/tilesets/secondary/lago_di_albera/metatiles.bin");
 const u16 gMetatileAttributes_LagoDiAlbera[] = INCBIN_U16("data/tilesets/secondary/lago_di_albera/metatile_attributes.bin");
 
@@ -54,6 +57,9 @@ const u16 gMetatileAttributes_Pacifidlog[] = INCBIN_U16("data/tilesets/secondary
 
 const u16 gMetatiles_Sootopolis[] = INCBIN_U16("data/tilesets/secondary/sootopolis/metatiles.bin");
 const u16 gMetatileAttributes_Sootopolis[] = INCBIN_U16("data/tilesets/secondary/sootopolis/metatile_attributes.bin");
+
+const u16 gMetatiles_Laricia[] = INCBIN_U16("data/tilesets/secondary/laricia/metatiles.bin");
+const u16 gMetatileAttributes_Laricia[] = INCBIN_U16("data/tilesets/secondary/laricia/metatile_attributes.bin");
 
 const u16 gMetatiles_BattleFrontierOutsideWest[] = INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_west/metatiles.bin");
 const u16 gMetatileAttributes_BattleFrontierOutsideWest[] = INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_west/metatile_attributes.bin");
@@ -132,6 +138,12 @@ const u16 gMetatileAttributes_Underwater[] = INCBIN_U16("data/tilesets/secondary
 
 const u16 gMetatiles_GenericBuilding[] = INCBIN_U16("data/tilesets/secondary/generic_building/metatiles.bin");
 const u16 gMetatileAttributes_GenericBuilding[] = INCBIN_U16("data/tilesets/secondary/generic_building/metatile_attributes.bin");
+
+const u16 gMetatiles_LariciaGymPrimary[] = INCBIN_U16("data/tilesets/primary/laricia_gym/metatiles.bin");
+const u16 gMetatileAttributes_LariciaGymPrimary[] = INCBIN_U16("data/tilesets/primary/laricia_gym/metatile_attributes.bin");
+
+const u16 gMetatiles_LariciaGym[] = INCBIN_U16("data/tilesets/secondary/laricia_gym/metatiles.bin");
+const u16 gMetatileAttributes_LariciaGym[] = INCBIN_U16("data/tilesets/secondary/laricia_gym/metatile_attributes.bin");
 
 const u16 gMetatiles_MauvilleGameCorner[] = INCBIN_U16("data/tilesets/secondary/mauville_game_corner/metatiles.bin");
 const u16 gMetatileAttributes_MauvilleGameCorner[] = INCBIN_U16("data/tilesets/secondary/mauville_game_corner/metatile_attributes.bin");

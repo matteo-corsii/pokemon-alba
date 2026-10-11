@@ -1066,6 +1066,23 @@
 #define METATILE_ViridianForest_HugeTreeTopMiddle_Mowed  0x281
 
 // Other
+#define METATILE_LariciaGym_TorchTopOff       0x20F
+#define METATILE_LariciaGym_TorchTopOn        0x20E
+#define METATILE_LariciaGym_TorchCenterOff    0x217
+#define METATILE_LariciaGym_TorchCenterOn     0x216
+#define METATILE_LariciaGym_TorchBase         0x233
+#define METATILE_LariciaGym_LeaderDoorClosed0 0x2DD
+#define METATILE_LariciaGym_LeaderDoorClosed1 0x2DE
+#define METATILE_LariciaGym_LeaderDoorClosed2 0x2DF
+#define METATILE_LariciaGym_LeaderDoorClosed3 0x2E0
+#define METATILE_LariciaGym_LeaderDoorClosed4 0x2E1
+#define METATILE_LariciaGym_LeaderDoorClosed5 0x2E2
+#define METATILE_LariciaGym_LeaderDoorOpen0   0x2E3
+#define METATILE_LariciaGym_LeaderDoorOpen1   0x2E4
+#define METATILE_LariciaGym_LeaderDoorOpen2   0x2E5
+#define METATILE_LariciaGym_LeaderDoorOpen3   0x2E6
+#define METATILE_LariciaGym_LeaderDoorOpen4   0x2E7
+#define METATILE_LariciaGym_LeaderDoorOpen5   0x2E8
 #define METATILE_GeneralFrlg_CalmWater               0x12B
 #define METATILE_GeneralFrlg_Door                    0x03D
 #define METATILE_GeneralFrlg_Plain_Grass             0x00D

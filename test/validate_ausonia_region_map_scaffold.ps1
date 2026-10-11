@@ -1,0 +1,70 @@
+param([string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path)
+$ErrorActionPreference = 'Stop'
+function Read-Json([string]$path) { Get-Content (Join-Path $RepositoryRoot $path) -Raw | ConvertFrom-Json }
+function Assert-True([bool]$condition, [string]$message) { if (-not $condition) { throw $message } }
+$sections = Read-Json 'src/data/region_map/region_map_sections.json'
+$expected = @{
+    MAPSEC_AUSONIA_ALBERA_BASSA = @(9, 11, 'ALBÈRA BASSA')
+    MAPSEC_AUSONIA_VIA_VERDI = @(9, 10, 'VIA VERDI')
+    MAPSEC_AUSONIA_PORTA_PRETORIA = @(10, 10, 'PORTA PRETORIA')
+    MAPSEC_AUSONIA_VIA_CISTERNONI = @(12, 9, 'VIA DEI CISTERNONI')
+    MAPSEC_ALBERA_STORICA = @(9, 9, 'ALBÈRA STORICA')
+    MAPSEC_VIA_CONSOLARE = @(10, 9, 'VIA CONSOLARE')
+    MAPSEC_LAGO_DI_ALBERA = @(12, 6, 'LAGO DI ALBÈRA')
+    MAPSEC_BORGO_DI_CASTELLO = @(10, 6, 'BORGO DI CASTELLO')
+    MAPSEC_VILLA_PAPALE = @(10, 5, 'VILLA PAPALE')
+    MAPSEC_GALLERIE_DI_SOPRA = @(11, 7, 'GALLERIE DI SOPRA')
+    MAPSEC_PONTE_VALLE_LARICIA = @(12, 10, 'PONTE/VALLE LARICIA')
+    MAPSEC_LARICIA = @(14, 11, 'LARICIA')
+}
+$expected['MAPSEC_LAGO_DI_ALBERA'][0] = 11
+$expected['MAPSEC_BORGO_DI_CASTELLO'][0] = 12
+$expected['MAPSEC_VILLA_PAPALE'][0] = 11
+$layoutText = Get-Content (Join-Path $RepositoryRoot 'src/data/region_map/region_map_layout_ausonia.h') -Raw
+$layoutMatch = [regex]::Match($layoutText, '(?s)sRegionMap_AusoniaSectionLayout\[MAP_HEIGHT\]\[MAP_WIDTH\]\s*=\s*\{(.*?)\};')
+Assert-True $layoutMatch.Success 'Ausonia section lookup matrix is missing.'
+$rows = @([regex]::Matches($layoutMatch.Groups[1].Value, '\{([^{}]*)\}') | ForEach-Object { ,(@($_.Groups[1].Value -split ',' | ForEach-Object { $_.Trim() })) })
+Assert-True ($rows.Count -eq 15) "Ausonia section lookup must contain 15 rows, found $($rows.Count)."
+for ($y = 0; $y -lt $rows.Count; $y++) {
+    Assert-True ($rows[$y].Count -eq 28) "Ausonia section lookup row $y must contain 28 columns, found $($rows[$y].Count)."
+}
+foreach ($id in $expected.Keys) {
+    $entry = @($sections.map_sections | Where-Object id -eq $id)
+    Assert-True ($entry.Count -eq 1) "$id must have exactly one section entry."
+    Assert-True ([int]$entry[0].x -eq $expected[$id][0] -and [int]$entry[0].y -eq $expected[$id][1]) "$id has incorrect coordinates."
+    Assert-True ($entry[0].name -eq $expected[$id][2]) "$id has incorrect user-facing name."
+    $x = [int]$entry[0].x
+    $y = [int]$entry[0].y
+    Assert-True ($rows[$y][$x] -eq $id) "$id JSON coordinate ($x,$y) resolves to $($rows[$y][$x]) instead of $id."
+}
+$lookupSeen = @{}
+for ($y = 0; $y -lt $rows.Count; $y++) {
+    for ($x = 0; $x -lt $rows[$y].Count; $x++) {
+        $id = $rows[$y][$x]
+        if ($id -eq 'MAPSEC_NONE') { continue }
+        Assert-True $expected.ContainsKey($id) "Unexpected Ausonia lookup section $id at ($x,$y)."
+        $entry = @($sections.map_sections | Where-Object id -eq $id)
+        Assert-True ($entry.Count -eq 1) "$id must have exactly one JSON section entry."
+        Assert-True ([int]$entry[0].x -eq $x -and [int]$entry[0].y -eq $y) "$id is obsolete or misplaced at ($x,$y); JSON declares ($($entry[0].x),$($entry[0].y))."
+        Assert-True (-not $lookupSeen.ContainsKey($id)) "$id appears in multiple lookup cells."
+        $lookupSeen[$id] = "$x,$y"
+    }
+}
+foreach ($id in $expected.Keys) {
+    Assert-True $lookupSeen.ContainsKey($id) "$id is missing from the Ausonia section lookup."
+}
+$seen = @{}
+foreach ($entry in $sections.map_sections | Where-Object { $expected.ContainsKey($_.id) }) {
+    $key = "$($entry.x),$($entry.y)"
+    Assert-True (-not $seen.ContainsKey($key)) "Ausonia coordinate collision at $key."
+    $seen[$key] = $entry.id
+}
+foreach ($path in @('data/maps/LittlerootTown/map.json','data/maps/Route101/map.json','data/maps/OldaleTown/map.json','data/maps/Route103/map.json')) {
+    $map = Read-Json $path
+    Assert-True ($map.region_map_section -like 'MAPSEC_AUSONIA_*') "$path is not assigned an Ausonia section."
+}
+$regionMap = Get-Content (Join-Path $RepositoryRoot 'src/region_map.c') -Raw
+Assert-True ($regionMap -match 'REGION_MAP_AUSONIA') 'Ausonia Region Map type is missing.'
+Assert-True ($regionMap -match 'case REGION_AUSONIA:\s*return REGION_MAP_AUSONIA') 'Ausonia routing is missing.'
+Assert-True (-not ($regionMap -match 'MAPSEC_AUSONIA.*sFlyLocations')) 'No Ausonia Fly destination may be added by this scaffold.'
+Write-Output 'Ausonia Region Map scaffold: PASS'

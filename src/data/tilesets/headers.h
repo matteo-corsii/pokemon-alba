@@ -63,6 +63,17 @@ const struct Tileset gTileset_PortaPretoria =
     .callback = InitTilesetAnim_Petalburg,
 };
 
+const struct Tileset gTileset_ViaConsolare =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_ViaConsolare,
+    .palettes = gTilesetPalettes_ViaConsolare,
+    .metatiles = gMetatiles_ViaConsolare,
+    .metatileAttributes = gMetatileAttributes_ViaConsolare,
+    .callback = InitTilesetAnim_Petalburg,
+};
+
 const struct Tileset gTileset_LagoDiAlbera =
 {
     .isCompressed = TRUE,
@@ -203,6 +214,17 @@ const struct Tileset gTileset_Sootopolis =
     .palettes = gTilesetPalettes_Sootopolis,
     .metatiles = gMetatiles_Sootopolis,
     .metatileAttributes = gMetatileAttributes_Sootopolis,
+    .callback = InitTilesetAnim_Sootopolis,
+};
+
+const struct Tileset gTileset_Laricia =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_Laricia,
+    .palettes = gTilesetPalettes_Laricia,
+    .metatiles = gMetatiles_Laricia,
+    .metatileAttributes = gMetatileAttributes_Laricia,
     .callback = InitTilesetAnim_Sootopolis,
 };
 
@@ -578,6 +600,28 @@ const struct Tileset gTileset_GenericBuilding =
     .metatiles = gMetatiles_GenericBuilding,
     .metatileAttributes = gMetatileAttributes_GenericBuilding,
     .callback = NULL,
+};
+
+const struct Tileset gTileset_LariciaGymPrimary =
+{
+    .isCompressed = TRUE,
+    .isSecondary = FALSE,
+    .tiles = gTilesetTiles_LariciaGymPrimary,
+    .palettes = gTilesetPalettes_LariciaGymPrimary,
+    .metatiles = gMetatiles_LariciaGymPrimary,
+    .metatileAttributes = gMetatileAttributes_LariciaGymPrimary,
+    .callback = InitTilesetAnim_Building,
+};
+
+const struct Tileset gTileset_LariciaGym =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_LariciaGym,
+    .palettes = gTilesetPalettes_LariciaGym,
+    .metatiles = gMetatiles_LariciaGym,
+    .metatileAttributes = gMetatileAttributes_LariciaGym,
+    .callback = InitTilesetAnim_LariciaGym,
 };
 
 const struct Tileset gTileset_MauvilleGameCorner =
