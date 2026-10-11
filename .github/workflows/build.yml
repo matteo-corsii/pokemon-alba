@@ -201,6 +201,17 @@ jobs:
             tools/mgba-rom-test-hydra/mgba-rom-test-hydra
           key: tools-check-${{ runner.os }}-${{ hashFiles('tools/*/Makefile', 'tools/**/*.c', 'tools/**/*.cpp', 'tools/**/*.h') }}
 
+      - name: Diagnose SaveBlock1 ARM layout
+        run: |
+          arm-none-eabi-gcc \
+            -Iinclude \
+            -DMODERN=1 -DTESTING=1 -DEMERALD -std=gnu17 \
+            -mthumb -mthumb-interwork -O0 -mabi=apcs-gnu \
+            -mtune=arm7tdmi -march=armv4t \
+            -Wno-pointer-to-int-cast -Wno-strict-aliasing \
+            -c test/save_layout_diag.c -o /tmp/save_layout_diag.o
+          arm-none-eabi-nm -S --defined-only /tmp/save_layout_diag.o | sort
+
       - name: Test
         env:
           GAME_VERSION: EMERALD
