@@ -203,13 +203,18 @@ jobs:
 
       - name: Diagnose SaveBlock1 ARM layout
         run: |
+          make -j$(nproc) tools
+          make MAP_VERSION=emerald generated
           arm-none-eabi-gcc \
-            -Iinclude \
+            -iquote include \
             -DMODERN=1 -DTESTING=1 -DEMERALD -std=gnu17 \
             -mthumb -mthumb-interwork -O0 -mabi=apcs-gnu \
             -mtune=arm7tdmi -march=armv4t \
-            -Wno-pointer-to-int-cast -Wno-strict-aliasing \
+            -Werror -Wall -Wno-pointer-to-int-cast \
+            -Wno-strict-aliasing -Wno-attribute-alias \
+            -Woverride-init -Wnonnull -Wenum-conversion \
             -c test/save_layout_diag.c -o /tmp/save_layout_diag.o
+          echo "SaveBlock1 ARM layout (symbol size = evaluated sizeof/offsetof):"
           arm-none-eabi-nm -S --defined-only /tmp/save_layout_diag.o | sort
 
       - name: Test
