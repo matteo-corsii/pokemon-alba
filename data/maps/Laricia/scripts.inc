@@ -31,6 +31,10 @@ Laricia_EventScript_SagraCamion::
 	msgbox Laricia_Text_SagraCamion, MSGBOX_NPC
 	end
 
+Laricia_EventScript_SagraAllestimento::
+	msgbox Laricia_Text_SagraAllestimento, MSGBOX_NPC
+	end
+
 Laricia_EventScript_SagraVenditore1::
 	lock
 	faceplayer
@@ -144,6 +148,9 @@ Laricia_Text_SagraCamion:
 	.string "Il camioncino e pronto per la festa!\p"
 	.string "Qui si sente gia il profumo\n"
 	.string "della porchetta.$"
+Laricia_Text_SagraAllestimento:
+	.string "Un elemento dell'allestimento\n"
+	.string "della Sagra della Porchetta.$"
 
 Laricia_Text_SagraVenditore1_Preparativi:
 	.string "Stiamo ancora sistemando tutto.\p"
