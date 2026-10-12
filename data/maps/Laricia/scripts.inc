@@ -102,9 +102,9 @@ Laricia_EventScript_PostGymScene::
 	lockall
 	clearflag FLAG_HIDE_LARICIA_POST_GYM_AUGUSTO
 	clearflag FLAG_HIDE_LARICIA_POST_GYM_NICO_LIA
-	showobject LOCALID_LARICIA_POST_GYM_AUGUSTO
-	showobject LOCALID_LARICIA_POST_GYM_NICO
-	showobject LOCALID_LARICIA_POST_GYM_LIA
+	addobject LOCALID_LARICIA_POST_GYM_AUGUSTO
+	addobject LOCALID_LARICIA_POST_GYM_NICO
+	addobject LOCALID_LARICIA_POST_GYM_LIA
 	msgbox Laricia_Text_PostGymAugustoInvite, MSGBOX_DEFAULT
 	applymovement LOCALID_LARICIA_POST_GYM_AUGUSTO, Laricia_Movement_AugustoToPiazza
 	waitmovement 0
@@ -116,9 +116,9 @@ Laricia_EventScript_PostGymScene::
 	msgbox Laricia_Text_PostGymMayorClosing, MSGBOX_DEFAULT
 	setflag FLAG_LARICIA_SAGRA_ACTIVE
 	clearflag FLAG_HIDE_LARICIA_SAGRA_TRUCK_3
-	showobject LOCALID_LARICIA_SAGRA_CAMION_3
+	addobject LOCALID_LARICIA_SAGRA_CAMION_3
 	setflag FLAG_HIDE_LARICIA_POST_GYM_AUGUSTO
-	hideobject LOCALID_LARICIA_POST_GYM_AUGUSTO
+	removeobject LOCALID_LARICIA_POST_GYM_AUGUSTO
 	releaseall
 
 Laricia_EventScript_PostGymScene_End:
