@@ -7245,9 +7245,9 @@ const struct ItemInfo gItemsInfo[] =
         .name = ITEM_NAME("Pan. Porchetta"),
         .price = 350,
         .description = COMPOUND_STRING(
-            "Una specialita locale\n"
-            "che cura i problemi di\n"
-            "stato."),
+            "Specialita locale\n"
+            "che cura ogni\n"
+            "alterazione."),
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_STATUS_RECOVERY,
         .type = ITEM_USE_PARTY_MENU,
