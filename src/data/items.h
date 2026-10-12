@@ -7242,7 +7242,7 @@ const struct ItemInfo gItemsInfo[] =
 
     [ITEM_PANINO_CON_PORCHETTA] =
     {
-        .name = ITEM_NAME("Panino con Porchetta"),
+        .name = ITEM_NAME("Pan. Porchetta"),
         .price = 350,
         .description = COMPOUND_STRING(
             "Una specialita locale\n"
