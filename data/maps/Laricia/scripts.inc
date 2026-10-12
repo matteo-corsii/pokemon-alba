@@ -8,10 +8,6 @@ Laricia_OnTransition:
 	clearflag FLAG_HIDE_LARICIA_SAGRA_TRUCK_3
 	clearflag FLAG_HIDE_LARICIA_POST_GYM_NICO_LIA
 	setflag FLAG_HIDE_LARICIA_POST_GYM_AUGUSTO
-	applymovement LOCALID_LARICIA_SAGRA_CAMION_1, Laricia_Movement_SagraCamion1
-	waitmovement 0
-	applymovement LOCALID_LARICIA_SAGRA_CAMION_2, Laricia_Movement_SagraCamion2
-	waitmovement 0
 	goto Laricia_OnTransition_Done
 
 Laricia_OnTransition_Preparativi:
@@ -25,20 +21,6 @@ Laricia_OnTransition_Done:
 Laricia_OnFrame:
 	map_script_2 VAR_TEMP_0, 1, Laricia_EventScript_PostGymScene
 	.2byte 0
-
-Laricia_Movement_SagraCamion1:
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	step_end
-
-Laricia_Movement_SagraCamion2:
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	step_end
 
 Laricia_EventScript_SagraBlocker::
 	goto_if_set FLAG_LARICIA_SAGRA_ACTIVE, Laricia_EventScript_SagraCamion
@@ -131,10 +113,6 @@ Laricia_EventScript_PostGymScene::
 	setflag FLAG_LARICIA_SAGRA_ACTIVE
 	clearflag FLAG_HIDE_LARICIA_SAGRA_TRUCK_3
 	showobject LOCALID_LARICIA_SAGRA_CAMION_3
-	applymovement LOCALID_LARICIA_SAGRA_CAMION_1, Laricia_Movement_SagraCamion1
-	waitmovement 0
-	applymovement LOCALID_LARICIA_SAGRA_CAMION_2, Laricia_Movement_SagraCamion2
-	waitmovement 0
 	setflag FLAG_HIDE_LARICIA_POST_GYM_AUGUSTO
 	hideobject LOCALID_LARICIA_POST_GYM_AUGUSTO
 	releaseall
@@ -237,6 +215,11 @@ Laricia_EventScript_VisitatorePalazzo::
 Laricia_EventScript_TerraFuturaSagra::
 	msgbox Laricia_Text_PostGymTerraFutura, MSGBOX_NPC
 	end
+
+Laricia_EventScript_SagraSpettatore::
+	msgbox Laricia_Text_SagraSpettatore, MSGBOX_NPC
+	end
+
 Laricia_EventScript_ClienteFraschetta::
 	msgbox Laricia_Text_ClienteFraschetta, MSGBOX_NPC
 	end
@@ -300,3 +283,6 @@ Laricia_Text_VisitatoreSagra:
 	.string "da tutta la zona.\p"
 	.string "E il profumo si sente prima\n"
 	.string "ancora di arrivare in piazza!$"
+Laricia_Text_SagraSpettatore:
+	.string "Che bella festa in piazza!\p"
+	.string "Aspetto l'inizio del discorso.$"
