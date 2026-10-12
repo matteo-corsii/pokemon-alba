@@ -12888,8 +12888,8 @@ const struct ItemInfo gItemsInfo[] =
         .name = ITEM_NAME("MT Nitrocarica"),
         .price = 3000,
         .description = COMPOUND_STRING(
-            "Aumenta la Velocita\n"
-            "del Pokemon che la usa."),
+            "Mossa Fuoco che\n"
+            "alza la Velocita."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
