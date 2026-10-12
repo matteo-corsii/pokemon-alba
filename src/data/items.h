@@ -7240,6 +7240,25 @@ const struct ItemInfo gItemsInfo[] =
         .iconPalette = gItemIconPalette_Glimmoranite,
     },
 
+    [ITEM_PANINO_CON_PORCHETTA] =
+    {
+        .name = ITEM_NAME("Panino con Porchetta"),
+        .price = 350,
+        .description = COMPOUND_STRING(
+            "Una specialita locale\n"
+            "che cura i problemi di\n"
+            "stato."),
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_STATUS_RECOVERY,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
+        .battleUsage = EFFECT_ITEM_CURE_STATUS,
+        .effect = gItemEffect_FullHeal,
+        .flingPower = 30,
+        .iconPic = gItemIcon_LavaCookie,
+        .iconPalette = gItemIconPalette_LavaCookieAndLetter,
+    },
+
 // Gems
     #if I_PRICE >= GEN_9
         #define GEM_PRICE 15000

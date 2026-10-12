@@ -1,9 +1,160 @@
 Laricia_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, Laricia_OnTransition
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, Laricia_OnFrame
 	.byte 0
 
+Laricia_OnTransition:
+	goto_if_unset FLAG_LARICIA_SAGRA_ACTIVE, Laricia_OnTransition_Preparativi
+	clearflag FLAG_HIDE_LARICIA_SAGRA_TRUCK_3
+	clearflag FLAG_HIDE_LARICIA_POST_GYM_NICO_LIA
+	setflag FLAG_HIDE_LARICIA_POST_GYM_AUGUSTO
+	applymovement LOCALID_LARICIA_SAGRA_CAMION_1, Laricia_Movement_SagraCamion1
+	waitmovement 0
+	applymovement LOCALID_LARICIA_SAGRA_CAMION_2, Laricia_Movement_SagraCamion2
+	waitmovement 0
+	goto Laricia_OnTransition_Done
+
+Laricia_OnTransition_Preparativi:
+	setflag FLAG_HIDE_LARICIA_SAGRA_TRUCK_3
+	setflag FLAG_HIDE_LARICIA_POST_GYM_AUGUSTO
+	setflag FLAG_HIDE_LARICIA_POST_GYM_NICO_LIA
+
+Laricia_OnTransition_Done:
+	end
+
+Laricia_OnFrame:
+	map_script_2 VAR_TEMP_0, 1, Laricia_EventScript_PostGymScene
+	.2byte 0
+
+Laricia_Movement_SagraCamion1:
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	step_end
+
+Laricia_Movement_SagraCamion2:
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	step_end
+
 Laricia_EventScript_SagraBlocker::
+	goto_if_set FLAG_LARICIA_SAGRA_ACTIVE, Laricia_EventScript_SagraCamion
 	msgbox Laricia_Text_SagraBlocker, MSGBOX_NPC
 	end
+
+Laricia_EventScript_SagraCamion::
+	msgbox Laricia_Text_SagraCamion, MSGBOX_NPC
+	end
+
+Laricia_EventScript_SagraVenditore1::
+	lock
+	faceplayer
+	goto_if_unset FLAG_LARICIA_SAGRA_ACTIVE, Laricia_EventScript_SagraVenditore1_Preparativi
+	msgbox Laricia_Text_SagraVenditore1, MSGBOX_DEFAULT
+	pokemart Laricia_Sagra_Pokemart
+	msgbox Laricia_Text_SagraGrazie, MSGBOX_DEFAULT
+	release
+	end
+
+Laricia_EventScript_SagraVenditore1_Preparativi::
+	msgbox Laricia_Text_SagraVenditore1_Preparativi, MSGBOX_DEFAULT
+	release
+	end
+
+Laricia_EventScript_SagraVenditore2::
+	lock
+	faceplayer
+	goto_if_unset FLAG_LARICIA_SAGRA_ACTIVE, Laricia_EventScript_SagraVenditore2_Preparativi
+	msgbox Laricia_Text_SagraVenditore2, MSGBOX_DEFAULT
+	pokemart Laricia_Sagra_Pokemart
+	msgbox Laricia_Text_SagraGrazie, MSGBOX_DEFAULT
+	release
+	end
+
+Laricia_EventScript_SagraVenditore2_Preparativi::
+	msgbox Laricia_Text_SagraVenditore2_Preparativi, MSGBOX_DEFAULT
+	release
+	end
+
+Laricia_EventScript_SagraVenditore3::
+	lock
+	faceplayer
+	goto_if_unset FLAG_LARICIA_SAGRA_ACTIVE, Laricia_EventScript_SagraVenditore3_Preparativi
+	msgbox Laricia_Text_SagraVenditore3, MSGBOX_DEFAULT
+	pokemart Laricia_Sagra_Pokemart
+	msgbox Laricia_Text_SagraGrazie, MSGBOX_DEFAULT
+	release
+	end
+
+Laricia_EventScript_SagraVenditore3_Preparativi::
+	msgbox Laricia_Text_SagraVenditore3_Preparativi, MSGBOX_DEFAULT
+	release
+	end
+
+Laricia_EventScript_PostGymAugusto::
+	msgbox Laricia_Text_PostGymAugusto, MSGBOX_NPC
+	end
+
+Laricia_EventScript_PostGymNico::
+	msgbox Laricia_Text_PostGymNico, MSGBOX_NPC
+	end
+
+Laricia_EventScript_PostGymLia::
+	msgbox Laricia_Text_PostGymLia, MSGBOX_NPC
+	end
+
+Laricia_EventScript_PostGymScene::
+	setvar VAR_TEMP_0, 0
+	goto_if_unset FLAG_LARICIA_POST_GYM_PENDING, Laricia_EventScript_PostGymScene_End
+	clearflag FLAG_LARICIA_POST_GYM_PENDING
+	goto_if_set FLAG_LARICIA_SAGRA_ACTIVE, Laricia_EventScript_PostGymScene_End
+	goto_if_unset FLAG_BADGE03_GET, Laricia_EventScript_PostGymScene_End
+	goto_if_unset FLAG_RECEIVED_TM_FLAME_CHARGE, Laricia_EventScript_PostGymScene_End
+	lockall
+	clearflag FLAG_HIDE_LARICIA_POST_GYM_AUGUSTO
+	clearflag FLAG_HIDE_LARICIA_POST_GYM_NICO_LIA
+	showobject LOCALID_LARICIA_POST_GYM_AUGUSTO
+	showobject LOCALID_LARICIA_POST_GYM_NICO
+	showobject LOCALID_LARICIA_POST_GYM_LIA
+	msgbox Laricia_Text_PostGymAugustoInvite, MSGBOX_DEFAULT
+	applymovement LOCALID_LARICIA_POST_GYM_AUGUSTO, Laricia_Movement_AugustoToPiazza
+	waitmovement 0
+	msgbox Laricia_Text_PostGymNicoJoin, MSGBOX_DEFAULT
+	msgbox Laricia_Text_PostGymLiaJoin, MSGBOX_DEFAULT
+	msgbox Laricia_Text_PostGymMayor, MSGBOX_DEFAULT
+	msgbox Laricia_Text_PostGymTerraFutura, MSGBOX_DEFAULT
+	msgbox Laricia_Text_PostGymAugustoSagra, MSGBOX_DEFAULT
+	msgbox Laricia_Text_PostGymMayorClosing, MSGBOX_DEFAULT
+	setflag FLAG_LARICIA_SAGRA_ACTIVE
+	clearflag FLAG_HIDE_LARICIA_SAGRA_TRUCK_3
+	showobject LOCALID_LARICIA_SAGRA_CAMION_3
+	applymovement LOCALID_LARICIA_SAGRA_CAMION_1, Laricia_Movement_SagraCamion1
+	waitmovement 0
+	applymovement LOCALID_LARICIA_SAGRA_CAMION_2, Laricia_Movement_SagraCamion2
+	waitmovement 0
+	setflag FLAG_HIDE_LARICIA_POST_GYM_AUGUSTO
+	hideobject LOCALID_LARICIA_POST_GYM_AUGUSTO
+	releaseall
+
+Laricia_EventScript_PostGymScene_End:
+	end
+
+Laricia_Movement_AugustoToPiazza:
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	step_end
 
 Laricia_Text_SagraBlocker:
 	.string "La strada per Galloro\n"
@@ -11,11 +162,80 @@ Laricia_Text_SagraBlocker:
 	.string "Stiamo preparando la Sagra\n"
 	.string "della Porchetta.$"
 
+Laricia_Text_SagraCamion:
+	.string "Il camioncino e pronto per la festa!\p"
+	.string "Qui si sente gia il profumo\n"
+	.string "della porchetta.$"
+
+Laricia_Text_SagraVenditore1_Preparativi:
+	.string "Stiamo ancora sistemando tutto.\p"
+	.string "Tra poco la piazza sara pronta.$"
+Laricia_Text_SagraVenditore1:
+	.string "La nostra ricetta e semplice:\n"
+	.string "pane caldo e porchetta locale.$"
+Laricia_Text_SagraVenditore2_Preparativi:
+	.string "Il fuoco e quasi pronto,\n"
+	.string "ma non si vende ancora.$"
+Laricia_Text_SagraVenditore2:
+	.string "Senti che profumo?\p"
+	.string "Un panino appena fatto ti aspetta.$"
+Laricia_Text_SagraVenditore3_Preparativi:
+	.string "Quando aprira la Sagra\n"
+	.string "qui ci sara posto per tutti.$"
+Laricia_Text_SagraVenditore3:
+	.string "Benvenuto alla festa!\p"
+	.string "Prendi un panino e goditi la piazza.$"
+Laricia_Text_SagraGrazie:
+	.string "Grazie e buona festa!$"
+
+Laricia_Text_PostGymAugustoInvite:
+	.string "Hai acceso tutte le fiamme della palestra.\p"
+	.string "Ora vieni con me: Laricia deve festeggiare\n"
+	.string "la tua vittoria.$"
+Laricia_Text_PostGymNicoJoin:
+	.string "NICO: Una festa in piazza?\p"
+	.string "Allora veniamo anche noi.$"
+Laricia_Text_PostGymLiaJoin:
+	.string "LIA: Dopo tutta quella storia,\n"
+	.string "un po' di festa ci vuole proprio.$"
+Laricia_Text_PostGymMayor:
+	.string "SINDACO: Cittadini di Laricia,\n"
+	.string "oggi celebriamo una nuova fiamma\n"
+	.string "per la nostra citta.$"
+Laricia_Text_PostGymTerraFutura:
+	.string "TERRA FUTURA: La tradizione locale\n"
+	.string "e una risorsa da custodire con cura.\p"
+	.string "Sosterremo questa festa\n"
+	.string "nel rispetto della comunita.$"
+Laricia_Text_PostGymAugustoSagra:
+	.string "AUGUSTO: Il fuoco della palestra\n"
+	.string "e anche il calore delle persone.\p"
+	.string "Che questa Sagra resti un incontro\n"
+	.string "fra memoria e futuro.$"
+Laricia_Text_PostGymMayorClosing:
+	.string "SINDACO: La Sagra della Porchetta\n"
+	.string "e ufficialmente aperta!\p"
+	.string "Le strade sono libere: benvenuti\n"
+	.string "a Laricia.$"
+
+	.align 2
+Laricia_Sagra_Pokemart:
+	.2byte ITEM_PANINO_CON_PORCHETTA
+	pokemartlistend
+
 Laricia_EventScript_AnzianoPiazza::
+	goto_if_set FLAG_LARICIA_SAGRA_ACTIVE, Laricia_EventScript_SindacoSagra
 	msgbox Laricia_Text_AnzianoPiazza, MSGBOX_NPC
 	end
+Laricia_EventScript_SindacoSagra::
+	msgbox Laricia_Text_PostGymMayor, MSGBOX_NPC
+	end
 Laricia_EventScript_VisitatorePalazzo::
+	goto_if_set FLAG_LARICIA_SAGRA_ACTIVE, Laricia_EventScript_TerraFuturaSagra
 	msgbox Laricia_Text_VisitatorePalazzo, MSGBOX_NPC
+	end
+Laricia_EventScript_TerraFuturaSagra::
+	msgbox Laricia_Text_PostGymTerraFutura, MSGBOX_NPC
 	end
 Laricia_EventScript_ClienteFraschetta::
 	msgbox Laricia_Text_ClienteFraschetta, MSGBOX_NPC

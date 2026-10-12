@@ -9,6 +9,13 @@ Laricia_Gym_Lobby_OnLoad::
 
 Laricia_Gym_Lobby_OnTransition::
 	call Laricia_Gym_Lobby_EventScript_UpdateLeaderDoor
+	setvar VAR_TEMP_0, 0
+	clearflag FLAG_LARICIA_POST_GYM_PENDING
+	goto_if_set FLAG_LARICIA_SAGRA_ACTIVE, Laricia_Gym_Lobby_OnTransition_Done
+	setflag FLAG_LARICIA_POST_GYM_PENDING
+	setvar VAR_TEMP_0, 1
+
+Laricia_Gym_Lobby_OnTransition_Done:
 	end
 
 Laricia_Gym_Lobby_EventScript_UpdateLeaderDoor::

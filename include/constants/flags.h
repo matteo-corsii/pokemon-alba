@@ -109,6 +109,13 @@
 #define FLAG_RECEIVED_VALLE_LARICIA_ORAN_BERRIES         0x918
 #define FLAG_RECEIVED_VALLE_LARICIA_PECHA_BERRIES        0x919
 #define FLAG_RECEIVED_VALLE_LARICIA_CHERI_BERRIES        0x91A
+
+// Laricia post-Gym festival state. These were unused persistent system flags.
+#define FLAG_LARICIA_SAGRA_ACTIVE                         FLAG_UNUSED_0x91B
+#define FLAG_LARICIA_POST_GYM_PENDING                    FLAG_UNUSED_0x91C
+#define FLAG_HIDE_LARICIA_POST_GYM_AUGUSTO               FLAG_UNUSED_0x91D
+#define FLAG_HIDE_LARICIA_POST_GYM_NICO_LIA              FLAG_UNUSED_0x91E
+#define FLAG_HIDE_LARICIA_SAGRA_TRUCK_3                  FLAG_UNUSED_0x91F
 #define FLAG_HIDE_ALBERA_LAB_NICO 0x24 // Nico's dedicated Albèra lab object
 #define FLAG_HIDE_ALBERA_LAB_LIA 0x25 // Lia's dedicated Albèra lab object
 #define FLAG_HIDE_ROUTE101_RESEARCH_PARTY 0x26 // Via Verdi investigation party objects
