@@ -19,7 +19,9 @@ Laricia_OnTransition_Done:
 	end
 
 Laricia_OnFrame:
+#if !IS_FRLG
 	map_script_2 VAR_TEMP_0, 1, Laricia_EventScript_PostGymScene
+#endif
 	.2byte 0
 
 Laricia_EventScript_SagraBlocker::
@@ -92,6 +94,7 @@ Laricia_EventScript_PostGymLia::
 	msgbox Laricia_Text_PostGymLia, MSGBOX_NPC
 	end
 
+#if !IS_FRLG
 Laricia_EventScript_PostGymScene::
 	setvar VAR_TEMP_0, 0
 	goto_if_unset FLAG_LARICIA_POST_GYM_PENDING, Laricia_EventScript_PostGymScene_End
@@ -123,6 +126,7 @@ Laricia_EventScript_PostGymScene::
 
 Laricia_EventScript_PostGymScene_End:
 	end
+#endif
 
 Laricia_Movement_AugustoToPiazza:
 	walk_down
@@ -172,6 +176,16 @@ Laricia_Text_SagraVenditore3:
 	.string "Prendi un panino e goditi la piazza.$"
 Laricia_Text_SagraGrazie:
 	.string "Grazie e buona festa!$"
+
+Laricia_Text_PostGymAugusto:
+	.string "La tua vittoria ha riacceso la fiamma\p"
+	.string "di Laricia. Ora la citta puo festeggiare.$"
+Laricia_Text_PostGymNico:
+	.string "Augusto, la festa puo iniziare!\p"
+	.string "Portiamo la nostra gioia in piazza.$"
+Laricia_Text_PostGymLia:
+	.string "Dopo questa prova, Laricia merita\n"
+	.string "una festa da ricordare.$"
 
 Laricia_Text_PostGymAugustoInvite:
 	.string "Hai acceso tutte le fiamme della palestra.\p"
