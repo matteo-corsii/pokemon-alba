@@ -1338,8 +1338,8 @@
 #define FLAG_UNUSED_0x4C2                                           0x4C2 // Unused Flag
 #define FLAG_UNUSED_0x4C3                                           0x4C3 // Unused Flag
 #define FLAG_UNUSED_0x4C4                                           0x4C4 // Unused Flag
-#define FLAG_UNUSED_0x4C5                                           0x4C5 // Unused Flag
-#define FLAG_UNUSED_0x4C6                                           0x4C6 // Unused Flag
+#define FLAG_UCCELLIERA_CHEF_BERRY_GIVEN                            0x4C5
+#define FLAG_UCCELLIERA_CHEF_DEFEATED                               0x4C6
 #define FLAG_UNUSED_0x4C7                                           0x4C7 // Unused Flag
 #define FLAG_UNUSED_0x4C8                                           0x4C8 // Unused Flag
 #define FLAG_UNUSED_0x4C9                                           0x4C9 // Unused Flag
