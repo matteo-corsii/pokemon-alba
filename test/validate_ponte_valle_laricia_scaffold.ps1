@@ -103,7 +103,12 @@ foreach ($id in $supportedLariciaBridgeMetatiles) {
     Assert-True (($id - 0x200) * 16 -lt [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/tilesets/secondary/laricia/metatiles.bin')).Length) "Laricia lacks required PortaPretoria bridge metatile 0x$('{0:X3}' -f $id)."
 }
 
-Assert-True (@($map.object_events).Count -eq 28 -and @($map.warp_events).Count -eq 5 -and @($map.coord_events).Count -eq 0 -and @($map.bg_events).Count -eq 0) 'Ponte/Valle event inventory is incorrect.'
+Assert-True (@($map.object_events).Count -eq 31 -and @($map.warp_events).Count -eq 5 -and @($map.coord_events).Count -eq 0 -and @($map.bg_events).Count -eq 0) 'Ponte/Valle event inventory is incorrect.'
+$aureaObjects = @($map.object_events | Where-Object { $_.local_id -in 'LOCALID_PONTE_VALLE_LARICIA_AUREA_RECRUIT_1', 'LOCALID_PONTE_VALLE_LARICIA_AUREA_SCIENTIST', 'LOCALID_PONTE_VALLE_LARICIA_AUREA_RECRUIT_2' })
+Assert-True ($aureaObjects.Count -eq 3) 'Ponte/Valle Team Aurea object events are missing.'
+Assert-True (@($aureaObjects | Where-Object { $_.local_id -eq 'LOCALID_PONTE_VALLE_LARICIA_AUREA_RECRUIT_1' -and $_.graphics_id -eq 'OBJ_EVENT_GFX_AQUA_MEMBER_M' -and $_.x -eq 57 -and $_.y -eq 7 -and $_.movement_type -eq 'MOVEMENT_TYPE_FACE_DOWN' -and $_.trainer_type -eq 'TRAINER_TYPE_NONE' }).Count -eq 1) 'First Team Aurea recruit is incorrect.'
+Assert-True (@($aureaObjects | Where-Object { $_.local_id -eq 'LOCALID_PONTE_VALLE_LARICIA_AUREA_SCIENTIST' -and $_.graphics_id -eq 'OBJ_EVENT_GFX_SCIENTIST_1' -and $_.x -eq 58 -and $_.y -eq 7 -and $_.movement_type -eq 'MOVEMENT_TYPE_FACE_DOWN' -and $_.trainer_type -eq 'TRAINER_TYPE_NONE' }).Count -eq 1) 'Team Aurea scientist is incorrect.'
+Assert-True (@($aureaObjects | Where-Object { $_.local_id -eq 'LOCALID_PONTE_VALLE_LARICIA_AUREA_RECRUIT_2' -and $_.graphics_id -eq 'OBJ_EVENT_GFX_AQUA_MEMBER_M' -and $_.x -eq 59 -and $_.y -eq 7 -and $_.movement_type -eq 'MOVEMENT_TYPE_FACE_DOWN' -and $_.trainer_type -eq 'TRAINER_TYPE_NONE' }).Count -eq 1) 'Second Team Aurea recruit is incorrect.'
 $underBridgeWarps = @($map.warp_events | Where-Object { $_.dest_map -eq 'MAP_PONTE_VALLE_LARICIA' })
 Assert-True ($underBridgeWarps.Count -eq 2) 'Ponte/Valle must contain exactly two local under-bridge warps.'
 Assert-True (@($underBridgeWarps | Where-Object { [int]$_.x -eq 51 -and [int]$_.y -eq 26 -and [int]$_.elevation -eq 3 -and $_.dest_warp_id -eq '1' }).Count -eq 1) 'Valle under-bridge warp must be 51,26 -> warp 1.'

@@ -25,6 +25,18 @@ PonteValleLaricia_EventScript_RagazzoCampi::
 	msgbox PonteValleLaricia_Text_RagazzoCampi, MSGBOX_NPC
 	end
 
+PonteValleLaricia_EventScript_AureaRecruit1::
+	msgbox PonteValleLaricia_Text_AureaRecruit1, MSGBOX_NPC
+	end
+
+PonteValleLaricia_EventScript_AureaScientist::
+	msgbox PonteValleLaricia_Text_AureaScientist, MSGBOX_NPC
+	end
+
+PonteValleLaricia_EventScript_AureaRecruit2::
+	msgbox PonteValleLaricia_Text_AureaRecruit2, MSGBOX_NPC
+	end
+
 PonteValleLaricia_Text_ContadinoCasale1:
 	.string "Qui il sole non manca mai.\p"
 	.string "Per chi lavora nei campi,\n"
@@ -56,3 +68,14 @@ PonteValleLaricia_Text_RagazzoCampi:
 	.string "un sacco di POKEMON!\p"
 	.string "Quando fa troppo caldo,\n"
 	.string "cercano tutti un po' d'ombra.$"
+
+PonteValleLaricia_Text_AureaRecruit1:
+	.string "Alt! L'accesso all'EMISSARIO e vietato.$"
+
+PonteValleLaricia_Text_AureaScientist:
+	.string "Stiamo effettuando delle rilevazioni.\n"
+	.string "Devi tornare indietro.$"
+
+PonteValleLaricia_Text_AureaRecruit2:
+	.string "Questa zona e sotto il controllo\n"
+	.string "del TEAM AUREA.$"

@@ -47,6 +47,9 @@
 
 #if IS_FRLG
 
+#define FLAG_OLDALE_MOLOPSY_SEEN 0
+#define FLAG_HIDE_VIA_CONSOLARE_LENGHELIS 0
+
 #include "constants/flags_frlg.h"
 
 #else
@@ -109,6 +112,10 @@
 #define FLAG_RECEIVED_VALLE_LARICIA_ORAN_BERRIES         0x918
 #define FLAG_RECEIVED_VALLE_LARICIA_PECHA_BERRIES        0x919
 #define FLAG_RECEIVED_VALLE_LARICIA_CHERI_BERRIES        0x91A
+
+// Temporary narrative flags reserved from previously unused persistent slots.
+#define FLAG_OLDALE_MOLOPSY_SEEN                         FLAG_UNUSED_0x028
+#define FLAG_HIDE_VIA_CONSOLARE_LENGHELIS                FLAG_UNUSED_0x029
 
 // Laricia post-Gym festival state. These were unused persistent system flags.
 #define FLAG_LARICIA_SAGRA_ACTIVE                         FLAG_UNUSED_0x91B

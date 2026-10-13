@@ -21,9 +21,9 @@ $learnables = Get-Content 'src/data/pokemon/all_learnables.json' -Raw | ConvertF
 $wild = Get-Content 'src/data/wild_encounters.json' -Raw
 $record = Get-Section $infoText '[SPECIES_LENGHELIS] =' "`n    },"
 
-Assert-Contains $species "SPECIES_MOLOSPSY,`n    SPECIES_LENGHELIS,`n    SPECIES_LUSCINCO,`n    SPECIES_LUSCERP,`n    SPECIES_LUMELLA,`n    SPECIES_OMPHALUX,`n    SPECIES_PALUDIX,`n    SPECIES_SANGUILEX,`n    SPECIES_TRITINO,`n    SPECIES_TRICREST,`n    SPECIES_SALAMPOLLA,`n    SPECIES_ALCHIMANDRA,`n    SPECIES_CISTERNIDE,`n    SPECIES_CALCISTERN,`n    SPECIES_CUSTOM_END," 'Species append-only order'
+Assert-Contains $species "SPECIES_MOLOSPSY,`n    SPECIES_LENGHELIS,`n    SPECIES_LUSCINCO,`n    SPECIES_LUSCERP,`n    SPECIES_LUMELLA,`n    SPECIES_OMPHALUX,`n    SPECIES_PALUDIX,`n    SPECIES_SANGUILEX,`n    SPECIES_TRITINO,`n    SPECIES_TRICREST,`n    SPECIES_SALAMPOLLA,`n    SPECIES_ALCHIMANDRA,`n    SPECIES_CISTERNIDE,`n    SPECIES_CALCISTERN,`n    SPECIES_CARPULUS,`n    SPECIES_LUCINUS,`n    SPECIES_NAUFRAGUS,`n    SPECIES_VITEMOSTO,`n    SPECIES_PORCHIGNIS,`n    SPECIES_BRONZOVERRO,`n    SPECIES_FRASCHIETTO,`n    SPECIES_FRASCOTTO,`n    SPECIES_CARPULETUM,`n    SPECIES_LUTELLUS,`n    SPECIES_CUSTOM_END," 'Species append-only order'
 Assert-Contains $dex "NATIONAL_DEX_MOLOSPSY,`n    NATIONAL_DEX_LENGHELIS,`n    NATIONAL_DEX_LUSCINCO,`n    NATIONAL_DEX_LUSCERP," 'National Dex append-only order'
-Assert-Contains $dex '#define NATIONAL_DEX_COUNT  NATIONAL_DEX_CALCISTERN' 'National Dex count'
+Assert-Contains $dex '#define NATIONAL_DEX_COUNT  NATIONAL_DEX_LUTELLUS' 'National Dex count'
 Assert-Contains $graphics 'gMonFrontPic_Lenghelis' 'Lenghelis graphics symbols'
 Assert-Contains $graphics 'gMonBackPic_Lenghelis' 'Lenghelis graphics symbols'
 Assert-Contains $graphics 'gMonPalette_Lenghelis' 'Lenghelis graphics symbols'

@@ -5,11 +5,13 @@ ViaConsolare_MapScripts::
 ViaConsolare_OnTransition::
 	goto_if_unset FLAG_CISTERNONI_AUREA_ENCOUNTER_COMPLETE, ViaConsolare_OnTransition_Hide
 	goto_if_set FLAG_VIA_CONSOLARE_EMISSARIO_LEAD_COMPLETE, ViaConsolare_OnTransition_Hide
+	setflag FLAG_HIDE_VIA_CONSOLARE_LENGHELIS
 	clearflag FLAG_HIDE_VIA_CONSOLARE_LIA
 	clearflag FLAG_HIDE_VIA_CONSOLARE_NICO
 	end
 
 ViaConsolare_OnTransition_Hide::
+	setflag FLAG_HIDE_VIA_CONSOLARE_LENGHELIS
 	setflag FLAG_HIDE_VIA_CONSOLARE_LIA
 	setflag FLAG_HIDE_VIA_CONSOLARE_NICO
 	end
@@ -28,6 +30,15 @@ ViaConsolare_EventScript_StartEmissarioLead::
 	goto_if_unset FLAG_CISTERNONI_AUREA_ENCOUNTER_COMPLETE, ViaConsolare_EventScript_EndEmissarioLead
 	msgbox ViaConsolare_Text_LiaEmissarioLead, MSGBOX_DEFAULT
 	msgbox ViaConsolare_Text_NicoEmissarioLead, MSGBOX_DEFAULT
+	clearflag FLAG_HIDE_VIA_CONSOLARE_LENGHELIS
+	addobject LOCALID_VIA_CONSOLARE_LENGHELIS
+	msgbox ViaConsolare_Text_ProtagonistSeesLenghelis, MSGBOX_YESNO
+	msgbox ViaConsolare_Text_NicoDoesNotSeeLenghelis, MSGBOX_DEFAULT
+	msgbox ViaConsolare_Text_LiaQuestionsLenghelis, MSGBOX_DEFAULT
+	applymovement LOCALID_VIA_CONSOLARE_LENGHELIS, ViaConsolare_Movement_LenghelisLeavesNorth
+	waitmovement 0
+	setflag FLAG_HIDE_VIA_CONSOLARE_LENGHELIS
+	removeobject LOCALID_VIA_CONSOLARE_LENGHELIS
 	setflag FLAG_VIA_CONSOLARE_EMISSARIO_LEAD_COMPLETE
 	applymovement LOCALID_VIA_CONSOLARE_LIA_EMISSARIO, ViaConsolare_Movement_LiaLeavesNorth
 	waitmovement 0
@@ -50,6 +61,17 @@ ViaConsolare_Movement_NicoLeavesNorth:
 	walk_up
 	walk_up
 	step_end
+
+ViaConsolare_Movement_LenghelisLeavesNorth:
+	face_up
+	walk_up
+	walk_up
+	walk_up
+	step_end
+
+ViaConsolare_EventScript_Lenghelis::
+	msgbox ViaConsolare_Text_Lenghelis, MSGBOX_NPC
+	end
 
 ViaConsolare_EventScript_Custode::
 	msgbox ViaConsolare_Text_Custode, MSGBOX_NPC
@@ -174,3 +196,21 @@ ViaConsolare_Text_LiaEmissarioLead:
 ViaConsolare_Text_NicoEmissarioLead:
 	.string "NICO: Ti raggiungo li. Prima voglio\n"
 	.string "affrontare la PALESTRA delle MACINE.$"
+
+ViaConsolare_Text_Lenghelis:
+	.string "Un piccolo spirito osserva il sentiero\n"
+	.string "in perfetto silenzio.$"
+
+ViaConsolare_Text_ProtagonistSeesLenghelis:
+	.string "Avete visto quel POKEMON?\p"
+	.string "E proprio li, vicino al sentiero.$"
+
+ViaConsolare_Text_NicoDoesNotSeeLenghelis:
+	.string "NICO: Quale POKEMON? Non ho visto niente.$"
+
+ViaConsolare_Text_LiaQuestionsLenghelis:
+	.string "LIA: Aspetta... hai visto qualcosa vicino\n"
+	.string "al sentiero?\p"
+	.string "NICO: Forse era nascosto tra gli alberi.\p"
+	.string "LIA: Non saprei... Ma non mi sembra che tu\n"
+	.string "te lo sia immaginato.$"
