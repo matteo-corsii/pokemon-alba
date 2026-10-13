@@ -17,6 +17,11 @@
       "map": "MAP_PONTE_VALLE_LARICIA",
       "offset": 0,
       "direction": "left"
+    },
+    {
+      "map": "MAP_VIA_DELL_UCCELLIERA",
+      "offset": 37,
+      "direction": "up"
     }
   ],
   "object_events": [
