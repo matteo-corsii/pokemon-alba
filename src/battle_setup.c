@@ -96,6 +96,7 @@ EWRAM_DATA u16 gPartnerTrainerId = 0;
 EWRAM_DATA static u8 *sTrainerBattleEndScript = NULL;
 EWRAM_DATA static bool8 sShouldCheckTrainerBScript = FALSE;
 EWRAM_DATA static u8 sNoOfPossibleTrainerRetScripts = 0;
+static bool8 sChefBattlePending;
 
 // The first transition is used if the enemy Pokémon are lower level than our Pokémon.
 // Otherwise, the second transition is used.
@@ -486,9 +487,11 @@ void StartOldManTutorialBattle(void)
 
 void BattleSetup_StartScriptedWildBattle(void)
 {
+	bool8 isChefBattle = sChefBattlePending;
+	sChefBattlePending = FALSE;
     LockPlayerFieldControls();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
-    gBattleTypeFlags = 0;
+	gBattleTypeFlags = isChefBattle ? BATTLE_TYPE_CHEF : 0;
     CreateBattleStartTask(GetWildBattleTransition(), 0);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
@@ -498,14 +501,21 @@ void BattleSetup_StartScriptedWildBattle(void)
 
 void BattleSetup_StartScriptedDoubleWildBattle(void)
 {
+	bool8 isChefBattle = sChefBattlePending;
+	sChefBattlePending = FALSE;
     LockPlayerFieldControls();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
-    gBattleTypeFlags = BATTLE_TYPE_DOUBLE;
+	gBattleTypeFlags = BATTLE_TYPE_DOUBLE | (isChefBattle ? BATTLE_TYPE_CHEF : 0);
     CreateBattleStartTask(GetWildBattleTransition(), 0);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
     IncrementDailyWildBattles();
     TryUpdateGymLeaderRematchFromWild();
+}
+
+void PrepareChefBattle(void)
+{
+	sChefBattlePending = TRUE;
 }
 
 void StartMarowakBattle(void)
