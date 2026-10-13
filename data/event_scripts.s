@@ -163,6 +163,7 @@ gStdScripts_End::
 	.include "data/maps/StradaBorgoCisternoni_Casa/scripts.inc"
 	.include "data/maps/PonteValleLaricia/scripts.inc"
 	.include "data/maps/Laricia/scripts.inc"
+	.include "data/maps/ViaDellUccelliera/scripts.inc"
 #if !IS_FRLG
 	.include "data/maps/Laricia_Gym_Lobby/scripts.inc"
 	.include "data/maps/Laricia_Gym_TrainerRoom1/scripts.inc"
