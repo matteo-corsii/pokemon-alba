@@ -12,6 +12,7 @@ ViaDellUccelliera_FraschettaFrascotto_EventScript_Fraschietto::
 @ T5.1 preparation: this label is intentionally not called until T5.2
 @ integrates the chef battle and its success path.
 ViaDellUccelliera_FraschettaFrascotto_EventScript_ChooseChefBerry::
+	goto_if_set FLAG_UCCELLIERA_CHEF_BERRY_GIVEN, ViaDellUccelliera_FraschettaFrascotto_EventScript_ChefBerryAlreadyGiven
 	lock
 	msgbox ViaDellUccelliera_FraschettaFrascotto_Text_ChooseChefBerry, MSGBOX_DEFAULT
 	fadescreen FADE_TO_BLACK
@@ -19,12 +20,23 @@ ViaDellUccelliera_FraschettaFrascotto_EventScript_ChooseChefBerry::
 	special Bag_ChooseBerry
 	goto_if_eq VAR_ITEM_ID, 0, ViaDellUccelliera_FraschettaFrascotto_EventScript_CancelChefBerry
 	removeitem VAR_ITEM_ID
+	goto_if_eq VAR_RESULT, FALSE, ViaDellUccelliera_FraschettaFrascotto_EventScript_ChefBerryRemovalFailed
 	setflag FLAG_UCCELLIERA_CHEF_BERRY_GIVEN
 	msgbox ViaDellUccelliera_FraschettaFrascotto_Text_ChefBerryGiven, MSGBOX_DEFAULT
 	release
 	end
 
 ViaDellUccelliera_FraschettaFrascotto_EventScript_CancelChefBerry::
+	release
+	end
+
+ViaDellUccelliera_FraschettaFrascotto_EventScript_ChefBerryAlreadyGiven::
+	msgbox ViaDellUccelliera_FraschettaFrascotto_Text_ChefBerryAlreadyGiven, MSGBOX_DEFAULT
+	release
+	end
+
+ViaDellUccelliera_FraschettaFrascotto_EventScript_ChefBerryRemovalFailed::
+	msgbox ViaDellUccelliera_FraschettaFrascotto_Text_ChefBerryRemovalFailed, MSGBOX_DEFAULT
 	release
 	end
 
@@ -52,3 +64,11 @@ ViaDellUccelliera_FraschettaFrascotto_Text_ChooseChefBerry:
 ViaDellUccelliera_FraschettaFrascotto_Text_ChefBerryGiven:
 	.string "Grazie! Lo chef potrà\n"
 	.string "ora prepararsi.$"
+
+ViaDellUccelliera_FraschettaFrascotto_Text_ChefBerryAlreadyGiven:
+	.string "La bacca è già stata\n"
+	.string "consegnata allo chef.$"
+
+ViaDellUccelliera_FraschettaFrascotto_Text_ChefBerryRemovalFailed:
+	.string "Non è stato possibile\n"
+	.string "consegnare la bacca.$"
