@@ -1,0 +1,35 @@
+{
+  "id": "MAP_VIA_DELL_UCCELLIERA_FRASCHETTA_FRASCOTTO",
+  "name": "ViaDellUccelliera_FraschettaFrascotto",
+  "layout": "LAYOUT_VIA_DELL_UCCELLIERA_FRASCHETTA_FRASCOTTO",
+  "music": "MUS_OLDALE",
+  "region_map_section": "MAPSEC_LARICIA",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [],
+  "warp_events": [
+    {
+      "x": 8,
+      "y": 8,
+      "elevation": 0,
+      "dest_map": "MAP_VIA_DELL_UCCELLIERA",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 9,
+      "y": 8,
+      "elevation": 0,
+      "dest_map": "MAP_VIA_DELL_UCCELLIERA",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

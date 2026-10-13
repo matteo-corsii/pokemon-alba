@@ -9798,6 +9798,17 @@
       "layout_version": "emerald"
     },
     {
+      "id": "LAYOUT_VIA_DELL_UCCELLIERA_FRASCHETTA_FRASCOTTO",
+      "name": "ViaDellUccelliera_FraschettaFrascotto_Layout",
+      "width": 17,
+      "height": 9,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/ViaDellUccelliera_FraschettaFrascotto/border.bin",
+      "blockdata_filepath": "data/layouts/ViaDellUccelliera_FraschettaFrascotto/map.bin",
+      "layout_version": "emerald"
+    },
+    {
       "id": "LAYOUT_LARICIA_HOUSE1",
       "name": "Laricia_House1_Layout",
       "width": 10,

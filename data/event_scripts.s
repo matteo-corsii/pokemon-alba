@@ -176,6 +176,7 @@ gStdScripts_End::
 	.include "data/maps/Laricia_Mart/scripts.inc"
 	.include "data/maps/Laricia_FraschettaPiazza/scripts.inc"
 	.include "data/maps/Laricia_FraschettaVicoli/scripts.inc"
+	.include "data/maps/ViaDellUccelliera_FraschettaFrascotto/scripts.inc"
 	.include "data/maps/Laricia_House1/scripts.inc"
 	.include "data/maps/Laricia_House2/scripts.inc"
 	.include "data/maps/Laricia_House3/scripts.inc"
