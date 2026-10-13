@@ -40,6 +40,22 @@ ViaDellUccelliera_FraschettaFrascotto_EventScript_ChefBerryRemovalFailed::
 	release
 	end
 
+@ T5.2C preparation: this entry point is intentionally not referenced by
+@ the NPC scripts until the battle restrictions and berry handoff are ready.
+ViaDellUccelliera_FraschettaFrascotto_EventScript_ChefBattle::
+	lock
+	special HasEnoughMonsForDoubleBattle
+	goto_if_ne VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS, ViaDellUccelliera_FraschettaFrascotto_EventScript_ChefBattleNotEnoughMons
+	setwildbattle SPECIES_FRASCOTTO, 31, ITEM_NONE, SPECIES_FRASCHIETTO, 30, ITEM_NONE
+	dowildbattle
+	release
+	end
+
+ViaDellUccelliera_FraschettaFrascotto_EventScript_ChefBattleNotEnoughMons::
+	msgbox ViaDellUccelliera_FraschettaFrascotto_Text_ChefBattleNotEnoughMons, MSGBOX_DEFAULT
+	release
+	end
+
 @ T5.2 will call this only after the chef battle is won.
 ViaDellUccelliera_FraschettaFrascotto_EventScript_SetChefDefeated::
 	setflag FLAG_UCCELLIERA_CHEF_DEFEATED
@@ -72,3 +88,7 @@ ViaDellUccelliera_FraschettaFrascotto_Text_ChefBerryAlreadyGiven:
 ViaDellUccelliera_FraschettaFrascotto_Text_ChefBerryRemovalFailed:
 	.string "Non è stato possibile\n"
 	.string "consegnare la bacca.$"
+
+ViaDellUccelliera_FraschettaFrascotto_Text_ChefBattleNotEnoughMons:
+	.string "Servono almeno due Pokémon\n"
+	.string "in grado di lottare.$"
