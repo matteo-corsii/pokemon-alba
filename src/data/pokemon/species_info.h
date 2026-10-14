@@ -2343,13 +2343,13 @@ const struct SpeciesInfo gSpeciesInfo[] =
         SHADOW(1, 5, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Mabosstiff)
         OVERWORLD(
-            sPicTable_Mabosstiff,
+            sPicTable_Molospsy,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
-            sAnimTable_Following,
-            gOverworldPalette_Mabosstiff,
-            gShinyOverworldPalette_Mabosstiff
+            sAnimTable_AlbaIdle,
+            gOverworldPalette_Molospsy,
+            gShinyOverworldPalette_Molospsy
         )
         .levelUpLearnset = sMolospsyLevelUpLearnset,
         .teachingType = EXPLICIT_TEACHABLES,
@@ -2408,13 +2408,13 @@ const struct SpeciesInfo gSpeciesInfo[] =
         SHADOW(0, 4, SHADOW_SIZE_M)
         FOOTPRINT(Espeon)
         OVERWORLD(
-            sPicTable_Espeon,
+            sPicTable_Lenghelis,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
-            sAnimTable_Following,
-            gOverworldPalette_Espeon,
-            gShinyOverworldPalette_Espeon
+            sAnimTable_Lenghelis,
+            gOverworldPalette_Lenghelis,
+            gShinyOverworldPalette_Lenghelis
         )
         .levelUpLearnset = sLenghelisLevelUpLearnset,
         .teachingType = EXPLICIT_TEACHABLES,
@@ -2963,7 +2963,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .description = COMPOUND_STRING("Attira l'attenzione con gesti vivaci\ne sfida chiunque mostri energia.\nAdora stare in mezzo alla confusione."),
         .pokemonScale = 320, .frontPic = gMonFrontPic_Fraschietto, .frontPicSize = MON_COORDS_SIZE(64, 64), .frontPicYOffset = 4, .frontAnimFrames = sAnims_SingleFramePlaceHolder,
         .backPic = gMonBackPic_Fraschietto, .backPicSize = MON_COORDS_SIZE(64, 64), .backPicYOffset = 4, .palette = gMonPalette_Fraschietto, .shinyPalette = gMonShinyPalette_Fraschietto, .iconSprite = gMonIcon_Fraschietto, .iconPalIndex = 0,
-        FOOTPRINT(Makuhita) OVERWORLD(sPicTable_Makuhita, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, sAnimTable_Following, gOverworldPalette_Makuhita, gShinyOverworldPalette_Makuhita)
+        FOOTPRINT(Makuhita) OVERWORLD(sPicTable_Fraschietto, SIZE_64x64, SHADOW_SIZE_M, TRACKS_FOOT, sAnimTable_AlbaIdle, gOverworldPalette_Fraschietto, gShinyOverworldPalette_Fraschietto)
         .levelUpLearnset = sFraschiettoLevelUpLearnset,
         .teachingType = EXPLICIT_TEACHABLES,
         .teachableLearnset = sFraschiettoTeachableLearnset,
@@ -2980,7 +2980,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .description = COMPOUND_STRING("Gestisce il proprio territorio come\nun padrone di casa. Alimenta la brace\ne condivide il calore con il gruppo."),
         .pokemonScale = 256, .frontPic = gMonFrontPic_Frascotto, .frontPicSize = MON_COORDS_SIZE(64, 64), .frontPicYOffset = 4, .frontAnimFrames = sAnims_SingleFramePlaceHolder,
         .backPic = gMonBackPic_Frascotto, .backPicSize = MON_COORDS_SIZE(64, 64), .backPicYOffset = 4, .palette = gMonPalette_Frascotto, .shinyPalette = gMonShinyPalette_Frascotto, .iconSprite = gMonIcon_Frascotto, .iconPalIndex = 0,
-        FOOTPRINT(Hariyama) OVERWORLD(sPicTable_Hariyama, SIZE_32x32, SHADOW_SIZE_L, TRACKS_FOOT, sAnimTable_Following, gOverworldPalette_Hariyama, gShinyOverworldPalette_Hariyama)
+        FOOTPRINT(Hariyama) OVERWORLD(sPicTable_Frascotto, SIZE_64x64, SHADOW_SIZE_L, TRACKS_FOOT, sAnimTable_AlbaIdle, gOverworldPalette_Frascotto, gShinyOverworldPalette_Frascotto)
         .levelUpLearnset = sFrascottoLevelUpLearnset,
         .teachingType = EXPLICIT_TEACHABLES,
         .teachableLearnset = sFrascottoTeachableLearnset,

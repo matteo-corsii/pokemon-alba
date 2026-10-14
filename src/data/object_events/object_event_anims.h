@@ -1220,6 +1220,119 @@ static const union AnimCmd *const sAnimTable_QuintyPlump[] = {
     [ANIM_STD_GO_FASTEST_EAST] = sAnim_QuintyPlumpGoFastestEast,
 };
 
+static const union AnimCmd sAnim_AlbaIdleSouth[] =
+{
+    ANIMCMD_FRAME(4, 16),
+    ANIMCMD_FRAME(5, 16),
+    ANIMCMD_FRAME(6, 16),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_AlbaFaceNorth[] =
+{
+    ANIMCMD_FRAME(1, 16),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_AlbaFaceWest[] =
+{
+    ANIMCMD_FRAME(2, 16),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_AlbaFaceEast[] =
+{
+    ANIMCMD_FRAME(3, 16),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_AlbaGoSouth[] =
+{
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_AlbaGoNorth[] =
+{
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_AlbaGoWest[] =
+{
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_AlbaGoEast[] =
+{
+    ANIMCMD_FRAME(3, 8),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd *const sAnimTable_AlbaIdle[] = {
+    [ANIM_STD_FACE_SOUTH] = sAnim_AlbaIdleSouth,
+    [ANIM_STD_FACE_NORTH] = sAnim_AlbaFaceNorth,
+    [ANIM_STD_FACE_WEST] = sAnim_AlbaFaceWest,
+    [ANIM_STD_FACE_EAST] = sAnim_AlbaFaceEast,
+    [ANIM_STD_GO_SOUTH] = sAnim_AlbaGoSouth,
+    [ANIM_STD_GO_NORTH] = sAnim_AlbaGoNorth,
+    [ANIM_STD_GO_WEST] = sAnim_AlbaGoWest,
+    [ANIM_STD_GO_EAST] = sAnim_AlbaGoEast,
+    [ANIM_STD_GO_FAST_SOUTH] = sAnim_AlbaGoSouth,
+    [ANIM_STD_GO_FAST_NORTH] = sAnim_AlbaGoNorth,
+    [ANIM_STD_GO_FAST_WEST] = sAnim_AlbaGoWest,
+    [ANIM_STD_GO_FAST_EAST] = sAnim_AlbaGoEast,
+    [ANIM_STD_GO_FASTER_SOUTH] = sAnim_AlbaGoSouth,
+    [ANIM_STD_GO_FASTER_NORTH] = sAnim_AlbaGoNorth,
+    [ANIM_STD_GO_FASTER_WEST] = sAnim_AlbaGoWest,
+    [ANIM_STD_GO_FASTER_EAST] = sAnim_AlbaGoEast,
+    [ANIM_STD_GO_FASTEST_SOUTH] = sAnim_AlbaGoSouth,
+    [ANIM_STD_GO_FASTEST_NORTH] = sAnim_AlbaGoNorth,
+    [ANIM_STD_GO_FASTEST_WEST] = sAnim_AlbaGoWest,
+    [ANIM_STD_GO_FASTEST_EAST] = sAnim_AlbaGoEast,
+};
+
+static const union AnimCmd sAnim_LenghelisIdleSouth[] =
+{
+    ANIMCMD_FRAME(7, 16),
+    ANIMCMD_FRAME(8, 16),
+    ANIMCMD_FRAME(9, 16),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_LenghelisGoNorth[] =
+{
+    ANIMCMD_FRAME(4, 6),
+    ANIMCMD_FRAME(5, 6),
+    ANIMCMD_FRAME(6, 6),
+    ANIMCMD_FRAME(5, 6),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd *const sAnimTable_Lenghelis[] = {
+    [ANIM_STD_FACE_SOUTH] = sAnim_LenghelisIdleSouth,
+    [ANIM_STD_FACE_NORTH] = sAnim_AlbaFaceNorth,
+    [ANIM_STD_FACE_WEST] = sAnim_AlbaFaceWest,
+    [ANIM_STD_FACE_EAST] = sAnim_AlbaFaceEast,
+    [ANIM_STD_GO_SOUTH] = sAnim_AlbaGoSouth,
+    [ANIM_STD_GO_NORTH] = sAnim_LenghelisGoNorth,
+    [ANIM_STD_GO_WEST] = sAnim_AlbaGoWest,
+    [ANIM_STD_GO_EAST] = sAnim_AlbaGoEast,
+    [ANIM_STD_GO_FAST_SOUTH] = sAnim_AlbaGoSouth,
+    [ANIM_STD_GO_FAST_NORTH] = sAnim_LenghelisGoNorth,
+    [ANIM_STD_GO_FAST_WEST] = sAnim_AlbaGoWest,
+    [ANIM_STD_GO_FAST_EAST] = sAnim_AlbaGoEast,
+    [ANIM_STD_GO_FASTER_SOUTH] = sAnim_AlbaGoSouth,
+    [ANIM_STD_GO_FASTER_NORTH] = sAnim_LenghelisGoNorth,
+    [ANIM_STD_GO_FASTER_WEST] = sAnim_AlbaGoWest,
+    [ANIM_STD_GO_FASTER_EAST] = sAnim_AlbaGoEast,
+    [ANIM_STD_GO_FASTEST_SOUTH] = sAnim_AlbaGoSouth,
+    [ANIM_STD_GO_FASTEST_NORTH] = sAnim_LenghelisGoNorth,
+    [ANIM_STD_GO_FASTEST_WEST] = sAnim_AlbaGoWest,
+    [ANIM_STD_GO_FASTEST_EAST] = sAnim_AlbaGoEast,
+};
+
 static const union AnimCmd *const sAnimTable_Standard[] = {
     [ANIM_STD_FACE_SOUTH] = sAnim_FaceSouth,
     [ANIM_STD_FACE_NORTH] = sAnim_FaceNorth,

@@ -96,11 +96,25 @@ const u16 gMonPalette_Molospsy[] = INCGFX_U16("graphics/pokemon/molospsy/normal.
 const u32 gMonBackPic_Molospsy[] = INCGFX_U32("graphics/pokemon/molospsy/back.png", ".4bpp.smol");
 const u16 gMonShinyPalette_Molospsy[] = INCGFX_U16("graphics/pokemon/molospsy/shiny.pal", ".gbapal");
 const u8 gMonIcon_Molospsy[] = INCGFX_U8("graphics/pokemon/molospsy/icon.png", ".4bpp");
+#if OW_POKEMON_OBJECT_EVENTS
+const u32 gObjectEventPic_Molospsy[] = INCGFX_COMP("graphics/pokemon/molospsy/overworld.png", ".4bpp", "-mwidth 4 -mheight 4");
+#if OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
+const u16 gOverworldPalette_Molospsy[] = INCGFX_U16("graphics/pokemon/molospsy/overworld_normal.pal", ".gbapal");
+const u16 gShinyOverworldPalette_Molospsy[] = INCGFX_U16("graphics/pokemon/molospsy/overworld_shiny.pal", ".gbapal");
+#endif
+#endif
 const u32 gMonFrontPic_Lenghelis[] = INCGFX_U32("graphics/pokemon/lenghelis/anim_front.png", ".4bpp.smol");
 const u16 gMonPalette_Lenghelis[] = INCGFX_U16("graphics/pokemon/lenghelis/normal.pal", ".gbapal");
 const u32 gMonBackPic_Lenghelis[] = INCGFX_U32("graphics/pokemon/lenghelis/back.png", ".4bpp.smol");
 const u16 gMonShinyPalette_Lenghelis[] = INCGFX_U16("graphics/pokemon/lenghelis/shiny.pal", ".gbapal");
 const u8 gMonIcon_Lenghelis[] = INCGFX_U8("graphics/pokemon/lenghelis/icon.png", ".4bpp");
+#if OW_POKEMON_OBJECT_EVENTS
+const u32 gObjectEventPic_Lenghelis[] = INCGFX_COMP("graphics/pokemon/lenghelis/overworld.png", ".4bpp", "-mwidth 4 -mheight 4");
+#if OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
+const u16 gOverworldPalette_Lenghelis[] = INCGFX_U16("graphics/pokemon/lenghelis/overworld_normal.pal", ".gbapal");
+const u16 gShinyOverworldPalette_Lenghelis[] = INCGFX_U16("graphics/pokemon/lenghelis/overworld_shiny.pal", ".gbapal");
+#endif
+#endif
 const u32 gMonFrontPic_Luscinco[] = INCGFX_U32("graphics/pokemon/luscinco/anim_front.png", ".4bpp.smol");
 const u16 gMonPalette_Luscinco[] = INCGFX_U16("graphics/pokemon/luscinco/normal.pal", ".gbapal");
 const u32 gMonBackPic_Luscinco[] = INCGFX_U32("graphics/pokemon/luscinco/back.png", ".4bpp.smol");
@@ -27745,11 +27759,25 @@ const u16 gMonPalette_Fraschietto[] = INCGFX_U16("graphics/pokemon/fraschietto/n
 const u32 gMonBackPic_Fraschietto[] = INCGFX_U32("graphics/pokemon/fraschietto/back.png", ".4bpp.smol");
 const u16 gMonShinyPalette_Fraschietto[] = INCGFX_U16("graphics/pokemon/fraschietto/shiny.pal", ".gbapal");
 const u8 gMonIcon_Fraschietto[] = INCGFX_U8("graphics/pokemon/fraschietto/icon.png", ".4bpp");
+#if OW_POKEMON_OBJECT_EVENTS
+const u32 gObjectEventPic_Fraschietto[] = INCGFX_COMP("graphics/pokemon/fraschietto/overworld.png", ".4bpp", "-mwidth 8 -mheight 8");
+#if OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
+const u16 gOverworldPalette_Fraschietto[] = INCGFX_U16("graphics/pokemon/fraschietto/overworld_normal.pal", ".gbapal");
+const u16 gShinyOverworldPalette_Fraschietto[] = INCGFX_U16("graphics/pokemon/fraschietto/overworld_shiny.pal", ".gbapal");
+#endif
+#endif
 const u32 gMonFrontPic_Frascotto[] = INCGFX_U32("graphics/pokemon/frascotto/anim_front.png", ".4bpp.smol");
 const u16 gMonPalette_Frascotto[] = INCGFX_U16("graphics/pokemon/frascotto/normal.pal", ".gbapal");
 const u32 gMonBackPic_Frascotto[] = INCGFX_U32("graphics/pokemon/frascotto/back.png", ".4bpp.smol");
 const u16 gMonShinyPalette_Frascotto[] = INCGFX_U16("graphics/pokemon/frascotto/shiny.pal", ".gbapal");
 const u8 gMonIcon_Frascotto[] = INCGFX_U8("graphics/pokemon/frascotto/icon.png", ".4bpp");
+#if OW_POKEMON_OBJECT_EVENTS
+const u32 gObjectEventPic_Frascotto[] = INCGFX_COMP("graphics/pokemon/frascotto/overworld.png", ".4bpp", "-mwidth 8 -mheight 8");
+#if OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
+const u16 gOverworldPalette_Frascotto[] = INCGFX_U16("graphics/pokemon/frascotto/overworld_normal.pal", ".gbapal");
+const u16 gShinyOverworldPalette_Frascotto[] = INCGFX_U16("graphics/pokemon/frascotto/overworld_shiny.pal", ".gbapal");
+#endif
+#endif
 
     const u32 gMonFrontPic_Egg[] = INCGFX_U32("graphics/pokemon/egg/anim_front.png", ".4bpp.smol");
     const u16 gMonPalette_Egg[] = INCGFX_U16("graphics/pokemon/egg/normal.pal", ".gbapal");
