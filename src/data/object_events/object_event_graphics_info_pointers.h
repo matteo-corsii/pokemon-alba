@@ -2,6 +2,14 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanNorm
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanMachBike;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanSurfing;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanFieldMove;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerAlbaNormal;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerAlbaMachBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerAlbaAcroBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerAlbaSurfing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerAlbaUnderwater;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerAlbaFieldMove;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerAlbaFishing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PlayerAlbaWatering;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_QuintyPlump;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_NinjaBoy;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Twin;
@@ -227,6 +235,9 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Dusclops;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnionRoomAttendant;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Sudowoodo;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Mew;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Cingerm;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Ardeino;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Serbrace;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Red;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Leaf;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Deoxys;
@@ -406,6 +417,14 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_BRENDAN_MACH_BIKE] =        &gObjectEventGraphicsInfo_BrendanMachBike,
     [OBJ_EVENT_GFX_BRENDAN_SURFING] =          &gObjectEventGraphicsInfo_BrendanSurfing,
     [OBJ_EVENT_GFX_BRENDAN_FIELD_MOVE] =       &gObjectEventGraphicsInfo_BrendanFieldMove,
+    [OBJ_EVENT_GFX_PLAYER_ALBA_NORMAL] =       &gObjectEventGraphicsInfo_PlayerAlbaNormal,
+    [OBJ_EVENT_GFX_PLAYER_ALBA_MACH_BIKE] =    &gObjectEventGraphicsInfo_PlayerAlbaMachBike,
+    [OBJ_EVENT_GFX_PLAYER_ALBA_ACRO_BIKE] =    &gObjectEventGraphicsInfo_PlayerAlbaAcroBike,
+    [OBJ_EVENT_GFX_PLAYER_ALBA_SURFING] =      &gObjectEventGraphicsInfo_PlayerAlbaSurfing,
+    [OBJ_EVENT_GFX_PLAYER_ALBA_UNDERWATER] =   &gObjectEventGraphicsInfo_PlayerAlbaUnderwater,
+    [OBJ_EVENT_GFX_PLAYER_ALBA_FIELD_MOVE] =   &gObjectEventGraphicsInfo_PlayerAlbaFieldMove,
+    [OBJ_EVENT_GFX_PLAYER_ALBA_FISHING] =      &gObjectEventGraphicsInfo_PlayerAlbaFishing,
+    [OBJ_EVENT_GFX_PLAYER_ALBA_WATERING] =     &gObjectEventGraphicsInfo_PlayerAlbaWatering,
     [OBJ_EVENT_GFX_QUINTY_PLUMP] =             &gObjectEventGraphicsInfo_QuintyPlump,
     [OBJ_EVENT_GFX_NINJA_BOY] =                &gObjectEventGraphicsInfo_NinjaBoy,
     [OBJ_EVENT_GFX_TWIN] =                     &gObjectEventGraphicsInfo_Twin,
@@ -645,6 +664,10 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_OW_MON] =                   &gObjectEventGraphicsInfo_Follower,
     [OBJ_EVENT_GFX_LIGHT_SPRITE] =             &gObjectEventGraphicsInfo_BallLight,
     [OBJ_EVENT_GFX_APRICORN_TREE] =            &gObjectEventGraphicsInfo_ApricornTree,
+    [OBJ_EVENT_GFX_CINGERM]                = &gObjectEventGraphicsInfo_Cingerm,
+    [OBJ_EVENT_GFX_ARDEINO]                = &gObjectEventGraphicsInfo_Ardeino,
+    [OBJ_EVENT_GFX_SERBRACE]               = &gObjectEventGraphicsInfo_Serbrace,
+
 #if IS_FRLG
     [OBJ_EVENT_GFX_RED_NORMAL] =               &gObjectEventGraphicsInfo_RedNormal,
     [OBJ_EVENT_GFX_RED_BIKE] =                 &gObjectEventGraphicsInfo_RedBike,

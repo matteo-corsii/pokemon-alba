@@ -7240,6 +7240,25 @@ const struct ItemInfo gItemsInfo[] =
         .iconPalette = gItemIconPalette_Glimmoranite,
     },
 
+    [ITEM_PANINO_CON_PORCHETTA] =
+    {
+        .name = ITEM_NAME("Pan. Porchetta"),
+        .price = 350,
+        .description = COMPOUND_STRING(
+            "Specialita locale\n"
+            "che cura ogni\n"
+            "alterazione."),
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_STATUS_RECOVERY,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
+        .battleUsage = EFFECT_ITEM_CURE_STATUS,
+        .effect = gItemEffect_FullHeal,
+        .flingPower = 30,
+        .iconPic = gItemIcon_LavaCookie,
+        .iconPalette = gItemIconPalette_LavaCookieAndLetter,
+    },
+
 // Gems
     #if I_PRICE >= GEN_9
         #define GEM_PRICE 15000
@@ -12885,9 +12904,11 @@ const struct ItemInfo gItemsInfo[] =
 
     [ITEM_TM51] =
     {
-        .name = ITEM_NAME("TM51"),
+        .name = ITEM_NAME("MT Nitrocarica"),
         .price = 3000,
-        .description = sQuestionMarksDesc, // Todo
+        .description = COMPOUND_STRING(
+            "Mossa Fuoco che\n"
+            "alza la Velocita."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,

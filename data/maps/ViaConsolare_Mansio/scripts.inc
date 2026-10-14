@@ -2,6 +2,8 @@ ViaConsolare_Mansio_MapScripts::
 	.byte 0
 
 ViaConsolare_Mansio_EventScript_Oste::
+	lock
+	faceplayer
 	msgbox ViaConsolare_Mansio_Text_OsteIntro, MSGBOX_YESNO
 	switch VAR_RESULT
 	case NO, ViaConsolare_Mansio_EventScript_OsteDecline
@@ -13,10 +15,12 @@ ViaConsolare_Mansio_EventScript_OsteHeal::
 	waitfanfare
 	special HealPlayerParty
 	msgbox ViaConsolare_Mansio_Text_OsteAfter, MSGBOX_DEFAULT
+	release
 	end
 
 ViaConsolare_Mansio_EventScript_OsteDecline::
 	msgbox ViaConsolare_Mansio_Text_OsteDecline, MSGBOX_DEFAULT
+	release
 	end
 
 ViaConsolare_Mansio_EventScript_Viandante::

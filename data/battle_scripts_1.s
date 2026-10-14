@@ -2762,14 +2762,17 @@ BattleScript_HandleFaintedMon::
 BattleScript_FaintedMonTryChoose:
 	openpartyscreen BS_FAINTED, BattleScript_FaintedMonEnd
 	switchhandleorder BS_FAINTED, 2
+	callnative BS_TryPrepareFirstEchoSwitch
 	jumpifnotbattletype BATTLE_TYPE_TRAINER, BattleScript_FaintedMonSendOutNew
 	jumpifbattletype BATTLE_TYPE_LINK, BattleScript_FaintedMonSendOutNew
 	jumpifbattletype BATTLE_TYPE_RECORDED_LINK, BattleScript_FaintedMonSendOutNew
 	jumpifbattletype BATTLE_TYPE_FRONTIER, BattleScript_FaintedMonSendOutNew
 	jumpifbattletype BATTLE_TYPE_DOUBLE, BattleScript_FaintedMonSendOutNew
 	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_PLAYER_FAINTED, BattleScript_FaintedMonSendOutNew
+	jumpifbyte CMP_EQUAL, sUNUSED_0x1A, TRUE, BattleScript_FirstEchoStarterPrelude
 	jumpifbyte CMP_EQUAL, sBATTLE_STYLE, OPTIONS_BATTLE_STYLE_SET, BattleScript_FaintedMonSendOutNew
 	jumpifcantswitch BS_PLAYER1, BattleScript_FaintedMonSendOutNew
+BattleScript_FirstEchoSwitchQuestion:
 	setbyte sILLUSION_NICK_HACK, 1
 @ Yes/No for sending out a new Pokémon when the opponent is switching
 	printstring STRINGID_ENEMYABOUTTOSWITCHPKMN
@@ -2829,6 +2832,23 @@ BattleScript_FaintedMonShiftSwitched:
 	resetsentmonsvalue
 	copybyte gBattlerTarget, sSAVED_BATTLER
 	goto BattleScript_FaintedMonSendOutNewEnd
+
+BattleScript_FirstEchoStarterPrelude:
+	printstring STRINGID_FIRSTECHOSTARTERSTIRS
+	waitmessage B_WAIT_TIME_LONG
+	printstring STRINGID_FIRSTECHOSTARTERWANTSBATTLE
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_FirstEchoSwitchQuestion
+
+BattleScript_FirstEchoActivates::
+	printstring STRINGID_FIRSTECHOWAVE
+	waitmessage B_WAIT_TIME_LONG
+	printstring STRINGID_FIRSTECHOREACHES
+	waitmessage B_WAIT_TIME_LONG
+	playanimation BS_SCRIPTING, B_ANIM_FIRST_ECHO
+	waitanimation
+	callnative BS_ApplyFirstEchoBoost
+	return
 
 BattleScript_HandleFaintedMonMultiple::
 	openpartyscreen BS_FAINTED_MULTIPLE_1, BattleScript_HandleFaintedMonMultipleStart

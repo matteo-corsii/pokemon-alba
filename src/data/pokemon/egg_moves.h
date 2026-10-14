@@ -113,6 +113,20 @@ static const u16 sSalampollaEggMoveLearnset[] = {
 
 #define sAlchimandraEggMoveLearnset sSalampollaEggMoveLearnset
 
+static const u16 sVitemostoEggMoveLearnset[] = {
+    MOVE_LEECH_SEED, MOVE_INGRAIN, MOVE_WEATHER_BALL, MOVE_UNAVAILABLE,
+};
+
+static const u16 sPorchignisEggMoveLearnset[] = {
+    MOVE_YAWN, MOVE_CURSE, MOVE_BODY_SLAM, MOVE_UNAVAILABLE,
+};
+#define sBronzoverroEggMoveLearnset sPorchignisEggMoveLearnset
+
+static const u16 sFraschiettoEggMoveLearnset[] = {
+    MOVE_BULLET_PUNCH, MOVE_COUNTER, MOVE_DETECT, MOVE_UNAVAILABLE,
+};
+#define sFrascottoEggMoveLearnset sFraschiettoEggMoveLearnset
+
 #if P_FAMILY_BULBASAUR
 static const u16 sBulbasaurEggMoveLearnset[] = {
     MOVE_SKULL_BASH,

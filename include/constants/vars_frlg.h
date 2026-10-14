@@ -263,8 +263,8 @@
 #define VAR_ALBERA_VIA_VERDI_STATE  0x40F8
 #define VAR_ALBERA_GYM_STATE       0x40F9
 #define VAR_ALBERA_GYM_INPUT       0x40FA
-#define VAR_0x40FB                 0x40FB
-#define VAR_0x40FC                 0x40FC
+#define VAR_ORIGINAL_STARTER_PERSONALITY_LO 0x40FB
+#define VAR_ORIGINAL_STARTER_PERSONALITY_HI 0x40FC
 #define VAR_0x40FD                 0x40FD
 #define VAR_0x40FE                 0x40FE
 #define VAR_0x40FF                 0x40FF

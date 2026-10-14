@@ -895,6 +895,10 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_LIGHTSCREENWOREOFF]                   = COMPOUND_STRING("{B_DEF_TEAM1} team's Light Screen wore off!"),
     [STRINGID_AURORAVEILWOREOFF]                    = COMPOUND_STRING("{B_DEF_TEAM1} team's Aurora Veil wore off!"),
     [STRINGID_STICKYWEBDISAPPEAREDFROMYOU]          = COMPOUND_STRING("The sticky web has disappeared from the ground around you!"),
+    [STRINGID_FIRSTECHOSTARTERSTIRS]                = COMPOUND_STRING("{B_BUFF1} freme nella sua POKé BALL!"),
+    [STRINGID_FIRSTECHOSTARTERWANTSBATTLE]          = COMPOUND_STRING("Sembra voler scendere in campo."),
+    [STRINGID_FIRSTECHOWAVE]                        = COMPOUND_STRING("Un'onda senza sorgente attraversa la sala!"),
+    [STRINGID_FIRSTECHOREACHES]                     = COMPOUND_STRING("Il primo Eco raggiunge {B_BUFF1}!"),
 };
 
 const u16 gTrainerUsedItemStringIds[] =
