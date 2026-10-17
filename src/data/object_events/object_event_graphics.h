@@ -482,6 +482,9 @@ const u32 gObjectEventPic_ApricornTree[] = INCGFX_U32("graphics/object_events/pi
 
 const u32 gFieldEffectObjectPic_ShinySparkle[] = INCGFX_U32("graphics/field_effects/pics/shiny_sparkle.png", ".4bpp", "-mwidth 2 -mheight 4");
 
+const u16 gObjectEventPal_NpcWhite[] = INCGFX_U16("graphics/object_events/palettes/npc_white.pal", ".gbapal");
+const u16 gObjectEventPic_SittingBoy[] = INCGFX_U16("graphics/object_events/pics/people/sitting_boy.png", ".4bpp", "-mwidth 2 -mheight 4");
+
 #if IS_FRLG
 
 const u16 gObjectEventPic_RedNormal[] = INCGFX_U16("graphics/object_events/pics/people/red/red_normal.png", ".4bpp", "-mwidth 2 -mheight 4");
@@ -504,7 +507,6 @@ const u16 gObjectEventPal_PlayerReflectionFrlg[] = INCGFX_U16("graphics/object_e
 const u16 gObjectEventPal_NpcBlue[] = INCGFX_U16("graphics/object_events/palettes/npc_blue.pal", ".gbapal");
 const u16 gObjectEventPal_NpcPink[] = INCGFX_U16("graphics/object_events/palettes/npc_pink.pal", ".gbapal");
 const u16 gObjectEventPal_NpcGreen[] = INCGFX_U16("graphics/object_events/palettes/npc_green.pal", ".gbapal");
-const u16 gObjectEventPal_NpcWhite[] = INCGFX_U16("graphics/object_events/palettes/npc_white.pal", ".gbapal");
 const u16 gObjectEventPal_NpcBlueReflection[] = INCGFX_U16("graphics/object_events/palettes/npc_blue_reflection.pal", ".gbapal");
 const u16 gObjectEventPal_NpcPinkReflection[] = INCGFX_U16("graphics/object_events/palettes/npc_pink_reflection.pal", ".gbapal");
 const u16 gObjectEventPal_NpcGreenReflection[] = INCGFX_U16("graphics/object_events/palettes/npc_green_reflection.pal", ".gbapal");
@@ -524,7 +526,6 @@ const u16 gObjectEventPic_LtSurge[] = INCGFX_U16("graphics/object_events/pics/pe
 const u16 gObjectEventPic_Bill[] = INCGFX_U16("graphics/object_events/pics/people/bill.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u16 gObjectEventPic_LittleBoyFrlg[] = INCGFX_U16("graphics/object_events/pics/people/little_boy_frlg.png", ".4bpp", "-mwidth 2 -mheight 2");
 const u16 gObjectEventPic_LittleGirlFrlg[] = INCGFX_U16("graphics/object_events/pics/people/little_girl_frlg.png", ".4bpp", "-mwidth 2 -mheight 2");
-const u16 gObjectEventPic_SittingBoy[] = INCGFX_U16("graphics/object_events/pics/people/sitting_boy.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u16 gObjectEventPic_LassFrlg[] = INCGFX_U16("graphics/object_events/pics/people/lass_frlg.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u16 gObjectEventPic_YoungsterFrlg[] = INCGFX_U16("graphics/object_events/pics/people/youngster_frlg.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u16 gObjectEventPic_Boy[] = INCGFX_U16("graphics/object_events/pics/people/boy.png", ".4bpp", "-mwidth 2 -mheight 4");

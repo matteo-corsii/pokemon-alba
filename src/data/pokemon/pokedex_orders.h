@@ -1115,6 +1115,7 @@ const u16 gPokedexOrder_Alphabetical[] =
     NATIONAL_DEX_FRASCOTTO,
     NATIONAL_DEX_CARPULETUM,
     NATIONAL_DEX_LUTELLUS,
+    NATIONAL_DEX_SUDOWOODO_AUSONIA,
 };
 
 const u16 gPokedexOrder_Weight[] =
@@ -3043,6 +3044,7 @@ const u16 gPokedexOrder_Weight[] =
     NATIONAL_DEX_FRASCOTTO,
     NATIONAL_DEX_CARPULETUM,
     NATIONAL_DEX_LUTELLUS,
+    NATIONAL_DEX_SUDOWOODO_AUSONIA,
 };
 
 const u16 gPokedexOrder_Height[] =
@@ -4448,4 +4450,5 @@ const u16 gPokedexOrder_Height[] =
     NATIONAL_DEX_FRASCOTTO,
     NATIONAL_DEX_CARPULETUM,
     NATIONAL_DEX_LUTELLUS,
+    NATIONAL_DEX_SUDOWOODO_AUSONIA,
 };

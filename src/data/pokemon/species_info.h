@@ -2987,6 +2987,70 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .eggMoveLearnset = sFrascottoEggMoveLearnset,
     },
 
+    // Pokémon Alba: Ausonia regional Sudowoodo. Gameplay values are inherited
+    // from vanilla Sudowoodo until regional balancing is approved.
+    [SPECIES_SUDOWOODO_AUSONIA] =
+    {
+        .baseHP        = 70,
+        .baseAttack    = 100,
+        .baseDefense   = 115,
+        .baseSpeed     = 30,
+        .baseSpAttack  = 30,
+        .baseSpDefense = 65,
+        .types = MON_TYPES(TYPE_GHOST, TYPE_GRASS),
+        .catchRate = 65,
+        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 144 : 135,
+        .evYield_Defense = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MINERAL),
+        .abilities = { ABILITY_STURDY, ABILITY_ROCK_HEAD, ABILITY_RATTLED },
+        .bodyColor = BODY_COLOR_BROWN,
+        .speciesName = _("Sudowoodo"),
+        .cryId = CRY_SUDOWOODO,
+        .natDexNum = NATIONAL_DEX_SUDOWOODO_AUSONIA,
+        .categoryName = _("IMITAZIONE"),
+        .height = 12,
+        .weight = 380,
+        .description = COMPOUND_STRING(
+            "It mimics a tree to avoid being attacked\n"
+            "by enemies. But since its forelegs\n"
+            "remain green throughout the year, it is\n"
+            "easily identified as a fake in the winter."),
+        .pokemonScale = 305,
+        .pokemonOffset = 8,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_SudowoodoAusonia,
+        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 0,
+        .frontAnimFrames = ANIM_FRAMES(
+            ANIMCMD_FRAME(0, 10),
+            ANIMCMD_FRAME(1, 6),
+            ANIMCMD_FRAME(2, 6),
+            ANIMCMD_FRAME(1, 6),
+            ANIMCMD_FRAME(0, 10),
+        ),
+        .frontAnimId = ANIM_H_SLIDE_SLOW,
+        .backPic = gMonBackPic_SudowoodoAusonia,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 0,
+        .backAnimId = BACK_ANIM_H_SLIDE,
+        .palette = gMonPalette_SudowoodoAusonia,
+        // No regional shiny is approved yet; required technical fallback.
+        .shinyPalette = gMonPalette_SudowoodoAusonia,
+        .iconSprite = gMonIcon_Sudowoodo,
+        .iconPalIndex = 1,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        SHADOW(-2, 7, SHADOW_SIZE_S)
+        FOOTPRINT(Sudowoodo)
+        .levelUpLearnset = sSudowoodoLevelUpLearnset,
+        .teachableLearnset = sSudowoodoTeachableLearnset,
+        .eggMoveLearnset = sSudowoodoEggMoveLearnset,
+    },
+
     /* You may add any custom species below this point based on the following structure: */
 
     /*

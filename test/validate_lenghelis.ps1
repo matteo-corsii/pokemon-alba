@@ -30,10 +30,12 @@ Assert-Contains $graphics 'gMonPalette_Lenghelis' 'Lenghelis graphics symbols'
 Assert-Contains $graphics 'gMonShinyPalette_Lenghelis' 'Lenghelis graphics symbols'
 Assert-Contains $graphics 'gMonIcon_Lenghelis' 'Lenghelis graphics symbols'
 
-foreach ($asset in @('anim_front.png','back.png','icon.png','normal.pal','shiny.pal')) {
+$requiredAssets = @('anim_front.png','back.png','icon.png','normal.pal','shiny.pal','overworld.png','overworld_normal.pal','overworld_shiny.pal')
+foreach ($asset in $requiredAssets) {
     Assert-True (Test-Path "graphics/pokemon/lenghelis/$asset") "Missing Lenghelis asset: $asset"
 }
-Assert-True ((Get-ChildItem graphics/pokemon/lenghelis -File).Count -eq 5) 'Lenghelis must contain exactly five assets'
+$unexpectedAssets = @(Get-ChildItem graphics/pokemon/lenghelis -File | Where-Object { $_.Name -notin $requiredAssets })
+Assert-True ($unexpectedAssets.Count -eq 0) "Unexpected Lenghelis assets: $($unexpectedAssets.Name -join ', ')"
 foreach ($forbidden in @('*.zip','*preview*','*concept*')) {
     Assert-True (@(Get-ChildItem graphics/pokemon/lenghelis -File -Filter $forbidden).Count -eq 0) "Forbidden Lenghelis asset: $forbidden"
 }
@@ -54,7 +56,7 @@ foreach ($expected in @(
     '.iconSprite = gMonIcon_Lenghelis', '.frontPicSize = MON_COORDS_SIZE(64, 64)',
     '.backPicSize = MON_COORDS_SIZE(64, 64)', '.frontAnimId = ANIM_H_JUMPS',
     '.backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL', 'FOOTPRINT(Espeon)',
-    'sPicTable_Espeon', 'gOverworldPalette_Espeon', 'gShinyOverworldPalette_Espeon',
+    'sPicTable_Lenghelis', 'gOverworldPalette_Lenghelis', 'gShinyOverworldPalette_Lenghelis',
     '.levelUpLearnset = sLenghelisLevelUpLearnset',
     '.teachableLearnset = sLenghelisTeachableLearnset',
     '.eggMoveLearnset = sLenghelisEggMoveLearnset'

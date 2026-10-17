@@ -18,6 +18,7 @@ ViaDellUccelliera_FraschettaFrascotto_EventScript_Frascotto::
 	faceplayer
 #if !IS_FRLG
 	goto_if_set FLAG_UCCELLIERA_CHEF_DEFEATED, ViaDellUccelliera_FraschettaFrascotto_EventScript_FrascottoAfter
+	setflag FLAG_UCCELLIERA_CHEF_SEEN
 	special HasEnoughMonsForDoubleBattle
 	goto_if_ne VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS, ViaDellUccelliera_FraschettaFrascotto_EventScript_ChefBattleNotEnoughMons
 	goto_if_set FLAG_UCCELLIERA_CHEF_BERRY_GIVEN, ViaDellUccelliera_FraschettaFrascotto_EventScript_ChefBattle
@@ -163,3 +164,93 @@ ViaDellUccelliera_FraschettaFrascotto_Text_ChefBattleWon:
 	.string "La sfida e finita!\n"
 	.string "Frascotto, ora puoi riposarti.$"
 #endif
+
+ViaDellUccelliera_FraschettaFrascotto_EventScript_Cliente::
+	lock
+	faceplayer
+#if !IS_FRLG
+	goto_if_set FLAG_UCCELLIERA_CHEF_DEFEATED, ViaDellUccelliera_FraschettaFrascotto_EventScript_ClienteAfter
+#endif
+	msgbox ViaDellUccelliera_FraschettaFrascotto_Text_Cliente, MSGBOX_NPC
+	release
+	end
+
+#if !IS_FRLG
+ViaDellUccelliera_FraschettaFrascotto_EventScript_ClienteAfter::
+	msgbox ViaDellUccelliera_FraschettaFrascotto_Text_ClienteAfter, MSGBOX_NPC
+	release
+	end
+#endif
+
+ViaDellUccelliera_FraschettaFrascotto_EventScript_Turista::
+	lock
+	faceplayer
+	msgbox ViaDellUccelliera_FraschettaFrascotto_Text_Turista, MSGBOX_NPC
+	release
+	end
+
+ViaDellUccelliera_FraschettaFrascotto_EventScript_Affamato::
+	lock
+	faceplayer
+	msgbox ViaDellUccelliera_FraschettaFrascotto_Text_Affamato, MSGBOX_NPC
+	release
+	end
+
+ViaDellUccelliera_FraschettaFrascotto_EventScript_Amica::
+	lock
+	faceplayer
+#if !IS_FRLG
+	goto_if_set FLAG_UCCELLIERA_CHEF_DEFEATED, ViaDellUccelliera_FraschettaFrascotto_EventScript_AmicaAfter
+#endif
+	msgbox ViaDellUccelliera_FraschettaFrascotto_Text_Amica, MSGBOX_NPC
+	release
+	end
+
+#if !IS_FRLG
+ViaDellUccelliera_FraschettaFrascotto_EventScript_AmicaAfter::
+	msgbox ViaDellUccelliera_FraschettaFrascotto_Text_AmicaAfter, MSGBOX_NPC
+	release
+	end
+#endif
+
+ViaDellUccelliera_FraschettaFrascotto_Text_Cliente:
+	.string "Conosco Frascotto da una vita!\n"
+	.string "Quando si mette ai fornelli,\n"
+	.string "devi vedere che spettacolo!\p"
+	.string "L'unico problema è convincerlo\n"
+	.string "a smettere di cucinare!$"
+
+ViaDellUccelliera_FraschettaFrascotto_Text_ClienteAfter:
+	.string "Frascotto è partito, ma\n"
+	.string "Fraschietto sta facendo un\n"
+	.string "gran lavoro! La fraschetta\n"
+	.string "è in ottime mani!$"
+
+ViaDellUccelliera_FraschettaFrascotto_Text_Turista:
+	.string "Ho scoperto che un tempo\n"
+	.string "le fraschette esponevano\n"
+	.string "una frasca per indicare\n"
+	.string "che si vendeva vino!\p"
+	.string "Ecco perché si chiamano\n"
+	.string "così!$"
+
+ViaDellUccelliera_FraschettaFrascotto_Text_Affamato:
+	.string "Ho ordinato un panino con\n"
+	.string "la porchetta...\p"
+	.string "Poi ho visto passare la\n"
+	.string "carbonara. Ora non so più\n"
+	.string "cosa scegliere!$"
+
+ViaDellUccelliera_FraschettaFrascotto_Text_Amica:
+	.string "Fraschietto è cresciuto tra\n"
+	.string "questi tavoli. Vedrai, un\n"
+	.string "giorno sarà lui a mandare\n"
+	.string "avanti la fraschetta!\p"
+	.string "Ha preso tutto dal padre...\n"
+	.string "tranne la pazienza!$"
+
+ViaDellUccelliera_FraschettaFrascotto_Text_AmicaAfter:
+	.string "Guarda un po' Fraschietto!\n"
+	.string "È diventato il padrone di\n"
+	.string "casa. Suo padre dev'essere\n"
+	.string "proprio orgoglioso!$"

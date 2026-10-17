@@ -116,6 +116,7 @@
 // Temporary narrative flags reserved from previously unused persistent slots.
 #define FLAG_OLDALE_MOLOPSY_SEEN                         FLAG_UNUSED_0x028
 #define FLAG_HIDE_VIA_CONSOLARE_LENGHELIS                FLAG_UNUSED_0x029
+#define FLAG_UCCELLIERA_CHEF_SEEN                        FLAG_UNUSED_0x02C
 
 // Laricia post-Gym festival state. These were unused persistent system flags.
 #define FLAG_LARICIA_SAGRA_ACTIVE                         FLAG_UNUSED_0x91B
@@ -1347,6 +1348,7 @@
 #define FLAG_UNUSED_0x4C4                                           0x4C4 // Unused Flag
 #define FLAG_UCCELLIERA_CHEF_BERRY_GIVEN                            0x4C5
 #define FLAG_UCCELLIERA_CHEF_DEFEATED                               0x4C6
+#define FLAG_ALBA_BALL_PRESS_UNLOCKED                               FLAG_UNUSED_0x02E
 #define FLAG_UNUSED_0x4C7                                           0x4C7 // Unused Flag
 #define FLAG_UNUSED_0x4C8                                           0x4C8 // Unused Flag
 #define FLAG_UNUSED_0x4C9                                           0x4C9 // Unused Flag

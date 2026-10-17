@@ -17,8 +17,8 @@ $specs = @(
 $layouts = (Read-Json 'data/layouts/layouts.json').layouts
 $groups = Read-Json 'data/maps/map_groups.json'
 $outside = Read-Json 'data/maps/Laricia/map.json'
-Assert-True (@($outside.warp_events).Count -eq 9) 'Laricia must have exactly the nine civilian interior warps.'
-Assert-True (@($outside.warp_events | Where-Object { [int]$_.x -eq 32 -and [int]$_.y -eq 10 }).Count -eq 0) 'Palazzo Chigi must not have a warp.'
+$gymWarp = @($outside.warp_events | Where-Object { [int]$_.x -eq 32 -and [int]$_.y -eq 10 -and $_.dest_map -eq 'MAP_LARICIA_GYM_LOBBY' -and $_.dest_warp_id -eq '4' })
+Assert-True (@($outside.warp_events).Count -eq 10 -and $gymWarp.Count -eq 1) 'Laricia must have the nine civilian interior warps and the approved Gym warp.'
 Assert-True (@($layouts | Where-Object { $_.id -in $specs.Layout }).Count -eq 9) 'Laricia interior layout IDs must be unique and registered.'
 Assert-True (@($groups.gMapGroup_IndoorOldale | Where-Object { $_ -in $specs.Name }).Count -eq 9) 'Laricia interiors must be appended once to IndoorOldale.'
 foreach ($s in $specs) {

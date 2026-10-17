@@ -81,11 +81,16 @@ Assert-True ($layout[0].primary_tileset -eq 'gTileset_General' -and $layout[0].s
 Assert-True (@($groups.gMapGroup_TownsAndRoutes | Where-Object { $_ -eq 'Laricia' }).Count -eq 1) 'Laricia must be registered once in TownsAndRoutes.'
 $connection = @($map.connections | Where-Object { $_.direction -eq 'left' -and $_.map -eq 'MAP_PONTE_VALLE_LARICIA' -and [int]$_.offset -eq 0 })
 $return = @($ponte.connections | Where-Object { $_.direction -eq 'right' -and $_.map -eq 'MAP_LARICIA' -and [int]$_.offset -eq 0 })
-Assert-True ($connection.Count -eq 1 -and $return.Count -eq 1 -and @($map.connections).Count -eq 1) 'Laricia/Ponte connection must be the sole reciprocal connection.'
+$uccellieraConnection = @($map.connections | Where-Object { $_.direction -eq 'up' -and $_.map -eq 'MAP_VIA_DELL_UCCELLIERA' -and [int]$_.offset -eq 37 })
+$uccelliera = Read-Json 'data/maps/ViaDellUccelliera/map.json'
+$uccellieraReturn = @($uccelliera.connections | Where-Object { $_.direction -eq 'down' -and $_.map -eq 'MAP_LARICIA' -and [int]$_.offset -eq -37 })
+Assert-True ($connection.Count -eq 1 -and $return.Count -eq 1 -and $uccellieraConnection.Count -eq 1 -and $uccellieraReturn.Count -eq 1 -and @($map.connections).Count -eq 2) 'Laricia connections must match the approved reciprocal Ponte and Via dell Uccelliera links.'
 $border = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot $layout[0].border_filepath)); $reference = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/layouts/AlberaStorica/border.bin'))
 Assert-True ($border.Length -eq 8 -and [Linq.Enumerable]::SequenceEqual([byte[]]$border, [byte[]]$reference)) 'Laricia must use the approved shared forest border.'
 $blocks = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot $layout[0].blockdata_filepath)); $ponteBlocks = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/layouts/PonteValleLaricia/map.bin'))
 Assert-True ($blocks.Length -eq 64*64*2) 'Laricia map.bin size is incorrect.'
+$generalRoot = Join-Path $RepositoryRoot 'data/tilesets/primary/general'
+$generalMetatiles = [IO.File]::ReadAllBytes((Join-Path $generalRoot 'metatiles.bin'))
 foreach ($y in @(14..17) + @(38..41)) {
     Assert-True (Is-Walkable (Read-Block $blocks 64 0 $y)) "Laricia west entry 0,$y is not walkable."
     Assert-True (Is-Walkable (Read-Block $ponteBlocks 64 63 $y)) "Ponte east entry 63,$y is not walkable."
@@ -108,14 +113,12 @@ $portaPretoriaMetatiles = [IO.File]::ReadAllBytes((Join-Path $portaPretoriaRoot 
 $portaPretoriaAttributes = [IO.File]::ReadAllBytes((Join-Path $portaPretoriaRoot 'metatile_attributes.bin'))
 $lariciaMetatiles = [IO.File]::ReadAllBytes((Join-Path $lariciaTilesetRoot 'metatiles.bin'))
 $lariciaAttributes = [IO.File]::ReadAllBytes((Join-Path $lariciaTilesetRoot 'metatile_attributes.bin'))
-Assert-True ($lariciaMetatiles.Length -eq 0x10A * 16 -and $lariciaAttributes.Length -eq 0x10A * 2) 'Laricia tileset must contain coherent entries through secondary metatile 0x309.'
+Assert-True ($lariciaMetatiles.Length -eq 0x113 * 16 -and $lariciaAttributes.Length -eq 0x113 * 2) 'Laricia tileset must contain coherent entries through secondary metatile 0x312.'
 $portaPretoriaImage = [System.Drawing.Bitmap]::FromFile((Join-Path $portaPretoriaRoot 'tiles.png'))
 $lariciaImage = [System.Drawing.Bitmap]::FromFile((Join-Path $lariciaTilesetRoot 'tiles.png'))
 $sourceTileCount = [int](($portaPretoriaImage.Width * $portaPretoriaImage.Height) / 64)
 $lariciaTileCount = [int](($lariciaImage.Width * $lariciaImage.Height) / 64)
-Assert-True ($lariciaTileCount -eq 336) 'Laricia tiles.png must contain exactly the registered 336 tiles.'
-$generalRoot = Join-Path $RepositoryRoot 'data/tilesets/primary/general'
-$generalMetatiles = [IO.File]::ReadAllBytes((Join-Path $generalRoot 'metatiles.bin'))
+Assert-True ($lariciaTileCount -eq 368) 'Laricia tiles.png must contain exactly the registered 368 tiles.'
 $generalImage = [System.Drawing.Bitmap]::FromFile((Join-Path $generalRoot 'tiles.png'))
 $generalPalettes = @{}; foreach ($slot in 0..5) { $generalPalettes[$slot] = Read-JascPalette (Join-Path $generalRoot ('palettes/{0:D2}.pal' -f $slot)) }
 $portaPalettes = @{}; foreach ($slot in @(6, 7, 11)) { $portaPalettes[$slot] = Read-JascPalette (Join-Path $portaPretoriaRoot ('palettes/{0:D2}.pal' -f $slot)) }
@@ -235,12 +238,12 @@ foreach ($y in 13..17) { Assert-True (-not (Is-Walkable (Read-Block $blocks 64 6
 $sagra = @($map.object_events | Where-Object { $_.local_id -eq 'LOCALID_LARICIA_SAGRA_ADDETTO' })
 Assert-True ($sagra.Count -eq 1 -and [int]$sagra[0].x -eq 45 -and [int]$sagra[0].y -eq 16 -and $sagra[0].script -eq 'Laricia_EventScript_SagraBlocker' -and $sagra[0].trainer_type -eq 'TRAINER_TYPE_NONE') 'Laricia Sagra attendant placement is incorrect.'
 $trucks = @($map.object_events | Where-Object { $_.graphics_id -eq 'OBJ_EVENT_GFX_TRUCK' })
-Assert-True ($trucks.Count -eq 2) 'Laricia must contain exactly two Sagra trucks.'
-foreach ($truck in $trucks) { Assert-True ([int]$truck.x -ge 46 -and [int]$truck.x -le 48 -and [int]$truck.y -ge 13 -and [int]$truck.y -le 18) 'Laricia Sagra truck is outside the approved manual area.' }
+Assert-True ($trucks.Count -eq 3) 'Laricia must contain exactly three Sagra trucks.'
+Assert-True (@($trucks | Where-Object { -not (([int]$_.x -eq 12 -and [int]$_.y -eq 14) -or ([int]$_.x -eq 22 -and [int]$_.y -eq 14) -or ([int]$_.x -eq 40 -and [int]$_.y -eq 14)) }).Count -eq 0) 'Laricia Sagra truck is outside the approved manual area.'
 Assert-True (@($map.bg_events).Count -eq 0) 'Laricia must not retain the removed Galloro/Genzalia sign event.'
-Assert-True (@($map.warp_events).Count -eq 9 -and @($map.coord_events).Count -eq 0) 'Laricia must contain the nine civilian interior warps and no coord events.'
-Assert-True (@($map.object_events).Count -eq 12 -and @($map.object_events | Where-Object { $_.trainer_type -ne 'TRAINER_TYPE_NONE' }).Count -eq 0) 'Laricia must contain the approved non-trainer Sagra and civilian population.'
-Assert-True (@($map.object_events | Where-Object { $_.graphics_id -eq 'OBJ_EVENT_GFX_TRUCK' }).Count -eq 2) 'Laricia Sagra must visibly use two existing truck object graphics.'
+Assert-True (@($map.warp_events).Count -eq 10 -and @($map.coord_events).Count -eq 0) 'Laricia must contain the ten approved warps and no coord events.'
+Assert-True (@($map.object_events).Count -eq 30 -and @($map.object_events | Where-Object { $_.trainer_type -ne 'TRAINER_TYPE_NONE' }).Count -eq 0) 'Laricia must contain the approved non-trainer Sagra and civilian population.'
+Assert-True (@($map.object_events | Where-Object { $_.graphics_id -eq 'OBJ_EVENT_GFX_TRUCK' }).Count -eq 3) 'Laricia Sagra must visibly use three existing truck object graphics.'
 $wild = Read-Json 'src/data/wild_encounters.json'
 Assert-True (@($wild.wild_encounter_groups | ForEach-Object { $_.encounters } | Where-Object { $_.map -eq 'MAP_LARICIA' }).Count -eq 0) 'Laricia scaffold must not add encounters.'
 $scripts = Get-Content -LiteralPath (Join-Path $RepositoryRoot 'data/maps/Laricia/scripts.inc') -Raw

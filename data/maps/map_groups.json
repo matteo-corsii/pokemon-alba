@@ -599,7 +599,9 @@
     "BattlePyramidSquare14",
     "BattlePyramidSquare15",
     "BattlePyramidSquare16",
-    "UnionRoom"
+    "UnionRoom",
+    "AlbaRefuge_Wood",
+    "AlbaRefuge_Rock"
   ],
   "gMapGroup_SpecialArea": [
     "SafariZone_Northwest",

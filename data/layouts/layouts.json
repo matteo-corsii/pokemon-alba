@@ -9961,6 +9961,28 @@
       "border_filepath": "data/layouts/Laricia_Gym_LeaderRoom/border.bin",
       "blockdata_filepath": "data/layouts/Laricia_Gym_LeaderRoom/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ALBA_REFUGE_WOOD",
+      "name": "AlbaRefuge_Wood_Layout",
+      "width": 16,
+      "height": 16,
+      "primary_tileset": "gTileset_SecretBase",
+      "secondary_tileset": "gTileset_SecretBaseTree",
+      "border_filepath": "data/layouts/AlbaRefuge_Wood/border.bin",
+      "blockdata_filepath": "data/layouts/AlbaRefuge_Wood/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ALBA_REFUGE_ROCK",
+      "name": "AlbaRefuge_Rock_Layout",
+      "width": 16,
+      "height": 16,
+      "primary_tileset": "gTileset_SecretBase",
+      "secondary_tileset": "gTileset_SecretBaseBlueCave",
+      "border_filepath": "data/layouts/AlbaRefuge_Rock/border.bin",
+      "blockdata_filepath": "data/layouts/AlbaRefuge_Rock/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

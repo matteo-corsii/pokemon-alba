@@ -3,15 +3,6 @@ LagoDiAlbera_RefugeMastersHouse_1F_MapScripts::
 	.byte 0
 
 LagoDiAlbera_RefugeMastersHouse_1F_OnTransition:
-#if IS_FRLG
-	removeobject LOCALID_LAGO_REFUGE_FRASCOTTO
-#else
-	goto_if_set FLAG_UCCELLIERA_CHEF_DEFEATED, LagoDiAlbera_RefugeMastersHouse_1F_OnTransition_ShowFrascotto
-	removeobject LOCALID_LAGO_REFUGE_FRASCOTTO
-	goto LagoDiAlbera_RefugeMastersHouse_1F_OnTransition_Done
-LagoDiAlbera_RefugeMastersHouse_1F_OnTransition_ShowFrascotto:
-	addobject LOCALID_LAGO_REFUGE_FRASCOTTO
-#endif
 LagoDiAlbera_RefugeMastersHouse_1F_OnTransition_Done:
 	end
 
@@ -28,9 +19,6 @@ LagoDiAlbera_RefugeMastersHouse_1F_EventScript_Assistant::
 	release
 	end
 
-LagoDiAlbera_RefugeMastersHouse_1F_EventScript_Frascotto::
-	msgbox LagoDiAlbera_RefugeMastersHouse_1F_Text_Frascotto, MSGBOX_NPC
-	end
 LagoDiAlbera_RefugeMastersHouse_1F_EventScript_AssistantBefore::
 	msgbox LagoDiAlbera_RefugeMastersHouse_1F_Text_AssistantBefore, MSGBOX_DEFAULT
 	release

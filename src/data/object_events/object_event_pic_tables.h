@@ -1454,6 +1454,18 @@ static const struct SpriteFrameImage sPicTable_ApricornTree[] = {
     overworld_frame(gObjectEventPic_ApricornTree, 2, 2, 0),
 };
 
+static const struct SpriteFrameImage sPicTable_SittingBoy[] = {
+    overworld_frame(gObjectEventPic_SittingBoy, 2, 4, 0),
+    overworld_frame(gObjectEventPic_SittingBoy, 2, 4, 2),
+    overworld_frame(gObjectEventPic_SittingBoy, 2, 4, 1),
+    overworld_frame(gObjectEventPic_SittingBoy, 2, 4, 0),
+    overworld_frame(gObjectEventPic_SittingBoy, 2, 4, 0),
+    overworld_frame(gObjectEventPic_SittingBoy, 2, 4, 2),
+    overworld_frame(gObjectEventPic_SittingBoy, 2, 4, 2),
+    overworld_frame(gObjectEventPic_SittingBoy, 2, 4, 1),
+    overworld_frame(gObjectEventPic_SittingBoy, 2, 4, 1),
+};
+
 #if IS_FRLG
 
 static const struct SpriteFrameImage sPicTable_RedNormal[] = {
@@ -1663,18 +1675,6 @@ static const struct SpriteFrameImage sPicTable_LittleGirlFrlg[] = {
     overworld_frame(gObjectEventPic_LittleGirlFrlg, 2, 2, 7),
     overworld_frame(gObjectEventPic_LittleGirlFrlg, 2, 2, 8),
     overworld_frame(gObjectEventPic_LittleGirlFrlg, 2, 2, 9),
-};
-
-static const struct SpriteFrameImage sPicTable_SittingBoy[] = {
-    overworld_frame(gObjectEventPic_SittingBoy, 2, 4, 0),
-    overworld_frame(gObjectEventPic_SittingBoy, 2, 4, 2),
-    overworld_frame(gObjectEventPic_SittingBoy, 2, 4, 1),
-    overworld_frame(gObjectEventPic_SittingBoy, 2, 4, 0),
-    overworld_frame(gObjectEventPic_SittingBoy, 2, 4, 0),
-    overworld_frame(gObjectEventPic_SittingBoy, 2, 4, 2),
-    overworld_frame(gObjectEventPic_SittingBoy, 2, 4, 2),
-    overworld_frame(gObjectEventPic_SittingBoy, 2, 4, 1),
-    overworld_frame(gObjectEventPic_SittingBoy, 2, 4, 1),
 };
 
 static const struct SpriteFrameImage sPicTable_LassFrlg[] = {

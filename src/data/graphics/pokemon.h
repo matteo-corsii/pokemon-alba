@@ -115,6 +115,11 @@ const u16 gOverworldPalette_Lenghelis[] = INCGFX_U16("graphics/pokemon/lenghelis
 const u16 gShinyOverworldPalette_Lenghelis[] = INCGFX_U16("graphics/pokemon/lenghelis/overworld_shiny.pal", ".gbapal");
 #endif
 #endif
+// Pokémon Alba: approved Ausonia regional Sudowoodo battle graphics.
+const u32 gMonFrontPic_SudowoodoAusonia[] = INCGFX_U32("graphics/pokemon/sudowoodo_ausonia/anim_front_gba.png", ".4bpp.smol");
+const u16 gMonPalette_SudowoodoAusonia[] = INCGFX_U16("graphics/pokemon/sudowoodo_ausonia/normal_gba.pal", ".gbapal");
+const u32 gMonBackPic_SudowoodoAusonia[] = INCGFX_U32("graphics/pokemon/sudowoodo_ausonia/back_gba.png", ".4bpp.smol");
+
 const u32 gMonFrontPic_Luscinco[] = INCGFX_U32("graphics/pokemon/luscinco/anim_front.png", ".4bpp.smol");
 const u16 gMonPalette_Luscinco[] = INCGFX_U16("graphics/pokemon/luscinco/normal.pal", ".gbapal");
 const u32 gMonBackPic_Luscinco[] = INCGFX_U32("graphics/pokemon/luscinco/back.png", ".4bpp.smol");

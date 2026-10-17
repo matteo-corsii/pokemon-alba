@@ -69,11 +69,11 @@ foreach ($expected in @(
 )) {
     Assert-Contains $record $expected 'SPECIES_MOLOSPSY'
 }
-Assert-Contains $record 'FOOTPRINT(Mabosstiff)' 'Molospsy temporary footprint placeholder'
-Assert-Contains $record 'sPicTable_Mabosstiff' 'Molospsy temporary overworld placeholder'
-Assert-Contains $record 'gOverworldPalette_Mabosstiff' 'Molospsy temporary overworld palette placeholder'
-Assert-Contains $record 'gShinyOverworldPalette_Mabosstiff' 'Molospsy temporary shiny overworld palette placeholder'
-Assert-Contains $record '.cryId = CRY_MABOSSTIFF' 'Molospsy temporary cry placeholder'
+Assert-Contains $record 'FOOTPRINT(Mabosstiff)' 'Molospsy footprint reuse'
+Assert-Contains $record 'sPicTable_Molospsy' 'Molospsy overworld picture table'
+Assert-Contains $record 'gOverworldPalette_Molospsy' 'Molospsy overworld palette'
+Assert-Contains $record 'gShinyOverworldPalette_Molospsy' 'Molospsy shiny overworld palette'
+Assert-Contains $record '.cryId = CRY_MABOSSTIFF' 'Molospsy canonical cry reuse'
 Assert-True ($record -notmatch 'SPECIES_MOLOSPSY.*EVOLUTION\(') 'Molospsy must remain single stage'
 
 $learnsetBlock = Get-Section $speciesInfo 'static const struct LevelUpMove sMolospsyLevelUpLearnset[]' '};'
