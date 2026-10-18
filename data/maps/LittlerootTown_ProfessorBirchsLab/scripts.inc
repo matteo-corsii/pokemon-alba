@@ -29,6 +29,9 @@ LittlerootTown_ProfessorBirchsLab_OnTransition:
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_SetAlberaStarterLayout::
+	removeobject LOCALID_BIRCHS_LAB_CYNDAQUIL_BALL
+	removeobject LOCALID_BIRCHS_LAB_TOTODILE_BALL
+	removeobject LOCALID_BIRCHS_LAB_CHIKORITA_BALL
 	setmaplayoutindex LAYOUT_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB_WITH_TABLE
 	return
 
