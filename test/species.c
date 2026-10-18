@@ -292,7 +292,8 @@ TEST("Ausonia starter IDs are append-only and distinct")
     EXPECT_EQ(SPECIES_FRASCOTTO, SPECIES_FRASCHIETTO + 1);
     EXPECT_EQ(SPECIES_CARPULETUM, SPECIES_FRASCOTTO + 1);
     EXPECT_EQ(SPECIES_LUTELLUS, SPECIES_CARPULETUM + 1);
-    EXPECT_EQ(SPECIES_EGG, SPECIES_LUTELLUS + 1);
+    EXPECT_EQ(SPECIES_SUDOWOODO_AUSONIA, SPECIES_LUTELLUS + 1);
+    EXPECT_EQ(SPECIES_EGG, SPECIES_SUDOWOODO_AUSONIA + 1);
     EXPECT_EQ(NUM_SPECIES, SPECIES_EGG);
 
     EXPECT_EQ(NATIONAL_DEX_PECHARUNT, 1025);
@@ -342,7 +343,8 @@ TEST("Ausonia starter IDs are append-only and distinct")
     EXPECT_EQ(NATIONAL_DEX_FRASCOTTO, NATIONAL_DEX_FRASCHIETTO + 1);
     EXPECT_EQ(NATIONAL_DEX_CARPULETUM, NATIONAL_DEX_FRASCOTTO + 1);
     EXPECT_EQ(NATIONAL_DEX_LUTELLUS, NATIONAL_DEX_CARPULETUM + 1);
-    EXPECT_EQ(NATIONAL_DEX_COUNT, NATIONAL_DEX_LUTELLUS);
+    EXPECT_EQ(NATIONAL_DEX_SUDOWOODO_AUSONIA, NATIONAL_DEX_LUTELLUS + 1);
+    EXPECT_EQ(NATIONAL_DEX_COUNT, NATIONAL_DEX_SUDOWOODO_AUSONIA);
 
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_CINGERM), COMPOUND_STRING("Cingerm")), 0);
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_ROVASCO), COMPOUND_STRING("Rovasco")), 0);
@@ -392,7 +394,7 @@ TEST("Ausonia starter IDs are append-only and distinct")
 
 TEST("Ausonia Regional Dex uses the canonical data table")
 {
-    EXPECT_EQ(AUSONIA_DEX_COUNT, 46);
+    EXPECT_EQ(AUSONIA_DEX_COUNT, 47);
     EXPECT_EQ(SpeciesToAusoniaPokedexNum(SPECIES_CINGERM), 1);
     EXPECT_EQ(SpeciesToAusoniaPokedexNum(SPECIES_SELVAZANNA), 3);
     EXPECT_EQ(SpeciesToAusoniaPokedexNum(SPECIES_ARDEINO), 7);
@@ -400,6 +402,7 @@ TEST("Ausonia Regional Dex uses the canonical data table")
     EXPECT_EQ(SpeciesToAusoniaPokedexNum(SPECIES_CARPULETUM), 36);
     EXPECT_EQ(SpeciesToAusoniaPokedexNum(SPECIES_LUTELLUS), 38);
     EXPECT_EQ(SpeciesToAusoniaPokedexNum(SPECIES_FRASCOTTO), 46);
+    EXPECT_EQ(SpeciesToAusoniaPokedexNum(SPECIES_SUDOWOODO_AUSONIA), 47);
     EXPECT_EQ(SpeciesToAusoniaPokedexNum(SPECIES_PIKACHU), 0);
 
     EXPECT_EQ(AusoniaToNationalOrder(0), NATIONAL_DEX_NONE);
@@ -407,6 +410,7 @@ TEST("Ausonia Regional Dex uses the canonical data table")
     EXPECT_EQ(AusoniaToNationalOrder(36), NATIONAL_DEX_CARPULETUM);
     EXPECT_EQ(AusoniaToNationalOrder(38), NATIONAL_DEX_LUTELLUS);
     EXPECT_EQ(AusoniaToNationalOrder(46), NATIONAL_DEX_FRASCOTTO);
+    EXPECT_EQ(AusoniaToNationalOrder(47), NATIONAL_DEX_SUDOWOODO_AUSONIA);
     EXPECT_EQ(AusoniaToNationalOrder(AUSONIA_DEX_COUNT + 1), NATIONAL_DEX_NONE);
 }
 
@@ -2077,10 +2081,10 @@ TEST("Molospsy canonical data and graphics are valid")
     EXPECT_EQ(info->enemyShadowYOffset, placeholder->enemyShadowYOffset);
     EXPECT_EQ((u32)info->enemyShadowSize, (u32)placeholder->enemyShadowSize);
 #if OW_POKEMON_OBJECT_EVENTS
-    EXPECT(info->overworldData.images == placeholder->overworldData.images);
+    EXPECT(info->overworldData.images != placeholder->overworldData.images);
 #if OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
-    EXPECT(info->overworldPalette == placeholder->overworldPalette);
-    EXPECT(info->overworldShinyPalette == placeholder->overworldShinyPalette);
+    EXPECT(info->overworldPalette != placeholder->overworldPalette);
+    EXPECT(info->overworldShinyPalette != placeholder->overworldShinyPalette);
 #endif
 #endif
     EXPECT(GetSpeciesEvolutions(SPECIES_MOLOSPSY) == NULL);
