@@ -1270,7 +1270,7 @@ static const union AnimCmd sAnim_AlbaGoEast[] =
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd *const sAnimTable_AlbaIdle[] = {
+const union AnimCmd *const sAnimTable_AlbaIdle[] = {
     [ANIM_STD_FACE_SOUTH] = sAnim_AlbaIdleSouth,
     [ANIM_STD_FACE_NORTH] = sAnim_AlbaFaceNorth,
     [ANIM_STD_FACE_WEST] = sAnim_AlbaFaceWest,
@@ -1310,7 +1310,7 @@ static const union AnimCmd sAnim_LenghelisGoNorth[] =
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd *const sAnimTable_Lenghelis[] = {
+const union AnimCmd *const sAnimTable_Lenghelis[] = {
     [ANIM_STD_FACE_SOUTH] = sAnim_LenghelisIdleSouth,
     [ANIM_STD_FACE_NORTH] = sAnim_AlbaFaceNorth,
     [ANIM_STD_FACE_WEST] = sAnim_AlbaFaceWest,
