@@ -1,8 +1,9 @@
 AlbaRefuge_MapScripts::
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, SecretBase_OnWarp
 	map_script MAP_SCRIPT_ON_TRANSITION, AlbaRefuge_OnTransition
+	map_script MAP_SCRIPT_ON_LOAD, AlbaRefuge_OnLoad
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SecretBase_OnFrame
-	map_script MAP_SCRIPT_ON_RESUME, SecretBase_OnResume
+	map_script MAP_SCRIPT_ON_RESUME, AlbaRefuge_OnResume
 	.byte 0
 
 AlbaRefuge_OnTransition:
@@ -10,12 +11,28 @@ AlbaRefuge_OnTransition:
 	special SetSecretBaseOwnerGfxId
 	special InitSecretBaseVars
 	goto_if_ne VAR_CURRENT_SECRET_BASE, 0, AlbaRefuge_EventScript_HideFrascotto
-	goto_if_unset FLAG_UCCELLIERA_CHEF_DEFEATED, AlbaRefuge_EventScript_HideFrascotto
-	addobject 1
-	end
+	goto_if_set FLAG_UCCELLIERA_CHEF_DEFEATED, AlbaRefuge_EventScript_ShowFrascotto
 
 AlbaRefuge_EventScript_HideFrascotto:
-	removeobject 1
+	setflag FLAG_TEMP_5
+	end
+
+AlbaRefuge_EventScript_ShowFrascotto:
+	clearflag FLAG_TEMP_5
+	end
+
+AlbaRefuge_OnLoad:
+AlbaRefuge_EventScript_UpdateBallPress:
+	goto_if_set FLAG_ALBA_BALL_PRESS_UNLOCKED, AlbaRefuge_EventScript_BallPressVisible
+	setmetatileinrange 13, 1, 14, 2, METATILE_SecretBase_Ground, FALSE, 3
+	return
+
+AlbaRefuge_EventScript_BallPressVisible:
+	return
+
+AlbaRefuge_OnResume:
+	setstepcallback STEP_CB_SECRET_BASE
+	call AlbaRefuge_EventScript_UpdateBallPress
 	end
 
 AlbaRefuge_EventScript_Frascotto::
