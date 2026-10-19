@@ -2239,7 +2239,7 @@ static void PrintCurrentSpeciesInfo(void)
     ConvertIntToDecimalStringN(gStringVar1, habitatCaught, STR_CONV_MODE_LEFT_ALIGN, 2);
     ConvertIntToDecimalStringN(gStringVar2, habitatTotal, STR_CONV_MODE_LEFT_ALIGN, 2);
     StringCopy(gStringVar4, gStringVar1);
-    StringAppend(gStringVar4, _("/"));
+    StringAppend(gStringVar4, COMPOUND_STRING("/"));
     StringAppend(gStringVar4, gStringVar2);
     AddTextPrinterParameterized3(WINDOW_INFO, FONT_SMALL, 48, CHAIN_BONUS_Y, sFontColor_Black, 0, gStringVar4);
 

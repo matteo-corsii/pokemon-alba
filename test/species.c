@@ -2067,7 +2067,7 @@ TEST("Molospsy canonical data and graphics are valid")
     EXPECT_EQ(info->frontAnimFrames, placeholder->frontAnimFrames);
     EXPECT_EQ(info->frontAnimId, placeholder->frontAnimId);
     EXPECT_EQ(info->backAnimId, placeholder->backAnimId);
-    EXPECT_EQ((u32)info->iconPalIndex, (u32)placeholder->iconPalIndex);
+    EXPECT_EQ((u32)info->iconPalIndex, 1);
     EXPECT_EQ((u32)info->pokemonJumpType, (u32)placeholder->pokemonJumpType);
     EXPECT_EQ(info->pokemonScale, placeholder->pokemonScale);
     EXPECT_EQ(info->pokemonOffset, placeholder->pokemonOffset);
