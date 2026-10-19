@@ -9,7 +9,7 @@
 #define DN_VAR_SPECIES                0x40FD // Registered DexNav species
 #define DN_VAR_STEP_COUNTER           0x40FE // Steps for finding hidden Pokémon
 
-#if IS_FRLG
+#if defined(FIRERED) || defined(LEAFGREEN)
 #define DN_FLAG_SEARCHING             0x91B // Searching for mon
 #define DN_FLAG_DETECTOR_MODE         0x91C // Allow player to find hidden mons
 #else
