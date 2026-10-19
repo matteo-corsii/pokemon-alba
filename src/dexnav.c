@@ -161,6 +161,100 @@ static void DexNavDrawHiddenIcons(void);
 static void DrawHiddenSearchWindow(u8 width);
 static void RevealHiddenMon(void);
 
+#define LOCAL_HABITAT_MAX_SPECIES (LAND_WILD_COUNT + WATER_WILD_COUNT + ROCK_WILD_COUNT + FISH_WILD_COUNT + HIDDEN_WILD_COUNT)
+
+static void AddLocalHabitatEncounterSpecies(enum Species *speciesList, u16 *speciesCount, const struct WildPokemonInfo *encounterInfo, u32 speciesCountForArea, bool32 requireEncounterRate)
+{
+    u32 i;
+
+    if (encounterInfo == NULL || (requireEncounterRate && encounterInfo->encounterRate == 0))
+        return;
+
+    for (i = 0; i < speciesCountForArea; i++)
+    {
+        enum Species species = encounterInfo->wildPokemon[i].species;
+        u16 j;
+
+        if (species == SPECIES_NONE)
+            continue;
+
+        for (j = 0; j < *speciesCount; j++)
+        {
+            if (speciesList[j] == species)
+                break;
+        }
+
+        if (j == *speciesCount && *speciesCount < LOCAL_HABITAT_MAX_SPECIES)
+            speciesList[(*speciesCount)++] = species;
+    }
+}
+
+static u16 GetLocalHabitatSpecies(enum Species *speciesList)
+{
+    u16 speciesCount = 0;
+    u16 headerId = GetCurrentMapWildMonHeaderId();
+    enum TimeOfDay timeOfDay;
+
+    if (headerId == HEADER_NONE)
+        return 0;
+
+    timeOfDay = GetTimeOfDayForEncounters(headerId, WILD_AREA_LAND);
+    AddLocalHabitatEncounterSpecies(speciesList, &speciesCount, gWildMonHeaders[headerId].encounterTypes[timeOfDay].landMonsInfo, LAND_WILD_COUNT, TRUE);
+    timeOfDay = GetTimeOfDayForEncounters(headerId, WILD_AREA_WATER);
+    AddLocalHabitatEncounterSpecies(speciesList, &speciesCount, gWildMonHeaders[headerId].encounterTypes[timeOfDay].waterMonsInfo, WATER_WILD_COUNT, TRUE);
+    timeOfDay = GetTimeOfDayForEncounters(headerId, WILD_AREA_ROCKS);
+    AddLocalHabitatEncounterSpecies(speciesList, &speciesCount, gWildMonHeaders[headerId].encounterTypes[timeOfDay].rockSmashMonsInfo, ROCK_WILD_COUNT, TRUE);
+    timeOfDay = GetTimeOfDayForEncounters(headerId, WILD_AREA_FISHING);
+    AddLocalHabitatEncounterSpecies(speciesList, &speciesCount, gWildMonHeaders[headerId].encounterTypes[timeOfDay].fishingMonsInfo, FISH_WILD_COUNT, TRUE);
+    timeOfDay = GetTimeOfDayForEncounters(headerId, WILD_AREA_HIDDEN);
+    AddLocalHabitatEncounterSpecies(speciesList, &speciesCount, gWildMonHeaders[headerId].encounterTypes[timeOfDay].hiddenMonsInfo, HIDDEN_WILD_COUNT, FALSE);
+
+    return speciesCount;
+}
+
+void GetLocalHabitatSpeciesCounts(u16 *total, u16 *caught)
+{
+    enum Species speciesList[LOCAL_HABITAT_MAX_SPECIES];
+    u16 speciesCount = GetLocalHabitatSpecies(speciesList);
+    u16 caughtCount = 0;
+    u16 i;
+
+    for (i = 0; i < speciesCount; i++)
+    {
+        if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(speciesList[i]), FLAG_GET_CAUGHT))
+            caughtCount++;
+    }
+
+    if (total != NULL)
+        *total = speciesCount;
+    if (caught != NULL)
+        *caught = caughtCount;
+}
+
+bool32 IsLocalHabitatComplete(void)
+{
+    u16 total;
+    u16 caught;
+
+    GetLocalHabitatSpeciesCounts(&total, &caught);
+    return total != 0 && total == caught;
+}
+
+bool32 IsSpeciesCaughtInLocalHabitat(enum Species species)
+{
+    enum Species speciesList[LOCAL_HABITAT_MAX_SPECIES];
+    u16 speciesCount = GetLocalHabitatSpecies(speciesList);
+    u16 i;
+
+    for (i = 0; i < speciesCount; i++)
+    {
+        if (speciesList[i] == species)
+            return GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT);
+    }
+
+    return FALSE;
+}
+
 //// Const Data
 // gui image data
 static const u32 sDexNavGuiTiles[] = INCGFX_U32("graphics/dexnav/gui_tiles.png", ".4bpp.smol");
@@ -2077,6 +2171,8 @@ static void PrintCurrentSpeciesInfo(void)
     enum Species species = DexNavGetSpecies();
     enum NationalDexOrder dexNum = SpeciesToNationalPokedexNum(species);
     enum Type type1, type2;
+    u16 habitatTotal;
+    u16 habitatCaught;
 
     if (!GetSetPokedexFlag(dexNum, FLAG_GET_SEEN))
         species = SPECIES_NONE;
@@ -2138,6 +2234,14 @@ static void PrintCurrentSpeciesInfo(void)
     //current chain
     ConvertIntToDecimalStringN(gStringVar1, gSaveBlock3Ptr->dexNavChain, STR_CONV_MODE_LEFT_ALIGN, 3);
     AddTextPrinterParameterized3(WINDOW_INFO, FONT_SMALL, 0, CHAIN_BONUS_Y, sFontColor_Black, 0, gStringVar1);
+
+    GetLocalHabitatSpeciesCounts(&habitatTotal, &habitatCaught);
+    ConvertIntToDecimalStringN(gStringVar1, habitatCaught, STR_CONV_MODE_LEFT_ALIGN, 2);
+    ConvertIntToDecimalStringN(gStringVar2, habitatTotal, STR_CONV_MODE_LEFT_ALIGN, 2);
+    StringCopy(gStringVar4, gStringVar1);
+    StringAppend(gStringVar4, _("/"));
+    StringAppend(gStringVar4, gStringVar2);
+    AddTextPrinterParameterized3(WINDOW_INFO, FONT_SMALL, 48, CHAIN_BONUS_Y, sFontColor_Black, 0, gStringVar4);
 
     CopyWindowToVram(WINDOW_INFO, 3);
     PutWindowTilemap(WINDOW_INFO);
