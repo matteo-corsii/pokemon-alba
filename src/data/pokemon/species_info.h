@@ -1689,7 +1689,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .palette = gMonPalette_Felivates,
         .shinyPalette = gMonShinyPalette_Felivates,
         .iconSprite = gMonIcon_Felivates,
-        .iconPalIndex = 1,
+        .iconPalIndex = 2,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(2, 4, SHADOW_SIZE_M)
         FOOTPRINT(Espeon)
