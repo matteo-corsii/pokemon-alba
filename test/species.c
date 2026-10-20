@@ -1295,7 +1295,7 @@ TEST("Ausonia common fauna uses original battle graphics and provisional auxilia
         (7 << 4) | 8,
     };
     static const u8 picOffsets[] = { 4, 3, 3, 3 };
-    static const u8 iconPalIndices[] = { 2, 1, 0, 1 };
+    static const u8 iconPalIndices[] = { 2, 1, 0, 2 };
 
     for (u32 i = 0; i < ARRAY_COUNT(species); i++)
     {
