@@ -87,6 +87,7 @@ static u8 MoveRegionMapCursor_Full(void);
 static u8 ProcessRegionMapInput_Zoomed(void);
 static u8 MoveRegionMapCursor_Zoomed(void);
 static void CalcZoomScrollParams(s16 scrollX, s16 scrollY, s16 c, s16 d, u16 e, u16 f, u8 rotation);
+static u16 GetRegionMapFullViewCoord(u16 coord, u16 minimum);
 static mapsec_u16_t GetMapSecIdAt(u16 x, u16 y);
 static void RegionMap_SetBG2XAndBG2Y(s16 x, s16 y);
 static void InitMapBasedOnPlayerLocation(void);
@@ -123,6 +124,12 @@ static const u32 sRegionMapCursorLargeGfxLZ[] = INCGFX_U32("graphics/pokenav/reg
 static const u16 sRegionMapBg_Pal[] = INCGFX_U16("graphics/pokenav/region_map/map.pal", ".gbapal");
 static const u32 sRegionMapBg_GfxLZ[] = INCGFX_U32("graphics/pokenav/region_map/map.png", ".8bpp.smol", "-num_tiles 233 -Wnum_tiles");
 static const u32 sRegionMapBg_TilemapLZ[] = INCGFX_U32("graphics/pokenav/region_map/map.bin", ".smolTM");
+static const u16 sRegionMapAusonia_Pal[] = INCGFX_U16("graphics/pokenav/region_map/map_ausonia.pal", ".gbapal");
+static const u32 sRegionMapAusoniaBase_Gfx[] = INCGFX_U32("graphics/pokenav/region_map/map_ausonia_base.png", ".8bpp.smol", "-num_tiles 256 -Wnum_tiles");
+static const u32 sRegionMapAusoniaBase_Tilemap[] = INCGFX_U32("graphics/pokenav/region_map/map_ausonia_base.bin", ".smolTM");
+static const u32 sRegionMapAusoniaDetail_Gfx[] = INCGFX_U32("graphics/pokenav/region_map/map_ausonia_detail.png", ".8bpp.smol", "-num_tiles 256 -Wnum_tiles");
+static const u32 sRegionMapAusoniaDetail_Tilemap[] = INCGFX_U32("graphics/pokenav/region_map/map_ausonia_detail.bin", ".smolTM");
+static void *sRegionMapAusoniaGfxBuffer;
 static const u16 sRegionMapPlayerIcon_BrendanPal[] = INCGFX_U16("graphics/pokenav/region_map/brendan_icon.png", ".gbapal");
 static const u8 sRegionMapPlayerIcon_BrendanGfx[] = INCGFX_U8("graphics/pokenav/region_map/brendan_icon.png", ".4bpp");
 static const u16 sRegionMapPlayerIcon_MayPal[] = INCGFX_U16("graphics/pokenav/region_map/may_icon.png", ".gbapal");
@@ -137,6 +144,7 @@ static const u8 sRegionMapPlayerIcon_LeafGfx[] = INCGFX_U8("graphics/pokenav/reg
 #include "data/region_map/region_map_layout_sevii123.h"
 #include "data/region_map/region_map_layout_sevii45.h"
 #include "data/region_map/region_map_layout_sevii67.h"
+#include "data/region_map/region_map_layout_ausonia.h"
 #include "data/region_map/region_map_entries.h"
 
 static const mapsec_u16_t sRegionMap_SpecialPlaceLocations[][2] =
@@ -376,6 +384,16 @@ const struct RegionMapInfo gRegionMapInfos[] =
         .regionMapPalette = sRegionMapSevii67_Pal,
         .regionMapGfx = sRegionMapSevii67_Gfx,
         .regionMapTilemap = sRegionMapSevii67_Tilemap,
+    },
+    [REGION_MAP_AUSONIA] =
+    {
+        .dexMapPalette = sPokedexAreaMap_Pal,
+        .dexMapGfx = sPokedexAreaMap_Gfx,
+        .dexMapTilemap = sPokedexAreaMap_Tilemap,
+        .dexMapPaletteSize = sizeof(sPokedexAreaMap_Pal),
+        .regionMapPalette = sRegionMapAusonia_Pal,
+        .regionMapGfx = sRegionMapAusoniaBase_Gfx,
+        .regionMapTilemap = sRegionMapAusoniaBase_Tilemap,
     },
 };
 
@@ -735,6 +753,30 @@ void ShowRegionMapForPokedexAreaScreen(struct RegionMap *regionMap)
     sRegionMap->playerIconSpritePosY = sRegionMap->cursorPosY;
 }
 
+static void LoadAusoniaRegionMapGfx(void)
+{
+    u32 size;
+    u32 i;
+    u8 *gfx = malloc_and_decompress(sRegionMapAusoniaBase_Gfx, &size);
+
+    if (gfx == NULL)
+        return;
+
+    // The shared 8bpp region-map renderer keeps its map palette in bank 7.
+    // The Ausonia PNG uses palette indices 0-46, so move those indices to the
+    // same bank before copying the tile data to VRAM.
+    for (i = 0; i < size; i++)
+        gfx[i] += BG_PLTT_ID(7);
+
+    if (LoadBgTiles(sRegionMap->bgNum, gfx, size, 0) == 0xFFFF)
+    {
+        Free(gfx);
+        return;
+    }
+
+    sRegionMapAusoniaGfxBuffer = gfx;
+}
+
 bool8 LoadRegionMapGfx(void)
 {
     enum RegionMapType regionMapType;
@@ -743,7 +785,15 @@ bool8 LoadRegionMapGfx(void)
     case 0:
         regionMapType = GetRegionMapType(gMapHeader.regionMapSectionId);
         if (sRegionMap->bgManaged)
-            DecompressAndCopyTileDataToVram(sRegionMap->bgNum, gRegionMapInfos[regionMapType].regionMapGfx, 0, 0, 0);
+        {
+            if (regionMapType == REGION_MAP_AUSONIA)
+            {
+                LoadAusoniaRegionMapGfx();
+                DecompressAndCopyTileDataToVram(1, sRegionMapAusoniaDetail_Gfx, 0, 0, 0);
+            }
+            else
+                DecompressAndCopyTileDataToVram(sRegionMap->bgNum, gRegionMapInfos[regionMapType].regionMapGfx, 0, 0, 0);
+        }
         else
             DecompressDataWithHeaderVram(gRegionMapInfos[regionMapType].regionMapGfx, (u16 *)BG_CHAR_ADDR(2));
         break;
@@ -752,7 +802,20 @@ bool8 LoadRegionMapGfx(void)
         if (sRegionMap->bgManaged)
         {
             if (!FreeTempTileDataBuffersIfPossible())
-                DecompressAndCopyTileDataToVram(sRegionMap->bgNum, gRegionMapInfos[regionMapType].regionMapTilemap, 0, 0, 1);
+            {
+                if (sRegionMapAusoniaGfxBuffer != NULL)
+                {
+                    Free(sRegionMapAusoniaGfxBuffer);
+                    sRegionMapAusoniaGfxBuffer = NULL;
+                }
+                if (regionMapType == REGION_MAP_AUSONIA)
+                {
+                    DecompressDataWithHeaderVram(sRegionMapAusoniaDetail_Tilemap, (u16 *)BG_SCREEN_ADDR(31));
+                    DecompressAndCopyTileDataToVram(sRegionMap->bgNum, gRegionMapInfos[regionMapType].regionMapTilemap, 0, 0, 1);
+                }
+                else
+                    DecompressAndCopyTileDataToVram(sRegionMap->bgNum, gRegionMapInfos[regionMapType].regionMapTilemap, 0, 0, 1);
+            }
         }
         else
         {
@@ -804,7 +867,8 @@ bool8 LoadRegionMapGfx(void)
             SetBgAttribute(sRegionMap->bgNum, BG_ATTR_SCREENSIZE, 2);
             SetBgAttribute(sRegionMap->bgNum, BG_ATTR_CHARBASEINDEX, sRegionMap->charBaseIdx);
             SetBgAttribute(sRegionMap->bgNum, BG_ATTR_MAPBASEINDEX, sRegionMap->mapBaseIdx);
-            SetBgAttribute(sRegionMap->bgNum, BG_ATTR_WRAPAROUND, 1);
+            SetBgAttribute(sRegionMap->bgNum, BG_ATTR_WRAPAROUND,
+                GetRegionMapType(gMapHeader.regionMapSectionId) == REGION_MAP_AUSONIA ? 0 : 1);
             SetBgAttribute(sRegionMap->bgNum, BG_ATTR_PALETTEMODE, 1);
         }
         sRegionMap->initStep++;
@@ -1177,12 +1241,20 @@ enum RegionMapType GetRegionMapType(u32 mapSecId)
         default:
             return REGION_MAP_KANTO;
         }
+    case REGION_AUSONIA:
+        return REGION_MAP_AUSONIA;
     case REGION_HOENN:
     default:
         return REGION_MAP_HOENN;
     }
 }
 
+static u16 GetRegionMapFullViewCoord(u16 coord, u16 minimum)
+{
+    if (GetRegionMapType(gMapHeader.regionMapSectionId) == REGION_MAP_AUSONIA)
+        return coord - minimum;
+    return coord;
+}
 static mapsec_u16_t GetMapSecIdAt(u16 x, u16 y)
 {
     if (y < MAPCURSOR_Y_MIN || y > MAPCURSOR_Y_MAX || x < MAPCURSOR_X_MIN || x > MAPCURSOR_X_MAX)
@@ -1207,6 +1279,8 @@ static mapsec_u16_t GetMapSecIdAt(u16 x, u16 y)
         default:
                 return sRegionMapSections_Kanto[y][x];
         }
+    case REGION_AUSONIA:
+        return sRegionMap_AusoniaSectionLayout[y][x];
     case REGION_HOENN:
     default:
             return sRegionMap_MapSectionLayout[y][x];
@@ -1703,8 +1777,8 @@ void CreateRegionMapCursor(u16 tileTag, u16 paletteTag)
         else
         {
             sRegionMap->cursorSprite->oam.size = SPRITE_SIZE(16x16);
-            sRegionMap->cursorSprite->x = 8 * sRegionMap->cursorPosX + 4;
-            sRegionMap->cursorSprite->y = 8 * sRegionMap->cursorPosY + 4;
+            sRegionMap->cursorSprite->x = 8 * GetRegionMapFullViewCoord(sRegionMap->cursorPosX, MAPCURSOR_X_MIN) + 4;
+            sRegionMap->cursorSprite->y = 8 * GetRegionMapFullViewCoord(sRegionMap->cursorPosY, MAPCURSOR_Y_MIN) + 4;
         }
         sRegionMap->cursorSprite->data[1] = 2;
         sRegionMap->cursorSprite->data[2] = OBJ_PLTT_ID(IndexOfSpritePaletteTag(paletteTag)) + 1;
@@ -1763,10 +1837,12 @@ void CreateRegionMapPlayerIcon(u16 tileTag, u16 paletteTag)
     LoadSpritePalette(&palette);
     spriteId = CreateSprite(&template, 0, 0, 1);
     sRegionMap->playerIconSprite = &gSprites[spriteId];
+    if (GetRegionMapType(gMapHeader.regionMapSectionId) == REGION_MAP_AUSONIA)
+        sRegionMap->playerIconSprite->oam.priority = 1;
     if (!sRegionMap->zoomed)
     {
-        sRegionMap->playerIconSprite->x = sRegionMap->playerIconSpritePosX * 8 + 4;
-        sRegionMap->playerIconSprite->y = sRegionMap->playerIconSpritePosY * 8 + 4;
+        sRegionMap->playerIconSprite->x = GetRegionMapFullViewCoord(sRegionMap->playerIconSpritePosX, MAPCURSOR_X_MIN) * 8 + 4;
+        sRegionMap->playerIconSprite->y = GetRegionMapFullViewCoord(sRegionMap->playerIconSpritePosY, MAPCURSOR_Y_MIN) * 8 + 4;
         sRegionMap->playerIconSprite->callback = SpriteCB_PlayerIconMapFull;
     }
     else
@@ -1799,8 +1875,8 @@ static void UnhideRegionMapPlayerIcon(void)
         }
         else
         {
-            sRegionMap->playerIconSprite->x = sRegionMap->playerIconSpritePosX * 8 + 4;
-            sRegionMap->playerIconSprite->y = sRegionMap->playerIconSpritePosY * 8 + 4;
+            sRegionMap->playerIconSprite->x = GetRegionMapFullViewCoord(sRegionMap->playerIconSpritePosX, MAPCURSOR_X_MIN) * 8 + 4;
+            sRegionMap->playerIconSprite->y = GetRegionMapFullViewCoord(sRegionMap->playerIconSpritePosY, MAPCURSOR_Y_MIN) * 8 + 4;
             sRegionMap->playerIconSprite->x2 = 0;
             sRegionMap->playerIconSprite->y2 = 0;
             sRegionMap->playerIconSprite->callback = SpriteCB_PlayerIconMapFull;

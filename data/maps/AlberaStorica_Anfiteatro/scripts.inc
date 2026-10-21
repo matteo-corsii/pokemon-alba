@@ -282,6 +282,7 @@ AlberaStorica_Anfiteatro_EventScript_LirioDefeated:
 	call Common_EventScript_PlayGymBadgeFanfare
 	msgbox AlberaStorica_Anfiteatro_Text_MedagliaBallata, MSGBOX_DEFAULT
 	msgbox AlberaStorica_Anfiteatro_Text_LirioPostVictoryText, MSGBOX_DEFAULT
+	closemessage
 	end
 
 AlberaStorica_Anfiteatro_EventScript_LirioPostVictory:

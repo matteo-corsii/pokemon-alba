@@ -42,6 +42,7 @@ static void TilesetAnim_EliteFour(u16);
 static void TilesetAnim_MauvilleGym(u16);
 static void TilesetAnim_BikeShop(u16);
 static void TilesetAnim_BattlePyramid(u16);
+static void TilesetAnim_LariciaGym(u16);
 static void TilesetAnim_BattleDome(u16);
 static void QueueAnimTiles_General_Flower(u16);
 static void QueueAnimTiles_General_Water(u16);
@@ -56,6 +57,7 @@ static void QueueAnimTiles_Slateport_Balloons(u16);
 static void QueueAnimTiles_Mauville_Flowers(u16, u8);
 static void QueueAnimTiles_BikeShop_BlinkingLights(u16);
 static void QueueAnimTiles_BattlePyramid_Torch(u16);
+static void QueueAnimTiles_LariciaGym_Torch(u16);
 static void QueueAnimTiles_BattlePyramid_StatueShadow(u16);
 static void BlendAnimPalette_BattleDome_FloorLights(u16);
 static void BlendAnimPalette_BattleDome_FloorLightsNoBlend(u16);
@@ -827,6 +829,13 @@ void InitTilesetAnim_BattlePyramid(void)
     sSecondaryTilesetAnimCallback = TilesetAnim_BattlePyramid;
 }
 
+void InitTilesetAnim_LariciaGym(void)
+{
+    sSecondaryTilesetAnimCounter = 0;
+    sSecondaryTilesetAnimCounterMax = sPrimaryTilesetAnimCounterMax;
+    sSecondaryTilesetAnimCallback = TilesetAnim_LariciaGym;
+}
+
 void InitTilesetAnim_BattleDome(void)
 {
     sSecondaryTilesetAnimCounter = 0;
@@ -1098,6 +1107,12 @@ static void TilesetAnim_BattlePyramid(u16 timer)
     }
 }
 
+static void TilesetAnim_LariciaGym(u16 timer)
+{
+    if (timer % 8 == 0)
+        QueueAnimTiles_LariciaGym_Torch(timer / 8);
+}
+
 static void TilesetAnim_BattleDome(u16 timer)
 {
     if (timer % 4 == 0)
@@ -1157,6 +1172,22 @@ static void QueueAnimTiles_BattlePyramid_Torch(u16 timer)
 {
     u16 i = timer % ARRAY_COUNT(gTilesetAnims_BattlePyramid_Torch);
     AppendTilesetAnimToBuffer(gTilesetAnims_BattlePyramid_Torch[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 151)), 8 * TILE_SIZE_4BPP);
+}
+
+const u16 gTilesetAnims_LariciaGym_Torch_Frame0[] = INCGFX_U16("data/tilesets/secondary/laricia_gym/anim/torch/0.png", ".4bpp");
+const u16 gTilesetAnims_LariciaGym_Torch_Frame1[] = INCGFX_U16("data/tilesets/secondary/laricia_gym/anim/torch/1.png", ".4bpp");
+const u16 gTilesetAnims_LariciaGym_Torch_Frame2[] = INCGFX_U16("data/tilesets/secondary/laricia_gym/anim/torch/2.png", ".4bpp");
+
+static const u16 *const gTilesetAnims_LariciaGym_Torch[] = {
+    gTilesetAnims_LariciaGym_Torch_Frame0,
+    gTilesetAnims_LariciaGym_Torch_Frame1,
+    gTilesetAnims_LariciaGym_Torch_Frame2,
+};
+
+static void QueueAnimTiles_LariciaGym_Torch(u16 timer)
+{
+    u16 i = timer % ARRAY_COUNT(gTilesetAnims_LariciaGym_Torch);
+    AppendTilesetAnimToBuffer(gTilesetAnims_LariciaGym_Torch[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 151)), 8 * TILE_SIZE_4BPP);
 }
 
 static void QueueAnimTiles_BattlePyramid_StatueShadow(u16 timer)
@@ -1431,4 +1462,3 @@ void InitTilesetAnim_CeladonGym(void)
     sSecondaryTilesetAnimCounterMax = 256;
     sSecondaryTilesetAnimCallback = TilesetAnim_CeladonGym;
 }
-

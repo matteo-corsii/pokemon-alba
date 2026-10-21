@@ -30,6 +30,7 @@
 #include "palette.h"
 #include "party_menu.h"
 #include "pokedex.h"
+#include "quest_log.h"
 #include "pokenav.h"
 #include "safari_zone.h"
 #include "save.h"
@@ -59,6 +60,7 @@ enum
     MENU_ACTION_BAG,
     MENU_ACTION_POKENAV,
     MENU_ACTION_PLAYER,
+    MENU_ACTION_DIARY,
     MENU_ACTION_SAVE,
     MENU_ACTION_OPTION,
     MENU_ACTION_EXIT,
@@ -88,7 +90,7 @@ EWRAM_DATA static u8 sSafariBallsWindowId = 0;
 EWRAM_DATA static u8 sBattlePyramidFloorWindowId = 0;
 EWRAM_DATA static u8 sStartMenuCursorPos = 0;
 EWRAM_DATA static u8 sNumStartMenuActions = 0;
-EWRAM_DATA static u8 sCurrentStartMenuActions[9] = {0};
+EWRAM_DATA static u8 sCurrentStartMenuActions[10] = {0};
 EWRAM_DATA static s8 sInitStartMenuData[2] = {0};
 
 EWRAM_DATA static u8 (*sSaveDialogCallback)(void) = NULL;
@@ -188,6 +190,7 @@ static const struct WindowTemplate sWindowTemplate_PyramidPeak = {
 };
 
 static const u8 sText_MenuDebug[] = _("DEBUG");
+static const u8 sText_MenuDiary[] = _("DIARIO");
 
 static const struct MenuAction sStartMenuItems[] =
 {
@@ -196,6 +199,7 @@ static const struct MenuAction sStartMenuItems[] =
     [MENU_ACTION_BAG]             = {gText_MenuBag,     {.u8_void = StartMenuBagCallback}},
     [MENU_ACTION_POKENAV]         = {gText_MenuPokenav, {.u8_void = StartMenuPokeNavCallback}},
     [MENU_ACTION_PLAYER]          = {gText_MenuPlayer,  {.u8_void = StartMenuPlayerNameCallback}},
+    [MENU_ACTION_DIARY]           = {sText_MenuDiary,   {.u8_void = QuestLog_StartMenuCallback}},
     [MENU_ACTION_SAVE]            = {gText_MenuSave,    {.u8_void = StartMenuSaveCallback}},
     [MENU_ACTION_OPTION]          = {gText_MenuOption,  {.u8_void = StartMenuOptionCallback}},
     [MENU_ACTION_EXIT]            = {gText_MenuExit,    {.u8_void = StartMenuExitCallback}},
@@ -326,7 +330,7 @@ static void BuildStartMenuActions(void)
 
 static void AddStartMenuAction(u8 action)
 {
-    AppendToList(sCurrentStartMenuActions, &sNumStartMenuActions, action);
+    AppendToList(sCurrentStartMenuActions, &sNumStartMenuActions, action, ARRAY_COUNT(sCurrentStartMenuActions));
 }
 
 static void BuildNormalStartMenu(void)
@@ -334,16 +338,19 @@ static void BuildNormalStartMenu(void)
     if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
         AddStartMenuAction(MENU_ACTION_POKEDEX);
 
-    if (DN_FLAG_DEXNAV_GET != 0 && FlagGet(DN_FLAG_DEXNAV_GET))
-        AddStartMenuAction(MENU_ACTION_DEXNAV);
-
     if (FlagGet(FLAG_SYS_POKEMON_GET) == TRUE)
         AddStartMenuAction(MENU_ACTION_POKEMON);
 
     AddStartMenuAction(MENU_ACTION_BAG);
+    AddStartMenuAction(MENU_ACTION_DIARY);
 
     if (FlagGet(FLAG_SYS_POKENAV_GET) == TRUE)
         AddStartMenuAction(MENU_ACTION_POKENAV);
+
+#if DEXNAV_ENABLED
+    if (FlagGet(DN_FLAG_DEXNAV_GET) == TRUE && !MapHasNoEncounterData())
+        AddStartMenuAction(MENU_ACTION_DEXNAV);
+#endif
 
     AddStartMenuAction(MENU_ACTION_PLAYER);
     AddStartMenuAction(MENU_ACTION_SAVE);
@@ -1499,8 +1506,11 @@ void HideStartMenu(void)
     HideStartMenuWindow();
 }
 
-void AppendToList(u8 *list, u8 *pos, u8 newEntry)
+void AppendToList(u8 *list, u8 *pos, u8 newEntry, u8 capacity)
 {
+    if (*pos >= capacity)
+        return;
+
     list[*pos] = newEntry;
     (*pos)++;
 }

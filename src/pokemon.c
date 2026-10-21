@@ -484,6 +484,7 @@ const struct NatureInfo gNaturesInfo[NUM_NATURES] =
 #include "data/pokemon/form_change_tables.h"
 #include "data/pokemon/form_change_table_pointers.h"
 #include "data/pokemon/wild_encounter_ow_behavior.h"
+#include "data/pokemon/ausonia_pokedex.h"
 #include "data/object_events/object_event_pic_tables_followers.h"
 
 #include "data/pokemon/species_info.h"
@@ -4834,6 +4835,24 @@ u32 SpeciesToRegionalPokedexNum(enum Species species)
     return SpeciesToHoennPokedexNum(species);
 }
 
+u32 SpeciesToAusoniaPokedexNum(enum Species species)
+{
+    enum NationalDexOrder nationalNum;
+    u32 i;
+
+    nationalNum = SpeciesToNationalPokedexNum(species);
+    if (!nationalNum)
+        return 0;
+
+    for (i = 0; i < AUSONIA_DEX_COUNT; i++)
+    {
+        if (gAusoniaPokedexOrder[i] == nationalNum)
+            return i + 1;
+    }
+
+    return 0;
+}
+
 enum KantoDexOrder SpeciesToKantoPokedexNum(enum Species species)
 {
     if (!species)
@@ -4853,6 +4872,14 @@ enum NationalDexOrder RegionalToNationalOrder(u32 regionalNum)
     if (IS_FRLG)
         return KantoToNationalOrder(regionalNum);
     return HoennToNationalOrder(regionalNum);
+}
+
+enum NationalDexOrder AusoniaToNationalOrder(u32 regionalNum)
+{
+    if (regionalNum == 0 || regionalNum > AUSONIA_DEX_COUNT)
+        return NATIONAL_DEX_NONE;
+
+    return gAusoniaPokedexOrder[regionalNum - 1];
 }
 
 enum NationalDexOrder KantoToNationalOrder(enum KantoDexOrder kantoNum)
@@ -5829,7 +5856,7 @@ enum TrainerPicID PlayerGenderToFrontTrainerPicId(enum Gender playerGender)
     if (playerGender != MALE)
         return FacilityClassToPicIndex(IS_FRLG ? FACILITY_CLASS_LEAF : FACILITY_CLASS_MAY);
     else
-        return FacilityClassToPicIndex(IS_FRLG ? FACILITY_CLASS_RED : FACILITY_CLASS_BRENDAN);
+        return IS_FRLG ? FacilityClassToPicIndex(FACILITY_CLASS_RED) : TRAINER_PIC_PLAYER_ALBA;
 }
 
 void HandleSetPokedexFlag(enum NationalDexOrder nationalNum, u8 caseId, u32 personality)

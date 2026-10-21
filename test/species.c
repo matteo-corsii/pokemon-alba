@@ -285,7 +285,15 @@ TEST("Ausonia starter IDs are append-only and distinct")
     EXPECT_EQ(SPECIES_CARPULUS, SPECIES_CALCISTERN + 1);
     EXPECT_EQ(SPECIES_LUCINUS, SPECIES_CARPULUS + 1);
     EXPECT_EQ(SPECIES_NAUFRAGUS, SPECIES_LUCINUS + 1);
-    EXPECT_EQ(SPECIES_EGG, SPECIES_NAUFRAGUS + 1);
+    EXPECT_EQ(SPECIES_VITEMOSTO, SPECIES_NAUFRAGUS + 1);
+    EXPECT_EQ(SPECIES_PORCHIGNIS, SPECIES_VITEMOSTO + 1);
+    EXPECT_EQ(SPECIES_BRONZOVERRO, SPECIES_PORCHIGNIS + 1);
+    EXPECT_EQ(SPECIES_FRASCHIETTO, SPECIES_BRONZOVERRO + 1);
+    EXPECT_EQ(SPECIES_FRASCOTTO, SPECIES_FRASCHIETTO + 1);
+    EXPECT_EQ(SPECIES_CARPULETUM, SPECIES_FRASCOTTO + 1);
+    EXPECT_EQ(SPECIES_LUTELLUS, SPECIES_CARPULETUM + 1);
+    EXPECT_EQ(SPECIES_SUDOWOODO_AUSONIA, SPECIES_LUTELLUS + 1);
+    EXPECT_EQ(SPECIES_EGG, SPECIES_SUDOWOODO_AUSONIA + 1);
     EXPECT_EQ(NUM_SPECIES, SPECIES_EGG);
 
     EXPECT_EQ(NATIONAL_DEX_PECHARUNT, 1025);
@@ -328,7 +336,15 @@ TEST("Ausonia starter IDs are append-only and distinct")
     EXPECT_EQ(NATIONAL_DEX_CARPULUS, NATIONAL_DEX_CALCISTERN + 1);
     EXPECT_EQ(NATIONAL_DEX_LUCINUS, NATIONAL_DEX_CARPULUS + 1);
     EXPECT_EQ(NATIONAL_DEX_NAUFRAGUS, NATIONAL_DEX_LUCINUS + 1);
-    EXPECT_EQ(NATIONAL_DEX_COUNT, NATIONAL_DEX_NAUFRAGUS);
+    EXPECT_EQ(NATIONAL_DEX_VITEMOSTO, NATIONAL_DEX_NAUFRAGUS + 1);
+    EXPECT_EQ(NATIONAL_DEX_PORCHIGNIS, NATIONAL_DEX_VITEMOSTO + 1);
+    EXPECT_EQ(NATIONAL_DEX_BRONZOVERRO, NATIONAL_DEX_PORCHIGNIS + 1);
+    EXPECT_EQ(NATIONAL_DEX_FRASCHIETTO, NATIONAL_DEX_BRONZOVERRO + 1);
+    EXPECT_EQ(NATIONAL_DEX_FRASCOTTO, NATIONAL_DEX_FRASCHIETTO + 1);
+    EXPECT_EQ(NATIONAL_DEX_CARPULETUM, NATIONAL_DEX_FRASCOTTO + 1);
+    EXPECT_EQ(NATIONAL_DEX_LUTELLUS, NATIONAL_DEX_CARPULETUM + 1);
+    EXPECT_EQ(NATIONAL_DEX_SUDOWOODO_AUSONIA, NATIONAL_DEX_LUTELLUS + 1);
+    EXPECT_EQ(NATIONAL_DEX_COUNT, NATIONAL_DEX_SUDOWOODO_AUSONIA);
 
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_CINGERM), COMPOUND_STRING("Cingerm")), 0);
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_ROVASCO), COMPOUND_STRING("Rovasco")), 0);
@@ -369,6 +385,33 @@ TEST("Ausonia starter IDs are append-only and distinct")
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_CARPULUS), COMPOUND_STRING("Carpulus")), 0);
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_LUCINUS), COMPOUND_STRING("Lucinus")), 0);
     EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_NAUFRAGUS), COMPOUND_STRING("Naufragus")), 0);
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_VITEMOSTO), COMPOUND_STRING("Vitemosto")), 0);
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_PORCHIGNIS), COMPOUND_STRING("Porchignis")), 0);
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_BRONZOVERRO), COMPOUND_STRING("Bronzoverro")), 0);
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_FRASCHIETTO), COMPOUND_STRING("Fraschietto")), 0);
+    EXPECT_EQ(StringCompare(GetSpeciesName(SPECIES_FRASCOTTO), COMPOUND_STRING("Frascotto")), 0);
+}
+
+TEST("Ausonia Regional Dex uses the canonical data table")
+{
+    EXPECT_EQ(AUSONIA_DEX_COUNT, 47);
+    EXPECT_EQ(SpeciesToAusoniaPokedexNum(SPECIES_CINGERM), 1);
+    EXPECT_EQ(SpeciesToAusoniaPokedexNum(SPECIES_SELVAZANNA), 3);
+    EXPECT_EQ(SpeciesToAusoniaPokedexNum(SPECIES_ARDEINO), 7);
+    EXPECT_EQ(SpeciesToAusoniaPokedexNum(SPECIES_BORGOTTO), 10);
+    EXPECT_EQ(SpeciesToAusoniaPokedexNum(SPECIES_CARPULETUM), 36);
+    EXPECT_EQ(SpeciesToAusoniaPokedexNum(SPECIES_LUTELLUS), 38);
+    EXPECT_EQ(SpeciesToAusoniaPokedexNum(SPECIES_FRASCOTTO), 46);
+    EXPECT_EQ(SpeciesToAusoniaPokedexNum(SPECIES_SUDOWOODO_AUSONIA), 47);
+    EXPECT_EQ(SpeciesToAusoniaPokedexNum(SPECIES_PIKACHU), 0);
+
+    EXPECT_EQ(AusoniaToNationalOrder(0), NATIONAL_DEX_NONE);
+    EXPECT_EQ(AusoniaToNationalOrder(1), NATIONAL_DEX_CINGERM);
+    EXPECT_EQ(AusoniaToNationalOrder(36), NATIONAL_DEX_CARPULETUM);
+    EXPECT_EQ(AusoniaToNationalOrder(38), NATIONAL_DEX_LUTELLUS);
+    EXPECT_EQ(AusoniaToNationalOrder(46), NATIONAL_DEX_FRASCOTTO);
+    EXPECT_EQ(AusoniaToNationalOrder(47), NATIONAL_DEX_SUDOWOODO_AUSONIA);
+    EXPECT_EQ(AusoniaToNationalOrder(AUSONIA_DEX_COUNT + 1), NATIONAL_DEX_NONE);
 }
 
 TEST("Ausonia Grass starter base data matches the approved prototype")
@@ -1017,7 +1060,9 @@ TEST("Ausonia Water starter graphics and Pokédex data are valid")
         EXPECT_EQ(info->height, heights[i]);
         EXPECT_EQ(info->weight, weights[i]);
         EXPECT_NE(StringCompare(info->description, gFallbackPokedexText), 0);
-        EXPECT_EQ(info->teachableLearnset[0], MOVE_UNAVAILABLE);
+        EXPECT_EQ(MoveListCount(info->teachableLearnset), 2);
+        EXPECT(MoveListContains(info->teachableLearnset, MOVE_SURF));
+        EXPECT(MoveListContains(info->teachableLearnset, MOVE_FLY));
         EXPECT_EQ(info->eggMoveLearnset[0], MOVE_UNAVAILABLE);
     }
 
@@ -1250,7 +1295,7 @@ TEST("Ausonia common fauna uses original battle graphics and provisional auxilia
         (7 << 4) | 8,
     };
     static const u8 picOffsets[] = { 4, 3, 3, 3 };
-    static const u8 iconPalIndices[] = { 2, 1, 0, 1 };
+    static const u8 iconPalIndices[] = { 2, 1, 0, 2 };
 
     for (u32 i = 0; i < ARRAY_COUNT(species); i++)
     {
@@ -2022,7 +2067,7 @@ TEST("Molospsy canonical data and graphics are valid")
     EXPECT_EQ(info->frontAnimFrames, placeholder->frontAnimFrames);
     EXPECT_EQ(info->frontAnimId, placeholder->frontAnimId);
     EXPECT_EQ(info->backAnimId, placeholder->backAnimId);
-    EXPECT_EQ((u32)info->iconPalIndex, (u32)placeholder->iconPalIndex);
+    EXPECT_EQ((u32)info->iconPalIndex, 1);
     EXPECT_EQ((u32)info->pokemonJumpType, (u32)placeholder->pokemonJumpType);
     EXPECT_EQ(info->pokemonScale, placeholder->pokemonScale);
     EXPECT_EQ(info->pokemonOffset, placeholder->pokemonOffset);
@@ -2036,10 +2081,10 @@ TEST("Molospsy canonical data and graphics are valid")
     EXPECT_EQ(info->enemyShadowYOffset, placeholder->enemyShadowYOffset);
     EXPECT_EQ((u32)info->enemyShadowSize, (u32)placeholder->enemyShadowSize);
 #if OW_POKEMON_OBJECT_EVENTS
-    EXPECT(info->overworldData.images == placeholder->overworldData.images);
+    EXPECT(info->overworldData.images != placeholder->overworldData.images);
 #if OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
-    EXPECT(info->overworldPalette == placeholder->overworldPalette);
-    EXPECT(info->overworldShinyPalette == placeholder->overworldShinyPalette);
+    EXPECT(info->overworldPalette != placeholder->overworldPalette);
+    EXPECT(info->overworldShinyPalette != placeholder->overworldShinyPalette);
 #endif
 #endif
     EXPECT(GetSpeciesEvolutions(SPECIES_MOLOSPSY) == NULL);

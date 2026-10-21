@@ -545,7 +545,7 @@ bool32 TryRunFromBattle(enum BattlerId battler)
     u8 speedVar;
 
     // If this flag is set, running will never be successful under any circumstances.
-    if (FlagGet(WE_FLAG_NO_RUNNING))
+    if ((gBattleTypeFlags & BATTLE_TYPE_CHEF) || FlagGet(WE_FLAG_NO_RUNNING))
         return effect;
 
     if (gBattleMons[battler].item == ITEM_ENIGMA_BERRY_E_READER)
