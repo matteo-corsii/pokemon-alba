@@ -8,12 +8,63 @@
 #include "text_window.h"
 #include "script.h"
 #include "field_name_box.h"
+#include "palette.h"
+#include "sound.h"
+#include "constants/map_types.h"
+#include "constants/region_map_sections.h"
+#include "constants/songs.h"
+
+// Temporary, audio-only instrumentation for Lago interior field messages.
+#define LAGO_FIELD_MESSAGE_DIAGNOSTIC 1
 
 static EWRAM_DATA u8 sFieldMessageBoxMode = 0;
 EWRAM_DATA u8 gWalkAwayFromSignpostTimer = 0;
 
 static void ExpandStringAndStartDrawFieldMessage(const u8 *, bool32);
 static void StartDrawFieldMessage(void);
+
+#if LAGO_FIELD_MESSAGE_DIAGNOSTIC
+static bool8 IsLagoInteriorForMessageDiagnostic(void)
+{
+    return (gMapHeader.mapType == MAP_TYPE_INDOOR
+         && gMapHeader.regionMapSectionId == MAPSEC_ALBERA_STORICA);
+}
+
+static bool8 IsPaletteZero(const u16 *palette)
+{
+    u8 i;
+    for (i = 0; i < 16; i++)
+        if (palette[i] != 0)
+            return FALSE;
+    return TRUE;
+}
+
+static bool8 ArePalettesEqual(const u16 *a, const u16 *b)
+{
+    u8 i;
+    for (i = 0; i < 16; i++)
+        if (a[i] != b[i])
+            return FALSE;
+    return TRUE;
+}
+
+static void DiagnosticMessageBoxPaletteCheckpoint(void)
+{
+    const u16 *unfaded14 = &gPlttBufferUnfaded[BG_PLTT_ID(14) / sizeof(u16)];
+    const u16 *unfaded15 = &gPlttBufferUnfaded[BG_PLTT_ID(15) / sizeof(u16)];
+    const u16 *faded14 = &gPlttBufferFaded[BG_PLTT_ID(14) / sizeof(u16)];
+    const u16 *faded15 = &gPlttBufferFaded[BG_PLTT_ID(15) / sizeof(u16)];
+
+    // D: base tone, then PAL14/PAL15 zero-state and faded/unfaded comparison.
+    PlaySE(SE_PIN);
+    PlaySE(IsPaletteZero(faded14) ? SE_BOO : SE_SUCCESS);
+    PlaySE(IsPaletteZero(faded15) ? SE_WALL_HIT : SE_BIKE_BELL);
+    PlaySE(ArePalettesEqual(faded14, unfaded14) ? SE_SELECT : SE_SWITCH);
+    PlaySE(ArePalettesEqual(faded15, unfaded15) ? SE_SELECT : SE_SWITCH);
+    if (gPaletteFade.bufferTransferDisabled)
+        PlaySE(SE_FAILURE);
+}
+#endif
 
 void InitFieldMessageBox(void)
 {
@@ -33,10 +84,18 @@ static void Task_DrawFieldMessage(u8 taskId)
     switch (task->tState)
     {
     case 0:
+#if LAGO_FIELD_MESSAGE_DIAGNOSTIC
+        if (IsLagoInteriorForMessageDiagnostic())
+            PlaySE(SE_PC_LOGIN); // C: state 0, before loading message-box graphics.
+#endif
         if (gMsgIsSignPost)
             LoadSignPostWindowFrameGfx();
         else
             LoadMessageBoxAndBorderGfx();
+#if LAGO_FIELD_MESSAGE_DIAGNOSTIC
+        if (IsLagoInteriorForMessageDiagnostic())
+            DiagnosticMessageBoxPaletteCheckpoint(); // D: immediately after UI load.
+#endif
         task->tState++;
         break;
     case 1:
@@ -61,7 +120,11 @@ static void Task_DrawFieldMessage(u8 taskId)
 
 static void CreateTask_DrawFieldMessage(void)
 {
-    CreateTask(Task_DrawFieldMessage, 0x50);
+    u8 taskId = CreateTask(Task_DrawFieldMessage, 0x50);
+#if LAGO_FIELD_MESSAGE_DIAGNOSTIC
+    if (taskId != TASK_NONE && IsLagoInteriorForMessageDiagnostic())
+        PlaySE(SE_WIN_OPEN); // B: Task_DrawFieldMessage created; task id is available here.
+#endif
 }
 
 static void DestroyTask_DrawFieldMessage(void)
@@ -75,6 +138,10 @@ bool8 ShowFieldMessage(const u8 *str)
 {
     if (sFieldMessageBoxMode != FIELD_MESSAGE_BOX_HIDDEN)
         return FALSE;
+#if LAGO_FIELD_MESSAGE_DIAGNOSTIC
+    if (IsLagoInteriorForMessageDiagnostic())
+        PlaySE(SE_CLICK); // A: ShowFieldMessage reached.
+#endif
     ExpandStringAndStartDrawFieldMessage(str, TRUE);
     sFieldMessageBoxMode = FIELD_MESSAGE_BOX_NORMAL;
     return TRUE;
