@@ -73,9 +73,29 @@ $openingTriggers = @($labMap.coord_events | Where-Object {
 Assert-True ($openingTriggers.Count -eq 6) 'La linea di trigger del laboratorio deve coprire sei celle.'
 Assert-True ((@($openingTriggers.x | Sort-Object) -join ',') -eq '4,5,6,7,8,9') 'Coordinate dei trigger del laboratorio inattese.'
 Assert-True (-not $lab.Contains('map_script_2 VAR_ALBERA_OPENING_STATE, 1')) 'LÃ¢â‚¬â„¢apertura non deve partire dalla porta tramite map script.'
-foreach ($legacyBall in @('LOCALID_BIRCHS_LAB_CYNDAQUIL_BALL', 'LOCALID_BIRCHS_LAB_TOTODILE_BALL', 'LOCALID_BIRCHS_LAB_CHIKORITA_BALL')) {
-    Assert-Contains $lab "removeobject $legacyBall" "La ball starter legacy $legacyBall non viene rimossa all'ingresso del laboratorio."
+foreach ($legacyFlag in @('FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CYNDAQUIL', 'FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_TOTODILE', 'FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CHIKORITA')) {
+    Assert-Contains $lab "setflag $legacyFlag" "La ball starter legacy $legacyFlag non viene nascosta prima dello spawn."
 }
+$transitionStart = $lab.IndexOf('LittlerootTown_ProfessorBirchsLab_OnTransition:')
+$layoutBranch = $lab.IndexOf('call_if_ge VAR_ALBERA_OPENING_STATE, 1', $transitionStart)
+foreach ($legacyFlag in @('FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CYNDAQUIL', 'FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_TOTODILE', 'FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CHIKORITA')) {
+    $flagPosition = $lab.IndexOf("setflag $legacyFlag", $transitionStart)
+    Assert-True ($flagPosition -ge $transitionStart -and $flagPosition -lt $layoutBranch) "Il flag $legacyFlag non viene impostato all'ingresso prima del branching."
+}
+$transitionBlock = $lab.Substring($transitionStart, $layoutBranch - $transitionStart)
+Assert-True (-not $transitionBlock.Contains('removeobject')) 'Il primo ingresso non deve affidarsi a removeobject per nascondere le ball legacy.'
+$itemBalls = @($labMap.object_events | Where-Object { $_.graphics_id -eq 'OBJ_EVENT_GFX_ITEM_BALL' })
+Assert-True ($itemBalls.Count -eq 6) 'Il laboratorio deve contenere esattamente le sei Item Ball legacy note.'
+foreach ($itemBall in $itemBalls) {
+    Assert-True ($itemBall.flag -in @('FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CYNDAQUIL', 'FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_TOTODILE', 'FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CHIKORITA')) "Item Ball con flag inatteso alle coordinate $($itemBall.x),$($itemBall.y)."
+}
+$centralBalls = @($itemBalls | Where-Object { $_.x -eq 6 -and $_.y -eq 8 })
+$tableBalls = @($itemBalls | Where-Object { $_.x -in @(8, 9, 10) -and $_.y -eq 4 })
+Assert-True ($centralBalls.Count -eq 3) 'Le tre Item Ball centrali legacy non sono tutte presenti nel template atteso.'
+Assert-True ($tableBalls.Count -eq 3 -and (@($tableBalls.x | Sort-Object) -join ',') -eq '8,9,10') 'Le tre Item Ball del tavolo non sono tutte presenti nelle coordinate attese.'
+Assert-Contains $lab 'addobject LOCALID_BIRCHS_LAB_CYNDAQUIL_BALL' 'Il percorso postgame Johto non aggiunge Cyndaquil.'
+Assert-Contains $lab 'addobject LOCALID_BIRCHS_LAB_TOTODILE_BALL' 'Il percorso postgame Johto non aggiunge Totodile.'
+Assert-Contains $lab 'addobject LOCALID_BIRCHS_LAB_CHIKORITA_BALL' 'Il percorso postgame Johto non aggiunge Chikorita.'
 foreach ($token in @(
     'LittlerootTown_ProfessorBirchsLab_EventScript_AlberaOpeningTrigger',
     'LittlerootTown_ProfessorBirchsLab_EventScript_StageAlberaOpening',
