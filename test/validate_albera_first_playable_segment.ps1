@@ -73,6 +73,9 @@ $openingTriggers = @($labMap.coord_events | Where-Object {
 Assert-True ($openingTriggers.Count -eq 6) 'La linea di trigger del laboratorio deve coprire sei celle.'
 Assert-True ((@($openingTriggers.x | Sort-Object) -join ',') -eq '4,5,6,7,8,9') 'Coordinate dei trigger del laboratorio inattese.'
 Assert-True (-not $lab.Contains('map_script_2 VAR_ALBERA_OPENING_STATE, 1')) 'LÃ¢â‚¬â„¢apertura non deve partire dalla porta tramite map script.'
+foreach ($legacyBall in @('LOCALID_BIRCHS_LAB_CYNDAQUIL_BALL', 'LOCALID_BIRCHS_LAB_TOTODILE_BALL', 'LOCALID_BIRCHS_LAB_CHIKORITA_BALL')) {
+    Assert-Contains $lab "removeobject $legacyBall" "La ball starter legacy $legacyBall non viene rimossa all'ingresso del laboratorio."
+}
 foreach ($token in @(
     'LittlerootTown_ProfessorBirchsLab_EventScript_AlberaOpeningTrigger',
     'LittlerootTown_ProfessorBirchsLab_EventScript_StageAlberaOpening',
