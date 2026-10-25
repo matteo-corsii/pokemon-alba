@@ -77,6 +77,75 @@
       ],
       "encounters": [
         {
+          "map": "MAP_GALLORO",
+          "base_label": "gGalloro",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 28,
+                "max_level": 32,
+                "species": "SPECIES_INFIORALA"
+              },
+              {
+                "min_level": 28,
+                "max_level": 32,
+                "species": "SPECIES_SUDOWOODO_AUSONIA"
+              },
+              {
+                "min_level": 28,
+                "max_level": 32,
+                "species": "SPECIES_INFIORALA"
+              },
+              {
+                "min_level": 28,
+                "max_level": 32,
+                "species": "SPECIES_LUSCERP"
+              },
+              {
+                "min_level": 29,
+                "max_level": 32,
+                "species": "SPECIES_LUSCERP"
+              },
+              {
+                "min_level": 29,
+                "max_level": 32,
+                "species": "SPECIES_TINUNCOL"
+              },
+              {
+                "min_level": 28,
+                "max_level": 31,
+                "species": "SPECIES_INFIORALA"
+              },
+              {
+                "min_level": 29,
+                "max_level": 32,
+                "species": "SPECIES_BRILLAZZA"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_SUDOWOODO_AUSONIA"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_BRILLAZZA"
+              },
+              {
+                "min_level": 31,
+                "max_level": 32,
+                "species": "SPECIES_SUDOWOODO_AUSONIA"
+              },
+              {
+                "min_level": 31,
+                "max_level": 32,
+                "species": "SPECIES_BRILLAZZA"
+              }
+            ]
+          }
+        },
+        {
           "map": "MAP_ROUTE101",
           "base_label": "gRoute101",
           "land_mons": {

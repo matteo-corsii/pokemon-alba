@@ -9743,6 +9743,28 @@
       "layout_version": "emerald"
     },
     {
+      "id": "LAYOUT_GALLORO",
+      "name": "Galloro_Layout",
+      "width": 48,
+      "height": 56,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Galloro",
+      "border_filepath": "data/layouts/Galloro/border.bin",
+      "blockdata_filepath": "data/layouts/Galloro/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_GALLORO_SANTUARIO",
+      "name": "Galloro_Santuario_Layout",
+      "width": 21,
+      "height": 14,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Facility",
+      "border_filepath": "data/layouts/Galloro_Santuario/border.bin",
+      "blockdata_filepath": "data/layouts/Galloro_Santuario/map.bin",
+      "layout_version": "emerald"
+    },
+    {
       "id": "LAYOUT_VIA_DELL_UCCELLIERA",
       "name": "ViaDellUccelliera_Layout",
       "width": 24,

@@ -874,14 +874,17 @@
 #define TRAINER_LARICIA_GYM_TRAINER_3         866
 #define TRAINER_LARICIA_GYM_TRAINER_4         867
 #define TRAINER_AUGUSTO                       868
+#define TRAINER_GALLORO_ESPLORATORE           869
+#define TRAINER_GALLORO_GIARDINIERA           870
+#define TRAINER_GALLORO_POKEFAN               871
 #endif
 
 // NOTE: Because each Trainer uses a flag to determine when they are defeated, there is only space for 9 additional trainers before trainer flag space overflows
 //       More space can be made by shifting flags around in constants/flags.h or changing how trainer flags are handled
 //       MAX_TRAINERS_COUNT can be increased but will take up additional saveblock space
 
-#define TRAINERS_COUNT_EMERALD     869
-#define MAX_TRAINERS_COUNT_EMERALD 869
+#define TRAINERS_COUNT_EMERALD     872
+#define MAX_TRAINERS_COUNT_EMERALD 872
 
 #if IS_FRLG
 #define TRAINERS_COUNT                      TRAINERS_COUNT_FRLG

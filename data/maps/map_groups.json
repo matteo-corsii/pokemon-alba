@@ -144,6 +144,7 @@
     "VillaPapaleGiardini",
     "PonteValleLaricia",
     "Laricia",
+    "Galloro",
     "ViaDellUccelliera"
   ],
   "gMapGroup_IndoorLittleroot": [
@@ -166,6 +167,10 @@
     "AlberaStorica_MentorsHouse",
     "AlberaStorica_CivicArchive",
     "AlberaStorica_SecretBaseShop",
+    "Galloro_LaboratorioElio",
+    "Galloro_Santuario",
+    "Galloro_Casa_1",
+    "Galloro_Casa_2",
     "ViaConsolare_Mansio",
     "LagoDiAlbera_RefugeMastersHouse_1F",
     "LagoDiAlbera_RefugeMastersHouse_2F",

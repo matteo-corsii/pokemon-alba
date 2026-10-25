@@ -1355,6 +1355,14 @@
 #define FLAG_UNUSED_0x4CA                                           0x4CA // Unused Flag
 #define FLAG_UNUSED_0x4CB                                           0x4CB // Unused Flag
 #define FLAG_UNUSED_0x4CC                                           0x4CC // Unused Flag
+#define FLAG_TRAINER_GALLORO_ESPLORATORE                             FLAG_UNUSED_0x4C7
+#define FLAG_TRAINER_GALLORO_GIARDINIERA                             FLAG_UNUSED_0x4C8
+#define FLAG_TRAINER_GALLORO_POKEFAN                                 FLAG_UNUSED_0x4C9
+#define FLAG_ITEM_GALLORO_SUPER_REPEL                                FLAG_UNUSED_0x4CA
+#define FLAG_ITEM_GALLORO_SUPER_POTION                               FLAG_UNUSED_0x4CB
+#define FLAG_ITEM_GALLORO_RAWST_BERRY                                FLAG_UNUSED_0x4CC
+#define FLAG_GALLORO_LA_MEMORIA_COMPLETED                            FLAG_UNUSED_0x4CD
+#define FLAG_GALLORO_LA_MEMORIA_SEEN                                 FLAG_UNUSED_0x4CE
 #define FLAG_UNUSED_0x4CD                                           0x4CD // Unused Flag
 #define FLAG_UNUSED_0x4CE                                           0x4CE // Unused Flag
 #define FLAG_UNUSED_0x4CF                                           0x4CF // Unused Flag

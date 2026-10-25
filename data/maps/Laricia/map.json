@@ -516,6 +516,27 @@
       "elevation": 0,
       "dest_map": "MAP_LARICIA_GYM_LOBBY",
       "dest_warp_id": "4"
+    },
+    {
+      "x": 63,
+      "y": 52,
+      "elevation": 3,
+      "dest_map": "MAP_GALLORO",
+      "dest_warp_id": "6"
+    },
+    {
+      "x": 63,
+      "y": 53,
+      "elevation": 3,
+      "dest_map": "MAP_GALLORO",
+      "dest_warp_id": "7"
+    },
+    {
+      "x": 63,
+      "y": 54,
+      "elevation": 3,
+      "dest_map": "MAP_GALLORO",
+      "dest_warp_id": "8"
     }
   ],
   "coord_events": [],

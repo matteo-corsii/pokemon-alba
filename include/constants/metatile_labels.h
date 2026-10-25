@@ -236,6 +236,10 @@
 #define METATILE_Fortree_WoodBridge1_Bottom                0x29F
 #define METATILE_Fortree_WoodBridge1_Top                   0x297
 
+// gTileset_Galloro
+#define METATILE_Galloro_SecretBase_TreeRight              0x25F
+#define METATILE_Galloro_SecretBase_VineRight              0x260
+
 // gTileset_FuchsiaCity
 #define METATILE_FuchsiaCity_Door                           0x2BF
 #define METATILE_FuchsiaCity_SafariZoneDoor                 0x2D2
