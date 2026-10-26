@@ -6,10 +6,10 @@ Galloro_Casa_1_EventScript_Parent::
 	faceplayer
 	msgbox Galloro_Casa_1_Text_Parent, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, Galloro_Casa_1_EventScript_ParentNo
-	fadeto black
+	fadescreen FADE_TO_BLACK
 	waitstate
 	special HealPlayerParty
-	fadeinlight 0
+	fadescreen FADE_FROM_BLACK
 	msgbox Galloro_Casa_1_Text_ParentYes, MSGBOX_DEFAULT
 	release
 	end
