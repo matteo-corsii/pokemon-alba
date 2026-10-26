@@ -17240,7 +17240,7 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 - Fake Out
 
 === TRAINER_GALLORO_ESPLORATORE ===
-Name: ESPLORATORE
+Name: ESPLORA
 Class: Hiker
 Pic: Hiker
 Gender: Male
@@ -17257,7 +17257,7 @@ Level: 32
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_GALLORO_GIARDINIERA ===
-Name: GIARDINIERA
+Name: GIARDINA
 Class: Lady
 Pic: Lass
 Gender: Female
@@ -17289,3 +17289,7 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 SPECIES_SUDOWOODO_AUSONIA
 Level: 32
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Shadow Sneak
+- Seed Bomb
+- Curse
+- Rock Slide

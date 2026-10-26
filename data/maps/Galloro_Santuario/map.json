@@ -3,6 +3,7 @@
   "name": "Galloro_Santuario",
   "layout": "LAYOUT_GALLORO_SANTUARIO",
   "music": "MUS_LILYCOVE_MUSEUM",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_GALLORO",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

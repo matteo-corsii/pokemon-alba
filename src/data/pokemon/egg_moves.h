@@ -1877,6 +1877,14 @@ static const u16 sSudowoodoEggMoveLearnset[] = {
     MOVE_ENDURE,
     MOVE_UNAVAILABLE,
 };
+
+static const u16 sSudowoodoAusoniaEggMoveLearnset[] = {
+    MOVE_CURSE,
+    MOVE_ROCK_SLIDE,
+    MOVE_SHADOW_SNEAK,
+    MOVE_LEECH_SEED,
+    MOVE_UNAVAILABLE,
+};
 #endif //P_FAMILY_SUDOWOODO
 
 #if P_FAMILY_HOPPIP

@@ -2987,8 +2987,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .eggMoveLearnset = sFrascottoEggMoveLearnset,
     },
 
-    // Pokémon Alba: Ausonia regional Sudowoodo. Gameplay values are inherited
-    // from vanilla Sudowoodo until regional balancing is approved.
+    // Pokémon Alba: Ausonia regional Sudowoodo.
     [SPECIES_SUDOWOODO_AUSONIA] =
     {
         .baseHP        = 70,
@@ -3046,9 +3045,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-2, 7, SHADOW_SIZE_S)
         FOOTPRINT(Sudowoodo)
-        .levelUpLearnset = sSudowoodoLevelUpLearnset,
-        .teachableLearnset = sSudowoodoTeachableLearnset,
-        .eggMoveLearnset = sSudowoodoEggMoveLearnset,
+        .levelUpLearnset = sSudowoodoAusoniaLevelUpLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sSudowoodoAusoniaTeachableLearnset,
+        .eggMoveLearnset = sSudowoodoAusoniaEggMoveLearnset,
     },
 
     /* You may add any custom species below this point based on the following structure: */
