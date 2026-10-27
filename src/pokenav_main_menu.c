@@ -314,6 +314,8 @@ void RestorePokenavMainMenuBg0(void)
     struct Pokenav_MainMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_MAIN_MENU);
 
     SetBgTilemapBuffer(0, menu->tilemapBuffer);
+    CopyToBgTilemapBuffer(0, &gPokenavHeader_Tilemap, 0, 0);
+    CopyPaletteIntoBufferUnfaded(gPokenavHeader_Pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
     CopyBgTilemapBufferToVram(0);
     ShowBg(0);
 }
@@ -707,7 +709,7 @@ static void LoadLeftHeaderGfxForMenu(u32 menuGfxId)
 static bool32 IsAusoniaMapHeader(u32 menuGfxId)
 {
     return (menuGfxId == POKENAV_GFX_MAP_MENU_ZOOMED_OUT || menuGfxId == POKENAV_GFX_MAP_MENU_ZOOMED_IN)
-        && GetRegionMapType(GetCurrentRegionMapSectionId()) == REGION_MAP_AUSONIA;
+        && GetRegionMapType(gMapHeader.regionMapSectionId) == REGION_MAP_AUSONIA;
 }
 
 static void DrawAusoniaMapHeader(u8 *buffer)
@@ -715,9 +717,9 @@ static void DrawAusoniaMapHeader(u8 *buffer)
     static const char *const sGlyphs[] = {
         "010101111101101", "101101101101111", "111100111001111", "111101101101111",
         "101111111111101", "111010010010111", "110101110101101", "111100110100111",
-        "111100101101111",
+        "111100101101111", "101101111101101", "111101101111100",
     };
-    static const char sText[] = "AUSONIA REGION";
+    static const char sText[] = "AUSONIA MAP";
     u32 frame, x, y, glyph, row, column;
 
     for (frame = 0; frame < 3; frame++)
@@ -740,7 +742,9 @@ static void DrawAusoniaMapHeader(u8 *buffer)
             : (sText[glyph] == 'N') ? 4
             : (sText[glyph] == 'I') ? 5
             : (sText[glyph] == 'R') ? 6
-            : (sText[glyph] == 'E') ? 7 : 8;
+            : (sText[glyph] == 'E') ? 7
+            : (sText[glyph] == 'M') ? 9
+            : (sText[glyph] == 'P') ? 10 : 8;
         for (y = 0; y < 5; y++)
             for (column = 0; column < 3; column++)
                 if (sGlyphs[row][y * 3 + column] == '1')

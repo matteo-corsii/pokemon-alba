@@ -2,6 +2,7 @@
 #include "bg.h"
 #include "decompress.h"
 #include "graphics.h"
+#include "list_menu.h"
 #include "main.h"
 #include "menu.h"
 #include "overworld.h"
@@ -13,6 +14,7 @@
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
+#include "task.h"
 #include "text.h"
 #include "window.h"
 #include "wild_encounter.h"
@@ -25,34 +27,37 @@ struct Pokenav_Habitat
     u16 count;
     u16 top;
     u16 windowId;
+    u8 bg1TilemapBuffer[BG_SCREEN_SIZE];
     enum Species species[HABITAT_MAX_SPECIES];
     struct Sprite *icons[HABITAT_VISIBLE_ROWS];
-    u8 bgTilemapBuffer[BG_SCREEN_SIZE];
+    u8 bg2TilemapBuffer[BG_SCREEN_SIZE];
     u32 loopedTaskId;
     bool32 (*isTaskActiveCB)(void);
     bool32 exitRequested;
+    u8 scrollArrowTaskId;
+    bool8 scrollArrowsLoaded;
 };
 
-static const u16 sHabitatUiPal[] = INCGFX_U16("graphics/pokenav/match_call/ui.png", ".gbapal");
-static const u32 sHabitatUiGfx[] = INCGFX_U32("graphics/pokenav/match_call/ui.png", ".4bpp.smol", "-num_tiles 13 -Wnum_tiles");
-static const u32 sHabitatUiTilemap[] = INCGFX_U32("graphics/pokenav/match_call/ui.bin", ".smolTM");
-static const u16 sHabitatListPal[] = INCGFX_U16("graphics/pokenav/match_call/list_window.pal", ".gbapal");
+static const u16 sHabitatFramePal[] = INCGFX_U16("graphics/pokenav/ribbons/list_bg.png", ".gbapal");
+static const u32 sHabitatFrameGfx[] = INCGFX_U32("graphics/pokenav/ribbons/list_bg.png", ".4bpp.smol");
+static const u32 sHabitatFrameTilemap[] = INCGFX_U32("graphics/pokenav/ribbons/list_bg.bin", ".smolTM");
+static const u16 sHabitatListPal[] = INCGFX_U16("graphics/pokenav/ribbons/list_ui.pal", ".gbapal");
 
 static const struct BgTemplate sHabitatBgTemplates[] =
 {
     {
-        .bg = 1, .charBaseIndex = 3, .mapBaseIndex = 0x1F, .screenSize = 0,
-        .paletteMode = 0, .priority = 1, .baseTile = 0
+        .bg = 1, .charBaseIndex = 1, .mapBaseIndex = 0x06, .screenSize = 0,
+        .paletteMode = 0, .priority = 2, .baseTile = 0
     },
     {
-        .bg = 2, .charBaseIndex = 2, .mapBaseIndex = 0x06, .screenSize = 0,
-        .paletteMode = 0, .priority = 2, .baseTile = 0x80
+        .bg = 2, .charBaseIndex = 2, .mapBaseIndex = 0x07, .screenSize = 0,
+        .paletteMode = 0, .priority = 3, .baseTile = 0
     },
 };
 
 static const struct WindowTemplate sHabitatWindowTemplate =
 {
-    .bg = 1, .tilemapLeft = 1, .tilemapTop = 1, .width = 28, .height = 19,
+    .bg = 2, .tilemapLeft = 2, .tilemapTop = 5, .width = 28, .height = 19,
     .paletteNum = 2, .baseBlock = 0x10
 };
 
@@ -64,6 +69,7 @@ static u32 LoopedTask_HabitatPageDown(s32 state);
 static u32 LoopedTask_HabitatExit(s32 state);
 static void DrawHabitat(void);
 static void DestroyHabitatIcons(void);
+static void CleanupHabitatScreen(void);
 static bool32 HabitatLoopTaskActive(void);
 
 bool32 PokenavCallback_Init_Habitat(void)
@@ -78,6 +84,8 @@ bool32 PokenavCallback_Init_Habitat(void)
     state->loopedTaskId = 0;
     state->isTaskActiveCB = NULL;
     state->exitRequested = FALSE;
+    state->scrollArrowTaskId = TASK_NONE;
+    state->scrollArrowsLoaded = FALSE;
     memset(state->icons, 0, sizeof(state->icons));
     return TRUE;
 }
@@ -147,10 +155,7 @@ void FreeHabitatSubstruct2(void)
     struct Pokenav_Habitat *state = GetSubstructPtr(POKENAV_SUBSTRUCT_HABITAT);
     if (state == NULL)
         return;
-    DestroyHabitatIcons();
-    if (state->windowId != WINDOW_NONE)
-        RemoveWindow(state->windowId);
-    FreeMonIconPalettes();
+    CleanupHabitatScreen();
     FreePokenavSubstruct(POKENAV_SUBSTRUCT_HABITAT);
 }
 
@@ -161,13 +166,16 @@ static u32 LoopedTask_OpenHabitat(s32 taskState)
     {
     case 0:
         InitBgTemplates(sHabitatBgTemplates, ARRAY_COUNT(sHabitatBgTemplates));
-        DecompressAndCopyTileDataToVram(1, sHabitatUiGfx, 0, 0, 0);
-        DecompressAndCopyTileDataToVram(2, sHabitatUiGfx, 0, 0, 0);
-        SetBgTilemapBuffer(2, state->bgTilemapBuffer);
-        CopyToBgTilemapBuffer(2, sHabitatUiTilemap, 0, 0);
-        CopyPaletteIntoBufferUnfaded(sHabitatUiPal, BG_PLTT_ID(2), sizeof(sHabitatUiPal));
+        DecompressAndCopyTileDataToVram(1, sHabitatFrameGfx, 0, 0, 0);
+        SetBgTilemapBuffer(1, state->bg1TilemapBuffer);
+        CopyToBgTilemapBuffer(1, sHabitatFrameTilemap, 0, 0);
+        CopyBgTilemapBufferToVram(1);
+        SetBgTilemapBuffer(2, state->bg2TilemapBuffer);
+        FillBgTilemapBufferRect_Palette0(2, 0, 0, 0, 32, 32);
+        CopyBgTilemapBufferToVram(2);
+        CopyPaletteIntoBufferUnfaded(sHabitatFramePal, BG_PLTT_ID(1), sizeof(sHabitatFramePal));
         state->windowId = AddWindow(&sHabitatWindowTemplate);
-        CopyPaletteIntoBufferUnfaded(sHabitatListPal, BG_PLTT_ID(1), sizeof(sHabitatListPal));
+        CopyPaletteIntoBufferUnfaded(sHabitatListPal, BG_PLTT_ID(2), sizeof(sHabitatListPal));
         LoadMonIconPalettes();
         return LT_INC_AND_PAUSE;
     case 1:
@@ -176,10 +184,16 @@ static u32 LoopedTask_OpenHabitat(s32 taskState)
         FillWindowPixelBuffer(state->windowId, PIXEL_FILL(1));
         PutWindowTilemap(state->windowId);
         DrawHabitat();
+        if (state->count > HABITAT_VISIBLE_ROWS)
+        {
+            state->scrollArrowTaskId = AddScrollIndicatorArrowPairParameterized(
+                SCROLL_ARROW_UP, 224, 48, 160, state->count - HABITAT_VISIBLE_ROWS,
+                TAG_NONE, TAG_NONE, &state->top);
+            state->scrollArrowsLoaded = TRUE;
+        }
         ShowBg(1);
         ShowBg(2);
-        LoadLeftHeaderGfxForIndex(POKENAV_GFX_MAIN_MENU);
-        ShowLeftHeaderGfx(POKENAV_GFX_MAIN_MENU, TRUE, FALSE);
+        SetLeftHeaderSpritesInvisibility();
         PokenavFadeScreen(POKENAV_FADE_FROM_BLACK);
         return LT_INC_AND_PAUSE;
     case 2:
@@ -236,6 +250,7 @@ static u32 LoopedTask_HabitatExit(s32 state)
     HideBg(1);
     HideBg(2);
     HideBg(3);
+    CleanupHabitatScreen();
     RestorePokenavMainMenuBg0();
     return LT_FINISH;
 }
@@ -249,14 +264,15 @@ static bool32 HabitatLoopTaskActive(void)
 static void DrawHabitat(void)
 {
     struct Pokenav_Habitat *state = GetSubstructPtr(POKENAV_SUBSTRUCT_HABITAT);
-    struct PokenavHabitatListItem item;
     u8 areaName[32];
+    const struct MapHeader *mapHeader;
     u16 i;
 
     DestroyHabitatIcons();
     FillWindowPixelBuffer(state->windowId, PIXEL_FILL(1));
     AddTextPrinterParameterized(state->windowId, FONT_NORMAL, COMPOUND_STRING("HABITAT"), 8, 1, TEXT_SKIP_DRAW, NULL);
-    GetMapName(areaName, GetCurrentRegionMapSectionId(), 0);
+    mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
+    GetMapName(areaName, mapHeader->regionMapSectionId, 0);
     AddTextPrinterParameterized(state->windowId, FONT_SMALL, areaName, 80, 1, TEXT_SKIP_DRAW, NULL);
 
     for (i = 0; i < HABITAT_VISIBLE_ROWS; i++)
@@ -264,16 +280,11 @@ static void DrawHabitat(void)
         u16 index = state->top + i;
         if (index >= state->count)
             break;
-        item.species = state->species[index];
-        AddTextPrinterParameterized(state->windowId, FONT_NORMAL, GetSpeciesName(item.species), 42, 32 + i * 32, TEXT_SKIP_DRAW, NULL);
-        state->icons[i] = &gSprites[CreateMonIconNoPersonality(item.species, SpriteCB_MonIcon, 24, 48 + i * 32, 1)];
+        AddTextPrinterParameterized(state->windowId, FONT_NORMAL, GetSpeciesName(state->species[index]), 42, 24 + i * 32, TEXT_SKIP_DRAW, NULL);
+        state->icons[i] = &gSprites[CreateMonIconNoPersonality(state->species[index], SpriteCB_MonIcon, 24, 56 + i * 32, 1)];
     }
     if (state->count == 0)
-        AddTextPrinterParameterized(state->windowId, FONT_NORMAL, COMPOUND_STRING("NO WILD POKEMON"), 24, 72, TEXT_SKIP_DRAW, NULL);
-    if (state->top != 0)
-        AddTextPrinterParameterized(state->windowId, FONT_SMALL, COMPOUND_STRING("UP"), 216, 136, TEXT_SKIP_DRAW, NULL);
-    if (state->top + HABITAT_VISIBLE_ROWS < state->count)
-        AddTextPrinterParameterized(state->windowId, FONT_SMALL, COMPOUND_STRING("DOWN"), 216, 144, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(state->windowId, FONT_SMALL, COMPOUND_STRING("NESSUN POKéMON SELVATICO\nDISPONIBILE"), 40, 72, TEXT_SKIP_DRAW, NULL);
     CopyWindowToVram(state->windowId, COPYWIN_FULL);
 }
 
@@ -291,4 +302,27 @@ static void DestroyHabitatIcons(void)
             state->icons[i] = NULL;
         }
     }
+}
+
+static void CleanupHabitatScreen(void)
+{
+    struct Pokenav_Habitat *state = GetSubstructPtr(POKENAV_SUBSTRUCT_HABITAT);
+
+    if (state == NULL)
+        return;
+    DestroyHabitatIcons();
+    if (state->scrollArrowsLoaded)
+    {
+        RemoveScrollIndicatorArrowPair(state->scrollArrowTaskId);
+        state->scrollArrowsLoaded = FALSE;
+    }
+    if (state->windowId != WINDOW_NONE)
+    {
+        ClearWindowTilemap(state->windowId);
+        RemoveWindow(state->windowId);
+        state->windowId = WINDOW_NONE;
+    }
+    UnsetBgTilemapBuffer(1);
+    UnsetBgTilemapBuffer(2);
+    FreeMonIconPalettes();
 }

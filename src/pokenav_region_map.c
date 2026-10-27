@@ -80,6 +80,7 @@ static u32 LoopedTask_UpdateInfoAfterCursorMove(s32);
 static u32 LoopedTask_RegionMapZoomOut(s32);
 static u32 LoopedTask_RegionMapZoomIn(s32);
 static u32 LoopedTask_ExitRegionMap(s32);
+static void RemoveRegionMapInfoWindow(void);
 static u32 LoopedTask_TreatAsPokeNavFlyMap(s32);
 
 extern const u16 gRegionMapCityZoomTiles_Pal[];
@@ -297,7 +298,7 @@ void FreeRegionMapSubstruct2(void)
     struct Pokenav_RegionMapGfx *state = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP_ZOOM);
     FreeRegionMapIconResources();
     FreeCityZoomViewGfx();
-    RemoveWindow(state->infoWindowId);
+    RemoveRegionMapInfoWindow();
     FreePokenavSubstruct(POKENAV_SUBSTRUCT_REGION_MAP);
     FreePokenavSubstruct(POKENAV_SUBSTRUCT_REGION_MAP_ZOOM);
     SetPokenavVBlankCallback();
@@ -506,11 +507,24 @@ static u32 LoopedTask_ExitRegionMap(s32 taskState)
         HideBg(1);
         HideBg(2);
         HideBg(3);
+        RemoveRegionMapInfoWindow();
         RestorePokenavMainMenuBg0();
         return LT_INC_AND_PAUSE;
     }
 
     return LT_FINISH;
+}
+
+static void RemoveRegionMapInfoWindow(void)
+{
+    struct Pokenav_RegionMapGfx *state = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP_ZOOM);
+
+    if (state->infoWindowId != WINDOW_NONE)
+    {
+        ClearWindowTilemap(state->infoWindowId);
+        RemoveWindow(state->infoWindowId);
+        state->infoWindowId = WINDOW_NONE;
+    }
 }
 
 static u32 LoopedTask_TreatAsPokeNavFlyMap(s32 taskState)

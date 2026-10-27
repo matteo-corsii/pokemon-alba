@@ -155,7 +155,7 @@ static const struct CompressedSpriteSheet sPokenavOptionsSpriteSheets[] =
 {
     {
         .data = gPokenavOptions_Gfx,
-        .size = 0x3400,
+        .size = 0x3800,
         .tag = GFXTAG_OPTIONS
     },
     {
@@ -179,9 +179,7 @@ static const struct SpritePalette sPokenavOptionsSpritePalettes[] =
 // Tile number, palette tag offset
 static const u16 sOptionsLabelGfx_RegionMap[] = {0x000, PALTAG_OPTIONS_DEFAULT - PALTAG_OPTIONS_START};
 static const u16 sOptionsLabelGfx_Condition[] = {0x020, PALTAG_OPTIONS_BLUE - PALTAG_OPTIONS_START};
-// Habitat currently reuses the compact blue option label footprint; the page
-// description and dedicated screen provide the actual HABITAT identity.
-#define sOptionsLabelGfx_Habitat sOptionsLabelGfx_Condition
+static const u16 sOptionsLabelGfx_Habitat[] = {0x1A0, PALTAG_OPTIONS_BLUE - PALTAG_OPTIONS_START};
 static const u16 sOptionsLabelGfx_MatchCall[] = {0x040, PALTAG_OPTIONS_RED - PALTAG_OPTIONS_START};
 static const u16 sOptionsLabelGfx_Ribbons[]   = {0x060, PALTAG_OPTIONS_PINK - PALTAG_OPTIONS_START};
 static const u16 sOptionsLabelGfx_SwitchOff[] = {0x080, PALTAG_OPTIONS_BEIGE - PALTAG_OPTIONS_START};
