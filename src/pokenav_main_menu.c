@@ -309,6 +309,15 @@ u32 PokenavMainMenuLoopedTaskIsActive(void)
     return IsLoopedTaskActive(menu->currentTaskId);
 }
 
+void RestorePokenavMainMenuBg0(void)
+{
+    struct Pokenav_MainMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_MAIN_MENU);
+
+    SetBgTilemapBuffer(0, menu->tilemapBuffer);
+    CopyBgTilemapBufferToVram(0);
+    ShowBg(0);
+}
+
 void ShutdownPokenav(void)
 {
     PlaySE(SE_POKENAV_OFF);

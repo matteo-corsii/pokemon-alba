@@ -506,6 +506,7 @@ static u32 LoopedTask_ExitRegionMap(s32 taskState)
         HideBg(1);
         HideBg(2);
         HideBg(3);
+        RestorePokenavMainMenuBg0();
         return LT_INC_AND_PAUSE;
     }
 
