@@ -295,7 +295,6 @@ bool32 IsRegionMapLoopedTaskActive(void)
 
 void FreeRegionMapSubstruct2(void)
 {
-    struct Pokenav_RegionMapGfx *state = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP_ZOOM);
     FreeRegionMapIconResources();
     FreeCityZoomViewGfx();
     RemoveRegionMapInfoWindow();
