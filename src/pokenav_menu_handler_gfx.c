@@ -179,6 +179,9 @@ static const struct SpritePalette sPokenavOptionsSpritePalettes[] =
 // Tile number, palette tag offset
 static const u16 sOptionsLabelGfx_RegionMap[] = {0x000, PALTAG_OPTIONS_DEFAULT - PALTAG_OPTIONS_START};
 static const u16 sOptionsLabelGfx_Condition[] = {0x020, PALTAG_OPTIONS_BLUE - PALTAG_OPTIONS_START};
+// Habitat currently reuses the compact blue option label footprint; the page
+// description and dedicated screen provide the actual HABITAT identity.
+#define sOptionsLabelGfx_Habitat sOptionsLabelGfx_Condition
 static const u16 sOptionsLabelGfx_MatchCall[] = {0x040, PALTAG_OPTIONS_RED - PALTAG_OPTIONS_START};
 static const u16 sOptionsLabelGfx_Ribbons[]   = {0x060, PALTAG_OPTIONS_PINK - PALTAG_OPTIONS_START};
 static const u16 sOptionsLabelGfx_SwitchOff[] = {0x080, PALTAG_OPTIONS_BEIGE - PALTAG_OPTIONS_START};
@@ -204,6 +207,7 @@ struct
         .deltaY = 20,
         .gfx = {
             sOptionsLabelGfx_RegionMap,
+            sOptionsLabelGfx_Habitat,
             sOptionsLabelGfx_Condition,
             sOptionsLabelGfx_SwitchOff
         }
@@ -214,6 +218,7 @@ struct
         .deltaY = 20,
         .gfx = {
             sOptionsLabelGfx_RegionMap,
+            sOptionsLabelGfx_Habitat,
             sOptionsLabelGfx_Condition,
             sOptionsLabelGfx_MatchCall,
             sOptionsLabelGfx_SwitchOff
@@ -225,6 +230,7 @@ struct
         .deltaY = 20,
         .gfx = {
             sOptionsLabelGfx_RegionMap,
+            sOptionsLabelGfx_Habitat,
             sOptionsLabelGfx_Condition,
             sOptionsLabelGfx_MatchCall,
             sOptionsLabelGfx_Ribbons,
@@ -270,6 +276,7 @@ static const struct WindowTemplate sOptionDescWindowTemplate =
 static const u8 *const sPageDescriptions[] =
 {
     [POKENAV_MENUITEM_MAP]                     = COMPOUND_STRING("Check the map of the AUSONIA region"),
+    [POKENAV_MENUITEM_HABITAT]                 = COMPOUND_STRING("Check wild POKéMON in this area."),
     [POKENAV_MENUITEM_CONDITION]               = COMPOUND_STRING("Check POKéMON in detail."),
     [POKENAV_MENUITEM_MATCH_CALL]              = COMPOUND_STRING("Call a registered TRAINER."),
     [POKENAV_MENUITEM_RIBBONS]                 = COMPOUND_STRING("Check obtained RIBBONS."),

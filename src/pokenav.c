@@ -49,7 +49,7 @@ static void Task_RunLoopedTask(u8);
 static void Task_Pokenav(u8);
 static void CB2_InitPokenavForTutorial(void);
 
-const struct PokenavCallbacks PokenavMenuCallbacks[15] =
+const struct PokenavCallbacks PokenavMenuCallbacks[17] =
 {
     [POKENAV_MAIN_MENU - POKENAV_MENU_IDS_START] =
     {
@@ -104,6 +104,16 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
     [POKENAV_MAIN_MENU_CURSOR_ON_RIBBONS - POKENAV_MENU_IDS_START] =
     {
         .init = PokenavCallback_Init_MainMenuCursorOnRibbons,
+        .callback = GetMenuHandlerCallback,
+        .open = OpenPokenavMenuNotInitial,
+        .createLoopTask = CreateMenuHandlerLoopedTask,
+        .isLoopTaskActive = IsMenuHandlerLoopedTaskActive,
+        .free1 = FreeMenuHandlerSubstruct1,
+        .free2 = FreeMenuHandlerSubstruct2,
+    },
+    [POKENAV_MAIN_MENU_CURSOR_ON_HABITAT - POKENAV_MENU_IDS_START] =
+    {
+        .init = PokenavCallback_Init_MainMenuCursorOnHabitat,
         .callback = GetMenuHandlerCallback,
         .open = OpenPokenavMenuNotInitial,
         .createLoopTask = CreateMenuHandlerLoopedTask,
@@ -200,6 +210,16 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
         .isLoopTaskActive = IsRibbonsMonListLoopedTaskActive,
         .free1 = FreeRibbonsMonList,
         .free2 = FreeRibbonsMonMenu,
+    },
+    [POKENAV_HABITAT - POKENAV_MENU_IDS_START] =
+    {
+        .init = PokenavCallback_Init_Habitat,
+        .callback = GetHabitatCallback,
+        .open = OpenHabitat,
+        .createLoopTask = CreateHabitatLoopedTask,
+        .isLoopTaskActive = IsHabitatLoopedTaskActive,
+        .free1 = FreeHabitatSubstruct1,
+        .free2 = FreeHabitatSubstruct2,
     },
 };
 

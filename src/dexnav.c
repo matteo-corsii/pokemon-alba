@@ -161,60 +161,14 @@ static void DexNavDrawHiddenIcons(void);
 static void DrawHiddenSearchWindow(u8 width);
 static void RevealHiddenMon(void);
 
-#define LOCAL_HABITAT_MAX_SPECIES (LAND_WILD_COUNT + WATER_WILD_COUNT + ROCK_WILD_COUNT + FISH_WILD_COUNT + HIDDEN_WILD_COUNT)
-
-static void AddLocalHabitatEncounterSpecies(enum Species *speciesList, u16 *speciesCount, const struct WildPokemonInfo *encounterInfo, u32 speciesCountForArea, bool32 requireEncounterRate)
-{
-    u32 i;
-
-    if (encounterInfo == NULL || (requireEncounterRate && encounterInfo->encounterRate == 0))
-        return;
-
-    for (i = 0; i < speciesCountForArea; i++)
-    {
-        enum Species species = encounterInfo->wildPokemon[i].species;
-        u16 j;
-
-        if (species == SPECIES_NONE)
-            continue;
-
-        for (j = 0; j < *speciesCount; j++)
-        {
-            if (speciesList[j] == species)
-                break;
-        }
-
-        if (j == *speciesCount && *speciesCount < LOCAL_HABITAT_MAX_SPECIES)
-            speciesList[(*speciesCount)++] = species;
-    }
-}
-
 static u16 GetLocalHabitatSpecies(enum Species *speciesList)
 {
-    u16 speciesCount = 0;
-    u16 headerId = GetCurrentMapWildMonHeaderId();
-    enum TimeOfDay timeOfDay;
-
-    if (headerId == HEADER_NONE)
-        return 0;
-
-    timeOfDay = GetTimeOfDayForEncounters(headerId, WILD_AREA_LAND);
-    AddLocalHabitatEncounterSpecies(speciesList, &speciesCount, gWildMonHeaders[headerId].encounterTypes[timeOfDay].landMonsInfo, LAND_WILD_COUNT, TRUE);
-    timeOfDay = GetTimeOfDayForEncounters(headerId, WILD_AREA_WATER);
-    AddLocalHabitatEncounterSpecies(speciesList, &speciesCount, gWildMonHeaders[headerId].encounterTypes[timeOfDay].waterMonsInfo, WATER_WILD_COUNT, TRUE);
-    timeOfDay = GetTimeOfDayForEncounters(headerId, WILD_AREA_ROCKS);
-    AddLocalHabitatEncounterSpecies(speciesList, &speciesCount, gWildMonHeaders[headerId].encounterTypes[timeOfDay].rockSmashMonsInfo, ROCK_WILD_COUNT, TRUE);
-    timeOfDay = GetTimeOfDayForEncounters(headerId, WILD_AREA_FISHING);
-    AddLocalHabitatEncounterSpecies(speciesList, &speciesCount, gWildMonHeaders[headerId].encounterTypes[timeOfDay].fishingMonsInfo, FISH_WILD_COUNT, TRUE);
-    timeOfDay = GetTimeOfDayForEncounters(headerId, WILD_AREA_HIDDEN);
-    AddLocalHabitatEncounterSpecies(speciesList, &speciesCount, gWildMonHeaders[headerId].encounterTypes[timeOfDay].hiddenMonsInfo, HIDDEN_WILD_COUNT, FALSE);
-
-    return speciesCount;
+    return GetCurrentMapHabitatSpecies(speciesList, HABITAT_MAX_SPECIES);
 }
 
 void GetLocalHabitatSpeciesCounts(u16 *total, u16 *caught)
 {
-    enum Species speciesList[LOCAL_HABITAT_MAX_SPECIES];
+    enum Species speciesList[HABITAT_MAX_SPECIES];
     u16 speciesCount = GetLocalHabitatSpecies(speciesList);
     u16 caughtCount = 0;
     u16 i;
@@ -242,7 +196,7 @@ bool32 IsLocalHabitatComplete(void)
 
 bool32 IsSpeciesCaughtInLocalHabitat(enum Species species)
 {
-    enum Species speciesList[LOCAL_HABITAT_MAX_SPECIES];
+    enum Species speciesList[HABITAT_MAX_SPECIES];
     u16 speciesCount = GetLocalHabitatSpecies(speciesList);
     u16 i;
 
