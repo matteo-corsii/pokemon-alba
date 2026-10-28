@@ -65,7 +65,7 @@ static void SpriteCB_GameFreakLogo(struct Sprite *sprite);
 static void SpriteCB_FlygonSilhouette(struct Sprite *sprite);
 
 // Scene 2 main tasks
-static void Task_Scene2_Load(u8);
+static void UNUSED Task_Scene2_Load(u8);
 static void Task_Scene2_CreateSprites(u8);
 static void Task_Scene2_BikeRide(u8);
 static void Task_Scene2_End(u8);
