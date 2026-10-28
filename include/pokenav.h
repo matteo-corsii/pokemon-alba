@@ -21,17 +21,11 @@ struct PokenavMatchCallEntry
     u16 headerId;
 };
 
-struct PokenavHabitatListItem
-{
-    enum Species species;
-};
-
 struct PokenavListItem
 {
     union {
         struct PokenavMonListItem mon;
         struct PokenavMatchCallEntry call;
-        struct PokenavHabitatListItem habitat;
     } item;
 };
 
@@ -93,7 +87,6 @@ enum
     POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST,
     POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_MENU,
     POKENAV_SUBSTRUCT_UNUSED,
-    POKENAV_SUBSTRUCT_HABITAT,
     POKENAV_SUBSTRUCT_REGION_MAP,
     POKENAV_SUBSTRUCT_LIST,
     POKENAV_SUBSTRUCT_MON_LIST,
@@ -129,8 +122,6 @@ enum
     POKENAV_CONDITION_SEARCH_MENU,              // The Condition search menu where the player selects a search parameter
     POKENAV_MAIN_MENU_CURSOR_ON_MATCH_CALL,
     POKENAV_MAIN_MENU_CURSOR_ON_RIBBONS,
-    POKENAV_MAIN_MENU_CURSOR_ON_HABITAT,
-    POKENAV_HABITAT,
     POKENAV_REGION_MAP,
     POKENAV_CONDITION_GRAPH_PARTY,              // The Condition graph screen when Party has been selected
     POKENAV_CONDITION_SEARCH_RESULTS,           // The list of results from a Condition search
@@ -157,7 +148,6 @@ enum
 enum
 {
     POKENAV_MENUITEM_MAP,
-    POKENAV_MENUITEM_HABITAT,
     POKENAV_MENUITEM_CONDITION,
     POKENAV_MENUITEM_MATCH_CALL,
     POKENAV_MENUITEM_RIBBONS,
@@ -311,16 +301,6 @@ enum
     POKENAV_MAP_FUNC_FLY
 };
 
-enum
-{
-    POKENAV_HABITAT_FUNC_NONE,
-    POKENAV_HABITAT_FUNC_DOWN,
-    POKENAV_HABITAT_FUNC_UP,
-    POKENAV_HABITAT_FUNC_PG_DOWN,
-    POKENAV_HABITAT_FUNC_PG_UP,
-    POKENAV_HABITAT_FUNC_EXIT
-};
-
 // Modes for PokenavFadeScreen
 enum {
     POKENAV_FADE_TO_BLACK,
@@ -411,7 +391,6 @@ void ShutdownPokenav(void);
 bool32 PokenavCallback_Init_MainMenuCursorOnMap(void);
 bool32 PokenavCallback_Init_MainMenuCursorOnMatchCall(void);
 bool32 PokenavCallback_Init_MainMenuCursorOnRibbons(void);
-bool32 PokenavCallback_Init_MainMenuCursorOnHabitat(void);
 bool32 PokenavCallback_Init_ConditionMenu(void);
 bool32 PokenavCallback_Init_ConditionSearchMenu(void);
 u32 GetMenuHandlerCallback(void);
@@ -455,15 +434,6 @@ bool32 OpenMatchCall(void);
 void CreateMatchCallLoopedTask(s32 index);
 bool32 IsMatchCallLoopedTaskActive(void);
 void FreeMatchCallSubstruct2(void);
-
-// pokenav_habitat.c
-bool32 PokenavCallback_Init_Habitat(void);
-u32 GetHabitatCallback(void);
-bool32 OpenHabitat(void);
-void CreateHabitatLoopedTask(s32 index);
-bool32 IsHabitatLoopedTaskActive(void);
-void FreeHabitatSubstruct1(void);
-void FreeHabitatSubstruct2(void);
 
 // pokenav_region_map.c
 u32 PokenavCallback_Init_RegionMap(void);
