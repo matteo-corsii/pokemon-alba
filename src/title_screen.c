@@ -622,7 +622,7 @@ void CB2_InitTitleScreen(void)
         gTasks[taskId].tCounter = 256;
         gTasks[taskId].tSkipToNext = FALSE;
         gTasks[taskId].tPointless = -16;
-        gTasks[taskId].tBg2Y = -32;
+        gTasks[taskId].tBg2Y = 0;
         gMain.state = 3;
         break;
     }
@@ -731,8 +731,6 @@ static void Task_TitleScreenPhase1(u8 taskId)
 // Create "Press Start" and copyright banners, and slide Pokémon logo up
 static void Task_TitleScreenPhase2(u8 taskId)
 {
-    u32 yPos;
-
     // Skip to next phase when A, B, Start, or Select is pressed
     if (JOY_NEW(A_B_START_SELECT) || gTasks[taskId].tSkipToNext)
     {
@@ -766,13 +764,10 @@ static void Task_TitleScreenPhase2(u8 taskId)
 
     if (!(gTasks[taskId].tCounter & 3) && gTasks[taskId].tPointless != 0)
         gTasks[taskId].tPointless++;
-    if (!(gTasks[taskId].tCounter & 1) && gTasks[taskId].tBg2Y != 0)
-        gTasks[taskId].tBg2Y++;
 
     // Slide Pokémon logo up
-    yPos = gTasks[taskId].tBg2Y * 256;
-    SetGpuReg(REG_OFFSET_BG2Y_L, yPos);
-    SetGpuReg(REG_OFFSET_BG2Y_H, yPos / 0x10000);
+    SetGpuReg(REG_OFFSET_BG2Y_L, 0);
+    SetGpuReg(REG_OFFSET_BG2Y_H, 0);
 
     gTasks[taskId].data[5] = 15; // Unused
     gTasks[taskId].data[6] = 6;  // Unused
