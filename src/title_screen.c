@@ -62,11 +62,12 @@ static void SpriteCB_PokemonLogoShine(struct Sprite *sprite);
 // const rom data
 static const u16 sUnusedUnknownPal[] = INCGFX_U16("graphics/title_screen/unused.pal", ".gbapal");
 
-static const u32 sTitleScreenRayquazaGfx[] = INCGFX_U32("graphics/title_screen/rayquaza.png", ".4bpp.smol");
-static const u32 sTitleScreenRayquazaTilemap[] = INCGFX_U32("graphics/title_screen/rayquaza.bin", ".smolTM");
 static const u32 sTitleScreenLogoShineGfx[] = INCGFX_U32("graphics/title_screen/logo_shine.png", ".4bpp.smol");
-static const u32 sTitleScreenCloudsGfx[] = INCGFX_U32("graphics/title_screen/clouds.png", ".4bpp.smol");
-
+static const u32 sTitleScreenAlbaGfx[] = INCBIN_U32("graphics/title_screen_alba/alba_scene.4bpp");
+static const u32 sTitleScreenAlbaTilemap[] = INCBIN_U32("graphics/title_screen_alba/alba_scene.bin");
+static const u16 sTitleScreenAlbaPal[] = INCBIN_U16("graphics/title_screen_alba/alba_scene.gbapal");
+static const u32 sTitleScreenAlbaPokemonLogoGfx[] = INCBIN_U32("graphics/title_screen_alba/pokemon_logo.8bpp");
+static const u32 sTitleScreenAlbaPokemonLogoTilemap[] = INCBIN_U32("graphics/title_screen_alba/pokemon_logo.bin");
 
 
 // Used to blend "Emerald Version" as it passes over over the Pokémon banner.
@@ -594,16 +595,14 @@ void CB2_InitTitleScreen(void)
         gMain.state = 1;
         break;
     case 1:
-        // bg2
-        DecompressDataWithHeaderVram(gTitleScreenPokemonLogoGfx, (void *)(BG_CHAR_ADDR(0)));
-        DecompressDataWithHeaderVram(gTitleScreenPokemonLogoTilemap, (void *)(BG_SCREEN_ADDR(9)));
-        LoadPalette(gTitleScreenBgPalettes, BG_PLTT_ID(0), 15 * PLTT_SIZE_4BPP);
-        // bg3
-        DecompressDataWithHeaderVram(sTitleScreenRayquazaGfx, (void *)(BG_CHAR_ADDR(2)));
-        DecompressDataWithHeaderVram(sTitleScreenRayquazaTilemap, (void *)(BG_SCREEN_ADDR(26)));
-        // bg1
-        DecompressDataWithHeaderVram(sTitleScreenCloudsGfx, (void *)(BG_CHAR_ADDR(3)));
-        DecompressDataWithHeaderVram(gTitleScreenCloudsTilemap, (void *)(BG_SCREEN_ADDR(27)));
+        // Alba BG0: approved 240x160 scene, packed as 4bpp tiles + text tilemap.
+        DmaCopy16(3, sTitleScreenAlbaGfx, (void *)(BG_CHAR_ADDR(2)), sizeof(sTitleScreenAlbaGfx));
+        DmaCopy16(3, sTitleScreenAlbaTilemap, (void *)(BG_SCREEN_ADDR(26)), sizeof(sTitleScreenAlbaTilemap));
+        LoadPalette(sTitleScreenAlbaPal, BG_PLTT_ID(0), 16 * PLTT_SIZE_4BPP);
+
+        // Alba BG2: original repository Pokemon logo, resized/re-indexed onto the Alba palette.
+        DmaCopy16(3, sTitleScreenAlbaPokemonLogoGfx, (void *)(BG_CHAR_ADDR(0)), sizeof(sTitleScreenAlbaPokemonLogoGfx));
+        DmaCopy16(3, sTitleScreenAlbaPokemonLogoTilemap, (void *)(BG_SCREEN_ADDR(9)), sizeof(sTitleScreenAlbaPokemonLogoTilemap));
         ScanlineEffect_Stop();
         ResetTasks();
         ResetSpriteData();
@@ -634,8 +633,8 @@ void CB2_InitTitleScreen(void)
         break;
     case 4:
         PanFadeAndZoomScreen(DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2, 0x100, 0);
-        SetGpuReg(REG_OFFSET_BG2X_L, -29 * 256);
-        SetGpuReg(REG_OFFSET_BG2X_H, -1);
+        SetGpuReg(REG_OFFSET_BG2X_L, 0);
+        SetGpuReg(REG_OFFSET_BG2X_H, 0);
         SetGpuReg(REG_OFFSET_BG2Y_L, -32 * 256);
         SetGpuReg(REG_OFFSET_BG2Y_H, -1);
         SetGpuReg(REG_OFFSET_WIN0H, 0);
@@ -648,11 +647,11 @@ void CB2_InitTitleScreen(void)
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
         SetGpuReg(REG_OFFSET_BLDY, 12);
         SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(3) | BGCNT_CHARBASE(2) | BGCNT_SCREENBASE(26) | BGCNT_16COLOR | BGCNT_TXT256x256);
-        SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(2) | BGCNT_CHARBASE(3) | BGCNT_SCREENBASE(27) | BGCNT_16COLOR | BGCNT_TXT256x256);
         SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(1) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(9) | BGCNT_256COLOR | BGCNT_AFF256x256);
         EnableInterrupts(INTR_FLAG_VBLANK);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_1
                                     | DISPCNT_OBJ_1D_MAP
+                                    | DISPCNT_BG0_ON
                                     | DISPCNT_BG2_ON
                                     | DISPCNT_OBJ_ON
                                     | DISPCNT_WIN0_ON
@@ -714,10 +713,12 @@ static void Task_TitleScreenPhase1(u8 taskId)
         spriteId = CreateSprite(&sVersionBannerLeftSpriteTemplate, VERSION_BANNER_LEFT_X, VERSION_BANNER_Y, 0);
         gSprites[spriteId].sAlphaBlendIdx = ARRAY_COUNT(gTitleScreenAlphaBlend);
         gSprites[spriteId].sParentTaskId = taskId;
+        gSprites[spriteId].invisible = TRUE;
 
         // Create right side of version banner
         spriteId = CreateSprite(&sVersionBannerRightSpriteTemplate, VERSION_BANNER_RIGHT_X, VERSION_BANNER_Y, 0);
         gSprites[spriteId].sParentTaskId = taskId;
+        gSprites[spriteId].invisible = TRUE;
 
         gTasks[taskId].tCounter = 144;
         gTasks[taskId].func = Task_TitleScreenPhase2;
@@ -752,11 +753,11 @@ static void Task_TitleScreenPhase2(u8 taskId)
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_1
                                     | DISPCNT_OBJ_1D_MAP
                                     | DISPCNT_BG0_ON
-                                    | DISPCNT_BG1_ON
                                     | DISPCNT_BG2_ON
                                     | DISPCNT_OBJ_ON);
-        CreatePressStartBanner(START_BANNER_X, 108);
-        CreateCopyrightBanner(START_BANNER_X, 148);
+        // The approved Alba BG0 already contains PRESS START and copyright.
+        CreatePressStartBanner(START_BANNER_X, DISPLAY_HEIGHT + 16);
+        CreateCopyrightBanner(START_BANNER_X, DISPLAY_HEIGHT + 32);
         if (QUICKSTART && QUICKSTART_HUD)
             CreateQuickstartHud();
         gTasks[taskId].tBg1Y = 0;
@@ -868,6 +869,6 @@ static void UpdateLegendaryMarkingColor(u8 frameNum)
         u32 b = 12;
 
         u16 color = RGB(r, g, b);
-        LoadPalette(&color, BG_PLTT_ID(14) + 15, sizeof(color));
+        LoadPalette(&color, BG_PLTT_ID(15) + 15, sizeof(color));
    }
 }
