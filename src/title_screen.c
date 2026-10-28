@@ -635,8 +635,8 @@ void CB2_InitTitleScreen(void)
         PanFadeAndZoomScreen(DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2, 0x100, 0);
         SetGpuReg(REG_OFFSET_BG2X_L, 0);
         SetGpuReg(REG_OFFSET_BG2X_H, 0);
-        SetGpuReg(REG_OFFSET_BG2Y_L, -32 * 256);
-        SetGpuReg(REG_OFFSET_BG2Y_H, -1);
+        SetGpuReg(REG_OFFSET_BG2Y_L, 0);
+        SetGpuReg(REG_OFFSET_BG2Y_H, 0);
         SetGpuReg(REG_OFFSET_WIN0H, 0);
         SetGpuReg(REG_OFFSET_WIN0V, 0);
         SetGpuReg(REG_OFFSET_WIN1H, 0);
