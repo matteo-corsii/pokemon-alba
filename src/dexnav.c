@@ -161,6 +161,54 @@ static void DexNavDrawHiddenIcons(void);
 static void DrawHiddenSearchWindow(u8 width);
 static void RevealHiddenMon(void);
 
+static u16 GetLocalHabitatSpecies(enum Species *speciesList)
+{
+    return GetCurrentMapHabitatSpecies(speciesList, HABITAT_MAX_SPECIES);
+}
+
+void GetLocalHabitatSpeciesCounts(u16 *total, u16 *caught)
+{
+    enum Species speciesList[HABITAT_MAX_SPECIES];
+    u16 speciesCount = GetLocalHabitatSpecies(speciesList);
+    u16 caughtCount = 0;
+    u16 i;
+
+    for (i = 0; i < speciesCount; i++)
+    {
+        if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(speciesList[i]), FLAG_GET_CAUGHT))
+            caughtCount++;
+    }
+
+    if (total != NULL)
+        *total = speciesCount;
+    if (caught != NULL)
+        *caught = caughtCount;
+}
+
+bool32 IsLocalHabitatComplete(void)
+{
+    u16 total;
+    u16 caught;
+
+    GetLocalHabitatSpeciesCounts(&total, &caught);
+    return total != 0 && total == caught;
+}
+
+bool32 IsSpeciesCaughtInLocalHabitat(enum Species species)
+{
+    enum Species speciesList[HABITAT_MAX_SPECIES];
+    u16 speciesCount = GetLocalHabitatSpecies(speciesList);
+    u16 i;
+
+    for (i = 0; i < speciesCount; i++)
+    {
+        if (speciesList[i] == species)
+            return GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT);
+    }
+
+    return FALSE;
+}
+
 //// Const Data
 // gui image data
 static const u32 sDexNavGuiTiles[] = INCGFX_U32("graphics/dexnav/gui_tiles.png", ".4bpp.smol");
@@ -2077,6 +2125,8 @@ static void PrintCurrentSpeciesInfo(void)
     enum Species species = DexNavGetSpecies();
     enum NationalDexOrder dexNum = SpeciesToNationalPokedexNum(species);
     enum Type type1, type2;
+    u16 habitatTotal;
+    u16 habitatCaught;
 
     if (!GetSetPokedexFlag(dexNum, FLAG_GET_SEEN))
         species = SPECIES_NONE;
@@ -2138,6 +2188,14 @@ static void PrintCurrentSpeciesInfo(void)
     //current chain
     ConvertIntToDecimalStringN(gStringVar1, gSaveBlock3Ptr->dexNavChain, STR_CONV_MODE_LEFT_ALIGN, 3);
     AddTextPrinterParameterized3(WINDOW_INFO, FONT_SMALL, 0, CHAIN_BONUS_Y, sFontColor_Black, 0, gStringVar1);
+
+    GetLocalHabitatSpeciesCounts(&habitatTotal, &habitatCaught);
+    ConvertIntToDecimalStringN(gStringVar1, habitatCaught, STR_CONV_MODE_LEFT_ALIGN, 2);
+    ConvertIntToDecimalStringN(gStringVar2, habitatTotal, STR_CONV_MODE_LEFT_ALIGN, 2);
+    StringCopy(gStringVar4, gStringVar1);
+    StringAppend(gStringVar4, COMPOUND_STRING("/"));
+    StringAppend(gStringVar4, gStringVar2);
+    AddTextPrinterParameterized3(WINDOW_INFO, FONT_SMALL, 48, CHAIN_BONUS_Y, sFontColor_Black, 0, gStringVar4);
 
     CopyWindowToVram(WINDOW_INFO, 3);
     PutWindowTilemap(WINDOW_INFO);

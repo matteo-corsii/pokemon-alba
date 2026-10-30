@@ -276,6 +276,61 @@ static const struct LevelUpMove sCodaironeLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+static const struct LevelUpMove sVitemostoLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_ABSORB), LEVEL_UP_MOVE( 1, MOVE_GROWTH),
+    LEVEL_UP_MOVE( 5, MOVE_EMBER), LEVEL_UP_MOVE( 8, MOVE_SWEET_SCENT),
+    LEVEL_UP_MOVE(12, MOVE_RAZOR_LEAF), LEVEL_UP_MOVE(16, MOVE_SUNNY_DAY),
+    LEVEL_UP_MOVE(20, MOVE_INCINERATE), LEVEL_UP_MOVE(24, MOVE_MEGA_DRAIN),
+    LEVEL_UP_MOVE(28, MOVE_FLAME_CHARGE), LEVEL_UP_MOVE(32, MOVE_SYNTHESIS),
+    LEVEL_UP_MOVE(36, MOVE_ENERGY_BALL), LEVEL_UP_MOVE(40, MOVE_FLAMETHROWER),
+    LEVEL_UP_MOVE(44, MOVE_SOLAR_BEAM), LEVEL_UP_MOVE(48, MOVE_WEATHER_BALL),
+    LEVEL_UP_END
+};
+
+static const struct LevelUpMove sPorchignisLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_TACKLE), LEVEL_UP_MOVE( 1, MOVE_LEER),
+    LEVEL_UP_MOVE( 5, MOVE_EMBER), LEVEL_UP_MOVE( 8, MOVE_DEFENSE_CURL),
+    LEVEL_UP_MOVE(11, MOVE_BITE), LEVEL_UP_MOVE(14, MOVE_FLAME_CHARGE),
+    LEVEL_UP_MOVE(18, MOVE_ROLLOUT), LEVEL_UP_MOVE(22, MOVE_HEADBUTT),
+    LEVEL_UP_MOVE(26, MOVE_FIRE_FANG), LEVEL_UP_MOVE(30, MOVE_TAKE_DOWN),
+    LEVEL_UP_MOVE(34, MOVE_WORK_UP), LEVEL_UP_MOVE(38, MOVE_CRUNCH),
+    LEVEL_UP_MOVE(43, MOVE_FLARE_BLITZ), LEVEL_UP_END
+};
+
+static const struct LevelUpMove sBronzoverroLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 0, MOVE_IRON_HEAD), LEVEL_UP_MOVE( 1, MOVE_TACKLE),
+    LEVEL_UP_MOVE( 1, MOVE_LEER), LEVEL_UP_MOVE( 5, MOVE_EMBER),
+    LEVEL_UP_MOVE( 8, MOVE_DEFENSE_CURL), LEVEL_UP_MOVE(11, MOVE_BITE),
+    LEVEL_UP_MOVE(14, MOVE_FLAME_CHARGE), LEVEL_UP_MOVE(18, MOVE_ROLLOUT),
+    LEVEL_UP_MOVE(22, MOVE_HEADBUTT), LEVEL_UP_MOVE(26, MOVE_FIRE_FANG),
+    LEVEL_UP_MOVE(30, MOVE_IRON_HEAD), LEVEL_UP_MOVE(34, MOVE_WORK_UP),
+    LEVEL_UP_MOVE(38, MOVE_CRUNCH), LEVEL_UP_MOVE(42, MOVE_IRON_DEFENSE),
+    LEVEL_UP_MOVE(46, MOVE_HEAT_CRASH), LEVEL_UP_MOVE(50, MOVE_HEAVY_SLAM),
+    LEVEL_UP_MOVE(55, MOVE_FLARE_BLITZ), LEVEL_UP_END
+};
+
+static const struct LevelUpMove sFraschiettoLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_POUND), LEVEL_UP_MOVE( 1, MOVE_LEER),
+    LEVEL_UP_MOVE( 5, MOVE_ROCK_SMASH), LEVEL_UP_MOVE( 8, MOVE_FOCUS_ENERGY),
+    LEVEL_UP_MOVE(11, MOVE_LOW_KICK), LEVEL_UP_MOVE(14, MOVE_HELPING_HAND),
+    LEVEL_UP_MOVE(18, MOVE_FAKE_OUT), LEVEL_UP_MOVE(22, MOVE_FORCE_PALM),
+    LEVEL_UP_MOVE(26, MOVE_BULK_UP), LEVEL_UP_MOVE(30, MOVE_BRICK_BREAK),
+    LEVEL_UP_MOVE(34, MOVE_REVERSAL), LEVEL_UP_MOVE(38, MOVE_TAKE_DOWN),
+    LEVEL_UP_MOVE(43, MOVE_CLOSE_COMBAT), LEVEL_UP_END
+};
+
+static const struct LevelUpMove sFrascottoLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 0, MOVE_FIRE_PUNCH), LEVEL_UP_MOVE( 1, MOVE_POUND),
+    LEVEL_UP_MOVE( 1, MOVE_LEER), LEVEL_UP_MOVE( 5, MOVE_ROCK_SMASH),
+    LEVEL_UP_MOVE( 8, MOVE_FOCUS_ENERGY), LEVEL_UP_MOVE(11, MOVE_LOW_KICK),
+    LEVEL_UP_MOVE(14, MOVE_HELPING_HAND), LEVEL_UP_MOVE(18, MOVE_FAKE_OUT),
+    LEVEL_UP_MOVE(22, MOVE_FORCE_PALM), LEVEL_UP_MOVE(26, MOVE_BULK_UP),
+    LEVEL_UP_MOVE(30, MOVE_FIRE_PUNCH), LEVEL_UP_MOVE(34, MOVE_BULK_UP),
+    LEVEL_UP_MOVE(38, MOVE_BRICK_BREAK), LEVEL_UP_MOVE(42, MOVE_FLAME_CHARGE),
+    LEVEL_UP_MOVE(46, MOVE_CLOSE_COMBAT), LEVEL_UP_MOVE(50, MOVE_FIRE_LASH),
+    LEVEL_UP_MOVE(55, MOVE_FLARE_BLITZ), LEVEL_UP_END
+};
+
 static const struct LevelUpMove sBorgottoLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_TACKLE),
     LEVEL_UP_MOVE( 1, MOVE_TAIL_WHIP),
@@ -438,6 +493,26 @@ static const struct LevelUpMove sPeregrinusLevelUpLearnset[] = {
     LEVEL_UP_MOVE(42, MOVE_DUAL_WINGBEAT),
     LEVEL_UP_MOVE(46, MOVE_BRAVE_BIRD),
     LEVEL_UP_MOVE(50, MOVE_QUICK_GUARD),
+    LEVEL_UP_END
+};
+
+static const struct LevelUpMove sSudowoodoAusoniaLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_TACKLE),
+    LEVEL_UP_MOVE( 1, MOVE_HARDEN),
+    LEVEL_UP_MOVE( 5, MOVE_ASTONISH),
+    LEVEL_UP_MOVE( 8, MOVE_GROWTH),
+    LEVEL_UP_MOVE(12, MOVE_ROCK_THROW),
+    LEVEL_UP_MOVE(16, MOVE_INGRAIN),
+    LEVEL_UP_MOVE(20, MOVE_SHADOW_SNEAK),
+    LEVEL_UP_MOVE(24, MOVE_LEECH_SEED),
+    LEVEL_UP_MOVE(28, MOVE_CURSE),
+    LEVEL_UP_MOVE(32, MOVE_SEED_BOMB),
+    LEVEL_UP_MOVE(36, MOVE_WILL_O_WISP),
+    LEVEL_UP_MOVE(40, MOVE_SUCKER_PUNCH),
+    LEVEL_UP_MOVE(44, MOVE_SHADOW_CLAW),
+    LEVEL_UP_MOVE(48, MOVE_WOOD_HAMMER),
+    LEVEL_UP_MOVE(52, MOVE_PHANTOM_FORCE),
+    LEVEL_UP_MOVE(58, MOVE_HORN_LEECH),
     LEVEL_UP_END
 };
 
@@ -669,9 +744,39 @@ static const struct LevelUpMove sSanguilexLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
-static const struct LevelUpMove sCarpulusLevelUpLearnset[] = {{1, MOVE_TACKLE}, {1, MOVE_TAIL_WHIP}, {4, MOVE_WATER_GUN}, {7, MOVE_FLAIL}, {10, MOVE_AQUA_JET}, {13, MOVE_HARDEN}, {16, MOVE_BITE}, {20, MOVE_AQUA_RING}, {24, MOVE_TAKE_DOWN}, {28, MOVE_WATER_PULSE}, {32, MOVE_AGILITY}, {36, MOVE_AQUA_TAIL}, {40, MOVE_DOUBLE_EDGE}, {44, MOVE_HYDRO_PUMP}};
-static const struct LevelUpMove sLucinusLevelUpLearnset[] = {{1, MOVE_TACKLE}, {1, MOVE_LEER}, {4, MOVE_BITE}, {8, MOVE_AQUA_JET}, {12, MOVE_FOCUS_ENERGY}, {16, MOVE_ICE_FANG}, {20, MOVE_ASSURANCE}, {24, MOVE_WATER_PULSE}, {28, MOVE_CRUNCH}, {32, MOVE_AGILITY}, {36, MOVE_LIQUIDATION}, {40, MOVE_NIGHT_SLASH}, {44, MOVE_PSYCHIC_FANGS}, {48, MOVE_HYDRO_PUMP}};
-static const struct LevelUpMove sNaufragusLevelUpLearnset[] = {{1, MOVE_TACKLE}, {1, MOVE_HARDEN}, {5, MOVE_WATER_GUN}, {9, MOVE_METAL_CLAW}, {13, MOVE_PROTECT}, {17, MOVE_AQUA_JET}, {21, MOVE_IRON_DEFENSE}, {25, MOVE_BRINE}, {29, MOVE_ANCIENT_POWER}, {33, MOVE_AQUA_TAIL}, {37, MOVE_IRON_HEAD}, {41, MOVE_HEAVY_SLAM}, {45, MOVE_RAIN_DANCE}, {49, MOVE_HYDRO_PUMP}, {53, MOVE_GYRO_BALL}};
+static const struct LevelUpMove sCarpulusLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_TACKLE), LEVEL_UP_MOVE( 1, MOVE_TAIL_WHIP),
+    LEVEL_UP_MOVE( 4, MOVE_WATER_GUN), LEVEL_UP_MOVE( 7, MOVE_FLAIL),
+    LEVEL_UP_MOVE(10, MOVE_AQUA_JET), LEVEL_UP_MOVE(13, MOVE_HARDEN),
+    LEVEL_UP_MOVE(16, MOVE_BITE), LEVEL_UP_MOVE(20, MOVE_AQUA_RING),
+    LEVEL_UP_MOVE(24, MOVE_TAKE_DOWN), LEVEL_UP_MOVE(28, MOVE_WATER_PULSE),
+    LEVEL_UP_MOVE(32, MOVE_AGILITY), LEVEL_UP_MOVE(36, MOVE_AQUA_TAIL),
+    LEVEL_UP_MOVE(40, MOVE_DOUBLE_EDGE), LEVEL_UP_MOVE(44, MOVE_HYDRO_PUMP),
+    LEVEL_UP_END
+};
+
+static const struct LevelUpMove sLucinusLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_TACKLE), LEVEL_UP_MOVE( 1, MOVE_LEER),
+    LEVEL_UP_MOVE( 4, MOVE_BITE), LEVEL_UP_MOVE( 8, MOVE_AQUA_JET),
+    LEVEL_UP_MOVE(12, MOVE_FOCUS_ENERGY), LEVEL_UP_MOVE(16, MOVE_ICE_FANG),
+    LEVEL_UP_MOVE(20, MOVE_ASSURANCE), LEVEL_UP_MOVE(24, MOVE_WATER_PULSE),
+    LEVEL_UP_MOVE(28, MOVE_CRUNCH), LEVEL_UP_MOVE(32, MOVE_AGILITY),
+    LEVEL_UP_MOVE(36, MOVE_LIQUIDATION), LEVEL_UP_MOVE(40, MOVE_NIGHT_SLASH),
+    LEVEL_UP_MOVE(44, MOVE_PSYCHIC_FANGS), LEVEL_UP_MOVE(48, MOVE_HYDRO_PUMP),
+    LEVEL_UP_END
+};
+
+static const struct LevelUpMove sNaufragusLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_TACKLE), LEVEL_UP_MOVE( 1, MOVE_HARDEN),
+    LEVEL_UP_MOVE( 5, MOVE_WATER_GUN), LEVEL_UP_MOVE( 9, MOVE_METAL_CLAW),
+    LEVEL_UP_MOVE(13, MOVE_PROTECT), LEVEL_UP_MOVE(17, MOVE_AQUA_JET),
+    LEVEL_UP_MOVE(21, MOVE_IRON_DEFENSE), LEVEL_UP_MOVE(25, MOVE_BRINE),
+    LEVEL_UP_MOVE(29, MOVE_ANCIENT_POWER), LEVEL_UP_MOVE(33, MOVE_AQUA_TAIL),
+    LEVEL_UP_MOVE(37, MOVE_IRON_HEAD), LEVEL_UP_MOVE(41, MOVE_HEAVY_SLAM),
+    LEVEL_UP_MOVE(45, MOVE_RAIN_DANCE), LEVEL_UP_MOVE(49, MOVE_HYDRO_PUMP),
+    LEVEL_UP_MOVE(53, MOVE_GYRO_BALL),
+    LEVEL_UP_END
+};
 
 const struct SpeciesInfo gSpeciesInfo[] =
 {
@@ -1220,7 +1325,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
             gShinyOverworldPalette_Ducklett
         )
         .levelUpLearnset = sArdeinoLevelUpLearnset,
-        .teachableLearnset = sNoneTeachableLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sArdeinoTeachableLearnset,
         .eggMoveLearnset = sNoneEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_VELAIRONE}),
     },
@@ -1288,7 +1394,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
             gShinyOverworldPalette_Swanna
         )
         .levelUpLearnset = sVelaironeLevelUpLearnset,
-        .teachableLearnset = sNoneTeachableLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sVelaironeTeachableLearnset,
         .eggMoveLearnset = sNoneEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_CODAIRONE}),
     },
@@ -1354,7 +1461,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
             gShinyOverworldPalette_Bombirdier
         )
         .levelUpLearnset = sCodaironeLevelUpLearnset,
-        .teachableLearnset = sNoneTeachableLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sCodaironeTeachableLearnset,
         .eggMoveLearnset = sNoneEggMoveLearnset,
     },
 
@@ -1601,7 +1709,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .palette = gMonPalette_Felivates,
         .shinyPalette = gMonShinyPalette_Felivates,
         .iconSprite = gMonIcon_Felivates,
-        .iconPalIndex = 1,
+        .iconPalIndex = 2,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(2, 4, SHADOW_SIZE_M)
         FOOTPRINT(Espeon)
@@ -2250,18 +2358,18 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .palette = gMonPalette_Molospsy,
         .shinyPalette = gMonShinyPalette_Molospsy,
         .iconSprite = gMonIcon_Molospsy,
-        .iconPalIndex = 0,
+        .iconPalIndex = 1,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(1, 5, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Mabosstiff)
         OVERWORLD(
-            sPicTable_Mabosstiff,
+            sPicTable_Molospsy,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
-            sAnimTable_Following,
-            gOverworldPalette_Mabosstiff,
-            gShinyOverworldPalette_Mabosstiff
+            sAnimTable_AlbaIdle,
+            gOverworldPalette_Molospsy,
+            gShinyOverworldPalette_Molospsy
         )
         .levelUpLearnset = sMolospsyLevelUpLearnset,
         .teachingType = EXPLICIT_TEACHABLES,
@@ -2320,13 +2428,13 @@ const struct SpeciesInfo gSpeciesInfo[] =
         SHADOW(0, 4, SHADOW_SIZE_M)
         FOOTPRINT(Espeon)
         OVERWORLD(
-            sPicTable_Espeon,
+            sPicTable_Lenghelis,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
-            sAnimTable_Following,
-            gOverworldPalette_Espeon,
-            gShinyOverworldPalette_Espeon
+            sAnimTable_Lenghelis,
+            gOverworldPalette_Lenghelis,
+            gShinyOverworldPalette_Lenghelis
         )
         .levelUpLearnset = sLenghelisLevelUpLearnset,
         .teachingType = EXPLICIT_TEACHABLES,
@@ -2358,7 +2466,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .backPicSize = MON_COORDS_SIZE(64, 64), .backPicYOffset = 4,
         .backAnimId = BACK_ANIM_H_SLIDE, .palette = gMonPalette_Luscinco,
         .shinyPalette = gMonShinyPalette_Luscinco, .iconSprite = gMonIcon_Luscinco,
-        .iconPalIndex = 0, .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        .iconPalIndex = 1, .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(0, 4, SHADOW_SIZE_M)
         FOOTPRINT(Treecko)
         OVERWORLD(sPicTable_Treecko, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT,
@@ -2392,7 +2500,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .backPicSize = MON_COORDS_SIZE(64, 64), .backPicYOffset = 4,
         .backAnimId = BACK_ANIM_H_SLIDE, .palette = gMonPalette_Luscerp,
         .shinyPalette = gMonShinyPalette_Luscerp, .iconSprite = gMonIcon_Luscerp,
-        .iconPalIndex = 0, .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        .iconPalIndex = 5, .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(0, 4, SHADOW_SIZE_M)
         FOOTPRINT(Sceptile)
         OVERWORLD(sPicTable_Sceptile, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT,
@@ -2425,7 +2533,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .backPicSize = MON_COORDS_SIZE(64, 64), .backPicYOffset = 4,
         .backAnimId = BACK_ANIM_SHRINK_GROW, .palette = gMonPalette_Lumella,
         .shinyPalette = gMonShinyPalette_Lumella, .iconSprite = gMonIcon_Lumella,
-        .iconPalIndex = 0, .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        .iconPalIndex = 1, .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(0, 4, SHADOW_SIZE_M)
         FOOTPRINT(Morelull)
         OVERWORLD(sPicTable_Morelull, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT,
@@ -2459,7 +2567,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .backPicSize = MON_COORDS_SIZE(64, 64), .backPicYOffset = 4,
         .backAnimId = BACK_ANIM_SHRINK_GROW, .palette = gMonPalette_Omphalux,
         .shinyPalette = gMonShinyPalette_Omphalux, .iconSprite = gMonIcon_Omphalux,
-        .iconPalIndex = 0, .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        .iconPalIndex = 1, .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(0, 4, SHADOW_SIZE_M)
         FOOTPRINT(Shiinotic)
         OVERWORLD(sPicTable_Shiinotic, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT,
@@ -2492,7 +2600,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .backPicSize = MON_COORDS_SIZE(64, 64), .backPicYOffset = 4,
         .backAnimId = BACK_ANIM_H_SLIDE, .palette = gMonPalette_Paludix,
         .shinyPalette = gMonShinyPalette_Paludix, .iconSprite = gMonIcon_Paludix,
-        .iconPalIndex = 0, .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        .iconPalIndex = 3, .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(0, 4, SHADOW_SIZE_M)
         FOOTPRINT(Surskit)
         OVERWORLD(sPicTable_Surskit, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT,
@@ -2528,7 +2636,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .backPicSize = MON_COORDS_SIZE(64, 64), .backPicYOffset = 4,
         .backAnimId = BACK_ANIM_H_SLIDE, .palette = gMonPalette_Sanguilex,
         .shinyPalette = gMonShinyPalette_Sanguilex, .iconSprite = gMonIcon_Sanguilex,
-        .iconPalIndex = 0, .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        .iconPalIndex = 4, .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(0, 4, SHADOW_SIZE_M)
         FOOTPRINT(Masquerain)
         OVERWORLD(sPicTable_Masquerain, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT,
@@ -2559,7 +2667,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .backPic = gMonBackPic_Tritino, .backPicSize = MON_COORDS_SIZE(64, 64),
         .backPicYOffset = 4, .palette = gMonPalette_Tritino,
         .shinyPalette = gMonShinyPalette_Tritino, .iconSprite = gMonIcon_Tritino,
-        .iconPalIndex = 0, .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        .iconPalIndex = 3, .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(0, 4, SHADOW_SIZE_M)
         FOOTPRINT(Tentacool)
         OVERWORLD(sPicTable_Tentacool, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT,
@@ -2591,7 +2699,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .backPic = gMonBackPic_Tricrest, .backPicSize = MON_COORDS_SIZE(64, 64),
         .backPicYOffset = 4, .palette = gMonPalette_Tricrest,
         .shinyPalette = gMonShinyPalette_Tricrest, .iconSprite = gMonIcon_Tricrest,
-        .iconPalIndex = 0, .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        .iconPalIndex = 3, .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(0, 4, SHADOW_SIZE_M)
         FOOTPRINT(Tentacool)
         OVERWORLD(sPicTable_Tentacool, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT,
@@ -2622,7 +2730,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .backPic = gMonBackPic_Salampolla, .backPicSize = MON_COORDS_SIZE(64, 64),
         .backPicYOffset = 4, .palette = gMonPalette_Salampolla,
         .shinyPalette = gMonShinyPalette_Salampolla, .iconSprite = gMonIcon_Salampolla,
-        .iconPalIndex = 0, .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        .iconPalIndex = 2, .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(0, 4, SHADOW_SIZE_M)
         FOOTPRINT(Salandit)
         OVERWORLD(sPicTable_Salandit, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT,
@@ -2654,7 +2762,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .backPic = gMonBackPic_Alchimandra, .backPicSize = MON_COORDS_SIZE(64, 64),
         .backPicYOffset = 4, .palette = gMonPalette_Alchimandra,
         .shinyPalette = gMonShinyPalette_Alchimandra, .iconSprite = gMonIcon_Alchimandra,
-        .iconPalIndex = 0, .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        .iconPalIndex = 2, .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(0, 4, SHADOW_SIZE_M)
         FOOTPRINT(Salandit)
         OVERWORLD(sPicTable_Salandit, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT,
@@ -2681,7 +2789,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .frontPicYOffset = 4, .frontAnimFrames = sAnims_SingleFramePlaceHolder,
         .backPic = gMonBackPic_Cisternide, .backPicSize = MON_COORDS_SIZE(64, 64), .backPicYOffset = 4,
         .palette = gMonPalette_Cisternide, .shinyPalette = gMonShinyPalette_Cisternide, .iconSprite = gMonIcon_Cisternide,
-        .iconPalIndex = 0, .pokemonJumpType = PKMN_JUMP_TYPE_NONE, SHADOW(0, 4, SHADOW_SIZE_M)
+        .iconPalIndex = 3, .pokemonJumpType = PKMN_JUMP_TYPE_NONE, SHADOW(0, 4, SHADOW_SIZE_M)
         FOOTPRINT(Anorith)
         OVERWORLD(sPicTable_Anorith, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, sAnimTable_Following, gOverworldPalette_Anorith, gShinyOverworldPalette_Anorith)
         .levelUpLearnset = sCisternideLevelUpLearnset, .teachingType = EXPLICIT_TEACHABLES,
@@ -2706,7 +2814,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .frontPic = gMonFrontPic_Calcistern, .frontPicSize = MON_COORDS_SIZE(64, 64), .frontPicYOffset = 4,
         .frontAnimFrames = sAnims_SingleFramePlaceHolder, .backPic = gMonBackPic_Calcistern,
         .backPicSize = MON_COORDS_SIZE(64, 64), .backPicYOffset = 4, .palette = gMonPalette_Calcistern,
-        .shinyPalette = gMonShinyPalette_Calcistern, .iconSprite = gMonIcon_Calcistern, .iconPalIndex = 0,
+        .shinyPalette = gMonShinyPalette_Calcistern, .iconSprite = gMonIcon_Calcistern, .iconPalIndex = 2,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE, SHADOW(0, 4, SHADOW_SIZE_L)
         FOOTPRINT(Crustle)
         OVERWORLD(sPicTable_Crustle, SIZE_32x32, SHADOW_SIZE_L, TRACKS_FOOT, sAnimTable_Following, gOverworldPalette_Crustle, gShinyOverworldPalette_Crustle)
@@ -2727,7 +2835,30 @@ const struct SpeciesInfo gSpeciesInfo[] =
             "Così si orienta nell'acqua torbida."),
         .pokemonScale = 256, .frontPic = gMonFrontPic_Carpulus, .frontPicSize = MON_COORDS_SIZE(64,64), .frontPicYOffset = 4,
         .frontAnimFrames = sAnims_SingleFramePlaceHolder, .backPic = gMonBackPic_Carpulus, .backPicSize = MON_COORDS_SIZE(64,64), .backPicYOffset = 4,
-        .palette = gMonPalette_Carpulus, .shinyPalette = gMonShinyPalette_Carpulus, .iconSprite = gMonIcon_Carpulus, .iconPalIndex = 0,
+        .palette = gMonPalette_Carpulus, .shinyPalette = gMonShinyPalette_Carpulus, .iconSprite = gMonIcon_Carpulus, .iconPalIndex = 5,
+        FOOTPRINT(Magikarp) OVERWORLD(sPicTable_Magikarp, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, sAnimTable_Following, gOverworldPalette_Magikarp, gShinyOverworldPalette_Magikarp)
+        .levelUpLearnset = sCarpulusLevelUpLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sCarpulusTeachableLearnset,
+        .eggMoveLearnset = sCarpulusEggMoveLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_CARPULETUM}),
+    },
+    [SPECIES_CARPULETUM] =
+    {
+        .baseHP = 90, .baseAttack = 105, .baseDefense = 100, .baseSpAttack = 65, .baseSpDefense = 85, .baseSpeed = 65,
+        .types = MON_TYPES(TYPE_WATER, TYPE_GROUND), .catchRate = 190, .expYield = 64, .evYield_Speed = 1,
+        .genderRatio = PERCENT_FEMALE(50), .eggCycles = 20, .friendship = 70, .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_2),
+        .abilities = { ABILITY_SWIFT_SWIM, ABILITY_WATER_VEIL, ABILITY_HYDRATION }, .bodyColor = BODY_COLOR_GREEN,
+        .speciesName = _("Carpuletum"), .cryId = CRY_MAGIKARP, .natDexNum = NATIONAL_DEX_CARPULETUM,
+        .categoryName = _("SCAGLIA"), .height = 6, .weight = 120,
+        .description = COMPOUND_STRING(
+            "Vive in branchi presso rive e pontili.\n"
+            "Le scaglie circolari riflettono la luce.\n"
+            "Così si orienta nell'acqua torbida."),
+        .pokemonScale = 256, .frontPic = gMonFrontPic_Carpuletum, .frontPicSize = MON_COORDS_SIZE(64,64), .frontPicYOffset = 4,
+        .frontAnimFrames = sAnims_SingleFramePlaceHolder, .backPic = gMonBackPic_Carpuletum, .backPicSize = MON_COORDS_SIZE(64,64), .backPicYOffset = 4,
+        .palette = gMonPalette_Carpuletum, .shinyPalette = gMonShinyPalette_Carpuletum, .iconSprite = gMonIcon_Carpuletum, .iconPalIndex = 5,
         FOOTPRINT(Magikarp) OVERWORLD(sPicTable_Magikarp, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, sAnimTable_Following, gOverworldPalette_Magikarp, gShinyOverworldPalette_Magikarp)
         .levelUpLearnset = sCarpulusLevelUpLearnset,
         .teachingType = EXPLICIT_TEACHABLES,
@@ -2745,7 +2876,30 @@ const struct SpeciesInfo gSpeciesInfo[] =
             "Scatta sulla preda senza increspare\n"
             "l'acqua."), .pokemonScale = 256,
         .frontPic = gMonFrontPic_Lucinus, .frontPicSize = MON_COORDS_SIZE(64,64), .frontPicYOffset = 4, .frontAnimFrames = sAnims_SingleFramePlaceHolder,
-        .backPic = gMonBackPic_Lucinus, .backPicSize = MON_COORDS_SIZE(64,64), .backPicYOffset = 4, .palette = gMonPalette_Lucinus, .shinyPalette = gMonShinyPalette_Lucinus, .iconSprite = gMonIcon_Lucinus, .iconPalIndex = 0,
+        .backPic = gMonBackPic_Lucinus, .backPicSize = MON_COORDS_SIZE(64,64), .backPicYOffset = 4, .palette = gMonPalette_Lucinus, .shinyPalette = gMonShinyPalette_Lucinus, .iconSprite = gMonIcon_Lucinus, .iconPalIndex = 1,
+        FOOTPRINT(Carvanha) OVERWORLD(sPicTable_Carvanha, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, sAnimTable_Following, gOverworldPalette_Carvanha, gShinyOverworldPalette_Carvanha)
+        .levelUpLearnset = sLucinusLevelUpLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sLucinusTeachableLearnset,
+        .eggMoveLearnset = sLucinusEggMoveLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 32, SPECIES_LUTELLUS}),
+    },
+    [SPECIES_LUTELLUS] =
+    {
+        .baseHP = 75, .baseAttack = 125, .baseDefense = 70, .baseSpAttack = 105, .baseSpDefense = 55, .baseSpeed = 100,
+        .types = MON_TYPES(TYPE_WATER, TYPE_DARK), .catchRate = 90, .expYield = 120, .evYield_Attack = 2,
+        .genderRatio = PERCENT_FEMALE(50), .eggCycles = 25, .friendship = 70, .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_2),
+        .abilities = { ABILITY_STRONG_JAW, ABILITY_SWIFT_SWIM, ABILITY_SNIPER }, .bodyColor = BODY_COLOR_GREEN,
+        .speciesName = _("Lutellus"), .cryId = CRY_CARVANHA, .natDexNum = NATIONAL_DEX_LUTELLUS,
+        .categoryName = _("AGGUATO"), .height = 14, .weight = 340,
+        .description = COMPOUND_STRING(
+            "Si nasconde fra i canneti.\n"
+            "Scatta sulla preda senza increspare\n"
+            "l'acqua."), .pokemonScale = 256,
+        .frontPic = gMonFrontPic_Lutellus, .frontPicSize = MON_COORDS_SIZE(64,64), .frontPicYOffset = 4,
+        .frontAnimFrames = sAnims_SingleFramePlaceHolder, .backPic = gMonBackPic_Lutellus, .backPicSize = MON_COORDS_SIZE(64,64), .backPicYOffset = 4,
+        .palette = gMonPalette_Lutellus, .shinyPalette = gMonShinyPalette_Lutellus, .iconSprite = gMonIcon_Lutellus, .iconPalIndex = 5,
         FOOTPRINT(Carvanha) OVERWORLD(sPicTable_Carvanha, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, sAnimTable_Following, gOverworldPalette_Carvanha, gShinyOverworldPalette_Carvanha)
         .levelUpLearnset = sLucinusLevelUpLearnset,
         .teachingType = EXPLICIT_TEACHABLES,
@@ -2763,12 +2917,158 @@ const struct SpeciesInfo gSpeciesInfo[] =
             "Nei laghi, le leggende lo scambiano\n"
             "per una nave senza equipaggio."), .pokemonScale = 256,
         .frontPic = gMonFrontPic_Naufragus, .frontPicSize = MON_COORDS_SIZE(64,64), .frontPicYOffset = 4, .frontAnimFrames = sAnims_SingleFramePlaceHolder,
-        .backPic = gMonBackPic_Naufragus, .backPicSize = MON_COORDS_SIZE(64,64), .backPicYOffset = 4, .palette = gMonPalette_Naufragus, .shinyPalette = gMonShinyPalette_Naufragus, .iconSprite = gMonIcon_Naufragus, .iconPalIndex = 0,
+        .backPic = gMonBackPic_Naufragus, .backPicSize = MON_COORDS_SIZE(64,64), .backPicYOffset = 4, .palette = gMonPalette_Naufragus, .shinyPalette = gMonShinyPalette_Naufragus, .iconSprite = gMonIcon_Naufragus, .iconPalIndex = 3,
         FOOTPRINT(Skarmory) OVERWORLD(sPicTable_Skarmory, SIZE_32x32, SHADOW_SIZE_L, TRACKS_FOOT, sAnimTable_Following, gOverworldPalette_Skarmory, gShinyOverworldPalette_Skarmory)
         .levelUpLearnset = sNaufragusLevelUpLearnset,
         .teachingType = EXPLICIT_TEACHABLES,
         .teachableLearnset = sNaufragusTeachableLearnset,
         .eggMoveLearnset = sNaufragusEggMoveLearnset,
+    },
+
+    [SPECIES_VITEMOSTO] =
+    {
+        .baseHP = 75, .baseAttack = 55, .baseDefense = 70, .baseSpeed = 80, .baseSpAttack = 100, .baseSpDefense = 65,
+        .types = MON_TYPES(TYPE_GRASS, TYPE_FIRE), .catchRate = 120, .expYield = 178, .evYield_SpAttack = 2, .genderRatio = PERCENT_FEMALE(50), .eggCycles = 20,
+        .friendship = 70, .growthRate = GROWTH_MEDIUM_FAST, .eggGroups = MON_EGG_GROUPS(EGG_GROUP_GRASS, EGG_GROUP_FIELD), .abilities = { ABILITY_CHLOROPHYLL, ABILITY_LEAF_GUARD, ABILITY_SOLAR_POWER },
+        .bodyColor = BODY_COLOR_GREEN, .speciesName = _("Vitemosto"), .cryId = CRY_SMOLIV, .natDexNum = NATIONAL_DEX_VITEMOSTO, .categoryName = _("MOSTO"), .height = 10, .weight = 270,
+        .description = COMPOUND_STRING("Accumula il calore del sole nei grappoli\nche crescono sul corpo. Il succo maturo\nsprigiona un aroma dolce e tiepido."),
+        .pokemonScale = 256, .frontPic = gMonFrontPic_Vitemosto, .frontPicSize = MON_COORDS_SIZE(64, 64), .frontPicYOffset = 4, .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        .backPic = gMonBackPic_Vitemosto, .backPicSize = MON_COORDS_SIZE(64, 64), .backPicYOffset = 4, .palette = gMonPalette_Vitemosto, .shinyPalette = gMonShinyPalette_Vitemosto, .iconSprite = gMonIcon_Vitemosto, .iconPalIndex = 4,
+        FOOTPRINT(Smoliv) OVERWORLD(sPicTable_Smoliv, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, sAnimTable_Following, gOverworldPalette_Smoliv, gShinyOverworldPalette_Smoliv)
+        .levelUpLearnset = sVitemostoLevelUpLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sVitemostoTeachableLearnset,
+        .eggMoveLearnset = sVitemostoEggMoveLearnset,
+    },
+
+    [SPECIES_PORCHIGNIS] =
+    {
+        .baseHP = 65, .baseAttack = 75, .baseDefense = 65, .baseSpeed = 45, .baseSpAttack = 45, .baseSpDefense = 30,
+        .types = MON_TYPES(TYPE_FIRE), .catchRate = 190, .expYield = 64, .evYield_Attack = 1, .genderRatio = PERCENT_FEMALE(50), .eggCycles = 20,
+        .friendship = 70, .growthRate = GROWTH_MEDIUM_FAST, .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD), .abilities = { ABILITY_BLAZE, ABILITY_GLUTTONY, ABILITY_THICK_FAT },
+        .bodyColor = BODY_COLOR_BROWN, .speciesName = _("Porchignis"), .cryId = CRY_TEPIG, .natDexNum = NATIONAL_DEX_PORCHIGNIS, .categoryName = _("BRACE"), .height = 7, .weight = 180,
+        .description = COMPOUND_STRING("Cerca terreni caldi dove rotolarsi.\nQuando si agita, il calore sotto la pelle\nfa uscire sottili sbuffi di fumo."),
+        .pokemonScale = 320, .frontPic = gMonFrontPic_Porchignis, .frontPicSize = MON_COORDS_SIZE(64, 64), .frontPicYOffset = 4, .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        .backPic = gMonBackPic_Porchignis, .backPicSize = MON_COORDS_SIZE(64, 64), .backPicYOffset = 4, .palette = gMonPalette_Porchignis, .shinyPalette = gMonShinyPalette_Porchignis, .iconSprite = gMonIcon_Porchignis, .iconPalIndex = 5,
+        FOOTPRINT(Tepig) OVERWORLD(sPicTable_Tepig, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, sAnimTable_Following, gOverworldPalette_Tepig, gShinyOverworldPalette_Tepig)
+        .levelUpLearnset = sPorchignisLevelUpLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sPorchignisTeachableLearnset,
+        .eggMoveLearnset = sPorchignisEggMoveLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_BRONZOVERRO}),
+    },
+
+    [SPECIES_BRONZOVERRO] =
+    {
+        .baseHP = 95, .baseAttack = 115, .baseDefense = 110, .baseSpeed = 55, .baseSpAttack = 55, .baseSpDefense = 75,
+        .types = MON_TYPES(TYPE_FIRE, TYPE_STEEL), .catchRate = 60, .expYield = 220, .evYield_Attack = 2, .genderRatio = PERCENT_FEMALE(50), .eggCycles = 20,
+        .friendship = 70, .growthRate = GROWTH_MEDIUM_FAST, .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD, EGG_GROUP_MINERAL), .abilities = { ABILITY_BLAZE, ABILITY_HEATPROOF, ABILITY_HEAVY_METAL },
+        .bodyColor = BODY_COLOR_BROWN, .speciesName = _("Bronzoverro"), .cryId = CRY_EMBOAR, .natDexNum = NATIONAL_DEX_BRONZOVERRO, .categoryName = _("BRONZO"), .height = 18, .weight = 1250,
+        .description = COMPOUND_STRING("Il calore ha indurito la pelle fino a\nrenderla simile al bronzo. Avanza senza\ntemere ne fiamme ne urti."),
+        .pokemonScale = 256, .frontPic = gMonFrontPic_Bronzoverro, .frontPicSize = MON_COORDS_SIZE(64, 64), .frontPicYOffset = 4, .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        .backPic = gMonBackPic_Bronzoverro, .backPicSize = MON_COORDS_SIZE(64, 64), .backPicYOffset = 4, .palette = gMonPalette_Bronzoverro, .shinyPalette = gMonShinyPalette_Bronzoverro, .iconSprite = gMonIcon_Bronzoverro, .iconPalIndex = 5,
+        FOOTPRINT(Emboar) OVERWORLD(sPicTable_Emboar, SIZE_32x32, SHADOW_SIZE_L, TRACKS_FOOT, sAnimTable_Following, gOverworldPalette_Emboar, gShinyOverworldPalette_Emboar)
+        .levelUpLearnset = sBronzoverroLevelUpLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sBronzoverroTeachableLearnset,
+        .eggMoveLearnset = sBronzoverroEggMoveLearnset,
+    },
+
+    [SPECIES_FRASCHIETTO] =
+    {
+        .baseHP = 55, .baseAttack = 75, .baseDefense = 50, .baseSpeed = 70, .baseSpAttack = 35, .baseSpDefense = 35,
+        .types = MON_TYPES(TYPE_FIGHTING), .catchRate = 190, .expYield = 64, .evYield_Attack = 1, .genderRatio = PERCENT_FEMALE(50), .eggCycles = 20,
+        .friendship = 70, .growthRate = GROWTH_MEDIUM_FAST, .eggGroups = MON_EGG_GROUPS(EGG_GROUP_HUMAN_LIKE), .abilities = { ABILITY_VITAL_SPIRIT, ABILITY_INNER_FOCUS, ABILITY_SCRAPPY },
+        .bodyColor = BODY_COLOR_BROWN, .speciesName = _("Fraschietto"), .cryId = CRY_MAKUHITA, .natDexNum = NATIONAL_DEX_FRASCHIETTO, .categoryName = _("OSTE"), .height = 8, .weight = 190,
+        .description = COMPOUND_STRING("Attira l'attenzione con gesti vivaci\ne sfida chiunque mostri energia.\nAdora stare in mezzo alla confusione."),
+        .pokemonScale = 320, .frontPic = gMonFrontPic_Fraschietto, .frontPicSize = MON_COORDS_SIZE(64, 64), .frontPicYOffset = 4, .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        .backPic = gMonBackPic_Fraschietto, .backPicSize = MON_COORDS_SIZE(64, 64), .backPicYOffset = 4, .palette = gMonPalette_Fraschietto, .shinyPalette = gMonShinyPalette_Fraschietto, .iconSprite = gMonIcon_Fraschietto, .iconPalIndex = 3,
+        FOOTPRINT(Makuhita) OVERWORLD(sPicTable_Fraschietto, SIZE_64x64, SHADOW_SIZE_M, TRACKS_FOOT, sAnimTable_AlbaIdle, gOverworldPalette_Fraschietto, gShinyOverworldPalette_Fraschietto)
+        .levelUpLearnset = sFraschiettoLevelUpLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sFraschiettoTeachableLearnset,
+        .eggMoveLearnset = sFraschiettoEggMoveLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_FRASCOTTO}),
+    },
+
+    [SPECIES_FRASCOTTO] =
+    {
+        .baseHP = 85, .baseAttack = 110, .baseDefense = 75, .baseSpeed = 85, .baseSpAttack = 65, .baseSpDefense = 80,
+        .types = MON_TYPES(TYPE_FIGHTING, TYPE_FIRE), .catchRate = 60, .expYield = 218, .evYield_Attack = 3, .genderRatio = PERCENT_FEMALE(50), .eggCycles = 20,
+        .friendship = 70, .growthRate = GROWTH_MEDIUM_FAST, .eggGroups = MON_EGG_GROUPS(EGG_GROUP_HUMAN_LIKE), .abilities = { ABILITY_VITAL_SPIRIT, ABILITY_GUTS, ABILITY_FLAME_BODY },
+        .bodyColor = BODY_COLOR_BROWN, .speciesName = _("Frascotto"), .cryId = CRY_HARIYAMA, .natDexNum = NATIONAL_DEX_FRASCOTTO, .categoryName = _("FOCOLARE"), .height = 16, .weight = 680,
+        .description = COMPOUND_STRING("Gestisce il proprio territorio come\nun padrone di casa. Alimenta la brace\ne condivide il calore con il gruppo."),
+        .pokemonScale = 256, .frontPic = gMonFrontPic_Frascotto, .frontPicSize = MON_COORDS_SIZE(64, 64), .frontPicYOffset = 4, .frontAnimFrames = sAnims_SingleFramePlaceHolder,
+        .backPic = gMonBackPic_Frascotto, .backPicSize = MON_COORDS_SIZE(64, 64), .backPicYOffset = 4, .palette = gMonPalette_Frascotto, .shinyPalette = gMonShinyPalette_Frascotto, .iconSprite = gMonIcon_Frascotto, .iconPalIndex = 0,
+        FOOTPRINT(Hariyama) OVERWORLD(sPicTable_Frascotto, SIZE_64x64, SHADOW_SIZE_L, TRACKS_FOOT, sAnimTable_AlbaIdle, gOverworldPalette_Frascotto, gShinyOverworldPalette_Frascotto)
+        .levelUpLearnset = sFrascottoLevelUpLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sFrascottoTeachableLearnset,
+        .eggMoveLearnset = sFrascottoEggMoveLearnset,
+    },
+
+    // Pokémon Alba: Ausonia regional Sudowoodo.
+    [SPECIES_SUDOWOODO_AUSONIA] =
+    {
+        .baseHP        = 70,
+        .baseAttack    = 100,
+        .baseDefense   = 115,
+        .baseSpeed     = 30,
+        .baseSpAttack  = 30,
+        .baseSpDefense = 65,
+        .types = MON_TYPES(TYPE_GHOST, TYPE_GRASS),
+        .catchRate = 65,
+        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 144 : 135,
+        .evYield_Defense = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MINERAL),
+        .abilities = { ABILITY_STURDY, ABILITY_ROCK_HEAD, ABILITY_RATTLED },
+        .bodyColor = BODY_COLOR_BROWN,
+        .speciesName = _("Sudowoodo"),
+        .cryId = CRY_SUDOWOODO,
+        .natDexNum = NATIONAL_DEX_SUDOWOODO_AUSONIA,
+        .categoryName = _("IMITAZIONE"),
+        .height = 12,
+        .weight = 380,
+        .description = COMPOUND_STRING(
+            "It mimics a tree to avoid being attacked\n"
+            "by enemies. But since its forelegs\n"
+            "remain green throughout the year, it is\n"
+            "easily identified as a fake in the winter."),
+        .pokemonScale = 305,
+        .pokemonOffset = 8,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_SudowoodoAusonia,
+        .frontPicSize = MON_COORDS_SIZE(64, 64),
+        .frontPicYOffset = 0,
+        .frontAnimFrames = ANIM_FRAMES(
+            ANIMCMD_FRAME(0, 10),
+            ANIMCMD_FRAME(1, 6),
+            ANIMCMD_FRAME(2, 6),
+            ANIMCMD_FRAME(1, 6),
+            ANIMCMD_FRAME(0, 10),
+        ),
+        .frontAnimId = ANIM_H_SLIDE_SLOW,
+        .backPic = gMonBackPic_SudowoodoAusonia,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 0,
+        .backAnimId = BACK_ANIM_H_SLIDE,
+        .palette = gMonPalette_SudowoodoAusonia,
+        // No regional shiny is approved yet; required technical fallback.
+        .shinyPalette = gMonPalette_SudowoodoAusonia,
+        .iconSprite = gMonIcon_Sudowoodo,
+        .iconPalIndex = 1,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        SHADOW(-2, 7, SHADOW_SIZE_S)
+        FOOTPRINT(Sudowoodo)
+        .levelUpLearnset = sSudowoodoAusoniaLevelUpLearnset,
+        .teachingType = EXPLICIT_TEACHABLES,
+        .teachableLearnset = sSudowoodoAusoniaTeachableLearnset,
+        .eggMoveLearnset = sSudowoodoAusoniaEggMoveLearnset,
     },
 
     /* You may add any custom species below this point based on the following structure: */

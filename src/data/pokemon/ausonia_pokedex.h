@@ -1,0 +1,6 @@
+static const enum NationalDexOrder gAusoniaPokedexOrder[AUSONIA_DEX_COUNT] =
+{
+#define AUSONIA_TO_NATIONAL(name) NATIONAL_DEX_##name,
+    FOREACH_SPECIES_IN_AUSONIA_DEX_ORDER(AUSONIA_TO_NATIONAL)
+#undef AUSONIA_TO_NATIONAL
+};

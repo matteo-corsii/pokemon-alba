@@ -6,6 +6,7 @@
 #include "wild_encounter_ow.h"
 
 #define HEADER_NONE 0xFFFF
+#define HABITAT_MAX_SPECIES (LAND_WILD_COUNT + WATER_WILD_COUNT + ROCK_WILD_COUNT + FISH_WILD_COUNT + HIDDEN_WILD_COUNT)
 
 enum WildPokemonArea {
     WILD_AREA_LAND,
@@ -80,5 +81,6 @@ u32 ChooseWildMonIndex_Rocks(void);
 u32 ChooseHiddenMonIndex(void);
 bool32 MapHasNoEncounterData(void);
 enum TimeOfDay GetTimeOfDayForEncounters(u32 headerId, enum WildPokemonArea area);
+u16 GetCurrentMapHabitatSpecies(enum Species *speciesList, u16 capacity);
 
 #endif // GUARD_WILD_ENCOUNTER_H

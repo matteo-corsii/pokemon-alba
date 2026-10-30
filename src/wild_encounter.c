@@ -33,6 +33,53 @@
 
 extern const u8 EventScript_SprayWoreOff[];
 
+static void AddHabitatEncounterSpecies(enum Species *speciesList, u16 *speciesCount, u16 capacity, const struct WildPokemonInfo *encounterInfo, u32 speciesCountForArea, bool32 requireEncounterRate)
+{
+    u32 i;
+
+    if (encounterInfo == NULL || (requireEncounterRate && encounterInfo->encounterRate == 0))
+        return;
+
+    for (i = 0; i < speciesCountForArea && *speciesCount < capacity; i++)
+    {
+        enum Species species = encounterInfo->wildPokemon[i].species;
+        u16 j;
+
+        if (species == SPECIES_NONE || species >= NUM_SPECIES)
+            continue;
+        for (j = 0; j < *speciesCount; j++)
+        {
+            if (speciesList[j] == species)
+                break;
+        }
+        if (j == *speciesCount)
+            speciesList[(*speciesCount)++] = species;
+    }
+}
+
+u16 GetCurrentMapHabitatSpecies(enum Species *speciesList, u16 capacity)
+{
+    u16 headerId = GetCurrentMapWildMonHeaderId();
+    u16 speciesCount = 0;
+    enum TimeOfDay timeOfDay;
+
+    if (speciesList == NULL || capacity == 0 || headerId == HEADER_NONE)
+        return 0;
+
+#define ADD_HABITAT(area, member, count, requireRate) \
+    do { \
+        timeOfDay = GetTimeOfDayForEncounters(headerId, area); \
+        AddHabitatEncounterSpecies(speciesList, &speciesCount, capacity, gWildMonHeaders[headerId].encounterTypes[timeOfDay].member, count, requireRate); \
+    } while (0)
+    ADD_HABITAT(WILD_AREA_LAND, landMonsInfo, LAND_WILD_COUNT, TRUE);
+    ADD_HABITAT(WILD_AREA_WATER, waterMonsInfo, WATER_WILD_COUNT, TRUE);
+    ADD_HABITAT(WILD_AREA_ROCKS, rockSmashMonsInfo, ROCK_WILD_COUNT, TRUE);
+    ADD_HABITAT(WILD_AREA_FISHING, fishingMonsInfo, FISH_WILD_COUNT, TRUE);
+    ADD_HABITAT(WILD_AREA_HIDDEN, hiddenMonsInfo, HIDDEN_WILD_COUNT, FALSE);
+#undef ADD_HABITAT
+    return speciesCount > capacity ? capacity : speciesCount;
+}
+
 #define MAX_ENCOUNTER_RATE 2880
 
 #define NUM_FEEBAS_SPOTS 6

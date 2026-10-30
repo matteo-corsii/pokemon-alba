@@ -78,6 +78,9 @@ bool32 TryFindHiddenPokemon(void);
 u32 CalculateDexNavShinyRolls(void);
 void IncrementDexNavChain(void);
 bool32 OnStep_DexNavSearch(void);
+void GetLocalHabitatSpeciesCounts(u16 *total, u16 *caught);
+bool32 IsLocalHabitatComplete(void);
+bool32 IsSpeciesCaughtInLocalHabitat(enum Species species);
 
 extern enum Species gDexNavSpecies;
 

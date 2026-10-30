@@ -65,7 +65,7 @@ static void SpriteCB_GameFreakLogo(struct Sprite *sprite);
 static void SpriteCB_FlygonSilhouette(struct Sprite *sprite);
 
 // Scene 2 main tasks
-static void Task_Scene2_Load(u8);
+static void UNUSED Task_Scene2_Load(u8);
 static void Task_Scene2_CreateSprites(u8);
 static void Task_Scene2_BikeRide(u8);
 static void Task_Scene2_End(u8);
@@ -1322,12 +1322,6 @@ static void Task_Scene1_PanUp(u8 taskId)
         gTasks[taskId].tBg3PosLo = offset;
         SetGpuReg(REG_OFFSET_BG0VOFS, gTasks[taskId].tBg3PosHi);
 
-        if (gIntroFrameCounter == TIMER_FLYGON_SILHOUETTE_APPEAR)
-        {
-            // Show Flygon silhouette
-            u8 spriteId = CreateSprite(&sSpriteTemplate_FlygonSilhouette, 120, DISPLAY_HEIGHT, 10);
-            gSprites[spriteId].invisible = TRUE;
-        }
     }
     else
     {
@@ -1343,7 +1337,10 @@ static void Task_Scene1_PanUp(u8 taskId)
 static void Task_Scene1_End(u8 taskId)
 {
     if (gIntroFrameCounter > TIMER_START_SCENE_2)
-        gTasks[taskId].func = Task_Scene2_Load;
+    {
+        DestroyTask(taskId);
+        SetMainCallback2(MainCB2_EndIntro);
+    }
 }
 
 static void Task_Scene2_Load(u8 taskId)

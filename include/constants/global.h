@@ -201,6 +201,12 @@ enum Gender
 #define OPTIONS_BATTLE_STYLE_SHIFT 0
 #define OPTIONS_BATTLE_STYLE_SET 1
 
+#define OPTIONS_SHINY_RATE_1_512  0
+#define OPTIONS_SHINY_RATE_1_1024 1
+#define OPTIONS_SHINY_RATE_1_2048 2
+#define OPTIONS_SHINY_RATE_1_4096 3
+#define OPTIONS_SHINY_RATE_1_8192 4
+
 enum __attribute__((packed)) Direction
 {
     DIR_NONE,
