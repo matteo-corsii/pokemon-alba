@@ -251,6 +251,7 @@ enum {
     PALTAG_ITEM_ICON_1, // Used implicitly in CreateItemIconSprites
     PALTAG_ITEM_ICON_2, // Used implicitly in CreateItemIconSprites
     PALTAG_MARKING_MENU,
+    PALTAG_SHINY_STAR,
 };
 
 enum {
@@ -273,6 +274,7 @@ enum {
     GFXTAG_MARKING_COMBO,
     GFXTAG_17, // Unused
     GFXTAG_MON_ICON,
+    GFXTAG_SHINY_STAR,
 };
 
 // The maximum number of Pokémon icons that can appear on-screen.
@@ -488,6 +490,7 @@ struct PokemonStorageSystemData
     u8 displayMonMarkings;
     u8 displayMonLevel;
     bool8 displayMonIsEgg;
+    bool8 displayMonIsShiny;
     u8 displayMonName[POKEMON_NAME_LENGTH + 1];
     u8 displayMonNameText[36];
     u8 displayMonSpeciesName[36];
@@ -532,6 +535,7 @@ struct PokemonStorageSystemData
     u16 displayMonPalOffset;
     u16 *displayMonTilePtr;
     struct Sprite *displayMonSprite;
+    struct Sprite *shinyStarSprite;
     u8 ALIGNED(4) tileBuffer[MON_PIC_SIZE * MAX_MON_PIC_FRAMES];
     u8 ALIGNED(4) itemIconBuffer[0x800];
     u8 wallpaperBgTilemapBuffer[0x1000];
@@ -1216,6 +1220,39 @@ static const union AffineAnimCmd *const sAffineAnims_ReleaseMon[] =
 };
 
 #include "data/wallpapers.h"
+
+static const u32 sShinyStar_Gfx[] = INCGFX_U32("graphics/pokemon_storage/wallpapers/icons/star_in_circle.png", ".4bpp.smol");
+static const u16 sShinyStar_Pal[] = INCGFX_U16("graphics/pokemon_storage/wallpapers/icons/star_in_circle.png", ".gbapal");
+static const struct CompressedSpriteSheet sShinyStarSpriteSheet =
+{
+    .data = sShinyStar_Gfx,
+    .size = 0x80,
+    .tag = GFXTAG_SHINY_STAR,
+};
+static const struct SpritePalette sShinyStarSpritePalette =
+{
+    .data = sShinyStar_Pal,
+    .tag = PALTAG_SHINY_STAR,
+};
+static const struct OamData sOamData_ShinyStar =
+{
+    .shape = SPRITE_SHAPE(16x16),
+    .size = SPRITE_SIZE(16x16),
+    .priority = 1,
+};
+static const union AnimCmd sAnim_ShinyStar[] =
+{
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END,
+};
+static const union AnimCmd *const sAnims_ShinyStar[] = {sAnim_ShinyStar};
+static const struct SpriteTemplate sSpriteTemplate_ShinyStar =
+{
+    .tileTag = GFXTAG_SHINY_STAR,
+    .paletteTag = PALTAG_SHINY_STAR,
+    .oam = &sOamData_ShinyStar,
+    .anims = sAnims_ShinyStar,
+};
 
 static const u16 sUnusedColor = RGB(26, 29, 8);
 
@@ -3818,6 +3855,8 @@ static void FreePokeStorageData(void)
 {
     TilemapUtil_Free();
     MultiMove_Free();
+    FreeSpriteTilesByTag(GFXTAG_SHINY_STAR);
+    FreeSpritePaletteByTag(PALTAG_SHINY_STAR);
     FREE_AND_SET_NULL(sStorage);
     FreeAllWindowBuffers();
 }
@@ -3884,7 +3923,12 @@ static void InitPalettesAndSprites(void)
         LoadPalette(sScrollingBgMoveItems_Pal, BG_PLTT_ID(3), sizeof(sScrollingBgMoveItems_Pal));
 
     SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(1) | BGCNT_CHARBASE(1) | BGCNT_16COLOR | BGCNT_SCREENBASE(30));
+    LoadCompressedSpriteSheet(&sShinyStarSpriteSheet);
+    LoadSpritePalette(&sShinyStarSpritePalette);
     CreateDisplayMonSprite();
+    sStorage->shinyStarSprite = CreateSprite(&sSpriteTemplate_ShinyStar, 68, 96, 1);
+    sStorage->shinyStarSprite->callback = SpriteCallbackDummy;
+    sStorage->shinyStarSprite->invisible = TRUE;
     CreateMarkingComboSprite();
     CreateWaveformSprites();
     RefreshDisplayMonData();
@@ -4034,10 +4078,12 @@ static void PrintDisplayMonInfo(void)
     {
         UpdateMonMarkingTiles(sStorage->displayMonMarkings, sStorage->markingComboTilesPtr);
         sStorage->markingComboSprite->invisible = FALSE;
+        sStorage->shinyStarSprite->invisible = sStorage->displayMonIsEgg || !sStorage->displayMonIsShiny;
     }
     else
     {
         sStorage->markingComboSprite->invisible = TRUE;
+        sStorage->shinyStarSprite->invisible = TRUE;
     }
 }
 
@@ -6989,6 +7035,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
     bool8 sanityIsBadEgg;
 
     sStorage->displayMonItemId = ITEM_NONE;
+    sStorage->displayMonIsShiny = FALSE;
     gender = MON_MALE;
     sanityIsBadEgg = FALSE;
     if (mode == MODE_PARTY)
@@ -7009,6 +7056,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
             sStorage->displayMonLevel = GetMonData(mon, MON_DATA_LEVEL);
             sStorage->displayMonMarkings = GetMonData(mon, MON_DATA_MARKINGS);
             sStorage->displayMonPersonality = GetMonData(mon, MON_DATA_PERSONALITY);
+            sStorage->displayMonIsShiny = GetMonData(mon, MON_DATA_IS_SHINY);
             sStorage->displayMonPalette = GetMonFrontSpritePal(mon);
             gender = GetMonGender(mon);
             sStorage->displayMonItemId = GetMonData(mon, MON_DATA_HELD_ITEM);
@@ -7034,6 +7082,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
             sStorage->displayMonMarkings = GetBoxMonData(boxMon, MON_DATA_MARKINGS);
             sStorage->displayMonPersonality = GetBoxMonData(boxMon, MON_DATA_PERSONALITY);
             sStorage->displayMonIsEgg = GetBoxMonData(boxMon, MON_DATA_IS_EGG);
+            sStorage->displayMonIsShiny = isShiny;
             sStorage->displayMonPalette = GetMonSpritePalFromSpeciesAndPersonalityIsEgg(sStorage->displayMonSpecies, isShiny, sStorage->displayMonPersonality, sStorage->displayMonIsEgg);
             gender = GetGenderFromSpeciesAndPersonality(sStorage->displayMonSpecies, sStorage->displayMonPersonality);
             sStorage->displayMonItemId = GetBoxMonData(boxMon, MON_DATA_HELD_ITEM);
