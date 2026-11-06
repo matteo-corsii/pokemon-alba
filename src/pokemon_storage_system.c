@@ -535,7 +535,7 @@ struct PokemonStorageSystemData
     u16 displayMonPalOffset;
     u16 *displayMonTilePtr;
     struct Sprite *displayMonSprite;
-    struct Sprite *shinyStarSprite;
+    u8 shinyStarSpriteId;
     u8 ALIGNED(4) tileBuffer[MON_PIC_SIZE * MAX_MON_PIC_FRAMES];
     u8 ALIGNED(4) itemIconBuffer[0x800];
     u8 wallpaperBgTilemapBuffer[0x1000];
@@ -3926,9 +3926,12 @@ static void InitPalettesAndSprites(void)
     LoadCompressedSpriteSheet(&sShinyStarSpriteSheet);
     LoadSpritePalette(&sShinyStarSpritePalette);
     CreateDisplayMonSprite();
-    sStorage->shinyStarSprite = CreateSprite(&sSpriteTemplate_ShinyStar, 68, 96, 1);
-    sStorage->shinyStarSprite->callback = SpriteCallbackDummy;
-    sStorage->shinyStarSprite->invisible = TRUE;
+    sStorage->shinyStarSpriteId = CreateSprite(&sSpriteTemplate_ShinyStar, 68, 96, 1);
+    if (sStorage->shinyStarSpriteId != SPRITE_NONE)
+    {
+        gSprites[sStorage->shinyStarSpriteId].callback = SpriteCallbackDummy;
+        gSprites[sStorage->shinyStarSpriteId].invisible = TRUE;
+    }
     CreateMarkingComboSprite();
     CreateWaveformSprites();
     RefreshDisplayMonData();
@@ -4078,12 +4081,14 @@ static void PrintDisplayMonInfo(void)
     {
         UpdateMonMarkingTiles(sStorage->displayMonMarkings, sStorage->markingComboTilesPtr);
         sStorage->markingComboSprite->invisible = FALSE;
-        sStorage->shinyStarSprite->invisible = sStorage->displayMonIsEgg || !sStorage->displayMonIsShiny;
+        if (sStorage->shinyStarSpriteId != SPRITE_NONE)
+            gSprites[sStorage->shinyStarSpriteId].invisible = sStorage->displayMonIsEgg || !sStorage->displayMonIsShiny;
     }
     else
     {
         sStorage->markingComboSprite->invisible = TRUE;
-        sStorage->shinyStarSprite->invisible = TRUE;
+        if (sStorage->shinyStarSpriteId != SPRITE_NONE)
+            gSprites[sStorage->shinyStarSpriteId].invisible = TRUE;
     }
 }
 
