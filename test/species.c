@@ -1703,7 +1703,7 @@ TEST("Ausonia early falcon fauna teachables Egg Moves graphics and auxiliary pla
     static const u8 backPicSizes[] = {
         (6 << 4) | 7,
         (7 << 4) | 8,
-        (7 << 4) | 7,
+        (8 << 4) | 7,
     };
     static const u8 frontOffsets[] = { 4, 2, 2 };
     static const u8 backOffsets[] = { 4, 2, 4 };
