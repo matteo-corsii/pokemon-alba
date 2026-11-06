@@ -1198,7 +1198,7 @@ static const struct SpriteTemplate sSpriteTemplate_StatusCondition =
 };
 static const u16 sMarkings_Pal[] = INCGFX_U16("graphics/summary_screen/markings.pal", ".gbapal");
 static const u32 sShinyStar_Gfx[] = INCGFX_U32("graphics/pokemon_storage/wallpapers/icons/star_in_circle.png", ".4bpp.smol");
-static const u16 sShinyStar_Pal[] = INCGFX_U16("graphics/pokemon_storage/wallpapers/icons/star_in_circle.png", ".gbapal");
+static const u16 sShinyStar_Pal[] = INCGFX_U16("graphics/pokemon_storage/wallpapers/icons/star_in_circle.pal", ".gbapal");
 static const struct CompressedSpriteSheet sShinyStarSpriteSheet =
 {
     .data = sShinyStar_Gfx,
