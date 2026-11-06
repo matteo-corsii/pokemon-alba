@@ -1698,14 +1698,14 @@ TEST("Ausonia early falcon fauna teachables Egg Moves graphics and auxiliary pla
     static const u8 frontPicSizes[] = {
         (8 << 4) | 7,
         (8 << 4) | 8,
-        (8 << 4) | 5,
+        (8 << 4) | 8,
     };
     static const u8 backPicSizes[] = {
         (6 << 4) | 7,
         (7 << 4) | 8,
         (7 << 4) | 7,
     };
-    static const u8 frontOffsets[] = { 4, 2, 12 };
+    static const u8 frontOffsets[] = { 4, 2, 2 };
     static const u8 backOffsets[] = { 4, 2, 4 };
     static const u16 ghepioTeachables[] = {
         MOVE_PROTECT, MOVE_REST, MOVE_SLEEP_TALK, MOVE_SUBSTITUTE, MOVE_SUNNY_DAY,
