@@ -113,6 +113,7 @@ enum
     SPRITE_ARR_ID_MON,
     SPRITE_ARR_ID_BALL,
     SPRITE_ARR_ID_STATUS,
+    SPRITE_ARR_ID_SHINY,
     SPRITE_ARR_ID_TYPE, // 2 for mon types, 5 for move types(4 moves and 1 to learn), used interchangeably, because mon types and move types aren't shown on the same screen
     SPRITE_ARR_ID_MOVE_SELECTOR1 = SPRITE_ARR_ID_TYPE + TYPE_ICON_SPRITE_COUNT, // 10 sprites that make up the selector
     SPRITE_ARR_ID_MOVE_SELECTOR2 = SPRITE_ARR_ID_MOVE_SELECTOR1 + MOVE_SELECTOR_SPRITES_COUNT,
@@ -312,6 +313,8 @@ static void CreateMonMarkingsSprite(struct Pokemon *);
 static void RemoveAndCreateMonMarkingsSprite(struct Pokemon *);
 static void CreateCaughtBallSprite(struct Pokemon *);
 static void CreateSetStatusSprite(void);
+static void CreateShinyStarSprite(void);
+static void UpdateShinyStarSprite(void);
 static void CreateMoveSelectorSprites(u8);
 static void SpriteCB_MoveSelector(struct Sprite *);
 static void DestroyMoveSelectorSprites(u8);
@@ -812,6 +815,7 @@ static const u8 sMovesPPLayout[] = _("{PP}{DYNAMIC 0}/{DYNAMIC 1}");
 #define TAG_MOVE_TYPES 30002
 #define TAG_MON_MARKINGS 30003
 #define TAG_CATEGORY_ICONS 30004
+#define TAG_SHINY_STAR 30005
 
 static const struct OamData sOamData_CategoryIcons =
 {
@@ -1193,6 +1197,38 @@ static const struct SpriteTemplate sSpriteTemplate_StatusCondition =
     .anims = sSpriteAnimTable_StatusCondition,
 };
 static const u16 sMarkings_Pal[] = INCGFX_U16("graphics/summary_screen/markings.pal", ".gbapal");
+static const u32 sShinyStar_Gfx[] = INCGFX_U32("graphics/pokemon_storage/wallpapers/icons/shiny_star.png", ".4bpp.smol");
+static const u16 sShinyStar_Pal[] = INCGFX_U16("graphics/pokemon_storage/wallpapers/icons/shiny_star.png", ".gbapal");
+static const struct CompressedSpriteSheet sShinyStarSpriteSheet =
+{
+    .data = sShinyStar_Gfx,
+    .size = 0x80,
+    .tag = TAG_SHINY_STAR
+};
+static const struct SpritePalette sShinyStarSpritePalette =
+{
+    .data = sShinyStar_Pal,
+    .tag = TAG_SHINY_STAR
+};
+static const struct OamData sOamData_ShinyStar =
+{
+    .shape = SPRITE_SHAPE(16x16),
+    .size = SPRITE_SIZE(16x16),
+    .priority = 1,
+};
+static const union AnimCmd sAnim_ShinyStar[] =
+{
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END
+};
+static const union AnimCmd *const sAnims_ShinyStar[] = {sAnim_ShinyStar};
+static const struct SpriteTemplate sSpriteTemplate_ShinyStar =
+{
+    .tileTag = TAG_SHINY_STAR,
+    .paletteTag = TAG_SHINY_STAR,
+    .oam = &sOamData_ShinyStar,
+    .anims = sAnims_ShinyStar,
+};
 
 // code
 static u8 ShowCategoryIcon(enum DamageCategory category)
@@ -1410,6 +1446,7 @@ static bool8 LoadGraphics(void)
         break;
     case 20:
         CreateSetStatusSprite();
+        CreateShinyStarSprite();
         gMain.state++;
         break;
     case 21:
@@ -1523,6 +1560,8 @@ static bool8 DecompressGraphics(void)
         LoadPalette(gMoveTypes_Pal, OBJ_PLTT_ID(13), 3 * PLTT_SIZE_4BPP);
         LoadCompressedSpriteSheet(&gSpriteSheet_CategoryIcons);
         LoadSpritePalette(&gSpritePal_CategoryIcons);
+        LoadCompressedSpriteSheet(&sShinyStarSpriteSheet);
+        LoadSpritePalette(&sShinyStarSpritePalette);
         sMonSummaryScreen->switchCounter = 0;
         return TRUE;
     }
@@ -3231,6 +3270,7 @@ static void PrintMonInfo(void)
         PrintNotEggInfo();
     else
         PrintEggInfo();
+    UpdateShinyStarSprite();
     ScheduleBgCopyTilemapToVram(0);
 }
 
@@ -4707,6 +4747,29 @@ static void CreateSetStatusSprite(void)
     else
     {
         SetSpriteInvisibility(SPRITE_ARR_ID_STATUS, TRUE);
+    }
+}
+
+static void CreateShinyStarSprite(void)
+{
+    u8 *spriteId = &sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_SHINY];
+
+    *spriteId = CreateSprite(&sSpriteTemplate_ShinyStar, 88, 104, 1);
+    if (*spriteId != SPRITE_NONE)
+    {
+        gSprites[*spriteId].callback = SpriteCallbackDummy;
+        UpdateShinyStarSprite();
+    }
+}
+
+static void UpdateShinyStarSprite(void)
+{
+    u8 spriteId = sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_SHINY];
+
+    if (spriteId != SPRITE_NONE)
+    {
+        gSprites[spriteId].invisible = sMonSummaryScreen->summary.isEgg
+                                    || !sMonSummaryScreen->summary.isShiny;
     }
 }
 

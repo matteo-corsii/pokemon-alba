@@ -27,6 +27,24 @@ OldaleTown_EventScript_Traveler::
 	msgbox OldaleTown_Text_Traveler, MSGBOX_NPC
 	end
 
+OldaleTown_EventScript_Molospsy::
+	lock
+	faceplayer
+	goto_if_set FLAG_OLDALE_MOLOPSY_SEEN, OldaleTown_EventScript_Molospsy_After
+	msgbox OldaleTown_Text_Molospsy, MSGBOX_DEFAULT
+	setflag FLAG_OLDALE_MOLOPSY_SEEN
+	release
+	end
+
+OldaleTown_EventScript_Molospsy_After::
+	msgbox OldaleTown_Text_Molospsy_After, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_EventScript_PortaPretoriaChild::
+	msgbox OldaleTown_Text_PortaPretoriaChild, MSGBOX_NPC
+	end
+
 OldaleTown_EventScript_WallResident::
 	msgbox OldaleTown_Text_WallResident, MSGBOX_NPC
 	end
@@ -63,6 +81,23 @@ OldaleTown_Text_Traveler:
 	.string "campeggi e rifugi.\p"
 	.string "Dicono che insegni ai viaggiatori a\n"
 	.string "crearsi un posto tutto loro.$"
+
+OldaleTown_Text_Molospsy:
+	.string "Queste pietre hanno visto sorgere e\n"
+	.string "cadere molte generazioni.\p"
+	.string "Gli uomini costruiscono, dimenticano...\n"
+	.string "e poi tornano a cercare cio che hanno perduto.\p"
+	.string "Ricorda, giovane viaggiatore: la terra\n"
+	.string "conserva tracce che il tempo non puo cancellare.$"
+
+OldaleTown_Text_Molospsy_After:
+	.string "Ascolta il silenzio delle pietre.\n"
+	.string "Hanno ancora molto da raccontare.$"
+
+OldaleTown_Text_PortaPretoriaChild:
+	.string "Anche tu riesci a vederlo?\p"
+	.string "E sempre li, vicino alle vecchie pietre.\p"
+	.string "A volte sembra che stia aspettando qualcuno...$"
 
 OldaleTown_Text_WestGateWorker:
 	.string "Il VIALE PRETORIO conduce ad\n"

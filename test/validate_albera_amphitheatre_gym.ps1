@@ -63,7 +63,7 @@ foreach ($pair in @(@('TRAINER_ALBERA_DARIO', '855', '624'), @('TRAINER_ALBERA_M
     Assert-True ($opponentsFrlg -match "#define\s+$($pair[0])\s+$($pair[2])\b") "Invalid FRLG trainer ID for $($pair[0])."
 }
 Assert-True ($opponents -match '#define\s+TRAINERS_COUNT_EMERALD\s+864\b') 'Emerald trainer count must include the approved Via dei Cisternoni trainers.'
-Assert-True ($opponentsFrlg -match '#define\s+TRAINERS_COUNT_FRLG\s+633\b') 'FRLG trainer count must include the approved Via dei Cisternoni trainers.'
+Assert-True ($opponentsFrlg -match '#define\s+TRAINERS_COUNT_FRLG\s+637\b') 'FRLG trainer count must include the approved Via dei Cisternoni and Lago trainers.'
 Assert-True ($opponents -match '#define\s+MAX_TRAINERS_COUNT_EMERALD\s+864\b') 'Emerald trainer capacity changed.'
 Assert-True ($opponentsFrlg -match '#define\s+MAX_TRAINERS_COUNT_FRLG\s+768\b') 'FRLG trainer capacity changed.'
 

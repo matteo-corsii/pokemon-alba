@@ -31,12 +31,12 @@ $docs = (Get-Content 'docs/AUSONIA_REGIONAL_DEX_PLAN.md' -Raw -Encoding UTF8) -r
 $saveTests = (Get-Content 'test/save.c' -Raw) -replace "`r`n", "`n"
 $learnables = Get-Content 'src/data/pokemon/all_learnables.json' -Raw | ConvertFrom-Json
 
-Assert-Contains $speciesConstants "SPECIES_GAZZOMBRA,`n    SPECIES_MOLOSPSY,`n    SPECIES_LENGHELIS,`n    SPECIES_LUSCINCO,`n    SPECIES_LUSCERP,`n    SPECIES_LUMELLA,`n    SPECIES_OMPHALUX,`n    SPECIES_PALUDIX,`n    SPECIES_SANGUILEX,`n    SPECIES_TRITINO,`n    SPECIES_TRICREST,`n    SPECIES_SALAMPOLLA,`n    SPECIES_ALCHIMANDRA,`n    SPECIES_CISTERNIDE,`n    SPECIES_CALCISTERN,`n    SPECIES_CUSTOM_END," 'Species append-only sequence'
+Assert-Contains $speciesConstants "SPECIES_GAZZOMBRA,`n    SPECIES_MOLOSPSY,`n    SPECIES_LENGHELIS,`n    SPECIES_LUSCINCO,`n    SPECIES_LUSCERP,`n    SPECIES_LUMELLA,`n    SPECIES_OMPHALUX,`n    SPECIES_PALUDIX,`n    SPECIES_SANGUILEX,`n    SPECIES_TRITINO,`n    SPECIES_TRICREST,`n    SPECIES_SALAMPOLLA,`n    SPECIES_ALCHIMANDRA,`n    SPECIES_CISTERNIDE,`n    SPECIES_CALCISTERN,`n    SPECIES_CARPULUS,`n    SPECIES_LUCINUS,`n    SPECIES_NAUFRAGUS,`n    SPECIES_VITEMOSTO,`n    SPECIES_PORCHIGNIS,`n    SPECIES_BRONZOVERRO,`n    SPECIES_FRASCHIETTO,`n    SPECIES_FRASCOTTO,`n    SPECIES_CARPULETUM,`n    SPECIES_LUTELLUS,`n    SPECIES_CUSTOM_END," 'Species append-only sequence'
 Assert-Contains $speciesConstants 'SPECIES_EGG = SPECIES_CUSTOM_END' 'Species_EGG definition'
 Assert-Contains $speciesConstants 'NUM_SPECIES = SPECIES_EGG' 'NUM_SPECIES definition'
 Assert-Contains $dexConstants "NATIONAL_DEX_GAZZOMBRA,`n    NATIONAL_DEX_MOLOSPSY," 'PokÃƒÆ’Ã‚Â©dex append-only sequence'
 Assert-Contains $dexConstants "NATIONAL_DEX_MOLOSPSY,`n    NATIONAL_DEX_LENGHELIS,`n    NATIONAL_DEX_LUSCINCO,`n    NATIONAL_DEX_LUSCERP," 'Luscinco/Luscerp append-only National Dex sequence'
-Assert-Contains $dexConstants '#define NATIONAL_DEX_COUNT  NATIONAL_DEX_CALCISTERN' 'National Dex count'
+Assert-Contains $dexConstants '#define NATIONAL_DEX_COUNT  NATIONAL_DEX_LUTELLUS' 'National Dex count'
 
 $record = Get-Section $speciesInfo '[SPECIES_MOLOSPSY] =' "`n    },"
 Assert-True ($speciesInfo.IndexOf('[SPECIES_MOLOSPSY] =') -lt $speciesInfo.IndexOf('/* You may add any custom species below this point based on the following structure: */')) 'Molospsy record is missing or misplaced'
@@ -69,11 +69,11 @@ foreach ($expected in @(
 )) {
     Assert-Contains $record $expected 'SPECIES_MOLOSPSY'
 }
-Assert-Contains $record 'FOOTPRINT(Mabosstiff)' 'Molospsy temporary footprint placeholder'
-Assert-Contains $record 'sPicTable_Mabosstiff' 'Molospsy temporary overworld placeholder'
-Assert-Contains $record 'gOverworldPalette_Mabosstiff' 'Molospsy temporary overworld palette placeholder'
-Assert-Contains $record 'gShinyOverworldPalette_Mabosstiff' 'Molospsy temporary shiny overworld palette placeholder'
-Assert-Contains $record '.cryId = CRY_MABOSSTIFF' 'Molospsy temporary cry placeholder'
+Assert-Contains $record 'FOOTPRINT(Mabosstiff)' 'Molospsy footprint reuse'
+Assert-Contains $record 'sPicTable_Molospsy' 'Molospsy overworld picture table'
+Assert-Contains $record 'gOverworldPalette_Molospsy' 'Molospsy overworld palette'
+Assert-Contains $record 'gShinyOverworldPalette_Molospsy' 'Molospsy shiny overworld palette'
+Assert-Contains $record '.cryId = CRY_MABOSSTIFF' 'Molospsy canonical cry reuse'
 Assert-True ($record -notmatch 'SPECIES_MOLOSPSY.*EVOLUTION\(') 'Molospsy must remain single stage'
 
 $learnsetBlock = Get-Section $speciesInfo 'static const struct LevelUpMove sMolospsyLevelUpLearnset[]' '};'
@@ -90,7 +90,7 @@ $learnableNames = @($learnables.PSObject.Properties.Name)
 $molospsyIndex = [Array]::IndexOf($learnableNames, 'MOLOSPSY')
 Assert-True ($molospsyIndex -ge 0) 'Molospsy must remain in all_learnables.json'
 Assert-True (($molospsyIndex + 1) -lt $learnableNames.Count -and $learnableNames[$molospsyIndex + 1] -ceq 'LENGHELIS') 'Lenghelis must follow Molospsy in all_learnables.json'
-Assert-True ($learnableNames[-1] -ceq 'ALCHIMANDRA') 'Alchimandra must be the last custom learnables entry'
+Assert-True ($learnableNames[-1] -ceq 'FRASCOTTO') 'Frascotto must be the last custom learnables entry'
 
 $eggBlock = Get-Section $eggMoves 'static const u16 sMolospsyEggMoveLearnset[]' '};'
 foreach ($move in @('MOVE_COUNTER','MOVE_DETECT','MOVE_ENDURE','MOVE_HELPING_HAND','MOVE_MIRROR_COAT','MOVE_POWER_UP_PUNCH','MOVE_QUICK_GUARD','MOVE_WIDE_GUARD','MOVE_UNAVAILABLE')) {

@@ -169,6 +169,7 @@ enum
 enum
 {
     HELPBAR_NONE,
+    HELPBAR_MAP_AUSONIA,
     HELPBAR_MAP_ZOOMED_OUT,
     HELPBAR_MAP_ZOOMED_IN,
     HELPBAR_MAP_ZOOMED_OUT_CANFLY,
@@ -381,6 +382,7 @@ void HideMainOrSubMenuLeftHeader(u32 id, bool32 onRightSide);
 void SlideMenuHeaderUp(void);
 void PokenavFillPalette(u32 palIndex, u16 fillValue);
 u32 PokenavMainMenuLoopedTaskIsActive(void);
+void RestorePokenavMainMenuBg0(void);
 bool32 WaitForPokenavShutdownFade(void);
 void SetActiveMenuLoopTasks(void *createLoopTask, void *isLoopTaskActive); // Fix types later.
 void ShutdownPokenav(void);

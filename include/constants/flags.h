@@ -47,6 +47,9 @@
 
 #if IS_FRLG
 
+#define FLAG_OLDALE_MOLOPSY_SEEN 0
+#define FLAG_HIDE_VIA_CONSOLARE_LENGHELIS 0
+
 #include "constants/flags_frlg.h"
 
 #else
@@ -78,6 +81,49 @@
 #define FLAG_LAGO_REFUGE_FIRST_MISSION_STARTED 0x8F9
 #define FLAG_LAGO_REFUGE_AMULET_COIN_RECEIVED 0x8FA
 #define FLAG_RECEIVED_LAGO_BIKE 0x8FB
+#define FLAG_HIDE_LAGO_DI_ALBERA_LAURO_SURF 0x8FC
+#define FLAG_ORIGINAL_STARTER_ID_REGISTERED 0x8FD
+#define FLAG_VIA_CONSOLARE_EMISSARIO_LEAD_COMPLETE 0x8FE
+#define FLAG_EMISSARIO_AUREA_ENCOUNTER_COMPLETE 0x8FF
+#define FLAG_FIRST_ECHO_SEEN 0x900
+#define FLAG_HIDE_VIA_CONSOLARE_LIA 0x901
+#define FLAG_HIDE_VIA_CONSOLARE_NICO 0x902
+#define FLAG_HIDE_LAGO_DI_ALBERA_LIA_EMISSARIO 0x903
+#define FLAG_HIDE_LAGO_DI_ALBERA_NICO_EMISSARIO 0x904
+#define FLAG_HIDE_EMISSARIO_LIA 0x905
+#define FLAG_HIDE_EMISSARIO_NICO 0x906
+#define FLAG_HIDE_EMISSARIO_AUREA_RECRUIT 0x907
+#define FLAG_HIDE_BOSCO_DEL_ROMITORIO_CINGERM 0x908
+#define FLAG_HIDE_BOSCO_DEL_ROMITORIO_ARDEINO 0x909
+#define FLAG_HIDE_BOSCO_DEL_ROMITORIO_SERBRACE 0x90A
+#define FLAG_ITEM_BOSCO_DEL_ROMITORIO_MIRACLE_SEED 0x90B
+#define FLAG_ITEM_BOSCO_DEL_ROMITORIO_TM09 0x90C
+#define FLAG_ITEM_BOSCO_DEL_ROMITORIO_CHARCOAL 0x90D
+#define FLAG_ITEM_BOSCO_DEL_ROMITORIO_MYSTIC_WATER 0x90E
+#define FLAG_HIDE_BORGO_DI_CASTELLO_NICO_LIA 0x90F
+#define FLAG_BORGO_NICO_LIA_INTRO_DONE 0x910
+#define FLAG_HIDE_VILLA_PAPALE_ARCHIVIO_PARTY 0x911
+#define FLAG_VILLA_PAPALE_ARCHIVIO_DONE 0x912
+#define FLAG_STRADA_BORGO_CISTERNONI_NICO_LIA_DONE 0x913
+#define FLAG_HIDE_STRADA_BORGO_CISTERNONI_NICO_LIA 0x914
+#define FLAG_ITEM_STRADA_BORGO_CISTERNONI_SUPER_POTION 0x915
+#define FLAG_HIDDEN_ITEM_STRADA_BORGO_CISTERNONI_ETHER 0x916
+#define FLAG_HIDDEN_ITEM_STRADA_BORGO_CISTERNONI_REVIVE 0x917
+#define FLAG_RECEIVED_VALLE_LARICIA_ORAN_BERRIES         0x918
+#define FLAG_RECEIVED_VALLE_LARICIA_PECHA_BERRIES        0x919
+#define FLAG_RECEIVED_VALLE_LARICIA_CHERI_BERRIES        0x91A
+
+// Temporary narrative flags reserved from previously unused persistent slots.
+#define FLAG_OLDALE_MOLOPSY_SEEN                         FLAG_UNUSED_0x028
+#define FLAG_HIDE_VIA_CONSOLARE_LENGHELIS                FLAG_UNUSED_0x029
+#define FLAG_UCCELLIERA_CHEF_SEEN                        FLAG_UNUSED_0x02C
+
+// Laricia post-Gym festival state. These were unused persistent system flags.
+#define FLAG_LARICIA_SAGRA_ACTIVE                         FLAG_UNUSED_0x91B
+#define FLAG_LARICIA_POST_GYM_PENDING                    FLAG_UNUSED_0x91C
+#define FLAG_HIDE_LARICIA_POST_GYM_AUGUSTO               FLAG_UNUSED_0x91D
+#define FLAG_HIDE_LARICIA_POST_GYM_NICO_LIA              FLAG_UNUSED_0x91E
+#define FLAG_HIDE_LARICIA_SAGRA_TRUCK_3                  FLAG_UNUSED_0x91F
 #define FLAG_HIDE_ALBERA_LAB_NICO 0x24 // Nico's dedicated Albèra lab object
 #define FLAG_HIDE_ALBERA_LAB_LIA 0x25 // Lia's dedicated Albèra lab object
 #define FLAG_HIDE_ROUTE101_RESEARCH_PARTY 0x26 // Via Verdi investigation party objects
@@ -286,7 +332,7 @@
 #define FLAG_RECEIVED_TM_ROAR                0xE7
 #define FLAG_RECEIVED_TM_GIGA_DRAIN          0xE8
 
-#define FLAG_UNUSED_0x0E9                    0xE9 // Unused Flag
+#define FLAG_RECEIVED_TM_FLAME_CHARGE        0xE9
 
 #define FLAG_RECEIVED_TM_REST                0xEA
 #define FLAG_RECEIVED_TM_ATTRACT             0xEB
@@ -1250,6 +1296,11 @@
 #define FLAG_UNUSED_0x495                                           0x495 // Unused Flag
 #define FLAG_UNUSED_0x496                                           0x496 // Unused Flag
 #define FLAG_UNUSED_0x497                                           0x497 // Unused Flag
+#define FLAG_TRAINER_LARICIA_GYM_TRAINER_1                         FLAG_UNUSED_0x493
+#define FLAG_TRAINER_LARICIA_GYM_TRAINER_2                         FLAG_UNUSED_0x494
+#define FLAG_TRAINER_LARICIA_GYM_TRAINER_3                         FLAG_UNUSED_0x495
+#define FLAG_TRAINER_LARICIA_GYM_TRAINER_4                         FLAG_UNUSED_0x496
+#define FLAG_TRAINER_AUGUSTO                                       FLAG_UNUSED_0x497
 #define FLAG_UNUSED_0x498                                           0x498 // Unused Flag
 #define FLAG_UNUSED_0x499                                           0x499 // Unused Flag
 #define FLAG_UNUSED_0x49A                                           0x49A // Unused Flag
@@ -1295,14 +1346,23 @@
 #define FLAG_UNUSED_0x4C2                                           0x4C2 // Unused Flag
 #define FLAG_UNUSED_0x4C3                                           0x4C3 // Unused Flag
 #define FLAG_UNUSED_0x4C4                                           0x4C4 // Unused Flag
-#define FLAG_UNUSED_0x4C5                                           0x4C5 // Unused Flag
-#define FLAG_UNUSED_0x4C6                                           0x4C6 // Unused Flag
+#define FLAG_UCCELLIERA_CHEF_BERRY_GIVEN                            0x4C5
+#define FLAG_UCCELLIERA_CHEF_DEFEATED                               0x4C6
+#define FLAG_ALBA_BALL_PRESS_UNLOCKED                               FLAG_UNUSED_0x02E
 #define FLAG_UNUSED_0x4C7                                           0x4C7 // Unused Flag
 #define FLAG_UNUSED_0x4C8                                           0x4C8 // Unused Flag
 #define FLAG_UNUSED_0x4C9                                           0x4C9 // Unused Flag
 #define FLAG_UNUSED_0x4CA                                           0x4CA // Unused Flag
 #define FLAG_UNUSED_0x4CB                                           0x4CB // Unused Flag
 #define FLAG_UNUSED_0x4CC                                           0x4CC // Unused Flag
+#define FLAG_TRAINER_GALLORO_ESPLORATORE                             FLAG_UNUSED_0x4C7
+#define FLAG_TRAINER_GALLORO_GIARDINIERA                             FLAG_UNUSED_0x4C8
+#define FLAG_TRAINER_GALLORO_POKEFAN                                 FLAG_UNUSED_0x4C9
+#define FLAG_ITEM_GALLORO_SUPER_REPEL                                FLAG_UNUSED_0x4CA
+#define FLAG_ITEM_GALLORO_SUPER_POTION                               FLAG_UNUSED_0x4CB
+#define FLAG_ITEM_GALLORO_RAWST_BERRY                                FLAG_UNUSED_0x4CC
+#define FLAG_GALLORO_LA_MEMORIA_COMPLETED                            FLAG_UNUSED_0x4CD
+#define FLAG_GALLORO_LA_MEMORIA_SEEN                                 FLAG_UNUSED_0x4CE
 #define FLAG_UNUSED_0x4CD                                           0x4CD // Unused Flag
 #define FLAG_UNUSED_0x4CE                                           0x4CE // Unused Flag
 #define FLAG_UNUSED_0x4CF                                           0x4CF // Unused Flag
@@ -1364,7 +1424,7 @@
 // See constants/opponents.h. The values there + FLAG_TRAINER_FLAG_START are the flag IDs
 
 #define TRAINER_FLAGS_START                                         0x500
-#define TRAINER_FLAGS_END                                           (TRAINER_FLAGS_START + MAX_TRAINERS_COUNT - 1) // 0x85F
+#define TRAINER_FLAGS_END                                           0x85F
 
 // System Flags
 

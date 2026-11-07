@@ -3061,6 +3061,13 @@ static void BattleStartClearSetData(void)
     for (i = 0; i < BATTLE_COMMUNICATION_ENTRIES_COUNT; i++)
         gBattleCommunication[i] = 0;
 
+    if (gBattleTypeFlags & BATTLE_TYPE_CHEF)
+    {
+        gBattleWeather = B_WEATHER_SUN_NORMAL;
+        gBattleStruct->weatherDuration = 5;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_SUNLIGHT;
+    }
+
     gPauseCounterBattle = 0;
     gIntroSlideFlags = 0;
     gLeveledUpInBattle = 0;
@@ -3958,7 +3965,7 @@ u8 IsRunningFromBattleImpossible(enum BattlerId battler)
     enum HoldEffect holdEffect;
     u32 i;
 
-    if (FlagGet(WE_FLAG_NO_RUNNING))
+    if ((gBattleTypeFlags & BATTLE_TYPE_CHEF) || FlagGet(WE_FLAG_NO_RUNNING))
     {
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CANT_ESCAPE;
         return BATTLE_RUN_FORBIDDEN;

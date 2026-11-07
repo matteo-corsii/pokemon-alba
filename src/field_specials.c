@@ -30,6 +30,7 @@
 #include "main.h"
 #include "match_call.h"
 #include "menu.h"
+#include "menu_helpers.h"
 #include "metatile_behavior.h"
 #include "mystery_gift.h"
 #include "overworld.h"
@@ -5779,3 +5780,79 @@ bool8 CheckAddCoins(void)
     else
         return TRUE;
 }
+
+#define tAlbaBallPressQuantity data[0]
+#define tAlbaBallPressMaxQuantity data[1]
+#define tAlbaBallPressWindowId data[2]
+
+static const u8 sText_AlbaBallPressQuantity[] = _("Quantita: {STR_VAR_1}\nA: Conferma  B: Annulla");
+
+static void AlbaRefuge_BallPressPrintQuantity(u8 windowId, u16 quantity)
+{
+    ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_RIGHT_ALIGN, MAX_ITEM_DIGITS);
+    StringExpandPlaceholders(gStringVar4, sText_AlbaBallPressQuantity);
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar4, 8, 1, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
+}
+
+static void Task_AlbaRefugeBallPressQuantity(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+
+    if (AdjustQuantityAccordingToDPadInput(&task->tAlbaBallPressQuantity, task->tAlbaBallPressMaxQuantity))
+        AlbaRefuge_BallPressPrintQuantity(task->tAlbaBallPressWindowId, task->tAlbaBallPressQuantity);
+    else if (JOY_NEW(A_BUTTON))
+    {
+        gSpecialVar_Result = task->tAlbaBallPressQuantity;
+        PlaySE(SE_SELECT);
+        ClearToTransparentAndRemoveWindow(task->tAlbaBallPressWindowId);
+        DestroyTask(taskId);
+        ScriptContext_Enable();
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        gSpecialVar_Result = 0;
+        PlaySE(SE_SELECT);
+        ClearToTransparentAndRemoveWindow(task->tAlbaBallPressWindowId);
+        DestroyTask(taskId);
+        ScriptContext_Enable();
+    }
+}
+
+static void Task_AlbaRefugeBallPressQuantityUnavailable(u8 taskId)
+{
+    gSpecialVar_Result = 0;
+    DestroyTask(taskId);
+    ScriptContext_Enable();
+}
+
+void AlbaRefuge_ChooseBallQuantity(void)
+{
+    u32 berryCount = CountTotalItemQuantityInBag(VarGet(VAR_0x8004));
+    u32 bagSpace = GetFreeSpaceForItemInBag(VarGet(VAR_0x8005));
+    u16 maxQuantity = berryCount < bagSpace ? berryCount : bagSpace;
+    u8 windowId;
+    u8 taskId;
+
+    if (maxQuantity > MAX_BAG_ITEM_CAPACITY)
+        maxQuantity = MAX_BAG_ITEM_CAPACITY;
+
+    if (maxQuantity == 0)
+    {
+        CreateTask(Task_AlbaRefugeBallPressQuantityUnavailable, 80);
+        return;
+    }
+
+    windowId = CreateWindowFromRect(4, 8, 22, 5);
+    SetStandardWindowBorderStyle(windowId, FALSE);
+    AlbaRefuge_BallPressPrintQuantity(windowId, 1);
+    taskId = CreateTask(Task_AlbaRefugeBallPressQuantity, 80);
+    gTasks[taskId].tAlbaBallPressQuantity = 1;
+    gTasks[taskId].tAlbaBallPressMaxQuantity = maxQuantity;
+    gTasks[taskId].tAlbaBallPressWindowId = windowId;
+}
+
+#undef tAlbaBallPressQuantity
+#undef tAlbaBallPressMaxQuantity
+#undef tAlbaBallPressWindowId

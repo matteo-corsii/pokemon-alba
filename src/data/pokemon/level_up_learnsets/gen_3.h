@@ -4186,6 +4186,7 @@ static const struct LevelUpMove sSudowoodoLevelUpLearnset[] = {
     LEVEL_UP_MOVE(57, MOVE_DOUBLE_EDGE),
     LEVEL_UP_END
 };
+
 #endif //P_FAMILY_SUDOWOODO
 
 #if P_FAMILY_HOPPIP

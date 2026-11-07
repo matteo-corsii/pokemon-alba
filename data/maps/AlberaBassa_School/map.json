@@ -4,7 +4,7 @@
   "layout": "LAYOUT_ALBERA_BASSA_SCHOOL",
   "music": "MUS_SCHOOL",
   "region": "REGION_HOENN",
-  "region_map_section": "MAPSEC_LITTLEROOT_TOWN",
+  "region_map_section": "MAPSEC_AUSONIA_ALBERA_BASSA",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_INDOOR",

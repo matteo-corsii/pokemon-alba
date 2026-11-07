@@ -1,5 +1,10 @@
 LagoDiAlbera_RefugeMastersHouse_1F_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, LagoDiAlbera_RefugeMastersHouse_1F_OnTransition
 	.byte 0
+
+LagoDiAlbera_RefugeMastersHouse_1F_OnTransition:
+LagoDiAlbera_RefugeMastersHouse_1F_OnTransition_Done:
+	end
 
 LagoDiAlbera_RefugeMastersHouse_1F_EventScript_Assistant::
 	lock
@@ -13,6 +18,7 @@ LagoDiAlbera_RefugeMastersHouse_1F_EventScript_Assistant::
 	msgbox LagoDiAlbera_RefugeMastersHouse_1F_Text_AssistantSearch, MSGBOX_DEFAULT
 	release
 	end
+
 LagoDiAlbera_RefugeMastersHouse_1F_EventScript_AssistantBefore::
 	msgbox LagoDiAlbera_RefugeMastersHouse_1F_Text_AssistantBefore, MSGBOX_DEFAULT
 	release
@@ -73,3 +79,6 @@ LagoDiAlbera_RefugeMastersHouse_1F_Text_RegisterReady:
 	.string "Hai trovato il luogo giusto.\nTorna dall'aiutante.$"
 LagoDiAlbera_RefugeMastersHouse_1F_Text_RegisterDone:
 	.string "Incarico completato. Ricompensa consegnata.$"
+LagoDiAlbera_RefugeMastersHouse_1F_Text_Frascotto:
+	.string "Ho trovato un nuovo rifugio.\n"
+	.string "Qui posso continuare a cucinare!$"

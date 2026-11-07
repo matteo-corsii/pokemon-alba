@@ -35,6 +35,7 @@
 #include "tv.h"
 #include "constants/decorations.h"
 #include "constants/event_objects.h"
+#include "constants/maps.h"
 #include "constants/songs.h"
 #include "constants/region_map_sections.h"
 #include "constants/metatile_labels.h"
@@ -1524,6 +1525,32 @@ static bool8 IsFloorOrBoardAndHole(u16 behaviorAt, const struct Decoration *deco
     return FALSE;
 }
 
+static bool8 IsAlbaRefugeCellReserved(s16 x, s16 y)
+{
+    s16 localX, localY;
+
+    if (gMapHeader.mapType != MAP_TYPE_SECRET_BASE
+     || (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(MAP_ALBA_REFUGE_WOOD)
+      && gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(MAP_ALBA_REFUGE_ROCK)))
+        return FALSE;
+
+    localX = x - MAP_OFFSET;
+    localY = y - MAP_OFFSET;
+
+    if (localX >= 1 && localX <= 4 && localY >= 1 && localY <= 2) // Frascotto's kitchen
+        return TRUE;
+    if (localX == 8 && (localY == 1 || localY == 2)) // PC and interaction tile
+        return TRUE;
+    if (localX >= 13 && localX <= 14 && (localY == 1 || localY == 2 || localY == 3)) // Pressa Ball
+        return TRUE;
+    if (localX == 7 && (localY == 14 || localY == 15)) // Entry and exit
+        return TRUE;
+    if (localX == 2 && (localY == 3 || localY == 4)) // Frascotto and interaction tile
+        return TRUE;
+
+    return FALSE;
+}
+
 #ifdef BUGFIX
 #define GetLayerType(tileId) UNPACK_LAYER_TYPE(GetMetatileAttributesById(tileId))
 #else
@@ -1558,6 +1585,8 @@ static bool8 CanPlaceDecoration(u8 taskId, const struct Decoration *decoration)
             for (j = 0; j < mapX; j++)
             {
                 curX = gTasks[taskId].tCursorX + j;
+                if (IsAlbaRefugeCellReserved(curX, curY))
+                    return FALSE;
                 behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
                 layerType = GetAttributeByMetatileIdAndMapLayout(NUM_TILES_IN_PRIMARY + decoration->tiles[(mapY - 1 - i) * mapX + j], METATILE_ATTRIBUTE_LAYER_TYPE, FALSE);
                 if (!IsFloorOrBoardAndHole(behaviorAt, decoration))
@@ -1579,6 +1608,8 @@ static bool8 CanPlaceDecoration(u8 taskId, const struct Decoration *decoration)
             for (j = 0; j < mapX; j++)
             {
                 curX = gTasks[taskId].tCursorX + j;
+                if (IsAlbaRefugeCellReserved(curX, curY))
+                    return FALSE;
                 behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
                 layerType = GetAttributeByMetatileIdAndMapLayout(NUM_TILES_IN_PRIMARY + decoration->tiles[(mapY - 1 - i) * mapX + j], METATILE_ATTRIBUTE_LAYER_TYPE, FALSE);
                 if (!MetatileBehavior_IsNormal(behaviorAt) && !IsSecretBaseTrainerSpot(behaviorAt, layerType))
@@ -1596,6 +1627,8 @@ static bool8 CanPlaceDecoration(u8 taskId, const struct Decoration *decoration)
         for (j = 0; j < mapX; j++)
         {
             curX = gTasks[taskId].tCursorX + j;
+            if (IsAlbaRefugeCellReserved(curX, curY))
+                return FALSE;
             behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
             layerType = GetAttributeByMetatileIdAndMapLayout(NUM_TILES_IN_PRIMARY + decoration->tiles[j], METATILE_ATTRIBUTE_LAYER_TYPE, FALSE);
             if (!MetatileBehavior_IsNormal(behaviorAt) && !MetatileBehavior_IsSecretBaseNorthWall(behaviorAt))
@@ -1616,6 +1649,8 @@ static bool8 CanPlaceDecoration(u8 taskId, const struct Decoration *decoration)
             for (j = 0; j < mapX; j++)
             {
                 curX = gTasks[taskId].tCursorX + j;
+                if (IsAlbaRefugeCellReserved(curX, curY))
+                    return FALSE;
                 if (!MetatileBehavior_IsSecretBaseNorthWall(MapGridGetMetatileBehaviorAt(curX, curY)))
                     return FALSE;
 
@@ -1629,6 +1664,8 @@ static bool8 CanPlaceDecoration(u8 taskId, const struct Decoration *decoration)
         for (j = 0; j < mapX; j++)
         {
             curX = gTasks[taskId].tCursorX + j;
+            if (IsAlbaRefugeCellReserved(curX, curY))
+                return FALSE;
             behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
             if (decoration->shape == DECORSHAPE_1x2)
             {

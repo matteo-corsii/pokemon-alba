@@ -88,7 +88,8 @@ foreach ($source in @($opponents, $opponentsFrlg)) {
 }
 foreach ($source in @($emeraldTrainers, $frlgTrainers)) {
     Assert-True ($source -match '(?s)=== TRAINER_CISTERNONI_AUREA_RECRUIT ===.*?Class: Team Aqua.*?Pic: Aqua Grunt F.*?Miciolo.*?Level: 12.*?Gazzuola.*?Level: 13') 'Team Aurea party must use Miciolo Lv. 12 and Gazzuola Lv. 13 ace with the approved temporary battle placeholder.'
-    Assert-True ($source -notmatch '(?s)=== TRAINER_CISTERNONI_AUREA_RECRUIT ===.*?Salampolla') 'Team Aurea party must not include Salampolla.'
+    $aureaBlock = [regex]::Match($source, '(?ms)^=== TRAINER_CISTERNONI_AUREA_RECRUIT ===\s*(.*?)(?=^===|\z)').Groups[1].Value
+    Assert-True ($aureaBlock -notmatch 'Salampolla') 'Team Aurea party must not include Salampolla.'
 }
 Assert-True ($routeScripts -match 'TRAINER_CISTERNONI_MARCO' -and $routeScripts -match 'TRAINER_CISTERNONI_TEO') 'Via dei Cisternoni must retain its two normal trainers.'
 

@@ -7240,6 +7240,101 @@ const struct ItemInfo gItemsInfo[] =
         .iconPalette = gItemIconPalette_Glimmoranite,
     },
 
+    [ITEM_PANINO_CON_PORCHETTA] =
+    {
+        .name = ITEM_NAME("Pan. Porchetta"),
+        .price = 350,
+        .description = COMPOUND_STRING(
+            "Specialita locale\n"
+            "che cura ogni\n"
+            "alterazione."),
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_STATUS_RECOVERY,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
+        .battleUsage = EFFECT_ITEM_CURE_STATUS,
+        .effect = gItemEffect_FullHeal,
+        .flingPower = 30,
+        .iconPic = gItemIcon_LavaCookie,
+        .iconPalette = gItemIconPalette_LavaCookieAndLetter,
+    },
+
+    [ITEM_CARBONARA] =
+    {
+        .name = ITEM_NAME("Carbonara"),
+        .price = 0,
+        .holdEffectParam = 60,
+        .description = COMPOUND_STRING(
+            "Specialita che\n"
+            "recupera 50 PS."),
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_HEALTH_RECOVERY,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
+        .battleUsage = EFFECT_ITEM_RESTORE_HP,
+        .effect = gItemEffect_SuperPotion,
+        .flingPower = 30,
+        .iconPic = gItemIcon_Potion,
+        .iconPalette = gItemIconPalette_SuperPotion,
+    },
+
+    [ITEM_CACIO_E_PEPE] =
+    {
+        .name = ITEM_NAME("Cacio e Pepe"),
+        .price = 0,
+        .holdEffectParam = 50,
+        .description = COMPOUND_STRING(
+            "Specialita che\n"
+            "recupera 60 PS."),
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_HEALTH_RECOVERY,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
+        .battleUsage = EFFECT_ITEM_RESTORE_HP,
+        .effect = gItemEffect_SodaPop,
+        .flingPower = 30,
+        .iconPic = gItemIcon_SodaPop,
+        .iconPalette = gItemIconPalette_SodaPop,
+    },
+
+    [ITEM_AMATRICIANA] =
+    {
+        .name = ITEM_NAME("Amatriciana"),
+        .price = 0,
+        .holdEffectParam = 120,
+        .description = COMPOUND_STRING(
+            "Specialita che\n"
+            "recupera 200 PS."),
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_HEALTH_RECOVERY,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
+        .battleUsage = EFFECT_ITEM_RESTORE_HP,
+        .effect = gItemEffect_HyperPotion,
+        .flingPower = 30,
+        .iconPic = gItemIcon_Potion,
+        .iconPalette = gItemIconPalette_HyperPotion,
+    },
+
+    [ITEM_GRICIA] =
+    {
+        .name = ITEM_NAME("Gricia"),
+        .price = 0,
+        .holdEffectParam = 10,
+        .description = COMPOUND_STRING(
+            "Specialita che\n"
+            "recupera 10 PP."),
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_PP_RECOVERY,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_PPRecovery,
+        .battleUsage = EFFECT_ITEM_RESTORE_PP,
+        .effect = gItemEffect_Elixir,
+        .flingPower = 30,
+        .iconPic = gItemIcon_Ether,
+        .iconPalette = gItemIconPalette_Elixir,
+    },
+
 // Gems
     #if I_PRICE >= GEN_9
         #define GEM_PRICE 15000
@@ -9118,7 +9213,7 @@ const struct ItemInfo gItemsInfo[] =
 
     [ITEM_SPELL_TAG] =
     {
-        .name = ITEM_NAME("Spell Tag"),
+        .name = ITEM_NAME("Spettrotarga"),
         .price = TYPE_BOOSTING_PRICE,
         .holdEffect = HOLD_EFFECT_TYPE_POWER,
         .holdEffectParam = TYPE_BOOST_PARAM,
@@ -12885,9 +12980,11 @@ const struct ItemInfo gItemsInfo[] =
 
     [ITEM_TM51] =
     {
-        .name = ITEM_NAME("TM51"),
+        .name = ITEM_NAME("MT Nitrocarica"),
         .price = 3000,
-        .description = sQuestionMarksDesc, // Todo
+        .description = COMPOUND_STRING(
+            "Mossa Fuoco che\n"
+            "alza la Velocita."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
