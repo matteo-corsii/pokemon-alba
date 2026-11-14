@@ -2917,7 +2917,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
             "Nei laghi, le leggende lo scambiano\n"
             "per una nave senza equipaggio."), .pokemonScale = 256,
         .frontPic = gMonFrontPic_Naufragus, .frontPicSize = MON_COORDS_SIZE(64,64), .frontPicYOffset = 4, .frontAnimFrames = sAnims_SingleFramePlaceHolder,
-        .backPic = gMonBackPic_Naufragus, .backPicSize = MON_COORDS_SIZE(64,64), .backPicYOffset = 4, .palette = gMonPalette_Naufragus, .shinyPalette = gMonShinyPalette_Naufragus, .iconSprite = gMonIcon_Naufragus, .iconPalIndex = 3,
+        .backPic = gMonBackPic_Naufragus, .backPicSize = MON_COORDS_SIZE(64,64), .backPicYOffset = 4, .palette = gMonPalette_Naufragus, .shinyPalette = gMonShinyPalette_Naufragus, .iconSprite = gMonIcon_Naufragus, .iconPalIndex = 7,
         FOOTPRINT(Skarmory) OVERWORLD(sPicTable_Skarmory, SIZE_32x32, SHADOW_SIZE_L, TRACKS_FOOT, sAnimTable_Following, gOverworldPalette_Skarmory, gShinyOverworldPalette_Skarmory)
         .levelUpLearnset = sNaufragusLevelUpLearnset,
         .teachingType = EXPLICIT_TEACHABLES,

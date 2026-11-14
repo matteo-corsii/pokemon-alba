@@ -2102,6 +2102,7 @@ const u16 gMonIconPalettes[][16] =
     INCGFX_U16("graphics/pokemon/icon_palettes/pal4.pal", ".gbapal"),
     INCGFX_U16("graphics/pokemon/icon_palettes/pal5.pal", ".gbapal"),
     INCGFX_U16("graphics/pokemon/icon_palettes/pal6.pal", ".gbapal"),
+    INCGFX_U16("graphics/pokemon/naufragus/icon.pal", ".gbapal"),
 };
 
 const u16 gTitleScreenBgPalettes[]         = INCBIN_U16("graphics/title_screen/pokemon_logo.gbapal",
