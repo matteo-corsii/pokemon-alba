@@ -242,6 +242,7 @@ enum {
     PALTAG_MON_ICON_4, // Used implicitly in CreateMonIconSprite
     PALTAG_MON_ICON_5, // Used implicitly in CreateMonIconSprite
     PALTAG_MON_ICON_6, // Used implicitly in CreateMonIconSprite
+    PALTAG_MON_ICON_7, // Used implicitly in CreateMonIconSprite
     PALTAG_DISPLAY_MON,
     PALTAG_MISC_1,
     PALTAG_MARKING_COMBO,

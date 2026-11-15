@@ -3,7 +3,7 @@
   "name": "BoscoDelRomitorio",
   "layout": "LAYOUT_BOSCO_DEL_ROMITORIO",
   "music": "MUS_PETALBURG_WOODS",
-  "region_map_section": "MAPSEC_ALBERA_STORICA",
+  "region_map_section": "MAPSEC_LAGO_DI_ALBERA",
   "requires_flash": false,
   "weather": "WEATHER_SHADE",
   "map_type": "MAP_TYPE_ROUTE",

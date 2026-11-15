@@ -3,7 +3,7 @@
   "name": "LagoDiAlbera_WaterGym_3F",
   "layout": "LAYOUT_LAGO_DI_ALBERA_WATER_GYM_3F",
   "music": "MUS_OLDALE",
-  "region_map_section": "MAPSEC_ALBERA_STORICA",
+  "region_map_section": "MAPSEC_LAGO_DI_ALBERA",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_INDOOR",
