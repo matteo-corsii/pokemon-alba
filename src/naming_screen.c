@@ -28,6 +28,7 @@
 #include "walda_phrase.h"
 #include "main.h"
 #include "decompress.h"
+#include "scanline_effect.h"
 #include "constants/event_objects.h"
 #include "constants/rgb.h"
 
@@ -2078,6 +2079,7 @@ static void CB2_NamingScreen(void)
 
 static void ResetVHBlank(void)
 {
+    ScanlineEffect_Stop();
     SetVBlankCallback(NULL);
     SetHBlankCallback(NULL);
 }

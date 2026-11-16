@@ -321,6 +321,7 @@ static void CB2_EvolutionSceneLoadGraphics(void)
 
     SetHBlankCallback(NULL);
     SetVBlankCallback(NULL);
+    ScanlineEffect_Stop();
     CpuFill32(0, (void *)(VRAM), VRAM_SIZE);
 
     SetGpuReg(REG_OFFSET_MOSAIC, 0);
@@ -390,6 +391,7 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
         SetHBlankCallback(NULL);
         SetVBlankCallback(NULL);
+        ScanlineEffect_Stop();
         ResetSpriteData();
         FreeAllSpritePalettes();
         gReservedSpritePaletteCount = 4;

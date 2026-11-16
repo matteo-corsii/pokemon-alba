@@ -73,6 +73,7 @@ $layouts = (Read-Json 'data/layouts/layouts.json').layouts
 $groups = Read-Json 'data/maps/map_groups.json'
 $map = Read-Json 'data/maps/Laricia/map.json'
 $ponte = Read-Json 'data/maps/PonteValleLaricia/map.json'
+$galloro = Read-Json 'data/maps/Galloro/map.json'
 $layout = @($layouts | Where-Object { $_.id -eq 'LAYOUT_LARICIA' })
 Assert-True ($map.id -eq 'MAP_LARICIA' -and $map.name -eq 'Laricia' -and $map.layout -eq 'LAYOUT_LARICIA') 'Laricia map identity is incorrect.'
 Assert-True ($map.region_map_section -eq 'MAPSEC_LARICIA' -and $map.show_map_name -eq $true -and $map.map_type -eq 'MAP_TYPE_TOWN') 'Laricia map metadata is incorrect.'
@@ -85,6 +86,10 @@ $uccellieraConnection = @($map.connections | Where-Object { $_.direction -eq 'up
 $uccelliera = Read-Json 'data/maps/ViaDellUccelliera/map.json'
 $uccellieraReturn = @($uccelliera.connections | Where-Object { $_.direction -eq 'down' -and $_.map -eq 'MAP_LARICIA' -and [int]$_.offset -eq -37 })
 Assert-True ($connection.Count -eq 1 -and $return.Count -eq 1 -and $uccellieraConnection.Count -eq 1 -and $uccellieraReturn.Count -eq 1 -and @($map.connections).Count -eq 2) 'Laricia connections must match the approved reciprocal Ponte and Via dell Uccelliera links.'
+$lariciaGalloroWarps = @($map.warp_events | Where-Object { $_.dest_map -eq 'MAP_GALLORO' })
+$galloroLariciaWarps = @($galloro.warp_events | Where-Object { $_.dest_map -eq 'MAP_LARICIA' })
+Assert-True ($lariciaGalloroWarps.Count -eq 3 -and @($lariciaGalloroWarps | Where-Object { [int]$_.x -eq 58 -and [int]$_.y -eq 14 -and [int]$_.dest_warp_id -eq 6 }).Count -eq 1 -and @($lariciaGalloroWarps | Where-Object { [int]$_.x -eq 59 -and [int]$_.y -eq 14 -and [int]$_.dest_warp_id -eq 7 }).Count -eq 1 -and @($lariciaGalloroWarps | Where-Object { [int]$_.x -eq 60 -and [int]$_.y -eq 14 -and [int]$_.dest_warp_id -eq 8 }).Count -eq 1) 'Laricia Galloro warps must be the approved three-cell row at 58..60,14.'
+Assert-True ($galloroLariciaWarps.Count -eq 3 -and @($galloroLariciaWarps | Where-Object { [int]$_.x -eq 0 -and [int]$_.y -eq 26 -and [int]$_.dest_warp_id -eq 10 }).Count -eq 1 -and @($galloroLariciaWarps | Where-Object { [int]$_.x -eq 0 -and [int]$_.y -eq 27 -and [int]$_.dest_warp_id -eq 11 }).Count -eq 1 -and @($galloroLariciaWarps | Where-Object { [int]$_.x -eq 0 -and [int]$_.y -eq 28 -and [int]$_.dest_warp_id -eq 12 }).Count -eq 1) 'Galloro Laricia warps must be the approved three-cell column at 0,26..28.'
 $border = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot $layout[0].border_filepath)); $reference = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/layouts/AlberaStorica/border.bin'))
 Assert-True ($border.Length -eq 8 -and [Linq.Enumerable]::SequenceEqual([byte[]]$border, [byte[]]$reference)) 'Laricia must use the approved shared forest border.'
 $blocks = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot $layout[0].blockdata_filepath)); $ponteBlocks = [IO.File]::ReadAllBytes((Join-Path $RepositoryRoot 'data/layouts/PonteValleLaricia/map.bin'))
@@ -104,6 +109,7 @@ foreach ($y in @(14..17) + @(38..41)) {
     }
 }
 $requiredBridgeMetatiles = @(0x293, 0x294, 0x2EE, 0x2F0, 0x2F9, 0x2FA, 0x302, 0x309)
+$approvedWarpMetatile = 0x260
 $sootopolisRoot = Join-Path $RepositoryRoot 'data/tilesets/secondary/sootopolis'
 $portaPretoriaRoot = Join-Path $RepositoryRoot 'data/tilesets/secondary/porta_pretoria'
 $lariciaTilesetRoot = Join-Path $RepositoryRoot 'data/tilesets/secondary/laricia'
@@ -113,6 +119,9 @@ $portaPretoriaMetatiles = [IO.File]::ReadAllBytes((Join-Path $portaPretoriaRoot 
 $portaPretoriaAttributes = [IO.File]::ReadAllBytes((Join-Path $portaPretoriaRoot 'metatile_attributes.bin'))
 $lariciaMetatiles = [IO.File]::ReadAllBytes((Join-Path $lariciaTilesetRoot 'metatiles.bin'))
 $lariciaAttributes = [IO.File]::ReadAllBytes((Join-Path $lariciaTilesetRoot 'metatile_attributes.bin'))
+$galloroTilesetRoot = Join-Path $RepositoryRoot 'data/tilesets/secondary/galloro'
+$galloroMetatiles = [IO.File]::ReadAllBytes((Join-Path $galloroTilesetRoot 'metatiles.bin'))
+$galloroAttributes = [IO.File]::ReadAllBytes((Join-Path $galloroTilesetRoot 'metatile_attributes.bin'))
 Assert-True ($lariciaMetatiles.Length -eq 0x113 * 16 -and $lariciaAttributes.Length -eq 0x113 * 2) 'Laricia tileset must contain coherent entries through secondary metatile 0x312.'
 $portaPretoriaImage = [System.Drawing.Bitmap]::FromFile((Join-Path $portaPretoriaRoot 'tiles.png'))
 $lariciaImage = [System.Drawing.Bitmap]::FromFile((Join-Path $lariciaTilesetRoot 'tiles.png'))
@@ -140,9 +149,17 @@ foreach ($i in 0..253) { foreach ($component in 0..7) { if ((([BitConverter]::To
 Assert-True ($sootopolisPalette11References -eq 0) 'Sootopolis palette 11 is not available for the Laricia bridge palette packing.'
 $paletteMap = @{ 0 = 0; 2 = 2; 6 = 12; 7 = 11; 11 = 12 }
 foreach ($i in 0..253) {
-    if ($requiredBridgeMetatiles -contains ($i + 0x200)) { continue }
+    if ($requiredBridgeMetatiles -contains ($i + 0x200) -or ($i + 0x200) -eq $approvedWarpMetatile) { continue }
     Assert-True ([Linq.Enumerable]::SequenceEqual([byte[]](Copy-Bytes $sootopolisMetatiles ($i * 16) 16), [byte[]](Copy-Bytes $lariciaMetatiles ($i * 16) 16))) "Laricia unexpectedly changes Sootopolis metatile 0x$('{0:X3}' -f ($i + 0x200))."
     Assert-True ([Linq.Enumerable]::SequenceEqual([byte[]](Copy-Bytes $sootopolisAttributes ($i * 2) 2), [byte[]](Copy-Bytes $lariciaAttributes ($i * 2) 2))) "Laricia unexpectedly changes Sootopolis attributes for 0x$('{0:X3}' -f ($i + 0x200))."
+}
+Assert-True ([BitConverter]::ToUInt16($lariciaAttributes, ($approvedWarpMetatile - 0x200) * 2) -eq 0x0060) 'Laricia warp metatile 0x260 must retain behavior 0x60.'
+Assert-True ([BitConverter]::ToUInt16($galloroAttributes, ($approvedWarpMetatile - 0x200) * 2) -eq 0x0060) 'Galloro warp metatile 0x260 must retain behavior 0x60.'
+$lariciaWarpOffset = ($approvedWarpMetatile - 0x200) * 16
+$galloroWarpOffset = ($approvedWarpMetatile - 0x200) * 16
+foreach ($component in 0..7) {
+    Assert-True (([BitConverter]::ToUInt16($lariciaMetatiles, $lariciaWarpOffset + $component * 2) -band 0x03FF) -lt 0x200) "Laricia warp metatile 0x260 component $component must reference a valid General tile."
+    Assert-True (([BitConverter]::ToUInt16($galloroMetatiles, $galloroWarpOffset + $component * 2) -band 0x03FF) -lt 0x200) "Galloro warp metatile 0x260 component $component must reference a valid General tile."
 }
 foreach ($id in $requiredBridgeMetatiles) {
     $offset = ($id - 0x200) * 16
@@ -241,7 +258,7 @@ $trucks = @($map.object_events | Where-Object { $_.graphics_id -eq 'OBJ_EVENT_GF
 Assert-True ($trucks.Count -eq 3) 'Laricia must contain exactly three Sagra trucks.'
 Assert-True (@($trucks | Where-Object { -not (([int]$_.x -eq 12 -and [int]$_.y -eq 14) -or ([int]$_.x -eq 22 -and [int]$_.y -eq 14) -or ([int]$_.x -eq 40 -and [int]$_.y -eq 14)) }).Count -eq 0) 'Laricia Sagra truck is outside the approved manual area.'
 Assert-True (@($map.bg_events).Count -eq 0) 'Laricia must not retain the removed Galloro/Genzalia sign event.'
-Assert-True (@($map.warp_events).Count -eq 10 -and @($map.coord_events).Count -eq 0) 'Laricia must contain the ten approved warps and no coord events.'
+Assert-True (@($map.warp_events).Count -eq 13 -and @($map.coord_events).Count -eq 0) 'Laricia must contain the thirteen approved warps, including the three Galloro warps, and no coord events.'
 Assert-True (@($map.object_events).Count -eq 30 -and @($map.object_events | Where-Object { $_.trainer_type -ne 'TRAINER_TYPE_NONE' }).Count -eq 0) 'Laricia must contain the approved non-trainer Sagra and civilian population.'
 Assert-True (@($map.object_events | Where-Object { $_.graphics_id -eq 'OBJ_EVENT_GFX_TRUCK' }).Count -eq 3) 'Laricia Sagra must visibly use three existing truck object graphics.'
 $wild = Read-Json 'src/data/wild_encounters.json'

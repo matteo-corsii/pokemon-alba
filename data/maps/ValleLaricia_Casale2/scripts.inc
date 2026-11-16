@@ -4,6 +4,7 @@ ValleLaricia_Casale2_MapScripts::
 ValleLaricia_Casale2_EventScript_Resident::
 	lock
 	faceplayer
+	setflag FLAG_VALLE_LARICIA_BERRIES_SEEN
 	goto_if_set FLAG_RECEIVED_VALLE_LARICIA_PECHA_BERRIES, ValleLaricia_Casale2_EventScript_After
 	msgbox ValleLaricia_Casale2_Text_Intro, MSGBOX_DEFAULT
 	checkitemspace ITEM_PECHA_BERRY, 2

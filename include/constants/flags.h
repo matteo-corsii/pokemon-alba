@@ -116,7 +116,10 @@
 // Temporary narrative flags reserved from previously unused persistent slots.
 #define FLAG_OLDALE_MOLOPSY_SEEN                         FLAG_UNUSED_0x028
 #define FLAG_HIDE_VIA_CONSOLARE_LENGHELIS                FLAG_UNUSED_0x029
+#define FLAG_LARICIA_RECORDS_REACHED                     FLAG_UNUSED_0x02A
+#define FLAG_LARICIA_SAGRA_COMPLETE                      FLAG_UNUSED_0x02B
 #define FLAG_UCCELLIERA_CHEF_SEEN                        FLAG_UNUSED_0x02C
+#define FLAG_VALLE_LARICIA_BERRIES_SEEN                  FLAG_UNUSED_0x02D
 
 // Laricia post-Gym festival state. These were unused persistent system flags.
 #define FLAG_LARICIA_SAGRA_ACTIVE                         FLAG_UNUSED_0x91B

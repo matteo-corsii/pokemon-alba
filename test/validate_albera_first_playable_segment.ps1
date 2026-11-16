@@ -86,13 +86,17 @@ $transitionBlock = $lab.Substring($transitionStart, $layoutBranch - $transitionS
 Assert-True (-not $transitionBlock.Contains('removeobject')) 'Il primo ingresso non deve affidarsi a removeobject per nascondere le ball legacy.'
 $itemBalls = @($labMap.object_events | Where-Object { $_.graphics_id -eq 'OBJ_EVENT_GFX_ITEM_BALL' })
 Assert-True ($itemBalls.Count -eq 6) 'Il laboratorio deve contenere esattamente le sei Item Ball legacy note.'
-foreach ($itemBall in $itemBalls) {
-    Assert-True ($itemBall.flag -in @('FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CYNDAQUIL', 'FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_TOTODILE', 'FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CHIKORITA')) "Item Ball con flag inatteso alle coordinate $($itemBall.x),$($itemBall.y)."
-}
 $centralBalls = @($itemBalls | Where-Object { $_.x -eq 6 -and $_.y -eq 8 })
 $tableBalls = @($itemBalls | Where-Object { $_.x -in @(8, 9, 10) -and $_.y -eq 4 })
 Assert-True ($centralBalls.Count -eq 3) 'Le tre Item Ball centrali legacy non sono tutte presenti nel template atteso.'
 Assert-True ($tableBalls.Count -eq 3 -and (@($tableBalls.x | Sort-Object) -join ',') -eq '8,9,10') 'Le tre Item Ball del tavolo non sono tutte presenti nelle coordinate attese.'
+foreach ($centralBall in $centralBalls) {
+    Assert-True ($centralBall.flag -in @('FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CYNDAQUIL', 'FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_TOTODILE', 'FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CHIKORITA')) "Ball legacy con flag inatteso alle coordinate $($centralBall.x),$($centralBall.y)."
+}
+foreach ($tableBall in $tableBalls) {
+    Assert-True ($tableBall.flag -eq '0') "Ball decorativa del tavolo non visibile: flag inatteso alle coordinate $($tableBall.x),$($tableBall.y)."
+    Assert-True ($tableBall.script -eq 'Common_EventScript_NopReturn') "Ball decorativa del tavolo con script interattivo alle coordinate $($tableBall.x),$($tableBall.y)."
+}
 Assert-Contains $lab 'addobject LOCALID_BIRCHS_LAB_CYNDAQUIL_BALL' 'Il percorso postgame Johto non aggiunge Cyndaquil.'
 Assert-Contains $lab 'addobject LOCALID_BIRCHS_LAB_TOTODILE_BALL' 'Il percorso postgame Johto non aggiunge Totodile.'
 Assert-Contains $lab 'addobject LOCALID_BIRCHS_LAB_CHIKORITA_BALL' 'Il percorso postgame Johto non aggiunge Chikorita.'

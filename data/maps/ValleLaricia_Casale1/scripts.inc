@@ -4,6 +4,7 @@ ValleLaricia_Casale1_MapScripts::
 ValleLaricia_Casale1_EventScript_Resident::
 	lock
 	faceplayer
+	setflag FLAG_VALLE_LARICIA_BERRIES_SEEN
 	goto_if_set FLAG_RECEIVED_WAILMER_PAIL, ValleLaricia_Casale1_EventScript_CheckOran
 	checkitem ITEM_WAILMER_PAIL
 	goto_if_eq VAR_RESULT, TRUE, ValleLaricia_Casale1_EventScript_RegisterPail

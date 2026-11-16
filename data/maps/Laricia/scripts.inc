@@ -4,6 +4,7 @@ Laricia_MapScripts::
 	.byte 0
 
 Laricia_OnTransition:
+	setflag FLAG_LARICIA_RECORDS_REACHED
 	goto_if_unset FLAG_LARICIA_SAGRA_ACTIVE, Laricia_OnTransition_Preparativi
 	clearflag FLAG_HIDE_LARICIA_SAGRA_TRUCK_3
 	clearflag FLAG_HIDE_LARICIA_POST_GYM_NICO_LIA
@@ -117,6 +118,7 @@ Laricia_EventScript_PostGymScene::
 	msgbox Laricia_Text_PostGymTerraFutura, MSGBOX_DEFAULT
 	msgbox Laricia_Text_PostGymAugustoSagra, MSGBOX_DEFAULT
 	msgbox Laricia_Text_PostGymMayorClosing, MSGBOX_DEFAULT
+	setflag FLAG_LARICIA_SAGRA_COMPLETE
 	setflag FLAG_LARICIA_SAGRA_ACTIVE
 	clearflag FLAG_HIDE_LARICIA_SAGRA_TRUCK_3
 	addobject LOCALID_LARICIA_SAGRA_CAMION_3

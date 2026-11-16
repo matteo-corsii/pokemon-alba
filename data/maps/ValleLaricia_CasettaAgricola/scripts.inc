@@ -4,6 +4,7 @@ ValleLaricia_CasettaAgricola_MapScripts::
 ValleLaricia_CasettaAgricola_EventScript_Resident::
 	lock
 	faceplayer
+	setflag FLAG_VALLE_LARICIA_BERRIES_SEEN
 	goto_if_set FLAG_RECEIVED_VALLE_LARICIA_CHERI_BERRIES, ValleLaricia_CasettaAgricola_EventScript_After
 	msgbox ValleLaricia_CasettaAgricola_Text_Intro, MSGBOX_DEFAULT
 	checkitemspace ITEM_CHERI_BERRY, 2
