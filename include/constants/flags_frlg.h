@@ -1328,6 +1328,17 @@
 #define FLAG_0x4EF               0x4EF
 #define FLAG_0x4F0               0x4F0
 #define FLAG_0x4F1               0x4F1
+
+// Alba quest flags are not used by the FRLG maps, but must remain defined for
+// shared quest data to compile. Use distinct unused FRLG slots rather than 0,
+// which could alias a real flag at runtime.
+#define FLAG_LARICIA_RECORDS_REACHED       FLAG_0x4BD
+#define FLAG_LARICIA_SAGRA_COMPLETE        FLAG_0x4BE
+#define FLAG_UCCELLIERA_CHEF_SEEN          FLAG_0x4BF
+#define FLAG_UCCELLIERA_CHEF_BERRY_GIVEN  FLAG_0x4C0
+#define FLAG_VALLE_LARICIA_BERRIES_SEEN    FLAG_0x4C1
+#define FLAG_GALLORO_LA_MEMORIA_COMPLETED FLAG_0x4C2
+#define FLAG_GALLORO_LA_MEMORIA_SEEN      FLAG_0x4C3
 #define FLAG_0x4F2               0x4F2
 #define FLAG_0x4F3               0x4F3
 #define FLAG_0x4F4               0x4F4
