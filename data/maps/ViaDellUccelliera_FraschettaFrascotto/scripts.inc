@@ -1,17 +1,5 @@
 ViaDellUccelliera_FraschettaFrascotto_MapScripts::
-	#if !IS_FRLG
-	map_script MAP_SCRIPT_ON_TRANSITION, ViaDellUccelliera_FraschettaFrascotto_OnTransition
-	#else
 	.byte 0
-	#endif
-
-ViaDellUccelliera_FraschettaFrascotto_OnTransition:
-	#if !IS_FRLG
-	goto_if_unset FLAG_UCCELLIERA_CHEF_DEFEATED, ViaDellUccelliera_FraschettaFrascotto_OnTransition_Done
-	removeobject LOCALID_VIA_DELL_UCCELLIERA_FRASCOTTO
-	#endif
-ViaDellUccelliera_FraschettaFrascotto_OnTransition_Done:
-	end
 
 ViaDellUccelliera_FraschettaFrascotto_EventScript_Frascotto::
 	lock

@@ -18,7 +18,19 @@ $layouts = (Read-Json 'data/layouts/layouts.json').layouts
 $groups = Read-Json 'data/maps/map_groups.json'
 $outside = Read-Json 'data/maps/Laricia/map.json'
 $gymWarp = @($outside.warp_events | Where-Object { [int]$_.x -eq 32 -and [int]$_.y -eq 10 -and $_.dest_map -eq 'MAP_LARICIA_GYM_LOBBY' -and $_.dest_warp_id -eq '4' })
-Assert-True (@($outside.warp_events).Count -eq 10 -and $gymWarp.Count -eq 1) 'Laricia must have the nine civilian interior warps and the approved Gym warp.'
+$galloroWarps = @(
+    @{ X = 58; Y = 14; DestWarp = '6' },
+    @{ X = 59; Y = 14; DestWarp = '7' },
+    @{ X = 60; Y = 14; DestWarp = '8' }
+)
+Assert-True (@($outside.warp_events).Count -eq 13 -and $gymWarp.Count -eq 1) 'Laricia must have the nine civilian interior warps, the approved Gym warp, and the three Galloro warps.'
+foreach ($expected in $galloroWarps) {
+    $warp = @($outside.warp_events | Where-Object {
+        [int]$_.x -eq $expected.X -and [int]$_.y -eq $expected.Y -and
+        $_.dest_map -eq 'MAP_GALLORO' -and $_.dest_warp_id -eq $expected.DestWarp
+    })
+    Assert-True ($warp.Count -eq 1) "Laricia Galloro warp at ($($expected.X),$($expected.Y)) is invalid."
+}
 Assert-True (@($layouts | Where-Object { $_.id -in $specs.Layout }).Count -eq 9) 'Laricia interior layout IDs must be unique and registered.'
 Assert-True (@($groups.gMapGroup_IndoorOldale | Where-Object { $_ -in $specs.Name }).Count -eq 9) 'Laricia interiors must be appended once to IndoorOldale.'
 foreach ($s in $specs) {

@@ -3,14 +3,10 @@
   "name": "Galloro_Casa_2",
   "layout": "LAYOUT_LARICIA_HOUSE2",
   "music": "MUS_OLDALE",
-  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_GALLORO",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_INDOOR",
-  "allow_cycling": false,
-  "allow_escaping": false,
-  "allow_running": false,
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
@@ -32,7 +28,7 @@
   ],
   "warp_events": [
     {
-      "x": 3,
+      "x": 4,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_GALLORO",
@@ -40,5 +36,9 @@
     }
   ],
   "coord_events": [],
-  "bg_events": []
+  "bg_events": [],
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "region": "REGION_HOENN"
 }

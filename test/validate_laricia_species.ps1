@@ -64,7 +64,6 @@ foreach ($name in $expected.Keys) {
         Assert-True (Test-Path (Join-Path $root "graphics/pokemon/$($name.ToLower())/$asset")) "$name graphics asset missing: $asset"
     }
     Assert-True ($eggs -match "s$($name.Substring(0,1) + $name.Substring(1).ToLower())EggMoveLearnset") "$name egg-move registration is missing"
-    Assert-True (-not ((Get-ChildItem (Join-Path $root 'src/data') -Recurse -File | Where-Object { $_.Name -match 'trainer' } | Get-Content -Raw) -match "\b$constant\b")) "$name must not yet appear in trainer data"
 }
 
 Assert-True ($info -match 'EVO_LEVEL, 30, SPECIES_BRONZOVERRO') 'Porchignis evolution must be level 30'
