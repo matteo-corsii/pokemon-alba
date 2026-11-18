@@ -63,6 +63,17 @@ const struct Tileset gTileset_PortaPretoria =
     .callback = InitTilesetAnim_Petalburg,
 };
 
+const struct Tileset gTileset_PonteValleLaricia =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PonteValleLaricia,
+    .palettes = gTilesetPalettes_PonteValleLaricia,
+    .metatiles = gMetatiles_PonteValleLaricia,
+    .metatileAttributes = gMetatileAttributes_PonteValleLaricia,
+    .callback = InitTilesetAnim_Petalburg,
+};
+
 const struct Tileset gTileset_ViaConsolare =
 {
     .isCompressed = TRUE,

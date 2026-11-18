@@ -1,6 +1,11 @@
 #ifndef GUARD_METATILE_LABELS_H
 #define GUARD_METATILE_LABELS_H
 
+// gTileset_PonteValleLaricia
+// These slots are used only for Laricia metatiles copied into the Ponte connection buffer.
+#define METATILE_PonteValleLaricia_Laricia_241  0x33D
+#define METATILE_PonteValleLaricia_Laricia_2D9  0x33E
+
 // gTileset_BattleArena
 #define METATILE_BattleArena_Door  0x21B
 

@@ -12,12 +12,14 @@
 #include "pokenav.h"
 #include "script.h"
 #include "secret_base.h"
+#include "tilesets.h"
 #include "trainer_hill.h"
 #include "tv.h"
 #include "constants/rgb.h"
 #include "constants/layouts.h"
 #include "constants/metatile_behaviors.h"
 #include "constants/metatile_behaviors_frlg.h"
+#include "constants/metatile_labels.h"
 #include "wild_encounter.h"
 
 struct ConnectionFlags
@@ -232,12 +234,43 @@ static void InitBackupMapLayoutConnections(struct MapHeader *mapHeader)
     }
 }
 
-static void FillConnection(int x, int y, struct MapHeader const *connectedMapHeader, int x2, int y2, int width, int height)
+#if !IS_FRLG
+
+static bool8 IsPonteValleLariciaLariciaConnection(struct MapHeader const *mapHeader, struct MapHeader const *connectedMapHeader)
+{
+    return mapHeader->mapLayout->secondaryTileset == &gTileset_PonteValleLaricia
+        && connectedMapHeader->mapLayout->secondaryTileset == &gTileset_Laricia;
+}
+
+static u16 RemapPonteValleLariciaConnectionMetatile(u16 mapBlock)
+{
+    switch (UNPACK_METATILE(mapBlock))
+    {
+    case 0x241:
+        return (mapBlock & ~MAPGRID_METATILE_ID_MASK) | METATILE_PonteValleLaricia_Laricia_241;
+    case 0x2D9:
+        return (mapBlock & ~MAPGRID_METATILE_ID_MASK) | METATILE_PonteValleLaricia_Laricia_2D9;
+    default:
+        return mapBlock;
+    }
+}
+
+#endif
+
+static void FillConnection(struct MapHeader const *mapHeader, int x, int y, struct MapHeader const *connectedMapHeader, int x2, int y2, int width, int height)
 {
     int i;
+#if !IS_FRLG
+    int j;
+    bool8 remapMetatiles = IsPonteValleLariciaLariciaConnection(mapHeader, connectedMapHeader);
+#endif
     const u16 *src;
     u16 *dest;
     int mapWidth;
+
+#if IS_FRLG
+    (void)mapHeader;
+#endif
 
     mapWidth = connectedMapHeader->mapLayout->width;
     src = &connectedMapHeader->mapLayout->map[mapWidth * y2 + x2];
@@ -245,7 +278,19 @@ static void FillConnection(int x, int y, struct MapHeader const *connectedMapHea
 
     for (i = 0; i < height; i++)
     {
+#if !IS_FRLG
+        if (remapMetatiles)
+        {
+            for (j = 0; j < width; j++)
+                dest[j] = RemapPonteValleLariciaConnectionMetatile(src[j]);
+        }
+        else
+        {
+            CpuCopy16(src, dest, width * 2);
+        }
+#else
         CpuCopy16(src, dest, width * 2);
+#endif
         dest += gBackupMapLayout.width;
         src += mapWidth;
     }
@@ -283,7 +328,7 @@ static void FillSouthConnection(struct MapHeader const *mapHeader, struct MapHea
         }
 
         FillConnection(
-            x, y,
+            mapHeader, x, y,
             connectedMapHeader,
             x2, /*y2*/ 0,
             width, /*height*/ MAP_OFFSET);
@@ -323,7 +368,7 @@ static void FillNorthConnection(struct MapHeader const *mapHeader, struct MapHea
         }
 
         FillConnection(
-            x, /*y*/ 0,
+            mapHeader, x, /*y*/ 0,
             connectedMapHeader,
             x2, y2,
             width, /*height*/ MAP_OFFSET);
@@ -362,7 +407,7 @@ static void FillWestConnection(struct MapHeader const *mapHeader, struct MapHead
         }
 
         FillConnection(
-            /*x*/ 0, y,
+            mapHeader, /*x*/ 0, y,
             connectedMapHeader,
             x2, y2,
             /*width*/ MAP_OFFSET, height);
@@ -399,7 +444,7 @@ static void FillEastConnection(struct MapHeader const *mapHeader, struct MapHead
         }
 
         FillConnection(
-            x, y,
+            mapHeader, x, y,
             connectedMapHeader,
             /*x2*/ 0, y2,
             /*width*/ MAP_OFFSET + 1, height);

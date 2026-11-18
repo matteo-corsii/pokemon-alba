@@ -15,6 +15,9 @@ const u16 gMetatileAttributes_Petalburg[] = INCBIN_U16("data/tilesets/secondary/
 const u16 gMetatiles_PortaPretoria[] = INCBIN_U16("data/tilesets/secondary/porta_pretoria/metatiles.bin");
 const u16 gMetatileAttributes_PortaPretoria[] = INCBIN_U16("data/tilesets/secondary/porta_pretoria/metatile_attributes.bin");
 
+const u16 gMetatiles_PonteValleLaricia[] = INCBIN_U16("data/tilesets/secondary/ponte_valle_laricia/metatiles.bin");
+const u16 gMetatileAttributes_PonteValleLaricia[] = INCBIN_U16("data/tilesets/secondary/ponte_valle_laricia/metatile_attributes.bin");
+
 const u16 gMetatiles_ViaConsolare[] = INCBIN_U16("data/tilesets/secondary/via_consolare/metatiles.bin");
 const u16 gMetatileAttributes_ViaConsolare[] = INCBIN_U16("data/tilesets/secondary/via_consolare/metatile_attributes.bin");
 

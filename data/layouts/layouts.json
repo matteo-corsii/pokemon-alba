@@ -9726,7 +9726,7 @@
       "width": 64,
       "height": 64,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_PortaPretoria",
+      "secondary_tileset": "gTileset_PonteValleLaricia",
       "border_filepath": "data/layouts/PonteValleLaricia/border.bin",
       "blockdata_filepath": "data/layouts/PonteValleLaricia/map.bin",
       "layout_version": "emerald"

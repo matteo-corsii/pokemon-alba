@@ -47,7 +47,7 @@
 #define OVERWORLD_PAL_FEMALE(...)
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
 
-#define OVERWORLD_DATA(picTable, _size, shadow, _tracks, _anims)                                                                     \
+#define OVERWORLD_DATA_WITH_COMPRESSION(picTable, _size, shadow, _tracks, _anims, _compressed)                                      \
 {                                                                                                                                       \
     .tileTag = TAG_NONE,                                                                                                                \
     .paletteTag = OBJ_EVENT_PAL_TAG_DYNAMIC,                                                                                            \
@@ -58,7 +58,7 @@
     .paletteSlot = PALSLOT_NPC_1,                                                                                                       \
     .shadowSize = shadow,                                                                                                               \
     .inanimate = FALSE,                                                                                                                 \
-    .compressed = COMP,                                                                                                                 \
+    .compressed = _compressed,                                                                                                          \
     .tracks = _tracks,                                                                                                                  \
     .oam = (_size == SIZE_32x32 ? &gObjectEventBaseOam_32x32 : &gObjectEventBaseOam_64x64),                                             \
     .subspriteTables = (_size == SIZE_32x32 ? sOamTables_32x32 : sOamTables_64x64),                                                     \
@@ -66,8 +66,15 @@
     .images = picTable,                                                                                                                 \
 }
 
+#define OVERWORLD_DATA(picTable, _size, shadow, _tracks, _anims) \
+    OVERWORLD_DATA_WITH_COMPRESSION(picTable, _size, shadow, _tracks, _anims, COMP)
+
 #define OVERWORLD(objEventPic, _size, shadow, _tracks, _anims, ...)                                 \
     .overworldData = OVERWORLD_DATA(objEventPic, _size, shadow, _tracks, _anims),                   \
+    OVERWORLD_PAL(__VA_ARGS__)
+
+#define OVERWORLD_UNCOMPRESSED(objEventPic, _size, shadow, _tracks, _anims, ...)                  \
+    .overworldData = OVERWORLD_DATA_WITH_COMPRESSION(objEventPic, _size, shadow, _tracks, _anims, FALSE), \
     OVERWORLD_PAL(__VA_ARGS__)
 
 #if P_GENDER_DIFFERENCES
@@ -80,6 +87,7 @@
 
 #else
 #define OVERWORLD(...)
+#define OVERWORLD_UNCOMPRESSED(...)
 #define OVERWORLD_FEMALE(...)
 #define OVERWORLD_PAL(...)
 #define OVERWORLD_PAL_FEMALE(...)
@@ -2983,7 +2991,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .description = COMPOUND_STRING("Attira l'attenzione con gesti vivaci\ne sfida chiunque mostri energia.\nAdora stare in mezzo alla confusione."),
         .pokemonScale = 320, .frontPic = gMonFrontPic_Fraschietto, .frontPicSize = MON_COORDS_SIZE(64, 64), .frontPicYOffset = 4, .frontAnimFrames = sAnims_SingleFramePlaceHolder,
         .backPic = gMonBackPic_Fraschietto, .backPicSize = MON_COORDS_SIZE(64, 64), .backPicYOffset = 4, .palette = gMonPalette_Fraschietto, .shinyPalette = gMonShinyPalette_Fraschietto, .iconSprite = gMonIcon_Fraschietto, .iconPalIndex = 3,
-        FOOTPRINT(Makuhita) OVERWORLD(sPicTable_Fraschietto, SIZE_64x64, SHADOW_SIZE_M, TRACKS_FOOT, sAnimTable_AlbaIdle, gOverworldPalette_Fraschietto, gShinyOverworldPalette_Fraschietto)
+        FOOTPRINT(Makuhita) OVERWORLD_UNCOMPRESSED(sPicTable_Fraschietto, SIZE_64x64, SHADOW_SIZE_M, TRACKS_FOOT, sAnimTable_AlbaIdle, gOverworldPalette_Fraschietto, gShinyOverworldPalette_Fraschietto)
         .levelUpLearnset = sFraschiettoLevelUpLearnset,
         .teachingType = EXPLICIT_TEACHABLES,
         .teachableLearnset = sFraschiettoTeachableLearnset,

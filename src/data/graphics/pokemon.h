@@ -27765,7 +27765,7 @@ const u32 gMonBackPic_Fraschietto[] = INCGFX_U32("graphics/pokemon/fraschietto/b
 const u16 gMonShinyPalette_Fraschietto[] = INCGFX_U16("graphics/pokemon/fraschietto/shiny.pal", ".gbapal");
 const u8 gMonIcon_Fraschietto[] = INCGFX_U8("graphics/pokemon/fraschietto/icon.png", ".4bpp");
 #if OW_POKEMON_OBJECT_EVENTS
-const u32 gObjectEventPic_Fraschietto[] = INCGFX_COMP("graphics/pokemon/fraschietto/overworld.png", ".4bpp", "-mwidth 8 -mheight 8");
+const u32 gObjectEventPic_Fraschietto[] = INCGFX_U32("graphics/pokemon/fraschietto/overworld.png", ".4bpp", "-mwidth 8 -mheight 8");
 #if OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
 const u16 gOverworldPalette_Fraschietto[] = INCGFX_U16("graphics/pokemon/fraschietto/overworld_normal.pal", ".gbapal");
 const u16 gShinyOverworldPalette_Fraschietto[] = INCGFX_U16("graphics/pokemon/fraschietto/overworld_shiny.pal", ".gbapal");

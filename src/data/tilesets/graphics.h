@@ -42,6 +42,28 @@ const u16 gTilesetPalettes_PortaPretoria[][16] =
     INCGFX_U16("data/tilesets/secondary/porta_pretoria/palettes/15.pal", ".gbapal"),
 };
 
+const u32 gTilesetTiles_PonteValleLaricia[] = INCGFX_U32("data/tilesets/secondary/ponte_valle_laricia/tiles.png", ".4bpp.fastSmol", "-num_tiles 407 -Wnum_tiles");
+
+const u16 gTilesetPalettes_PonteValleLaricia[][16] =
+{
+    INCGFX_U16("data/tilesets/secondary/ponte_valle_laricia/palettes/00.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/ponte_valle_laricia/palettes/01.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/ponte_valle_laricia/palettes/02.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/ponte_valle_laricia/palettes/03.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/ponte_valle_laricia/palettes/04.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/ponte_valle_laricia/palettes/05.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/ponte_valle_laricia/palettes/06.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/ponte_valle_laricia/palettes/07.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/ponte_valle_laricia/palettes/08.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/ponte_valle_laricia/palettes/09.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/ponte_valle_laricia/palettes/10.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/ponte_valle_laricia/palettes/11.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/ponte_valle_laricia/palettes/12.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/ponte_valle_laricia/palettes/13.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/ponte_valle_laricia/palettes/14.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/ponte_valle_laricia/palettes/15.pal", ".gbapal"),
+};
+
 const u32 gTilesetTiles_ViaConsolare[] = INCGFX_U32("data/tilesets/secondary/via_consolare/tiles.png", ".4bpp.fastSmol", "-num_tiles 409 -Wnum_tiles");
 
 const u16 gTilesetPalettes_ViaConsolare[][16] =
