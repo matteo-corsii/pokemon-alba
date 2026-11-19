@@ -6,6 +6,10 @@
 #define METATILE_PonteValleLaricia_Laricia_241  0x33D
 #define METATILE_PonteValleLaricia_Laricia_2D9  0x33E
 
+// gTileset_LariciaPonte
+// Private slot used only for the Ponte/Laricia connection buffer.
+#define METATILE_LariciaPonte_Ponte_309  0x3F9
+
 // gTileset_BattleArena
 #define METATILE_BattleArena_Door  0x21B
 

@@ -250,6 +250,17 @@ const struct Tileset gTileset_Laricia =
     .callback = InitTilesetAnim_Sootopolis,
 };
 
+const struct Tileset gTileset_LariciaPonte =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_LariciaPonte,
+    .palettes = gTilesetPalettes_LariciaPonte,
+    .metatiles = gMetatiles_LariciaPonte,
+    .metatileAttributes = gMetatileAttributes_LariciaPonte,
+    .callback = InitTilesetAnim_Sootopolis,
+};
+
 const struct Tileset gTileset_BattleFrontierOutsideWest =
 {
     .isCompressed = TRUE,

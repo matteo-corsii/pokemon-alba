@@ -239,7 +239,8 @@ static void InitBackupMapLayoutConnections(struct MapHeader *mapHeader)
 static bool8 IsPonteValleLariciaLariciaConnection(struct MapHeader const *mapHeader, struct MapHeader const *connectedMapHeader)
 {
     return mapHeader->mapLayout->secondaryTileset == &gTileset_PonteValleLaricia
-        && connectedMapHeader->mapLayout->secondaryTileset == &gTileset_Laricia;
+        && (connectedMapHeader->mapLayout->secondaryTileset == &gTileset_Laricia
+         || connectedMapHeader->mapLayout->secondaryTileset == &gTileset_LariciaPonte);
 }
 
 static u16 RemapPonteValleLariciaConnectionMetatile(u16 mapBlock)
@@ -255,6 +256,23 @@ static u16 RemapPonteValleLariciaConnectionMetatile(u16 mapBlock)
     }
 }
 
+static bool8 IsLariciaPonteLariciaConnection(struct MapHeader const *mapHeader, struct MapHeader const *connectedMapHeader)
+{
+    return mapHeader->mapLayout->secondaryTileset == &gTileset_LariciaPonte
+        && connectedMapHeader->mapLayout->secondaryTileset == &gTileset_PonteValleLaricia;
+}
+
+static u16 RemapLariciaPonteConnectionMetatile(u16 mapBlock)
+{
+    switch (UNPACK_METATILE(mapBlock))
+    {
+    case 0x309:
+        return (mapBlock & ~MAPGRID_METATILE_ID_MASK) | METATILE_LariciaPonte_Ponte_309;
+    default:
+        return mapBlock;
+    }
+}
+
 #endif
 
 static void FillConnection(struct MapHeader const *mapHeader, int x, int y, struct MapHeader const *connectedMapHeader, int x2, int y2, int width, int height)
@@ -262,7 +280,8 @@ static void FillConnection(struct MapHeader const *mapHeader, int x, int y, stru
     int i;
 #if !IS_FRLG
     int j;
-    bool8 remapMetatiles = IsPonteValleLariciaLariciaConnection(mapHeader, connectedMapHeader);
+    bool8 remapPonteMetatiles = IsPonteValleLariciaLariciaConnection(mapHeader, connectedMapHeader);
+    bool8 remapLariciaMetatiles = IsLariciaPonteLariciaConnection(mapHeader, connectedMapHeader);
 #endif
     const u16 *src;
     u16 *dest;
@@ -279,10 +298,15 @@ static void FillConnection(struct MapHeader const *mapHeader, int x, int y, stru
     for (i = 0; i < height; i++)
     {
 #if !IS_FRLG
-        if (remapMetatiles)
+        if (remapPonteMetatiles)
         {
             for (j = 0; j < width; j++)
                 dest[j] = RemapPonteValleLariciaConnectionMetatile(src[j]);
+        }
+        else if (remapLariciaMetatiles)
+        {
+            for (j = 0; j < width; j++)
+                dest[j] = RemapLariciaPonteConnectionMetatile(src[j]);
         }
         else
         {
