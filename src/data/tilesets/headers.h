@@ -258,7 +258,7 @@ const struct Tileset gTileset_LariciaPonte =
     .palettes = gTilesetPalettes_LariciaPonte,
     .metatiles = gMetatiles_LariciaPonte,
     .metatileAttributes = gMetatileAttributes_LariciaPonte,
-    .callback = InitTilesetAnim_Sootopolis,
+    .callback = InitTilesetAnim_Petalburg,
 };
 
 const struct Tileset gTileset_BattleFrontierOutsideWest =
