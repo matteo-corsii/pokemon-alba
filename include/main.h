@@ -58,6 +58,8 @@ extern s8 gPcmDmaCounter;
 void AgbMain(void);
 void AgbMainLoop(void);
 void SetMainCallback2(MainCallback callback);
+void DeferVBlankGraphicsUntilCallbacksComplete(void);
+bool8 IsVBlankGraphicsDeferred(void);
 void InitKeys(void);
 void SetVBlankCallback(IntrCallback callback);
 void SetHBlankCallback(IntrCallback callback);

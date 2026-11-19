@@ -73,6 +73,7 @@ COMMON_DATA s8 gPcmDmaCounter = 0;
 COMMON_DATA void *gAgbMainLoop_sp = NULL;
 
 static EWRAM_DATA u16 sTrainerId = 0;
+static EWRAM_DATA vbool8 sVBlankGraphicsDeferred = FALSE;
 
 //EWRAM_DATA void (**gFlashTimerIntrFunc)(void) = NULL;
 
@@ -197,6 +198,20 @@ static void CallCallbacks(void)
 
     if (gMain.callback2)
         gMain.callback2();
+
+    // A connected-map redraw can span several VBlanks. Publish its tiles,
+    // palette, OAM and tilemaps together, only after the whole frame is ready.
+    sVBlankGraphicsDeferred = FALSE;
+}
+
+void DeferVBlankGraphicsUntilCallbacksComplete(void)
+{
+    sVBlankGraphicsDeferred = TRUE;
+}
+
+bool8 IsVBlankGraphicsDeferred(void)
+{
+    return sVBlankGraphicsDeferred;
 }
 
 void SetMainCallback2(MainCallback callback)
@@ -356,6 +371,8 @@ void SetSerialCallback(IntrCallback callback)
 
 static void VBlankIntr(void)
 {
+    bool8 updateGraphics = !sVBlankGraphicsDeferred;
+
     if (gWirelessCommType != 0)
         RfuVSync();
     else if (gLinkVSyncDisabled == FALSE)
@@ -366,13 +383,16 @@ static void VBlankIntr(void)
     if (gTrainerHillVBlankCounter && *gTrainerHillVBlankCounter < 0xFFFFFFFF)
         (*gTrainerHillVBlankCounter)++;
 
-    if (gMain.vblankCallback)
+    if (updateGraphics && gMain.vblankCallback)
         gMain.vblankCallback();
 
     gMain.vblankCounter2++;
 
-    CopyBufferedValuesToGpuRegs();
-    ProcessDma3Requests();
+    if (updateGraphics)
+    {
+        CopyBufferedValuesToGpuRegs();
+        ProcessDma3Requests();
+    }
 
     gPcmDmaCounter = gSoundInfo.pcmDmaCounter;
 
