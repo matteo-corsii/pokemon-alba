@@ -138,8 +138,10 @@ static struct MapHeader headers[2] = {
 };
 static const struct MapHeader *Overworld_GetMapHeaderByGroupAndId(u8 group, u8 number) { return &headers[number]; }
 static void CpuCopy16(const void *src, void *dest, int n) { memcpy(dest,src,n); }
+#define DmaCopy16(channel, src, dest, size) CpuCopy16(src, dest, size)
 static void CpuFill16(u16 value, void *dest, int n) { for (int i=0; i<n/2; i++) ((u16*)dest)[i]=value; }
 #define CpuFastFill16 CpuFill16
+static bool8 IsVBlankGraphicsDeferred(void) { return TRUE; }
 static void ClearMirageTowerPulseBlendEffect(void) {}
 static void ScheduleBgCopyTilemapToVram(int bg) {}
 static void UpdateObjectEventsForCameraUpdate(int x,int y) {}

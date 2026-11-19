@@ -29,6 +29,7 @@ static void RedrawMapSliceEast(struct FieldCameraOffset *, const struct MapLayou
 static void RedrawMapSliceWest(struct FieldCameraOffset *, const struct MapLayout *);
 static s32 MapPosToBgTilemapOffset(struct FieldCameraOffset *, s32, s32);
 static void DrawWholeMapViewInternal(int, int, const struct MapLayout *);
+static void DrawRemappedConnectionMapView(void) ARM_FUNC __attribute__((section(".iwram.code"), noinline));
 static void DrawMetatileAt(const struct MapLayout *, u16, int, int);
 static void DrawMetatile(s32, const u16 *, u16);
 static void CameraPanningCB_PanAhead(void);
@@ -118,6 +119,119 @@ static void DrawWholeMapViewInternal(int x, int y, const struct MapLayout *mapLa
             DrawMetatileAt(mapLayout, r6 + temp, x + j / 2, y + i / 2);
         }
     }
+}
+
+// Rebuild all three BGs for the dedicated Emerald connection in one batch.
+// Unlike the ordinary single-metatile path, this resolves each grid ID once,
+// reuses consecutive metatile definitions and queues each BG only once.
+// ARM code in IWRAM keeps this short, dense loop within the transition frame.
+static void DrawRemappedConnectionMapView(void)
+{
+    typedef u32 TilemapWord __attribute__((may_alias));
+    const struct MapLayout *layout = gMapHeader.mapLayout;
+    const TilemapWord *primaryTiles = (const TilemapWord *)layout->primaryTileset->metatiles;
+    const TilemapWord *secondaryTiles = (const TilemapWord *)layout->secondaryTileset->metatiles;
+    const u16 *primaryAttributes = layout->primaryTileset->metatileAttributes;
+    const u16 *secondaryAttributes = layout->secondaryTileset->metatileAttributes;
+    TilemapWord *bg1 = (TilemapWord *)gOverworldTilemapBuffer_Bg1;
+    TilemapWord *bg2 = (TilemapWord *)gOverworldTilemapBuffer_Bg2;
+    TilemapWord *bg3 = (TilemapWord *)gOverworldTilemapBuffer_Bg3;
+    TilemapWord *lowerLayer = NULL, *upperLayer = NULL, *clearLayer = NULL;
+    u32 lowerTop = 0, lowerBottom = 0, upperTop = 0, upperBottom = 0, clearWord = 0;
+    u32 previousId = NUM_METATILES_TOTAL;
+    int x = gSaveBlock1Ptr->pos.x;
+    int y = gSaveBlock1Ptr->pos.y;
+    int width = gBackupMapLayout.width;
+    bool8 viewInBounds = x >= 0 && y >= 0
+        && x + 16 <= width && y + 16 <= gBackupMapLayout.height;
+    const u16 *row = viewInBounds ? gBackupMapLayout.map + y * width + x : NULL;
+    int i, j;
+
+    // Overworld BG buffers are word-aligned heap allocations and the camera
+    // ring advances by two tiles. Keep the generic renderer as a safe fallback.
+    if (layout->isFrlg
+     || (((uintptr_t)bg1 | (uintptr_t)bg2 | (uintptr_t)bg3
+        | (uintptr_t)primaryTiles | (uintptr_t)secondaryTiles) & 3)
+     || ((sFieldCameraOffset.xTileOffset | sFieldCameraOffset.yTileOffset) & 1))
+    {
+        DrawWholeMapView();
+        return;
+    }
+
+    for (i = 0; i < 16; i++)
+    {
+        u32 rowOffset = ((sFieldCameraOffset.yTileOffset + i * 2) & 31) * 16;
+
+        for (j = 0; j < 16; j++)
+        {
+            u16 block = viewInBounds ? row[j] : MAPGRID_UNDEFINED;
+            u32 id = block == MAPGRID_UNDEFINED
+                ? MapGridGetMetatileIdAt(x + j, y + i) : UNPACK_METATILE(block);
+            u32 offset = rowOffset + (((sFieldCameraOffset.xTileOffset + j * 2) & 31) >> 1);
+
+            if (id != previousId)
+            {
+                const TilemapWord *tiles;
+                u16 attributes;
+                u32 layer;
+
+                previousId = id;
+                if (id < NUM_METATILES_IN_PRIMARY)
+                {
+                    tiles = primaryTiles + id * (NUM_TILES_PER_METATILE / 2);
+                    attributes = primaryAttributes[id];
+                }
+                else
+                {
+                    id -= NUM_METATILES_IN_PRIMARY;
+                    tiles = secondaryTiles + id * (NUM_TILES_PER_METATILE / 2);
+                    attributes = secondaryAttributes[id];
+                }
+                layer = (attributes & METATILE_ATTR_LAYER_MASK) >> METATILE_ATTR_LAYER_SHIFT;
+                lowerTop = tiles[0];
+                lowerBottom = tiles[1];
+                upperTop = tiles[2];
+                upperBottom = tiles[3];
+                clearWord = 0;
+                lowerLayer = bg3;
+                upperLayer = bg1;
+                clearLayer = bg2;
+                switch (layer)
+                {
+                case METATILE_LAYER_TYPE_NORMAL:
+                    lowerLayer = bg2;
+                    clearLayer = bg3;
+                    clearWord = 0x30143014;
+                    break;
+                case METATILE_LAYER_TYPE_COVERED:
+                    upperLayer = bg2;
+                    clearLayer = bg1;
+                    break;
+                case METATILE_LAYER_TYPE_SPLIT:
+                    break;
+                default:
+                    lowerLayer = NULL;
+                    break;
+                }
+            }
+
+            if (lowerLayer != NULL)
+            {
+                lowerLayer[offset] = lowerTop;
+                lowerLayer[offset + 16] = lowerBottom;
+                upperLayer[offset] = upperTop;
+                upperLayer[offset + 16] = upperBottom;
+                clearLayer[offset] = clearWord;
+                clearLayer[offset + 16] = clearWord;
+            }
+        }
+        if (viewInBounds)
+            row += width;
+    }
+    ScheduleBgCopyTilemapToVram(1);
+    ScheduleBgCopyTilemapToVram(2);
+    ScheduleBgCopyTilemapToVram(3);
+    sFieldCameraOffset.copyBGToVRAM = TRUE;
 }
 
 static void RedrawMapSlicesForCameraUpdate(struct FieldCameraOffset *cameraOffset, int x, int y)
@@ -419,7 +533,7 @@ void CameraUpdateNoObjectRefresh(void)
         // Tile and palette slots change across this remapped connection. All
         // retained BG words must be rebuilt after advancing the camera ring.
         if (AreMapLayoutsUsingRemappedConnection(oldMapLayout, gMapHeader.mapLayout))
-            DrawWholeMapView();
+            DrawRemappedConnectionMapView();
         else
             RedrawMapSlicesForCameraUpdate(&sFieldCameraOffset, deltaX * 2, deltaY * 2);
     }
@@ -492,7 +606,7 @@ void CameraUpdate(void)
         // Tile and palette slots change across this remapped connection. All
         // retained BG words must be rebuilt after advancing the camera ring.
         if (AreMapLayoutsUsingRemappedConnection(oldMapLayout, gMapHeader.mapLayout))
-            DrawWholeMapView();
+            DrawRemappedConnectionMapView();
         else
             RedrawMapSlicesForCameraUpdate(&sFieldCameraOffset, deltaX * 2, deltaY * 2);
         TryDespawnOWEsCrossingMapConnection();

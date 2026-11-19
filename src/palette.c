@@ -870,9 +870,88 @@ void TimeBlendPalette(u16 palOffset, u32 coeff, u32 blendColor)
     }
 }
 
+// An endpoint or two identical settings only need one color calculation.
+// Keep TimeMixPalettes' color-0 and alternate-light rules. The source high bit
+// selects lighting and is not carried through to colors 1-15 in the result.
+static void TimeMixPalettesSingle(u32 palettes, u16 *src, u16 *dst, const struct BlendSettings *blend)
+{
+    u32 color = blend->blendColor;
+    bool8 tint = blend->isTint;
+    u32 coeff = tint ? 16 : blend->coeff * 2;
+    s32 targetR, targetG, targetB;
+
+    if (tint)
+    {
+        targetR = color & 0xFF;
+        targetG = (color >> 8) & 0xFF;
+        targetB = (color >> 16) & 0xFF;
+    }
+    else
+    {
+        targetR = color & 31;
+        targetG = (color >> 5) & 31;
+        targetB = (color >> 10) & 31;
+    }
+
+    do
+    {
+        if (palettes & 1)
+        {
+            u16 *srcEnd = src + 16;
+            u32 lightColor = *dst++ = *src++;
+            s32 lightR, lightG, lightB;
+
+            if (!(lightColor >> 15))
+                lightColor = DEFAULT_LIGHT_COLOR;
+            lightR = lightColor & 31;
+            lightG = (lightColor >> 5) & 31;
+            lightB = (lightColor >> 10) & 31;
+            while (src != srcEnd)
+            {
+                u32 srcColor = *src++;
+                s32 r = srcColor & 31;
+                s32 g = (srcColor >> 5) & 31;
+                s32 b = (srcColor >> 10) & 31;
+
+                if (srcColor >> 15)
+                {
+                    r += ((lightR - r) * (s32)coeff) >> 5;
+                    g += ((lightG - g) * (s32)coeff) >> 5;
+                    b += ((lightB - b) * (s32)coeff) >> 5;
+                }
+                else if (tint)
+                {
+                    r = (u16)(targetR * r) >> 8;
+                    g = (u16)(targetG * g) >> 8;
+                    b = (u16)(targetB * b) >> 8;
+                    if (r > 31)
+                        r = 31;
+                    if (g > 31)
+                        g = 31;
+                    if (b > 31)
+                        b = 31;
+                }
+                else
+                {
+                    r += ((targetR - r) * (s32)coeff) >> 5;
+                    g += ((targetG - g) * (s32)coeff) >> 5;
+                    b += ((targetB - b) * (s32)coeff) >> 5;
+                }
+                *dst++ = RGB2(r, g, b);
+            }
+        }
+        else
+        {
+            src += 16;
+            dst += 16;
+        }
+        palettes >>= 1;
+    } while (palettes);
+}
+
 // Blends a weighted average of two blend parameters
 // Parameters can be either blended (as in BlendPalettes) or tinted (as in TintPaletteRGB_Copy)
-void TimeMixPalettes(u32 palettes, u16 *src, u16 *dst, struct BlendSettings *blend0, struct BlendSettings *blend1, u16 weight0)
+static void TimeMixPalettesWeighted(u32 palettes, u16 *src, u16 *dst, struct BlendSettings *blend0, struct BlendSettings *blend1, u16 weight0)
 {
     s32 r0, g0, b0, r1, g1, b1, defR, defG, defB, altR, altG, altB;
     u32 color0, coeff0, color1, coeff1;
@@ -1023,6 +1102,122 @@ void TimeMixPalettes(u32 palettes, u16 *src, u16 *dst, struct BlendSettings *ble
         }
         palettes >>= 1;
     } while (palettes);
+}
+
+// Reuse the exact channel calculation across several palette banks. Tables
+// live on the stack, and high-bit colors retain their per-palette lighting.
+// The public wrapper requires at least three banks and a weight in [0, 256].
+static void TimeMixPalettesLookup(u32 palettes, u16 *src, u16 *dst, struct BlendSettings *blend0, struct BlendSettings *blend1, u16 weight0) __attribute__((noinline));
+
+static void TimeMixPalettesLookup(u32 palettes, u16 *src, u16 *dst, struct BlendSettings *blend0, struct BlendSettings *blend1, u16 weight0)
+{
+    u16 lookup[3][32];
+    bool8 tint0 = blend0->isTint;
+    bool8 tint1 = blend1->isTint;
+    s32 coeff0 = tint0 ? 16 : blend0->coeff * 2;
+    s32 coeff1 = tint1 ? 16 : blend1->coeff * 2;
+    int channel;
+
+    for (channel = 0; channel < 3; channel++)
+    {
+        s32 target0 = (blend0->blendColor >> (channel * (tint0 ? 8 : 5))) & (tint0 ? 255 : 31);
+        s32 target1 = (blend1->blendColor >> (channel * (tint1 ? 8 : 5))) & (tint1 ? 255 : 31);
+        s32 value0 = tint0 ? 0 : target0 * coeff0 * 8;
+        s32 value1 = tint1 ? 0 : target1 * coeff1 * 8;
+        s32 step0 = tint0 ? target0 : 256 - coeff0 * 8;
+        s32 step1 = tint1 ? target1 : 256 - coeff1 * 8;
+        int input;
+
+        // c + floor((target-c)*coeff/32) equals
+        // floor((target*coeff*8 + c*(256-coeff*8))/256).
+        // Tint products are at most 255*31, so the original u16 cast and
+        // clamp cannot change them. Round each endpoint before mixing it.
+        for (input = 0; input < 32; input++)
+        {
+            s32 endpoint0 = value0 >> 8;
+            s32 endpoint1 = value1 >> 8;
+            s32 mixed = endpoint1 + (((endpoint0 - endpoint1) * (s32)weight0) >> 8);
+
+            // Packing modulo 2^16 preserves RGB2 even when coeff > 16.
+            lookup[channel][input] = (u16)((u32)mixed << (channel * 5));
+            value0 += step0;
+            value1 += step1;
+        }
+    }
+
+    do
+    {
+        if (palettes & 1)
+        {
+            u16 *end = src + 16;
+            u32 light = *dst++ = *src++;
+            s32 lightR, lightG, lightB;
+
+            if (!(light & 0x8000))
+                light = DEFAULT_LIGHT_COLOR;
+            lightR = light & 31;
+            lightG = (light >> 5) & 31;
+            lightB = (light >> 10) & 31;
+            while (src != end)
+            {
+                u32 color = *src++;
+                s32 r = color & 31;
+                s32 g = (color >> 5) & 31;
+                s32 b = (color >> 10) & 31;
+
+                if (!(color & 0x8000))
+                {
+                    *dst++ = lookup[0][r] | lookup[1][g] | lookup[2][b];
+                }
+                else
+                {
+                    s32 r0 = r + (((lightR - r) * coeff0) >> 5);
+                    s32 g0 = g + (((lightG - g) * coeff0) >> 5);
+                    s32 b0 = b + (((lightB - b) * coeff0) >> 5);
+                    s32 r1 = r + (((lightR - r) * coeff1) >> 5);
+                    s32 g1 = g + (((lightG - g) * coeff1) >> 5);
+                    s32 b1 = b + (((lightB - b) * coeff1) >> 5);
+
+                    r0 = r1 + (((r0 - r1) * (s32)weight0) >> 8);
+                    g0 = g1 + (((g0 - g1) * (s32)weight0) >> 8);
+                    b0 = b1 + (((b0 - b1) * (s32)weight0) >> 8);
+                    *dst++ = (u16)((u32)r0 | ((u32)g0 << 5) | ((u32)b0 << 10));
+                }
+            }
+        }
+        else
+        {
+            src += 16;
+            dst += 16;
+        }
+        palettes >>= 1;
+    } while (palettes);
+}
+
+void TimeMixPalettes(u32 palettes, u16 *src, u16 *dst, struct BlendSettings *blend0, struct BlendSettings *blend1, u16 weight0)
+{
+    u32 remaining;
+
+    if (!palettes)
+        return;
+
+    // Remove two set bits: any remaining bit means at least three banks.
+    remaining = palettes & (palettes - 1);
+    remaining &= remaining - 1;
+    if (remaining && weight0 <= 256)
+        TimeMixPalettesLookup(palettes, src, dst, blend0, blend1, weight0);
+    else if (weight0 == 256)
+        TimeMixPalettesSingle(palettes, src, dst, blend0);
+    else if (weight0 == 0)
+        TimeMixPalettesSingle(palettes, src, dst, blend1);
+    else if (blend0->isTint == blend1->isTint
+          && (blend0->isTint
+              ? blend0->blendColor == blend1->blendColor
+              : ((blend0->blendColor & 0x7FFF) == (blend1->blendColor & 0x7FFF)
+                 && blend0->coeff == blend1->coeff)))
+        TimeMixPalettesSingle(palettes, src, dst, blend0);
+    else
+        TimeMixPalettesWeighted(palettes, src, dst, blend0, blend1, weight0);
 }
 
 // Apply weighted average to palettes, preserving high bits of dst throughout
