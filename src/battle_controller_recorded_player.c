@@ -276,7 +276,7 @@ static void RecordedPlayerHandleDrawTrainerPic(enum BattlerId battler)
 
     if (TESTING)
     {
-        trainerPicId = TRAINER_PIC_BRENDAN;
+        trainerPicId = TRAINER_PIC_PLAYER_ALBA;
         if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
             xPos = 32;
         else

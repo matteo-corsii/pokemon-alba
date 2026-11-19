@@ -3,6 +3,22 @@ static const struct SpriteFrameImage sPicTable_Substitute[] = {
 };
 
 #if OW_POKEMON_OBJECT_EVENTS
+static const struct SpriteFrameImage sPicTable_Molospsy[] = {
+    overworld_ascending_frames(gObjectEventPic_Molospsy, 4, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_Lenghelis[] = {
+    overworld_ascending_frames(gObjectEventPic_Lenghelis, 4, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_Frascotto[] = {
+    overworld_ascending_frames(gObjectEventPic_Frascotto, 8, 8),
+};
+
+static const struct SpriteFrameImage sPicTable_Fraschietto[] = {
+    overworld_ascending_frames(gObjectEventPic_Fraschietto, 8, 8),
+};
+
 #if P_FAMILY_BULBASAUR
 static const struct SpriteFrameImage sPicTable_Bulbasaur[] = {
     overworld_ascending_frames(gObjectEventPic_Bulbasaur, 4, 4),

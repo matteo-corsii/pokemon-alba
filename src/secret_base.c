@@ -98,6 +98,9 @@ static const struct SecretBaseEntranceMetatiles sSecretBaseEntranceMetatiles[] =
 {
     {.closedMetatileId = METATILE_General_SecretBase_TreeLeft,  .openMetatileId = METATILE_General_SecretBase_VineLeft},
     {.closedMetatileId = METATILE_General_SecretBase_TreeRight, .openMetatileId = METATILE_General_SecretBase_VineRight},
+#if !IS_FRLG
+    {.closedMetatileId = METATILE_Galloro_SecretBase_TreeRight,  .openMetatileId = METATILE_Galloro_SecretBase_VineRight},
+#endif
     {.closedMetatileId = METATILE_General_RedCaveIndent,        .openMetatileId = METATILE_General_RedCaveOpen},
     {.closedMetatileId = METATILE_General_YellowCaveIndent,     .openMetatileId = METATILE_General_YellowCaveOpen},
     {.closedMetatileId = METATILE_General_BlueCaveIndent,       .openMetatileId = METATILE_General_BlueCaveOpen},
@@ -415,9 +418,37 @@ void SetOccupiedSecretBaseEntranceMetatiles(struct MapEvents const *events)
     }
 }
 
+static bool8 IsPlayerSecretBase(void)
+{
+    return VarGet(VAR_CURRENT_SECRET_BASE) == 0
+        && gSaveBlock1Ptr->secretBases[0].secretBaseId == sCurSecretBaseId;
+}
+
+static bool8 SecretBaseUsesWoodRefuge(u8 secretBaseId)
+{
+    return (secretBaseId >= SECRET_BASE_TREE1_1 && secretBaseId <= SECRET_BASE_SHRUB4_3)
+        || secretBaseId == SECRET_BASE_ALBERA_TREE_1
+        || secretBaseId == SECRET_BASE_CISTERNONI_TREE_1;
+}
+
+static u16 GetPlayerRefugeMap(void)
+{
+    if (SecretBaseUsesWoodRefuge(sCurSecretBaseId))
+        return MAP_ALBA_REFUGE_WOOD;
+    return MAP_ALBA_REFUGE_ROCK;
+}
+
 static void SetSecretBaseWarpDestination(void)
 {
     s8 secretBaseGroup = SECRET_BASE_ID_TO_GROUP(sCurSecretBaseId);
+
+    if (IsPlayerSecretBase())
+    {
+        u16 map = GetPlayerRefugeMap();
+        SetWarpDestinationToMapWarp(MAP_GROUP(map), MAP_NUM(map), 0);
+        return;
+    }
+
     SetWarpDestinationToMapWarp(MAP_GROUP(MAP_SECRET_BASE_RED_CAVE1), GET_BASE_MAP_NUM(secretBaseGroup), GET_BASE_WARP_ID(secretBaseGroup));
 }
 
@@ -493,13 +524,21 @@ static void Task_EnterNewlyCreatedSecretBase(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        s8 secretBaseGroup = SECRET_BASE_ID_TO_GROUP(sCurSecretBaseId);
-        SetWarpDestination(
-            gSaveBlock1Ptr->location.mapGroup,
-            gSaveBlock1Ptr->location.mapNum,
-            WARP_ID_NONE,
-            GET_BASE_COMPUTER_X(secretBaseGroup),
-            GET_BASE_COMPUTER_Y(secretBaseGroup));
+        if (IsPlayerSecretBase())
+        {
+            u16 map = GetPlayerRefugeMap();
+            SetWarpDestination(MAP_GROUP(map), MAP_NUM(map), WARP_ID_NONE, 8, 2);
+        }
+        else
+        {
+            s8 secretBaseGroup = SECRET_BASE_ID_TO_GROUP(sCurSecretBaseId);
+            SetWarpDestination(
+                gSaveBlock1Ptr->location.mapGroup,
+                gSaveBlock1Ptr->location.mapNum,
+                WARP_ID_NONE,
+                GET_BASE_COMPUTER_X(secretBaseGroup),
+                GET_BASE_COMPUTER_Y(secretBaseGroup));
+        }
         WarpIntoMap();
         gFieldCallback = EnterNewlyCreatedSecretBase_StartFadeIn;
         SetMainCallback2(CB2_LoadMap);
@@ -515,8 +554,7 @@ void EnterNewlyCreatedSecretBase(void)
 
 bool8 CurMapIsSecretBase(void)
 {
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_SECRET_BASE_RED_CAVE1)
-     && (u8)gSaveBlock1Ptr->location.mapNum <= MAP_NUM(MAP_SECRET_BASE_SHRUB4))
+    if (gMapHeader.mapType == MAP_TYPE_SECRET_BASE)
         return TRUE;
     else
         return FALSE;

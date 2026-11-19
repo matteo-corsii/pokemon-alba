@@ -14,6 +14,7 @@
 #include "match_call.h"
 #include "menu.h"
 #include "menu_helpers.h"
+#include "overworld.h"
 #include "palette.h"
 #include "pokedex.h"
 #include "pokemon_icon.h"
@@ -392,8 +393,11 @@ void DisplayYesNoMenuWithDefault(u8 initialCursorPos)
 
 u8 AddStartMenuWindow(u8 numActions)
 {
+	u8 height = (numActions * 2) + (numActions == 9 ? 1 : 2);
+	u8 top = (20 - height) / 2;
+
     if (sStartMenuWindowId == WINDOW_NONE)
-        sStartMenuWindowId = AddWindowParameterized(0, 22, 1, 7, (numActions * 2) + 2, 15, 0x139);
+        sStartMenuWindowId = AddWindowParameterized(0, 22, top, 7, height, 15, 0x139);
     return sStartMenuWindowId;
 }
 
@@ -1913,7 +1917,7 @@ void BufferSaveMenuText(u8 textId, u8 *dest, u8 color)
         ConvertIntToDecimalStringN(string, gSaveBlock2Ptr->playTimeMinutes, STR_CONV_MODE_LEADING_ZEROS, 2);
         break;
     case SAVE_MENU_LOCATION:
-        GetMapNameGeneric(string, gMapHeader.regionMapSectionId);
+        GetMapNameGeneric(string, GetCurrentRegionMapSectionId());
         break;
     case SAVE_MENU_BADGES:
         for (curFlag = FLAG_BADGE01_GET, flagCount = 0, endOfString = string + 1; curFlag < FLAG_BADGE01_GET + NUM_BADGES; curFlag++)

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "first_echo.h"
 #include "battle.h"
 #include "load_save.h"
 #include "battle_setup.h"
@@ -95,23 +96,24 @@ EWRAM_DATA u16 gPartnerTrainerId = 0;
 EWRAM_DATA static u8 *sTrainerBattleEndScript = NULL;
 EWRAM_DATA static bool8 sShouldCheckTrainerBScript = FALSE;
 EWRAM_DATA static u8 sNoOfPossibleTrainerRetScripts = 0;
+static bool8 sChefBattlePending;
 
 // The first transition is used if the enemy Pokémon are lower level than our Pokémon.
 // Otherwise, the second transition is used.
 static const u8 sBattleTransitionTable_Wild[][2] =
 {
-    [TRANSITION_TYPE_NORMAL] = {B_TRANSITION_SLICE,          B_TRANSITION_WHITE_BARS_FADE},
-    [TRANSITION_TYPE_CAVE]   = {B_TRANSITION_CLOCKWISE_WIPE, B_TRANSITION_GRID_SQUARES},
-    [TRANSITION_TYPE_FLASH]  = {B_TRANSITION_BLUR,           B_TRANSITION_GRID_SQUARES},
-    [TRANSITION_TYPE_WATER]  = {B_TRANSITION_WAVE,           B_TRANSITION_RIPPLE},
+    [TRANSITION_TYPE_NORMAL] = {B_TRANSITION_POKEBALLS_TRAIL, B_TRANSITION_POKEBALLS_TRAIL},
+    [TRANSITION_TYPE_CAVE]   = {B_TRANSITION_POKEBALLS_TRAIL, B_TRANSITION_POKEBALLS_TRAIL},
+    [TRANSITION_TYPE_FLASH]  = {B_TRANSITION_POKEBALLS_TRAIL, B_TRANSITION_POKEBALLS_TRAIL},
+    [TRANSITION_TYPE_WATER]  = {B_TRANSITION_POKEBALLS_TRAIL, B_TRANSITION_POKEBALLS_TRAIL},
 };
 
 static const u8 sBattleTransitionTable_Trainer[][2] =
 {
-    [TRANSITION_TYPE_NORMAL] = {B_TRANSITION_POKEBALLS_TRAIL, B_TRANSITION_ANGLED_WIPES},
-    [TRANSITION_TYPE_CAVE]   = {B_TRANSITION_SHUFFLE,         B_TRANSITION_BIG_POKEBALL},
-    [TRANSITION_TYPE_FLASH]  = {B_TRANSITION_BLUR,            B_TRANSITION_GRID_SQUARES},
-    [TRANSITION_TYPE_WATER]  = {B_TRANSITION_SWIRL,           B_TRANSITION_RIPPLE},
+    [TRANSITION_TYPE_NORMAL] = {B_TRANSITION_POKEBALLS_TRAIL, B_TRANSITION_POKEBALLS_TRAIL},
+    [TRANSITION_TYPE_CAVE]   = {B_TRANSITION_POKEBALLS_TRAIL, B_TRANSITION_POKEBALLS_TRAIL},
+    [TRANSITION_TYPE_FLASH]  = {B_TRANSITION_POKEBALLS_TRAIL, B_TRANSITION_POKEBALLS_TRAIL},
+    [TRANSITION_TYPE_WATER]  = {B_TRANSITION_POKEBALLS_TRAIL, B_TRANSITION_POKEBALLS_TRAIL},
 };
 
 // Battle Frontier (excluding Pyramid and Dome, which have their own tables below)
@@ -485,9 +487,11 @@ void StartOldManTutorialBattle(void)
 
 void BattleSetup_StartScriptedWildBattle(void)
 {
+	bool8 isChefBattle = sChefBattlePending;
+	sChefBattlePending = FALSE;
     LockPlayerFieldControls();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
-    gBattleTypeFlags = 0;
+	gBattleTypeFlags = isChefBattle ? BATTLE_TYPE_CHEF : 0;
     CreateBattleStartTask(GetWildBattleTransition(), 0);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
@@ -497,14 +501,21 @@ void BattleSetup_StartScriptedWildBattle(void)
 
 void BattleSetup_StartScriptedDoubleWildBattle(void)
 {
+	bool8 isChefBattle = sChefBattlePending;
+	sChefBattlePending = FALSE;
     LockPlayerFieldControls();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
-    gBattleTypeFlags = BATTLE_TYPE_DOUBLE;
+	gBattleTypeFlags = BATTLE_TYPE_DOUBLE | (isChefBattle ? BATTLE_TYPE_CHEF : 0);
     CreateBattleStartTask(GetWildBattleTransition(), 0);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
     IncrementDailyWildBattles();
     TryUpdateGymLeaderRematchFromWild();
+}
+
+void PrepareChefBattle(void)
+{
+	sChefBattlePending = TRUE;
 }
 
 void StartMarowakBattle(void)
@@ -965,6 +976,7 @@ static void CB2_GiveStarter(void)
     *GetVarPointer(VAR_STARTER_MON) = gSpecialVar_Result;
     starterMon = GetStarterPokemon(gSpecialVar_Result);
     ScriptGiveMon(starterMon, 5, ITEM_NONE);
+    FirstEcho_RegisterStarterIdentity(starterMon);
     ResetTasks();
 
     // Pokémon Alba selects its starter safely inside Lauro's laboratory.
@@ -1020,14 +1032,34 @@ static void TryUpdateGymLeaderRematchFromTrainer(void)
         UpdateGymLeaderRematch();
 }
 
+u16 GetTrainerFlagId(u16 trainerId)
+{
+#if !IS_FRLG
+    switch (trainerId)
+    {
+    case TRAINER_LARICIA_GYM_TRAINER_1:
+        return FLAG_TRAINER_LARICIA_GYM_TRAINER_1;
+    case TRAINER_LARICIA_GYM_TRAINER_2:
+        return FLAG_TRAINER_LARICIA_GYM_TRAINER_2;
+    case TRAINER_LARICIA_GYM_TRAINER_3:
+        return FLAG_TRAINER_LARICIA_GYM_TRAINER_3;
+    case TRAINER_LARICIA_GYM_TRAINER_4:
+        return FLAG_TRAINER_LARICIA_GYM_TRAINER_4;
+    case TRAINER_AUGUSTO:
+        return FLAG_TRAINER_AUGUSTO;
+    }
+#endif
+    return TRAINER_FLAGS_START + trainerId;
+}
+
 static u16 GetTrainerAFlag(void)
 {
-    return TRAINER_FLAGS_START + TRAINER_BATTLE_PARAM.opponentA;
+    return GetTrainerFlagId(TRAINER_BATTLE_PARAM.opponentA);
 }
 
 static u16 GetTrainerBFlag(void)
 {
-    return TRAINER_FLAGS_START + TRAINER_BATTLE_PARAM.opponentB;
+    return GetTrainerFlagId(TRAINER_BATTLE_PARAM.opponentB);
 }
 
 static bool32 IsPlayerDefeated(u32 battleOutcome)
@@ -1238,7 +1270,7 @@ void SetUpTwoTrainersBattle(void)
 bool32 GetTrainerFlagFromScriptPointer(const u8 *data)
 {
     TrainerBattleParameter *temp = (TrainerBattleParameter*)(data + OPCODE_OFFSET);
-    return FlagGet(TRAINER_FLAGS_START + temp->params.opponentA);
+    return FlagGet(GetTrainerFlagId(temp->params.opponentA));
 }
 
 bool32 GetRematchFromScriptPointer(const u8 *data)
@@ -1300,17 +1332,17 @@ static void UNUSED SetBattledTrainerFlag(void)
 
 bool8 HasTrainerBeenFought(u16 trainerId)
 {
-    return FlagGet(TRAINER_FLAGS_START + trainerId);
+    return FlagGet(GetTrainerFlagId(trainerId));
 }
 
 void SetTrainerFlag(u16 trainerId)
 {
-    FlagSet(TRAINER_FLAGS_START + trainerId);
+    FlagSet(GetTrainerFlagId(trainerId));
 }
 
 void ClearTrainerFlag(u16 trainerId)
 {
-    FlagClear(TRAINER_FLAGS_START + trainerId);
+    FlagClear(GetTrainerFlagId(trainerId));
 }
 
 void BattleSetup_StartTrainerBattle(void)

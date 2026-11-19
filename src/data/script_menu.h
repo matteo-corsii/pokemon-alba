@@ -836,6 +836,23 @@ static const struct MenuAction MultichoiceList_BerryPlot[] =
     {gText_Exit},
 };
 
+static const struct MenuAction MultichoiceList_AlbaFrascotto[] =
+{
+    {COMPOUND_STRING("Pan. Porchetta")},
+    {COMPOUND_STRING("Carbonara")},
+    {COMPOUND_STRING("Cacio e Pepe")},
+    {COMPOUND_STRING("Amatriciana")},
+    {COMPOUND_STRING("Gricia")},
+    {gText_Exit},
+};
+
+static const struct MenuAction MultichoiceList_AlbaBallPress[] =
+{
+    {COMPOUND_STRING("Poke Ball")},
+    {COMPOUND_STRING("Mega Ball")},
+    {gText_Exit},
+};
+
 static const struct MenuAction sMultichoiceList_BikeShop[] = {
     {COMPOUND_STRING("BICYCLE{CLEAR_TO 73}{FONT_SMALL}¥1,000,000")},
     {COMPOUND_STRING("NO THANKS")}
@@ -1164,6 +1181,8 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_BASE_PC_WITH_REGISTRY]      = MULTICHOICE(MultichoiceList_BasePCWithRegistry),
     [MULTI_SECRET_BASE_OWNER_PC_NO_REGISTRY] = MULTICHOICE(MultichoiceList_SecretBaseOwnerPCNoRegistry),
     [MULTI_SECRET_BASE_OWNER_PC_WITH_REGISTRY] = MULTICHOICE(MultichoiceList_SecretBaseOwnerPCWithRegistry),
+    [MULTI_ALBA_FRASCOTTO]              = MULTICHOICE(MultichoiceList_AlbaFrascotto),
+    [MULTI_ALBA_BALL_PRESS]             = MULTICHOICE(MultichoiceList_AlbaBallPress),
     [MULTI_REGISTER_MENU]              = MULTICHOICE(MultichoiceList_RegisterMenu),
     [MULTI_SSTIDAL_LILYCOVE]           = MULTICHOICE(MultichoiceList_Exit),
     [MULTI_UNUSED_9]                   = MULTICHOICE(MultichoiceList_Exit),

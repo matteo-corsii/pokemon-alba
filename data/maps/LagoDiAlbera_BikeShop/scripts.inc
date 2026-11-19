@@ -27,7 +27,25 @@ LagoDiAlbera_BikeShop_EventScript_Acro::
 LagoDiAlbera_BikeShop_EventScript_Switch::
 	msgbox LagoDiAlbera_BikeShop_Text_Switch, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, LagoDiAlbera_BikeShop_EventScript_Keep
+	checkitem ITEM_ACRO_BIKE
+	goto_if_eq VAR_RESULT, TRUE, LagoDiAlbera_BikeShop_EventScript_SwitchAcroForMach
+	checkitem ITEM_MACH_BIKE
+	goto_if_eq VAR_RESULT, TRUE, LagoDiAlbera_BikeShop_EventScript_SwitchMachForAcro
+	goto LagoDiAlbera_BikeShop_EventScript_Keep
+
+LagoDiAlbera_BikeShop_EventScript_SwitchAcroForMach::
+	removeitem ITEM_ACRO_BIKE
+	giveitem ITEM_MACH_BIKE
 	special SwapRegisteredBike
+	goto LagoDiAlbera_BikeShop_EventScript_SwitchComplete
+
+LagoDiAlbera_BikeShop_EventScript_SwitchMachForAcro::
+	removeitem ITEM_MACH_BIKE
+	giveitem ITEM_ACRO_BIKE
+	special SwapRegisteredBike
+	goto LagoDiAlbera_BikeShop_EventScript_SwitchComplete
+
+LagoDiAlbera_BikeShop_EventScript_SwitchComplete::
 	msgbox LagoDiAlbera_BikeShop_Text_Switched, MSGBOX_DEFAULT
 LagoDiAlbera_BikeShop_EventScript_Keep::
 	release

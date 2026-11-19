@@ -26,6 +26,7 @@ gSpecials::
 	def_special SetPlayerSecretBase
 	def_special CheckPlayerHasSecretBase
 	def_special Special_GetPlayerSecretBaseId
+	def_special Special_GetFirstEchoActiveMonResult
 	def_special EnterSecretBase
 	def_special ClearAndLeaveSecretBase
 	def_special MoveOutOfSecretBase
@@ -66,6 +67,7 @@ gSpecials::
 	def_special ObjectEventInteractionGetBerryName
 	def_special ObjectEventInteractionGetBerryCountString
 	def_special Bag_ChooseBerry, waitstate=1
+	def_special AlbaRefuge_ChooseBallQuantity, waitstate=1
 	def_special ObjectEventInteractionPlantBerryTree
 	def_special ObjectEventInteractionPickBerryTree
 	def_special ObjectEventInteractionRemoveBerryTree
@@ -83,6 +85,7 @@ gSpecials::
 	def_special BattleSetup_StartRematchBattle, waitstate=1
 	def_special ShowPokemonStorageSystemPC, waitstate=1
 	def_special HasEnoughMonsForDoubleBattle
+	def_special PrepareChefBattle
 	def_special TurnOffTVScreen
 	def_special DoTVShow
 	def_special DoPokeNews
@@ -641,3 +644,4 @@ gSpecials::
 	def_special StickerManGetBragFlags
 	def_special CheckAddCoins
 	def_special ToggleSecretBaseEntranceMetatile
+	def_special TryMigrateOriginalStarterIdentity

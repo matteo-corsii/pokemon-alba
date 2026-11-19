@@ -1,4 +1,5 @@
 #include "global.h"
+#include "event_data.h"
 #include "pokedex.h"
 #include "pokemon_storage_system.h"
 #include "test/test.h"
@@ -85,6 +86,53 @@ TEST("Ausonia Dex initialization preserves initialized extension flags")
 
     EXPECT_EQ(gSaveBlock1Ptr->extendedDexSeen[0], 0x81);
     EXPECT_EQ(gSaveBlock1Ptr->extendedDexCaught[DEX_SAVE_EXTENSION_BYTES - 1], 0x80);
+}
+
+TEST("Ausonia Regional Dex counts only its table entries")
+{
+    ClearPokedexSaveFlags();
+
+    EXPECT_EQ(GetAusoniaPokedexCount(FLAG_GET_SEEN), 0);
+    EXPECT_EQ(GetAusoniaPokedexCount(FLAG_GET_CAUGHT), 0);
+
+    GetSetPokedexFlag(NATIONAL_DEX_CINGERM, FLAG_SET_SEEN);
+    GetSetPokedexFlag(NATIONAL_DEX_CINGERM, FLAG_SET_CAUGHT);
+    EXPECT_EQ(GetAusoniaPokedexCount(FLAG_GET_SEEN), 1);
+    EXPECT_EQ(GetAusoniaPokedexCount(FLAG_GET_CAUGHT), 1);
+
+    GetSetPokedexFlag(NATIONAL_DEX_PIKACHU, FLAG_SET_SEEN);
+    GetSetPokedexFlag(NATIONAL_DEX_PIKACHU, FLAG_SET_CAUGHT);
+    EXPECT_EQ(GetAusoniaPokedexCount(FLAG_GET_SEEN), 1);
+    EXPECT_EQ(GetAusoniaPokedexCount(FLAG_GET_CAUGHT), 1);
+}
+
+TEST("Ausonia detail numbers and legacy mode normalization")
+{
+    EXPECT_EQ(GetPokedexDisplayNumber(NATIONAL_DEX_CINGERM, DEX_MODE_AUSONIA), 1);
+    EXPECT_EQ(GetPokedexDisplayNumber(NATIONAL_DEX_CARPULETUM, DEX_MODE_AUSONIA), 36);
+    EXPECT_EQ(GetPokedexDisplayNumber(NATIONAL_DEX_LUTELLUS, DEX_MODE_AUSONIA), 38);
+    EXPECT_EQ(GetPokedexDisplayNumber(NATIONAL_DEX_FRASCOTTO, DEX_MODE_AUSONIA), 46);
+    EXPECT_EQ(GetPokedexDisplayNumber(NATIONAL_DEX_CARPULETUM, DEX_MODE_NATIONAL), NATIONAL_DEX_CARPULETUM);
+
+    gSaveBlock2Ptr->pokedex.mode = DEX_MODE_HOENN;
+    DisableNationalPokedex();
+    GetRegionalPokedexCount(FLAG_GET_SEEN);
+#if IS_FRLG
+    EXPECT_EQ(gSaveBlock2Ptr->pokedex.mode, DEX_MODE_HOENN);
+#else
+    EXPECT_EQ(gSaveBlock2Ptr->pokedex.mode, DEX_MODE_AUSONIA);
+#endif
+
+    EnableNationalPokedex();
+    gSaveBlock2Ptr->pokedex.mode = DEX_MODE_NATIONAL;
+    GetRegionalPokedexCount(FLAG_GET_SEEN);
+    EXPECT_EQ(gSaveBlock2Ptr->pokedex.mode, DEX_MODE_NATIONAL);
+    DisableNationalPokedex();
+#if IS_FRLG
+    gSaveBlock2Ptr->pokedex.mode = DEX_MODE_HOENN;
+#else
+    gSaveBlock2Ptr->pokedex.mode = DEX_MODE_AUSONIA;
+#endif
 }
 
 TEST("Pokédex flags route independently across legacy and extension storage")

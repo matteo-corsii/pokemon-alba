@@ -23,6 +23,7 @@
 #define tSound data[4]
 #define tButtonMode data[5]
 #define tWindowFrameType data[6]
+#define tShinyRate data[7]
 
 enum
 {
@@ -32,7 +33,7 @@ enum
     MENUITEM_SOUND,
     MENUITEM_BUTTONMODE,
     MENUITEM_FRAMETYPE,
-    MENUITEM_CANCEL,
+    MENUITEM_SHINYRATE,
     MENUITEM_COUNT,
 };
 
@@ -48,6 +49,7 @@ enum
 #define YPOS_SOUND        (MENUITEM_SOUND * 16)
 #define YPOS_BUTTONMODE   (MENUITEM_BUTTONMODE * 16)
 #define YPOS_FRAMETYPE    (MENUITEM_FRAMETYPE * 16)
+#define YPOS_SHINYRATE    (MENUITEM_SHINYRATE * 16)
 
 static void Task_OptionMenuFadeIn(u8 taskId);
 static void Task_OptionMenuProcessInput(u8 taskId);
@@ -66,6 +68,8 @@ static u8 FrameType_ProcessInput(u8 selection);
 static void FrameType_DrawChoices(u8 selection);
 static u8 ButtonMode_ProcessInput(u8 selection);
 static void ButtonMode_DrawChoices(u8 selection);
+static u8 ShinyRate_ProcessInput(u8 selection);
+static void ShinyRate_DrawChoices(u8 selection);
 static void DrawHeaderText(void);
 static void DrawOptionMenuTexts(void);
 static void DrawBgWindowFrames(void);
@@ -87,6 +91,14 @@ static const u8 gText_FrameTypeNumber[]    = _("{COLOR GREEN}{SHADOW LIGHT_GREEN
 static const u8 gText_ButtonTypeNormal[]   = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}NORMAL");
 static const u8 gText_ButtonTypeLR[]       = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}LR");
 static const u8 gText_ButtonTypeLEqualsA[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}L=A");
+static const u8 *const sShinyRateTexts[] =
+{
+    COMPOUND_STRING("{COLOR GREEN}{SHADOW LIGHT_GREEN}1/512"),
+    COMPOUND_STRING("{COLOR GREEN}{SHADOW LIGHT_GREEN}1/1024"),
+    COMPOUND_STRING("{COLOR GREEN}{SHADOW LIGHT_GREEN}1/2048"),
+    COMPOUND_STRING("{COLOR GREEN}{SHADOW LIGHT_GREEN}1/4096"),
+    COMPOUND_STRING("{COLOR GREEN}{SHADOW LIGHT_GREEN}1/8192"),
+};
 
 static const u16 sOptionMenuText_Pal[] = INCGFX_U16("graphics/interface/option_menu_text.pal", ".gbapal");
 // note: this is only used in the Japanese release
@@ -100,7 +112,7 @@ static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
     [MENUITEM_SOUND]       = COMPOUND_STRING("SOUND"),
     [MENUITEM_BUTTONMODE]  = COMPOUND_STRING("BUTTON MODE"),
     [MENUITEM_FRAMETYPE]   = COMPOUND_STRING("FRAME"),
-    [MENUITEM_CANCEL]      = COMPOUND_STRING("CANCEL"),
+    [MENUITEM_SHINYRATE]   = COMPOUND_STRING("SHINY RATE"),
 };
 
 static const struct WindowTemplate sOptionMenuWinTemplates[] =
@@ -250,6 +262,9 @@ void CB2_InitOptionMenu(void)
         gTasks[taskId].tSound = gSaveBlock2Ptr->optionsSound;
         gTasks[taskId].tButtonMode = gSaveBlock2Ptr->optionsButtonMode;
         gTasks[taskId].tWindowFrameType = gSaveBlock2Ptr->optionsWindowFrameType;
+        gTasks[taskId].tShinyRate = gSaveBlock2Ptr->optionsShinyRate;
+        if (gTasks[taskId].tShinyRate > OPTIONS_SHINY_RATE_1_8192)
+            gTasks[taskId].tShinyRate = OPTIONS_SHINY_RATE_1_512;
 
         TextSpeed_DrawChoices(gTasks[taskId].tTextSpeed);
         BattleScene_DrawChoices(gTasks[taskId].tBattleSceneOff);
@@ -257,6 +272,7 @@ void CB2_InitOptionMenu(void)
         Sound_DrawChoices(gTasks[taskId].tSound);
         ButtonMode_DrawChoices(gTasks[taskId].tButtonMode);
         FrameType_DrawChoices(gTasks[taskId].tWindowFrameType);
+        ShinyRate_DrawChoices(gTasks[taskId].tShinyRate);
         HighlightOptionMenuItem(gTasks[taskId].tMenuSelection);
 
         CopyWindowToVram(WIN_OPTIONS, COPYWIN_FULL);
@@ -279,12 +295,7 @@ static void Task_OptionMenuFadeIn(u8 taskId)
 
 static void Task_OptionMenuProcessInput(u8 taskId)
 {
-    if (JOY_NEW(A_BUTTON))
-    {
-        if (gTasks[taskId].tMenuSelection == MENUITEM_CANCEL)
-            gTasks[taskId].func = Task_OptionMenuSave;
-    }
-    else if (JOY_NEW(B_BUTTON))
+    if (JOY_NEW(B_BUTTON))
     {
         gTasks[taskId].func = Task_OptionMenuSave;
     }
@@ -293,12 +304,12 @@ static void Task_OptionMenuProcessInput(u8 taskId)
         if (gTasks[taskId].tMenuSelection > 0)
             gTasks[taskId].tMenuSelection--;
         else
-            gTasks[taskId].tMenuSelection = MENUITEM_CANCEL;
+            gTasks[taskId].tMenuSelection = MENUITEM_COUNT - 1;
         HighlightOptionMenuItem(gTasks[taskId].tMenuSelection);
     }
     else if (JOY_NEW(DPAD_DOWN))
     {
-        if (gTasks[taskId].tMenuSelection < MENUITEM_CANCEL)
+        if (gTasks[taskId].tMenuSelection < MENUITEM_COUNT - 1)
             gTasks[taskId].tMenuSelection++;
         else
             gTasks[taskId].tMenuSelection = 0;
@@ -352,6 +363,13 @@ static void Task_OptionMenuProcessInput(u8 taskId)
             if (previousOption != gTasks[taskId].tWindowFrameType)
                 FrameType_DrawChoices(gTasks[taskId].tWindowFrameType);
             break;
+        case MENUITEM_SHINYRATE:
+            previousOption = gTasks[taskId].tShinyRate;
+            gTasks[taskId].tShinyRate = ShinyRate_ProcessInput(gTasks[taskId].tShinyRate);
+
+            if (previousOption != gTasks[taskId].tShinyRate)
+                ShinyRate_DrawChoices(gTasks[taskId].tShinyRate);
+            break;
         default:
             return;
         }
@@ -372,6 +390,7 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsSound = gTasks[taskId].tSound;
     gSaveBlock2Ptr->optionsButtonMode = gTasks[taskId].tButtonMode;
     gSaveBlock2Ptr->optionsWindowFrameType = gTasks[taskId].tWindowFrameType;
+    gSaveBlock2Ptr->optionsShinyRate = gTasks[taskId].tShinyRate;
 
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_OptionMenuFadeOut;
@@ -629,6 +648,34 @@ static void ButtonMode_DrawChoices(u8 selection)
     DrawOptionMenuChoice(gText_ButtonTypeLR, xLR, YPOS_BUTTONMODE, styles[1]);
 
     DrawOptionMenuChoice(gText_ButtonTypeLEqualsA, GetStringRightAlignXOffset(FONT_NORMAL, gText_ButtonTypeLEqualsA, 198), YPOS_BUTTONMODE, styles[2]);
+}
+
+static u8 ShinyRate_ProcessInput(u8 selection)
+{
+    if (JOY_NEW(DPAD_RIGHT))
+    {
+        if (selection < OPTIONS_SHINY_RATE_1_8192)
+            selection++;
+        else
+            selection = OPTIONS_SHINY_RATE_1_512;
+
+        sArrowPressed = TRUE;
+    }
+    if (JOY_NEW(DPAD_LEFT))
+    {
+        if (selection > OPTIONS_SHINY_RATE_1_512)
+            selection--;
+        else
+            selection = OPTIONS_SHINY_RATE_1_8192;
+
+        sArrowPressed = TRUE;
+    }
+    return selection;
+}
+
+static void ShinyRate_DrawChoices(u8 selection)
+{
+    DrawOptionMenuChoice(sShinyRateTexts[selection], GetStringRightAlignXOffset(FONT_NORMAL, sShinyRateTexts[selection], 198), YPOS_SHINYRATE, 1);
 }
 
 static void DrawHeaderText(void)

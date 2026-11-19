@@ -20,9 +20,13 @@ $southConnection = @($route.connections | Where-Object {
 $viaConsolareConnection = @($route.connections | Where-Object {
     $_.direction -eq 'left' -and $_.map -eq 'MAP_VIA_CONSOLARE' -and $_.offset -eq 0
 })
-Assert-True ($route.connections.Count -eq 2) 'Route103 must retain its south connection and the approved Via Consolare connection.'
+$ponteValleConnection = @($route.connections | Where-Object {
+    $_.direction -eq 'right' -and $_.map -eq 'MAP_PONTE_VALLE_LARICIA' -and $_.offset -eq 0
+})
+Assert-True ($route.connections.Count -eq 4) 'Route103 must retain its existing connections and the approved Ponte/Valle Laricia connection.'
 Assert-True ($southConnection.Count -eq 1) 'Route103 must retain exactly one south Porta Pretoria connection.'
 Assert-True ($viaConsolareConnection.Count -eq 1) 'Route103 must retain exactly one left Via Consolare connection with offset 0.'
+Assert-True ($ponteValleConnection.Count -eq 1) 'Route103 must retain exactly one right Ponte/Valle Laricia connection with offset 0.'
 Assert-True ($route.object_events.Count -eq 7) 'Route103 must contain the approved Via dei Cisternoni trainers, ambient NPCs, Lia, and Nico.'
 $routeExpectedObjects = @(
     @{ x = 22; y = 8; graphics_id = 'OBJ_EVENT_GFX_HIKER'; script = 'Route103_EventScript_Marco'; trainer_type = 'TRAINER_TYPE_NORMAL' },
@@ -72,7 +76,8 @@ Assert-True ($routeScripts -notmatch 'Route103_EventScript_CisternoniAccessClose
 Assert-True ($routeScripts -notmatch 'setmetatile 52, 7') 'Route103 must not dynamically block or unblock the Cisternoni entrance.'
 Assert-True ($routeScripts -notmatch 'call_if_(?:un)?set FLAG_BADGE01_GET, Route103_EventScript_(?:Close|Open)CisternoniEntrance') 'Cisternoni physical access must not depend on Badge 1.'
 Assert-True ((0..21 | Where-Object { ((& $readRouteRawCell 0 $_) -band 0x400) -eq 0 }).Count -gt 0) 'The west Via Consolare passage must remain physically open.'
-Assert-True ((0..79 | Where-Object { ((& $readRouteRawCell $_ 0) -band 0x400) -eq 0 }).Count -eq 0) 'The north Castel Gandolfo boundary must remain blocked until its future connection exists.'
+$northOpenCells = @(0..79 | Where-Object { ((& $readRouteRawCell $_ 0) -band 0x400) -eq 0 })
+Assert-True (($northOpenCells -join ',') -eq '16,17,18,19') 'Route103 north edge must retain only the approved Strada connection opening.'
 foreach ($coord in @(@(13, 14), @(13, 15), @(50, 10))) {
     Assert-True (((& $readRouteRawCell $coord[0] $coord[1]) -band 0x400) -eq 0) "Route103 companion event coordinate ($($coord[0]),$($coord[1])) must remain walkable terrain."
 }
