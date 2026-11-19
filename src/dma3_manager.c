@@ -17,7 +17,8 @@ struct Dma3Request
     u32 value;
 };
 
-static struct Dma3Request sDma3Requests[MAX_DMA_REQUESTS];
+// Keep this 2 KiB queue out of IWRAM to leave room for main/interrupt call stacks.
+static EWRAM_DATA struct Dma3Request sDma3Requests[MAX_DMA_REQUESTS];
 
 static vbool8 sDma3ManagerLocked;
 static u8 sDma3RequestCursor;

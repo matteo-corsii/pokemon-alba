@@ -48,6 +48,11 @@ SECTIONS {
         *libnosys.a:*.o(COMMON);
     } > IWRAM
 
+    /* crt0.s starts the system stack at 0x03007E40. Interrupt handlers also
+     * use that stack, so reserve 4 KiB below it instead of filling all IWRAM. */
+    ASSERT(ADDR(.iwram.bss) + SIZEOF(.iwram.bss) <= 0x03007E40 - 0x1000,
+           "IWRAM code/data leave less than 4 KiB for the system stack")
+
     /* BEGIN ROM DATA */
 
     .text ORIGIN(ROM) :
