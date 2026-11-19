@@ -268,6 +268,10 @@ static u16 RemapLariciaPonteConnectionMetatile(u16 mapBlock)
     {
     case 0x309:
         return (mapBlock & ~MAPGRID_METATILE_ID_MASK) | METATILE_LariciaPonte_Ponte_309;
+    case 0x293:
+        return (mapBlock & ~MAPGRID_METATILE_ID_MASK) | METATILE_LariciaPonte_Ponte_293;
+    case 0x294:
+        return (mapBlock & ~MAPGRID_METATILE_ID_MASK) | METATILE_LariciaPonte_Ponte_294;
     default:
         return mapBlock;
     }
