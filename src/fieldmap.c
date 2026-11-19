@@ -52,7 +52,9 @@ static bool8 SkipCopyingMetatileFromSavedMap(u16 *mapBlock, u16 mapWidth, u8 yMo
 static const struct MapConnection *GetIncomingConnection(enum Connection direction, int x, int y);
 static bool8 IsPosInIncomingConnectingMap(enum Connection direction, int x, int y, const struct MapConnection *connection);
 static bool8 IsCoordInIncomingConnectingMap(int coord, int srcMax, int destMax, int offset);
+#if !IS_FRLG
 static void CopyMapViewSpan(const u16 *src, u16 *dest, int count, int rows, const u32 *remap) ARM_FUNC __attribute__((section(".iwram.code"), noinline));
+#endif
 static void ClearMapSideBorders(int width, int height) ARM_FUNC __attribute__((section(".iwram.code"), noinline));
 static void CopyNativeMapForConnection(const u16 *src, u16 *dest, int width, int height) ARM_FUNC __attribute__((section(".iwram.code"), noinline));
 
@@ -957,6 +959,7 @@ static void LoadSavedMapView(void)
     }
 }
 
+#if !IS_FRLG
 // Each packed entry contains a source ID and the XOR needed to reach its
 // destination ID. All six collision/elevation bits pass through unchanged.
 static void CopyMapViewSpan(const u16 *src, u16 *dest, int count, int rows, const u32 *remap)
@@ -989,7 +992,6 @@ static void CopyMapViewSpan(const u16 *src, u16 *dest, int count, int rows, cons
     }
 }
 
-#if !IS_FRLG
 static const u32 *GetPonteLariciaMapViewRemap(int index)
 {
     static const u32 mappings[][3] = {
