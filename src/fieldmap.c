@@ -277,7 +277,89 @@ static u16 RemapLariciaPonteConnectionMetatile(u16 mapBlock)
     }
 }
 
+static u16 RestorePonteValleLariciaConnectionMetatile(u16 mapBlock)
+{
+    switch (UNPACK_METATILE(mapBlock))
+    {
+    case METATILE_PonteValleLaricia_Laricia_241:
+        return (mapBlock & ~MAPGRID_METATILE_ID_MASK) | 0x241;
+    case METATILE_PonteValleLaricia_Laricia_2D9:
+        return (mapBlock & ~MAPGRID_METATILE_ID_MASK) | 0x2D9;
+    default:
+        return mapBlock;
+    }
+}
+
+static u16 RestoreLariciaPonteConnectionMetatile(u16 mapBlock)
+{
+    switch (UNPACK_METATILE(mapBlock))
+    {
+    case METATILE_LariciaPonte_Ponte_309:
+        return (mapBlock & ~MAPGRID_METATILE_ID_MASK) | 0x309;
+    case METATILE_LariciaPonte_Ponte_293:
+        return (mapBlock & ~MAPGRID_METATILE_ID_MASK) | 0x293;
+    case METATILE_LariciaPonte_Ponte_294:
+        return (mapBlock & ~MAPGRID_METATILE_ID_MASK) | 0x294;
+    default:
+        return mapBlock;
+    }
+}
+
 #endif
+
+bool8 AreMapLayoutsUsingRemappedConnection(const struct MapLayout *from, const struct MapLayout *to)
+{
+#if !IS_FRLG
+    return (from->secondaryTileset == &gTileset_PonteValleLaricia
+         && to->secondaryTileset == &gTileset_LariciaPonte)
+        || (from->secondaryTileset == &gTileset_LariciaPonte
+         && to->secondaryTileset == &gTileset_PonteValleLaricia);
+#else
+    (void)from;
+    (void)to;
+    return FALSE;
+#endif
+}
+
+// Saved views contain both the current map and its connection previews. A
+// preview alias must become a native ID when that map becomes current; native
+// IDs from the old map must instead use the new map's preview aliases. Position
+// determines ownership because the two tilesets also share native numeric IDs.
+// The same normalization repairs in-game saves made after an older transition.
+static u16 NormalizePonteLariciaMapViewBlock(u16 mapBlock, int x, int y)
+{
+#if !IS_FRLG
+    const struct MapLayout *layout = gMapHeader.mapLayout;
+    const struct MapConnection *connection;
+    const struct MapHeader *connectedMapHeader;
+
+    if (layout->secondaryTileset != &gTileset_PonteValleLaricia
+     && layout->secondaryTileset != &gTileset_LariciaPonte)
+        return mapBlock;
+
+    if (x >= MAP_OFFSET && x < layout->width + MAP_OFFSET
+     && y >= MAP_OFFSET && y < layout->height + MAP_OFFSET)
+    {
+        if (layout->secondaryTileset == &gTileset_PonteValleLaricia)
+            return RestoreLariciaPonteConnectionMetatile(mapBlock);
+        return RestorePonteValleLariciaConnectionMetatile(mapBlock);
+    }
+
+    connection = GetMapConnectionAtPos(x, y);
+    if (connection != NULL)
+    {
+        connectedMapHeader = GetMapHeaderFromConnection(connection);
+        if (IsPonteValleLariciaLariciaConnection(&gMapHeader, connectedMapHeader))
+            return RemapPonteValleLariciaConnectionMetatile(mapBlock);
+        if (IsLariciaPonteLariciaConnection(&gMapHeader, connectedMapHeader))
+            return RemapLariciaPonteConnectionMetatile(mapBlock);
+    }
+#else
+    (void)x;
+    (void)y;
+#endif
+    return mapBlock;
+}
 
 static void FillConnection(struct MapHeader const *mapHeader, int x, int y, struct MapHeader const *connectedMapHeader, int x2, int y2, int width, int height)
 {
@@ -690,7 +772,7 @@ static void LoadSavedMapView(void)
             for (j = x; j < x + MAP_OFFSET_W; j++)
             {
                 if (!SkipCopyingMetatileFromSavedMap(&sBackupMapData[j + width * i], width, yMode))
-                    sBackupMapData[j + width * i] = *mapView;
+                    sBackupMapData[j + width * i] = NormalizePonteLariciaMapViewBlock(*mapView, j, i);
                 mapView++;
             }
         }
@@ -705,8 +787,9 @@ static void LoadSavedMapView(void)
     }
 }
 
-static void MoveMapViewToBackup(enum Connection direction)
+static void MoveMapViewToBackup(enum Connection direction, const struct MapLayout *oldMapLayout)
 {
+    bool8 remapMapView = AreMapLayoutsUsingRemappedConnection(oldMapLayout, gMapHeader.mapLayout);
     int width;
     u16 *mapView;
     int x0, y0;
@@ -757,7 +840,10 @@ static void MoveMapViewToBackup(enum Connection direction)
             srci = (y + r8) * MAP_OFFSET_W + r9;
             src = &mapView[srci + i];
             dest = &sBackupMapData[x0 + desti + j];
-            *dest = *src;
+            if (remapMapView)
+                *dest = NormalizePonteLariciaMapViewBlock(*src, x0 + j, y0 + y);
+            else
+                *dest = *src;
             i++;
             j++;
         }
@@ -852,6 +938,7 @@ static void SetPositionFromConnection(const struct MapConnection *connection, en
 
 bool8 CameraMove(int x, int y)
 {
+    const struct MapLayout *oldMapLayout = gMapHeader.mapLayout;
     enum Connection direction;
     const struct MapConnection *connection;
     int old_x, old_y;
@@ -881,7 +968,7 @@ bool8 CameraMove(int x, int y)
         gCamera.y = old_y - gSaveBlock1Ptr->pos.y;
         gSaveBlock1Ptr->pos.x += x;
         gSaveBlock1Ptr->pos.y += y;
-        MoveMapViewToBackup(direction);
+        MoveMapViewToBackup(direction, oldMapLayout);
     }
 
     return gCamera.active;

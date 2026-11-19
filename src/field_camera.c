@@ -412,9 +412,16 @@ void CameraUpdateNoObjectRefresh(void)
 
     if (deltaX != 0 || deltaY != 0)
     {
+        const struct MapLayout *oldMapLayout = gMapHeader.mapLayout;
+
         CameraMove(deltaX, deltaY);
         AddCameraTileOffset(&sFieldCameraOffset, deltaX * 2, deltaY * 2);
-        RedrawMapSlicesForCameraUpdate(&sFieldCameraOffset, deltaX * 2, deltaY * 2);
+        // Tile and palette slots change across this remapped connection. All
+        // retained BG words must be rebuilt after advancing the camera ring.
+        if (AreMapLayoutsUsingRemappedConnection(oldMapLayout, gMapHeader.mapLayout))
+            DrawWholeMapView();
+        else
+            RedrawMapSlicesForCameraUpdate(&sFieldCameraOffset, deltaX * 2, deltaY * 2);
     }
 
     AddCameraPixelOffset(&sFieldCameraOffset, movementSpeedX, movementSpeedY);
@@ -475,12 +482,19 @@ void CameraUpdate(void)
 
     if (deltaX != 0 || deltaY != 0)
     {
+        const struct MapLayout *oldMapLayout = gMapHeader.mapLayout;
+
         CameraMove(deltaX, deltaY);
         UpdateObjectEventsForCameraUpdate(deltaX, deltaY);
         RotatingGatePuzzleCameraUpdate(deltaX, deltaY);
         SetBerryTreesSeen();
         AddCameraTileOffset(&sFieldCameraOffset, deltaX * 2, deltaY * 2);
-        RedrawMapSlicesForCameraUpdate(&sFieldCameraOffset, deltaX * 2, deltaY * 2);
+        // Tile and palette slots change across this remapped connection. All
+        // retained BG words must be rebuilt after advancing the camera ring.
+        if (AreMapLayoutsUsingRemappedConnection(oldMapLayout, gMapHeader.mapLayout))
+            DrawWholeMapView();
+        else
+            RedrawMapSlicesForCameraUpdate(&sFieldCameraOffset, deltaX * 2, deltaY * 2);
         TryDespawnOWEsCrossingMapConnection();
     }
 
