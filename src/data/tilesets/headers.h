@@ -65,7 +65,7 @@ const struct Tileset gTileset_PortaPretoria =
 
 const struct Tileset gTileset_PonteValleLaricia =
 {
-    .isCompressed = TRUE,
+    .isCompressed = FALSE,
     .isSecondary = TRUE,
     .tiles = gTilesetTiles_PonteValleLaricia,
     .palettes = gTilesetPalettes_PonteValleLaricia,
@@ -252,7 +252,7 @@ const struct Tileset gTileset_Laricia =
 
 const struct Tileset gTileset_LariciaPonte =
 {
-    .isCompressed = TRUE,
+    .isCompressed = FALSE,
     .isSecondary = TRUE,
     .tiles = gTilesetTiles_LariciaPonte,
     .palettes = gTilesetPalettes_LariciaPonte,

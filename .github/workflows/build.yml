@@ -178,6 +178,7 @@ jobs:
   test:
     if: github.actor != 'allcontributors[bot]'
     runs-on: ubuntu-latest
+    timeout-minutes: 35
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -210,7 +211,15 @@ jobs:
             tools/mgba-rom-test-hydra/mgba-rom-test-hydra
           key: tools-check-${{ runner.os }}-${{ hashFiles('tools/*/Makefile', 'tools/**/*.c', 'tools/**/*.cpp', 'tools/**/*.h') }}
 
+      - name: Build test ROM
+        timeout-minutes: 15
+        env:
+          GAME_VERSION: EMERALD
+          TEST: 1
+        run: make -j$(nproc) pokeemerald-test.elf
+
       - name: Test
+        timeout-minutes: 25
         env:
           GAME_VERSION: EMERALD
           TEST: 1

@@ -47,6 +47,7 @@ u32 MapGridGetMetatileAttributeAt(s16 x, s16 y, u8 attributeType);
 u8 MapGridGetMetatileLayerTypeAt(int x, int y);
 u8 MapGridGetElevationAt(int x, int y);
 bool8 CameraMove(int x, int y);
+bool8 AreMapLayoutsUsingRemappedConnection(const struct MapLayout *from, const struct MapLayout *to);
 void SaveMapView(void);
 void SetCameraFocusCoords(u16 x, u16 y);
 void InitMap(void);
