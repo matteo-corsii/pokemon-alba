@@ -32,28 +32,28 @@
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_LARICIA_GYM_TRAINER_ROOM1",
-      "dest_warp_id": "0"
+      "dest_warp_id": "1"
     },
     {
       "x": 22,
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_LARICIA_GYM_TRAINER_ROOM2",
-      "dest_warp_id": "0"
+      "dest_warp_id": "1"
     },
     {
       "x": 4,
       "y": 11,
       "elevation": 0,
       "dest_map": "MAP_LARICIA_GYM_TRAINER_ROOM3",
-      "dest_warp_id": "0"
+      "dest_warp_id": "1"
     },
     {
       "x": 13,
       "y": 2,
       "elevation": 0,
       "dest_map": "MAP_LARICIA_GYM_LEADER_ROOM",
-      "dest_warp_id": "0"
+      "dest_warp_id": "1"
     },
     {
       "x": 13,
@@ -67,7 +67,7 @@
       "y": 11,
       "elevation": 0,
       "dest_map": "MAP_LARICIA_GYM_TRAINER_ROOM4",
-      "dest_warp_id": "0"
+      "dest_warp_id": "1"
     },
     {
       "x": 13,
