@@ -23,12 +23,12 @@ Laricia_Gym_Lobby_EventScript_UpdateLeaderDoor::
 	goto_if_not_defeated TRAINER_LARICIA_GYM_TRAINER_2, Laricia_Gym_Lobby_EventScript_LeaderDoorClosed
 	goto_if_not_defeated TRAINER_LARICIA_GYM_TRAINER_3, Laricia_Gym_Lobby_EventScript_LeaderDoorClosed
 	goto_if_not_defeated TRAINER_LARICIA_GYM_TRAINER_4, Laricia_Gym_Lobby_EventScript_LeaderDoorClosed
-	setmetatile 12, 1, METATILE_LariciaGym_LeaderDoorOpen0, TRUE
-	setmetatile 13, 1, METATILE_LariciaGym_LeaderDoorOpen1, TRUE
-	setmetatile 14, 1, METATILE_LariciaGym_LeaderDoorOpen2, TRUE
-	setmetatile 12, 2, METATILE_LariciaGym_LeaderDoorOpenLeftLobby, TRUE
+	setmetatile 12, 1, METATILE_LariciaGym_LeaderDoorClosed0, TRUE
+	setmetatile 13, 1, METATILE_LariciaGym_LeaderDoorClosed1, TRUE
+	setmetatile 14, 1, METATILE_LariciaGym_LeaderDoorClosed2, TRUE
+	setmetatile 12, 2, METATILE_LariciaGym_LeaderDoorClosed3, TRUE
 	setmetatile 13, 2, METATILE_LariciaGym_LeaderDoorOpen4, FALSE
-	setmetatile 14, 2, METATILE_LariciaGym_LeaderDoorOpen5, TRUE
+	setmetatile 14, 2, METATILE_LariciaGym_LeaderDoorClosed5, TRUE
 	special DrawWholeMapView
 	return
 Laricia_Gym_Lobby_EventScript_LeaderDoorClosed::

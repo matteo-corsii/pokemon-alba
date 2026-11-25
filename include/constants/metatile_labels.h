@@ -249,7 +249,7 @@
 
 // gTileset_Galloro
 #define METATILE_Galloro_SecretBase_TreeRight              0x25F
-#define METATILE_Galloro_SecretBase_VineRight              0x260
+#define METATILE_Galloro_SecretBase_VineRight              0x261
 
 // gTileset_FuchsiaCity
 #define METATILE_FuchsiaCity_Door                           0x2BF
@@ -1096,7 +1096,7 @@
 #define METATILE_LariciaGym_LeaderDoorOpen1   0x2E4
 #define METATILE_LariciaGym_LeaderDoorOpen2   0x2E5
 #define METATILE_LariciaGym_LeaderDoorOpen3   0x2E6
-#define METATILE_LariciaGym_LeaderDoorOpen4   0x2E7
+#define METATILE_LariciaGym_LeaderDoorOpen4   0x3FE
 #define METATILE_LariciaGym_LeaderDoorOpen5   0x2E8
 #define METATILE_LariciaGym_LeaderDoorOpenLeftLobby 0x3FD
 #define METATILE_GeneralFrlg_CalmWater               0x12B

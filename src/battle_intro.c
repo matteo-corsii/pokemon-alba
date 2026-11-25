@@ -93,7 +93,8 @@ int GetAnimBgAttribute(u8 bgId, u8 attributeId)
 
 static bool8 IsOrdinaryBattleIntro(void)
 {
-    if (gBattleTypeFlags & ~(BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE))
+    // Non-link battles set IS_MASTER before their intro task is created.
+    if (gBattleTypeFlags & ~(BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_IS_MASTER))
         return FALSE;
 
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
@@ -221,6 +222,9 @@ static void BattleIntroSlideOrdinary(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case 0:
+        // BG3 already contains the main battle background. Stop the split
+        // BG3HOFS DMA before the eye window starts revealing it.
+        gScanlineEffect.state = 3;
         gTasks[taskId].data[2] = 1;
         gTasks[taskId].tState++;
         break;
@@ -236,8 +240,6 @@ static void BattleIntroSlideOrdinary(u8 taskId)
         if ((gBattle_WIN0V & 0xFF00) == 0x3000)
         {
             // The main battle background was loaded by CB2_InitBattleInternal.
-            // Stop the entry BG scanline DMA before exposing the full scene.
-            gScanlineEffect.state = 3;
             CpuFill32(0, (void *)BG_SCREEN_ADDR(28), BG_SCREEN_SIZE);
             SetBgAttribute(1, BG_ATTR_CHARBASEINDEX, 0);
             SetBgAttribute(2, BG_ATTR_CHARBASEINDEX, 0);
