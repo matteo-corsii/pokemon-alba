@@ -943,6 +943,9 @@ static void BuyMenuDrawObjectEvents(void)
             (u16)sShopData->viewportObjects[i][Y_COORD] * 16 + 48 - graphicsInfo->height / 2,
             2);
 
+        if (spriteId == MAX_SPRITES)
+            continue;
+
         if (BuyMenuCheckIfObjectEventOverlapsMenuBg(sShopData->viewportObjects[i]) == TRUE)
         {
             gSprites[spriteId].subspriteTableNum = 4;
