@@ -116,10 +116,31 @@ Laricia_EventScript_PostGymScene::
 	addobject LOCALID_LARICIA_POST_GYM_NICO
 	addobject LOCALID_LARICIA_POST_GYM_LIA
 	msgbox Laricia_Text_PostGymAugustoInvite, MSGBOX_DEFAULT
+	getplayerxy VAR_0x8004, VAR_0x8005
+	compare VAR_0x8004, 32
+	goto_if_ne Laricia_EventScript_PostGymAugustoOriginalMovement
+	compare VAR_0x8005, 11
+	goto_if_ne Laricia_EventScript_PostGymAugustoOriginalMovement
+	applymovement LOCALID_LARICIA_POST_GYM_AUGUSTO, Laricia_Movement_AugustoToComizio
+	goto Laricia_EventScript_PostGymAugustoMovementDone
+
+Laricia_EventScript_PostGymAugustoOriginalMovement:
 	applymovement LOCALID_LARICIA_POST_GYM_AUGUSTO, Laricia_Movement_AugustoToPiazza
+
+Laricia_EventScript_PostGymAugustoMovementDone:
 	waitmovement 0
 	msgbox Laricia_Text_PostGymNicoJoin, MSGBOX_DEFAULT
 	msgbox Laricia_Text_PostGymLiaJoin, MSGBOX_DEFAULT
+	getplayerxy VAR_0x8004, VAR_0x8005
+	compare VAR_0x8004, 32
+	goto_if_ne Laricia_EventScript_PostGymComizioDialogues
+	compare VAR_0x8005, 11
+	goto_if_ne Laricia_EventScript_PostGymComizioDialogues
+	closemessage
+	applymovement LOCALID_PLAYER, Laricia_Movement_PlayerToComizio
+	waitmovement 0
+
+Laricia_EventScript_PostGymComizioDialogues:
 	msgbox Laricia_Text_PostGymMayor, MSGBOX_DEFAULT
 	msgbox Laricia_Text_PostGymTerraFutura, MSGBOX_DEFAULT
 	msgbox Laricia_Text_PostGymAugustoSagra, MSGBOX_DEFAULT
@@ -148,6 +169,24 @@ Laricia_Movement_AugustoToPiazza:
 	walk_down
 	walk_left
 	walk_left
+	step_end
+
+Laricia_Movement_AugustoToComizio:
+	.rept 5
+	walk_down
+	.endr
+	.rept 14
+	walk_left
+	.endr
+	step_end
+
+Laricia_Movement_PlayerToComizio:
+	.rept 8
+	walk_down
+	.endr
+	.rept 15
+	walk_left
+	.endr
 	step_end
 
 Laricia_Text_SagraBlocker:

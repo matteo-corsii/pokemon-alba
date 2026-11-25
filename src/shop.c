@@ -949,7 +949,10 @@ static void BuyMenuDrawObjectEvents(void)
             gSprites[spriteId].subspriteMode = SUBSPRITES_ON;
         }
 
-        StartSpriteAnim(&gSprites[spriteId], sShopData->viewportObjects[i][ANIM_NUM]);
+        if (graphicsInfo->inanimate)
+            StartSpriteAnim(&gSprites[spriteId], ANIM_STAY_STILL);
+        else
+            StartSpriteAnim(&gSprites[spriteId], sShopData->viewportObjects[i][ANIM_NUM]);
     }
 
     gWeatherPtr->palProcessingState = weatherTemp; // restore weather state

@@ -428,6 +428,7 @@ static bool8 SecretBaseUsesWoodRefuge(u8 secretBaseId)
 {
     return (secretBaseId >= SECRET_BASE_TREE1_1 && secretBaseId <= SECRET_BASE_SHRUB4_3)
         || secretBaseId == SECRET_BASE_ALBERA_TREE_1
+        || secretBaseId == SECRET_BASE_GALLORO_TREE_1
         || secretBaseId == SECRET_BASE_CISTERNONI_TREE_1;
 }
 

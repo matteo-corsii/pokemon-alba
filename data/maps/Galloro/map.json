@@ -380,8 +380,8 @@
       "type": "secret_base",
       "x": 4,
       "y": 7,
-      "elevation": 3,
-      "secret_base_id": "SECRET_BASE_TREE1_1"
+      "elevation": 0,
+      "secret_base_id": "SECRET_BASE_GALLORO_TREE_1"
     },
     {
       "type": "sign",

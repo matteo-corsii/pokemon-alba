@@ -1098,6 +1098,7 @@
 #define METATILE_LariciaGym_LeaderDoorOpen3   0x2E6
 #define METATILE_LariciaGym_LeaderDoorOpen4   0x2E7
 #define METATILE_LariciaGym_LeaderDoorOpen5   0x2E8
+#define METATILE_LariciaGym_LeaderDoorOpenLeftLobby 0x3FD
 #define METATILE_GeneralFrlg_CalmWater               0x12B
 #define METATILE_GeneralFrlg_Door                    0x03D
 #define METATILE_GeneralFrlg_Plain_Grass             0x00D

@@ -26,7 +26,7 @@ Laricia_Gym_Lobby_EventScript_UpdateLeaderDoor::
 	setmetatile 12, 1, METATILE_LariciaGym_LeaderDoorOpen0, TRUE
 	setmetatile 13, 1, METATILE_LariciaGym_LeaderDoorOpen1, TRUE
 	setmetatile 14, 1, METATILE_LariciaGym_LeaderDoorOpen2, TRUE
-	setmetatile 12, 2, METATILE_LariciaGym_LeaderDoorOpen3, TRUE
+	setmetatile 12, 2, METATILE_LariciaGym_LeaderDoorOpenLeftLobby, TRUE
 	setmetatile 13, 2, METATILE_LariciaGym_LeaderDoorOpen4, FALSE
 	setmetatile 14, 2, METATILE_LariciaGym_LeaderDoorOpen5, TRUE
 	special DrawWholeMapView
@@ -42,7 +42,7 @@ Laricia_Gym_Lobby_EventScript_LeaderDoorClosed::
 	return
 
 Laricia_Gym_Lobby_EventScript_Butler::
-	msgbox Laricia_Gym_Lobby_Text_Butler, MSGBOX_DEFAULT
+	msgbox Laricia_Gym_Lobby_Text_Butler, MSGBOX_NPC
 	end
 
 Laricia_Gym_Lobby_Text_Butler:
