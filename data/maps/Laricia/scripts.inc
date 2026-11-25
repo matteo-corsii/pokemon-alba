@@ -17,6 +17,13 @@ Laricia_OnTransition_Preparativi:
 	setflag FLAG_HIDE_LARICIA_POST_GYM_NICO_LIA
 
 Laricia_OnTransition_Done:
+#if !IS_FRLG
+	goto_if_set FLAG_LARICIA_SAGRA_ACTIVE, Laricia_OnTransition_End
+	goto_if_unset FLAG_BADGE03_GET, Laricia_OnTransition_End
+	goto_if_unset FLAG_RECEIVED_TM_FLAME_CHARGE, Laricia_OnTransition_End
+	setvar VAR_TEMP_0, 1
+Laricia_OnTransition_End:
+#endif
 	end
 
 Laricia_OnFrame:
@@ -98,7 +105,6 @@ Laricia_EventScript_PostGymLia::
 #if !IS_FRLG
 Laricia_EventScript_PostGymScene::
 	setvar VAR_TEMP_0, 0
-	goto_if_unset FLAG_LARICIA_POST_GYM_PENDING, Laricia_EventScript_PostGymScene_End
 	clearflag FLAG_LARICIA_POST_GYM_PENDING
 	goto_if_set FLAG_LARICIA_SAGRA_ACTIVE, Laricia_EventScript_PostGymScene_End
 	goto_if_unset FLAG_BADGE03_GET, Laricia_EventScript_PostGymScene_End
