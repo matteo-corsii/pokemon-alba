@@ -490,7 +490,6 @@ static void Task_ReturnToShopMenu(u8 taskId)
 
 static void ShowShopMenuAfterExitingBuyOrSellMenu(u8 taskId)
 {
-    ClearDialogWindowAndFrame(0, FALSE);
     CreateShopMenu(sMartInfo.martType);
     DestroyTask(taskId);
 }
