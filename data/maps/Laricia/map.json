@@ -107,8 +107,8 @@
       "flag": "FLAG_HIDE_LARICIA_SAGRA_TRUCK_3"
     },
     {
-      "local_id": "LOCALID_LARICIA_SAGRA_VENDITORE_1",
-      "graphics_id": "OBJ_EVENT_GFX_MAN_2",
+      "local_id": "LOCALID_LARICIA_SAGRA_VENDITORE_NUOVO",
+      "graphics_id": "OBJ_EVENT_GFX_MAN_3",
       "x": 12,
       "y": 15,
       "elevation": 3,
@@ -117,7 +117,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Laricia_EventScript_SagraVenditore1",
+      "script": "Laricia_EventScript_SagraVenditore2",
       "flag": "0"
     },
     {
