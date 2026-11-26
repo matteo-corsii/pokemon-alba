@@ -693,6 +693,30 @@ static void DrawMapNamePopUpFrame(u8 bg, u8 x, u8 y, u8 deltaX, u8 deltaY, u8 un
         FillBgTilemapBufferRect(bg, TILE_BOT_EDGE_START + i, i - 1 + x, y + deltaY, 1, 1, 14);
 }
 
+static void BlitMapNamePopUpBackground(u8 windowId, const u8 *pixels)
+{
+    u32 i;
+
+    // The Gen 3 background already has the window's complete tiled layout.
+    // Preserve the original color-key behavior if a future theme uses index 0
+    // or a different window size; opaque full-window images need only a copy.
+    if (GetWindowAttribute(windowId, WINDOW_WIDTH) == 10
+     && GetWindowAttribute(windowId, WINDOW_HEIGHT) == 3)
+    {
+        for (i = 0; i < sizeof(sMapPopUp_Table[0]); i++)
+        {
+            if ((pixels[i] & 0x0F) == 0 || (pixels[i] & 0xF0) == 0)
+                break;
+        }
+        if (i == sizeof(sMapPopUp_Table[0]))
+        {
+            CopyToWindowPixelBuffer(windowId, pixels, sizeof(sMapPopUp_Table[0]), 0);
+            return;
+        }
+    }
+    BlitBitmapToWindow(windowId, pixels, 0, 0, 80, 24);
+}
+
 static void LoadMapNamePopUpWindowBg(void)
 {
     u8 popUpThemeId;
@@ -741,6 +765,6 @@ static void LoadMapNamePopUpWindowBg(void)
             LoadPalette(&sMapPopUp_Palette_Underwater, BG_PLTT_ID(14), sizeof(sMapPopUp_Palette_Underwater));
         else
             LoadPalette(sMapPopUp_PaletteTable[popUpThemeId], BG_PLTT_ID(14), sizeof(sMapPopUp_PaletteTable[0]));
-        BlitBitmapToWindow(popupWindowId, sMapPopUp_Table[popUpThemeId], 0, 0, 80, 24);
+        BlitMapNamePopUpBackground(popupWindowId, sMapPopUp_Table[popUpThemeId]);
     }
 }

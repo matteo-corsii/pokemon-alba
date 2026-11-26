@@ -5,6 +5,7 @@
 #include "battle_main.h"
 #include "battle_setup.h"
 #include "bg.h"
+#include "data.h"
 #include "gpu_regs.h"
 #include "main.h"
 #include "scanline_effect.h"
@@ -20,6 +21,7 @@ void BattleIntroSlide3(u8);
 static void BattleIntroSlideLink(u8);
 static void BattleIntroSlidePartner(u8);
 static void BattleIntroNoSlide(u8);
+static void BattleIntroSlideOrdinary(u8);
 
 static const u8 sBattleAnimBgCnts[] = {REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, REG_OFFSET_BG2CNT, REG_OFFSET_BG3CNT};
 
@@ -89,6 +91,28 @@ int GetAnimBgAttribute(u8 bgId, u8 attributeId)
 #define tState data[0]
 #define tEnvironment data[1]
 
+static bool8 IsOrdinaryBattleIntro(void)
+{
+    // Non-link battles set IS_MASTER before their intro task is created.
+    if (gBattleTypeFlags & ~(BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_IS_MASTER))
+        return FALSE;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+    {
+        enum TrainerClassID trainerClass = GetTrainerClassFromId(TRAINER_BATTLE_PARAM.opponentA);
+
+        if (trainerClass == TRAINER_CLASS_LEADER || trainerClass == TRAINER_CLASS_CHAMPION
+         || trainerClass == TRAINER_CLASS_LEADER_FRLG || trainerClass == TRAINER_CLASS_CHAMPION_FRLG
+         || trainerClass == TRAINER_CLASS_RIVAL || trainerClass == TRAINER_CLASS_RIVAL_EARLY_FRLG
+         || trainerClass == TRAINER_CLASS_RIVAL_LATE_FRLG)
+            return FALSE;
+
+        return GetTrainerBattleTransition() == B_TRANSITION_POKEBALLS_TRAIL;
+    }
+
+    return GetWildBattleTransition() == B_TRANSITION_POKEBALLS_TRAIL;
+}
+
 void HandleIntroSlide(u8 environment)
 {
     u8 taskId;
@@ -104,6 +128,10 @@ void HandleIntroSlide(u8 environment)
     else if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
     {
         taskId = CreateTask(BattleIntroSlide3, 0);
+    }
+    else if (IsOrdinaryBattleIntro())
+    {
+        taskId = CreateTask(BattleIntroSlideOrdinary, 0);
     }
     else
     {
@@ -177,6 +205,58 @@ static void BattleIntroNoSlide(u8 taskId)
         SetBgAttribute(2, BG_ATTR_CHARBASEINDEX, 0);
         SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(28) | BGCNT_TXT256x512);
         SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(30) | BGCNT_TXT512x256);
+        break;
+    case 4:
+        BattleIntroSlideEnd(taskId);
+        break;
+    }
+}
+
+// The overworld Pokeball transition is already complete. Reveal the fully
+// loaded battle BG without the horizontal scanline slide of the entry BG.
+static void BattleIntroSlideOrdinary(u8 taskId)
+{
+    if (B_FAST_INTRO_NO_SLIDE || gTestRunnerHeadless)
+        return BattleIntroNoSlide(taskId);
+
+    switch (gTasks[taskId].tState)
+    {
+    case 0:
+        // BG3 already contains the main battle background. Stop the split
+        // BG3HOFS DMA before the eye window starts revealing it.
+        gScanlineEffect.state = 3;
+        gTasks[taskId].data[2] = 1;
+        gTasks[taskId].tState++;
+        break;
+    case 1:
+        if (--gTasks[taskId].data[2] == 0)
+        {
+            SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR);
+            gTasks[taskId].tState++;
+        }
+        break;
+    case 2:
+        gBattle_WIN0V -= 0xFF;
+        if ((gBattle_WIN0V & 0xFF00) == 0x3000)
+        {
+            // The main battle background was loaded by CB2_InitBattleInternal.
+            CpuFill32(0, (void *)BG_SCREEN_ADDR(28), BG_SCREEN_SIZE);
+            SetBgAttribute(1, BG_ATTR_CHARBASEINDEX, 0);
+            SetBgAttribute(2, BG_ATTR_CHARBASEINDEX, 0);
+            SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(28) | BGCNT_TXT256x512);
+            SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(30) | BGCNT_TXT512x256);
+            gTasks[taskId].tState++;
+        }
+        break;
+    case 3:
+        // Continue the eye opening with no horizontal offsets or extra slide.
+        if (gBattle_WIN0V & 0xFF00)
+            gBattle_WIN0V -= 0x3FC;
+        else
+        {
+            gIntroSlideFlags &= ~1;
+            gTasks[taskId].tState++;
+        }
         break;
     case 4:
         BattleIntroSlideEnd(taskId);

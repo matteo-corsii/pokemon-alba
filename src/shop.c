@@ -943,13 +943,19 @@ static void BuyMenuDrawObjectEvents(void)
             (u16)sShopData->viewportObjects[i][Y_COORD] * 16 + 48 - graphicsInfo->height / 2,
             2);
 
+        if (spriteId == MAX_SPRITES)
+            continue;
+
         if (BuyMenuCheckIfObjectEventOverlapsMenuBg(sShopData->viewportObjects[i]) == TRUE)
         {
             gSprites[spriteId].subspriteTableNum = 4;
             gSprites[spriteId].subspriteMode = SUBSPRITES_ON;
         }
 
-        StartSpriteAnim(&gSprites[spriteId], sShopData->viewportObjects[i][ANIM_NUM]);
+        if (graphicsInfo->inanimate)
+            StartSpriteAnim(&gSprites[spriteId], ANIM_STAY_STILL);
+        else
+            StartSpriteAnim(&gSprites[spriteId], sShopData->viewportObjects[i][ANIM_NUM]);
     }
 
     gWeatherPtr->palProcessingState = weatherTemp; // restore weather state

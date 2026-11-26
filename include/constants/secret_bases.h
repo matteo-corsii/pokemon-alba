@@ -168,6 +168,7 @@
 
 // Albera Storica's first tutorial tree reuses the Tree1 interior.
 #define SECRET_BASE_ALBERA_TREE_1 241
+#define SECRET_BASE_GALLORO_TREE_1 242
 
 #define SECRET_BASE_ALBERA_TREE SECRET_BASE_GROUP(24)
 

@@ -5,6 +5,7 @@
 #include "fldeff.h"
 #include "fldeff_misc.h"
 #include "frontier_util.h"
+#include "main.h"
 #include "menu.h"
 #include "mirage_tower.h"
 #include "overworld.h"
@@ -51,6 +52,65 @@ static bool8 SkipCopyingMetatileFromSavedMap(u16 *mapBlock, u16 mapWidth, u8 yMo
 static const struct MapConnection *GetIncomingConnection(enum Connection direction, int x, int y);
 static bool8 IsPosInIncomingConnectingMap(enum Connection direction, int x, int y, const struct MapConnection *connection);
 static bool8 IsCoordInIncomingConnectingMap(int coord, int srcMax, int destMax, int offset);
+#if !IS_FRLG
+static void CopyMapViewSpan(const u16 *src, u16 *dest, int count, int rows, const u32 *remap) ARM_FUNC __attribute__((section(".iwram.code"), noinline));
+#endif
+static void ClearMapSideBorders(int width, int height) ARM_FUNC __attribute__((section(".iwram.code"), noinline));
+static void CopyNativeMapForConnection(const u16 *src, u16 *dest, int width, int height) ARM_FUNC __attribute__((section(".iwram.code"), noinline));
+
+static bool8 IsPreparingPonteLariciaConnection(void)
+{
+#if !IS_FRLG
+    const struct Tileset *tileset = gMapHeader.mapLayout->secondaryTileset;
+
+    return IsVBlankGraphicsDeferred()
+        && (tileset == &gTileset_PonteValleLaricia || tileset == &gTileset_LariciaPonte);
+#else
+    return FALSE;
+#endif
+}
+
+static void ClearMapBordersForConnection(int width, int height)
+{
+    int bottom = (width * (height - MAP_OFFSET)) & ~1;
+
+    // The native rectangle is overwritten next. Clear only the surrounding
+    // strips, rounding BIOS fills to words and 32-byte transfer blocks.
+    CpuFastFill16(MAPGRID_UNDEFINED, sBackupMapData, ((MAP_OFFSET * width + MAP_OFFSET) * sizeof(u16) + 31) & ~31);
+    CpuFastFill16(MAPGRID_UNDEFINED, sBackupMapData + bottom, ((width * height - bottom) * sizeof(u16) + 31) & ~31);
+    ClearMapSideBorders(width, height);
+}
+
+static void ClearMapSideBorders(int width, int height)
+{
+    typedef u32 MapWord __attribute__((may_alias));
+    const u32 empty = MAPGRID_UNDEFINED | (MAPGRID_UNDEFINED << 16);
+    int row;
+
+    for (row = MAP_OFFSET; row < height - MAP_OFFSET; row++)
+    {
+        int border = (row * width + width - MAP_OFFSET_W + MAP_OFFSET) & ~1;
+        MapWord *dest = (MapWord *)(sBackupMapData + border);
+
+        // One short fill spans this row's right edge and the next left edge.
+        // Any rounded overlap with native cells is overwritten by their copy.
+#if MAP_OFFSET_W == 15
+        dest[0] = empty;
+        dest[1] = empty;
+        dest[2] = empty;
+        dest[3] = empty;
+        dest[4] = empty;
+        dest[5] = empty;
+        dest[6] = empty;
+        dest[7] = empty;
+#else
+        int i;
+
+        for (i = 0; i < (((MAP_OFFSET_W + 1) * sizeof(u16) + 31) & ~31) / sizeof(u32); i++)
+            dest[i] = empty;
+#endif
+    }
+}
 
 static inline u16 GetBorderBlockAt(int x, int y)
 {
@@ -169,16 +229,38 @@ static void InitMapLayoutData(struct MapHeader *mapHeader)
     int width;
     int height;
     mapLayout = mapHeader->mapLayout;
-    CpuFastFill16(MAPGRID_UNDEFINED, sBackupMapData, sizeof(sBackupMapData));
     gBackupMapLayout.map = sBackupMapData;
     width = mapLayout->width + MAP_OFFSET_W;
     gBackupMapLayout.width = width;
     height = mapLayout->height + MAP_OFFSET_H;
     gBackupMapLayout.height = height;
+    // Keep the ordinary initialization for all other loading paths. Extra
+    // capacity here permits the small rounding overlap of the border fills.
+    if (IsPreparingPonteLariciaConnection()
+     && width * height * sizeof(u16) + 31 <= sizeof(sBackupMapData))
+    {
+        ClearMapBordersForConnection(width, height);
+    }
+    else
+    {
+        CpuFastFill16(MAPGRID_UNDEFINED, sBackupMapData, sizeof(sBackupMapData));
+    }
     if (width * height <= MAX_MAP_DATA_SIZE)
     {
         InitBackupMapLayoutData(mapLayout->map, mapLayout->width, mapLayout->height);
         InitBackupMapLayoutConnections(mapHeader);
+    }
+}
+
+static void CopyNativeMapForConnection(const u16 *src, u16 *dest, int width, int height)
+{
+    // The deferred graphics callback cannot compete for DMA3 here. Keep the
+    // short row setup in fast memory along with the native rectangle copy.
+    while (height-- > 0)
+    {
+        DmaCopy16(3, src, dest, width * 2);
+        src += width;
+        dest += width + MAP_OFFSET_W;
     }
 }
 
@@ -188,6 +270,14 @@ static void InitBackupMapLayoutData(const u16 *map, u16 width, u16 height)
     int y;
     dest = gBackupMapLayout.map;
     dest += gBackupMapLayout.width * 7 + MAP_OFFSET;
+
+    if (width > 0 && IsPreparingPonteLariciaConnection())
+    {
+        CopyNativeMapForConnection(map, dest, width, height);
+        return;
+    }
+
+    // Other map loads retain their existing CPU copy path.
     for (y = 0; y < height; y++)
     {
         CpuCopy16(map, dest, width * 2);
@@ -236,6 +326,8 @@ static void InitBackupMapLayoutConnections(struct MapHeader *mapHeader)
 
 #if !IS_FRLG
 
+static void CopyRemappedConnection(const u16 *src, u16 *dest, int srcWidth, int width, int height, bool8 toPonte) ARM_FUNC __attribute__((section(".iwram.code"), noinline));
+
 static bool8 IsPonteValleLariciaLariciaConnection(struct MapHeader const *mapHeader, struct MapHeader const *connectedMapHeader)
 {
     return mapHeader->mapLayout->secondaryTileset == &gTileset_PonteValleLaricia
@@ -277,19 +369,187 @@ static u16 RemapLariciaPonteConnectionMetatile(u16 mapBlock)
     }
 }
 
+static u16 RestorePonteValleLariciaConnectionMetatile(u16 mapBlock)
+{
+    switch (UNPACK_METATILE(mapBlock))
+    {
+    case METATILE_PonteValleLaricia_Laricia_241:
+        return (mapBlock & ~MAPGRID_METATILE_ID_MASK) | 0x241;
+    case METATILE_PonteValleLaricia_Laricia_2D9:
+        return (mapBlock & ~MAPGRID_METATILE_ID_MASK) | 0x2D9;
+    default:
+        return mapBlock;
+    }
+}
+
+static u16 RestoreLariciaPonteConnectionMetatile(u16 mapBlock)
+{
+    switch (UNPACK_METATILE(mapBlock))
+    {
+    case METATILE_LariciaPonte_Ponte_309:
+        return (mapBlock & ~MAPGRID_METATILE_ID_MASK) | 0x309;
+    case METATILE_LariciaPonte_Ponte_293:
+        return (mapBlock & ~MAPGRID_METATILE_ID_MASK) | 0x293;
+    case METATILE_LariciaPonte_Ponte_294:
+        return (mapBlock & ~MAPGRID_METATILE_ID_MASK) | 0x294;
+    default:
+        return mapBlock;
+    }
+}
+
+#endif
+
+bool8 AreMapLayoutsUsingRemappedConnection(const struct MapLayout *from, const struct MapLayout *to)
+{
+#if !IS_FRLG
+    return (from->secondaryTileset == &gTileset_PonteValleLaricia
+         && to->secondaryTileset == &gTileset_LariciaPonte)
+        || (from->secondaryTileset == &gTileset_LariciaPonte
+         && to->secondaryTileset == &gTileset_PonteValleLaricia);
+#else
+    (void)from;
+    (void)to;
+    return FALSE;
+#endif
+}
+
+// Saved views contain both the current map and its connection previews. A
+// preview alias must become a native ID when that map becomes current; native
+// IDs from the old map must instead use the new map's preview aliases. Position
+// determines ownership because the two tilesets also share native numeric IDs.
+// The same normalization repairs in-game saves made after an older transition.
+static u16 NormalizePonteLariciaMapViewBlock(u16 mapBlock, int x, int y)
+{
+#if !IS_FRLG
+    const struct MapLayout *layout = gMapHeader.mapLayout;
+    const struct MapConnection *connection;
+    const struct MapHeader *connectedMapHeader;
+    u16 metatile = UNPACK_METATILE(mapBlock);
+
+    // Most blocks need no translation. Avoid resolving a map connection for
+    // every unchanged cell in the saved viewport.
+    if (layout->secondaryTileset == &gTileset_PonteValleLaricia)
+    {
+        if (metatile != 0x241 && metatile != 0x2D9
+         && metatile != METATILE_LariciaPonte_Ponte_309
+         && metatile != METATILE_LariciaPonte_Ponte_293
+         && metatile != METATILE_LariciaPonte_Ponte_294)
+            return mapBlock;
+    }
+    else if (layout->secondaryTileset == &gTileset_LariciaPonte)
+    {
+        if (metatile != 0x309 && metatile != 0x293 && metatile != 0x294
+         && metatile != METATILE_PonteValleLaricia_Laricia_241
+         && metatile != METATILE_PonteValleLaricia_Laricia_2D9)
+            return mapBlock;
+    }
+    else
+        return mapBlock;
+
+    if (x >= MAP_OFFSET && x < layout->width + MAP_OFFSET
+     && y >= MAP_OFFSET && y < layout->height + MAP_OFFSET)
+    {
+        if (layout->secondaryTileset == &gTileset_PonteValleLaricia)
+            return RestoreLariciaPonteConnectionMetatile(mapBlock);
+        return RestorePonteValleLariciaConnectionMetatile(mapBlock);
+    }
+
+    connection = GetMapConnectionAtPos(x, y);
+    if (connection != NULL)
+    {
+        connectedMapHeader = GetMapHeaderFromConnection(connection);
+        if (IsPonteValleLariciaLariciaConnection(&gMapHeader, connectedMapHeader))
+            return RemapPonteValleLariciaConnectionMetatile(mapBlock);
+        if (IsLariciaPonteLariciaConnection(&gMapHeader, connectedMapHeader))
+            return RemapLariciaPonteConnectionMetatile(mapBlock);
+    }
+#else
+    (void)x;
+    (void)y;
+#endif
+    return mapBlock;
+}
+
+#if !IS_FRLG
+static void CopyRemappedConnection(const u16 *src, u16 *dest, int srcWidth, int width, int height, bool8 toPonte)
+{
+    int row;
+    int srcSkip = srcWidth - width;
+    int destSkip = gBackupMapLayout.width - width;
+
+    if (width <= 0)
+        return;
+
+    // This loop only handles the existing two remapped connection types.
+    // Select the translation once, then copy and translate in one pass.
+    // XOR changes only the known metatile ID, preserving collision/elevation.
+    if (toPonte)
+    {
+        for (row = 0; row < height; row++)
+        {
+            const u16 *end = src + width;
+
+            do
+            {
+                u32 block = *src++;
+
+                switch (UNPACK_METATILE(block))
+                {
+                case 0x241:
+                    block ^= 0x241 ^ METATILE_PonteValleLaricia_Laricia_241;
+                    break;
+                case 0x2D9:
+                    block ^= 0x2D9 ^ METATILE_PonteValleLaricia_Laricia_2D9;
+                    break;
+                }
+                *dest++ = block;
+            } while (src != end);
+            src += srcSkip;
+            dest += destSkip;
+        }
+    }
+    else
+    {
+        for (row = 0; row < height; row++)
+        {
+            const u16 *end = src + width;
+
+            do
+            {
+                u32 block = *src++;
+
+                switch (UNPACK_METATILE(block))
+                {
+                case 0x309:
+                    block ^= 0x309 ^ METATILE_LariciaPonte_Ponte_309;
+                    break;
+                case 0x293:
+                    block ^= 0x293 ^ METATILE_LariciaPonte_Ponte_293;
+                    break;
+                case 0x294:
+                    block ^= 0x294 ^ METATILE_LariciaPonte_Ponte_294;
+                    break;
+                }
+                *dest++ = block;
+            } while (src != end);
+            src += srcSkip;
+            dest += destSkip;
+        }
+    }
+}
 #endif
 
 static void FillConnection(struct MapHeader const *mapHeader, int x, int y, struct MapHeader const *connectedMapHeader, int x2, int y2, int width, int height)
 {
     int i;
 #if !IS_FRLG
-    int j;
     bool8 remapPonteMetatiles = IsPonteValleLariciaLariciaConnection(mapHeader, connectedMapHeader);
     bool8 remapLariciaMetatiles = IsLariciaPonteLariciaConnection(mapHeader, connectedMapHeader);
 #endif
     const u16 *src;
     u16 *dest;
     int mapWidth;
+    bool8 useDma = IsPreparingPonteLariciaConnection() && width > 0;
 
 #if IS_FRLG
     (void)mapHeader;
@@ -299,26 +559,20 @@ static void FillConnection(struct MapHeader const *mapHeader, int x, int y, stru
     src = &connectedMapHeader->mapLayout->map[mapWidth * y2 + x2];
     dest = &gBackupMapLayout.map[gBackupMapLayout.width * y + x];
 
+#if !IS_FRLG
+    if (remapPonteMetatiles || remapLariciaMetatiles)
+    {
+        CopyRemappedConnection(src, dest, mapWidth, width, height, remapPonteMetatiles);
+        return;
+    }
+#endif
+
     for (i = 0; i < height; i++)
     {
-#if !IS_FRLG
-        if (remapPonteMetatiles)
-        {
-            for (j = 0; j < width; j++)
-                dest[j] = RemapPonteValleLariciaConnectionMetatile(src[j]);
-        }
-        else if (remapLariciaMetatiles)
-        {
-            for (j = 0; j < width; j++)
-                dest[j] = RemapLariciaPonteConnectionMetatile(src[j]);
-        }
+        if (useDma)
+            DmaCopy16(3, src, dest, width * 2);
         else
-        {
             CpuCopy16(src, dest, width * 2);
-        }
-#else
-        CpuCopy16(src, dest, width * 2);
-#endif
         dest += gBackupMapLayout.width;
         src += mapWidth;
     }
@@ -690,7 +944,7 @@ static void LoadSavedMapView(void)
             for (j = x; j < x + MAP_OFFSET_W; j++)
             {
                 if (!SkipCopyingMetatileFromSavedMap(&sBackupMapData[j + width * i], width, yMode))
-                    sBackupMapData[j + width * i] = *mapView;
+                    sBackupMapData[j + width * i] = NormalizePonteLariciaMapViewBlock(*mapView, j, i);
                 mapView++;
             }
         }
@@ -705,8 +959,184 @@ static void LoadSavedMapView(void)
     }
 }
 
-static void MoveMapViewToBackup(enum Connection direction)
+#if !IS_FRLG
+// Each packed entry contains a source ID and the XOR needed to reach its
+// destination ID. All six collision/elevation bits pass through unchanged.
+static void CopyMapViewSpan(const u16 *src, u16 *dest, int count, int rows, const u32 *remap)
 {
+    u32 from0 = remap[0] & 0xFFFF, change0 = remap[0] >> 16;
+    u32 from1 = remap[1] & 0xFFFF, change1 = remap[1] >> 16;
+    u32 from2 = remap[2] & 0xFFFF, change2 = remap[2] >> 16;
+    int srcSkip = MAP_OFFSET_W - count;
+    int destSkip = gBackupMapLayout.width - count;
+
+    while (rows-- > 0)
+    {
+        const u16 *end = src + count;
+
+        while (src != end)
+        {
+            u32 block = *src++;
+            u32 id = UNPACK_METATILE(block);
+
+            if (id == from0)
+                block ^= change0;
+            else if (id == from1)
+                block ^= change1;
+            else if (id == from2)
+                block ^= change2;
+            *dest++ = block;
+        }
+        src += srcSkip;
+        dest += destSkip;
+    }
+}
+
+static const u32 *GetPonteLariciaMapViewRemap(int index)
+{
+    static const u32 mappings[][3] = {
+        {METATILE_LariciaPonte_Ponte_309 | ((0x309 ^ METATILE_LariciaPonte_Ponte_309) << 16),
+         METATILE_LariciaPonte_Ponte_293 | ((0x293 ^ METATILE_LariciaPonte_Ponte_293) << 16),
+         METATILE_LariciaPonte_Ponte_294 | ((0x294 ^ METATILE_LariciaPonte_Ponte_294) << 16)},
+        {0x241 | ((0x241 ^ METATILE_PonteValleLaricia_Laricia_241) << 16),
+         0x2D9 | ((0x2D9 ^ METATILE_PonteValleLaricia_Laricia_2D9) << 16), 0xFFFF},
+        {METATILE_PonteValleLaricia_Laricia_241 | ((0x241 ^ METATILE_PonteValleLaricia_Laricia_241) << 16),
+         METATILE_PonteValleLaricia_Laricia_2D9 | ((0x2D9 ^ METATILE_PonteValleLaricia_Laricia_2D9) << 16), 0xFFFF},
+        {0x309 | ((0x309 ^ METATILE_LariciaPonte_Ponte_309) << 16),
+         0x293 | ((0x293 ^ METATILE_LariciaPonte_Ponte_293) << 16),
+         0x294 | ((0x294 ^ METATILE_LariciaPonte_Ponte_294) << 16)},
+        {0xFFFF, 0xFFFF, 0xFFFF},
+    };
+
+    return mappings[index];
+}
+#endif
+
+static void CopyRemappedMapViewRow(const u16 *src, u16 *dest, int x, int y, int count)
+{
+#if !IS_FRLG
+    const struct MapLayout *layout = gMapHeader.mapLayout;
+    bool8 toPonte = layout->secondaryTileset == &gTileset_PonteValleLaricia;
+    int nativeEnd = layout->width + MAP_OFFSET;
+
+    // At corners, retain the complete position-based connection lookup.
+    if (y >= MAP_OFFSET && y < layout->height + MAP_OFFSET)
+    {
+        while (count > 0)
+        {
+            const u32 *remap = GetPonteLariciaMapViewRemap(4);
+            int span = count;
+            bool8 native = x >= MAP_OFFSET && x < nativeEnd;
+            bool8 preview = FALSE;
+
+            if (x < MAP_OFFSET && span > MAP_OFFSET - x)
+                span = MAP_OFFSET - x;
+            else if (native && span > nativeEnd - x)
+                span = nativeEnd - x;
+
+            if (!native)
+            {
+                const struct MapConnection *connection = GetMapConnectionAtPos(x, y);
+
+                if (connection != NULL)
+                {
+                    const struct MapHeader *header = GetMapHeaderFromConnection(connection);
+                    preview = IsPonteValleLariciaLariciaConnection(&gMapHeader, header)
+                        || IsLariciaPonteLariciaConnection(&gMapHeader, header);
+                }
+            }
+
+            if (native)
+                remap = GetPonteLariciaMapViewRemap(toPonte ? 0 : 2);
+            else if (preview)
+                remap = GetPonteLariciaMapViewRemap(toPonte ? 1 : 3);
+
+            CopyMapViewSpan(src, dest, span, 1, remap);
+            src += span;
+            dest += span;
+            x += span;
+            count -= span;
+        }
+        return;
+    }
+#endif
+    while (count-- > 0)
+        *dest++ = NormalizePonteLariciaMapViewBlock(*src++, x++, y);
+}
+
+static bool8 TryCopyRemappedMapViewRectangle(const u16 *src, u16 *dest, int x, int y, int count, int rows, enum Connection direction, const struct MapLayout *oldMapLayout)
+{
+#if !IS_FRLG
+    const struct MapLayout *layout = gMapHeader.mapLayout;
+    const struct MapConnections *connections = gMapHeader.connections;
+    const struct MapConnection *side = NULL;
+    const struct MapHeader *neighbor;
+    const u32 *nativeRemap, *previewRemap;
+    enum Connection previewDirection;
+    int nativeEnd = layout->width + MAP_OFFSET;
+    int firstCount;
+    int i;
+    bool8 toPonte = layout->secondaryTileset == &gTileset_PonteValleLaricia;
+
+    // Resolve ownership once only when every row has the same native/preview
+    // split. Corners and unusual connection arrangements keep the row lookup.
+    if (connections == NULL || connections->connections == NULL
+     || count <= 0 || rows <= 0 || x < 0 || x + count > gBackupMapLayout.width
+     || y < MAP_OFFSET || y + rows > layout->height + MAP_OFFSET)
+        return FALSE;
+
+    if (direction == CONNECTION_EAST)
+    {
+        if (x >= MAP_OFFSET || x + count <= MAP_OFFSET || x + count > nativeEnd)
+            return FALSE;
+        firstCount = MAP_OFFSET - x;
+        previewDirection = CONNECTION_WEST;
+    }
+    else if (direction == CONNECTION_WEST)
+    {
+        if (x < MAP_OFFSET || x >= nativeEnd || x + count <= nativeEnd)
+            return FALSE;
+        firstCount = nativeEnd - x;
+        previewDirection = CONNECTION_EAST;
+    }
+    else
+        return FALSE;
+
+    for (i = 0; i < connections->count; i++)
+    {
+        const struct MapConnection *connection = &connections->connections[i];
+
+        if (connection->direction == previewDirection)
+        {
+            if (side != NULL)
+                return FALSE;
+            side = connection;
+        }
+    }
+    if (side == NULL)
+        return FALSE;
+
+    neighbor = GetMapHeaderFromConnection(side);
+    if (neighbor == NULL || neighbor->mapLayout != oldMapLayout
+     || y < side->offset + MAP_OFFSET
+     || y + rows > side->offset + MAP_OFFSET + oldMapLayout->height)
+        return FALSE;
+
+    nativeRemap = GetPonteLariciaMapViewRemap(toPonte ? 0 : 2);
+    previewRemap = GetPonteLariciaMapViewRemap(toPonte ? 1 : 3);
+    CopyMapViewSpan(src, dest, firstCount, rows,
+                    direction == CONNECTION_EAST ? previewRemap : nativeRemap);
+    CopyMapViewSpan(src + firstCount, dest + firstCount, count - firstCount, rows,
+                    direction == CONNECTION_EAST ? nativeRemap : previewRemap);
+    return TRUE;
+#else
+    return FALSE;
+#endif
+}
+
+static void MoveMapViewToBackup(enum Connection direction, const struct MapLayout *oldMapLayout)
+{
+    bool8 remapMapView = AreMapLayoutsUsingRemappedConnection(oldMapLayout, gMapHeader.mapLayout);
     int width;
     u16 *mapView;
     int x0, y0;
@@ -747,8 +1177,25 @@ static void MoveMapViewToBackup(enum Connection direction)
         break;
     }
 
+    if (remapMapView
+     && TryCopyRemappedMapViewRectangle(mapView + r8 * MAP_OFFSET_W + r9,
+                                       sBackupMapData + width * y0 + x0,
+                                       x0, y0, x2, y2, direction, oldMapLayout))
+    {
+        ClearSavedMapView();
+        return;
+    }
+
     for (y = 0; y < y2; y++)
     {
+        if (remapMapView)
+        {
+            src = &mapView[(y + r8) * MAP_OFFSET_W + r9];
+            dest = &sBackupMapData[width * (y + y0) + x0];
+            CopyRemappedMapViewRow(src, dest, x0, y0 + y, x2);
+            continue;
+        }
+
         i = 0;
         j = 0;
         for (x = 0; x < x2; x++)
@@ -852,6 +1299,7 @@ static void SetPositionFromConnection(const struct MapConnection *connection, en
 
 bool8 CameraMove(int x, int y)
 {
+    const struct MapLayout *oldMapLayout = gMapHeader.mapLayout;
     enum Connection direction;
     const struct MapConnection *connection;
     int old_x, old_y;
@@ -881,7 +1329,7 @@ bool8 CameraMove(int x, int y)
         gCamera.y = old_y - gSaveBlock1Ptr->pos.y;
         gSaveBlock1Ptr->pos.x += x;
         gSaveBlock1Ptr->pos.y += y;
-        MoveMapViewToBackup(direction);
+        MoveMapViewToBackup(direction, oldMapLayout);
     }
 
     return gCamera.active;

@@ -879,6 +879,14 @@ bool8 SetDiveWarpDive(u16 x, u16 y)
 
 void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
 {
+    const struct MapHeader *nextMapHeader = Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum);
+
+    // These dedicated tilesets use different hardware tile/palette slots.
+    // Keep the previous complete frame until CameraUpdate has rebuilt all
+    // three BGs and the main callback has queued their VRAM copies.
+    if (AreMapLayoutsUsingRemappedConnection(gMapHeader.mapLayout, nextMapHeader->mapLayout))
+        DeferVBlankGraphicsUntilCallbacksComplete();
+
     SetWarpDestination(mapGroup, mapNum, WARP_ID_NONE, -1, -1);
 
     // Dont transition map music between BF Outside West/East

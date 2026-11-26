@@ -42,7 +42,9 @@ const u16 gTilesetPalettes_PortaPretoria[][16] =
     INCGFX_U16("data/tilesets/secondary/porta_pretoria/palettes/15.pal", ".gbapal"),
 };
 
-const u32 gTilesetTiles_PonteValleLaricia[] = INCGFX_U32("data/tilesets/secondary/ponte_valle_laricia/tiles.png", ".4bpp.fastSmol", "-num_tiles 407 -Wnum_tiles");
+// Keep the dedicated seamless-connection tiles ready in ROM. The fixed size
+// also supplies the unused padding expected by the 512-tile secondary loader.
+const u32 gTilesetTiles_PonteValleLaricia[512 * TILE_SIZE_4BPP / sizeof(u32)] = INCGFX_U32("data/tilesets/secondary/ponte_valle_laricia/tiles.png", ".4bpp", "-num_tiles 407 -Wnum_tiles");
 
 const u16 gTilesetPalettes_PonteValleLaricia[][16] =
 {
@@ -416,7 +418,7 @@ const u16 gTilesetPalettes_Laricia[][16] =
     INCGFX_U16("data/tilesets/secondary/laricia/palettes/15.pal", ".gbapal"),
 };
 
-const u32 gTilesetTiles_LariciaPonte[] = INCGFX_U32("data/tilesets/secondary/laricia_ponte/tiles.png", ".4bpp.fastSmol", "-num_tiles 372 -Wnum_tiles");
+const u32 gTilesetTiles_LariciaPonte[512 * TILE_SIZE_4BPP / sizeof(u32)] = INCGFX_U32("data/tilesets/secondary/laricia_ponte/tiles.png", ".4bpp", "-num_tiles 372 -Wnum_tiles");
 
 const u16 gTilesetPalettes_LariciaPonte[][16] =
 {
